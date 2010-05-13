@@ -8,7 +8,7 @@
  */
 class Dominio
 {
-	public $DB_HOST = "localhost"; //mysql01.servicodespertador.net 
+	public $DB_HOST = "mysql01.joaopadilha.com"; //mysql01.servicodespertador.net 
 	public $DB_USER = "servicodespert"; 
 	public $DB_PASSWD = "Mend2009"; 
 	public $DB_DATA = "servicodespertnovo";
