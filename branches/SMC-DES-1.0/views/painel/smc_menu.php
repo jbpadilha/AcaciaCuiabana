@@ -27,7 +27,7 @@
 					<li class="opcao" onclick="window.location='?p=busca_cpf';">Clientes - Pessoa física</a></li>
 					<li class="opcao" onclick="window.location='?p=busca_cnpj';">Clientes - Pessoa jurídica</a></li>
 					<li class="opcao" onclick="window.location='?p=busca_veiculos';">Veículos</a></li>
-					<li class="opcao" onclick="window.location='?p=busca_motorista';">Condutores</a></li>
+					<li class="opcao" onclick="window.location='?p=busca_condutores';">Condutores</a></li>
 					<li class="opcao" onclick="window.location='?p=busca_revisoes';">Revisões</a></li>
 					<li class="opcao" onclick="window.location='?p=busca_abastece';">Abastecimentos</a></li>
 				</ul>

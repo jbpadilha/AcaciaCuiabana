@@ -563,6 +563,10 @@ class QDAO
 		{
 			$where = "WHERE vencCnh = ?";
 		}
+		elseif(!is_null($valueObj->getNumeroCnh()))
+		{
+			$where = "WHERE numeroCnh = ?";
+		}
 		
 		try 
 		{
@@ -581,9 +585,14 @@ class QDAO
 			{
 				mysqli_stmt_bind_param($prepare,'s',$vencCnh);
 			}
+			elseif(!is_null($valueObj->getNumeroCnh()))
+			{
+				mysqli_stmt_bind_param($prepare,'s',$numeroCnh);
+			}
 						
 			$idCnh = $valueObj->getIdCnh();
 			$vencCnh = $valueObj->getVencCnh();
+			$numeroCnh = $valueObj->getNumeroCnh();
 			
 			if(!mysqli_stmt_execute($prepare))
 				throw new Exception("Não foi possível conectar no banco de dados.");

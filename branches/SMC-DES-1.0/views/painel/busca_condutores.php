@@ -13,7 +13,7 @@ $logon = $_SESSION["usuarioLogon"];
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	<title>SMC - Busca CPF (Pessoa física)</title>
+	<title>SMC - Busca Condutor</title>
 	<meta name="Description" content="SMC - Novo cadastro de Pessoa Física" >
 	<meta http-equiv="X-UA-Compatible" content="IE=7" > 
 	<link rel="stylesheet" href="../css/meucpf.css" type="text/css" media="all" >
@@ -28,10 +28,10 @@ $logon = $_SESSION["usuarioLogon"];
 <div id="form_busca">
 
 	<form name="busca_veiculo" method="POST" action="../../class/ControlaFuncionalidades.php" >
-		<input type="hidden" id="acao" name="acao" value="buscaVeiculos">
+		<input type="hidden" id="acao" name="acao" value="buscaCondutores">
 		<input type="hidden" id="idCliente" name="idCliente" value="<?=$logon->getIdClientes()?>">
-		<p class="caption"> Consulta de veículos </p>
-		<label>Placa:</label>
+		<p class="caption"> Consulta de Condutor </p>
+		<label>Cnh:</label>
 		<input name="busca" type="text" class="placa" >
 		<span class="borda"> </span> 
 		<p class="tright"> <input class="f_right" type="submit" value="Procurar" > </p>
@@ -39,23 +39,23 @@ $logon = $_SESSION["usuarioLogon"];
 
 </div>
 <?php 
-		$collVeiculosPesquisados = null;
-		if(isset($_GET['veiculosPesquisados']))
+		$collCondutoresPesquisados = null;
+		if(isset($_GET['condutoresPesquisados']))
 		{
-			if($_GET['veiculosPesquisados'] != '')
+			if($_GET['condutoresPesquisados'] != '')
 			{
-				$collVeiculosPesquisados = unserialize(urldecode($_GET['veiculosPesquisados']));
+				$collCondutoresPesquisados = unserialize(urldecode($_GET['condutoresPesquisados']));
 			}
 			else 
 			{
-				$collVeiculosPesquisados = null;
+				$collCondutoresPesquisados = null;
 			}
-			if(!is_null($collVeiculosPesquisados) && count($collVeiculosPesquisados) > 0)
+			if(!is_null($collCondutoresPesquisados) && count($collCondutoresPesquisados) > 0)
 			{
-				if(count($collVeiculosPesquisados) > 1)
-					echo "<p>".count($collVeiculosPesquisados)." resultados encontrados</p><br><br>";
+				if(count($collCondutoresPesquisados) > 1)
+					echo "<p>".count($collCondutoresPesquisados)." resultados encontrados</p><br><br>";
 				else
-					echo "<p>".count($collVeiculosPesquisados)." resultado encontrado</p><br><br>";
+					echo "<p>".count($collCondutoresPesquisados)." resultado encontrado</p><br><br>";
 			}
 			else
 			{
@@ -63,34 +63,43 @@ $logon = $_SESSION["usuarioLogon"];
 			}
 		} 
 		
-		$veiculoPesquisado = new Veiculos();
-		if(!is_null($collVeiculosPesquisados) && count($collVeiculosPesquisados) > 0)
+		$condutorPesquisado = new Condutores();
+		if(!is_null($collCondutoresPesquisados) && count($collCondutoresPesquisados) > 0)
 		{
 			?>
 <div id="form_resultados">
 <div id="titulos">
-	<label class="nome tleft">Placa</label> 
-	<label class="cpf tcenter">Modelo</label>
+	<label class="nome tleft">Nome</label> 
+	<label class="cpf tcenter">Cnh</label>
 </div>
 <?php 
-			foreach ($collVeiculosPesquisados as $veiculos)
+			foreach ($collCondutoresPesquisados as $condutor)
 			{
-				$veiculoPesquisado = (object)$veiculos;
+				$condutorPesquisado = (object)$condutor;
+				$pessoaPesquisada = new Pessoa();
+				$pessoaPesquisada->setIdPessoa($condutorPesquisado->getIdPessoa());
+				$collVoPessoaPesq = $controla->findPessoas($pessoaPesquisada);
+				$pessoaPesquisada = $collVoPessoaPesq[0];
+				
+				$cnhPesquisado = new Cnh();
+				$cnhPesquisado->setIdCnh($condutorPesquisado->getIdCnh());
+				$collCnh = $controla->findCnh($cnhPesquisado);
+				$cnhPesquisado = $collCnh[0];
 ?>
 	<form class="esq" method="get" action="index.php" >
 		<table width="655">
 	      	<tr>
 		        <td width="293"><b>
-		          <?=$veiculoPesquisado->getPlacaVeiculos()?>
+		          <?=$pessoaPesquisada->getNomePessoa()?>
 		        </b></td>
 		        <td width="244"><b>
-		          <?=$veiculoPesquisado->getModeloVeiculos()?>
+		          <?=$cnhPesquisado->getNumeroCnh()?>
 		        </b></td>
 		        <td width="102"><input type="submit" value="Detalhar / Alterar"/> </td>
 	      	</tr>
    	 	</table>
-		<input type="hidden" value="<?=$veiculoPesquisado->getIdVeiculos()?>" name="idVeiculosAlterar" />
-    	<input type="hidden" value="detalhe_veiculo" name="p" />
+		<input type="hidden" value="<?=$condutorPesquisado->getIdCondutores()?>" name="idCondutorAlterar" />
+    	<input type="hidden" value="detalhe_condutores" name="p" />
 	</form>
 	<?php 
 			}
