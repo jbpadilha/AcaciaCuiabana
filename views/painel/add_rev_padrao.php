@@ -44,6 +44,7 @@ if(isset($_GET['revisoes']))
 				<option><?SELECIONE?></option>
 				<?php 
 				$veiculos = new Veiculos();
+				if($logon->)
 				$veiculos->setIdClientes($logon->getIdClientes());
 				$collVoVeiculos = $controla->findVeiculos($veiculos);
 				if(!is_null($collVoVeiculos))
