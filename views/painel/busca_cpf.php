@@ -89,7 +89,7 @@ $logon = $_SESSION["usuarioLogon"];
         <td width="244"><b>
           <?=$pessoaPesquisada->getCpfPessoa()?>
         </b></td>
-        <td width="102"><a href="javascript:void(0)" onclick="document.form.submit();">Detalhar / Alterar</a></td>
+        <td width="102"><input type="submit" value="Detalhar / Alterar"/> </td>
       </tr>
     </table>
     <input type="hidden" value="<?=$pessoaPesquisada->getIdPessoa()?>" name="idPessoaAlterar" />

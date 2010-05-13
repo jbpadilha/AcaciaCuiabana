@@ -2092,7 +2092,9 @@ if(isset($_POST))
 				$pessoaConjugue = new Pessoa();
 				if($pessoaAtual->getEstadoCivilPessoa() == "Casado" || $pessoaAtual->getEstadoCivilPessoa() == "União Estável" )
 				{
-					$pessoaConjugue->setIdPessoa($_POST['idPessoaConjugue']);
+					if($_POST['idPessoaConjugue'] != '')
+						$pessoaConjugue->setIdPessoa($_POST['idPessoaConjugue']);
+						
 					if($_POST['nomeConjugue'] != '')
 						$pessoaConjugue->setNomePessoa(trim($_POST['nomeConjugue']));
 					else 
@@ -2127,18 +2129,26 @@ if(isset($_POST))
 				
 				if($mensagem == '')
 				{
-					//Atualização de Endereço
-					$controla->updatePessoa($pessoaAtual);
-					$controla->updateEndereco($endereco);
-					
 					//Cadastrando Conjugue
 					if($pessoaAtual->getEstadoCivilPessoa() == "Casado" || $pessoaAtual->getEstadoCivilPessoa() == "União Estável" )
 					{
-						$controla->updatePessoa($pessoaConjugue);
+						if($pessoaConjugue->getIdPessoa() != null)
+						{
+							$controla->updatePessoa($pessoaConjugue);
+						}
+						else
+						{
+							$idPessoaConjugue = $controla->cadastraPessoa($pessoaConjugue);
+							$pessoaConjugue->setIdPessoa($idPessoaConjugue);					
+						}
 						$endereco->setIdPessoa($pessoaConjugue->getIdPessoa());	
 						$controla->updateEndereco($endereco);
+						$pessoaAtual->setIdConjuguePessoa($pessoaConjugue->getIdPessoa());
 					}
-					
+					//Atualização de Endereço
+					$controla->updatePessoa($pessoaAtual);
+					$endereco->setIdPessoa($pessoaAtual->getIdPessoa());
+					$controla->updateEndereco($endereco);
 					
 					
 					$descricao = "
@@ -2155,7 +2165,7 @@ if(isset($_POST))
 						";
 					}
 					
-					//$controla->enviarEmail($pessoaAtual->getNomePessoa(),$endereco->getEmailEndereco(),"Cadastro de Pessoa",$descricao);
+					$controla->enviarEmail($pessoaAtual->getNomePessoa(),$endereco->getEmailEndereco(),"Cadastro de Pessoa",$descricao);
 					$mensagem = "Atualização realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
 					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
 				}
@@ -2252,128 +2262,147 @@ if(isset($_POST))
 				$endereco->setTelefoneEndereco(trim($_POST['telefone']));
 				$endereco->setCelEndereco(trim($_POST['celular']));
 				$endereco->setFaxEndereco(trim($_POST['fax']));
-				
+				$endereco->setIdEmpresa($empresas->getIdEmpresa());
 
-				//DADOS DO DIRETOR DA EMPRESA
-				
-				$pessoaDiretor = new Pessoa();
-				
-				if($_POST['nome'] != '')
-					$pessoaDiretor->setNomePessoa(trim($_POST['nome']));
-				else 
-					$mensagem .= "O Nome da Pessoa não pode estar em branco.";
-				
-				if($_POST['dataNascimento'] != '')
-					$pessoaDiretor->setDataNascimentoPessoa($formataData->toDBDate($_POST['dataNascimento']));
-				else
-					$mensagem .= "A data de nascimento da pessoa deve ser preenchida.";
+				$pessoaDiretor = null;
+				if($_POST['preenche'] == "Sim")
+				{
+					//DADOS DO DIRETOR DA EMPRESA
 					
-				$pessoaDiretor->setIdPessoa($_POST['idDiretor']);
-				$pessoaDiretor->setSexoPessoa($_POST['sexo']);
-				$pessoaDiretor->setEstadoCivilPessoa($_POST['estadoCivil']);
-				
-				if($_POST['rg'] != '')
-				{
-					$pessoaDiretor->setRgPessoa(trim($_POST['rg']));
-					$pessoaDiretor->setOrgExpPessoa(trim($_POST['rg_orgao']));
-					$pessoaDiretor->setUfOrgExpPessoa($_POST['rg_uf']);
-				}
-				else
-				{
-					$mensagem .= "O RG da pessoa não deve estar em branco.";
-				}
-				
-				if($_POST['cpf'] != '')
-					$pessoaDiretor->setCpfPessoa($controla->retiraMascaraCPF($_POST['cpf']));
-				else
-					$mensagem .= "O CPF não deve estar em branco.";
-				
-				//ENDEREÇO DIRETOR DA EMPRESA
-				$enderecoDiretor = new Endereco();
-				$enderecoDiretor->setIdEndereco($_POST['idEnderecoDiretor']);
-				$enderecoDiretor->setRuaEndereco(trim($_POST['ruaDiretor']));
-				$enderecoDiretor->setComplementoEndereco(trim($_POST['complementoDiretor']));
-				$enderecoDiretor->setBairroEndereco(trim($_POST['bairroDiretor']));
-				$enderecoDiretor->setCepEndereco(trim($_POST['cepDiretor']));
-				$enderecoDiretor->setCidadeEndereco(trim($_POST['cidadeDiretor']));
-				$enderecoDiretor->setEstadoEndereco($_POST['estadoDiretor']);
-				
-				if($controla->testaEmail($_POST['email']))
-					$enderecoDiretor->setEmailEndereco(trim($_POST['emailDiretor']));
-				
-				$enderecoDiretor->setTelefoneEndereco(trim($_POST['telefoneDiretor']));
-				$enderecoDiretor->setCelEndereco(trim($_POST['celularDiretor']));
-				$enderecoDiretor->setFaxEndereco(trim($_POST['faxDiretor']));
-				
-				
-				//DADOS CONJUGUE DIRETOR
-				$pessoaConjugue = new Pessoa();
-				if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "União Estável" )
-				{
-					if($_POST['nomeConjugue'] != '')
-						$pessoaConjugue->setNomePessoa(trim($_POST['nomeConjugue']));
+					$pessoaDiretor = new Pessoa();
+					
+					if($_POST['nome'] != '')
+						$pessoaDiretor->setNomePessoa(trim($_POST['nome']));
 					else 
-						$mensagem .= "O Nome do Conjugue não pode estar em branco.";
+						$mensagem .= "O Nome da Pessoa não pode estar em branco.";
 					
-					if($_POST['dataNascimentoConjugue'] != '')
-						$pessoaConjugue->setDataNascimentoPessoa($formataData->toDBDate($_POST['dataNascimentoConjugue']));
+					if($_POST['dataNascimento'] != '')
+						$pessoaDiretor->setDataNascimentoPessoa($formataData->toDBDate($_POST['dataNascimento']));
 					else
-						$mensagem .= "A data de nascimento do Conjugue deve ser preenchida.";
-					
-					$pessoaConjugue->setIdPessoa($_POST['idConjugueDiretor']);
-					$pessoaConjugue->setSexoPessoa($_POST['sexoConjugue']);
-					$pessoaConjugue->setEstadoCivilPessoa($_POST['estadoCivil']);
-					
-					if($_POST['rgConjugue'] != '')
+						$mensagem .= "A data de nascimento da pessoa deve ser preenchida.";
+						
+					if($_POST['idDiretor'] != '')
 					{
-						$pessoaConjugue->setRgPessoa(trim($_POST['rgConjugue']));
-						$pessoaConjugue->setOrgExpPessoa(trim($_POST['rg_orgaoConjugue']));
-						$pessoaConjugue->setUfOrgExpPessoa($_POST['rg_ufConjugue']);
+						$pessoaDiretor->setIdPessoa($_POST['idDiretor']);
+					}
+					$pessoaDiretor->setSexoPessoa($_POST['sexo']);
+					$pessoaDiretor->setEstadoCivilPessoa($_POST['estadoCivil']);
+					
+					if($_POST['rg'] != '')
+					{
+						$pessoaDiretor->setRgPessoa(trim($_POST['rg']));
+						$pessoaDiretor->setOrgExpPessoa(trim($_POST['rg_orgao']));
+						$pessoaDiretor->setUfOrgExpPessoa($_POST['rg_uf']);
 					}
 					else
 					{
-						$mensagem .= "O RG do Conjugue não deve estar em branco.";
+						$mensagem .= "O RG da pessoa não deve estar em branco.";
 					}
 					
-					if($_POST['cpfConjugue'] != '')
-						$pessoaConjugue->setCpfPessoa($controla->retiraMascaraCPF($_POST['cpfConjugue']));
+					if($_POST['cpf'] != '')
+						$pessoaDiretor->setCpfPessoa($controla->retiraMascaraCPF($_POST['cpf']));
 					else
-						$mensagem .= "O CPF do Conjugue não deve estar em branco.";
+						$mensagem .= "O CPF não deve estar em branco.";
+					
+					//ENDEREÇO DIRETOR DA EMPRESA
+					$enderecoDiretor = new Endereco();
+					$enderecoDiretor->setRuaEndereco(trim($_POST['ruaDiretor']));
+					$enderecoDiretor->setComplementoEndereco(trim($_POST['complementoDiretor']));
+					$enderecoDiretor->setBairroEndereco(trim($_POST['bairroDiretor']));
+					$enderecoDiretor->setCepEndereco(trim($_POST['cepDiretor']));
+					$enderecoDiretor->setCidadeEndereco(trim($_POST['cidadeDiretor']));
+					$enderecoDiretor->setEstadoEndereco($_POST['estadoDiretor']);
+					
+					if($controla->testaEmail($_POST['email']))
+						$enderecoDiretor->setEmailEndereco(trim($_POST['emailDiretor']));
+					
+					$enderecoDiretor->setTelefoneEndereco(trim($_POST['telefoneDiretor']));
+					$enderecoDiretor->setCelEndereco(trim($_POST['celularDiretor']));
+					$enderecoDiretor->setFaxEndereco(trim($_POST['faxDiretor']));
+					$enderecoDiretor->setIdPessoa($pessoaDiretor->getIdPessoa());
+					
+					//DADOS CONJUGUE DIRETOR
+					$pessoaConjugue = new Pessoa();
+					if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "União Estável" )
+					{
+						if($_POST['nomeConjugue'] != '')
+							$pessoaConjugue->setNomePessoa(trim($_POST['nomeConjugue']));
+						else 
+							$mensagem .= "O Nome do Conjugue não pode estar em branco.";
+						
+						if($_POST['dataNascimentoConjugue'] != '')
+							$pessoaConjugue->setDataNascimentoPessoa($formataData->toDBDate($_POST['dataNascimentoConjugue']));
+						else
+							$mensagem .= "A data de nascimento do Conjugue deve ser preenchida.";
+						
+						$pessoaConjugue->setIdPessoa($_POST['idConjugueDiretor']);
+						$pessoaConjugue->setSexoPessoa($_POST['sexoConjugue']);
+						$pessoaConjugue->setEstadoCivilPessoa($_POST['estadoCivil']);
+						
+						if($_POST['rgConjugue'] != '')
+						{
+							$pessoaConjugue->setRgPessoa(trim($_POST['rgConjugue']));
+							$pessoaConjugue->setOrgExpPessoa(trim($_POST['rg_orgaoConjugue']));
+							$pessoaConjugue->setUfOrgExpPessoa($_POST['rg_ufConjugue']);
+						}
+						else
+						{
+							$mensagem .= "O RG do Conjugue não deve estar em branco.";
+						}
+						
+						if($_POST['cpfConjugue'] != '')
+							$pessoaConjugue->setCpfPessoa($controla->retiraMascaraCPF($_POST['cpfConjugue']));
+						else
+							$mensagem .= "O CPF do Conjugue não deve estar em branco.";
+					}
 				}
 				
 				//TESTE E CADASTRO
 				if($mensagem == '')
 				{
 					//Atualização DO DIRETOR DA EMPRESA E ENDERECO DO DIRETOR
-					$pessoaDiretor->setIdCliente($cliente->getIdClientes());
-					$controla->updatePessoa($pessoaDiretor);
-					$enderecoDiretor->setIdPessoa($pessoaDiretor->getIdPessoa());
-					
-					if(!is_null($enderecoDiretor->getIdEndereco()) && $enderecoDiretor->getIdEndereco()!='')
+					if($pessoaDiretor != null)
 					{
-						$controla->updateEndereco($enderecoDiretor);
-					}
-					else 
-					{
-						$controla->cadastraEndereco($enderecoDiretor);
-					}
-					
-					//Atualização Conjugue
-					if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "União Estável" )
-					{
-						$pessoaConjugue->setIdCliente($cliente->getIdClientes());
-						if(!is_null($pessoaConjugue->getIdPessoa()) && $pessoaConjugue->getIdPessoa()!='')
+						//Atualização Conjugue
+						if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "União Estável" )
 						{
-							$controla->updatePessoa($pessoaConjugue);
+							$pessoaConjugue->setIdCliente($cliente->getIdClientes());
+							if(!is_null($pessoaConjugue->getIdPessoa()) && $pessoaConjugue->getIdPessoa()!='')
+							{
+								$controla->updatePessoa($pessoaConjugue);
+							}
+							else
+							{
+								$idConjugue = $controla->cadastraPessoa($pessoaConjugue);
+								$pessoaConjugue->setIdPessoa($idConjugue);
+							}
+							if($_POST['idConjugueDiretor'] != '')
+								$enderecoDiretor->setIdEndereco($_POST['idConjugueDiretor']);
+							$enderecoDiretor->setIdPessoa($pessoaConjugue->getIdPessoa());
+							
+							if(!is_null($enderecoDiretor->getIdEndereco()) && $enderecoDiretor->getIdEndereco()!='')
+							{
+								$controla->updateEndereco($enderecoDiretor);
+							}
+							else 
+							{
+								$controla->cadastraEndereco($enderecoDiretor);
+							}
+						}
+						$pessoaDiretor->setIdCliente($cliente->getIdClientes());
+						if($pessoaDiretor->getIdPessoa()!=null)
+						{
+							$controla->updatePessoa($pessoaDiretor);
 						}
 						else
 						{
-							$idConjugue = $controla->cadastraPessoa($pessoaConjugue);
-							$pessoaConjugue->setIdPessoa($idConjugue);
+							$idPessoaDiretor = $controla->cadastraPessoa($pessoaDiretor);
+							$pessoaDiretor->setIdPessoa($idPessoaDiretor);
 						}
-						
-						$enderecoDiretor->setIdEndereco($_POST['idConjugueDiretor']);
-						$enderecoDiretor->setIdPessoa($pessoaConjugue->getIdPessoa());
+						if($_POST['idEnderecoDiretor'] != '')
+							$enderecoDiretor->setIdEndereco($_POST['idEnderecoDiretor']);
+							
+						$enderecoDiretor->setIdPessoa($pessoaDiretor->getIdPessoa());
 						
 						if(!is_null($enderecoDiretor->getIdEndereco()) && $enderecoDiretor->getIdEndereco()!='')
 						{
@@ -2384,7 +2413,7 @@ if(isset($_POST))
 							$controla->cadastraEndereco($enderecoDiretor);
 						}
 					}
-					
+
 					//Atualização da Empresa
 					$empresas->setIdDiretor($pessoaDiretor->getIdPessoa());
 					$controla->updateEmpresa($empresas);
@@ -2407,23 +2436,19 @@ if(isset($_POST))
 					//
 					
 					$descricao = "
-					<b>DADOS DA PESSOA</b>
-					{$pessoaDiretor->mostraDadosPessoa()}<br>
+					<b>DADOS DA Empresa</b><br>
+					{$empresas->mostraDados()}<br>
 					<br>
-					<b>ENDEREÇO</b>
+					<b>ENDEREÇO</b><br>
 					{$endereco->mostraDadosEndereco()}<br>
-					<br>";
-					if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "União Estável" )
-					{
-						$descricao = "
-						<b>DADOS DO CONJUGUE</b>
-						{$pessoaConjugue->mostraDadosPessoa()}
-						";
-					}
+					<br>
+					<b>DIRETOR</b><br>
+					{$pessoaDiretor->mostraDadosPessoa()}<br>
+					";
 					
-					//$controla->enviarEmail($pessoaAtual->getNomePessoa(),$endereco->getEmailEndereco(),"Cadastro de Pessoa",$descricao);
+					$controla->enviarEmail($empresas->getNomeEmpresa(),$endereco->getEmailEndereco(),"Cadastro de Pessoa",$descricao);
 					$mensagem = "Atualização de Empresas realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
-					header("Location: ../views/painel/index.php?msg={$mensagem}");
+					header("Location: ../views/painel/index.php?p=home&msg={$mensagem}");
 				}
 				else 
 				{
@@ -2434,6 +2459,158 @@ if(isset($_POST))
 			{
 				$mensagem .= $e;
 				header("Location: ../views/painel/index.php?p=detalhe_cnpj&msg=$mensagem&empresas=".urlencode(serialize($empresas))."&endereco=".urlencode(serialize($endereco))."&pessoaDiretor=".urlencode(serialize($pessoaDiretor))."&enderecoDiretor=".urlencode(serialize($enderecoDiretor))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."");
+			}
+		}
+		
+		if($_POST['acao'] == "buscaVeiculos")
+		{
+			$mensagem = '';
+			try 
+			{
+				$veiculos = new Veiculos();
+				if($_POST['busca'] != '')
+				{
+					$veiculos->getPlacaVeiculos(trim($_POST['busca']));
+				}
+				else
+					$mensagem = 'Para efetuar a busca, você deve entrar com um parâmetro.';
+				
+				$veiculos->setIdClientes($_POST['idCliente']);	
+					
+				if($mensagem == '')
+				{
+					$collVo = null;
+					$collVo = $controla->findVeiculos($veiculos);
+					if(!is_null($collVo))
+						header("Location: ../views/painel/index.php?p=busca_veiculos&veiculosPesquisados=".urlencode(serialize($collVo)).""); 
+					else
+						header("Location: ../views/painel/index.php?p=busca_veiculos&veiculosPesquisados=");
+				}
+				else
+				{
+					header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
+				}
+			}
+			catch (Exception $e)
+			{
+				$mensagem .= $e;
+				header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
+			}
+		}
+		
+		if($_POST['acao'] == "alterarVeiculos")
+		{
+			try
+			{
+				$mensagem = '';
+				$veiculos = new Veiculos();
+				$veiculos->setIdVeiculos($_POST['idVeiculos']);
+				$veiculos->setIdClientes($_POST['idClientes']);
+				
+				if($_POST['placa'] != '')
+					$veiculos->setPlacaVeiculos($_POST['placa']);
+				else
+					$mensagem .= "A placa do veículo deve ser informada";
+				
+				$veiculos->setMarcaVeiculos($_POST['marca']);
+				$veiculos->setModeloVeiculos($_POST['modelo']);
+				$veiculos->setCorVeiculos($_POST['cor']);
+				$veiculos->setCombustivelVeiculos($_POST['combustivel']);
+				$veiculos->setCapacidadeTanqueVeiculos($_POST['capacidade']);
+				$veiculos->setAnoFabricacaoVeiculos($_POST['anofab']);
+				$veiculos->setRenavamVeiculos($_POST['renavam']);
+				$veiculos->setChassiVeiculos($_POST['chassi']);
+				$veiculos->setCodFipeVeiculos($_POST['codigo_fipe']);
+				$veiculos->setFornecedorNfVeiculos($_POST['fornecedor_nf']);
+				$veiculos->setCidadeNfVeiculos($_POST['cidade_nf']);
+				$veiculos->setProprietarioNfVeiculos($_POST['proprietario_nf']);
+				$veiculos->setArrendatarioNfVeiculos($_POST['arrendatario_nf']);
+				$veiculos->setPlacaNfVeiculos($_POST['placa_nf']);
+				$veiculos->setNumeroNfVeiculos($_POST['numero_nf']);
+				$veiculos->setDataNfVeiculos($formataData->toDBDate($_POST['data_nf']));
+				$veiculos->setKmEntregaNfVeiculos($_POST['km_entrega_nf']);
+				$veiculos->setTempoGarantiaNfVeiculos($_POST['tempo_garantia']);
+				$veiculos->setKmGarantiaVeiculos($_POST['km_garantia']);
+				$veiculos->setVencimentoIpvaVeiculos($formataData->toDBDate($_POST['vencimento_ipva']));
+				$veiculos->setVencimentoSeguroVeiculos($formataData->toDBDate($_POST['vencimento_seguro']));
+				
+				if($mensagem == '')
+				{
+					$controla->updateVeiculos($veiculos);
+					$mensagem = 'Veículo Alterado com sucesso.';
+					header("Location: ../views/painel/index.php?p=home&msg={$mensagem}");
+				}
+				else
+				{
+					header("Location: ../views/painel/index.php?p=detalhe_veiculo&msg=$mensagem&veiculos=".urlencode(serialize($veiculos))."");
+				}
+				
+			}
+			catch (Exception $e)
+			{
+				$mensagem .= $e;
+				header("Location: ../views/painel/index.php?p=detalhe_veiculo&msg=$mensagem&veiculos=".urlencode(serialize($veiculos))."");
+			}
+		}
+		
+		if($_POST['acao'] == "buscaCondutores")
+		{
+			$mensagem = '';
+			try 
+			{
+				$condutores = new Condutores();
+				$cnh = new Cnh();
+				if($_POST['busca'] != '')
+				{
+					$cnh->setNumeroCnh(trim($_POST['busca']));
+				}
+				else
+					$mensagem = 'Para efetuar a busca, você deve entrar com um parâmetro.';
+					
+				if($mensagem == '')
+				{
+					$collVo = null;
+					$collVoCnh = $controla->findCnh($cnh);
+					if(!is_null($collVoCnh))
+					{
+						foreach ($collVoCnh as $cnhs)
+						{
+							$cnh = $cnhs;
+							$condutorPesquisa = new Condutores();
+							$condutorPesquisa->setIdCnh($cnh->getIdCnh());
+							$collVoCondutor = $controla->findCondutores($condutorPesquisa);
+							if(!is_null($collVoCondutor))
+							{
+								foreach ($collVoCondutor as $condutores)
+								{
+									$condutorPesquisa = $condutores;
+									$pessoaAtual = new Pessoa();
+									$pessoaAtual->setIdPessoa($condutorPesquisa->getIdPessoa());
+									$collVoPessoaAtual = $controla->findPessoas($pessoaAtual);
+									$pessoaAtual = $collVoPessoaAtual[0];
+									if($pessoaAtual->getIdCliente() == $_POST['idCliente'])
+									{
+										$collVo[] = $condutorPesquisa;
+										
+									}
+								}
+							}
+						}
+					}
+					if(!is_null($collVo))
+						header("Location: ../views/painel/index.php?p=busca_condutores&condutoresPesquisados=".urlencode(serialize($collVo)).""); 
+					else
+						header("Location: ../views/painel/index.php?p=busca_condutores&condutoresPesquisados=");
+				}
+				else
+				{
+					header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
+				}
+			}
+			catch (Exception $e)
+			{
+				$mensagem .= $e;
+				header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
 			}
 		}
 	}
