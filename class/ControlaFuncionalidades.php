@@ -2613,6 +2613,58 @@ if(isset($_POST))
 				header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
 			}
 		}
+		
+		if($_POST['acao'] == "alterarCondutores")
+		{
+			$mensagem = '';
+			try
+			{
+				$pessoaCondutor = new Condutores();
+				$pessoaCondutor->setIdCondutores($_POST['idCondutor']);
+				$pessoaCondutor->setIdCnh($_POST['idCnh']);
+				$pessoaCondutor->setIdPessoa($_POST['idPessoa']);
+				
+				$cnh = new Cnh();
+				$cnh->setIdCnh($pessoaCondutor->getIdCnh());
+				
+				if($_POST['cnh'] != '')
+					$cnh->setNumeroCnh(trim($_POST['cnh']));
+				else
+					$mensagem .= 'Você deve preencher o número da CNH.';
+					
+				if($_POST['cnhuf'] != '')
+					$cnh->setUfCnh(trim($_POST['cnhuf']));
+				else
+					$mensagem .= 'Você deve selecionar o estado da carteira de habilitação.';
+				
+				if($_POST['cnhcat'] != '')
+					$cnh->setCategoriaCnh(trim($_POST['cnhcat']));
+				else
+					$mensagem .= 'Você deve informar a categoria da carteira de habilitação.';
+				
+				if($_POST['cnhvcto'] != '')
+					$cnh->setVencCnh($formataData->toDBDate($_POST['cnhvcto']));
+				else
+					$mensagem .= 'Você deve informar o a data do vencimento da carteira de habilitação.';
+
+				if($mensagem == '')
+				{
+					$controla->updateCnh($cnh);
+					$controla->updateCondutores($pessoaCondutor);
+					$mensagem = 'Condutor alterado com sucesso.';
+					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
+				}
+				else
+				{
+					header("Location: ../views/painel/index.php?p=detalhe_condutores&msg=$mensagem&condutores=".urlencode(serialize($pessoaCondutor))."&cnh=".urlencode(serialize($cnh))."");
+				}				
+			}
+			catch (Exception $e)
+			{
+				$mensagem .= $e;
+				header("Location: ../views/painel/index.php?p=detalhe_condutores&msg=$mensagem&condutores=".urlencode(serialize($pessoaCondutor))."&cnh=".urlencode(serialize($cnh))."");
+			}
+		}
 	}
 	
 }
