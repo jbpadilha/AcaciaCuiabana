@@ -857,7 +857,7 @@ class DAO
 		
 		try 
 		{
-			$sql = mysqli_prepare($conecta,"UPDATE cnh SET dataRegistroCondutores=?,
+			$sql = mysqli_prepare($conecta,"UPDATE condutores SET dataRegistroCondutores=?,
 			obsCondutores=?,idPessoa=?,idCnh=? WHERE idCondutores=?");
 			mysqli_bind_param($sql,'sssss',$dataRegistroCondutores,$obsCondutores,$idPessoa,$idCnh,$idCondutores);
 			
