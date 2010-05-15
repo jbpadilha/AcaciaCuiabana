@@ -811,6 +811,10 @@ class QDAO
 		{
 			$where = "WHERE proxDataRevisoes = ?";
 		}
+		elseif (!is_null($valueObj->getIdVeiculos()))
+		{
+			$where = "WHERE idVeiculos = ?";
+		}
 		
 		try 
 		{
@@ -829,9 +833,14 @@ class QDAO
 			{
 				mysqli_stmt_bind_param($prepare,'s',$proxDataRevisoes);
 			}
+			elseif (!is_null($valueObj->getIdVeiculos()))
+			{
+				mysqli_stmt_bind_param($prepare,'s',$idVeiculos);
+			}
 						
 			$idRevisoes = $valueObj->getIdRevisoes();
 			$proxDataRevisoes = $valueObj->getProxDataRevisoes();
+			$idVeiculos = $valueObj->getIdVeiculos();
 			
 			if(!mysqli_stmt_execute($prepare))
 				throw new Exception("Não foi possível conectar no banco de dados.");
