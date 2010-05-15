@@ -118,8 +118,7 @@
 	<td class="<?php if ($dia == date('d',mktime()) && $_mes == date('m', mktime())) { echo 'hoje'; } else { echo 'dia'; } ?>" >
 		<label class="link"><?php echo $dia; ?></label>
 		<?php
-			$data = new DateTime();
-			$data->setDate($year,$_mes,$dia);
+			$data = $year."-".$_mes."-".$dia;
 			$userLogon = new Logon();
 			$userLogon = $_SESSION['usuarioLogon'];
 			$mostraLinkMais = false;
