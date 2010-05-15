@@ -1259,7 +1259,7 @@ class ControlaFuncionalidades
 						$this->enviarEmail($nome,$email,"SMC - Serviço Despertador - Aviso de Aniversário",$descricao);
 						$avisosGrava = new Avisos();
 						$avisosGrava->setAssuntoAvisos("SMC - Serviço Despertador - Aviso de Aniversário");
-						$avisosGrava->setDataAvisos(date("Y-m-d"));
+						$avisosGrava->setDataAvisos(date("Y-m-d H:i:s"));
 						$avisosGrava->setIdClientes($clientes->getIdClientes());
 						$this->cadastrarAvisos($avisosGrava);
 					}
@@ -1282,7 +1282,7 @@ class ControlaFuncionalidades
 						$this->enviarEmail($nome,$email,"SMC - Serviço Despertador - Aviso de Vencimento de CNH",$descricao);
 						$avisosGrava = new Avisos();
 						$avisosGrava->setAssuntoAvisos("SMC - Serviço Despertador - Aviso de Vencimento de CNH");
-						$avisosGrava->setDataAvisos(date("Y-m-d"));
+						$avisosGrava->setDataAvisos(date("Y-m-d H:i:s"));
 						$avisosGrava->setIdClientes($clientes->getIdClientes());
 						$this->cadastrarAvisos($avisosGrava);
 					}
@@ -1302,7 +1302,7 @@ class ControlaFuncionalidades
 						$this->enviarEmail($nome,$email,"SMC - Serviço Despertador - Aviso de Vencimento de IPVa",$descricao);
 						$avisosGrava = new Avisos();
 						$avisosGrava->setAssuntoAvisos("SMC - Serviço Despertador - Aviso de Vencimento de IPVA");
-						$avisosGrava->setDataAvisos(date("Y-m-d"));
+						$avisosGrava->setDataAvisos(date("Y-m-d H:i:s"));
 						$avisosGrava->setIdClientes($clientes->getIdClientes());
 						$this->cadastrarAvisos($avisosGrava);
 					}
@@ -1322,7 +1322,7 @@ class ControlaFuncionalidades
 						$this->enviarEmail($nome,$email,"SMC - Serviço Despertador - Aviso de Vencimento de Seguro",$descricao);
 						$avisosGrava = new Avisos();
 						$avisosGrava->setAssuntoAvisos("SMC - Serviço Despertador - Aviso de Vencimento de Seguro");
-						$avisosGrava->setDataAvisos(date("Y-m-d"));
+						$avisosGrava->setDataAvisos(date("Y-m-d H:i:s"));
 						$avisosGrava->setIdClientes($clientes->getIdClientes());
 						$this->cadastrarAvisos($avisosGrava);
 					}
@@ -1342,7 +1342,7 @@ class ControlaFuncionalidades
 						$this->enviarEmail($nome,$email,"SMC - Serviço Despertador - Aviso de Vencimento de Garantia",$descricao);
 						$avisosGrava = new Avisos();
 						$avisosGrava->setAssuntoAvisos("SMC - Serviço Despertador - Aviso de Vencimento de Garantia");
-						$avisosGrava->setDataAvisos(date("Y-m-d"));
+						$avisosGrava->setDataAvisos(date("Y-m-d H:i:s"));
 						$avisosGrava->setIdClientes($clientes->getIdClientes());
 						$this->cadastrarAvisos($avisosGrava);
 					}
@@ -1366,7 +1366,7 @@ class ControlaFuncionalidades
 						$this->enviarEmail($nome,$email,"SMC - Serviço Despertador - Aviso de Revisão agendada",$descricao);
 						$avisosGrava = new Avisos();
 						$avisosGrava->setAssuntoAvisos("SMC - Serviço Despertador - Aviso de Revisão agendada");
-						$avisosGrava->setDataAvisos(date("Y-m-d"));
+						$avisosGrava->setDataAvisos(date("Y-m-d H:i:s"));
 						$avisosGrava->setIdClientes($clientes->getIdClientes());
 						$this->cadastrarAvisos($avisosGrava);
 					}			
