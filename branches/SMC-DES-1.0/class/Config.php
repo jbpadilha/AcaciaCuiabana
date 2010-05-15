@@ -18,9 +18,6 @@ $dominio = new Dominio();
 $formataData = new FormataData();
 $controla = new ControlaFuncionalidades();
 
-//Teste de Envio de Avisos
-$controla->pesquisaVencimentosDisparaEmail();
-
 define ("DB_HOST", $dominio->DB_HOST);
 define ("DB_USER", $dominio->DB_USER);
 define ("DB_PASSWD", $dominio->DB_PASSWD);
@@ -31,6 +28,9 @@ date_default_timezone_set('America/Cuiaba');
 define ("TITULO", "..~`SMC - Manutenção como deve ser feita.`~..");
 define ("LOGS_PATH", "./");
 define ("SELECIONE","Selecione");
+
+//Teste de Envio de Avisos
+$controla->pesquisaVencimentosDisparaEmail();
 
 header("Content-Type: text/html; charset=ISO-8859-1");
 	
