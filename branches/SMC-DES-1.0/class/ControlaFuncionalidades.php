@@ -1,4 +1,4 @@
-<?php
+		<?php
 require_once ('FormataData.php');
 require_once ('Dominio.php');
 
@@ -403,10 +403,10 @@ class ControlaFuncionalidades
 	 * @param Logon $usuario Logado , DateTime  $data
 	 * @author João Padilha
 	 */
-	public function listarAniversariosClientes(Logon $logon, DateTime  $data)
+	public function listarAniversariosClientes(Logon $logon, $data)
 	{
 		$qdao = new QDAO();
-		$formataData = new FormataData();
+		$data = explode("-",$data);
 		if(!is_null($logon))
 		{
 			$collVoPessoas = new ArrayObject();
@@ -420,7 +420,7 @@ class ControlaFuncionalidades
 				
 				$pessoasCliente = new Pessoa();
 				$pessoasCliente->setIdCliente($cliente->getIdClientes());
-				$pessoasCliente->setDataNascimentoPessoa($data->format("Y-m-d"));
+				$pessoasCliente->setDataNascimentoPessoa($data[0]."-".$data[1]."-".$data[2]);
 				$collVoPessoasCli = $this->findPessoas($pessoasCliente);
 				if(!is_null($collVoPessoasCli))
 				{
@@ -433,7 +433,7 @@ class ControlaFuncionalidades
 			elseif($logon->getNivelAcessoLogin() == 5)
 			{
 				$pessoa = new Pessoa();
-				$pessoa->setDataNascimentoPessoa($data->format("Y-m-d"));
+				$pessoa->setDataNascimentoPessoa($data[0]."-".$data[1]."-".$data[2]);
 				$collVoP =  $this->findPessoas($pessoa);
 				if(!is_null($collVoP))
 				{
@@ -454,10 +454,10 @@ class ControlaFuncionalidades
 	/**
 	 * Listagem de Cnh`s Vencidas
 	 */
-	public function listaCnhVencida(Logon $logon, DateTime  $data)
+	public function listaCnhVencida(Logon $logon, $data)
 	{
 		$qdao = new QDAO();
-		$formataData = new FormataData();
+		$data = explode("-",$data);
 		if(!is_null($logon))
 		{
 			$collVoCnh = new ArrayObject();
@@ -488,7 +488,7 @@ class ControlaFuncionalidades
 								$condutorCli = $condutorAtual;
 								$cnh = new Cnh();
 								$cnh->setIdCnh($condutorCli->getIdCnh());
-								$cnh->setVencCnh($data->format("Y-m-d"));
+								$cnh->setVencCnh($data[0]."-".$data[1]."-".$data[2]);
 								$collCnh = $this->findCnh($cnh);
 								if(!is_null($collCnh))
 								{
@@ -505,7 +505,7 @@ class ControlaFuncionalidades
 			elseif($logon->getNivelAcessoLogin() == 5)
 			{
 				$cnh = new Cnh();
-				$cnh->setVencCnh($data->format("Y-m-d"));
+				$cnh->setVencCnh($data[0]."-".$data[1]."-".$data[2]);
 				$collVo = $this->findCnh($cnh);
 				if(!is_null($collVo))
 				{
@@ -528,10 +528,10 @@ class ControlaFuncionalidades
 	 * @param Logon $logon
 	 * @param DateTime $data
 	 */
-	public function listaIpvaVencidos(Logon $logon, DateTime  $data)
+	public function listaIpvaVencidos(Logon $logon, $data)
 	{
 		$qdao = new QDAO();
-		$formataData = new FormataData();
+		$data = explode("-",$data);
 		if(!is_null($logon))
 		{
 			// Verificar IPVA de Veiculos de Clientes Vencidos - Caso Seja Administrador trazer todos.
@@ -540,7 +540,7 @@ class ControlaFuncionalidades
 			{
 				$veiculos = new Veiculos();
 				$veiculos->setIdClientes($logon->getIdClientes());
-				$veiculos->setVencimentoIpvaVeiculos($data->format("Y-m-d"));
+				$veiculos->setVencimentoIpvaVeiculos($data[0]."-".$data[1]."-".$data[2]);
 				$coll = $this->findVeiculos($veiculos);
 				if(!is_null($coll))
 				{
@@ -553,7 +553,7 @@ class ControlaFuncionalidades
 			elseif($logon->getNivelAcessoLogin() == 5)
 			{
 				$veiculos = new Veiculos();
-				$veiculos->setVencimentoIpvaVeiculos($data->format("Y-m-d"));
+				$veiculos->setVencimentoIpvaVeiculos($data[0]."-".$data[1]."-".$data[2]);
 				$coll = $this->findVeiculos($veiculos);
 				if(!is_null($coll))
 				{
@@ -576,10 +576,10 @@ class ControlaFuncionalidades
 	 * @param Logon $logon
 	 * @param DateTime $data
 	 */
-	public function listaSeguroVencidos(Logon $logon, DateTime  $data)
+	public function listaSeguroVencidos(Logon $logon, $data)
 	{
 		$qdao = new QDAO();
-		$formataData = new FormataData();
+		$data = explode("-",$data);
 		if(!is_null($logon))
 		{
 			// Verificar Seguro de carro Vencidos dos clientes - Caso Seja Administrador trazer todos.
@@ -588,7 +588,7 @@ class ControlaFuncionalidades
 			{
 				$veiculos = new Veiculos();
 				$veiculos->setIdClientes($logon->getIdClientes());
-				$veiculos->setVencimentoSeguroVeiculos($data->format("Y-m-d"));
+				$veiculos->setVencimentoSeguroVeiculos($data[0]."-".$data[1]."-".$data[2]);
 				$coll = $this->findVeiculos($veiculos);
 				if(!is_null($coll))
 				{
@@ -601,7 +601,7 @@ class ControlaFuncionalidades
 			elseif($logon->getNivelAcessoLogin() == 5)
 			{
 				$veiculos = new Veiculos();
-				$veiculos->setVencimentoSeguroVeiculos($data->format("Y-m-d"));
+				$veiculos->setVencimentoSeguroVeiculos($data[0]."-".$data[1]."-".$data[2]);
 				$coll = $this->findVeiculos($veiculos);
 				if(!is_null($coll))
 				{
@@ -624,7 +624,7 @@ class ControlaFuncionalidades
 	 * @param Logon $logon
 	 * @param DateTime $data
 	 */
-	public function listaGarantiasVenc(Logon $logon, DateTime  $data)
+	public function listaGarantiasVenc(Logon $logon, $data)
 	{
 		$qdao = new QDAO();
 		$formataData = new FormataData();
@@ -642,17 +642,16 @@ class ControlaFuncionalidades
 					foreach ($collVoVeiculos as $arrayVeiculos)
 					{
 						$veiculos = $arrayVeiculos;
-						$data_fim_garantia = new DateTime();
-						$tempoGarantia = new DateTime();
 						if(!is_null($veiculos->getTempoGarantiaNfVeiculos()) && !is_null($veiculos->getDataNfVeiculos()))
 						{
+							$tempoGarantia = new DateTime();
 							$tempoGarantia->setDate(0,$veiculos->getTempoGarantiaNfVeiculos(),0);
 							$dataNfVeiulos = new DateTime();
 							$dataQuebra = explode("-",$veiculos->getDataNfVeiculos());
 							$dataNfVeiulos->setDate($dataQuebra[0],$dataQuebra[1],$dataQuebra[2]);
 							$data_fim_garantia = $this->somarData($dataNfVeiulos,$tempoGarantia);
-							
-							if($data->format("Y-m-d")==$data_fim_garantia)
+							$data = $data[0]."-".$data[1]."-".$data[2];
+							if($data==$data_fim_garantia)
 							{
 								$collVoGarantias->append($veiculos);
 							}
@@ -682,7 +681,8 @@ class ControlaFuncionalidades
 							$dataNfVeiculo->setDate($dataNf[0],$dataNf[1],$dataNf[2]); 
 							
 							$data_fim_garantia = $this->somarData($dataNfVeiculo,$tempoGarantia);
-							if($data->format("Y-m-d")==$data_fim_garantia)
+							$data = $data[0]."-".$data[1]."-".$data[2];
+							if($data==$data_fim_garantia)
 							{
 								$collVoGarantias->append($veiculos);
 							}
@@ -703,10 +703,10 @@ class ControlaFuncionalidades
 	 * @param $logon
 	 * @param $data
 	 */
-	public function listaRevisoes(Logon $logon, DateTime  $data)
+	public function listaRevisoes(Logon $logon, $data)
 	{
 		$qdao = new QDAO();
-		$formataData = new FormataData();
+		$data = explode("-",$data);
 		if(!is_null($logon))
 		{
 			// Verificar Revisoes dos veículos dos clientes - Caso Seja Administrador trazer todos.
@@ -723,7 +723,7 @@ class ControlaFuncionalidades
 						//$veiculos = $arrayVeiculos;
 						$revisoes = new Revisoes();
 						$revisoes->setIdVeiculos($veiculos->getIdVeiculos());
-						$revisoes->setProxDataRevisoes($data->format("Y-m-d"));
+						$revisoes->setProxDataRevisoes($data[0]."-".$data[1]."-".$data[2]);
 						$collvoAtual = $this->findRevisoes($revisoes);
 						if(!is_null($collvoAtual))
 						{
@@ -736,7 +736,7 @@ class ControlaFuncionalidades
 			elseif($logon->getNivelAcessoLogin() == 5)
 			{
 				$revisoes = new Revisoes();
-				$revisoes->setProxDataRevisoes($data->format("Y-m-d"));
+				$revisoes->setProxDataRevisoes($data[0]."-".$data[1]."-".$data[2]);
 				$coll = $this->findRevisoes($revisoes);
 				if(!is_null($coll))
 				{
@@ -1162,6 +1162,147 @@ class ControlaFuncionalidades
 		catch (Exception $e)
 		{
 			throw new Exception($e->getMessage());
+		}
+	}
+
+	public function pesquisaVencimentosDisparaEmail()
+	{
+		$data = new date("Y-m-d");
+		
+		$clientes = new Clientes();
+		$collClientes = $this->findClientes($clientes);
+		if(!is_null($collClientes))
+		{
+			foreach ($collClientes as $clienteAtual)
+			{
+				$clientes = $clienteAtual;
+				$pessoaAtual = new Pessoa();
+				$empresas = new Empresas();
+				$endereco = new Endereco();
+				$email = '';
+				$nome = '';
+				if(!is_null($clientes->getIdPessoa()))
+				{
+					$pessoaAtual->setIdPessoa($clientes->getIdPessoa());
+					$collPessoa = $this->findPessoas($pessoaAtual);
+					$pessoaAtual = $collPessoa[0];
+					$endereco->setIdPessoa($pessoaAtual->getIdPessoa());
+					$collEnd = $this->findEndereco($endereco);
+					if(!is_null($collEnd))
+					{
+						$endereco =  $collEnd[0];
+						$email = $endereco->getEmailEndereco();
+					} 
+					$nome = $pessoaAtual->getNomePessoa();
+				}
+				elseif(!is_null($clientes->getIdPessoa()))
+				{
+					$empresas->setIdEmpresa($clientes->getIdEmpresa());
+					$collEmpresa = $this->findEmpresas($empresas);
+					$empresas = $collEmpresa[0];
+					$endereco->setIdEmpresa($empresas->getIdEmpresa());
+					$collEnd = $this->findEndereco($endereco);
+					if(!is_null($collEnd))
+					{
+						$endereco =  $collEnd[0];
+						$email = $endereco->getEmailEndereco();
+					}
+					$nome = $empresas->getNomeEmpresa();
+				}
+				
+				$collVoPessoa = $this->listarAniversariosClientes($clientes,$data);
+				$collVoCnh = $this->listaCnhVencida($clientes,$data);
+				$collVoIpva = $this->listaIpvaVencidos($clientes,$data);
+				$collVoSeguro = $this->listaSeguroVencidos($clientes,$data);
+				$collVoGarantias = $this->ListaGarantiasVenc($clientes,$data);
+				$collVoRevisoes = $this->listaRevisoes($clientes,$data);
+				
+				if(!is_null($collVoPessoa) || !is_null($collVoCnh) || !is_null($collVoIpva) || 
+				!is_null($collVoSeguro) || !is_null($collVoGarantias) || !is_null($collVoRevisoes))
+				{
+					$descricao = "";
+					if(!is_null($collVoCnh))
+					{
+						$cont = 0;
+						foreach ($collVoCnh as $cnhs)
+						{
+							if($cont == 0)
+								$descricao .= '<label class="ativo">CNH vencendo Hoje</label><br><br>';
+							$cnhAtual = new Cnh();
+							$cnhAtual = $cnhs;
+							$pessoaAtual = new Pessoa();
+							$pessoaAtual = $cnhAtual->returnaPessoa();
+							$descricao .= '<label class="ativo" title="">CNH numero '.$cnhAtual->getNumeroCnh().', <b>nome:</b> '.$pessoaAtual->getNomePessoa().'</label><br>';
+							$cont++;
+						}
+						$descricao .= '<br><br>';
+					}
+					if(!is_null($collVoIpva))
+					{
+						$cont = 0;
+						foreach ($collVoIpva as $ipvas)
+						{
+							if($cont == 0)
+								$descricao .= '<label class="ativo">IPVA vencendo Hoje</label><br>';
+							$veiculoAtual = new Veiculos(); 
+							$veiculoAtual = $ipvas;
+							$descricao .= '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - IPVA vencendo</label><br>';
+							$cont++;
+						}
+						$descricao .= '<br><br>';
+					}
+					if(!is_null($collVoSeguro))
+					{
+						$cont = 0;
+						foreach ($collVoSeguro as $seguros)
+						{
+							if($cont == 0)
+								$descricao .= '<label class="ativo">Seguro do Carro vencendo Hoje</label><br>';
+							$veiculoAtual = new Veiculos(); 
+							$veiculoAtual = $seguros;
+							$descricao .= '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - Seguro vencendo</label><br>';
+							$cont++;
+						}
+						$descricao .= '<br><br>';
+					}
+					if(!is_null($collVoGarantias))
+					{
+						$cont = 0;
+						foreach ($collVoGarantias as $garantias)
+						{
+							if($cont == 0)
+								$descricao .= '<label class="ativo">Garantia vencendo hoje</label><br>';
+							$veiculoAtual = new Veiculos(); 
+							$veiculoAtual = $garantias;
+							$descricao .= '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - Garantia vencendo</label><br>';
+							$cont++;
+						}
+						$descricao .= '<br><br>';
+					}
+					if(!is_null($collVoRevisoes))
+					{
+						$cont = 0;
+						foreach ($collVoRevisoes as $revisoes)
+						{
+							if($cont == 0)
+								$descricao .= '<label class="ativo">Revisão agendanda</label><br>';
+							$revisoesAtual = new Revisoes();
+							$revisoesAtual = $revisoes;
+							$veiculoAtual = new Veiculos();
+							$veiculoAtual->setIdVeiculos($revisoesAtual->getIdVeiculos());
+							$collVeiculos = $controla->findVeiculos($veiculoAtual);
+							$veiculoAtual = $collVeiculos[0]; 
+							$descricao .= '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - Revisão agendada</label><br>';
+							$cont++;
+						}
+						$descricao .= '<br><br>';
+					}			
+					if($email != '')
+					{		
+						$controla->enviarEmail($nome,$email,"Aviso de Vencimentos",$descricao);
+					}
+				}
+			}
 		}
 	}
 }

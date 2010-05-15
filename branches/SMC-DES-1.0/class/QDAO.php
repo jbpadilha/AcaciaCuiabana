@@ -215,17 +215,38 @@ class QDAO
 		elseif(!is_null($valueObj->getIdPessoa()) && !is_null($valueObj->getDataNascimentoPessoa()))
 		{
 			$dataAniversario = explode("-",$valueObj->getDataNascimentoPessoa());
-			$where = "WHERE idPessoa = ? AND dataNascimentoPessoa like '%{$dataAniversario[1]}-{$dataAniversario[2]}'";
+			if($dataAniversario[2] != 0)
+			{
+				$where = "WHERE idPessoa = ? AND dataNascimentoPessoa like '%{$dataAniversario[1]}-{$dataAniversario[2]}'";
+			}
+			else
+			{
+				$where = "WHERE idPessoa = ? AND dataNascimentoPessoa like '%-{$dataAniversario[1]}-%'";
+			}
 		}
 		elseif(!is_null($valueObj->getIdCliente()) && !is_null($valueObj->getDataNascimentoPessoa()))
 		{
 			$dataAniversario = explode("-",$valueObj->getDataNascimentoPessoa());
-			$where = "WHERE idCliente = ? AND dataNascimentoPessoa like '%{$dataAniversario[1]}-{$dataAniversario[2]}'";
+			if($dataAniversario[2] != 0)
+			{
+				$where = "WHERE idCliente = ? AND dataNascimentoPessoa like '%{$dataAniversario[1]}-{$dataAniversario[2]}'";
+			}
+			else
+			{
+				$where = "WHERE idCliente = ? AND dataNascimentoPessoa like '%-{$dataAniversario[1]}-%'";
+			}
 		}
 		elseif(!is_null($valueObj->getDataNascimentoPessoa()))
 		{
 			$dataAniversario = explode("-",$valueObj->getDataNascimentoPessoa());
-			$where = "WHERE dataNascimentoPessoa like '%{$dataAniversario[1]}-{$dataAniversario[2]}'";
+			if($dataAniversario[2] != 0)
+			{
+				$where = "WHERE dataNascimentoPessoa like '%{$dataAniversario[1]}-{$dataAniversario[2]}'";
+			}
+			else 
+			{
+				$where = "WHERE dataNascimentoPessoa like '%-{$dataAniversario[1]}-%'";
+			}
 		}
 		elseif(!is_null($valueObj->getIdCliente()) && !is_null($valueObj->getNomePessoa()))
 		{
@@ -553,7 +574,15 @@ class QDAO
 		
 		if(!is_null($valueObj->getIdCnh()) && !is_null($valueObj->getVencCnh()))
 		{
-			$where = "WHERE idCnh = ? AND vencCnh = ?";
+			$dataCnh = explode("-",$valueObj->getVencCnh());
+			if($dataCnh[0] == 0 && $dataCnh[2] == 0)
+			{
+				$where = "WHERE idCnh = ? AND vencCnh like '%-{$dataCnh[1]}-%'";
+			}
+			else
+			{
+				$where = "WHERE idCnh = ? AND vencCnh = ?";
+			}
 		}
 		elseif(!is_null($valueObj->getIdCnh()))
 		{
@@ -561,7 +590,15 @@ class QDAO
 		}
 		elseif(!is_null($valueObj->getVencCnh()))
 		{
-			$where = "WHERE vencCnh = ?";
+			$dataCnh = explode("-",$valueObj->getVencCnh());
+			if($dataCnh[0] == 0 && $dataCnh[2] == 0)
+			{
+				$where = "WHERE vencCnh like '%-{$dataCnh[1]}-%'";
+			}
+			else
+			{
+				$where = "WHERE vencCnh = ?";
+			}
 		}
 		elseif(!is_null($valueObj->getNumeroCnh()))
 		{
@@ -575,7 +612,15 @@ class QDAO
 			
 			if(!is_null($valueObj->getIdCnh()) && !is_null($valueObj->getVencCnh()))
 			{
-				mysqli_stmt_bind_param($prepare,'is',$idCnh,$vencCnh);
+				$dataCnh = explode("-",$valueObj->getVencCnh());
+				if(!($dataCnh[0] == 0 && $dataCnh[2] == 0))
+				{
+					mysqli_stmt_bind_param($prepare,'is',$idCnh,$vencCnh);
+				}
+				else
+				{
+					mysqli_stmt_bind_param($prepare,'i',$idCnh);
+				}
 			}
 			elseif(!is_null($valueObj->getIdCnh()))
 			{
@@ -583,7 +628,11 @@ class QDAO
 			}
 			elseif(!is_null($valueObj->getVencCnh()))
 			{
-				mysqli_stmt_bind_param($prepare,'s',$vencCnh);
+				$dataCnh = explode("-",$valueObj->getVencCnh());
+				if(!($dataCnh[0] == 0 && $dataCnh[2] == 0))
+				{
+					mysqli_stmt_bind_param($prepare,'s',$vencCnh);
+				}
 			}
 			elseif(!is_null($valueObj->getNumeroCnh()))
 			{
@@ -667,11 +716,27 @@ class QDAO
 		
 		if(!is_null($valueObj->getIdVeiculos()) && !is_null($valueObj->getVencimentoIpvaVeiculos()) && is_null($valueObj->getVencimentoSeguroVeiculos()))
 		{
-			$where = "WHERE idVeiculos = ? AND vencimentoIpvaVeiculos = ?";
+			$dataIpva = explode("-",$valueObj->getVencimentoIpvaVeiculos());
+			if($dataIpva[0] == 0 && $dataIpva[2] == 0)
+			{
+				$where = "WHERE idVeiculos = ? AND vencimentoIpvaVeiculos like '%-{$dataIpva[1]}-%'";
+			}
+			else
+			{
+				$where = "WHERE idVeiculos = ? AND vencimentoIpvaVeiculos = ?";
+			}
 		}
 		elseif(!is_null($valueObj->getIdVeiculos()) && is_null($valueObj->getVencimentoIpvaVeiculos()) && !is_null($valueObj->getVencimentoSeguroVeiculos()))
 		{
-			$where = "WHERE idVeiculos = ? AND vencimentoSeguroVeiculos = ?";
+			$dataSeguro = explode("-",$valueObj->getVencimentoSeguroVeiculos());
+			if($dataSeguro[0] == 0 && $dataSeguro[2] == 0)
+			{
+				$where = "WHERE idVeiculos = ? AND vencimentoSeguroVeiculos like '%-{$dataSeguro[1]}-%'";
+			}
+			else
+			{
+				$where = "WHERE idVeiculos = ? AND vencimentoSeguroVeiculos = ?";
+			}
 		}
 		elseif(!is_null($valueObj->getIdVeiculos()))
 		{
@@ -679,11 +744,31 @@ class QDAO
 		}
 		elseif (!is_null($valueObj->getVencimentoIpvaVeiculos()))
 		{
-			$where = "WHERE vencimentoIpvaVeiculos = ?";
+			$dataIpva = explode("-",$valueObj->getVencimentoIpvaVeiculos());
+			if($dataIpva[0] == 0 && $dataIpva[2] == 0)
+			{
+				$where = "WHERE vencimentoIpvaVeiculos like '%-{$dataIpva[1]}-%'";
+			}
+			else
+			{
+				$where = "WHERE vencimentoIpvaVeiculos = ?";
+			}
 		}
 		elseif (!is_null($valueObj->getVencimentoSeguroVeiculos()))
 		{
-			$where = "WHERE vencimentoSeguroVeiculos = ?";
+			$dataSeguro = explode("-",$valueObj->getVencimentoSeguroVeiculos());
+			if($dataSeguro[0] == 0 && $dataSeguro[2] == 0)
+			{
+				$where = "WHERE vencimentoSeguroVeiculos like '%-{$dataSeguro[1]}-%'";
+			}
+			else
+			{
+				$where = "WHERE vencimentoSeguroVeiculos = ?";
+			}
+		}
+		elseif(!is_null($valueObj->getIdClientes()))
+		{
+			$where = "WHERE idClientes = ?";
 		}
 		
 		try 
@@ -693,11 +778,27 @@ class QDAO
 			
 			if(!is_null($valueObj->getIdVeiculos()) && !is_null($valueObj->getVencimentoIpvaVeiculos()) && is_null($valueObj->getVencimentoSeguroVeiculos()))
 			{
-				mysqli_stmt_bind_param($prepare,'is',$idVeiculos,$vencimentoIpvaVeiculos);
+				$dataIpva = explode("-",$valueObj->getVencimentoIpvaVeiculos());
+				if(!($dataIpva[0] == 0 && $dataIpva[2] == 0))
+				{
+					mysqli_stmt_bind_param($prepare,'is',$idVeiculos,$vencimentoIpvaVeiculos);
+				}
+				else
+				{
+					mysqli_stmt_bind_param($prepare,'i',$idVeiculos);
+				}
 			}
 			elseif(!is_null($valueObj->getIdVeiculos()) && is_null($valueObj->getVencimentoIpvaVeiculos()) && !is_null($valueObj->getVencimentoSeguroVeiculos()))
 			{
-				mysqli_stmt_bind_param($prepare,'is',$idVeiculos,$vencimentoSeguroVeiculos);
+				$dataSeguro = explode("-",$valueObj->getVencimentoSeguroVeiculos());
+				if(!($dataSeguro[0] == 0 && $dataSeguro[2] == 0))
+				{
+					mysqli_stmt_bind_param($prepare,'is',$idVeiculos,$vencimentoSeguroVeiculos);
+				}
+				else
+				{
+					mysqli_stmt_bind_param($prepare,'i',$idVeiculos);
+				}
 			}
 			elseif(!is_null($valueObj->getIdVeiculos()))
 			{
@@ -705,17 +806,30 @@ class QDAO
 			}
 			elseif (!is_null($valueObj->getVencimentoIpvaVeiculos()))
 			{
-				mysqli_stmt_bind_param($prepare,'s',$vencimentoIpvaVeiculos);
+				$dataIpva = explode("-",$valueObj->getVencimentoIpvaVeiculos());
+				if(!($dataIpva[0] == 0 && $dataIpva[2] == 0))
+				{
+					mysqli_stmt_bind_param($prepare,'s',$vencimentoIpvaVeiculos);
+				}
 			}
 			elseif (!is_null($valueObj->getVencimentoSeguroVeiculos()))
 			{
-				mysqli_stmt_bind_param($prepare,'s',$vencimentoSeguroVeiculos);
+				$dataSeguro = explode("-",$valueObj->getVencimentoSeguroVeiculos());
+				if(!($dataSeguro[0] == 0 && $dataSeguro[2] == 0))
+				{
+					mysqli_stmt_bind_param($prepare,'s',$vencimentoSeguroVeiculos);
+				}
+			}
+			elseif(!is_null($valueObj->getIdClientes()))
+			{
+				mysqli_stmt_bind_param($prepare,'s',$idClientes);
 			}
 			
 			
 			$idVeiculos = $valueObj->getIdVeiculos();
 			$vencimentoIpvaVeiculos = $valueObj->getVencimentoIpvaVeiculos();
 			$vencimentoSeguroVeiculos = $valueObj->getVencimentoSeguroVeiculos();
+			$idClientes = $valueObj->getIdClientes();
 			
 			if(!mysqli_stmt_execute($prepare))
 				throw new Exception("Não foi possível conectar no banco de dados.");
@@ -801,7 +915,15 @@ class QDAO
 		
 		if(!is_null($valueObj->getIdRevisoes()) && !is_null($valueObj->getProxDataRevisoes()))
 		{
-			$where = "WHERE idRevisoes = ? AND proxDataRevisoes = ?";
+			$data = explode("-",$valueObj->getProxDataRevisoes());
+			if($data[0] == 0 && $data[2] == 0)
+			{
+				$where = "WHERE idRevisoes = ? AND proxDataRevisoes like '%-{$data[1]}-%'";
+			}
+			else
+			{
+				$where = "WHERE idRevisoes = ? AND proxDataRevisoes = ?";
+			}
 		}
 		elseif(!is_null($valueObj->getIdRevisoes()))
 		{
@@ -809,7 +931,16 @@ class QDAO
 		}
 		elseif(!is_null($valueObj->getProxDataRevisoes()))
 		{
-			$where = "WHERE proxDataRevisoes = ?";
+			$data = explode("-",$valueObj->getProxDataRevisoes());
+			if($data[0] == 0 && $data[2] == 0)
+			{
+				$where = "WHERE proxDataRevisoes like '%-{$data[1]}-%'";
+			}
+			else
+			{
+				$where = "WHERE proxDataRevisoes = ?";
+			}
+
 		}
 		elseif (!is_null($valueObj->getIdVeiculos()))
 		{
@@ -823,7 +954,15 @@ class QDAO
 			
 			if(!is_null($valueObj->getIdRevisoes()) && !is_null($valueObj->getProxDataRevisoes()))
 			{
-				mysqli_stmt_bind_param($prepare,'is',$idRevisoes,$proxDataRevisoes);
+				$data = explode("-",$valueObj->getProxDataRevisoes());
+				if(!($data[0] == 0 && $data[2] == 0))
+				{
+					mysqli_stmt_bind_param($prepare,'is',$idRevisoes,$proxDataRevisoes);
+				}
+				else
+				{
+					mysqli_stmt_bind_param($prepare,'i',$idRevisoes);
+				}
 			}
 			elseif(!is_null($valueObj->getIdRevisoes()))
 			{
@@ -831,7 +970,11 @@ class QDAO
 			}
 			elseif(!is_null($valueObj->getProxDataRevisoes()))
 			{
-				mysqli_stmt_bind_param($prepare,'s',$proxDataRevisoes);
+				$data = explode("-",$valueObj->getProxDataRevisoes());
+				if(!($data[0] == 0 && $data[2] == 0))
+				{
+					mysqli_stmt_bind_param($prepare,'s',$proxDataRevisoes);
+				}
 			}
 			elseif (!is_null($valueObj->getIdVeiculos()))
 			{
