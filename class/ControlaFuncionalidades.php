@@ -2665,6 +2665,159 @@ if(isset($_POST))
 				header("Location: ../views/painel/index.php?p=detalhe_condutores&msg=$mensagem&condutores=".urlencode(serialize($pessoaCondutor))."&cnh=".urlencode(serialize($cnh))."");
 			}
 		}
+		
+		if($_POST['acao'] == "buscaRevisoes")
+		{
+			$mensagem = '';
+			try 
+			{
+				$veiculos = new Veiculos();
+				$revisoes = new Revisoes();
+				if($_POST['busca'] != '')
+				{
+					$veiculos->setPlacaVeiculos(trim($_POST['busca']));
+				}
+				else
+					$mensagem = 'Para efetuar a busca, você deve entrar com um parâmetro.';
+					
+				if($mensagem == '')
+				{
+					$collVo = null;
+					$collVoVeiculos = $controla->findVeiculos($veiculos);
+					if(!is_null($collVoVeiculos))
+					{
+						$veiculos = $collVoVeiculos[0];
+						$revisoes->setIdVeiculos($veiculos->getIdVeiculos());
+						$collVo = $controla->findRevisoes($revisoes);
+					}
+					if(!is_null($collVo))
+					{
+						
+						header("Location: ../views/painel/index.php?p=busca_revisoes&revisoesPesquisados=".urlencode(serialize($collVo))."&veiculos=".urlencode(serialize($veiculos))."");
+					} 
+					else 
+					{
+						header("Location: ../views/painel/index.php?p=busca_revisoes&revisoesPesquisados=");
+					}
+				}
+				else
+				{
+					header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
+				}
+			}
+			catch (Exception $e)
+			{
+				$mensagem .= $e;
+				header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
+			}
+		}
+		if($_POST['acao'] == "alterarRevisoes")
+		{
+			$mensagem = '';
+			try
+			{
+				$revisoes = new Revisoes();
+				$revisoes->setIdRevisoes($_POST['idRevisoes']);
+				$revisoes->setIdVeiculos($_POST['idVeiculos']);
+				$revisoes->setIdTipoRevisoes($_POST['idTipoRevisoes']);
+
+				$revisoes->setDataRevisoes($formataData->toDBDate($_POST['tult']));
+				$revisoes->setKmRevisoes($_POST['kult']);
+				$revisoes->setProxDataRevisoes($formataData->toDBDate($_POST['tprox']));
+				$revisoes->setProxKmRevisoes($_POST['kprox']);
+
+				if($mensagem == '')
+				{
+					$controla->updateRevisoes($revisoes);
+					$mensagem = 'Revisão alterado com sucesso.';
+					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
+				}
+				else
+				{
+					header("Location: ../views/painel/index.php?p=detalhe_revisoes&msg=$mensagem&revisoes=".urlencode(serialize($revisoes))."");
+				}
+				
+			}
+			catch (Exception $e)
+			{
+				$mensagem .= $e;
+				header("Location: ../views/painel/index.php?p=detalhe_revisoes&msg=$mensagem&revisoes=".urlencode(serialize($revisoes))."");
+			}
+		}
+		if($_POST['acao'] == "buscaAbastecimentos")
+		{
+			$mensagem = '';
+			try 
+			{
+				$abastecimentos = new Abastecimentos();
+				if($_POST['veiculo'] != '')
+				{
+					$abastecimentos->getIdVeiculos(trim($_POST['veiculo']));
+				}
+				else
+					$mensagem = 'Para efetuar a busca, você deve entrar com um parâmetro.';
+					
+				if($mensagem == '')
+				{
+					$collVo = $controla->findAbastecimentos($abastecimentos);
+					
+					if(!is_null($collVo))
+					{
+						
+						header("Location: ../views/painel/index.php?p=busca_abastece&abastecimentosPesquisados=".urlencode(serialize($collVo))."");
+					} 
+					else 
+					{
+						header("Location: ../views/painel/index.php?p=busca_abastece&abastecimentosPesquisados=");
+					}
+				}
+				else
+				{
+					header("Location: ../views/painel/index.php?p=busca_abastece&msg=$mensagem");
+				}
+			}
+			catch (Exception $e)
+			{
+				$mensagem .= $e;
+				header("Location: ../views/painel/index.php?p=busca_abastece&msg=$mensagem");
+			}
+		}
+		
+		if($_POST['acao'] == "alterarAbastecimento")
+		{
+			$mensagem = '';
+			try
+			{
+				$abastecimentos = new Abastecimentos();
+				$abastecimentos->setIdAbastecimentos($_POST['idAbastecimentos']);
+				$abastecimentos->setIdVeiculos($_POST['idVeiculos']);
+				
+				$abastecimentos->setDataAbastecimentos($formataData->toDBDate($_POST['data']));
+				$abastecimentos->setKmAbastecimentos($_POST['km']);
+				$abastecimentos->setPostoAbastecimentos($_POST['posto']);
+				$abastecimentos->setNfAbastecimentos($_POST['nf']);
+				$abastecimentos->setTipoCombustivelAbastecimentos($_POST['combustivel']);
+				$abastecimentos->setValorAbastecimentos($_POST['valor']);
+				$abastecimentos->setLitrosAbastecimentos($_POST['litros']);
+
+				if($mensagem == '')
+				{
+					$controla->updateAbastecimentos($abastecimentos);
+					$mensagem = 'Abastecimento alterado com sucesso.';
+					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
+				}
+				else
+				{
+					header("Location: ../views/painel/index.php?p=detalhe_abastecimentos&msg=$mensagem&abastecimentos=".urlencode(serialize($abastecimentos))."");
+				}
+				
+			}
+			catch (Exception $e)
+			{
+				$mensagem .= $e;
+				header("Location: ../views/painel/index.php?p=detalhe_abastecimentos&msg=$mensagem&abastecimentos=".urlencode(serialize($abastecimentos))."");
+			}
+		}
 	}
 	
 }

@@ -141,5 +141,19 @@ class Revisoes
 		return $ultimaRevisao;
 	}
 
+	public function getTipoRevisoes()
+	{
+		$string = ''; 
+		if($this->idTipoRevisoes != null)
+		{
+			$controla = new ControlaFuncionalidades();
+			$tipoRevisoes = new Tiporevisoes();
+			$tipoRevisoes->setIdTipoRevisoes($this->idTipoRevisoes);
+			$collVoTipo = $controla->findTipoRevisoes($tipoRevisoes);
+			$tipoRevisoes = $collVoTipo[0];
+			$string = $tipoRevisoes->getDescricaoTipoRevisoes();
+		}
+		return $string;
+	}
 }
 ?>
