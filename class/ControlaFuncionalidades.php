@@ -1773,7 +1773,12 @@ if(isset($_POST))
 				}
 				else
 				{
-					header("Location: ../views/painel/index.php?p=add_cpf&msg=$mensagem&pessoa=".urlencode(serialize($pessoaAtual))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."");
+					//."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))
+					$complemento = "&pessoa=".urlencode(serialize($pessoaAtual));
+					$complemento .= "&endereco=".urlencode(serialize($endereco));
+					//$complemento .= "&pessoaConjugue=".urlencode(serialize($pessoaConjugue));
+					header("Location: ../views/painel/index.php?p=add_cpf&msg=$mensagem.$complemento");
+					exit;
 				}
 			}
 			catch (Exception $e)
