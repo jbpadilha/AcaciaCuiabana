@@ -1301,7 +1301,8 @@ class QDAO
 		}
 		elseif(!is_null($valueObj->getIdClientes()) && !is_null($valueObj->getDataAvisos()))
 		{
-			$where = "WHERE idClientes = ? AND dataAvisos = ?";
+			$data = explode("-",$valueObj->getDataAvisos());
+			$where = "WHERE idClientes = ? AND dataAvisos like '{$data[0]}-{$data[1]}-{$data[2]}%'";
 		}
 		elseif(!is_null($valueObj->getIdClientes()))
 		{
@@ -1318,17 +1319,12 @@ class QDAO
 			{
 				mysqli_stmt_bind_param($prepare,'i',$idAvisos);
 			}
-			elseif(!is_null($valueObj->getIdClientes()) && !is_null($valueObj->getDataAvisos()))
-			{
-				mysqli_stmt_bind_param($prepare,'is',$idClientes,$dataAvisos);
-			}
 			elseif(!is_null($valueObj->getIdClientes()))
 			{
 				mysqli_stmt_bind_param($prepare,'i',$idClientes);
 			}
 						
 			$idAvisos = $valueObj->getIdAvisos();
-			$dataAvisos = $valueObj->getDataAvisos();
 			$idClientes = $valueObj->getIdClientes();
 			
 			if(!mysqli_stmt_execute($prepare))

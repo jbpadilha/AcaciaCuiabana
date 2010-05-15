@@ -29,9 +29,6 @@ define ("TITULO", "..~`SMC - Manutenção como deve ser feita.`~..");
 define ("LOGS_PATH", "./");
 define ("SELECIONE","Selecione");
 
-//Teste de Envio de Avisos
-$controla->pesquisaVencimentosDisparaEmail();
-
 header("Content-Type: text/html; charset=ISO-8859-1");
 	
 	
