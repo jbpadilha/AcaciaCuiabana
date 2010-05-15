@@ -56,7 +56,7 @@ class ControlaFuncionalidades
 		$emailRetorno = "cadastro@servicodespertador.net";
 		$headers = "Content-Type: text/html; charset=iso-8859-1\n";
 		$headers .="From: SMC Serviço Despertador <$emailRetorno>";
-		/*if (mail($mail,$assunto_email,$msg,$headers))
+		if (mail($mail,$assunto_email,$msg,$headers))
 		{
 			$assunto = "Enviado E-mail para Usuário pelo Serviço Despertador - SMC";
 			mail($emailRetorno,$assunto_email,$msg,$headers);
@@ -67,7 +67,7 @@ class ControlaFuncionalidades
 		{
 			$msgResposta = "Ocorreu um erro no envio da mensagem.Talvez o E-mail informado esteja incorreto.";
 			throw new Exception($msgResposta);
-		}*/
+		}
 	}
 	
 	/**
