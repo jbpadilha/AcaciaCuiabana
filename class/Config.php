@@ -18,6 +18,9 @@ $dominio = new Dominio();
 $formataData = new FormataData();
 $controla = new ControlaFuncionalidades();
 
+//Teste de Envio de Avisos
+$controla->pesquisaVencimentosDisparaEmail();
+
 define ("DB_HOST", $dominio->DB_HOST);
 define ("DB_USER", $dominio->DB_USER);
 define ("DB_PASSWD", $dominio->DB_PASSWD);
