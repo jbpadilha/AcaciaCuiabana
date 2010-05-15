@@ -56,7 +56,7 @@ class ControlaFuncionalidades
 		$emailRetorno = "cadastro@servicodespertador.net";
 		$headers = "Content-Type: text/html; charset=iso-8859-1\n";
 		$headers .="From: SMC Serviço Despertador <$emailRetorno>";
-		if (mail($mail,$assunto_email,$msg,$headers))
+		if (@mail($mail,$assunto_email,$msg,$headers))
 		{
 			$assunto = "Enviado E-mail para Usuário pelo Serviço Despertador - SMC";
 			mail($emailRetorno,$assunto_email,$msg,$headers);
@@ -1769,22 +1769,22 @@ if(isset($_POST))
 					
 					$controla->enviarEmail($pessoaAtual->getNomePessoa(),$endereco->getEmailEndereco(),"Cadastro de Pessoa",$descricao);
 					$mensagem = "Cadastro realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
-					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
+					echo "<script type=\"text/javascript\">document.location='../views/painel/index.php?p=home&msg={$mensagem}'</script>";
+					//header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
 				}
 				else
 				{
 					//."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))
 					$complemento = "&pessoa=".urlencode(serialize($pessoaAtual));
 					$complemento .= "&endereco=".urlencode(serialize($endereco));
-					//$complemento .= "&pessoaConjugue=".urlencode(serialize($pessoaConjugue));
-					header("Location: ../views/painel/index.php?p=add_cpf&msg=$mensagem.$complemento");
-					exit;
+					$complemento .= "&pessoaConjugue=".urlencode(serialize($pessoaConjugue));
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg={$mensagem}{$complemento}'</script>";
 				}
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e;
-				header("Location: ../views/painel/index.php?p=add_cpf&msg=$mensagem&pessoa=".urlencode(serialize($pessoaAtual))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."");
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg={$mensagem}'</script>";
 			}
 		}
 		
@@ -1969,17 +1969,17 @@ if(isset($_POST))
 					
 					$controla->enviarEmail($empresa->getNomeEmpresa(),$endereco->getEmailEndereco(),"Cadastro de Empresa",$descricao);
 					$mensagem = "Cadastro realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
-					header("Location: ../views/painel/index.php?p=home&msg={$mensagem}");
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg={$mensagem}'</script>";
 				}
 				else 
 				{
-					header("Location: ../views/painel/index.php?p=add_cnpj&msg=$mensagem&empresas=".urlencode(serialize($empresas))."&endereco=".urlencode(serialize($endereco))."&pessoaDiretor=".urlencode(serialize($pessoaDiretor))."&enderecoDiretor=".urlencode(serialize($enderecoDiretor))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."");
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cnpj&msg={$mensagem}'</script>";
 				}
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e;
-				header("Location: ../views/painel/index.php?p=add_cnpj&msg=$mensagem&empresas=".urlencode(serialize($empresas))."&endereco=".urlencode(serialize($endereco))."&pessoaDiretor=".urlencode(serialize($pessoaDiretor))."&enderecoDiretor=".urlencode(serialize($enderecoDiretor))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."");
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cnpj&msg={$mensagem}&empresas=".urlencode(serialize($empresas))."&endereco=".urlencode(serialize($endereco))."&pessoaDiretor=".urlencode(serialize($pessoaDiretor))."&enderecoDiretor=".urlencode(serialize($enderecoDiretor))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
 			}
 		}
 		
@@ -2022,7 +2022,7 @@ if(isset($_POST))
 				{
 					$controla->cadastraVeiculos($veiculos);
 					$mensagem = 'Veículo Cadastrado com sucesso.';
-					header("Location: ../views/painel/index.php?p=home&msg={$mensagem}");
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg={$mensagem}'</script>";
 				}
 				else
 				{
@@ -2033,7 +2033,7 @@ if(isset($_POST))
 			catch (Exception $e)
 			{
 				$mensagem .= $e;
-				header("Location: ../views/painel/index.php?p=add_veiculos&msg=$mensagem&veiculos=".urlencode(serialize($veiculos))."");
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_veiculos&msg={$mensagem}'</script>";
 			}
 		}
 		
@@ -2089,17 +2089,17 @@ if(isset($_POST))
 						
 					}
 					$mensagem = 'Condutor cadastrado com sucesso.';
-					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg={$mensagem}'</script>";
 				}
 				else
 				{
-					header("Location: ../views/painel/index.php?p=add_motorista&msg=$mensagem&condutores=".urlencode(serialize($pessoaCondutor))."&cnh=".urlencode(serialize($cnh))."");
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_motorista&msg={$mensagem}&condutores=".urlencode(serialize($pessoaCondutor))."&cnh=".urlencode(serialize($cnh))."'</script>";
 				}				
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e;
-				header("Location: ../views/painel/index.php?p=add_motorista&msg=$mensagem&condutores=".urlencode(serialize($pessoaCondutor))."&cnh=".urlencode(serialize($cnh))."");
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_motorista&msg={$mensagem}'</script>";
 			}
 		}
 		
@@ -2118,18 +2118,18 @@ if(isset($_POST))
 				{
 					$controla->cadastrarTipoRevisoes($tipoRevisoes);
 					$mensagem = 'Tipo de revisão cadastrado com sucesso.';
-					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg={$mensagem}'</script>";
 				}	
 				else
 				{
-					header("Location: ../views/painel/index.php?p=add_tipo_rev&msg=$mensagem&tipoRevisoes=".urlencode(serialize($tipoRevisoes))."");
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_tipo_rev&msg={$mensagem}&tipoRevisoes=".urlencode(serialize($tipoRevisoes))."'</script>";
 				}
 					
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e;
-				header("Location: ../views/painel/index.php?p=add_tipo_rev&msg=$mensagem&tipoRevisoes=".urlencode(serialize($tipoRevisoes))."");
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_tipo_rev&msg={$mensagem}'</script>";
 			}
 		}
 		if($_POST['acao'] == "cadastroRevisoes")
@@ -2158,18 +2158,18 @@ if(isset($_POST))
 				{
 					$controla->cadastrarRevisoes($revisoes);
 					$mensagem = 'Revisão cadastrado com sucesso.';
-					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg={$mensagem}'</script>";
 				}
 				else
 				{
-					header("Location: ../views/painel/index.php?p=add_rev_padrao&msg=$mensagem&revisoes=".urlencode(serialize($revisoes))."");
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao&msg={$mensagem}&revisoes=".urlencode(serialize($revisoes))."'</script>";
 				}
 				
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e;
-				header("Location: ../views/painel/index.php?p=add_rev_padrao&msg=$mensagem&revisoes=".urlencode(serialize($revisoes))."");
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao&msg={$mensagem}'</script>";
 			}
 		}
 		
@@ -2196,18 +2196,18 @@ if(isset($_POST))
 				{
 					$controla->cadastrarAbastecimentos($abastecimentos);
 					$mensagem = 'Abastecimento cadastrado com sucesso.';
-					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg={$mensagem}'</script>";
 				}
 				else
 				{
-					header("Location: ../views/painel/index.php?p=add_abastece&msg=$mensagem&abastecimentos=".urlencode(serialize($abastecimentos))."");
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_abastece&msg={$mensagem}'</script>";
 				}
 				
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e;
-				header("Location: ../views/painel/index.php?p=add_abastece&msg=$mensagem&abastecimentos=".urlencode(serialize($abastecimentos))."");
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_abastece&msg={$mensagem}'</script>";
 			}
 		}
 		
