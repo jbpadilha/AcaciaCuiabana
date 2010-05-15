@@ -1186,6 +1186,8 @@ class ControlaFuncionalidades
 					continue;
 				}
 				
+				$logon = new Logon();
+				$logon->getIdClientes();
 				$pessoaAtual = new Pessoa();
 				$empresas = new Empresas();
 				$endereco = new Endereco();
@@ -1220,12 +1222,12 @@ class ControlaFuncionalidades
 					$nome = $empresas->getNomeEmpresa();
 				}
 				
-				$collVoPessoa = $this->listarAniversariosClientes($clientes,$data);
-				$collVoCnh = $this->listaCnhVencida($clientes,$data);
-				$collVoIpva = $this->listaIpvaVencidos($clientes,$data);
-				$collVoSeguro = $this->listaSeguroVencidos($clientes,$data);
-				$collVoGarantias = $this->ListaGarantiasVenc($clientes,$data);
-				$collVoRevisoes = $this->listaRevisoes($clientes,$data);
+				$collVoPessoa = $this->listarAniversariosClientes($logon,$data);
+				$collVoCnh = $this->listaCnhVencida($logon,$data);
+				$collVoIpva = $this->listaIpvaVencidos($logon,$data);
+				$collVoSeguro = $this->listaSeguroVencidos($logon,$data);
+				$collVoGarantias = $this->ListaGarantiasVenc($logon,$data);
+				$collVoRevisoes = $this->listaRevisoes($logon,$data);
 				
 				if(!is_null($collVoPessoa) || !is_null($collVoCnh) || !is_null($collVoIpva) || 
 				!is_null($collVoSeguro) || !is_null($collVoGarantias) || !is_null($collVoRevisoes))
