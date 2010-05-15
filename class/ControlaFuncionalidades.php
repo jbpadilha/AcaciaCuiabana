@@ -1383,6 +1383,7 @@ if(isset($_POST))
 //POST e GET
 if(isset($_POST))
 {
+	ob_start();
 	header("Content-Type: text/html; charset=ISO-8859-1");
 	$msg = "";
 	$controla = new ControlaFuncionalidades();
@@ -3028,6 +3029,7 @@ if(isset($_POST))
 				header("Location: ../views/painel/index.php?p=detalhe_abastecimentos&msg=$mensagem&abastecimentos=".urlencode(serialize($abastecimentos))."");
 			}
 		}
+		ob_end_flush();
 	}
 	
 }
