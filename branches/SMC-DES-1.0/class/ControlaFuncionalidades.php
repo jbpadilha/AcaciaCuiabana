@@ -1,9 +1,9 @@
-		<?php
+<?php
 require_once ('FormataData.php');
 require_once ('Dominio.php');
 
 require_once ('Abastecimentos.php');
-require_once ('Avisosveiculos.php');
+require_once ('Avisos.php');
 require_once ('EmpresaCondutores.php');
 require_once ('Empresas.php');
 require_once ('Pessoa.php');
@@ -371,14 +371,14 @@ class ControlaFuncionalidades
 	
 	/**
 	 * Método de Procura/Listagem de Avisos de Veículos
-	 * @param Avisosveiculos $avisosVeiculos
+	 * @param Avisos $avisosVeiculos
 	 */
-	public function findAvisosVeiculos(Avisosveiculos $avisosVeiculos)
+	public function findAvisos(Avisos $avisos)
 	{
 		$qdao = new QDAO();
 		try
 		{
-			$this->collVo = $qdao->findAvisoVeiculos($avisosVeiculos);
+			$this->collVo = $qdao->findAvisos($avisos);
 		}
 		catch (Exception $e)
 		{
@@ -929,14 +929,14 @@ class ControlaFuncionalidades
 	
 	/**
 	 * Método de Atualização de Aviso de Veículos
-	 * @param Avisosveiculos $avisosVeiculos
+	 * @param Avisos $avisosVeiculos
 	 */
-	public function updateAvisosVeiculos(Avisosveiculos $avisosVeiculos)
+	public function updateAvisos(Avisos $avisos)
 	{
 		$dao = new DAO();
 		try 
 		{
-			$dao->updateAvisosVeiculos($avisosVeiculos);
+			$dao->updateAvisos($avisos);
 		}
 		catch (Exception $e)
 		{
@@ -1152,12 +1152,12 @@ class ControlaFuncionalidades
 	 * Método de Cadastramento de Avisos de Veículos
 	 * @param $avisosVeiculos
 	 */
-	public function cadastrarAvisosVeiculos(Avisosveiculos $avisosVeiculos)
+	public function cadastrarAvisos(Avisos $avisos)
 	{
 		$dao = new DAO();
 		try 
 		{
-			$dao->cadastrarAvisosVeiculos($avisosVeiculos);
+			$dao->cadastrarAvisos($avisos);
 		}
 		catch (Exception $e)
 		{
@@ -1167,7 +1167,7 @@ class ControlaFuncionalidades
 
 	public function pesquisaVencimentosDisparaEmail()
 	{
-		$data = new date("Y-m-d");
+		$data = date("Y-m-d");
 		
 		$clientes = new Clientes();
 		$collClientes = $this->findClientes($clientes);
@@ -1176,6 +1176,16 @@ class ControlaFuncionalidades
 			foreach ($collClientes as $clienteAtual)
 			{
 				$clientes = $clienteAtual;
+				
+				$avisos = new Avisos();
+				$avisos->setIdClientes($clientes->getIdClientes());
+				$avisos->setDataAvisos(date("Y-m-d"));
+				$collVoAvisos = $this->findAvisos($avisos);
+				if(!is_null($collVoAvisos) && count($collVoAvisos)>0)
+				{
+					continue;
+				}
+				
 				$pessoaAtual = new Pessoa();
 				$empresas = new Empresas();
 				$endereco = new Endereco();
@@ -1221,6 +1231,28 @@ class ControlaFuncionalidades
 				!is_null($collVoSeguro) || !is_null($collVoGarantias) || !is_null($collVoRevisoes))
 				{
 					$descricao = "";
+					
+					if(!is_null($collVoPessoa))
+					{
+						$cont = 0;
+						foreach ($collVoPessoa as $pessoas)
+						{
+							if($cont == 0)
+								echo '<label class="ativo">Aniversário do Dia</label><br><br>';
+							$pessoaAtual = new Logon();
+							$pessoaAtual = $pessoas;
+							echo '<label class="ativo" title="'.$formataData->toViewDate($pessoaAtual->getDataNascimentoPessoa()).'">Aniversário de '.$pessoaAtual->getNomePessoa().'</label><br>';
+							$cont++;
+						}
+						echo '<br><br>';
+						$this->enviarEmail($nome,$email,"SMC - Serviço Despertador - Aviso de Aniversário",$descricao);
+						$avisosGrava = new Avisos();
+						$avisosGrava->setAssuntoAvisos("SMC - Serviço Despertador - Aviso de Aniversário");
+						$avisosGrava->setDataAvisos(date("Y-m-d"));
+						$avisosGrava->setIdClientes($clientes->getIdClientes());
+						
+					}
+					
 					if(!is_null($collVoCnh))
 					{
 						$cont = 0;
@@ -1236,6 +1268,11 @@ class ControlaFuncionalidades
 							$cont++;
 						}
 						$descricao .= '<br><br>';
+						$this->enviarEmail($nome,$email,"SMC - Serviço Despertador - Aviso de Vencimento de CNH",$descricao);
+						$avisosGrava = new Avisos();
+						$avisosGrava->setAssuntoAvisos("SMC - Serviço Despertador - Aviso de Vencimento de CNH");
+						$avisosGrava->setDataAvisos(date("Y-m-d"));
+						$avisosGrava->setIdClientes($clientes->getIdClientes());
 					}
 					if(!is_null($collVoIpva))
 					{
@@ -1250,6 +1287,11 @@ class ControlaFuncionalidades
 							$cont++;
 						}
 						$descricao .= '<br><br>';
+						$this->enviarEmail($nome,$email,"SMC - Serviço Despertador - Aviso de Vencimento de IPVa",$descricao);
+						$avisosGrava = new Avisos();
+						$avisosGrava->setAssuntoAvisos("SMC - Serviço Despertador - Aviso de Vencimento de IPVA");
+						$avisosGrava->setDataAvisos(date("Y-m-d"));
+						$avisosGrava->setIdClientes($clientes->getIdClientes());
 					}
 					if(!is_null($collVoSeguro))
 					{
@@ -1264,6 +1306,11 @@ class ControlaFuncionalidades
 							$cont++;
 						}
 						$descricao .= '<br><br>';
+						$this->enviarEmail($nome,$email,"SMC - Serviço Despertador - Aviso de Vencimento de Seguro",$descricao);
+						$avisosGrava = new Avisos();
+						$avisosGrava->setAssuntoAvisos("SMC - Serviço Despertador - Aviso de Vencimento de Seguro");
+						$avisosGrava->setDataAvisos(date("Y-m-d"));
+						$avisosGrava->setIdClientes($clientes->getIdClientes());
 					}
 					if(!is_null($collVoGarantias))
 					{
@@ -1278,6 +1325,11 @@ class ControlaFuncionalidades
 							$cont++;
 						}
 						$descricao .= '<br><br>';
+						$this->enviarEmail($nome,$email,"SMC - Serviço Despertador - Aviso de Vencimento de Garantia",$descricao);
+						$avisosGrava = new Avisos();
+						$avisosGrava->setAssuntoAvisos("SMC - Serviço Despertador - Aviso de Vencimento de Garantia");
+						$avisosGrava->setDataAvisos(date("Y-m-d"));
+						$avisosGrava->setIdClientes($clientes->getIdClientes());
 					}
 					if(!is_null($collVoRevisoes))
 					{
@@ -1296,11 +1348,12 @@ class ControlaFuncionalidades
 							$cont++;
 						}
 						$descricao .= '<br><br>';
+						$this->enviarEmail($nome,$email,"SMC - Serviço Despertador - Aviso de Revisão agendada",$descricao);
+						$avisosGrava = new Avisos();
+						$avisosGrava->setAssuntoAvisos("SMC - Serviço Despertador - Aviso de Revisão agendada");
+						$avisosGrava->setDataAvisos(date("Y-m-d"));
+						$avisosGrava->setIdClientes($clientes->getIdClientes());
 					}			
-					if($email != '')
-					{		
-						$controla->enviarEmail($nome,$email,"Aviso de Vencimentos",$descricao);
-					}
 				}
 			}
 		}
