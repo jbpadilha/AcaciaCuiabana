@@ -1127,26 +1127,28 @@ class DAO
 	}
 	
 	/**
-	 * Método de Cadastramento de Aviso de Veiculos
-	 * @param Avisosveiculos $avisoVeiculos
+	 * Método de Cadastramento de Avisos
+	 * @param Avisos $avisos
 	 */
-	public function cadastrarAvisosVeiculos(Avisosveiculos $avisoVeiculos)
+	public function cadastrarAvisos(Avisos $avisos)
 	{
 		$conecta = new Connecta();
-		$valueObj = (object)$avisoVeiculos;
+		$valueObj = (object)$avisos;
 		
-		$idAvisosVeiculos = '';
-		$dataAvisoVeiculos = '';
-		$idVeiculos = '';
+		$idAvisos = '';
+		$dataAvisos = '';
+		$idClientes = '';
+		$assuntoAvisos = '';
 		
 		try 
 		{
-			$sql = mysqli_prepare($conecta,"INSERT INTO avisosveiculos (idAvisosVeiculos,dataAvisoVeiculos,
-			idVeiculos) VALUES('',?,?)");
-			mysqli_bind_param($sql,'ss',$dataAvisoVeiculos,$idVeiculos);
+			$sql = mysqli_prepare($conecta,"INSERT INTO avisos (idAvisos,dataAvisos,
+			idClientes,assuntoAvisos) VALUES('',?,?,?)");
+			mysqli_bind_param($sql,'sss',$dataAvisos,$idClientes,$assuntoAvisos);
 			
-			$dataAvisoVeiculos = $valueObj->getDataAvisoVeiculos();
-			$idVeiculos = $valueObj->getIdVeiculos();	
+			$dataAvisos = $valueObj->getDataAvisos();
+			$idClientes = $valueObj->getIdClientes();
+			$assuntoAvisos = $valueObj->getAssuntoAvisos();	
 			
 			if(!mysqli_stmt_execute($sql))
 				throw new Exception("Não foi possível conectar no banco de dados.");
@@ -1162,24 +1164,26 @@ class DAO
 	 * Método de Atualização de Aviso de Veiculos
 	 * @param Avisosveiculos $avisosVeiculos
 	 */
-	public function updateAvisosVeiculos(Avisosveiculos $avisosVeiculos)
+	public function updateAvisos(Avisos $avisos)
 	{
 		$conecta = new Connecta();
-		$valueObj = (object)$avisosVeiculos;
+		$valueObj = (object)$avisos;
 		
-		$idAvisosVeiculos = '';
-		$dataAvisoVeiculos = '';
-		$idVeiculos = '';
+		$idAvisos = '';
+		$dataAvisos = '';
+		$idClientes = '';
+		$assuntoAvisos = '';
 		
 		try 
 		{
-			$sql = mysqli_prepare($conecta,"UPDATE avisosveiculos SET dataAvisoVeiculos=?,
-			idVeiculos=? WHERE idAvisosVeiculos=?");
-			mysqli_bind_param($sql,'ssi',$dataAvisoVeiculos,$idVeiculos,$idAvisosVeiculos);
+			$sql = mysqli_prepare($conecta,"UPDATE avisos SET dataAvisos = ?,
+			idClientes=?,assuntoAvisos=? WHERE idAvisos = ?");
+			mysqli_bind_param($sql,'sssi',$dataAvisos,$idClientes,$assuntoAvisos,$idAvisos);
 			
-			$dataAvisoVeiculos = $valueObj->getDataAvisoVeiculos();
-			$idVeiculos = $valueObj->getIdVeiculos();
-			$idAvisosVeiculos = $valueObj->getIdAvisosVeiculos();
+			$dataAvisos = $valueObj->getDataAvisos();
+			$idClientes = $valueObj->getIdClientes();
+			$assuntoAvisos = $valueObj->getAssuntoAvisos();
+			$idAvisos = $valueObj->getIdAvisos();	
 			
 			if(!mysqli_stmt_execute($sql))
 				throw new Exception("Não foi possível conectar no banco de dados.");

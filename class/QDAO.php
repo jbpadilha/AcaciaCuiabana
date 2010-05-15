@@ -1277,66 +1277,78 @@ class QDAO
 	 * Método de Procura/Listagem de Aviso de Veículos
 	 * @param Avisosveiculos $avisoVeiculos
 	 */
-	public function findAvisoVeiculos(Avisosveiculos $avisoVeiculos)
+	public function findAvisos(Avisos $avisos)
 	{
 		$collVo = null;
 		$valueObj = null;
-		$valueObj = new Avisosveiculos();
+		$valueObj = new Avisos();
 		$conecta = new Connecta();
 		
-		$valueObj = $avisoVeiculos;
+		$valueObj = $avisos;
 		
-		$idAvisosVeiculos = '';
-		$dataAvisoVeiculos = '';
-		$idVeiculos = '';
+		$idAvisos = '';
+		$dataAvisos = '';
+		$idClientes = '';
+		$assuntoAvisos = '';
 		
 		$where = '';
 		
-		$sql = "SELECT * FROM avisosveiculos ";
+		$sql = "SELECT * FROM avisos ";
 		
-		if(!is_null($valueObj->getIdAvisosVeiculos()))
+		if(!is_null($valueObj->getIdAvisos()))
 		{
-			$where = "WHERE idAvisosVeiculos = ?";
+			$where = "WHERE idAvisos = ?";
 		}
-		elseif(!is_null($valueObj->getIdVeiculos()))
+		elseif(!is_null($valueObj->getIdClientes()) && !is_null($valueObj->getDataAvisos()))
 		{
-			$where = "WHERE idVeiculos = ?";
+			$where = "WHERE idClientes = ? AND dataAvisos = ?";
 		}
+		elseif(!is_null($valueObj->getIdClientes()))
+		{
+			$where = "WHERE idClientes = ?";
+		}
+		
 		
 		try 
 		{
 			$sql .= $where;
 			$prepare = mysqli_prepare($conecta,$sql);
 			
-			if(!is_null($valueObj->getIdAvisosVeiculos()))
+			if(!is_null($valueObj->getIdAvisos()))
 			{
-				mysqli_stmt_bind_param($prepare,'i',$idAvisosVeiculos);
+				mysqli_stmt_bind_param($prepare,'i',$idAvisos);
 			}
-			elseif(!is_null($valueObj->getIdVeiculos()))
+			elseif(!is_null($valueObj->getIdClientes()) && !is_null($valueObj->getDataAvisos()))
 			{
-				mysqli_stmt_bind_param($prepare,'i',$idVeiculos);
+				mysqli_stmt_bind_param($prepare,'is',$idClientes,$dataAvisos);
+			}
+			elseif(!is_null($valueObj->getIdClientes()))
+			{
+				mysqli_stmt_bind_param($prepare,'i',$idClientes);
 			}
 						
-			$idAvisosVeiculos = $valueObj->getIdAvisosVeiculos();
-			$idVeiculos = $valueObj->getIdVeiculos();
+			$idAvisos = $valueObj->getIdAvisos();
+			$dataAvisos = $valueObj->getDataAvisos();
+			$idClientes = $valueObj->getIdClientes();
 			
 			if(!mysqli_stmt_execute($prepare))
 				throw new Exception("Não foi possível conectar no banco de dados.");
 			
-			mysqli_stmt_bind_result($prepare,$idAvisosVeiculos,$dataAvisoVeiculos,
-			$idVeiculos);
+			mysqli_stmt_bind_result($prepare,$idAvisos,$dataAvisos,
+			$idClientes, $assuntoAvisos);
 			while(mysqli_stmt_fetch($prepare))
 			{
-				$valueObj = new Avisosveiculos();
-				$valueObj->setIdAvisosVeiculos($idAvisosVeiculos);
-				$valueObj->setDataAvisoVeiculos($dataAvisoVeiculos);
-				$valueObj->setIdVeiculos($idVeiculos);
+				$valueObj = new Avisos();
+				$valueObj->setIdAvisos($idAvisos);
+				$valueObj->setDataAvisos($dataAvisos);
+				$valueObj->setIdClientes($idClientes);
+				$valueObj->setAssuntoAvisos($assuntoAvisos);
 				$collVo[] = $valueObj;
 			}
 		}
 		catch (Exception $e)
 		{
-			throw new Exception("Não foi possível listar a tabela Aviso de Veiculos. ".$e->getMessage());
+			throw new Exception("Não foi possível listar a tabela Aviso. ".$e->getMessage());
 		}
 		$conecta = null;
 		$valueObj = null;
