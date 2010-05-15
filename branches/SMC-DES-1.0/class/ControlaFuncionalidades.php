@@ -1187,7 +1187,7 @@ class ControlaFuncionalidades
 				}
 				
 				$logon = new Logon();
-				$logon->getIdClientes();
+				$logon->setIdClientes($clientes->getIdClientes());
 				$pessoaAtual = new Pessoa();
 				$empresas = new Empresas();
 				$endereco = new Endereco();
@@ -1222,40 +1222,49 @@ class ControlaFuncionalidades
 					$nome = $empresas->getNomeEmpresa();
 				}
 				
-				$collVoPessoa = $this->listarAniversariosClientes($logon,$data);
+				$collVoPessoa = new ArrayObject();
+				$collVoCnh = new ArrayObject();
+				$collVoIpva = new ArrayObject();
+				$collVoSeguro = new ArrayObject();
+				$collVoGarantias = new ArrayObject();
+				$collVoRevisoes = new ArrayObject();
+				
+				$dataAniv = explode("-",$data);
+				$dataAniv = "0-{$dataAniv[1]}-{$dataAniv[2]}";
+				$collVoPessoa = $this->listarAniversariosClientes($logon,$dataAniv);
 				$collVoCnh = $this->listaCnhVencida($logon,$data);
 				$collVoIpva = $this->listaIpvaVencidos($logon,$data);
 				$collVoSeguro = $this->listaSeguroVencidos($logon,$data);
 				$collVoGarantias = $this->ListaGarantiasVenc($logon,$data);
 				$collVoRevisoes = $this->listaRevisoes($logon,$data);
 				
-				if(!is_null($collVoPessoa) || !is_null($collVoCnh) || !is_null($collVoIpva) || 
-				!is_null($collVoSeguro) || !is_null($collVoGarantias) || !is_null($collVoRevisoes))
+				if($collVoPessoa->count()>0 || $collVoCnh->count()>0 || $collVoIpva->count()>0 || 
+				$collVoSeguro->count()>0 || $collVoGarantias->count()>0 || $collVoRevisoes->count()>0)
 				{
 					$descricao = "";
-					
-					if(!is_null($collVoPessoa))
+					$formataData = new FormataData();
+					if($collVoPessoa->count()>0)
 					{
 						$cont = 0;
 						foreach ($collVoPessoa as $pessoas)
 						{
 							if($cont == 0)
-								echo '<label class="ativo">Aniversário do Dia</label><br><br>';
+								$descricao .= '<label class="ativo">Aniversário do Dia</label><br><br>';
 							$pessoaAtual = new Logon();
 							$pessoaAtual = $pessoas;
-							echo '<label class="ativo" title="'.$formataData->toViewDate($pessoaAtual->getDataNascimentoPessoa()).'">Aniversário de '.$pessoaAtual->getNomePessoa().'</label><br>';
+							$descricao .= '<label class="ativo" title="'.$formataData->toViewDate($pessoaAtual->getDataNascimentoPessoa()).'">Aniversário de '.$pessoaAtual->getNomePessoa().'</label><br>';
 							$cont++;
 						}
-						echo '<br><br>';
+						$descricao .= '<br><br>';
 						$this->enviarEmail($nome,$email,"SMC - Serviço Despertador - Aviso de Aniversário",$descricao);
 						$avisosGrava = new Avisos();
 						$avisosGrava->setAssuntoAvisos("SMC - Serviço Despertador - Aviso de Aniversário");
 						$avisosGrava->setDataAvisos(date("Y-m-d"));
 						$avisosGrava->setIdClientes($clientes->getIdClientes());
-						
+						$this->cadastrarAvisos($avisosGrava);
 					}
 					
-					if(!is_null($collVoCnh))
+					if($collVoCnh->count()>0)
 					{
 						$cont = 0;
 						foreach ($collVoCnh as $cnhs)
@@ -1275,8 +1284,9 @@ class ControlaFuncionalidades
 						$avisosGrava->setAssuntoAvisos("SMC - Serviço Despertador - Aviso de Vencimento de CNH");
 						$avisosGrava->setDataAvisos(date("Y-m-d"));
 						$avisosGrava->setIdClientes($clientes->getIdClientes());
+						$this->cadastrarAvisos($avisosGrava);
 					}
-					if(!is_null($collVoIpva))
+					if($collVoIpva->count()>0)
 					{
 						$cont = 0;
 						foreach ($collVoIpva as $ipvas)
@@ -1294,8 +1304,9 @@ class ControlaFuncionalidades
 						$avisosGrava->setAssuntoAvisos("SMC - Serviço Despertador - Aviso de Vencimento de IPVA");
 						$avisosGrava->setDataAvisos(date("Y-m-d"));
 						$avisosGrava->setIdClientes($clientes->getIdClientes());
+						$this->cadastrarAvisos($avisosGrava);
 					}
-					if(!is_null($collVoSeguro))
+					if($collVoSeguro->count()>0)
 					{
 						$cont = 0;
 						foreach ($collVoSeguro as $seguros)
@@ -1313,8 +1324,9 @@ class ControlaFuncionalidades
 						$avisosGrava->setAssuntoAvisos("SMC - Serviço Despertador - Aviso de Vencimento de Seguro");
 						$avisosGrava->setDataAvisos(date("Y-m-d"));
 						$avisosGrava->setIdClientes($clientes->getIdClientes());
+						$this->cadastrarAvisos($avisosGrava);
 					}
-					if(!is_null($collVoGarantias))
+					if($collVoGarantias->count()>0)
 					{
 						$cont = 0;
 						foreach ($collVoGarantias as $garantias)
@@ -1332,8 +1344,9 @@ class ControlaFuncionalidades
 						$avisosGrava->setAssuntoAvisos("SMC - Serviço Despertador - Aviso de Vencimento de Garantia");
 						$avisosGrava->setDataAvisos(date("Y-m-d"));
 						$avisosGrava->setIdClientes($clientes->getIdClientes());
+						$this->cadastrarAvisos($avisosGrava);
 					}
-					if(!is_null($collVoRevisoes))
+					if($collVoRevisoes->count()>0)
 					{
 						$cont = 0;
 						foreach ($collVoRevisoes as $revisoes)
@@ -1355,6 +1368,7 @@ class ControlaFuncionalidades
 						$avisosGrava->setAssuntoAvisos("SMC - Serviço Despertador - Aviso de Revisão agendada");
 						$avisosGrava->setDataAvisos(date("Y-m-d"));
 						$avisosGrava->setIdClientes($clientes->getIdClientes());
+						$this->cadastrarAvisos($avisosGrava);
 					}			
 				}
 			}
