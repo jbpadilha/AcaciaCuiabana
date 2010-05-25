@@ -40,7 +40,7 @@ if(isset($_GET['abastecimentos']))
 
 <div id="abastece">
 
-	<form name="form1" method="post" action="../../class/ControlaFuncionalidades.php" onsubmit="return validaForm(this)" >
+	<form name="form1" method="post" action="../../class/RecebePostGet.php" onsubmit="return validaForm(this)" >
 	<input type="hidden" id="acao" name="acao" value="cadastroAbastecimento">
 	<p class="caption"> Lançar abastecimento </p>
 	<fieldset>

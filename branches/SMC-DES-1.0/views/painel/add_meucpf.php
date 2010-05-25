@@ -52,7 +52,7 @@ if(!is_null($logon->getIdPessoa()))
 
 <body oncontextmenu="return false;" >
 
-<form method="POST" action="../../class/ControlaFuncionalidades.php" onsubmit="return validaForm(this)">	
+<form method="POST" action="../../class/RecebePostGet.php" onsubmit="return validaForm(this)">	
 	<input type="hidden" id="idPessoa" name="idPessoa" value="<?=$pessoa->getIdPessoa()?>"/>
 	<fieldset> <p class="caption"> Dados pessoais <span class="borda"> </span> </p>
 		<div id="left">

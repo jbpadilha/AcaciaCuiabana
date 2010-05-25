@@ -49,7 +49,7 @@ elseif (isset($_GET['idAbastecimentos']) && $_GET['idAbastecimentos'] != '')
 
 <div id="abastece">
 
-	<form name="form1" method="post" action="../../class/ControlaFuncionalidades.php" onsubmit="return validaForm(this)" >
+	<form name="form1" method="post" action="../../class/RecebePostGet.php" onsubmit="return validaForm(this)" >
 	<input type="hidden" id="acao" name="acao" value="alterarAbastecimento">
 	<input type="hidden" id="idAbastecimentos" name="idAbastecimentos" value="<?=$abastecimentos->getIdAbastecimentos()?>">
 	<input type="hidden" id="idVeiculos" name="idVeiculos" value="<?=$abastecimentos->getIdVeiculos()?>">

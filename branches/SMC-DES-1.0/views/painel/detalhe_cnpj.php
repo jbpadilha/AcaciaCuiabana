@@ -33,7 +33,7 @@ elseif (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
 <script type="text/javascript" language="javascript" src="../cidades.js" > </script>
 </head>
 <body>
-<form method="post" action="../../class/ControlaFuncionalidades.php" onsubmit="return validaForm(this)">
+<form method="post" action="../../class/RecebePostGet.php" onsubmit="return validaForm(this)">
 <input type="hidden" id="acao" name="acao" value="alterarEmpresa">
 <input type="hidden" id="idCliente" name="idCliente" value="<?=$logon->getIdClientes()?>">
 <input type="hidden" id="idEmpresa" name="idEmpresa" value="<?=$empresa->getIdEmpresa()?>">

@@ -8,7 +8,7 @@
 		<label> <img src="imagens/right.png" alt="" /> Não sou cadastrado </label>
 	</div>
 
-	<form id="formlogin" name="f_login" method="POST" action="../class/ControlaFuncionalidades.php" target="_self" onsubmit="return checkforml(this)">
+	<form id="formlogin" name="f_login" method="POST" action="../class/RecebePostGet.php" target="_self" onsubmit="return checkforml(this)">
 		<p> <label for="login">Login:</label>
 			<input class="x3" type="text" tabindex="1" name="login" id="login" onfocus="foco('login', 'x3 foco_on'); SetHelp('loginfo','Informe o CPF')" onblur="VerificaCPF('login','x3','loginfo');" maxlength="14">
 			<label id="loginfo" class="info"> </label> </p>
@@ -19,7 +19,7 @@
 			<label id="pasinfo" class="info"> </label> </p>
 	</form>
 	
-	<form id="formcadastro" name="loga" action="../class/ControlaFuncionalidades.php" method="post" onsubmit="return checkform(this)"> 
+	<form id="formcadastro" name="loga" action="../class/RecebePostGet.php" method="post" onsubmit="return checkform(this)"> 
 		<p><label for="lnome">Nome completo: </label> <input class="x9" type="text" name="lnome" id="lnome" onfocus="foco('lnome', 'x9 foco_on'); SetHelp('hlpnome',''); " onblur="foco('lnome', 'x9 foco_off'); CountWords('lnome','hlpnome','x9');" >
 			<label> </label><label id="hlpnome" class="info"> </label></p>
 		<p> <label for="lemail">E-mail: </label> <input class="x8" type="text" name="lemail" id="lemail" onfocus="foco('lemail', 'x8 foco_on'); SetHelp('hint','Informe um e-mail válido'); " onblur="foco('lemail', 'x8 foco_off'); ValidaEmail('lemail','hint','x8');" >

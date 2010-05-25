@@ -31,7 +31,7 @@ if(isset($_GET['revisoes']))
 <body onload="getInput();">
 
 <div id="form">
-	<form name="form_get" method="post" action="../../class/ControlaFuncionalidades.php" >
+	<form name="form_get" method="post" action="../../class/RecebePostGet.php" >
 		<input type="hidden" id="acao" name="acao" value="cadastroRevisoes">
 		<p class="caption"> CADASTRO DE REVISÕES </p>
 		<p><span class="esq">
