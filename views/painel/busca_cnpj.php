@@ -20,7 +20,7 @@ $logon = $_SESSION["usuarioLogon"];
 </head>
 <body>
 <div id="form_busca">
-	<form name="busca_cnpj" method="POST" action="../../class/ControlaFuncionalidades.php" >
+	<form name="busca_cnpj" method="POST" action="../../class/RecebePostGet.php" >
 		<input type="hidden" id="acao" name="acao" value="buscaCnpj">
 		<input type="hidden" id="idCliente" name="idCliente" value="<?=$logon->getIdClientes()?>">
 		<p class="caption"> Consulta de Pessoa Jurídica</p>

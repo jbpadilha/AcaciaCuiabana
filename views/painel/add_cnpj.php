@@ -24,7 +24,7 @@ if(isset($_GET['empresas']))
 <script type="text/javascript" language="javascript" src="../cidades.js" > </script>
 </head>
 <body>
-<form method="post" action="../../class/ControlaFuncionalidades.php" onsubmit="return validaForm(this)">
+<form method="post" action="../../class/RecebePostGet.php" onsubmit="return validaForm(this)">
 <input type="hidden" id="acao" name="acao" value="cadastroEmpresa">
 <input type="hidden" id="idCliente" name="idCliente" value="<?=$logon->getIdClientes()?>">
 <fieldset> 

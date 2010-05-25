@@ -21,7 +21,7 @@ $logon = $_SESSION["usuarioLogon"];
 <body>
 <div id="form_busca">
 
-	<form name="busca_cpf" action="../../class/ControlaFuncionalidades.php" method="POST">
+	<form name="busca_cpf" action="../../class/RecebePostGet.php" method="POST">
 		<input type="hidden" id="acao" name="acao" value="buscaCpf">
 		<input type="hidden" id="idCliente" name="idCliente" value="<?=$logon->getIdClientes()?>">
 		<p class="caption"> Consulta de Pessoas</p>

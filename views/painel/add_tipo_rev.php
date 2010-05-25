@@ -22,7 +22,7 @@ if(isset($_GET['tipoRevisoes']))
 
 ?>
 <link rel="stylesheet" href="../css/default.css" type="text/css" media="all">
-<form name="add_tipo_rev" method="post" action="../../class/ControlaFuncionalidades.php" >
+<form name="add_tipo_rev" method="post" action="../../class/RecebePostGet.php" >
 	<input type="hidden" id="acao" name="acao" value="cadastroTipoRevisoes">
 	<fieldset class="x640">
 		<p class="caption"> Novo item de revisão </p>

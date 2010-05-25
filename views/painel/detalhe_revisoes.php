@@ -40,7 +40,7 @@ elseif (isset($_GET['idRevisoesAlterar']) && $_GET['idRevisoesAlterar'] != '')
 <body onload="getInput();">
 
 <div id="form">
-	<form name="form_get" method="post" action="../../class/ControlaFuncionalidades.php" >
+	<form name="form_get" method="post" action="../../class/RecebePostGet.php" >
 		<input type="hidden" id="acao" name="acao" value="alterarRevisoes">
 		<input type="hidden" id="idRevisoes" name="idRevisoes" value="<?=$revisoes->getIdRevisoes()?>">
 		<input type="hidden" id="idTipoRevisoes" name="idTipoRevisoes" value="<?=$revisoes->getIdTipoRevisoes()?>">

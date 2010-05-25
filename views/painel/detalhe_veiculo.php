@@ -23,7 +23,7 @@ $logon = $_SESSION["usuarioLogon"];
 </head>
 
 <body oncontextmenu="return false;" >
-<form method="post" action="../../class/ControlaFuncionalidades.php" onSubmit="return valida();" >
+<form method="post" action="../../class/RecebePostGet.php" onSubmit="return valida();" >
 <input type="hidden" id="idClientes" name="idClientes" value="<?=$logon->getIdClientes()?>"/>
 <input type="hidden" id="acao" name="acao" value="alterarVeiculos"/>
 <?php 

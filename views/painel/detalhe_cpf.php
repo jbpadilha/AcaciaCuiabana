@@ -58,7 +58,7 @@ elseif (isset($_GET['idPessoaAlterar']) && $_GET['idPessoaAlterar'] != '')
 </head>
 
 <body oncontextmenu="return false;" >
-<form method="POST" action="../../class/ControlaFuncionalidades.php" onsubmit="return validaForm(this)" >
+<form method="POST" action="../../class/RecebePostGet.php" onsubmit="return validaForm(this)" >
 <input type="hidden" id="acao" name="acao" value="alterarPessoa">
 <input type="hidden" id="idCliente" name="idCliente" value="<?=$logon->getIdClientes()?>">
 <input type="hidden" id="idPessoa" name="idPessoa" value="<?=$pessoa->getIdPessoa()?>">

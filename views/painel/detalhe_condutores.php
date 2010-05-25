@@ -35,7 +35,7 @@ if(isset($_GET['cnh']))
 
 <link rel="stylesheet" href="../css/default.css" type="text/css" media="all">
 
-<form method="POST" action="../../class/ControlaFuncionalidades.php" onsubmit="return validaForm(this)" >
+<form method="POST" action="../../class/RecebePostGet.php" onsubmit="return validaForm(this)" >
 <input type="hidden" id="acao" name="acao" value="alterarCondutores">
 <input type="hidden" id="idCliente" name="idCliente" value="<?=$logon->getIdClientes()?>">
 <input type="hidden" id="idCondutor" name="idCondutor" value="<?=$condutores->getIdCondutores()?>">

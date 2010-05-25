@@ -46,7 +46,7 @@ if(isset($_GET['pessoa']))
 </head>
 
 <body oncontextmenu="return false;" >
-<form method="post" action="../../class/ControlaFuncionalidades.php" onSubmit="return valida();" >
+<form method="post" action="../../class/RecebePostGet.php" onSubmit="return valida();" >
 <input type="hidden" id="acao" name="acao" value="cadastroPessoa">
 <input type="hidden" id="idCliente" name="idCliente" value="<?=$logon->getIdClientes()?>">
 <fieldset class="cadastro"><p class="caption"> Dados pessoais <span class="borda"></span></p>

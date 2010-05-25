@@ -22,7 +22,7 @@ $logon = $_SESSION["usuarioLogon"];
 
 <div class="busca">
 
-	<form id="f_cli" action="../../class/ControlaFuncionalidades.php" method="post">
+	<form id="f_cli" action="../../class/RecebePostGet.php" method="post">
 		<input type="hidden" id="acao" name="acao" value="buscaAbastecimentos">
 		<input type="hidden" id="idCliente" name="idCliente" value="<?=$logon->getIdClientes()?>">
 	<label>Veículo:</label>
