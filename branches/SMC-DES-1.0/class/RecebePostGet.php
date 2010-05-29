@@ -123,7 +123,7 @@ if(isset($_GET))
 							}
 					}
 					
-					$controla->enviarEmail($nome,$endereco->getEmailEndereco(),"SMC - Serviço Despertador - {$_GET['assunto']}",)
+					$controla->enviarEmail($nome,$endereco->getEmailEndereco(),"SMC - Serviço Despertador - {$_GET['assunto']}",$descricao);
 				}
 			}
 		}
