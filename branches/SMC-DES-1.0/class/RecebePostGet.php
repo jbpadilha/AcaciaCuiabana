@@ -227,6 +227,9 @@ if(isset($_POST))
 				
 				$logon->setSenha(trim($_POST['lsenha']));
 				
+				if(!$controla->validaCpfIgual($pessoa->getCpfPessoa()))
+					$mensagem = "CPF já existe na base de dados.";
+				
 				if($mensagem == '')
 				{
 					$idPessoa = $controla->cadastraPessoa($pessoa);
@@ -332,6 +335,9 @@ if(isset($_POST))
 						$mensagem .= 'A data de nascimento do Conjugue não pode estar em branco.';
 					$pessoaConjugue->setSexoPessoa($_POST['sexo_conjuge']);
 				}
+				
+				if(!$controla->validaCpfIgual($pessoa->getCpfPessoa()))
+					$mensagem = "CPF já existe na base de dados.";
 				
 				if($mensagem == '')
 				{
@@ -488,10 +494,16 @@ if(isset($_POST))
 						$pessoaConjugue->setCpfPessoa($controla->retiraMascaraCPF($_POST['cpfConjugue']));
 					else
 						$mensagem .= "O CPF do Conjugue não deve estar em branco.";
+					
+					if(!$controla->validaCpfIgual($pessoaConjugue->getCpfPessoa()))
+						$mensagem = "CPF do Conjugue já existe na base de dados.";
 				}
 				
 				//TESTE DE ERRO e UPDATE DE CADASTRO
-				
+				if(!$controla->validaCpfIgual($pessoaAtual->getCpfPessoa()))
+					$mensagem = "CPF já existe na base de dados.";
+
+
 				if($mensagem == '')
 				{
 					//Atualização de Endereço
@@ -597,7 +609,9 @@ if(isset($_POST))
 				
 
 				//DADOS DO DIRETOR DA EMPRESA
-				
+				if(!$controla->validaCnpjIgual($empresas->getCnpjEmpresa()))
+					$mensagem = "CNPJ já existe na base de dados.";
+
 				$pessoaDiretor = null;
 				
 				if($_POST['preenche'] == "Sim")
@@ -682,6 +696,11 @@ if(isset($_POST))
 						else
 							$mensagem .= "O CPF do Conjugue não deve estar em branco.";
 					}
+					if(!$controla->validaCpfIgual($pessoaDiretor->getCpfPessoa()))
+						$mensagem = "CPF do Diretor já existe na base de dados.";
+					
+					if(!$controla->validaCpfIgual($pessoaConjugue->getCpfPessoa()))
+						$mensagem = "CPF do Conjugue do Diretor já existe na base de dados.";
 				}
 				
 				//TESTE E CADASTRO
@@ -793,6 +812,10 @@ if(isset($_POST))
 				if($_POST['vencimento_seguro']!= '' && $controla->validaData($_POST['vencimento_seguro']))
 					$veiculos->setVencimentoSeguroVeiculos($formataData->toDBDate($_POST['vencimento_seguro']));
 				
+				if(!$controla->validaVeiculoIgual($veiculos->getPlacaVeiculos()))
+						$mensagem = "Placa do Veículo já existe na base de dados.";
+
+
 				if($mensagem == '')
 				{
 					$controla->cadastraVeiculos($veiculos);
@@ -844,6 +867,9 @@ if(isset($_POST))
 					$cnh->setVencCnh($formataData->toDBDate($_POST['cnhvcto']));
 				else
 					$mensagem .= 'Você deve informar o a data do vencimento da carteira de habilitação.';
+				
+				if(!$controla->validaCnhIgual($cnh->getNumeroCnh()))
+						$mensagem = "CNH já existe na base de dados.";
 
 				if($mensagem == '')
 				{

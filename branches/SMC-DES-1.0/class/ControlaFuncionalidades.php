@@ -158,7 +158,7 @@ class ControlaFuncionalidades
 		{
 			$retornoValData = false;
 		}
-		return $returno;
+		return $retornoValData;
 	}
 	
 	/**
@@ -184,6 +184,86 @@ class ControlaFuncionalidades
 			$retorno = false;
 		
 		return $retorno;
+	}
+	
+	/**
+	 * Validação de CPF
+	 * @param unknown_type $cpf
+	 */
+	public function validaCpfIgual($cpf)
+	{
+		$qdao = new QDAO();		
+		$pessoa = new Pessoa();
+		$pessoa->setCpfPessoa($cpf);
+		$collVo = $qdao->findPessoa($pessoa);
+		if(!is_null($collVo))
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+
+	/**
+	 * Validação de CNPJ
+	 * @param unknown_type $cnpj
+	 */
+	public function validaCnpjIgual($cnpj)
+	{
+		$qdao = new QDAO();		
+		$empresas = new Empresas();
+		$empresas->setCnpjEmpresa($cnpj);
+		$collVo = $qdao->findEmpresas($empresas);
+		if(!is_null($collVo))
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+
+	/**
+	 * Validação de Veiculo
+	 * @param unknown_type $placa
+	 */
+	public function validaVeiculoIgual($placa)
+	{
+		$qdao = new QDAO();		
+		$veiculos = new Veiculos();
+		$veiculos->setPlacaVeiculos($placa);
+		$collVo = $qdao->findVeiculos($veiculos);
+		if(!is_null($collVo))
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+
+	/**
+	 * Validação de CNh
+	 * @param unknown_type $cnh
+	 */
+	public function validaCnhIgual($cnh)
+	{
+		$qdao = new QDAO();		
+		$cnh = new Cnh();
+		$cnh->setNumeroCnh($cnh);
+		$collVo = $qdao->findVeiculos($cnh);
+		if(!is_null($collVo))
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 	
 	/**
