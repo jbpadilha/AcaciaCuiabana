@@ -20,10 +20,10 @@
 	label.ativo { clear:both; float:left; width:100%; text-align:left; font-family:Consolas, Courier; margin:2px 0px 0px 0px; color:#444; padding:2px 0px; cursor:pointer; }
 	label.ativo:hover { color:#FFF; font-weight:bold; background:#FFD800; }
 </style>
-<script type="text/javascript">
+<script type="text/javascript" language="javascript">
 function enviaEmail(idEndereco,tipo,idTipo)
 {
-	document.location.href='../../class/recebePostGet.php?acao=enviaEmail&idEndereco='+idEnderec+'&tipo='+tipo+'&idTipo='+idTipo+;
+	document.location='../../class/RecebePostGet.php?acao=enviaEmail&idEndereco='+idEndereco+'&tipo='+tipo+'&idTipo='+idTipo;
 }
 </script>
 <?php

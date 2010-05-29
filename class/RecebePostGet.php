@@ -49,6 +49,7 @@ if(isset($_GET))
 								Aniversário de '.$pessoaTipo->getNomePessoa().'
 								Dia: '.$dataNiver[1].'/'.$dataNiver[2].'
 								';
+								$assunto = 'Aviso de Aniversário';
 								break;
 							}
 						case 2: 
@@ -66,6 +67,8 @@ if(isset($_GET))
 								Condutor: '.$pessoaTipo->getNomePessoa().'
 								Data do vencimento: '.$formataData->toViewDate($cnhAtual->getVencCnh()).'
 								';
+								$assunto = 'Aviso de Vencimento de CNH';
+								break;
 							}
 						case 3: 
 							{
@@ -79,6 +82,8 @@ if(isset($_GET))
 								Veículo placa '.$veiculo->getPlacaVeiculos().'
 								Data do vencimento: '.$formataData->toViewDate($veiculo->getVencimentoIpvaVeiculos()).'
 								';
+								$assunto = 'Aviso de Vencimento de IPVA';
+								break;
 							}
 						case 4: 
 							{
@@ -92,6 +97,8 @@ if(isset($_GET))
 								Veículo placa '.$veiculo->getPlacaVeiculos().'
 								Data do vencimento: '.$formataData->toViewDate($veiculo->getVencimentoSeguroVeiculos()).'
 								';
+								$assunto = 'Aviso de Vencimento de Seguro';
+								break;
 							}
 						case 5: 
 							{
@@ -105,6 +112,8 @@ if(isset($_GET))
 								Veículo placa '.$veiculo->getPlacaVeiculos().'
 								Data do vencimento: '.$formataData->toViewDate($veiculo->getDataEntregaNfVeiculos()).'
 								';
+								$assunto = 'Aviso de Vencimento de Garantia';
+								break;
 							}
 						case 6:
 							{
@@ -120,10 +129,14 @@ if(isset($_GET))
 								Veículo placa '.$veiculo->getPlacaVeiculos().'
 								Data da Revisão: '.$formataData->toViewDate($revisao->getDataRevisoes()).'
 								';
+								$assunto = 'Aviso de Revisão agendada.';
+								break;
 							}
 					}
 					
-					$controla->enviarEmail($nome,$endereco->getEmailEndereco(),"SMC - Serviço Despertador - {$_GET['assunto']}",$descricao);
+					$controla->enviarEmail($nome,$endereco->getEmailEndereco(),"SMC - Serviço Despertador - $assunto",$descricao);
+					$mensagem = 'E-mail enviado com sucesso.';
+					echo $mensagem;
 				}
 			}
 		}
