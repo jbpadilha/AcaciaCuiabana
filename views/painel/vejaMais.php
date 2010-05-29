@@ -20,6 +20,12 @@
 	label.ativo { clear:both; float:left; width:100%; text-align:left; font-family:Consolas, Courier; margin:2px 0px 0px 0px; color:#444; padding:2px 0px; cursor:pointer; }
 	label.ativo:hover { color:#FFF; font-weight:bold; background:#FFD800; }
 </style>
+<script type="text/javascript">
+function enviaEmail(idEndereco,tipo,idTipo)
+{
+	document.location.href='../../class/recebePostGet.php?acao=enviaEmail&idEndereco='+idEnderec+'&tipo='+tipo+'&idTipo='+idTipo+;
+}
+</script>
 <?php
 require ('../../class/Config.php');
 
@@ -32,9 +38,11 @@ if(!is_null($listaAniversarios))
 	{
 		if($cont == 0)
 			echo '<label class="ativo">Aniversário do Dia</label>';
-		$pessoaAtual = new Logon();
-		$pessoaAtual = $pessoas;
-		echo '<label class="ativo" title="'.$formataData->toViewDate($pessoaAtual->getDataNascimentoPessoa()).'">Aniversário de '.$pessoaAtual->getNomePessoa().'</label>';
+		$pessoaAtual = new Pessoa();
+		$pessoaAtual = (object)$pessoas;
+		$endereco = new Endereco();
+		$endereco = (object)$pessoaAtual->retornaEndereco(); 
+		echo '<label class="ativo" title="'.$formataData->toViewDate($pessoaAtual->getDataNascimentoPessoa()).'">Aniversário de '.$pessoaAtual->getNomePessoa().'&nbsp;&nbsp;<input type="button" value="Enviar E-mail" onclick="enviaEmail('.$endereco->getIdEndereco().',1,'.$pessoaAtual->getIdPessoa().')"/></label>';
 		$cont++;
 	}
 	echo '<br><br>';
@@ -49,10 +57,12 @@ if(!is_null($listaCnh))
 		if($cont == 0)
 			echo '<label class="ativo">CNH vencendo Hoje</label>';
 		$cnhAtual = new Cnh();
-		$cnhAtual = $cnhs;
+		$cnhAtual = $cnhs;		
 		$pessoaAtual = new Pessoa();
 		$pessoaAtual = $cnhAtual->returnaPessoa();
-		echo '<label class="ativo" title="">CNH numero '.$cnhAtual->getNumeroCnh().', <b>nome:</b> '.$pessoaAtual->getNomePessoa().'</label>';
+		$endereco = new Endereco();
+		$endereco = (object)$pessoaAtual->retornaEndereco();
+		echo '<label class="ativo" title="">CNH numero '.$cnhAtual->getNumeroCnh().', <b>nome:</b> '.$pessoaAtual->getNomePessoa().'&nbsp;&nbsp;<input type="button" value="Enviar E-mail" onclick="enviaEmail('.$endereco->getIdEndereco().',2,'.$cnhAtual->getIdCnh().')"/></label>';
 		$cont++;
 	}
 	echo '<br><br>';
@@ -66,9 +76,13 @@ if(!is_null($listaIpva))
 	{
 		if($cont == 0)
 			echo '<label class="ativo">IPVA vencendo Hoje</label>';
-		$veiculoAtual = new Veiculos(); 
+		$veiculoAtual = new Veiculos();
 		$veiculoAtual = $ipvas;
-		echo '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - IPVA vencendo</label>';
+		$clientes = new Clientes();
+		$clientes = $veiculoAtual->retornaClientes();
+		$endereco = new Endereco();
+		$endereco = $clientes->getEnderecoCliente();
+		echo '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - IPVA vencendo&nbsp;&nbsp;<input type="button" value="Enviar E-mail" onclick="enviaEmail('.$endereco->getIdEndereco().',3,'.$veiculoAtual->getIdVeiculos().')"/></label>';
 		$cont++;
 	}
 	echo '<br><br>';
@@ -84,7 +98,11 @@ if(!is_null($listaSeguro))
 			echo '<label class="ativo">Seguro do Carro vencendo Hoje</label>';
 		$veiculoAtual = new Veiculos(); 
 		$veiculoAtual = $seguros;
-		echo '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - Seguro vencendo</label>';
+		$clientes = new Clientes();
+		$clientes = $veiculoAtual->retornaClientes();
+		$endereco = new Endereco();
+		$endereco = $clientes->getEnderecoCliente();
+		echo '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - Seguro vencendo&nbsp;&nbsp;<input type="button" value="Enviar E-mail" onclick="enviaEmail('.$endereco->getIdEndereco().',4,'.$veiculoAtual->getIdVeiculos().')"/></label>';
 		$cont++;
 	}
 	echo '<br><br>';
@@ -100,7 +118,11 @@ if(!is_null($listaGarantia))
 			echo '<label class="ativo">Garantia vencendo hoje</label>';
 		$veiculoAtual = new Veiculos(); 
 		$veiculoAtual = $garantias;
-		echo '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - Garantia vencendo</label>';
+		$clientes = new Clientes();
+		$clientes = $veiculoAtual->retornaClientes();
+		$endereco = new Endereco();
+		$endereco = $clientes->getEnderecoCliente();
+		echo '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - Garantia vencendo&nbsp;&nbsp;<input type="button" value="Enviar E-mail" onclick="enviaEmail('.$endereco->getIdEndereco().',5,'.$veiculoAtual->getIdVeiculos().')"/></label>';
 		$cont++;
 	}
 	echo '<br><br>';
@@ -119,8 +141,12 @@ if(!is_null($listaRevisoes))
 		$veiculoAtual = new Veiculos();
 		$veiculoAtual->setIdVeiculos($revisoesAtual->getIdVeiculos());
 		$collVeiculos = $controla->findVeiculos($veiculoAtual);
-		$veiculoAtual = $collVeiculos[0]; 
-		echo '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - Revisão agendada</label>';
+		$veiculoAtual = $collVeiculos[0];
+		$clientes = new Clientes();
+		$clientes = $veiculoAtual->retornaClientes();
+		$endereco = new Endereco();
+		$endereco = $clientes->getEnderecoCliente();
+		echo '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - Revisão agendada&nbsp;&nbsp;<input type="button" value="Enviar E-mail" onclick="enviaEmail('.$endereco->getIdEndereco().',6,'.$revisoesAtual->getIdRevisoes().')"/></label>';
 		$cont++;
 	}
 	echo '<br><br>';

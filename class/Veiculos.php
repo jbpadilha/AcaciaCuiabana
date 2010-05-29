@@ -443,6 +443,14 @@ class Veiculos
 		$this->idClientes = $idClientes;
 	}
 
-
+	public function retornaClientes()
+	{
+		$clientes = new Clientes();
+		$controla = new ControlaFuncionalidades();
+		$clientes->setIdClientes($this->getIdClientes());
+		$collVo = $controla->findClientes($clientes);
+		$clientes = (object)$collVo[0];
+		return $clientes;
+	}
 }
 ?>

@@ -208,6 +208,14 @@ class Pessoa
 		$this->idCliente = $idCliente;
 	}
 
-
+	public function retornaEndereco()
+	{
+		$controla = new ControlaFuncionalidades();
+		$endereco = new Endereco();
+		$endereco->setIdPessoa($this->getIdPessoa());
+		$collVo = $controla->findEndereco($endereco);
+		$endereco = $collVo[0];
+		return $endereco; 
+	}
 }
 ?>

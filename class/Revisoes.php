@@ -155,5 +155,15 @@ class Revisoes
 		}
 		return $string;
 	}
+
+	public function getVeiculo()
+	{
+		$controla = new ControlaFuncionalidades();
+		$veiculo = new Veiculos();
+		$veiculo->setIdVeiculos($this->getIdVeiculos());
+		$collVo = $controla->findVeiculos($veiculo);
+		$veiculo = $collVo[0];
+		return (object)$veiculo; 
+	}
 }
 ?>
