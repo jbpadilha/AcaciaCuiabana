@@ -676,7 +676,8 @@ class ControlaFuncionalidades
 					foreach ($collVoVeiculos as $arrayVeiculos)
 					{
 						$veiculos = $arrayVeiculos;
-						if(!is_null($veiculos->getTempoGarantiaNfVeiculos()) && !is_null($veiculos->getDataNfVeiculos()))
+						if(!is_null($veiculos->getTempoGarantiaNfVeiculos()) && !is_null($veiculos->getDataNfVeiculos())
+						&& $veiculos->getTempoGarantiaNfVeiculos() != '')
 						{
 							$tempoGarantia = new DateTime();
 							$tempoGarantia->setDate(0,$veiculos->getTempoGarantiaNfVeiculos(),0);

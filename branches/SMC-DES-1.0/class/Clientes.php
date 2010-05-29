@@ -104,6 +104,29 @@ class Clientes
 		}
 	}
 	
-
+	public function getEnderecoCliente()
+	{
+		$controle = new ControlaFuncionalidades();
+		if($this->getIdPessoa() != null)
+		{
+			$pessoa = new Pessoa();
+			$pessoa->setIdPessoa($this->getIdPessoa());
+			$valueObj =  $controle->findPessoas($pessoa);
+			$pessoa = new Pessoa($valueObj[0]);
+			$endereco = new Endereco();
+			$endereco = $pessoa->retornaEndereco();
+			return $endereco;
+		}
+		elseif ($this->getIdEmpresa())
+		{
+			$empresas = new Empresas();
+			$empresas->setIdEmpresa($this->getIdEmpresa());
+			$valueObj =  $controle->findEmpresas($empresas);
+			$empresas = new Empresas($valueObj[0]);
+			$endereco = new Endereco();
+			$endereco = $empresas->getEnderecoEmpresa();
+			return $endereco;
+		}
+	}
 }
 ?>

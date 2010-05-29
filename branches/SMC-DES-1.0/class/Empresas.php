@@ -192,6 +192,21 @@ class Empresas
 		
 	}
 
-
+	public function getEnderecoEmpresa()
+	{
+		$controla = new ControlaFuncionalidades();
+		$endereco = new Endereco();
+		$endereco->setIdEmpresa($this->getIdEmpresa());
+		$collVo = $controla->findEndereco($endereco);
+		$endereco = (object)$collVo[0];
+		if(is_null($endereco->getEmailEndereco()))
+		{
+			$endereco = new Endereco();
+			$endereco->setIdPessoa($this->getIdDiretor());
+			$collVo = $controla->findEndereco($endereco);
+			$endereco = (object)$collVo[0];
+		}
+		return $endereco;
+	}
 }
 ?>

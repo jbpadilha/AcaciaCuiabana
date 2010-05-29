@@ -1,6 +1,134 @@
 <?php
 require_once('ControlaFuncionalidades.php');
 //POST e GET
+if(isset($_GET))
+{
+	if(isset($_GET['acao']))
+	{
+		if ($_GET['acao'] == "enviaEmail")
+		{
+			$controla = new ControlaFuncionalidades();
+			$endereco = new Endereco();
+			if($_GET['idEndereco'] != '')
+			{
+				$endereco->setIdEndereco($_GET['idEndereco']);
+				$collVo = $controla->findEndereco($endereco);
+				$endereco = $collVo[0];
+				if(!is_null($endereco->getEmailEndereco()))
+				{
+					$nome = '';
+					if(!is_null($endereco->getIdPessoa()))
+					{
+						$pessoa = new Pessoa();
+						$pessoa->setIdPessoa($endereco->getIdPessoa());
+						$collPessoa = $controla->findPessoas($pessoa);
+						$pessoa = $collPessoa[0];
+						$nome = $pessoa->getNomePessoa();
+					}
+					elseif(!is_null($endereco->getIdEmpresa()))
+					{
+						$empresa = new Empresa();
+						$empresa->setIdEmpresa($endereco->getIdEmpresa());
+						$collempresa = $controla->findEmpresas($empresa);
+						$empresa = $collempresa[0];
+						$nome = $empresa->getNomeFantasiaEmpresa();
+					}
+					$descricao = '';
+					switch ($_GET['tipo'])
+					{
+						case 1: 
+							{
+								$pessoaTipo = new Pessoa();
+								$pessoaTipo->setIdPessoa($_GET['idTipo']);
+								$collVoTipo = $controla->findPessoas($pessoaTipo);
+								$pessoaTipo = $collVoTipo[0];
+								$dataNiver = explode("-",$pessoaTipo->getDataNascimentoPessoa());
+								$descricao = '
+								<b>SMC - Serviço Despertador</b>
+								<label class="ativo">Aniversário do Dia</label><br><br>
+								Aniversário de '.$pessoaTipo->getNomePessoa().'
+								Dia: '.$dataNiver[1].'/'.$dataNiver[2].'
+								';
+								break;
+							}
+						case 2: 
+							{
+								$cnhAtual = new Cnh();
+								$cnhAtual->setIdCnh($_GET['idTipo']);
+								$collVo = $controla->findCnh($cnhAtual);
+								$cnhAtual = $collVo[0]; 		
+								$pessoaTipo = new Pessoa();
+								$pessoaTipo = $cnhAtual->returnaPessoa();
+								$descricao = '
+								<b>SMC - Serviço Despertador</b>
+								<label class="ativo">Vencimento de CNH</label><br><br>
+								CNH Nº '.$cnhAtual->getNumeroCnh().'
+								Condutor: '.$pessoaTipo->getNomePessoa().'
+								Data do vencimento: '.$formataData->toViewDate($cnhAtual->getVencCnh()).'
+								';
+							}
+						case 3: 
+							{
+								$veiculo = new Veiculos();
+								$veiculo->setIdVeiculos($_GET['idTipo']);
+								$collVo = $controla->findVeiculos($veiculo);
+								$veiculo = $collVo[0]; 		
+								$descricao = '
+								<b>SMC - Serviço Despertador</b>
+								<label class="ativo">Vencimento de IPVA</label><br><br>
+								Veículo placa '.$veiculo->getPlacaVeiculos().'
+								Data do vencimento: '.$formataData->toViewDate($veiculo->getVencimentoIpvaVeiculos()).'
+								';
+							}
+						case 4: 
+							{
+								$veiculo = new Veiculos();
+								$veiculo->setIdVeiculos($_GET['idTipo']);
+								$collVo = $controla->findVeiculos($veiculo);
+								$veiculo = $collVo[0]; 		
+								$descricao = '
+								<b>SMC - Serviço Despertador</b>
+								<label class="ativo">Vencimento de Seguro</label><br><br>
+								Veículo placa '.$veiculo->getPlacaVeiculos().'
+								Data do vencimento: '.$formataData->toViewDate($veiculo->getVencimentoSeguroVeiculos()).'
+								';
+							}
+						case 5: 
+							{
+								$veiculo = new Veiculos();
+								$veiculo->setIdVeiculos($_GET['idTipo']);
+								$collVo = $controla->findVeiculos($veiculo);
+								$veiculo = $collVo[0];
+								$descricao = '
+								<b>SMC - Serviço Despertador</b>
+								<label class="ativo">Vencimento de Garantia</label><br><br>
+								Veículo placa '.$veiculo->getPlacaVeiculos().'
+								Data do vencimento: '.$formataData->toViewDate($veiculo->getDataEntregaNfVeiculos()).'
+								';
+							}
+						case 6:
+							{
+								$revisao = new Revisoes();
+								$revisao->setIdRevisoes($_GET['idTipo']);
+								$collVo = $controla->findRevisoes($revisao);
+								$revisao = $collVo[0];
+								$veiculo = new Veiculos();
+								$veiculo = $revisao->getVeiculo();
+								$descricao = '
+								<b>SMC - Serviço Despertador</b>
+								<label class="ativo">Revisão Agendada</label><br><br>
+								Veículo placa '.$veiculo->getPlacaVeiculos().'
+								Data da Revisão: '.$formataData->toViewDate($revisao->getDataRevisoes()).'
+								';
+							}
+					}
+					
+					$controla->enviarEmail($nome,$endereco->getEmailEndereco(),"SMC - Serviço Despertador - {$_GET['assunto']}",)
+				}
+			}
+		}
+	}
+}
 if(isset($_POST))
 {
 	ob_start();
@@ -400,13 +528,13 @@ if(isset($_POST))
 				}
 				else
 				{
-					throw new Exception(); 
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cpf&msg={$mensagem}&pessoa=".urlencode(serialize($pessoaAtual))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>"; 
 				}
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg={$mensagem}'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cpf&msg={$mensagem}&pessoa=".urlencode(serialize($pessoaAtual))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
 			}
 		}
 		
@@ -609,7 +737,7 @@ if(isset($_POST))
 				}
 				else 
 				{
-					throw new Exception();
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cnpj&msg={$mensagem}&empresas=".urlencode(serialize($empresas))."&endereco=".urlencode(serialize($endereco))."&pessoaDiretor=".urlencode(serialize($pessoaDiretor))."&enderecoDiretor=".urlencode(serialize($enderecoDiretor))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
 				}
 			}
 			catch (Exception $e)
@@ -673,7 +801,7 @@ if(isset($_POST))
 				}
 				else
 				{
-					throw new Exception();
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_veiculos&msg={$mensagem}&veiculos=".urlencode(serialize($veiculos))."'</script>";
 				}
 				
 			}
@@ -740,7 +868,7 @@ if(isset($_POST))
 				}
 				else
 				{
-					throw new Exception();
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_motorista&msg={$mensagem}&condutores=".urlencode(serialize($pessoaCondutor))."&cnh=".urlencode(serialize($cnh))."'</script>";
 				}				
 			}
 			catch (Exception $e)
@@ -769,7 +897,7 @@ if(isset($_POST))
 				}	
 				else
 				{
-					throw new Exception();
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_tipo_rev&msg={$mensagem}&tipoRevisoes=".urlencode(serialize($tipoRevisoes))."'</script>";
 				}	
 			}
 			catch (Exception $e)
@@ -814,7 +942,7 @@ if(isset($_POST))
 				}
 				else
 				{
-					throw new Exception();
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao&msg={$mensagem}&revisoes=".urlencode(serialize($revisoes))."'</script>";
 				}
 				
 			}
@@ -856,7 +984,7 @@ if(isset($_POST))
 				}
 				else
 				{
-					throw new Exception();
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_abastece&msg={$mensagem}'</script>";
 				}
 				
 			}
@@ -891,7 +1019,7 @@ if(isset($_POST))
 				}
 				else
 				{
-					throw new Exception();
+					header("Location: ../views/painel/index.php?p=busca_cpf&msg=$mensagem");
 				}
 			}
 			catch (Exception $e)
@@ -1043,7 +1171,7 @@ if(isset($_POST))
 				}
 				else
 				{
-					throw new Exception();
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cpf&msg=$mensagem&pessoa=".urlencode(serialize($pessoaAtual))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
 				}
 			}
 			catch (Exception $e)
@@ -1333,7 +1461,7 @@ if(isset($_POST))
 				}
 				else 
 				{
-					throw new Exception();
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cnpj&msg=$mensagem&empresas=".urlencode(serialize($empresas))."&endereco=".urlencode(serialize($endereco))."&pessoaDiretor=".urlencode(serialize($pessoaDiretor))."&enderecoDiretor=".urlencode(serialize($enderecoDiretor))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
 				}
 			}
 			catch (Exception $e)
@@ -1369,7 +1497,7 @@ if(isset($_POST))
 				}
 				else
 				{
-					throw new Exception();
+					header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
 				}
 			}
 			catch (Exception $e)
@@ -1434,7 +1562,7 @@ if(isset($_POST))
 				}
 				else
 				{
-					throw new Exception();
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_veiculo&msg=$mensagem&veiculos=".urlencode(serialize($veiculos))."'</script>";
 				}
 				
 			}
@@ -1548,7 +1676,7 @@ if(isset($_POST))
 				}
 				else
 				{
-					throw new Exception();
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_condutores&msg=$mensagem&condutores=".urlencode(serialize($pessoaCondutor))."&cnh=".urlencode(serialize($cnh))."'</script>";
 				}				
 			}
 			catch (Exception $e)
@@ -1633,7 +1761,7 @@ if(isset($_POST))
 				}
 				else
 				{					
-					throw new Exception();
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_revisoes&msg=$mensagem&revisoes=".urlencode(serialize($revisoes))."'</script>";
 				}
 				
 			}
@@ -1709,7 +1837,7 @@ if(isset($_POST))
 				}
 				else
 				{
-					throw new Exception();
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_abastecimentos&msg=$mensagem&abastecimentos=".urlencode(serialize($abastecimentos))."'</script>";
 				}
 				
 			}
