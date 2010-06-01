@@ -38,7 +38,6 @@ class ControlaFuncionalidades
 	 */
 	public function destroiSessao()
 	{
-		session_start();
 		session_destroy();
 		header("Location:../views/index.php");
 	}
@@ -149,12 +148,12 @@ class ControlaFuncionalidades
 	public function validaData($data)
 	{
 		$retornoValData = true;
-		$data = explode("/",$data);
-		if($data[2] < 1900)
+		$dataN = explode("/",$data);
+		if($dataN[2] < 1900)
 		{
 			$retornoValData = false;
 		}
-		if(strlen($data[2]) < 4 || strlen($data[2]) > 4)
+		if(strlen($dataN[2]) < 4 || strlen($dataN[2]) > 4)
 		{
 			$retornoValData = false;
 		}
@@ -198,11 +197,11 @@ class ControlaFuncionalidades
 		$collVo = $qdao->findPessoa($pessoa);
 		if(!is_null($collVo))
 		{
-			return false;
+			return true;
 		}
 		else
 		{
-			return true;
+			return false;
 		}
 	}
 
@@ -218,11 +217,11 @@ class ControlaFuncionalidades
 		$collVo = $qdao->findEmpresas($empresas);
 		if(!is_null($collVo))
 		{
-			return false;
+			return true;
 		}
 		else
 		{
-			return true;
+			return false;
 		}
 	}
 
@@ -238,11 +237,11 @@ class ControlaFuncionalidades
 		$collVo = $qdao->findVeiculos($veiculos);
 		if(!is_null($collVo))
 		{
-			return false;
+			return true;
 		}
 		else
 		{
-			return true;
+			return false;
 		}
 	}
 
@@ -250,19 +249,19 @@ class ControlaFuncionalidades
 	 * Validação de CNh
 	 * @param unknown_type $cnh
 	 */
-	public function validaCnhIgual($cnh)
+	public function validaCnhIgual($ncnh)
 	{
 		$qdao = new QDAO();		
 		$cnh = new Cnh();
-		$cnh->setNumeroCnh($cnh);
-		$collVo = $qdao->findVeiculos($cnh);
+		$cnh->setNumeroCnh($ncnh);
+		$collVo = $qdao->findCnh($cnh);
 		if(!is_null($collVo))
 		{
-			return false;
+			return true;
 		}
 		else
 		{
-			return true;
+			return false;
 		}
 	}
 	
@@ -525,7 +524,20 @@ class ControlaFuncionalidades
 		{
 			$collVoPessoas = new ArrayObject();
 			// Verificar Aniversários de Clientes - Caso Seja Administrador trazer todos.
-			if($logon->getIdClientes() != null)
+			if($logon->getNivelAcessoLogin() == 5)
+			{
+				$pessoa = new Pessoa();
+				$pessoa->setDataNascimentoPessoa($data[0]."-".$data[1]."-".$data[2]);
+				$collVoP =  $this->findPessoas($pessoa);
+				if(!is_null($collVoP))
+				{
+					foreach ($collVoP as $pessoas)
+					{
+						$collVoPessoas->append($pessoas);
+					}
+				}
+			}
+			elseif($logon->getIdClientes() != null)
 			{
 				$cliente = new Clientes();
 				$cliente->setIdClientes($logon->getIdClientes());
@@ -542,19 +554,6 @@ class ControlaFuncionalidades
 					{
 						$collVoPessoas->append($pessoas);
 					}	
-				}
-			}
-			elseif($logon->getNivelAcessoLogin() == 5)
-			{
-				$pessoa = new Pessoa();
-				$pessoa->setDataNascimentoPessoa($data[0]."-".$data[1]."-".$data[2]);
-				$collVoP =  $this->findPessoas($pessoa);
-				if(!is_null($collVoP))
-				{
-					foreach ($collVoP as $pessoas)
-					{
-						$collVoPessoas->append($pessoas);
-					}
 				}
 			}
 			return $collVoPessoas;
@@ -576,7 +575,20 @@ class ControlaFuncionalidades
 		{
 			$collVoCnh = new ArrayObject();
 			// Verificar CNH de Clientes Vencidos - Caso Seja Administrador trazer todos.
-			if($logon->getIdClientes() != null)
+			if($logon->getNivelAcessoLogin() == 5)
+			{
+				$cnh = new Cnh();
+				$cnh->setVencCnh($data[0]."-".$data[1]."-".$data[2]);
+				$collVo = $this->findCnh($cnh);
+				if(!is_null($collVo))
+				{
+					foreach ($collVo as $cnhs)
+					{
+						$collVoCnh->append($cnhs);
+					}
+				} 
+			}
+			elseif($logon->getIdClientes() != null)
 			{				
 				$cliente = new Clientes();
 				$cliente->setIdClientes($logon->getIdClientes());
@@ -616,19 +628,6 @@ class ControlaFuncionalidades
 					}
 				}
 			}
-			elseif($logon->getNivelAcessoLogin() == 5)
-			{
-				$cnh = new Cnh();
-				$cnh->setVencCnh($data[0]."-".$data[1]."-".$data[2]);
-				$collVo = $this->findCnh($cnh);
-				if(!is_null($collVo))
-				{
-					foreach ($collVo as $cnhs)
-					{
-						$collVoCnh->append($cnhs);
-					}
-				} 
-			}
 			return $collVoCnh;
 		}
 		else
@@ -650,7 +649,20 @@ class ControlaFuncionalidades
 		{
 			// Verificar IPVA de Veiculos de Clientes Vencidos - Caso Seja Administrador trazer todos.
 			$collVoVei = new ArrayObject();
-			if($logon->getIdClientes() != null)
+			if($logon->getNivelAcessoLogin() == 5)
+			{
+				$veiculos = new Veiculos();
+				$veiculos->setVencimentoIpvaVeiculos($data[0]."-".$data[1]."-".$data[2]);
+				$coll = $this->findVeiculos($veiculos);
+				if(!is_null($coll))
+				{
+					foreach ($coll as $veiculo)
+					{
+						$collVoVei->append($veiculo);
+					}
+				}
+			}
+			elseif($logon->getIdClientes() != null)
 			{
 				$veiculos = new Veiculos();
 				$veiculos->setIdClientes($logon->getIdClientes());
@@ -661,19 +673,6 @@ class ControlaFuncionalidades
 					foreach ($coll as $veiculo)
 					{
 						$collVoVei->append($veiculo);	
-					}
-				}
-			}
-			elseif($logon->getNivelAcessoLogin() == 5)
-			{
-				$veiculos = new Veiculos();
-				$veiculos->setVencimentoIpvaVeiculos($data[0]."-".$data[1]."-".$data[2]);
-				$coll = $this->findVeiculos($veiculos);
-				if(!is_null($coll))
-				{
-					foreach ($coll as $veiculo)
-					{
-						$collVoVei->append($veiculo);
 					}
 				}
 			}
@@ -698,10 +697,9 @@ class ControlaFuncionalidades
 		{
 			// Verificar Seguro de carro Vencidos dos clientes - Caso Seja Administrador trazer todos.
 			$collVoSeguros = new ArrayObject();
-			if($logon->getIdClientes() != null)
+			if($logon->getNivelAcessoLogin() == 5)
 			{
 				$veiculos = new Veiculos();
-				$veiculos->setIdClientes($logon->getIdClientes());
 				$veiculos->setVencimentoSeguroVeiculos($data[0]."-".$data[1]."-".$data[2]);
 				$coll = $this->findVeiculos($veiculos);
 				if(!is_null($coll))
@@ -712,9 +710,10 @@ class ControlaFuncionalidades
 					}
 				}
 			}
-			elseif($logon->getNivelAcessoLogin() == 5)
+			elseif($logon->getIdClientes() != null)
 			{
 				$veiculos = new Veiculos();
+				$veiculos->setIdClientes($logon->getIdClientes());
 				$veiculos->setVencimentoSeguroVeiculos($data[0]."-".$data[1]."-".$data[2]);
 				$coll = $this->findVeiculos($veiculos);
 				if(!is_null($coll))
@@ -746,36 +745,7 @@ class ControlaFuncionalidades
 		{
 			// Verificar Garantias Vencida dos veículos dos clientes - Caso Seja Administrador trazer todos.
 			$collVoGarantias = new ArrayObject();
-			if($logon->getIdClientes() != null)
-			{
-				$veiculos = new Veiculos();
-				$veiculos->setIdClientes($logon->getIdClientes());
-				$collVoVeiculos = $this->findVeiculos($veiculos);
-				if(!is_null($collVoVeiculos))
-				{
-					foreach ($collVoVeiculos as $arrayVeiculos)
-					{
-						$veiculos = $arrayVeiculos;
-						if(!is_null($veiculos->getTempoGarantiaNfVeiculos()) && !is_null($veiculos->getDataNfVeiculos())
-						&& $veiculos->getTempoGarantiaNfVeiculos() != '')
-						{
-							$tempoGarantia = new DateTime();
-							$tempoGarantia->setDate(0,$veiculos->getTempoGarantiaNfVeiculos(),0);
-							$dataNfVeiulos = new DateTime();
-							$dataQuebra = explode("-",$veiculos->getDataNfVeiculos());
-							$dataNfVeiulos->setDate($dataQuebra[0],$dataQuebra[1],$dataQuebra[2]);
-							$data_fim_garantia = $this->somarData($dataNfVeiulos,$tempoGarantia);
-							$data = $data[0]."-".$data[1]."-".$data[2];
-							if($data==$data_fim_garantia)
-							{
-								$collVoGarantias->append($veiculos);
-							}
-						}
-					}
-				}
-				
-			}
-			elseif($logon->getNivelAcessoLogin() == 5)
+			if($logon->getNivelAcessoLogin() == 5)
 			{
 				$veiculos = new Veiculos();
 				$collVoVeiculos = $this->findVeiculos($veiculos);
@@ -805,6 +775,35 @@ class ControlaFuncionalidades
 					}
 				}
 			}
+			elseif($logon->getIdClientes() != null)
+			{
+				$veiculos = new Veiculos();
+				$veiculos->setIdClientes($logon->getIdClientes());
+				$collVoVeiculos = $this->findVeiculos($veiculos);
+				if(!is_null($collVoVeiculos))
+				{
+					foreach ($collVoVeiculos as $arrayVeiculos)
+					{
+						$veiculos = $arrayVeiculos;
+						if(!is_null($veiculos->getTempoGarantiaNfVeiculos()) && !is_null($veiculos->getDataNfVeiculos())
+						&& $veiculos->getTempoGarantiaNfVeiculos() != '')
+						{
+							$tempoGarantia = new DateTime();
+							$tempoGarantia->setDate(0,$veiculos->getTempoGarantiaNfVeiculos(),0);
+							$dataNfVeiulos = new DateTime();
+							$dataQuebra = explode("-",$veiculos->getDataNfVeiculos());
+							$dataNfVeiulos->setDate($dataQuebra[0],$dataQuebra[1],$dataQuebra[2]);
+							$data_fim_garantia = $this->somarData($dataNfVeiulos,$tempoGarantia);
+							$data = $data[0]."-".$data[1]."-".$data[2];
+							if($data==$data_fim_garantia)
+							{
+								$collVoGarantias->append($veiculos);
+							}
+						}
+					}
+				}
+				
+			}
 			return $collVoGarantias;
 		}
 		else
@@ -826,7 +825,21 @@ class ControlaFuncionalidades
 		{
 			// Verificar Revisoes dos veículos dos clientes - Caso Seja Administrador trazer todos.
 			$collVoRevisoes = new ArrayObject();
-			if($logon->getIdClientes() != null)
+			if($logon->getNivelAcessoLogin() == 5)
+			{
+				$revisoes = new Revisoes();
+				$revisoes->setProxDataRevisoes($data[0]."-".$data[1]."-".$data[2]);
+				$coll = $this->findRevisoes($revisoes);
+				if(!is_null($coll))
+				{
+					foreach ($coll as $revisao)
+					{
+						$collVoRevisoes->append($revisao);
+					}
+				}
+				
+			}
+			elseif($logon->getIdClientes() != null)
 			{
 				$veiculos = new Veiculos();
 				$veiculos->setIdClientes($logon->getIdClientes());
@@ -844,20 +857,6 @@ class ControlaFuncionalidades
 						{
 							$collVoRevisoes->append($collvoAtual[0]);
 						}
-					}
-				}
-				
-			}
-			elseif($logon->getNivelAcessoLogin() == 5)
-			{
-				$revisoes = new Revisoes();
-				$revisoes->setProxDataRevisoes($data[0]."-".$data[1]."-".$data[2]);
-				$coll = $this->findRevisoes($revisoes);
-				if(!is_null($coll))
-				{
-					foreach ($coll as $revisao)
-					{
-						$collVoRevisoes->append($revisao);
 					}
 				}
 				

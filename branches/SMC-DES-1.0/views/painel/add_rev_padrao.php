@@ -88,8 +88,8 @@ if(isset($_GET['revisoes']))
 					?>
 				</select><br/><br/>
 				<span class="left">
-					<label for="tprox"><b>Próximas revisões</b> - a cada</label>
-					<input type="text" name="tprox" id="tprox" class="x1 tcenter" maxlength="10" value="<?=$formataData->toViewDate($revisoes->getProxDataRevisoes())?>" />
+					<label for="tprox"><b>Próxima revisão</b></label>
+					<input type="text" name="tprox" id="tprox" class="x1 tcenter" maxlength="10" onkeypress="return mascara(event,this,'##/##/####');" value="<?=$formataData->toViewDate($revisoes->getProxDataRevisoes())?>" />
 					
 					<label for="tprox">meses ou</label> 
 					<input type="text" name="kprox" id="kprox" class="x2 km tcenter" value="<?=$revisoes->getProxKmRevisoes()?>" /><label for="kprox">kilômetros.</label> 

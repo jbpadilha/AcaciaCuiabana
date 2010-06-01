@@ -54,8 +54,8 @@ if(isset($_GET['msg']))
 				{
 					$clientes = new Clientes();
 					$clientes->setIdClientes($userLogon->getIdClientes());
-					$valueObj = $controla->findClientes($clientes);
-					$clientes = $valueObj[0];
+					$collVo = $controla->findClientes($clientes);
+					$clientes = (object)$collVo[0];
 					$nome = $clientes->getNomeCliente();
 				}
 				$link = isset ($_GET['p']) ? $_GET['p']: '';
