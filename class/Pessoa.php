@@ -190,7 +190,7 @@ class Pessoa
 		<b>Estado Civil:</b> {$this->estadoCivilPessoa}<br>
 		<b>RG:</b> {$this->rgPessoa}<br>
 		<b>Org. Expeditor:</b> {$this->orgExpPessoa}<br>
-		<b>Complemento:</b> {$this->orgExpPessoa}<br>
+		<b>Complemento:</b> {$this->complementoPessoa}<br>
 		";
 		return $string;
 	}

@@ -4,6 +4,10 @@ if(!isset($_SESSION['usuarioLogon']))
 {
 	header("Location:../views/home.php?p=login");
 }
+if(isset($_GET['msg']))
+{
+	echo "<script>alert('{$_GET['msg']}');</script>";
+}
 $logon = new Logon();
 $logon = $_SESSION["usuarioLogon"];
 

@@ -7,137 +7,143 @@ if(isset($_GET))
 	{
 		if ($_GET['acao'] == "enviaEmail")
 		{
-			$controla = new ControlaFuncionalidades();
-			$endereco = new Endereco();
-			if($_GET['idEndereco'] != '')
+			try
 			{
-				$endereco->setIdEndereco($_GET['idEndereco']);
-				$collVo = $controla->findEndereco($endereco);
-				$endereco = $collVo[0];
-				if(!is_null($endereco->getEmailEndereco()))
+				$controla = new ControlaFuncionalidades();
+				$endereco = new Endereco();
+				if($_GET['idEndereco'] != '')
 				{
-					$nome = '';
-					if(!is_null($endereco->getIdPessoa()))
+					$endereco->setIdEndereco($_GET['idEndereco']);
+					$collVo = $controla->findEndereco($endereco);
+					$endereco = $collVo[0];
+					if(!is_null($endereco->getEmailEndereco()))
 					{
-						$pessoa = new Pessoa();
-						$pessoa->setIdPessoa($endereco->getIdPessoa());
-						$collPessoa = $controla->findPessoas($pessoa);
-						$pessoa = $collPessoa[0];
-						$nome = $pessoa->getNomePessoa();
+						$nome = '';
+						if(!is_null($endereco->getIdPessoa()))
+						{
+							$pessoa = new Pessoa();
+							$pessoa->setIdPessoa($endereco->getIdPessoa());
+							$collPessoa = $controla->findPessoas($pessoa);
+							$pessoa = $collPessoa[0];
+							$nome = $pessoa->getNomePessoa();
+						}
+						elseif(!is_null($endereco->getIdEmpresa()))
+						{
+							$empresa = new Empresa();
+							$empresa->setIdEmpresa($endereco->getIdEmpresa());
+							$collempresa = $controla->findEmpresas($empresa);
+							$empresa = $collempresa[0];
+							$nome = $empresa->getNomeFantasiaEmpresa();
+						}
+						$descricao = '';
+						switch ($_GET['tipo'])
+						{
+							case 1: 
+								{
+									$pessoaTipo = new Pessoa();
+									$pessoaTipo->setIdPessoa($_GET['idTipo']);
+									$collVoTipo = $controla->findPessoas($pessoaTipo);
+									$pessoaTipo = $collVoTipo[0];
+									$dataNiver = explode("-",$pessoaTipo->getDataNascimentoPessoa());
+									$descricao = '
+									<b>SMC - Serviço Despertador</b>
+									<label class="ativo">Aniversário do Dia</label><br><br>
+									Aniversário de '.$pessoaTipo->getNomePessoa().'
+									Dia: '.$dataNiver[1].'/'.$dataNiver[2].'
+									';
+									$assunto = 'Aviso de Aniversário';
+									break;
+								}
+							case 2: 
+								{
+									$cnhAtual = new Cnh();
+									$cnhAtual->setIdCnh($_GET['idTipo']);
+									$collVo = $controla->findCnh($cnhAtual);
+									$cnhAtual = $collVo[0]; 		
+									$pessoaTipo = new Pessoa();
+									$pessoaTipo = $cnhAtual->returnaPessoa();
+									$descricao = '
+									<b>SMC - Serviço Despertador</b>
+									<label class="ativo">Vencimento de CNH</label><br><br>
+									CNH Nº '.$cnhAtual->getNumeroCnh().'
+									Condutor: '.$pessoaTipo->getNomePessoa().'
+									Data do vencimento: '.$formataData->toViewDate($cnhAtual->getVencCnh()).'
+									';
+									$assunto = 'Aviso de Vencimento de CNH';
+									break;
+								}
+							case 3: 
+								{
+									$veiculo = new Veiculos();
+									$veiculo->setIdVeiculos($_GET['idTipo']);
+									$collVo = $controla->findVeiculos($veiculo);
+									$veiculo = $collVo[0]; 		
+									$descricao = '
+									<b>SMC - Serviço Despertador</b>
+									<label class="ativo">Vencimento de IPVA</label><br><br>
+									Veículo placa '.$veiculo->getPlacaVeiculos().'
+									Data do vencimento: '.$formataData->toViewDate($veiculo->getVencimentoIpvaVeiculos()).'
+									';
+									$assunto = 'Aviso de Vencimento de IPVA';
+									break;
+								}
+							case 4: 
+								{
+									$veiculo = new Veiculos();
+									$veiculo->setIdVeiculos($_GET['idTipo']);
+									$collVo = $controla->findVeiculos($veiculo);
+									$veiculo = $collVo[0]; 		
+									$descricao = '
+									<b>SMC - Serviço Despertador</b>
+									<label class="ativo">Vencimento de Seguro</label><br><br>
+									Veículo placa '.$veiculo->getPlacaVeiculos().'
+									Data do vencimento: '.$formataData->toViewDate($veiculo->getVencimentoSeguroVeiculos()).'
+									';
+									$assunto = 'Aviso de Vencimento de Seguro';
+									break;
+								}
+							case 5: 
+								{
+									$veiculo = new Veiculos();
+									$veiculo->setIdVeiculos($_GET['idTipo']);
+									$collVo = $controla->findVeiculos($veiculo);
+									$veiculo = $collVo[0];
+									$descricao = '
+									<b>SMC - Serviço Despertador</b>
+									<label class="ativo">Vencimento de Garantia</label><br><br>
+									Veículo placa '.$veiculo->getPlacaVeiculos().'
+									Data do vencimento: '.$formataData->toViewDate($veiculo->getDataEntregaNfVeiculos()).'
+									';
+									$assunto = 'Aviso de Vencimento de Garantia';
+									break;
+								}
+							case 6:
+								{
+									$revisao = new Revisoes();
+									$revisao->setIdRevisoes($_GET['idTipo']);
+									$collVo = $controla->findRevisoes($revisao);
+									$revisao = $collVo[0];
+									$veiculo = new Veiculos();
+									$veiculo = $revisao->getVeiculo();
+									$descricao = '
+									<b>SMC - Serviço Despertador</b>
+									<label class="ativo">Revisão Agendada</label><br><br>
+									Veículo placa '.$veiculo->getPlacaVeiculos().'
+									Data da Revisão: '.$formataData->toViewDate($revisao->getDataRevisoes()).'
+									';
+									$assunto = 'Aviso de Revisão agendada.';
+									break;
+								}
+						}
+						$controla->enviarEmail($nome,$endereco->getEmailEndereco(),"SMC - Serviço Despertador - $assunto",$descricao);
+						$mensagem = 'E-mail enviado com sucesso.';
+						echo $mensagem;
 					}
-					elseif(!is_null($endereco->getIdEmpresa()))
-					{
-						$empresa = new Empresa();
-						$empresa->setIdEmpresa($endereco->getIdEmpresa());
-						$collempresa = $controla->findEmpresas($empresa);
-						$empresa = $collempresa[0];
-						$nome = $empresa->getNomeFantasiaEmpresa();
-					}
-					$descricao = '';
-					switch ($_GET['tipo'])
-					{
-						case 1: 
-							{
-								$pessoaTipo = new Pessoa();
-								$pessoaTipo->setIdPessoa($_GET['idTipo']);
-								$collVoTipo = $controla->findPessoas($pessoaTipo);
-								$pessoaTipo = $collVoTipo[0];
-								$dataNiver = explode("-",$pessoaTipo->getDataNascimentoPessoa());
-								$descricao = '
-								<b>SMC - Serviço Despertador</b>
-								<label class="ativo">Aniversário do Dia</label><br><br>
-								Aniversário de '.$pessoaTipo->getNomePessoa().'
-								Dia: '.$dataNiver[1].'/'.$dataNiver[2].'
-								';
-								$assunto = 'Aviso de Aniversário';
-								break;
-							}
-						case 2: 
-							{
-								$cnhAtual = new Cnh();
-								$cnhAtual->setIdCnh($_GET['idTipo']);
-								$collVo = $controla->findCnh($cnhAtual);
-								$cnhAtual = $collVo[0]; 		
-								$pessoaTipo = new Pessoa();
-								$pessoaTipo = $cnhAtual->returnaPessoa();
-								$descricao = '
-								<b>SMC - Serviço Despertador</b>
-								<label class="ativo">Vencimento de CNH</label><br><br>
-								CNH Nº '.$cnhAtual->getNumeroCnh().'
-								Condutor: '.$pessoaTipo->getNomePessoa().'
-								Data do vencimento: '.$formataData->toViewDate($cnhAtual->getVencCnh()).'
-								';
-								$assunto = 'Aviso de Vencimento de CNH';
-								break;
-							}
-						case 3: 
-							{
-								$veiculo = new Veiculos();
-								$veiculo->setIdVeiculos($_GET['idTipo']);
-								$collVo = $controla->findVeiculos($veiculo);
-								$veiculo = $collVo[0]; 		
-								$descricao = '
-								<b>SMC - Serviço Despertador</b>
-								<label class="ativo">Vencimento de IPVA</label><br><br>
-								Veículo placa '.$veiculo->getPlacaVeiculos().'
-								Data do vencimento: '.$formataData->toViewDate($veiculo->getVencimentoIpvaVeiculos()).'
-								';
-								$assunto = 'Aviso de Vencimento de IPVA';
-								break;
-							}
-						case 4: 
-							{
-								$veiculo = new Veiculos();
-								$veiculo->setIdVeiculos($_GET['idTipo']);
-								$collVo = $controla->findVeiculos($veiculo);
-								$veiculo = $collVo[0]; 		
-								$descricao = '
-								<b>SMC - Serviço Despertador</b>
-								<label class="ativo">Vencimento de Seguro</label><br><br>
-								Veículo placa '.$veiculo->getPlacaVeiculos().'
-								Data do vencimento: '.$formataData->toViewDate($veiculo->getVencimentoSeguroVeiculos()).'
-								';
-								$assunto = 'Aviso de Vencimento de Seguro';
-								break;
-							}
-						case 5: 
-							{
-								$veiculo = new Veiculos();
-								$veiculo->setIdVeiculos($_GET['idTipo']);
-								$collVo = $controla->findVeiculos($veiculo);
-								$veiculo = $collVo[0];
-								$descricao = '
-								<b>SMC - Serviço Despertador</b>
-								<label class="ativo">Vencimento de Garantia</label><br><br>
-								Veículo placa '.$veiculo->getPlacaVeiculos().'
-								Data do vencimento: '.$formataData->toViewDate($veiculo->getDataEntregaNfVeiculos()).'
-								';
-								$assunto = 'Aviso de Vencimento de Garantia';
-								break;
-							}
-						case 6:
-							{
-								$revisao = new Revisoes();
-								$revisao->setIdRevisoes($_GET['idTipo']);
-								$collVo = $controla->findRevisoes($revisao);
-								$revisao = $collVo[0];
-								$veiculo = new Veiculos();
-								$veiculo = $revisao->getVeiculo();
-								$descricao = '
-								<b>SMC - Serviço Despertador</b>
-								<label class="ativo">Revisão Agendada</label><br><br>
-								Veículo placa '.$veiculo->getPlacaVeiculos().'
-								Data da Revisão: '.$formataData->toViewDate($revisao->getDataRevisoes()).'
-								';
-								$assunto = 'Aviso de Revisão agendada.';
-								break;
-							}
-					}
-					
-					$controla->enviarEmail($nome,$endereco->getEmailEndereco(),"SMC - Serviço Despertador - $assunto",$descricao);
-					$mensagem = 'E-mail enviado com sucesso.';
-					echo $mensagem;
 				}
+			}
+			catch (Exception $e)
+			{
+				echo $e;
 			}
 		}
 	}
@@ -189,7 +195,8 @@ if(isset($_POST))
 				}
 				else 
 				{
-					throw new Exception("Usuário e senha incorretos.");
+					$mensagem = "Usuário ou senha incorreto.";
+					header("Location: ../views/home.php?p=login&msg=$mensagem");
 				}
 			}
 			catch (Exception $e)
@@ -240,7 +247,7 @@ if(isset($_POST))
 				
 				$logon->setSenha(trim($_POST['lsenha']));
 				
-				if(!$controla->validaCpfIgual($pessoa->getCpfPessoa()))
+				if($controla->validaCpfIgual($pessoa->getCpfPessoa()))
 					$mensagem = "CPF já existe na base de dados.";
 				
 				if($mensagem == '')
@@ -274,7 +281,7 @@ if(isset($_POST))
 				}
 				else
 				{
-					throw new Exception();
+					header("Location: ../views/home.php?msg={$mensagem}");
 				}
 			}
 			catch (Exception $e)
@@ -349,9 +356,6 @@ if(isset($_POST))
 					$pessoaConjugue->setSexoPessoa($_POST['sexo_conjuge']);
 				}
 				
-				if(!$controla->validaCpfIgual($pessoa->getCpfPessoa()))
-					$mensagem = "CPF já existe na base de dados.";
-				
 				if($mensagem == '')
 				{
 					$clientes = new Clientes();
@@ -404,7 +408,7 @@ if(isset($_POST))
 				}
 				else
 				{
-					throw new Exception();
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/add_meucpf.php?msg=$mensagem&pessoa=".urlencode(serialize($pessoa))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
 				}
 					
 			}
@@ -508,12 +512,12 @@ if(isset($_POST))
 					else
 						$mensagem .= "O CPF do Conjugue não deve estar em branco.";
 					
-					if(!$controla->validaCpfIgual($pessoaConjugue->getCpfPessoa()))
+					if($controla->validaCpfIgual($pessoaConjugue->getCpfPessoa()))
 						$mensagem = "CPF do Conjugue já existe na base de dados.";
 				}
 				
 				//TESTE DE ERRO e UPDATE DE CADASTRO
-				if(!$controla->validaCpfIgual($pessoaAtual->getCpfPessoa()))
+				if($controla->validaCpfIgual($pessoaAtual->getCpfPessoa()))
 					$mensagem = "CPF já existe na base de dados.";
 
 
@@ -622,7 +626,7 @@ if(isset($_POST))
 				
 
 				//DADOS DO DIRETOR DA EMPRESA
-				if(!$controla->validaCnpjIgual($empresas->getCnpjEmpresa()))
+				if($controla->validaCnpjIgual($empresas->getCnpjEmpresa()))
 					$mensagem = "CNPJ já existe na base de dados.";
 
 				$pessoaDiretor = null;
@@ -709,10 +713,10 @@ if(isset($_POST))
 						else
 							$mensagem .= "O CPF do Conjugue não deve estar em branco.";
 					}
-					if(!$controla->validaCpfIgual($pessoaDiretor->getCpfPessoa()))
+					if($controla->validaCpfIgual($pessoaDiretor->getCpfPessoa()))
 						$mensagem = "CPF do Diretor já existe na base de dados.";
 					
-					if(!$controla->validaCpfIgual($pessoaConjugue->getCpfPessoa()))
+					if($controla->validaCpfIgual($pessoaConjugue->getCpfPessoa()))
 						$mensagem = "CPF do Conjugue do Diretor já existe na base de dados.";
 				}
 				
@@ -825,7 +829,7 @@ if(isset($_POST))
 				if($_POST['vencimento_seguro']!= '' && $controla->validaData($_POST['vencimento_seguro']))
 					$veiculos->setVencimentoSeguroVeiculos($formataData->toDBDate($_POST['vencimento_seguro']));
 				
-				if(!$controla->validaVeiculoIgual($veiculos->getPlacaVeiculos()))
+				if($controla->validaVeiculoIgual($veiculos->getPlacaVeiculos()))
 						$mensagem = "Placa do Veículo já existe na base de dados.";
 
 
@@ -881,7 +885,7 @@ if(isset($_POST))
 				else
 					$mensagem .= 'Você deve informar o a data do vencimento da carteira de habilitação.';
 				
-				if(!$controla->validaCnhIgual($cnh->getNumeroCnh()))
+				if($controla->validaCnhIgual($cnh->getNumeroCnh()))
 						$mensagem = "CNH já existe na base de dados.";
 
 				if($mensagem == '')
@@ -972,7 +976,7 @@ if(isset($_POST))
 					$revisoes->setProxDataRevisoes($formataData->toDBDate($_POST['tprox']));
 					
 				$revisoes->setProxKmRevisoes($_POST['kprox']);
-
+				
 				if($mensagem == '')
 				{
 					$controla->cadastrarRevisoes($revisoes);

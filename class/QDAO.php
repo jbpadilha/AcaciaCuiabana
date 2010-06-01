@@ -256,6 +256,10 @@ class QDAO
 		{
 			$where = "WHERE idCliente = ?";
 		}
+		elseif(!is_null($valueObj->getCpfPessoa($cpfPessoa)))
+		{
+			$where = "WHERE cpfPessoa = ?";
+		}
 		
 		try 
 		{
@@ -270,9 +274,14 @@ class QDAO
 			{
 				mysqli_stmt_bind_param($prepare,'i',$idCliente);
 			}
+			elseif(!is_null($valueObj->getCpfPessoa($cpfPessoa)))
+			{
+				mysqli_stmt_bind_param($prepare,'s',$valueObj->getCpfPessoa($cpfPessoa));
+			}
 						
 			$idPessoa = $valueObj->getIdPessoa();
 			$idCliente = $valueObj->getIdCliente();
+			$cpfPessoa = $valueObj->getCpfPessoa();
 			
 			if(!mysqli_stmt_execute($prepare))
 				throw new Exception("Não foi possível conectar no banco de dados.");
@@ -347,6 +356,10 @@ class QDAO
 		{
 			$where = "WHERE idClientes = ?";
 		}
+		elseif(!is_null($valueObj->getCnpjEmpresa()))
+		{
+			$where = "WHERE cnpjEmpresa = ?";
+		}
 		try 
 		{
 			$sql .= $where;
@@ -360,9 +373,14 @@ class QDAO
 			{
 				mysqli_stmt_bind_param($prepare,'i',$idClientes);
 			}
+			elseif(!is_null($valueObj->getCnpjEmpresa()))
+			{
+				mysqli_stmt_bind_param($prepare,'s',$cnpjEmpresa);
+			}
 			
 			$idEmpresa = $valueObj->getIdEmpresa();
 			$idClientes = $valueObj->getIdClientes();
+			$cnpjEmpresa = $valueObj->getCnpjEmpresa();
 			
 			if(!mysqli_stmt_execute($prepare))
 				throw new Exception("Não foi possível conectar no banco de dados.");
@@ -770,6 +788,10 @@ class QDAO
 		{
 			$where = "WHERE idClientes = ?";
 		}
+		elseif(!is_null($valueObj->getPlacaVeiculos()))
+		{
+			$where = "WHERE placaVeiculos = ?";
+		}
 		
 		try 
 		{
@@ -824,12 +846,17 @@ class QDAO
 			{
 				mysqli_stmt_bind_param($prepare,'s',$idClientes);
 			}
+			elseif(!is_null($valueObj->getPlacaVeiculos()))
+			{
+				mysqli_stmt_bind_param($prepare,'s',$placaVeiculos);
+			}
 			
 			
 			$idVeiculos = $valueObj->getIdVeiculos();
 			$vencimentoIpvaVeiculos = $valueObj->getVencimentoIpvaVeiculos();
 			$vencimentoSeguroVeiculos = $valueObj->getVencimentoSeguroVeiculos();
 			$idClientes = $valueObj->getIdClientes();
+			$placaVeiculos = $valueObj->getPlacaVeiculos();
 			
 			if(!mysqli_stmt_execute($prepare))
 				throw new Exception("Não foi possível conectar no banco de dados.");
