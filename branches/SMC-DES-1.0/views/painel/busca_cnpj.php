@@ -29,7 +29,7 @@
 	$collEmpresasPesquisadas = null;
 	if(isset($_GET['empresasPesquisadas'])) {
 		if($_GET['empresasPesquisadas'] != '') {
-			$collEmpresasPesquisadas = unserialize(urldecode($_GET['empresasPesquisadas']));
+			$collEmpresasPesquisadas = unserialize(base64_decode($_GET['empresasPesquisadas']));
 		} else {
 			$collEmpresasPesquisadas = null;
 		}

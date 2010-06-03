@@ -11,7 +11,7 @@
 	$abastecimentos = new Abastecimentos();
 	
 	if(isset($_GET['abastecimentos'])) {
-		$abastecimentos = unserialize(urldecode($_GET['abastecimentos']));
+		$abastecimentos = unserialize(base64_decode($_GET['abastecimentos']));
 	}
 ?>
 <link rel="stylesheet" href="_css/formPadrao.css" type="text/css" media="all" />

@@ -17,7 +17,7 @@ if($logon->getNivelAcessoLogin() <= 5)
 $tipoRevisoes = new Tiporevisoes();
 if(isset($_GET['tipoRevisoes']))
 {
-	$tipoRevisoes = unserialize(urldecode($_GET['tipoRevisoes']));
+	$tipoRevisoes = unserialize(base64_decode($_GET['tipoRevisoes']));
 }
 
 ?>

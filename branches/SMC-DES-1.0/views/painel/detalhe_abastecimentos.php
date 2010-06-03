@@ -10,7 +10,7 @@
 	$abastecimentos = new Abastecimentos();
 
 	if(isset($_GET['abastecimentos'])) {
-		$abastecimentos = unserialize(urldecode($_GET['abastecimentos']));
+		$abastecimentos = unserialize(base64_decode($_GET['abastecimentos']));
 	} elseif (isset($_GET['idAbastecimentos']) && $_GET['idAbastecimentos'] != '') {
 		$abastecimentos->setIdAbastecimentos($_GET['idAbastecimentos']);
 		$collVoAlterar = $controla->findAbastecimentos($abastecimentos);

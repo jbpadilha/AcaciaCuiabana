@@ -46,7 +46,7 @@
 	
 	if(isset($_GET['abastecimentosPesquisados'])) {
 		if($_GET['abastecimentosPesquisados'] != '') {
-			$collAbastecimentosPesquisadas = unserialize(urldecode($_GET['abastecimentosPesquisados']));
+			$collAbastecimentosPesquisadas = unserialize(base64_decode($_GET['abastecimentosPesquisados']));
 		} else {
 			$collAbastecimentosPesquisadas = null;
 		}

@@ -13,7 +13,7 @@
 
 	if(isset($_GET['empresas']))
 	{
-		$empresa = (object)unserialize(urldecode($_GET['empresas']));
+		$empresa = (object)unserialize(base64_decode($_GET['empresas']));
 	}
 ?>
 <form method="post" action="../../class/RecebePostGet.php">
@@ -43,7 +43,7 @@
 $endereco= new Endereco();
 if(isset($_GET['endereco']))
 {
-	$endereco = (object)unserialize(urldecode($_GET['endereco']));
+	$endereco = (object)unserialize(base64_decode($_GET['endereco']));
 }
 ?>
 <fieldset>
@@ -79,7 +79,7 @@ if(isset($_GET['endereco']))
 	$pessoa = new Pessoa();
 
 	if(isset($_GET['pessoaDiretor'])) {
-		$pessoa = (object)unserialize(urldecode($_GET['pessoaDiretor']));
+		$pessoa = (object)unserialize(base64_decode($_GET['pessoaDiretor']));
 	}
 ?>
 <fieldset>
@@ -130,7 +130,7 @@ if(isset($_GET['endereco']))
 	$enderecoDiretor= new Endereco();
 
 	if(isset($_GET['enderecoDiretor'])) {
-		$enderecoDiretor = (object)unserialize(urldecode($_GET['enderecoDiretor']));
+		$enderecoDiretor = (object)unserialize(base64_decode($_GET['enderecoDiretor']));
 	}
 ?>
 
@@ -168,7 +168,7 @@ if(isset($_GET['endereco']))
 	$pessoaConjugue = new Pessoa();
 
 	if(isset($_GET['pessoaConjugue'])) {
-		$pessoaConjugue = (object) unserialize(urldecode($_GET['pessoaConjugue']));
+		$pessoaConjugue = (object) unserialize(base64_decode($_GET['pessoaConjugue']));
 	}
 ?>
 	<p class="caption">Dados do(a) cônjuge</p>

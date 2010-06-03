@@ -12,7 +12,7 @@ $logon = $_SESSION["usuarioLogon"];
 $pessoa = new Pessoa();
 if(isset($_GET['pessoa']))
 {
-	$pessoa = unserialize(urldecode($_GET['pessoa']));
+	$pessoa = unserialize(base64_decode($_GET['pessoa']));
 }
 elseif (isset($_GET['idPessoaAlterar']) && $_GET['idPessoaAlterar'] != '')
 {
@@ -98,7 +98,7 @@ $endereco= new Endereco();
 
 if(isset($_GET['endereco']))
 {
-	$endereco = unserialize(urldecode($_GET['endereco']));
+	$endereco = unserialize(base64_decode($_GET['endereco']));
 }
 elseif (isset($_GET['idPessoaAlterar']) && $_GET['idPessoaAlterar'] != '')
 {
@@ -134,7 +134,7 @@ elseif (isset($_GET['idPessoaAlterar']) && $_GET['idPessoaAlterar'] != '')
 $pessoaConjugue = new Pessoa();
 if(isset($_GET['pessoaConjugue']))
 {
-	$pessoaConjugue = (object) unserialize(urldecode($_GET['pessoaConjugue']));
+	$pessoaConjugue = (object) unserialize(base64_decode($_GET['pessoaConjugue']));
 }
 elseif (isset($_GET['idPessoaAlterar']) && $_GET['idPessoaAlterar'] != '')
 {

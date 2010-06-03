@@ -12,7 +12,7 @@ $logon = $_SESSION["usuarioLogon"];
 $revisoes = new Revisoes();
 if(isset($_GET['revisoes']))
 {
-	$revisoes = unserialize(urldecode($_GET['revisoes']));
+	$revisoes = unserialize(base64_decode($_GET['revisoes']));
 }
 elseif (isset($_GET['idRevisoesAlterar']) && $_GET['idRevisoesAlterar'] != '')
 {

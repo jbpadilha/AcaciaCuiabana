@@ -28,7 +28,7 @@
 	
 	if(isset($_GET['pessoasPesquisadas'])) {
 		if($_GET['pessoasPesquisadas'] != '') {
-			$collPessoasPesquisadas = unserialize(urldecode($_GET['pessoasPesquisadas']));
+			$collPessoasPesquisadas = unserialize(base64_decode($_GET['pessoasPesquisadas']));
 		} else {
 			$collPessoasPesquisadas = null;
 		}

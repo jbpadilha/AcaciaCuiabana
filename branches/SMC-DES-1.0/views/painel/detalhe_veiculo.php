@@ -30,7 +30,7 @@ $logon = $_SESSION["usuarioLogon"];
 $veiculos = new Veiculos();
 if(isset($_GET['veiculos']))
 {
-	$veiculos = unserialize(urldecode($_GET['veiculos']));
+	$veiculos = unserialize(base64_decode($_GET['veiculos']));
 }
 elseif (isset($_GET['idVeiculosAlterar']) && $_GET['idVeiculosAlterar'] != '')
 {

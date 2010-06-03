@@ -44,7 +44,7 @@ $logon = $_SESSION["usuarioLogon"];
 		{
 			if($_GET['condutoresPesquisados'] != '')
 			{
-				$collCondutoresPesquisados = unserialize(urldecode($_GET['condutoresPesquisados']));
+				$collCondutoresPesquisados = unserialize(base64_decode($_GET['condutoresPesquisados']));
 			}
 			else 
 			{

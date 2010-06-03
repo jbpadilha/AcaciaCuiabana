@@ -13,7 +13,7 @@ $empresa = new Empresas();
 
 if(isset($_GET['empresas']))
 {
-	$empresa = (object)unserialize(urldecode($_GET['empresas']));
+	$empresa = (object)unserialize(base64_decode($_GET['empresas']));
 }
 elseif (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
 {
@@ -65,7 +65,7 @@ elseif (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
 $endereco= new Endereco();
 if(isset($_GET['endereco']))
 {
-	$endereco = (object)unserialize(urldecode($_GET['endereco']));
+	$endereco = (object)unserialize(base64_decode($_GET['endereco']));
 }
 elseif (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
 {
@@ -102,7 +102,7 @@ elseif (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
 $pessoa = new Pessoa();
 if(isset($_GET['pessoaDiretor']))
 {
-	$pessoa = (object)unserialize(urldecode($_GET['pessoaDiretor']));
+	$pessoa = (object)unserialize(base64_decode($_GET['pessoaDiretor']));
 }
 elseif (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
 {
@@ -158,7 +158,7 @@ elseif (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
 $enderecoDiretor= new Endereco();
 if(isset($_GET['enderecoDiretor']))
 {
-	$enderecoDiretor = (object)unserialize(urldecode($_GET['enderecoDiretor']));
+	$enderecoDiretor = (object)unserialize(base64_decode($_GET['enderecoDiretor']));
 }
 elseif ($pessoa->getIdPessoa() != null)
 {
@@ -195,7 +195,7 @@ elseif ($pessoa->getIdPessoa() != null)
 	$enderecoConjugueDiretor = new Endereco();
 	if(isset($_GET['pessoaConjugue']))
 	{
-		$pessoaConjugue = (object) unserialize(urldecode($_GET['pessoaConjugue']));
+		$pessoaConjugue = (object) unserialize(base64_decode($_GET['pessoaConjugue']));
 	}
 	elseif ($pessoa->getIdConjuguePessoa() != null)
 	{

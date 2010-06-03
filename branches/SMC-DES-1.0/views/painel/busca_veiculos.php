@@ -27,7 +27,7 @@
 	$collVeiculosPesquisados = null;
 	if(isset($_GET['veiculosPesquisados'])) {
 		if($_GET['veiculosPesquisados'] != '') {
-			$collVeiculosPesquisados = unserialize(urldecode($_GET['veiculosPesquisados']));
+			$collVeiculosPesquisados = unserialize(base64_decode($_GET['veiculosPesquisados']));
 		} else {
 			$collVeiculosPesquisados = null;
 		}

@@ -11,11 +11,11 @@
 	$cnh = new Cnh();
 	
 	if(isset($_GET['condutores'])) {
-		$condutores = unserialize(urldecode($_GET['condutores']));
+		$condutores = unserialize(base64_decode($_GET['condutores']));
 	}
 	
 	if(isset($_GET['cnh'])) {
-		$cnh = unserialize(urldecode($_GET['cnh']));
+		$cnh = unserialize(base64_decode($_GET['cnh']));
 	}
 ?>
 <form method="post" action="../../class/RecebePostGet.php">
