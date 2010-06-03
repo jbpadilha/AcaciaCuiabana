@@ -29,7 +29,7 @@ define ("TITULO", "..~`SMC - Manutenção como deve ser feita.`~..");
 define ("LOGS_PATH", "./");
 define ("SELECIONE","Selecione");
 
-header("Content-Type: text/html; charset=ISO-8859-1");
+header("Content-Type: text/html; charset=UTF-8");
 	
 	
 ?>
