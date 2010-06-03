@@ -225,8 +225,8 @@ if(isset($_POST))
 
 			try
 			{
-				if($_POST['lnome'] != '' && $controla->validaNomes($_POST['lnome']))
-					$pessoa->setNomePessoa(trim($_POST['lnome']));
+				if($_POST['lnome'] != '')
+					$pessoa->setNomePessoa(trim($controla->validaNomes($_POST['lnome'])));
 				else
 					$mensagem .= "O nome não pode estar em branco.";
 				
@@ -235,10 +235,10 @@ if(isset($_POST))
 				else
 					$mensagem .= "O E-mail não pode estar em branco.";
 					
-				if($_POST['llogin'] != '' && $controla->validaNomes($_POST['llogin']))
+				if($_POST['llogin'] != '')
 				{
-					$pessoa->setCpfPessoa($controla->retiraMascaraCPF($_POST['llogin']));
-					$logon->setLogin($controla->retiraMascaraCPF($_POST['llogin']));
+					$pessoa->setCpfPessoa($controla->validaCpfIgual($controla->validaCPF($controla->retiraMascaraCPF($_POST['llogin']))));
+					$logon->setLogin($pessoa->getCpfPessoa());
 				}
 				else
 				{
@@ -246,9 +246,6 @@ if(isset($_POST))
 				}
 				
 				$logon->setSenha(trim($_POST['lsenha']));
-				
-				if($controla->validaCpfIgual($pessoa->getCpfPessoa()))
-					$mensagem = "CPF já existe na base de dados.";
 				
 				if($mensagem == '')
 				{
@@ -276,18 +273,18 @@ if(isset($_POST))
 					
 					$controla->enviarEmail($pessoa->getNomePessoa(),$endereco->getEmailEndereco(),"Cadastro de novo Usuário",$descricao);
 					$mensagem = "Cadastro realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
-					header("Location: ../views/home.php?msg={$mensagem}");
+					header("Location: ../views/home.php?msg=$mensagem");
 					
 				}
 				else
 				{
-					header("Location: ../views/home.php?msg={$mensagem}");
+					header("Location: ../views/home.php?msg=$mensagem");
 				}
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/home.php?p=login&msg={$mensagem}&pessoa=".urlencode(serialize($pessoa))."&endereco=".urlencode(serialize($endereco))."&logon=".urlencode(serialize($logon))."'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/home.php?p=login&msg=$mensagem&pessoa=".urlencode(serialize($pessoa))."&endereco=".urlencode(serialize($endereco))."&logon=".urlencode(serialize($logon))."'</script>";
 			}
 			
 		}		
@@ -304,12 +301,13 @@ if(isset($_POST))
 				
 				$pessoa->setIdPessoa($_POST['idPessoa']);
 				
-				if($_POST['nome_cliente'] != '' && $controla->validaNomes($_POST['nome_cliente']))
-					$pessoa->setNomePessoa($_POST['nome_cliente']);
+				if($_POST['nome_cliente'] != '')
+					$pessoa->setNomePessoa($controla->validaNomes($_POST['nome_cliente']));
 				else
 					$mensagem .= 'O nome do Cliente não pode estar em branco.';
-				if($_POST['nascimento_cliente'] != '' && $controla->validaData($_POST['nascimento_cliente']))
-					$pessoa->setDataNascimentoPessoa($formataData->toDBDate($_POST['nascimento_cliente']));
+					
+				if($_POST['nascimento_cliente'] != '')
+					$pessoa->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['nascimento_cliente'])));
 				else
 					$mensagem .= 'O data de nascimento do Cliente não pode estar em branco.';
 					
@@ -334,7 +332,7 @@ if(isset($_POST))
 				$endereco->setCepEndereco($_POST['cep_contato']);
 				$endereco->setCidadeEndereco($_POST['cidade_contato']);
 				$endereco->setEstadoEndereco($_POST['estado_contato']);
-				$endereco->setEmailEndereco($_POST['email_contato']);
+				$endereco->setEmailEndereco($controla->testaEmail($_POST['email_contato']));
 				$endereco->setTelefoneEndereco($_POST['tel_contato']);
 				$endereco->setCelEndereco($_POST['cel_contato']);
 				$endereco->setFaxEndereco($_POST['cel_contato']);
@@ -344,15 +342,16 @@ if(isset($_POST))
 				if($pessoa->getEstadoCivilPessoa() == "Casado" || $pessoa->getEstadoCivilPessoa() == "União Estável")
 				{
 					$pessoaConjugue->setIdPessoa($_POST['idConjugue']);
-					if($_POST['nome_conjuge'] != '' && $controla->validaNomes($_POST['nome_conjuge']))
-						$pessoaConjugue->setNomePessoa($_POST['nome_conjuge']);
+					if($_POST['nome_conjuge'] != '')
+						$pessoaConjugue->setNomePessoa($controla->validaNomes($_POST['nome_conjuge']));
 					else
 						$mensagem = "O nome do Conjugue não deve estar em branco.";
 					
-					if($_POST['nasc_conjuge']!= '' && $controla->validaData($_POST['nasc_conjuge']))
-						$pessoaConjugue->setDataNascimentoPessoa($formataData->toDBDate($_POST['nasc_conjuge']));
+					if($_POST['nasc_conjuge']!= '')
+						$pessoaConjugue->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['nasc_conjuge'])));
 					else
 						$mensagem .= 'A data de nascimento do Conjugue não pode estar em branco.';
+					
 					$pessoaConjugue->setSexoPessoa($_POST['sexo_conjuge']);
 				}
 				
@@ -415,7 +414,7 @@ if(isset($_POST))
 			catch (Exception $e)
 			{
 				$mensagem .= $e;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/add_meucpf.php?msg={$mensagem}&pessoa=".urlencode(serialize($pessoa))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/add_meucpf.php?msg=$mensagem&pessoa=".urlencode(serialize($pessoa))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
 			}
 		}
 		
@@ -426,16 +425,17 @@ if(isset($_POST))
 				$mensagem = '';
 				//CADASTRO DE PESSOA
 				$pessoaAtual = new Pessoa();
-				
+				$pessoaConjugue = new Pessoa();
+				$endereco = new Endereco();
 				$pessoaAtual->setIdCliente($_POST['idCliente']);
 				
-				if($_POST['nome'] != '' && $controla->validaNomes($_POST['nome']))
-					$pessoaAtual->setNomePessoa(trim($_POST['nome']));
+				if($_POST['nome'] != '')
+					$pessoaAtual->setNomePessoa(trim($controla->validaNomes($_POST['nome'])));
 				else 
 					$mensagem .= "O Nome da Pessoa não pode estar em branco.";
 				
-				if($_POST['dataNascimento'] != '' && $controla->validaData($_POST['dataNascimento']))
-					$pessoaAtual->setDataNascimentoPessoa($formataData->toDBDate($_POST['dataNascimento']));
+				if($_POST['dataNascimento'] != '')
+					$pessoaAtual->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['dataNascimento'])));
 				else
 					$mensagem .= "A data de nascimento da pessoa deve ser preenchida.";
 				
@@ -454,13 +454,15 @@ if(isset($_POST))
 				}
 				
 				if($_POST['cpf'] != '')
-					$pessoaAtual->setCpfPessoa($controla->retiraMascaraCPF($_POST['cpf']));
-				else
+				{
+					$pessoaAtual->setCpfPessoa($controla->validaCpfIgual($controla->validaCPF($controla->retiraMascaraCPF($_POST['cpf']))));
+				}
+				else 
+				{
 					$mensagem .= "O CPF não deve estar em branco.";
+				}
 				
 				//CADASTRO DE ENDERECO PARA PESSOA
-				
-				$endereco = new Endereco();
 				
 				$endereco->setRuaEndereco(trim($_POST['rua']));
 				$endereco->setComplementoEndereco(trim($_POST['complemento']));
@@ -469,8 +471,7 @@ if(isset($_POST))
 				$endereco->setCidadeEndereco(trim($_POST['cidade']));
 				$endereco->setEstadoEndereco($_POST['estado']);
 				
-				if($controla->testaEmail($_POST['email']))
-					$endereco->setEmailEndereco(trim($_POST['email']));
+				$endereco->setEmailEndereco(trim($controla->testaEmail($_POST['email'])));
 				
 				$endereco->setTelefoneEndereco(trim($_POST['telefone']));
 				$endereco->setCelEndereco(trim($_POST['celular']));
@@ -479,17 +480,16 @@ if(isset($_POST))
 				
 				//Cadastro do Conjugue
 				
-				$pessoaConjugue = new Pessoa();
 				if($pessoaAtual->getEstadoCivilPessoa() == "Casado" || $pessoaAtual->getEstadoCivilPessoa() == "União Estável" )
 				{
 					
-					if($_POST['nomeConjugue'] != '' && $controla->validaNomes($_POST['nomeConjugue']))
-						$pessoaConjugue->setNomePessoa(trim($_POST['nomeConjugue']));
+					if($_POST['nomeConjugue'] != '')
+						$pessoaConjugue->setNomePessoa(trim($controla->validaNomes($_POST['nomeConjugue'])));
 					else 
 						$mensagem .= "O Nome do Conjugue não pode estar em branco.";
 					
-					if($_POST['dataNascimentoConjugue'] != '' && $controla->validaData($_POST['dataNascimentoConjugue']))
-						$pessoaConjugue->setDataNascimentoPessoa($formataData->toDBDate($_POST['dataNascimentoConjugue']));
+					if($_POST['dataNascimentoConjugue'] != '')
+						$pessoaConjugue->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['dataNascimentoConjugue'])));
 					else
 						$mensagem .= "A data de nascimento do Conjugue deve ser preenchida.";
 					
@@ -508,18 +508,16 @@ if(isset($_POST))
 					}
 					
 					if($_POST['cpfConjugue'] != '')
-						$pessoaConjugue->setCpfPessoa($controla->retiraMascaraCPF($_POST['cpfConjugue']));
+					{
+						$pessoaConjugue->setCpfPessoa($controla->validaCpfIgual($controla->validaCPF($controla->retiraMascaraCPF($_POST['cpfConjugue']))));						
+					}
 					else
+					{
 						$mensagem .= "O CPF do Conjugue não deve estar em branco.";
-					
-					if($controla->validaCpfIgual($pessoaConjugue->getCpfPessoa()))
-						$mensagem = "CPF do Conjugue já existe na base de dados.";
+					}
 				}
 				
 				//TESTE DE ERRO e UPDATE DE CADASTRO
-				if($controla->validaCpfIgual($pessoaAtual->getCpfPessoa()))
-					$mensagem = "CPF já existe na base de dados.";
-
 
 				if($mensagem == '')
 				{
@@ -553,17 +551,17 @@ if(isset($_POST))
 					
 					$controla->enviarEmail($pessoaAtual->getNomePessoa(),$endereco->getEmailEndereco(),"Cadastro de Pessoa",$descricao);
 					$mensagem = "Cadastro realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg={$mensagem}'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cpf&msg={$mensagem}&pessoa=".urlencode(serialize($pessoaAtual))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>"; 
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cpf&msg=$mensagem&pessoa=".urlencode(serialize($pessoaAtual))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>"; 
 				}
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cpf&msg={$mensagem}&pessoa=".urlencode(serialize($pessoaAtual))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
+				$mensagem .= $e->getMessage();
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cpf&msg=$mensagem&pessoa=".urlencode(serialize($pessoaAtual))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
 			}
 		}
 		
@@ -579,29 +577,30 @@ if(isset($_POST))
 				$collVoCliente = $controla->findClientes($cliente);
 				$cliente = $collVoCliente[0];
 				
-				if($_POST['nome_empresa'] != '' && $controla->validaNomes($_POST['nome_empresa']))
-					$empresas->setNomeEmpresa($_POST['nome_empresa']);
+				if($_POST['nome_empresa'] != '')
+					$empresas->setNomeEmpresa($controla->validaNomes($_POST['nome_empresa']));
 				else	
 					$mensagem .= "O nome da Empresa não deve estar em branco.";
 				
-				if($_POST['nome_fantasia'] != '' && $controla->validaNomes($_POST['nome_fantasia']))	
-					$empresas->setNomeFantasiaEmpresa($_POST['nome_fantasia']);
+				if($_POST['nome_fantasia'] != '')	
+					$empresas->setNomeFantasiaEmpresa($controla->validaNomes($_POST['nome_fantasia']));
 				else 	
 					$mensagem .= "O nome Fantasia deve ser preenchido.";
 				
 				if($_POST['data_fundacao'] != '')
 				{
-					if($controla->validaData($_POST['data_fundacao']))
-						$empresas->setDataFundacaoEmpresa($formataData->toDBDate($_POST['data_fundacao']));
-					else
-						$mensagem .= "A data de Funcação da Empresa está incorreta.";
+						$empresas->setDataFundacaoEmpresa($formataData->toDBDate($controla->validaData($_POST['data_fundacao'])));
 				}
 				$empresas->setIdClientes($cliente->getIdClientes());
 
-				if($_POST['cnpj'] != '' && $controla->validaCNPJ($_POST['cnpj']))
-					$empresas->setCnpjEmpresa($_POST['cnpj']);
-				else
-					$mensagem .= "O CNPJ inválido";
+				if($_POST['cnpj'] != '')
+				{
+					$empresas->setCnpjEmpresa($controla->validaCnpjIgual($controla->validaCNPJ($controla->retiraMascaraCNPJ($_POST['cnpj']))));
+				}
+				else 
+				{
+					$mensagem .= "O CNPJ não pode estar em branco.";
+				}
 				
 				$empresas->setInscricaoEstadualEmpresa($_POST['insc']);
 				$empresas->setRamoEmpresa($_POST['ramo']);
@@ -615,32 +614,27 @@ if(isset($_POST))
 				$endereco->setCepEndereco(trim($_POST['cep']));
 				$endereco->setCidadeEndereco(trim($_POST['cidade']));
 				$endereco->setEstadoEndereco($_POST['estado']);
-				
-				if($controla->testaEmail($_POST['email']))
-					$endereco->setEmailEndereco(trim($_POST['email']));
-				
+				$endereco->setEmailEndereco(trim($controla->testaEmail($_POST['email'])));
 				$endereco->setTelefoneEndereco(trim($_POST['telefone']));
 				$endereco->setCelEndereco(trim($_POST['celular']));
 				$endereco->setFaxEndereco(trim($_POST['fax']));
 				
 
 				//DADOS DO DIRETOR DA EMPRESA
-				if($controla->validaCnpjIgual($empresas->getCnpjEmpresa()))
-					$mensagem .= "CNPJ já existe na base de dados.";
-
 				$pessoaDiretor = null;
 				$enderecoDiretor = null;
 				$pessoaConjugue = null;
 				if($_POST['preenche'] != '' && $_POST['preenche'] == "Sim")
 				{
 					$pessoaDiretor = new Pessoa();
-					if($_POST['nome'] != '' && $controla->validaNomes($_POST['nome']))
-						$pessoaDiretor->setNomePessoa(trim($_POST['nome']));
+					
+					if($_POST['nome'] != '')
+						$pessoaDiretor->setNomePessoa(trim($controla->validaNomes($_POST['nome'])));
 					else 
 						$mensagem .= "O Nome da Pessoa não pode estar em branco.";
 					
-					if($_POST['dataNascimento'] != '' && $controla->validaData($_POST['dataNascimento']))
-						$pessoaDiretor->setDataNascimentoPessoa($formataData->toDBDate($_POST['dataNascimento']));
+					if($_POST['dataNascimento'] != '')
+						$pessoaDiretor->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['dataNascimento'])));
 					else
 						$mensagem .= "A data de nascimento da pessoa deve ser preenchida.";
 					
@@ -659,9 +653,13 @@ if(isset($_POST))
 					}
 					
 					if($_POST['cpf'] != '')
-						$pessoaDiretor->setCpfPessoa($controla->retiraMascaraCPF($_POST['cpf']));
+					{
+						$pessoaDiretor->setCpfPessoa($controla->validaCpfIgual($controla->validaCPF($controla->retiraMascaraCPF($_POST['cpf']))));
+					}
 					else
+					{
 						$mensagem .= "O CPF não deve estar em branco.";
+					}
 					
 					//ENDEREÇO DIRETOR DA EMPRESA
 					$enderecoDiretor = new Endereco();
@@ -671,10 +669,7 @@ if(isset($_POST))
 					$enderecoDiretor->setCepEndereco(trim($_POST['cepDiretor']));
 					$enderecoDiretor->setCidadeEndereco(trim($_POST['cidadeDiretor']));
 					$enderecoDiretor->setEstadoEndereco($_POST['estadoDiretor']);
-					
-					if($controla->testaEmail($_POST['email']))
-						$enderecoDiretor->setEmailEndereco(trim($_POST['emailDiretor']));
-					
+					$enderecoDiretor->setEmailEndereco(trim($controla->testaEmail($_POST['email'])));
 					$enderecoDiretor->setTelefoneEndereco(trim($_POST['telefoneDiretor']));
 					$enderecoDiretor->setCelEndereco(trim($_POST['celularDiretor']));
 					$enderecoDiretor->setFaxEndereco(trim($_POST['faxDiretor']));
@@ -685,13 +680,13 @@ if(isset($_POST))
 					if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "União Estável" )
 					{
 						$pessoaConjugue = new Pessoa();
-						if($_POST['nomeConjugue'] != '' && $controla->validaNomes($_POST['nomeConjugue']))
-							$pessoaConjugue->setNomePessoa(trim($_POST['nomeConjugue']));
+						if($_POST['nomeConjugue'] != '')
+							$pessoaConjugue->setNomePessoa(trim($controla->validaNomes($_POST['nomeConjugue'])));
 						else 
 							$mensagem .= "O Nome do Conjugue não pode estar em branco.";
 						
-						if($_POST['dataNascimentoConjugue'] != '' && $controla->validaData($_POST['dataNascimentoConjugue']))
-							$pessoaConjugue->setDataNascimentoPessoa($formataData->toDBDate($_POST['dataNascimentoConjugue']));
+						if($_POST['dataNascimentoConjugue'] != '')
+							$pessoaConjugue->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['dataNascimentoConjugue'])));
 						else
 							$mensagem .= "A data de nascimento do Conjugue deve ser preenchida.";
 						
@@ -710,15 +705,10 @@ if(isset($_POST))
 						}
 						
 						if($_POST['cpfConjugue'] != '')
-							$pessoaConjugue->setCpfPessoa($controla->retiraMascaraCPF($_POST['cpfConjugue']));
+							$pessoaConjugue->setCpfPessoa($controla->validaCpfIgual($controla->validaCPF($controla->retiraMascaraCPF($_POST['cpfConjugue']))));
 						else
 							$mensagem .= "O CPF do Conjugue não deve estar em branco.";
 					}
-					if($controla->validaCpfIgual($pessoaDiretor->getCpfPessoa()))
-						$mensagem .= "CPF do Diretor já existe na base de dados.";
-					
-					if($controla->validaCpfIgual($pessoaConjugue->getCpfPessoa()))
-						$mensagem .= "CPF do Conjugue do Diretor já existe na base de dados.";
 				}
 				
 				//TESTE E CADASTRO
@@ -770,7 +760,7 @@ if(isset($_POST))
 					
 					$controla->enviarEmail($empresa->getNomeEmpresa(),$endereco->getEmailEndereco(),"Cadastro de Empresa",$descricao);
 					$mensagem = "Cadastro realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg={$mensagem}'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
 				}
 				else 
 				{
@@ -791,7 +781,7 @@ if(isset($_POST))
 					$enderecoDiretor = new Endereco();
 				if(is_null($pessoaConjugue))
 					$pessoaConjugue = new Pessoa();
-				$mensagem .= $e;
+				$mensagem .= $e->getMessage();
 				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cnpj&msg=$mensagem&empresas=".urlencode(serialize($empresas))."&endereco=".urlencode(serialize($endereco))."&pessoaDiretor=".urlencode(serialize($pessoaDiretor))."&enderecoDiretor=".urlencode(serialize($enderecoDiretor))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
 			}
 		}
@@ -806,14 +796,7 @@ if(isset($_POST))
 				
 				if($_POST['placa'] != '')
 				{
-					if($controla->validaVeiculoIgual($veiculos->getPlacaVeiculos()))
-					{
-						$mensagem .= "Placa do Veículo já existe na base de dados.";
-					}
-					else
-					{
-						$veiculos->setPlacaVeiculos($_POST['placa']);
-					}
+					$veiculos->setPlacaVeiculos($controla->validaVeiculoIgual($_POST['placa']));
 				}
 				else
 				{
@@ -838,37 +821,37 @@ if(isset($_POST))
 				}
 				$veiculos->setPlacaNfVeiculos($_POST['placa_nf']);
 				$veiculos->setNumeroNfVeiculos($_POST['numero_nf']);
-				if($_POST['data_nf'] != '' && $controla->validaData($_POST['data_nf']))
+				if($_POST['data_nf'] != '')
 				{
-					$veiculos->setDataNfVeiculos($formataData->toDBDate($_POST['data_nf']));
+					$veiculos->setDataNfVeiculos($formataData->toDBDate($controla->validaData($_POST['data_nf'])));
 				}
 				$veiculos->setKmEntregaNfVeiculos($_POST['km_entrega_nf']);
 				$veiculos->setTempoGarantiaNfVeiculos($_POST['tempo_garantia']);
 				$veiculos->setKmGarantiaVeiculos($_POST['km_garantia']);
-				if($_POST['vencimento_ipva'] != '' && $controla->validaData($_POST['vencimento_ipva']))
-					$veiculos->setVencimentoIpvaVeiculos($formataData->toDBDate($_POST['vencimento_ipva']));
+				if($_POST['vencimento_ipva'] != '')
+					$veiculos->setVencimentoIpvaVeiculos($formataData->toDBDate($controla->validaData($_POST['vencimento_ipva'])));
 				else
 					$mensagem .= "O vencimento do IPVA deve ser preenchido.";
 				
-				if($_POST['vencimento_seguro']!= '' && $controla->validaData($_POST['vencimento_seguro']))
-					$veiculos->setVencimentoSeguroVeiculos($formataData->toDBDate($_POST['vencimento_seguro']));
+				if($_POST['vencimento_seguro']!= '')
+					$veiculos->setVencimentoSeguroVeiculos($formataData->toDBDate($controla->validaData($_POST['vencimento_seguro'])));
 
 				if($mensagem == '')
 				{
 					$controla->cadastraVeiculos($veiculos);
 					$mensagem = 'Veículo Cadastrado com sucesso.';
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg={$mensagem}'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_veiculos&msg={$mensagem}&veiculos=".urlencode(serialize($veiculos))."'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_veiculos&msg=$mensagem&veiculos=".urlencode(serialize($veiculos))."'</script>";
 				}
 				
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_veiculos&msg={$mensagem}&veiculos=".urlencode(serialize($veiculos))."'</script>";
+				$mensagem .= $e->getMessage();
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_veiculos&msg=$mensagem&veiculos=".urlencode(serialize($veiculos))."'</script>";
 			}
 		}
 		
@@ -886,7 +869,7 @@ if(isset($_POST))
 					$mensagem .= 'Você deve escolher uma pessoa cadastrada para completar o cadastro.';
 				
 				if($_POST['cnh'] != '')
-					$cnh->setNumeroCnh(trim($_POST['cnh']));
+					$cnh->setNumeroCnh(trim($controla->validaCnhIgual($_POST['cnh'])));
 				else
 					$mensagem .= 'Você deve preencher o número da CNH.';
 					
@@ -901,12 +884,9 @@ if(isset($_POST))
 					$mensagem .= 'Você deve informar a categoria da carteira de habilitação.';
 				
 				if($_POST['cnhvcto'] != '')
-					$cnh->setVencCnh($formataData->toDBDate($_POST['cnhvcto']));
+					$cnh->setVencCnh($formataData->toDBDate($controla->validaData($_POST['cnhvcto'])));
 				else
 					$mensagem .= 'Você deve informar o a data do vencimento da carteira de habilitação.';
-				
-				if($controla->validaCnhIgual($cnh->getNumeroCnh()))
-						$mensagem = "CNH já existe na base de dados.";
 
 				if($mensagem == '')
 				{
@@ -927,17 +907,17 @@ if(isset($_POST))
 						
 					}
 					$mensagem = 'Condutor cadastrado com sucesso.';
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg={$mensagem}'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_motorista&msg={$mensagem}&condutores=".urlencode(serialize($pessoaCondutor))."&cnh=".urlencode(serialize($cnh))."'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_motorista&msg=$mensagem&condutores=".urlencode(serialize($pessoaCondutor))."&cnh=".urlencode(serialize($cnh))."'</script>";
 				}				
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_motorista&msg={$mensagem}&condutores=".urlencode(serialize($pessoaCondutor))."&cnh=".urlencode(serialize($cnh))."'</script>";
+				$mensagem .= $e->getMessage();
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_motorista&msg=$mensagem&condutores=".urlencode(serialize($pessoaCondutor))."&cnh=".urlencode(serialize($cnh))."'</script>";
 			}
 		}
 		
@@ -956,17 +936,17 @@ if(isset($_POST))
 				{
 					$controla->cadastrarTipoRevisoes($tipoRevisoes);
 					$mensagem = 'Tipo de revisão cadastrado com sucesso.';
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg={$mensagem}'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
 				}	
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_tipo_rev&msg={$mensagem}&tipoRevisoes=".urlencode(serialize($tipoRevisoes))."'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_tipo_rev&msg=$mensagem&tipoRevisoes=".urlencode(serialize($tipoRevisoes))."'</script>";
 				}	
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_tipo_rev&msg={$mensagem}&tipoRevisoes=".urlencode(serialize($tipoRevisoes))."'</script>";
+				$mensagem .= $e->getMessage();
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_tipo_rev&msg=$mensagem&tipoRevisoes=".urlencode(serialize($tipoRevisoes))."'</script>";
 			}
 		}
 		if($_POST['acao'] == "cadastroRevisoes")
@@ -986,14 +966,14 @@ if(isset($_POST))
 				else
 					$mensagem .= 'O tipo da Revisão deve ser selecionado.';
 
-				if($_POST['tult'] != '' && $controla->validaData($_POST['tult']))
-					$revisoes->setDataRevisoes($formataData->toDBDate($_POST['tult']));
+				if($_POST['tult'] != '')
+					$revisoes->setDataRevisoes($formataData->toDBDate($controla->validaData($_POST['tult'])));
 				else
 					$mensagem .= "A data da Revisão deve ser preenchida.";
 				
 				$revisoes->setKmRevisoes($_POST['kult']);
-				if($_POST['tprox'] != '' && $controla->validaData($_POST['tprox']))
-					$revisoes->setProxDataRevisoes($formataData->toDBDate($_POST['tprox']));
+				if($_POST['tprox'] != '')
+					$revisoes->setProxDataRevisoes($formataData->toDBDate($controla->validaData($_POST['tprox'])));
 					
 				$revisoes->setProxKmRevisoes($_POST['kprox']);
 				
@@ -1001,18 +981,18 @@ if(isset($_POST))
 				{
 					$controla->cadastrarRevisoes($revisoes);
 					$mensagem = 'Revisão cadastrado com sucesso.';
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg={$mensagem}'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao&msg={$mensagem}&revisoes=".urlencode(serialize($revisoes))."'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao&msg=$mensagem&revisoes=".urlencode(serialize($revisoes))."'</script>";
 				}
 				
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao&msg={$mensagem}&revisoes=".urlencode(serialize($revisoes))."'</script>";
+				$mensagem .= $e->getMessage();
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao&msg=$mensagem&revisoes=".urlencode(serialize($revisoes))."'</script>";
 			}
 		}
 		
@@ -1027,8 +1007,8 @@ if(isset($_POST))
 				else
 					$mensagem .= 'Um veículo deve ser selecionado.';
 				
-				if($_POST['data'] != '' && $controla->validaData($_POST['data']))
-					$abastecimentos->setDataAbastecimentos($formataData->toDBDate($_POST['data']));
+				if($_POST['data'] != '')
+					$abastecimentos->setDataAbastecimentos($formataData->toDBDate($controla->validaData($_POST['data'])));
 				else
 					$mensagem = "A data do Abastecimento deve ser preenchida.";
 					
@@ -1043,18 +1023,18 @@ if(isset($_POST))
 				{
 					$controla->cadastrarAbastecimentos($abastecimentos);
 					$mensagem = 'Abastecimento cadastrado com sucesso.';
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg={$mensagem}'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_abastece&msg={$mensagem}'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_abastece&msg=$mensagem'</script>";
 				}
 				
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_abastece&msg={$mensagem}'</script>";
+				$mensagem .= $e->getMessage();
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_abastece&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -1086,7 +1066,7 @@ if(isset($_POST))
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
+				$mensagem .= $e->getMessage();
 				header("Location: ../views/painel/index.php?p=busca_cpf&msg=$mensagem");
 			}
 		}
@@ -1101,13 +1081,13 @@ if(isset($_POST))
 				$pessoaAtual->setIdPessoa($_POST['idPessoa']);
 				$pessoaAtual->setIdCliente($_POST['idCliente']);
 				
-				if($_POST['nome'] != '' && $controla->validaNomes($_POST['nome']))
-					$pessoaAtual->setNomePessoa(trim($_POST['nome']));
+				if($_POST['nome'] != '')
+					$pessoaAtual->setNomePessoa(trim($controla->validaNomes($_POST['nome'])));
 				else 
 					$mensagem .= "O Nome da Pessoa não pode estar em branco.";
 				
-				if($_POST['dataNascimento'] != '' && $controla->validaData($_POST['dataNascimento']))
-					$pessoaAtual->setDataNascimentoPessoa($formataData->toDBDate($_POST['dataNascimento']));
+				if($_POST['dataNascimento'] != '')
+					$pessoaAtual->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['dataNascimento'])));
 				else
 					$mensagem .= "A data de nascimento da pessoa deve ser preenchida.";
 				
@@ -1140,10 +1120,7 @@ if(isset($_POST))
 				$endereco->setCepEndereco(trim($_POST['cep']));
 				$endereco->setCidadeEndereco(trim($_POST['cidade']));
 				$endereco->setEstadoEndereco($_POST['estado']);
-				
-				if($controla->testaEmail($_POST['email']))
-					$endereco->setEmailEndereco(trim($_POST['email']));
-				
+				$endereco->setEmailEndereco(trim($controla->testaEmail($_POST['email'])));
 				$endereco->setTelefoneEndereco(trim($_POST['telefone']));
 				$endereco->setCelEndereco(trim($_POST['celular']));
 				$endereco->setFaxEndereco(trim($_POST['fax']));
@@ -1157,13 +1134,13 @@ if(isset($_POST))
 					if($_POST['idPessoaConjugue'] != '')
 						$pessoaConjugue->setIdPessoa($_POST['idPessoaConjugue']);
 						
-					if($_POST['nomeConjugue'] != '' && $controla->validaNomes($_POST['nomeConjugue']))
-						$pessoaConjugue->setNomePessoa(trim($_POST['nomeConjugue']));
+					if($_POST['nomeConjugue'] != '')
+						$pessoaConjugue->setNomePessoa(trim($controla->validaNomes($_POST['nomeConjugue'])));
 					else 
 						$mensagem .= "O Nome do Conjugue não pode estar em branco.";
 					
-					if($_POST['dataNascimentoConjugue'] != '' && $controla->validaData($_POST['dataNascimentoConjugue']))
-						$pessoaConjugue->setDataNascimentoPessoa($formataData->toDBDate($_POST['dataNascimentoConjugue']));
+					if($_POST['dataNascimentoConjugue'] != '')
+						$pessoaConjugue->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['dataNascimentoConjugue'])));
 					else
 						$mensagem .= "A data de nascimento do Conjugue deve ser preenchida.";
 					
@@ -1238,7 +1215,7 @@ if(isset($_POST))
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
+				$mensagem .= $e->getMessage();
 				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cpf&msg=$mensagem&pessoa=".urlencode(serialize($pessoaAtual))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
 			}
 		}
@@ -1275,7 +1252,7 @@ if(isset($_POST))
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
+				$mensagem .= $e->getMessage();
 				header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
 			}
 		}
@@ -1293,18 +1270,18 @@ if(isset($_POST))
 				$cliente = $collVoCliente[0];
 				
 				$empresas->setIdEmpresa($_POST['idEmpresa']);
-				if($_POST['nome_empresa'] != '' && $controla->validaNomes($_POST['nome_empresa']))
-					$empresas->setNomeEmpresa($_POST['nome_empresa']);
+				if($_POST['nome_empresa'] != '')
+					$empresas->setNomeEmpresa($controla->validaNomes($_POST['nome_empresa']));
 				else
 					$mensagem .= "O nome da Empresa não permitido.";
 				
-				if($_POST['nome_fantasia'] != '' && $controla->validaNomes($_POST['nome_fantasia']))
-					$empresas->setNomeFantasiaEmpresa($_POST['nome_fantasia']);
+				if($_POST['nome_fantasia'] != '')
+					$empresas->setNomeFantasiaEmpresa($controla->validaNomes($_POST['nome_fantasia']));
 				else
 					$mensagem .= "O nome Fantasia não permitido.";
 				
-				if($_POST['data_fundacao'] != '' && $controla->validaData($_POST['data_fundacao']))
-					$empresas->setDataFundacaoEmpresa($formataData->toDBDate($_POST['data_fundacao']));
+				if($_POST['data_fundacao'] != '')
+					$empresas->setDataFundacaoEmpresa($formataData->toDBDate($controla->validaData($_POST['data_fundacao'])));
 				$empresas->setIdClientes($cliente->getIdClientes());
 
 				if($_POST['cnpj'] != '')
@@ -1326,10 +1303,7 @@ if(isset($_POST))
 				$endereco->setCepEndereco(trim($_POST['cep']));
 				$endereco->setCidadeEndereco(trim($_POST['cidade']));
 				$endereco->setEstadoEndereco($_POST['estado']);
-				
-				if($controla->testaEmail($_POST['email']))
-					$endereco->setEmailEndereco(trim($_POST['email']));
-				
+				$endereco->setEmailEndereco(trim($controla->testaEmail($_POST['email'])));
 				$endereco->setTelefoneEndereco(trim($_POST['telefone']));
 				$endereco->setCelEndereco(trim($_POST['celular']));
 				$endereco->setFaxEndereco(trim($_POST['fax']));
@@ -1342,13 +1316,13 @@ if(isset($_POST))
 					
 					$pessoaDiretor = new Pessoa();
 					
-					if($_POST['nome'] != '' && $controla->validaNomes($_POST['nome']))
-						$pessoaDiretor->setNomePessoa(trim($_POST['nome']));
+					if($_POST['nome'] != '')
+						$pessoaDiretor->setNomePessoa(trim($controla->validaNomes($_POST['nome'])));
 					else 
 						$mensagem .= "O Nome da Pessoa não permitido.";
 					
-					if($_POST['dataNascimento'] != '' && $controla->validaData($_POST['dataNascimento']))
-						$pessoaDiretor->setDataNascimentoPessoa($formataData->toDBDate($_POST['dataNascimento']));
+					if($_POST['dataNascimento'] != '')
+						$pessoaDiretor->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['dataNascimento'])));
 					else
 						$mensagem .= "A data de nascimento da pessoa deve ser preenchida.";
 						
@@ -1383,10 +1357,7 @@ if(isset($_POST))
 					$enderecoDiretor->setCepEndereco(trim($_POST['cepDiretor']));
 					$enderecoDiretor->setCidadeEndereco(trim($_POST['cidadeDiretor']));
 					$enderecoDiretor->setEstadoEndereco($_POST['estadoDiretor']);
-					
-					if($controla->testaEmail($_POST['email']))
-						$enderecoDiretor->setEmailEndereco(trim($_POST['emailDiretor']));
-					
+					$enderecoDiretor->setEmailEndereco(trim($controla->testaEmail($_POST['email'])));
 					$enderecoDiretor->setTelefoneEndereco(trim($_POST['telefoneDiretor']));
 					$enderecoDiretor->setCelEndereco(trim($_POST['celularDiretor']));
 					$enderecoDiretor->setFaxEndereco(trim($_POST['faxDiretor']));
@@ -1396,13 +1367,13 @@ if(isset($_POST))
 					$pessoaConjugue = new Pessoa();
 					if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "União Estável" )
 					{
-						if($_POST['nomeConjugue'] != '' && $controla->validaNomes($_POST['nomeConjugue']))
-							$pessoaConjugue->setNomePessoa(trim($_POST['nomeConjugue']));
+						if($_POST['nomeConjugue'] != '')
+							$pessoaConjugue->setNomePessoa(trim($controla->validaNomes($_POST['nomeConjugue'])));
 						else 
 							$mensagem .= "O Nome do Conjugue inválido.";
 						
-						if($_POST['dataNascimentoConjugue'] != '' && $controla->validaData($_POST['dataNascimentoConjugue']))
-							$pessoaConjugue->setDataNascimentoPessoa($formataData->toDBDate($_POST['dataNascimentoConjugue']));
+						if($_POST['dataNascimentoConjugue'] != '')
+							$pessoaConjugue->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['dataNascimentoConjugue'])));
 						else
 							$mensagem .= "A data de nascimento do Conjugue deve ser preenchida.";
 						
@@ -1519,7 +1490,7 @@ if(isset($_POST))
 					
 					$controla->enviarEmail($empresas->getNomeEmpresa(),$endereco->getEmailEndereco(),"Cadastro de Pessoa",$descricao);
 					$mensagem = "Atualização de Empresas realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
-					header("Location: ../views/painel/index.php?p=home&msg={$mensagem}");
+					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
 				}
 				else 
 				{
@@ -1528,7 +1499,7 @@ if(isset($_POST))
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
+				$mensagem .= $e->getMessage();
 				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cnpj&msg=$mensagem&empresas=".urlencode(serialize($empresas))."&endereco=".urlencode(serialize($endereco))."&pessoaDiretor=".urlencode(serialize($pessoaDiretor))."&enderecoDiretor=".urlencode(serialize($enderecoDiretor))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
 			}
 		}
@@ -1564,7 +1535,7 @@ if(isset($_POST))
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
+				$mensagem .= $e->getMessage();
 				header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
 			}
 		}
@@ -1596,31 +1567,31 @@ if(isset($_POST))
 				$veiculos->setCidadeNfVeiculos($_POST['cidade_nf']);
 				$veiculos->setProprietarioNfVeiculos($_POST['proprietario_nf']);
 				
-				if($_POST['arrendatario_nf'] != '' && $controla->validaData($_POST['arrendatario_nf']))
+				if($_POST['arrendatario_nf'] != '')
 					$veiculos->setArrendatarioNfVeiculos($_POST['arrendatario_nf']);
 					
 				$veiculos->setPlacaNfVeiculos($_POST['placa_nf']);
 				$veiculos->setNumeroNfVeiculos($_POST['numero_nf']);
 				
-				if($_POST['data_nf'] != '' && $controla->validaData($_POST['data_nf']))
-					$veiculos->setDataNfVeiculos($formataData->toDBDate($_POST['data_nf']));
+				if($_POST['data_nf'] != '')
+					$veiculos->setDataNfVeiculos($formataData->toDBDate($controla->validaData($_POST['data_nf'])));
 					
 				$veiculos->setKmEntregaNfVeiculos($_POST['km_entrega_nf']);
-				$veiculos->setTempoGarantiaNfVeiculos($_POST['tempo_garantia']);
+				$veiculos->setTempoGarantiaNfVeiculos($formataData->toDBDate($controla->validaData($_POST['tempo_garantia'])));
 				$veiculos->setKmGarantiaVeiculos($_POST['km_garantia']);
-				if($_POST['vencimento_ipva'] != '' && $controla->validaData($_POST['vencimento_ipva']))
-					$veiculos->setVencimentoIpvaVeiculos($formataData->toDBDate($_POST['vencimento_ipva']));
+				if($_POST['vencimento_ipva'] != '')
+					$veiculos->setVencimentoIpvaVeiculos($formataData->toDBDate($controla->validaData($_POST['vencimento_ipva'])));
 				else
 					$mensagem .= "O vencimento do IPVA deve ser preenchido.";
 				
-				if($_POST['vencimento_seguro'] != '' && $controla->validaData($_POST['vencimento_seguro']))
-					$veiculos->setVencimentoSeguroVeiculos($formataData->toDBDate($_POST['vencimento_seguro']));
+				if($_POST['vencimento_seguro'] != '')
+					$veiculos->setVencimentoSeguroVeiculos($formataData->toDBDate($controla->validaData($_POST['vencimento_seguro'])));
 				
 				if($mensagem == '')
 				{
 					$controla->updateVeiculos($veiculos);
 					$mensagem = 'Veículo Alterado com sucesso.';
-					header("Location: ../views/painel/index.php?p=home&msg={$mensagem}");
+					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
 				}
 				else
 				{
@@ -1630,7 +1601,7 @@ if(isset($_POST))
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
+				$mensagem .= $e->getMessage();
 				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_veiculo&msg=$mensagem&veiculos=".urlencode(serialize($veiculos))."'</script>";
 			}
 		}
@@ -1691,7 +1662,7 @@ if(isset($_POST))
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
+				$mensagem .= $e->getMessage();
 				header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
 			}
 		}
@@ -1724,8 +1695,8 @@ if(isset($_POST))
 				else
 					$mensagem .= 'Você deve informar a categoria da carteira de habilitação.';
 				
-				if($_POST['cnhvcto'] != '' && $controla->validaData($_POST['cnhvcto']))
-					$cnh->setVencCnh($formataData->toDBDate($_POST['cnhvcto']));
+				if($_POST['cnhvcto'] != '')
+					$cnh->setVencCnh($formataData->toDBDate($controla->validaData($_POST['cnhvcto'])));
 				else
 					$mensagem .= 'Você deve informar o a data do vencimento da carteira de habilitação.';
 
@@ -1743,7 +1714,7 @@ if(isset($_POST))
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
+				$mensagem .= $e->getMessage();
 				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_condutores&msg=$mensagem&condutores=".urlencode(serialize($pessoaCondutor))."&cnh=".urlencode(serialize($cnh))."'</script>";
 			}
 		}
@@ -1755,6 +1726,7 @@ if(isset($_POST))
 			{
 				$veiculos = new Veiculos();
 				$revisoes = new Revisoes();
+				
 				if($_POST['busca'] != '')
 				{
 					$veiculos->setPlacaVeiculos(trim($_POST['busca']));
@@ -1789,7 +1761,7 @@ if(isset($_POST))
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
+				$mensagem .= $e->getMessage();
 				header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
 			}
 		}
@@ -1803,15 +1775,15 @@ if(isset($_POST))
 				$revisoes->setIdVeiculos($_POST['idVeiculos']);
 				$revisoes->setIdTipoRevisoes($_POST['idTipoRevisoes']);
 
-				if($_POST['tult'] != '' && $controla->validaData($_POST['tult']))
-					$revisoes->setDataRevisoes($formataData->toDBDate($_POST['tult']));
+				if($_POST['tult'] != '')
+					$revisoes->setDataRevisoes($formataData->toDBDate($controla->validaData($_POST['tult'])));
 				else	
 					$mensagem .= "A data da Revisão deve ser preenchida.";
 					
 				$revisoes->setKmRevisoes($_POST['kult']);
 				
-				if($_POST['tprox'] != '' && $controla->validaData($_POST['tprox']))
-					$revisoes->setProxDataRevisoes($formataData->toDBDate($_POST['tprox']));
+				if($_POST['tprox'] != '')
+					$revisoes->setProxDataRevisoes($formataData->toDBDate($controla->validaData($_POST['tprox'])));
 					
 				$revisoes->setProxKmRevisoes($_POST['kprox']);
 
@@ -1829,7 +1801,7 @@ if(isset($_POST))
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
+				$mensagem .= $e->getMessage();
 				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_revisoes&msg=$mensagem&revisoes=".urlencode(serialize($revisoes))."'</script>";
 			}
 		}
@@ -1867,7 +1839,7 @@ if(isset($_POST))
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
+				$mensagem .= $e->getMessage();
 				header("Location: ../views/painel/index.php?p=busca_abastece&msg=$mensagem");
 			}
 		}
@@ -1881,8 +1853,8 @@ if(isset($_POST))
 				$abastecimentos->setIdAbastecimentos($_POST['idAbastecimentos']);
 				$abastecimentos->setIdVeiculos($_POST['idVeiculos']);
 				
-				if($_POST['data'] != '' && $controla->validaData($_POST['data']))
-					$abastecimentos->setDataAbastecimentos($formataData->toDBDate($_POST['data']));
+				if($_POST['data'] != '')
+					$abastecimentos->setDataAbastecimentos($formataData->toDBDate($controla->validaData($_POST['data'])));
 					
 				$abastecimentos->setKmAbastecimentos($_POST['km']);
 				$abastecimentos->setPostoAbastecimentos($_POST['posto']);
@@ -1905,7 +1877,7 @@ if(isset($_POST))
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
+				$mensagem .= $e->getMessage();
 				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_abastecimentos&msg=$mensagem&abastecimentos=".urlencode(serialize($abastecimentos))."'</script>";
 			}
 		}
