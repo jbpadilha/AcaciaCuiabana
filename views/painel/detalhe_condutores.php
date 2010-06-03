@@ -13,7 +13,7 @@ $condutores = new Condutores();
 $cnh = new Cnh();
 if(isset($_GET['condutores']))
 {
-	$condutores = unserialize(urldecode($_GET['condutores']));
+	$condutores = unserialize(base64_decode($_GET['condutores']));
 }
 elseif (isset($_GET['idCondutorAlterar']) && $_GET['idCondutorAlterar'] != '')
 {
@@ -29,7 +29,7 @@ elseif (isset($_GET['idCondutorAlterar']) && $_GET['idCondutorAlterar'] != '')
 }
 if(isset($_GET['cnh']))
 {
-	$cnh = unserialize(urldecode($_GET['cnh']));
+	$cnh = unserialize(base64_decode($_GET['cnh']));
 }
 ?>
 

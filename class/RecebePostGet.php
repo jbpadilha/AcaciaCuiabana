@@ -283,7 +283,7 @@ if(isset($_POST))
 			catch (Exception $e)
 			{
 				$mensagem .= $e;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/home.php?p=login&msg=$mensagem&pessoa=".urlencode(serialize($pessoa))."&endereco=".urlencode(serialize($endereco))."&logon=".urlencode(serialize($logon))."'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/home.php?p=login&msg=$mensagem&pessoa=".base64_encode(serialize($pessoa))."&endereco=".base64_encode(serialize($endereco))."&logon=".base64_encode(serialize($logon))."'</script>";
 			}
 			
 		}		
@@ -406,14 +406,14 @@ if(isset($_POST))
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/add_meucpf.php?msg=$mensagem&pessoa=".urlencode(serialize($pessoa))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/add_meucpf.php?msg=$mensagem&pessoa=".base64_encode(serialize($pessoa))."&endereco=".base64_encode(serialize($endereco))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>";
 				}
 					
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/add_meucpf.php?msg=$mensagem&pessoa=".urlencode(serialize($pessoa))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/add_meucpf.php?msg=$mensagem&pessoa=".base64_encode(serialize($pessoa))."&endereco=".base64_encode(serialize($endereco))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>";
 			}
 		}
 		
@@ -554,13 +554,13 @@ if(isset($_POST))
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cpf&msg=$mensagem&pessoa=".urlencode(serialize($pessoaAtual))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>"; 
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cpf&msg=$mensagem&pessoa=".base64_encode(serialize($pessoaAtual))."&endereco=".base64_encode(serialize($endereco))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>"; 
 				}
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cpf&msg=$mensagem&pessoa=".urlencode(serialize($pessoaAtual))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cpf&msg=$mensagem&pessoa=".base64_encode(serialize($pessoaAtual))."&endereco=".base64_encode(serialize($endereco))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>";
 			}
 		}
 		
@@ -769,7 +769,7 @@ if(isset($_POST))
 						$enderecoDiretor = new Endereco();
 					if(is_null($pessoaConjugue))
 						$pessoaConjugue = new Pessoa();
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cnpj&msg=$mensagem&empresas=".urlencode(serialize($empresas))."&endereco=".urlencode(serialize($endereco))."&pessoaDiretor=".urlencode(serialize($pessoaDiretor))."&enderecoDiretor=".urlencode(serialize($enderecoDiretor))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cnpj&msg=$mensagem&empresas=".base64_encode(serialize($empresas))."&endereco=".base64_encode(serialize($endereco))."&pessoaDiretor=".base64_encode(serialize($pessoaDiretor))."&enderecoDiretor=".base64_encode(serialize($enderecoDiretor))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>";
 				}
 			}
 			catch (Exception $e)
@@ -781,7 +781,7 @@ if(isset($_POST))
 				if(is_null($pessoaConjugue))
 					$pessoaConjugue = new Pessoa();
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cnpj&msg=$mensagem&empresas=".urlencode(serialize($empresas))."&endereco=".urlencode(serialize($endereco))."&pessoaDiretor=".urlencode(serialize($pessoaDiretor))."&enderecoDiretor=".urlencode(serialize($enderecoDiretor))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cnpj&msg=$mensagem&empresas=".base64_encode(serialize($empresas))."&endereco=".base64_encode(serialize($endereco))."&pessoaDiretor=".base64_encode(serialize($pessoaDiretor))."&enderecoDiretor=".base64_encode(serialize($enderecoDiretor))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>";
 			}
 		}
 		
@@ -845,14 +845,14 @@ if(isset($_POST))
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_veiculos&msg=$mensagem&veiculos=".urlencode(serialize($veiculos))."'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_veiculos&msg=$mensagem&veiculos=".base64_encode(serialize($veiculos))."'</script>";
 				}
 				
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_veiculos&msg=$mensagem&veiculos=".urlencode(serialize($veiculos))."'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_veiculos&msg=$mensagem&veiculos=".base64_encode(serialize($veiculos))."'</script>";
 			}
 		}
 		
@@ -912,13 +912,13 @@ if(isset($_POST))
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_motorista&msg=$mensagem&condutores=".urlencode(serialize($pessoaCondutor))."&cnh=".urlencode(serialize($cnh))."'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_motorista&msg=$mensagem&condutores=".base64_encode(serialize($pessoaCondutor))."&cnh=".base64_encode(serialize($cnh))."'</script>";
 				}				
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_motorista&msg=$mensagem&condutores=".urlencode(serialize($pessoaCondutor))."&cnh=".urlencode(serialize($cnh))."'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_motorista&msg=$mensagem&condutores=".base64_encode(serialize($pessoaCondutor))."&cnh=".base64_encode(serialize($cnh))."'</script>";
 			}
 		}
 		
@@ -941,13 +941,13 @@ if(isset($_POST))
 				}	
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_tipo_rev&msg=$mensagem&tipoRevisoes=".urlencode(serialize($tipoRevisoes))."'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_tipo_rev&msg=$mensagem&tipoRevisoes=".base64_encode(serialize($tipoRevisoes))."'</script>";
 				}	
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_tipo_rev&msg=$mensagem&tipoRevisoes=".urlencode(serialize($tipoRevisoes))."'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_tipo_rev&msg=$mensagem&tipoRevisoes=".base64_encode(serialize($tipoRevisoes))."'</script>";
 			}
 		}
 		if($_POST['acao'] == "cadastroRevisoes")
@@ -986,14 +986,14 @@ if(isset($_POST))
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao&msg=$mensagem&revisoes=".urlencode(serialize($revisoes))."'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao&msg=$mensagem&revisoes=".base64_encode(serialize($revisoes))."'</script>";
 				}
 				
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao&msg=$mensagem&revisoes=".urlencode(serialize($revisoes))."'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao&msg=$mensagem&revisoes=".base64_encode(serialize($revisoes))."'</script>";
 			}
 		}
 		
@@ -1060,7 +1060,7 @@ if(isset($_POST))
 				{
 					$collVo = $controla->findPessoas($pessoa);
 					if(!is_null($collVo))
-						echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_cpf&pessoasPesquisadas=".urlencode(serialize($collVo))."'</script>";
+						echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_cpf&pessoasPesquisadas=".base64_encode(serialize($collVo))."'</script>";
 					else
 						header("Location: ../views/painel/index.php?p=busca_cpf&pessoasPesquisadas=");
 				}
@@ -1215,13 +1215,13 @@ if(isset($_POST))
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cpf&msg=$mensagem&pessoa=".urlencode(serialize($pessoaAtual))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cpf&msg=$mensagem&pessoa=".base64_encode(serialize($pessoaAtual))."&endereco=".base64_encode(serialize($endereco))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>";
 				}
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cpf&msg=$mensagem&pessoa=".urlencode(serialize($pessoaAtual))."&endereco=".urlencode(serialize($endereco))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cpf&msg=$mensagem&pessoa=".base64_encode(serialize($pessoaAtual))."&endereco=".base64_encode(serialize($endereco))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>";
 			}
 		}
 		
@@ -1250,7 +1250,7 @@ if(isset($_POST))
 					$collVo = null;
 					$collVo = $controla->findEmpresas($empresas);
 					if(!is_null($collVo))
-						echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_cnpj&empresasPesquisadas=".urlencode(serialize($collVo))."'</script>";	
+						echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_cnpj&empresasPesquisadas=".base64_encode(serialize($collVo))."'</script>";	
 					else
 						header("Location: ../views/painel/index.php?p=busca_cnpj&empresasPesquisadas=");
 				}
@@ -1503,13 +1503,13 @@ if(isset($_POST))
 				}
 				else 
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cnpj&msg=$mensagem&empresas=".urlencode(serialize($empresas))."&endereco=".urlencode(serialize($endereco))."&pessoaDiretor=".urlencode(serialize($pessoaDiretor))."&enderecoDiretor=".urlencode(serialize($enderecoDiretor))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cnpj&msg=$mensagem&empresas=".base64_encode(serialize($empresas))."&endereco=".base64_encode(serialize($endereco))."&pessoaDiretor=".base64_encode(serialize($pessoaDiretor))."&enderecoDiretor=".base64_encode(serialize($enderecoDiretor))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>";
 				}
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cnpj&msg=$mensagem&empresas=".urlencode(serialize($empresas))."&endereco=".urlencode(serialize($endereco))."&pessoaDiretor=".urlencode(serialize($pessoaDiretor))."&enderecoDiretor=".urlencode(serialize($enderecoDiretor))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cnpj&msg=$mensagem&empresas=".base64_encode(serialize($empresas))."&endereco=".base64_encode(serialize($endereco))."&pessoaDiretor=".base64_encode(serialize($pessoaDiretor))."&enderecoDiretor=".base64_encode(serialize($enderecoDiretor))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>";
 			}
 		}
 		
@@ -1537,7 +1537,7 @@ if(isset($_POST))
 					$collVo = null;
 					$collVo = $controla->findVeiculos($veiculos);
 					if(!is_null($collVo))
-						echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_veiculos&veiculosPesquisados=".urlencode(serialize($collVo))."'</script>";	 
+						echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_veiculos&veiculosPesquisados=".base64_encode(serialize($collVo))."'</script>";	 
 					else
 						header("Location: ../views/painel/index.php?p=busca_veiculos&veiculosPesquisados=");
 				}
@@ -1608,14 +1608,14 @@ if(isset($_POST))
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_veiculo&msg=$mensagem&veiculos=".urlencode(serialize($veiculos))."'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_veiculo&msg=$mensagem&veiculos=".base64_encode(serialize($veiculos))."'</script>";
 				}
 				
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_veiculo&msg=$mensagem&veiculos=".urlencode(serialize($veiculos))."'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_veiculo&msg=$mensagem&veiculos=".base64_encode(serialize($veiculos))."'</script>";
 			}
 		}
 		

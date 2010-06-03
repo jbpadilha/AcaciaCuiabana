@@ -37,7 +37,7 @@ $logon = $_SESSION["usuarioLogon"];
 		{
 			if($_GET['revisoesPesquisados'] != '')
 			{
-				$collRevisoesPesquisadas = unserialize(urldecode($_GET['revisoesPesquisados']));
+				$collRevisoesPesquisadas = unserialize(base64_decode($_GET['revisoesPesquisados']));
 			}
 			else 
 			{
@@ -69,7 +69,7 @@ $logon = $_SESSION["usuarioLogon"];
 	{
 		$revisoes = (object)$revisaoAtual;
 		$veiculos = new Veiculos();
-		$veiculos = (object)unserialize(urldecode($_GET['veiculos']));
+		$veiculos = (object)unserialize(base64_decode($_GET['veiculos']));
 ?>
 <form class="center" action="index.php" method="get">
 	<input type="hidden" value="<?=$revisoes->getIdRevisoes()?>" name="idRevisoesAlterar" />
