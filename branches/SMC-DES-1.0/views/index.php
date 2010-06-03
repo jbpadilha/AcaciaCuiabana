@@ -6,7 +6,6 @@
 
 	<title>SMC - Serviço de Manutenção e Consultoria</title>
 	<link rel="SHORTCUT ICON" href="imagens/smc.ico" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="Content-Language" content="pt-BR" />
 	<meta name="author" content="JÃºnior Mendonçaa" />
 	<meta name="copyright" content="SMC - Serviço de Manutenção e Consultoria">
