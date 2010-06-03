@@ -25,7 +25,7 @@ li.opcao:hover ul { display:block; }
 #painel li.opcao:hover li.opcao ul { top:0px; left:100%; }
 /* Primary Items */
 #nav-container li { padding:6px 17px; margin-top:10px; color:#FFFFFF; font:bold 14px "Segoe UI", Verdana, Arial; background:url(../imagens/smc_menu/item-primary-bg.gif) no-repeat top center; cursor:pointer; }
-#nav-container li.opcao:hover { color:#6C3600; background:url(../imagens/smc_menu/item-primary-bg.gif); background-repeat:no-repeat; background-position:center; }
+li.webmail, #nav-container li.opcao:hover { color:#6C3600; background:url(../imagens/smc_menu/item-primary-bg.gif); background-repeat:no-repeat; background-position:center; }
 
 /* Secondary Items Container */
 #nav-container ul { padding:10px 4px 10px 4px; margin:0px 0px 0px 0px; background:#FF9900 url(../imagens/smc_menu/item-secondary-container-bg.jpg) repeat-x; border-bottom:1px solid #CA6500; }

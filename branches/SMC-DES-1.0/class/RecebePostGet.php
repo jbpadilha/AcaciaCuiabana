@@ -582,30 +582,29 @@ if(isset($_POST))
 				if($_POST['nome_empresa'] != '' && $controla->validaNomes($_POST['nome_empresa']))
 					$empresas->setNomeEmpresa($_POST['nome_empresa']);
 				else	
-					$mensagem = "O nome da Empresa não deve estar em branco.";
+					$mensagem .= "O nome da Empresa não deve estar em branco.";
 				
 				if($_POST['nome_fantasia'] != '' && $controla->validaNomes($_POST['nome_fantasia']))	
 					$empresas->setNomeFantasiaEmpresa($_POST['nome_fantasia']);
 				else 	
-					$mensagem = "O nome Fantasia deve ser preenchido.";
+					$mensagem .= "O nome Fantasia deve ser preenchido.";
 				
 				if($_POST['data_fundacao'] != '')
 				{
 					if($controla->validaData($_POST['data_fundacao']))
 						$empresas->setDataFundacaoEmpresa($formataData->toDBDate($_POST['data_fundacao']));
 					else
-						$mensagem = "A data de Funcação da Empresa está incorreta.";
+						$mensagem .= "A data de Funcação da Empresa está incorreta.";
 				}
 				$empresas->setIdClientes($cliente->getIdClientes());
 
-				if($_POST['cnpj'] != '')
+				if($_POST['cnpj'] != '' && $controla->validaCNPJ($_POST['cnpj']))
 					$empresas->setCnpjEmpresa($_POST['cnpj']);
 				else
-					$mensagem = "O CNPJ não pode estar em branco";
+					$mensagem .= "O CNPJ inválido";
 				
 				$empresas->setInscricaoEstadualEmpresa($_POST['insc']);
 				$empresas->setRamoEmpresa($_POST['ramo']);
-				$empresas->setOrigemEmpresa($_POST['origem']);
 				
 				//DADOS DO ENDEREÇO DA EMRPESA
 				$endereco = new Endereco();
@@ -627,11 +626,12 @@ if(isset($_POST))
 
 				//DADOS DO DIRETOR DA EMPRESA
 				if($controla->validaCnpjIgual($empresas->getCnpjEmpresa()))
-					$mensagem = "CNPJ já existe na base de dados.";
+					$mensagem .= "CNPJ já existe na base de dados.";
 
 				$pessoaDiretor = null;
-				
-				if($_POST['preenche'] == "Sim")
+				$enderecoDiretor = null;
+				$pessoaConjugue = null;
+				if($_POST['preenche'] != '' && $_POST['preenche'] == "Sim")
 				{
 					$pessoaDiretor = new Pessoa();
 					if($_POST['nome'] != '' && $controla->validaNomes($_POST['nome']))
@@ -681,9 +681,10 @@ if(isset($_POST))
 					
 					
 					//DADOS CONJUGUE DIRETOR
-					$pessoaConjugue = new Pessoa();
+					
 					if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "União Estável" )
 					{
+						$pessoaConjugue = new Pessoa();
 						if($_POST['nomeConjugue'] != '' && $controla->validaNomes($_POST['nomeConjugue']))
 							$pessoaConjugue->setNomePessoa(trim($_POST['nomeConjugue']));
 						else 
@@ -714,10 +715,10 @@ if(isset($_POST))
 							$mensagem .= "O CPF do Conjugue não deve estar em branco.";
 					}
 					if($controla->validaCpfIgual($pessoaDiretor->getCpfPessoa()))
-						$mensagem = "CPF do Diretor já existe na base de dados.";
+						$mensagem .= "CPF do Diretor já existe na base de dados.";
 					
 					if($controla->validaCpfIgual($pessoaConjugue->getCpfPessoa()))
-						$mensagem = "CPF do Conjugue do Diretor já existe na base de dados.";
+						$mensagem .= "CPF do Conjugue do Diretor já existe na base de dados.";
 				}
 				
 				//TESTE E CADASTRO
@@ -773,13 +774,25 @@ if(isset($_POST))
 				}
 				else 
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cnpj&msg={$mensagem}&empresas=".urlencode(serialize($empresas))."&endereco=".urlencode(serialize($endereco))."&pessoaDiretor=".urlencode(serialize($pessoaDiretor))."&enderecoDiretor=".urlencode(serialize($enderecoDiretor))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
+					if(is_null($pessoaDiretor))
+						$pessoaDiretor = new Pessoa();
+					if(is_null($enderecoDiretor))
+						$enderecoDiretor = new Endereco();
+					if(is_null($pessoaConjugue))
+						$pessoaConjugue = new Pessoa();
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cnpj&msg=$mensagem&empresas=".urlencode(serialize($empresas))."&endereco=".urlencode(serialize($endereco))."&pessoaDiretor=".urlencode(serialize($pessoaDiretor))."&enderecoDiretor=".urlencode(serialize($enderecoDiretor))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
 				}
 			}
 			catch (Exception $e)
 			{
+				if(is_null($pessoaDiretor))
+					$pessoaDiretor = new Pessoa();
+				if(is_null($enderecoDiretor))
+					$enderecoDiretor = new Endereco();
+				if(is_null($pessoaConjugue))
+					$pessoaConjugue = new Pessoa();
 				$mensagem .= $e;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cnpj&msg={$mensagem}&empresas=".urlencode(serialize($empresas))."&endereco=".urlencode(serialize($endereco))."&pessoaDiretor=".urlencode(serialize($pessoaDiretor))."&enderecoDiretor=".urlencode(serialize($enderecoDiretor))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cnpj&msg=$mensagem&empresas=".urlencode(serialize($empresas))."&endereco=".urlencode(serialize($endereco))."&pessoaDiretor=".urlencode(serialize($pessoaDiretor))."&enderecoDiretor=".urlencode(serialize($enderecoDiretor))."&pessoaConjugue=".urlencode(serialize($pessoaConjugue))."'</script>";
 			}
 		}
 		
@@ -792,9 +805,20 @@ if(isset($_POST))
 				$veiculos->setIdClientes($_POST['idClientes']);
 				
 				if($_POST['placa'] != '')
-					$veiculos->setPlacaVeiculos($_POST['placa']);
+				{
+					if($controla->validaVeiculoIgual($veiculos->getPlacaVeiculos()))
+					{
+						$mensagem .= "Placa do Veículo já existe na base de dados.";
+					}
+					else
+					{
+						$veiculos->setPlacaVeiculos($_POST['placa']);
+					}
+				}
 				else
+				{
 					$mensagem .= "A placa do veículo deve ser informada";
+				}
 				
 				$veiculos->setMarcaVeiculos($_POST['marca']);
 				$veiculos->setModeloVeiculos($_POST['modelo']);
@@ -808,7 +832,7 @@ if(isset($_POST))
 				$veiculos->setFornecedorNfVeiculos($_POST['fornecedor_nf']);
 				$veiculos->setCidadeNfVeiculos($_POST['cidade_nf']);
 				$veiculos->setProprietarioNfVeiculos($_POST['proprietario_nf']);
-				if($_POST['arrendatario_nf'] != '' && $controla->validaData($_POST['arrendatario_nf']))
+				if($_POST['arrendatario_nf'] != '')
 				{
 					$veiculos->setArrendatarioNfVeiculos($_POST['arrendatario_nf']);
 				}
@@ -828,10 +852,6 @@ if(isset($_POST))
 				
 				if($_POST['vencimento_seguro']!= '' && $controla->validaData($_POST['vencimento_seguro']))
 					$veiculos->setVencimentoSeguroVeiculos($formataData->toDBDate($_POST['vencimento_seguro']));
-				
-				if($controla->validaVeiculoIgual($veiculos->getPlacaVeiculos()))
-						$mensagem = "Placa do Veículo já existe na base de dados.";
-
 
 				if($mensagem == '')
 				{
@@ -1048,12 +1068,11 @@ if(isset($_POST))
 					$pessoa->setNomePessoa(trim($_POST['busca']));
 				else
 					$mensagem = 'Para efetuar a busca, você deve entrar com um parâmetro.';
-				
+
 				$pessoa->setIdCliente($_POST['idCliente']);
 				
 				if($mensagem == '')
 				{
-					$collVo = null;
 					$collVo = $controla->findPessoas($pessoa);
 					if(!is_null($collVo))
 						header("Location: ../views/painel/index.php?p=busca_cpf&pessoasPesquisadas=".urlencode(serialize($collVo)).""); 
