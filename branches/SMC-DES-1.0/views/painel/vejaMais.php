@@ -29,9 +29,9 @@ function enviaEmail(idEndereco,tipo,idTipo)
 <?php
 require ('../../class/Config.php');
 
-$listaAniversarios = unserialize(urldecode($_GET['listaPessoa']));
+$listaAniversarios = unserialize(base64_decode(trim($_GET['listaPessoa'])));
 
-if(!is_null($listaAniversarios))
+if(!is_null($listaAniversarios) && $listaAniversarios->count() > 0)
 {
 	$cont = 0;
 	foreach ($listaAniversarios as $pessoas)
@@ -48,8 +48,8 @@ if(!is_null($listaAniversarios))
 	echo '<br><br>';
 }
 
-$listaCnh = unserialize(urldecode($_GET['listaCnh']));
-if(!is_null($listaCnh))
+$listaCnh = unserialize(base64_decode(trim($_GET['listaCnh'])));
+if(!is_null($listaCnh)  && $listaCnh->count() > 0)
 {
 	$cont = 0;
 	foreach ($listaCnh as $cnhs)
@@ -68,8 +68,8 @@ if(!is_null($listaCnh))
 	echo '<br><br>';
 }
 
-$listaIpva = unserialize(urldecode($_GET['listaIpva']));
-if(!is_null($listaIpva))
+$listaIpva = unserialize(base64_decode(trim($_GET['listaIpva'])));
+if(!is_null($listaIpva) && $listaIpva->count() > 0)
 {
 	$cont = 0;
 	foreach ($listaIpva as $ipvas)
@@ -88,8 +88,8 @@ if(!is_null($listaIpva))
 	echo '<br><br>';
 }
 
-$listaSeguro = unserialize(urldecode($_GET['listaSeguro']));
-if(!is_null($listaSeguro))
+$listaSeguro = unserialize(base64_decode(trim($_GET['listaSeguro'])));
+if(!is_null($listaSeguro) && $listaSeguro->count() > 0)
 {
 	$cont = 0;
 	foreach ($listaSeguro as $seguros)
@@ -108,8 +108,8 @@ if(!is_null($listaSeguro))
 	echo '<br><br>';
 }
 
-$listaGarantia = unserialize(urldecode($_GET['listaGarantia']));
-if(!is_null($listaGarantia))
+$listaGarantia = unserialize(base64_decode(trim($_GET['listaGarantia'])));
+if(!is_null($listaGarantia) && $listaGarantia->count() > 0)
 {
 	$cont = 0;
 	foreach ($listaGarantia as $garantias)
@@ -128,8 +128,8 @@ if(!is_null($listaGarantia))
 	echo '<br><br>';
 }
 
-$listaRevisoes = unserialize(urldecode($_GET['listaRevisoes']));
-if(!is_null($listaRevisoes))
+$listaRevisoes = unserialize(base64_decode(trim($_GET['listaRevisoes'])));
+if(!is_null($listaRevisoes) && $listaRevisoes->count() > 0)
 {
 	$cont = 0;
 	foreach ($listaRevisoes as $revisoes)

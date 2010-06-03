@@ -174,19 +174,8 @@
 				$mostraLinkMais = true;
 			}
 			if($mostraLinkMais)
-				echo '<label class="ativo" title=""><div id="vejaMais"><a href="javascript:void(0);" onClick="abrepagina(\'vejaMais.php?listaPessoa='.urlencode(serialize($collVoPessoa)).'&listaCnh='.urlencode(serialize($collVoCnh)).'&listaIpva='.urlencode(serialize($collVoIpva)).'&listaSeguro='.urlencode(serialize($collVoSeguro)).'&listaGarantia='.urlencode(serialize($collVoGarantias)).'&listaRevisoes='.urlencode(serialize($collVoRevisoes)).'\', 300, 300);">Veja mais ++</a></div></label>';
-			
-/*			ListaAnivClientes($dia, $_mes, $year);
-			ListaAnivConjCli($dia, $_mes, $year);
-			ListaAnivCondutor($dia, $_mes, $year);
-			ListaCNHCliente($dia, $_mes, $year);
-			ListaCNHCondutor($dia, $_mes, $year);
-			ListaCNHResponsavel($dia, $_mes, $year);
-			ListaIPVAVencido($dia, $_mes, $year);
-			ListaSeguroVencido($dia, $_mes, $year);
-			ListaGarantiasVenc($dia, $_mes, $year);
-			ListaRevisoes($dia, $_mes, $year);
-*/		?>
+				echo "<label class=\"ativo\"><div id=\"vejaMais\"><a href=\"javascript:void(0);\" onClick=\"abrepagina('vejaMais.php?listaPessoa=".base64_encode(serialize($collVoPessoa))."&listaCnh=".base64_encode(serialize($collVoCnh))."&listaIpva=".base64_encode(serialize($collVoIpva))."&listaSeguro=".base64_encode(serialize($collVoSeguro))."&listaGarantia=".base64_encode(serialize($collVoGarantias))."&listaRevisoes=".base64_encode(serialize($collVoRevisoes))."', 300, 300);\">Veja mais ++</a></div></label>";
+		?>
 	</td>
 		<?php
 			if (date('w',mktime(0,0,0,$month,$d,$year)) == 0 && date('t',mktime(0,0,0,($month+1),0,$year)) > $d) {

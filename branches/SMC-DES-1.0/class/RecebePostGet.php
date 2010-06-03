@@ -150,7 +150,6 @@ if(isset($_GET))
 }
 if(isset($_POST))
 {
-	ob_start();
 	header("Content-Type: text/html; charset=ISO-8859-1");
 	$msg = "";
 	$controla = new ControlaFuncionalidades();
@@ -826,7 +825,9 @@ if(isset($_POST))
 					$veiculos->setDataNfVeiculos($formataData->toDBDate($controla->validaData($_POST['data_nf'])));
 				}
 				$veiculos->setKmEntregaNfVeiculos($_POST['km_entrega_nf']);
-				$veiculos->setTempoGarantiaNfVeiculos($_POST['tempo_garantia']);
+				if($_POST['tempo_garantia'] != '')
+					$veiculos->setTempoGarantiaNfVeiculos();
+					
 				$veiculos->setKmGarantiaVeiculos($_POST['km_garantia']);
 				if($_POST['vencimento_ipva'] != '')
 					$veiculos->setVencimentoIpvaVeiculos($formataData->toDBDate($controla->validaData($_POST['vencimento_ipva'])));
@@ -1048,14 +1049,18 @@ if(isset($_POST))
 					$pessoa->setNomePessoa(trim($_POST['busca']));
 				else
 					$mensagem = 'Para efetuar a busca, você deve entrar com um parâmetro.';
-
-				$pessoa->setIdCliente($_POST['idCliente']);
+				$logon = new Logon();
+				$logon = (object)$_SESSION['usuarioLogon'];
+				if($logon->getNivelAcessoLogin() != 5)
+				{	
+					$pessoa->setIdCliente($_POST['idCliente']);
+				}
 				
 				if($mensagem == '')
 				{
 					$collVo = $controla->findPessoas($pessoa);
 					if(!is_null($collVo))
-						header("Location: ../views/painel/index.php?p=busca_cpf&pessoasPesquisadas=".urlencode(serialize($collVo)).""); 
+						echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_cpf&pessoasPesquisadas=".urlencode(serialize($collVo))."'</script>";
 					else
 						header("Location: ../views/painel/index.php?p=busca_cpf&pessoasPesquisadas=");
 				}
@@ -1233,15 +1238,19 @@ if(isset($_POST))
 				}
 				else
 					$mensagem = 'Para efetuar a busca, você deve entrar com um parâmetro.';
-				
-				$empresas->setIdClientes($_POST['idCliente']);	
+				$logon = new Logon();
+				$logon = (object)$_SESSION['usuarioLogon'];
+				if($logon->getNivelAcessoLogin() != 5)
+				{
+					$empresas->setIdClientes($_POST['idCliente']);
+				}	
 					
 				if($mensagem == '')
 				{
 					$collVo = null;
 					$collVo = $controla->findEmpresas($empresas);
 					if(!is_null($collVo))
-						header("Location: ../views/painel/index.php?p=busca_cnpj&empresasPesquisadas=".urlencode(serialize($collVo)).""); 
+						echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_cnpj&empresasPesquisadas=".urlencode(serialize($collVo))."'</script>";	
 					else
 						header("Location: ../views/painel/index.php?p=busca_cnpj&empresasPesquisadas=");
 				}
@@ -1516,15 +1525,19 @@ if(isset($_POST))
 				}
 				else
 					$mensagem = 'Para efetuar a busca, você deve entrar com um parâmetro.';
-				
-				$veiculos->setIdClientes($_POST['idCliente']);	
+				$logon = new Logon();
+				$logon = (object)$_SESSION['usuarioLogon'];
+				if($logon->getNivelAcessoLogin() != 5)
+				{
+					$veiculos->setIdClientes($_POST['idCliente']);
+				}	
 					
 				if($mensagem == '')
 				{
 					$collVo = null;
 					$collVo = $controla->findVeiculos($veiculos);
 					if(!is_null($collVo))
-						header("Location: ../views/painel/index.php?p=busca_veiculos&veiculosPesquisados=".urlencode(serialize($collVo)).""); 
+						echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_veiculos&veiculosPesquisados=".urlencode(serialize($collVo))."'</script>";	 
 					else
 						header("Location: ../views/painel/index.php?p=busca_veiculos&veiculosPesquisados=");
 				}
@@ -1620,6 +1633,9 @@ if(isset($_POST))
 				else
 					$mensagem = 'Para efetuar a busca, você deve entrar com um parâmetro.';
 					
+				$logon = new Logon();
+				$logon = (object)$_SESSION['usuarioLogon'];
+	
 				if($mensagem == '')
 				{
 					$collVo = null;
@@ -1641,7 +1657,7 @@ if(isset($_POST))
 									$pessoaAtual->setIdPessoa($condutorPesquisa->getIdPessoa());
 									$collVoPessoaAtual = $controla->findPessoas($pessoaAtual);
 									$pessoaAtual = $collVoPessoaAtual[0];
-									if($pessoaAtual->getIdCliente() == $_POST['idCliente'])
+									if($pessoaAtual->getIdCliente() == $_POST['idCliente'] || $logon->getNivelAcessoLogin() == 5)
 									{
 										$collVo[] = $condutorPesquisa;
 										
@@ -1651,7 +1667,7 @@ if(isset($_POST))
 						}
 					}
 					if(!is_null($collVo))
-						header("Location: ../views/painel/index.php?p=busca_condutores&condutoresPesquisados=".urlencode(serialize($collVo)).""); 
+						header("Location: ../views/painel/index.php?p=busca_condutores&condutoresPesquisados=".base64_encode(serialize($collVo)).""); 
 					else
 						header("Location: ../views/painel/index.php?p=busca_condutores&condutoresPesquisados=");
 				}
@@ -1709,13 +1725,13 @@ if(isset($_POST))
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_condutores&msg=$mensagem&condutores=".urlencode(serialize($pessoaCondutor))."&cnh=".urlencode(serialize($cnh))."'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_condutores&msg=$mensagem&condutores=".base64_encode(serialize($pessoaCondutor))."&cnh=".base64_encode(serialize($cnh))."'</script>";
 				}				
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_condutores&msg=$mensagem&condutores=".urlencode(serialize($pessoaCondutor))."&cnh=".urlencode(serialize($cnh))."'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_condutores&msg=$mensagem&condutores=".base64_encode(serialize($pessoaCondutor))."&cnh=".base64_encode(serialize($cnh))."'</script>";
 			}
 		}
 		
@@ -1733,6 +1749,13 @@ if(isset($_POST))
 				}
 				else
 					$mensagem = 'Para efetuar a busca, você deve entrar com um parâmetro.';
+				
+				$logon = new Logon();
+				$logon = (object)$_SESSION['usuarioLogon'];
+				if($logon->getNivelAcessoLogin() != 5)
+				{
+					$veiculos->setIdClientes($_GET['idCliente']);
+				}	
 					
 				if($mensagem == '')
 				{
@@ -1747,7 +1770,7 @@ if(isset($_POST))
 					if(!is_null($collVo))
 					{
 						
-						header("Location: ../views/painel/index.php?p=busca_revisoes&revisoesPesquisados=".urlencode(serialize($collVo))."&veiculos=".urlencode(serialize($veiculos))."");
+						header("Location: ../views/painel/index.php?p=busca_revisoes&revisoesPesquisados=".base64_encode(serialize($collVo))."&veiculos=".base64_encode(serialize($veiculos))."");
 					} 
 					else 
 					{
@@ -1795,14 +1818,14 @@ if(isset($_POST))
 				}
 				else
 				{					
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_revisoes&msg=$mensagem&revisoes=".urlencode(serialize($revisoes))."'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_revisoes&msg=$mensagem&revisoes=".base64_encode(serialize($revisoes))."'</script>";
 				}
 				
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_revisoes&msg=$mensagem&revisoes=".urlencode(serialize($revisoes))."'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_revisoes&msg=$mensagem&revisoes=".base64_encode(serialize($revisoes))."'</script>";
 			}
 		}
 		if($_POST['acao'] == "buscaAbastecimentos")
@@ -1813,7 +1836,7 @@ if(isset($_POST))
 				$abastecimentos = new Abastecimentos();
 				if($_POST['veiculo'] != '')
 				{
-					$abastecimentos->getIdVeiculos(trim($_POST['veiculo']));
+					$abastecimentos->setIdVeiculos(trim($_POST['veiculo']));
 				}
 				else
 					$mensagem = 'Para efetuar a busca, você deve entrar com um parâmetro.';
@@ -1825,7 +1848,7 @@ if(isset($_POST))
 					if(!is_null($collVo))
 					{
 						
-						header("Location: ../views/painel/index.php?p=busca_abastece&abastecimentosPesquisados=".urlencode(serialize($collVo))."");
+						header("Location: ../views/painel/index.php?p=busca_abastece&abastecimentosPesquisados=".base64_encode(serialize($collVo))."");
 					} 
 					else 
 					{
@@ -1871,17 +1894,16 @@ if(isset($_POST))
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_abastecimentos&msg=$mensagem&abastecimentos=".urlencode(serialize($abastecimentos))."'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_abastecimentos&msg=$mensagem&abastecimentos=".base64_encode(serialize($abastecimentos))."'</script>";
 				}
 				
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_abastecimentos&msg=$mensagem&abastecimentos=".urlencode(serialize($abastecimentos))."'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_abastecimentos&msg=$mensagem&abastecimentos=".base64_encode(serialize($abastecimentos))."'</script>";
 			}
 		}
-		ob_end_flush();
 	}
 	
 }
