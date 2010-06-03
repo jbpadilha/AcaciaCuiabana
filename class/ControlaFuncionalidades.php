@@ -104,14 +104,14 @@ class ControlaFuncionalidades
 	 * Método de validação de CPF
 	 * @param $cpf
 	 */
-	function validaCPF($cpf)
+	public function validaCPF($cpf)
 	{	// Verifiva se o número digitado contém todos os digitos
 	    $cpf = str_pad(ereg_replace('[^0-9]', '', $cpf), 11, '0', STR_PAD_LEFT);
 		
 		// Verifica se nenhuma das sequências abaixo foi digitada, caso seja, retorna falso
 	    if (strlen($cpf) != 11 || $cpf == '00000000000' || $cpf == '11111111111' || $cpf == '22222222222' || $cpf == '33333333333' || $cpf == '44444444444' || $cpf == '55555555555' || $cpf == '66666666666' || $cpf == '77777777777' || $cpf == '88888888888' || $cpf == '99999999999')
 		{
-		return false;
+			throw new Exception("CPF Inválido.");
 	    }
 		else
 		{   // Calcula os números para verificar se o CPF é verdadeiro
@@ -123,12 +123,11 @@ class ControlaFuncionalidades
 	            $d = ((10 * $d) % 11) % 10;
 	
 	            if ($cpf{$c} != $d) {
-	                return false;
+	                throw new Exception("CPF Inválido.");
 	            }
 	        }
-	
-	        return true;
 	    }
+	    return $cpf;
 	}
 	
 	/**
@@ -139,37 +138,8 @@ class ControlaFuncionalidades
 	public function validaCNPJ($str)
 	{
 		if (!preg_match('|^(\d{2,3})\.?(\d{3})\.?(\d{3})\/?(\d{4})\-?(\d{2})$|', $str, $matches))
-		return false;
-
-		array_shift($matches);
-	
-		$str = implode('', $matches);
-		if (strlen($str) > 14)
-			$str = substr($str, 1);
-	
-		$sum1 = 0;
-		$sum2 = 0;
-		$sum3 = 0;
-		$calc1 = 5;
-		$calc2 = 6;
-	
-		for ($i=0; $i <= 12; $i++) {
-			$calc1 = $calc1 < 2 ? 9 : $calc1;
-			$calc2 = $calc2 < 2 ? 9 : $calc2;
-	
-			if ($i <= 11)
-				$sum1 += $str[$i] * $calc1;
-	
-			$sum2 += $str[$i] * $calc2;
-			$sum3 += $str[$i];
-			$calc1--;
-			$calc2--;
-		}
-	
-		$sum1 %= 11;
-		$sum2 %= 11;
-	
-		return ($sum3 && $str[12] == ($sum1 < 2 ? 0 : 11 - $sum1) && $str[13] == ($sum2 < 2 ? 0 : 11 - $sum2)) ? $str : false;
+			throw new Exception("CNPJ Inválido.");
+		return $str;
 	}
 	
 	/**
@@ -188,17 +158,16 @@ class ControlaFuncionalidades
 	 */
 	public function validaData($data)
 	{
-		$retornoValData = true;
 		$dataN = explode("/",$data);
 		if($dataN[2] < 1900)
 		{
-			$retornoValData = false;
+			throw new Exception("Data Inválida.");
 		}
 		if(strlen($dataN[2]) < 4 || strlen($dataN[2]) > 4)
 		{
-			$retornoValData = false;
+			throw new Exception("Data Inválida.");
 		}
-		return $retornoValData;
+		return $data;
 	}
 	
 	/**
@@ -219,11 +188,10 @@ class ControlaFuncionalidades
 	 */
 	public function validaNomes($nomes)
 	{
-		$retorno = true;
 		if(strlen($nomes) < 3 )
-			$retorno = false;
-		
-		return $retorno;
+			throw new Exception("O nome deve conter mais que 3 letras.");
+		else
+			return $nomes;
 	}
 	
 	/**
@@ -232,18 +200,15 @@ class ControlaFuncionalidades
 	 */
 	public function validaCpfIgual($cpf)
 	{
-		$qdao = new QDAO();		
+		$qdao = new QDAO();
 		$pessoa = new Pessoa();
 		$pessoa->setCpfPessoa($cpf);
 		$collVo = $qdao->findPessoa($pessoa);
 		if(!is_null($collVo))
 		{
-			return true;
+			throw new Exception("CPF já cadastrado.");
 		}
-		else
-		{
-			return false;
-		}
+		return $cpf;
 	}
 
 	/**
@@ -258,12 +223,9 @@ class ControlaFuncionalidades
 		$collVo = $qdao->findEmpresas($empresas);
 		if(!is_null($collVo))
 		{
-			return true;
+			throw new Exception("CNPJ já cadastrado.");
 		}
-		else
-		{
-			return false;
-		}
+		return $cnpj;
 	}
 
 	/**
@@ -278,12 +240,9 @@ class ControlaFuncionalidades
 		$collVo = $qdao->findVeiculos($veiculos);
 		if(!is_null($collVo))
 		{
-			return true;
+			throw new Exception("Veículo já cadastrado.");
 		}
-		else
-		{
-			return false;
-		}
+		return $placa;
 	}
 
 	/**
@@ -298,12 +257,9 @@ class ControlaFuncionalidades
 		$collVo = $qdao->findCnh($cnh);
 		if(!is_null($collVo))
 		{
-			return true;
+			throw new Exception("CNH já cadastrada.");
 		}
-		else
-		{
-			return false;
-		}
+		return $ncnh;
 	}
 	
 	/**
