@@ -250,7 +250,7 @@ class QDAO
 		}
 		elseif(!is_null($valueObj->getIdCliente()) && !is_null($valueObj->getNomePessoa()))
 		{
-			$where = "WHERE idCliente = ? AND nomePessoa like '%{$valueObj->getNomePessoa()}%'";
+			$where = "WHERE idCliente = ? AND nomePessoa like ?";
 		}
 		elseif(!is_null($valueObj->getIdCliente()))
 		{
@@ -270,6 +270,10 @@ class QDAO
 			{
 				mysqli_stmt_bind_param($prepare,'i',$idPessoa);
 			}
+			elseif(!is_null($valueObj->getIdCliente()) && !is_null($valueObj->getNomePessoa()))
+			{
+				mysqli_stmt_bind_param($prepare,'is',$idCliente,$nomePessoa);
+			}
 			elseif(!is_null($valueObj->getIdCliente()))
 			{
 				mysqli_stmt_bind_param($prepare,'i',$idCliente);
@@ -282,7 +286,7 @@ class QDAO
 			$idPessoa = $valueObj->getIdPessoa();
 			$idCliente = $valueObj->getIdCliente();
 			$cpfPessoa = $valueObj->getCpfPessoa();
-			
+			$nomePessoa = "%".$valueObj->getNomePessoa()."%";
 			if(!mysqli_stmt_execute($prepare))
 				throw new Exception("Não foi possível conectar no banco de dados.");
 			

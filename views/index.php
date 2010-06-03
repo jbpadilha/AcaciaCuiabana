@@ -1,29 +1,31 @@
-<?php 
-require_once("../class/Config.php");
-//Teste de Envio de Avisos
-$controla->pesquisaVencimentosDisparaEmail();
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+ï»¿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
 
 <head>
-	<title>SMC | Bem vindo(a)...</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" >
+
+	<title>SMC - ServiÃ§o de ManutenÃ§Ã£o e Consultoria</title>
 	<link rel="SHORTCUT ICON" href="imagens/smc.ico" />
-	<link rel="stylesheet" type="text/css" href="css/home.css" />
-	<meta name="keywords" content="smc, serviço, despertador, manutenção, preventiva, preditiva, corretiva" >
-	<meta name="description" content="SMC - Manutenção como deve ser feita." >
-	<meta http-equiv="refresh" content="10;url=/home.php" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Language" content="pt-BR" />
+	<meta name="author" content="JÃƒÂºnior MendonÃ§aa" />
+	<meta name="copyright" content="SMC - ServiÃ§o de ManutenÃ§Ã£o e Consultoria">
+	<meta name="description" content="SMC - ManutenÃ§Ã£o como deve ser feita." />
+	<meta name="keywords" lang="pt-br" content="smc, serviÃ§o despertador, servico despertador, servicodespertador, manutenÃ§Ã£o, preventiva, gestÃƒÂ£o, frotas, ativos" />
+    <link type="text/css" rel="Stylesheet" media="screen" href="_css/intro.css" />
+
 </head>
 
-<body class="intro">
+<body>
 
-<div id="intro" class="link" onclick="window.location='home.php';" >
-	<p> <img src="imagens/smc_logo.jpg" alt="SMC - Serviços, Manutenção e Consultoria" title="Serviços, Manutenção e Consultoria" /> </p>
-	<p class="slogan">A manutenção como deve ser feita.</p>
-	<p class="link">Entrar</a> 
+<div id="intro">
+	<a href="home.php" target="_self">
+		<img src="_img/smc_logo_460x200.png" alt="SMC - ServiÃ§os, ManutenÃ§Ã£o e Consultoria" title="ServiÃ§os, ManutenÃ§Ã£o e Consultoria" />
+		<p>A manutenÃ§Ã£o como deve ser feita.</p>
+		<p>Entrar</p>
+	</a>
 </div>
 
-</body>	
+</body>
 
 </html>

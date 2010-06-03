@@ -1,170 +1,183 @@
 <?php
-require_once ('../../class/Config.php');
-if(!isset($_SESSION['usuarioLogon']))
-{
-	header("Location:../views/home.php?p=login");
-}
-if(isset($_GET['msg']))
-{
-	echo "<script>alert('{$_GET['msg']}');</script>";
-}
-$logon = new Logon();
-$logon = $_SESSION["usuarioLogon"];
+	require_once ('../../class/Config.php');
 
-$pessoa = new Pessoa();
-if(!is_null($logon->getIdPessoa()))
-{
-	$pessoa->setIdPessoa($logon->getIdPessoa());
-	
-	$collVoPessoa = $controla->findPessoas($pessoa);
-	if(!is_null($collVoPessoa))
-	{
-		$pessoa = $collVoPessoa[0];
+	if(!isset($_SESSION['usuarioLogon'])) {
+		header("Location:../views/home.php?p=login");
 	}
-}
+
+	if(isset($_GET['msg'])) {
+		echo "<script>alert('{$_GET['msg']}');</script>";
+	}
+
+	$logon = new Logon();
+	$logon = $_SESSION["usuarioLogon"];
+	$pessoa = new Pessoa();
+
+	if(!is_null($logon->getIdPessoa())) {
+		$pessoa->setIdPessoa($logon->getIdPessoa());
+		$collVoPessoa = $controla->findPessoas($pessoa);
+
+		if(!is_null($collVoPessoa)) {
+			$pessoa = $collVoPessoa[0];
+		}
+	}
 ?>
+<link rel="stylesheet" href="_css/formPadrao.css" type="text/css" media="all" />
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
-<html xmlns="http://www.w3.org/1999/xhtml" >
-
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	<title>SMC - Cadastro de clientes (Pessoa física)</title>
-	<meta name="Description" content="SMC - Novo cadastro de Pessoa Física" >
-	<meta http-equiv="X-UA-Compatible" content="IE=7" > 
-	<link rel="stylesheet" href="../css/meucpf.css" type="text/css" media="all" >
-	<script type="text/javascript" language="javascript" src="../scripts/full.js" > </script>
-	<script type="text/javascript" language="javascript" src="../scripts/jquery.js" > </script>
-	<script type="text/javascript" language="javascript" src="../scripts/jquery.MultiFile.js" > </script>
-	<script type="text/javascript">
-	function habilitaConjugue(selecao)
-	{
-		sty1 = document.getElementById('layerFrm1');
-		if (selecao.value == 'Casado(a)' || selecao.value == 'União Estável')
-		{ 
-			sty1.style.visibility = 'visible';
-			sty1.style.display = 'block';
-		}
-		else
-		{ 
-			sty1.style.visibility = 'hidden';
-			sty1.style.display = 'none';
-		}
-	}
-	</script>
-</head>
-
-<body oncontextmenu="return false;" >
-
-<form method="POST" action="../../class/RecebePostGet.php" onsubmit="return validaForm(this)">	
-	<input type="hidden" id="idPessoa" name="idPessoa" value="<?=$pessoa->getIdPessoa()?>"/>
-	<fieldset> <p class="caption"> Dados pessoais <span class="borda"> </span> </p>
-		<div id="left">
-				<p> <label>Nome: 					</label> <input type="text" name="nome_cliente" value="<?=$pessoa->getNomePessoa()?>" class="nome" />
-			</p><p> <label>Nascimento: 				</label> <input type="text" name="nascimento_cliente" value="<?=$formataData->toViewDate($pessoa->getDataNascimentoPessoa())?>" onkeypress="return mascara(event,this,'##/##/####');return Onlynumbers(event);" onKeyUp="return autoTab(this, 10, event);" maxlength="10" class="data" />
-			</p><p> <label>Sexo: 					</label> 
-			<select name="sexo_cliente" class="x3" >
-				<option selected="selected"><?=SELECIONE?></option>
-				<option value="M"<?=($pessoa->getSexoPessoa()=="M")?"selected":""?>>Masculino</option>
-				<option value="F"<?=($pessoa->getSexoPessoa()=="F")?"selected":""?>>Feminino</option>
-			</select>
-			</p><p> <label>Estado Civil: 			</label> 
-			<select name="ecivil_cliente" onchange="habilitaConjugue(this);" class="x3" >
-				<option selected="selected"><?=SELECIONE?></option>
-				<option value="Casado" <?=($pessoa->getEstadoCivilPessoa()==="Casado")?"selected":""?>>Casado(a)</option>
-				<option value="Solteiro" <?=($pessoa->getEstadoCivilPessoa()==="Solteiro")?"selected":""?>>Solteiro(a)</option>
-				<option value="União Estável" <?=($pessoa->getEstadoCivilPessoa()==="União Estável")?"selected":""?>>União Estável</option>
-			</select>
-			</p><p> <label>Observações: 			</label> <input type="text" name="nota" class="x9" value="<?=$pessoa->getComplementoPessoa()?>" />
-			</p>
+<form method="POST" action="../../class/RecebePostGet.php">
+	<p class="caption">Dados pessoais</p>
+	<fieldset>
+		<div class="left">
+			<label>Nome:
+				<input type="text" name="nome_cliente" value="<?=$pessoa->getNomePessoa()?>" class="long" />
+			</label>
+			<label>Nascimento:
+				<input type="text" name="nascimento_cliente" value="<?=$formataData->toViewDate($pessoa->getDataNascimentoPessoa())?>" onkeypress="return mascara(event,this,'##/##/####');return Onlynumbers(event);" onKeyUp="return autoTab(this, 10, event);" maxlength="10" class="data" />
+			</label>
+			<br />
+			<label>Sexo:
+				<select name="sexo_cliente">
+					<option selected="selected"><?=SELECIONE?></option>
+					<option value="M"<?=($pessoa->getSexoPessoa()=="M")?"selected":""?>>Masculino</option>
+					<option value="F"<?=($pessoa->getSexoPessoa()=="F")?"selected":""?>>Feminino</option>
+				</select>
+			</label>
+			<label>Estado Civil:
+				<select name="ecivil_cliente" onchange="habilitaConjugue(this);" class="x3" >
+					<option selected="selected"><?=SELECIONE?></option>
+					<option value="Casado" <?=($pessoa->getEstadoCivilPessoa()==="Casado")?"selected":""?>>Casado(a)</option>
+					<option value="Solteiro" <?=($pessoa->getEstadoCivilPessoa()==="Solteiro")?"selected":""?>>Solteiro(a)</option>
+					<option value="União Estável" <?=($pessoa->getEstadoCivilPessoa()==="União Estável")?"selected":""?>>União Estável</option>
+				</select>
+ 			</label>
+			<label>Observações:
+				<input type="text" name="nota" value="<?=$pessoa->getComplementoPessoa()?>" />
+ 			</label>
 		</div>
-		<div id="right">
-				<p> <label>RG: 						</label> <input type="text" name="rg_cliente" value="<?=$pessoa->getRgPessoa()?>"		onkeypress="return Onlynumbers(event)" class="x3" />
-			</p><p> <label>Órgao Exped./UF: 		</label> <input type="text" name="orgexprg_cliente" value="<?=$pessoa->getOrgExpPessoa()?>" onkeypress="return Onlychars(event);" onKeyUp="return autoTab(this, 3, event);" maxlength="3" class="x1" />
-			<label class="x0">- 					</label> 
-			<select name="ufexprg_cliente" class="x1" >  
-				<option selected="selected"><?=SELECIONE?></option>
-				<option value="MT" <?=($pessoa->getUfOrgExpPessoa()==="MT")? "selected":""?>>MT</option>
-			</select></p>
-			<p> <label>CPF: 					</label> <input type="text" name="cpf_cliente" value="<?=$pessoa->getCpfPessoa()?>"	onkeypress="return mascara(event,this,'###.###.###-##');return Onlynumbers(event);" onKeyUp="return autoTab(this, 14, event);" maxlength="14" class="x3" />
-			</p>
+		<div class="right">
+			<label>RG:
+				<input type="text" name="rg_cliente" value="<?=$pessoa->getRgPessoa()?>" class="doc" />
+			</label>
+			<label>Órgao Exp.:
+				<input type="text" name="orgexprg_cliente" value="<?=$pessoa->getOrgExpPessoa()?>" maxlength="3" class="small" />
+			</label>
+			<label>UF:
+				<select name="ufexprg_cliente">
+					<option selected></option>
+					<option value="MT" <?=($pessoa->getUfOrgExpPessoa()==="MT")? "selected":""?>>MT</option>
+				</select>
+			</label>
+			<br />
+			<label>CPF:
+				<input type="text" name="cpf_cliente" value="<?=$pessoa->getCpfPessoa()?>" maxlength="14" class="doc" />
+			</label>
 		</div>
 	</fieldset>
 <?php
-$endereco= new Endereco();
-if(!is_null($pessoa->getIdPessoa()))
-{
-	$endereco->setIdPessoa($pessoa->getIdPessoa());
-	$collVoEnd = $controla->findEndereco($endereco);
-	if(!is_null($collVoEnd))
-	{
-		$endereco = $collVoEnd[0]; 
+	$endereco= new Endereco();
+
+	if(!is_null($pessoa->getIdPessoa())) {
+		$endereco->setIdPessoa($pessoa->getIdPessoa());
+		$collVoEnd = $controla->findEndereco($endereco);
+
+		if(!is_null($collVoEnd)) {
+			$endereco = $collVoEnd[0];
+		}
 	}
-}
 ?>
-	<input type="hidden" id="idEndereco" name="idEndereco" value="<?=$endereco->getIdEndereco()?>"/>
-	<fieldset> <p class="caption"> Contato <span class="borda"> </span> </p>
-	<div id="left">
-			<p> <label>Rua, avenida, logradouro: 	</label> <input type="text" name="rua_contato" class="x9" value="<?=$endereco->getRuaEndereco()?>" /></p>
-			<p> <label>Complemento: 				</label> <input type="text" name="complemento_contato" class="x9" value="<?=$endereco->getComplementoEndereco()?>" /></p>
-			<p> <label>Bairro: 						</label> <input type="text" name="bairro_contato" class="x9" value""<?=$endereco->getBairroEndereco()?> /></p>
-			<p> <label>CEP: 						</label> <input type="text" name="cep_contato" value="<?=$endereco->getCepEndereco()?>" onkeypress="return mascara(event,this,'##.###-###');return Onlynumbers(event);" onKeyUp="return autoTab(this, 10, event);" maxlength="10" class="x2" /></p>
-			<p> <label>Cidade: 						</label> <input type="text" name="cidade_contato" class="x5" value="<?=$endereco->getCidadeEndereco()?>"/></label> 
-				<select name="estado_contato" class="x1" >
+	<p class="caption">Contato</p>
+	<fieldset>
+	<div class="left">
+		<label>Rua, avenida, logradouro:
+			<input type="text" name="rua_contato" value="<?=$endereco->getRuaEndereco()?>" class="long" />
+		</label>
+		<label>Número:
+			<input type="text" name="numero" value="<?=$endereco->getRuaEndereco()?>" class="small" />
+		</label>
+		<br />
+		<label>Complemento:
+			<input type="text" name="complemento_contato" value="<?=$endereco->getComplementoEndereco()?>" class="long" />
+		</label>
+		<br />
+		<label>Bairro:
+			<input type="text" name="bairro_contato" value""<?=$endereco->getBairroEndereco()?> class="long" />
+		</label>
+		<label>CEP:
+			<input type="text" name="cep_contato" value="<?=$endereco->getCepEndereco()?>" maxlength="10" class="data" />
+		</label>
+		<br />
+		<label>Cidade:
+			<input type="text" name="cidade_contato" value="<?=$endereco->getCidadeEndereco()?>" class="long" />
+		</label>
+		<label>UF:
+			<select name="estado_contato" class="x1" >
 				<option selected="selected"><?=SELECIONE?></option>
 				<option value="MT" <?=($endereco->getEstadoEndereco()==="MT")? "selected":""?>>MT</option>
-				</select>
-			</p>
-			<p><label>E-mail: 					</label> <input type="text" name="email_contato" value="<?=$endereco->getEmailEndereco()?>" class="email" /></p>
+			</select>
+		</label>
+		<br />
 	</div>
-	<div id="right">
-			<p> <label>DDD - Telefone: 			</label> <input type="text" name="tel_contato" value="<?=$endereco->getTelefoneEndereco()?>"		onkeypress="return mascara(event,this,'(##) ####-####');" 	onKeyUp="return autoTab(this, 9, event);" maxlength="9" class="x2" ></p>
-			<p> <label>DDD - Celular: 			</label> <input type="text" name="cel_contato" 	value="<?=$endereco->getCelEndereco()?>"	onkeypress="return mascara(event,this,'(##) ####-####');" 	onKeyUp="return autoTab(this, 9, event);" maxlength="9" class="x2" ></p>
-			<p> <label>DDD - Fax: 				</label> <input type="text" name="fax_contato" value="<?=$endereco->getFaxEndereco()?>"		onkeypress="return mascara(event,this,'(##) ####-####');" 	onKeyUp="return autoTab(this, 9, event);" maxlength="9" class="x2" ></p>
+	<div class="right">
+		<label>DDD - Telefone:
+			<input type="text" name="tel_contato" value="<?=$endereco->getTelefoneEndereco()?>"	maxlength="9" class="doc" />
+		</label>
+		<br />
+		<label>DDD - Celular:
+			<input type="text" name="cel_contato" value="<?=$endereco->getCelEndereco()?>" maxlength="9" class="doc" />
+		</label>
+		<br />
+		<label>DDD - Fax:
+			<input type="text" name="fax_contato" value="<?=$endereco->getFaxEndereco()?>" maxlength="9" class="doc" />
+		</label>
+		<br />
+		<label>E-mail:
+			<input type="text" name="email_contato" value="<?=$endereco->getEmailEndereco()?>" class="long" />
+		</label>
 	</div>
 	</fieldset>
-<?php 
-$pessoaConjugue = new Pessoa();
-if($pessoa->getIdConjuguePessoa() != null)
-{
-	$pessoaConjugue->setIdPessoa($pessoa->getIdConjuguePessoa());
-	$collVoConjugue = $controla->findPessoas($pessoaConjugue);
-	if(!is_null($collVoConjugue))
-	{
-		$pessoaConjugue = $collVoConjugue[0];
+<?php
+	$pessoaConjugue = new Pessoa();
+
+	if($pessoa->getIdConjuguePessoa() != null) {
+		$pessoaConjugue->setIdPessoa($pessoa->getIdConjuguePessoa());
+		$collVoConjugue = $controla->findPessoas($pessoaConjugue);
+
+		if(!is_null($collVoConjugue)) {
+			$pessoaConjugue = $collVoConjugue[0];
+		}
 	}
-}
 ?>
-	<input type="hidden" id="idConjugue" name="idConjugue" value="<?=$pessoaConjugue->getIdPessoa()?>"/>
-	<fieldset id="layerFrm1">  
-		<p class="caption"> Dados do(a) cônjuge <span class="borda"> </span> </p>
-		<div id="left">
-				<p> <label>Nome: 					</label> <input type="text" name="nome_conjuge" class="nome" value="<?=$pessoaConjugue->getNomePessoa()?>" /></p>
+	<p class="caption">Dados do(a) cônjuge</p>
+	<fieldset>
+		<div class="left">
+			<label>Nome:
+				<input type="text" name="nome_conjuge" value="<?=$pessoaConjugue->getNomePessoa()?>" class="long" />
+			</label>
 		</div>
-		<div id="right">
-				<p> <label>Nascimento: 				</label> <input type="text" name="nasc_conjuge" onkeypress="return mascara(event,this,'##/##/####');return Onlynumbers(event);" onKeyUp="return autoTab(this, 10, event);" maxlength="10" class="x2" value="<?=$formataData->toViewDate($pessoaConjugue->getDataNascimentoPessoa())?>" /></p>
-				<p> <label>Sexo: 					</label> 
+		<div class="right">
+			<label>Nascimento:
+				<input type="text" name="nasc_conjuge" value="<?=$formataData->toViewDate($pessoaConjugue->getDataNascimentoPessoa())?>" maxlength="10" class="data" />
+			</label>
+			<label>Sexo:
 				<select name="sexo_conjuge" class="x3" >
-					<option selected="selected"><?=SELECIONE?></option>
+					<option selected></option>
 					<option value="M"<?=($pessoaConjugue->getSexoPessoa()=="M")?"selected":""?>>Masculino</option>
 					<option value="F"<?=($pessoaConjugue->getSexoPessoa()=="F")?"selected":""?>>Feminino</option>
 				</select>
-			</p>
+			</label>
 		</div>
 	</fieldset>
-	<?php 
-	if($pessoaConjugue->getIdPessoa() != null)
-	{
+<?php
+	if($pessoaConjugue->getIdPessoa() != null) {
 		echo '<script>document.layerFrm1.style = "display:block"</script>';
 	}
-	?>
-	<span class="borda"> </span>
-	<p class="tright">
+?>
+	<p class="botoes">
+		<input type="hidden" id="idPessoa" name="idPessoa" value="<?=$pessoa->getIdPessoa()?>"/>
+		<input type="hidden" id="idEndereco" name="idEndereco" value="<?=$endereco->getIdEndereco()?>"/>
+		<input type="hidden" id="idConjugue" name="idConjugue" value="<?=$pessoaConjugue->getIdPessoa()?>"/>
+		<input type="hidden" id="acao" name="acao" value="cadastraMeuCpf" >
 		<input type="submit" name="completo" value="Confirmar" >
 		<input type="reset" value="Limpar campos" >
-		<input type="hidden" id="acao" name="acao" value="cadastraMeuCpf" >
 	</p>
 </form>
-
-</body>
-</html>

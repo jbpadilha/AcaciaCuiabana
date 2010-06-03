@@ -1,27 +1,55 @@
-<div id="txt_inicio">
-
-<h1>Por qu�?</h1>
-
-<img class="ilustra" src="imagens/business.jpg" alt="" />
-
-<p>Geralmente, os propriet�rios de ve�culos, por costume cultural, esperam o carro apresentar defeitos para s� ent�o lev�-lo � oficina.</p>
-<p>A� vem os transtornos: encostar o ve�culo para a manuten��o, fazer or�amentos, etc...</p>
-
-<div id="questao">
-	<p class="pergunta"> <img src="imagens/ico_pergunta.png" title="Surge a pergunta:" alt="Pergunta:" /> "- Mas existe outra maneira de proceder!?" </p>
-	<p class="resposta"> <img src="imagens/contato.png" title="A SMC responde:" alt="Resposta:" /> "- Sim, existe!" </p>
+﻿<div id="conteudo_top">
+	<h1>Indicadores de qualidade</h1>
 </div>
 
-<div class="clear"> </div>
+<div id="conteudo">
+	<p>
+		<b>Importantes ferramentas para medir os resultados da sua oficina podem ser aplicadas no dia-a-dia e controlar metas traçadas para que o negócio tenha crescimento e sucesso na sua gestão.</b>
+	</p>
 
-<p>A <b>MANUTEN��O PREVENTIVA</b> � a forma mais segura e econ�mica de lidar com um autom�vel.</p>
-<p>O cliente, com certeza, ser� tratado com a seriedade e a real preocupa��o do reparador, que se comprometer� com seu bem-estar, principalmente no que diz respeito � redu��o de custos.</p>
-<p>Afinal, esse � o grande objetivo da t�cnica em quest�o.</p>
-<p>A MANUTEN��O PREVENTIVA tem, por base, uma meta bastante espec�fica: Diagnosticar o problema antes que ele aconte�a.</p>
-<p>Por isso, contar com profissionais de gabarito, que tenham experi�ncia e conhecimento de manuais de propriedade dos ve�culos e manuais t�cnicos � imprescind�vel.</p>
-<p>O reparador atento e experiente pode determinar a hora certa da troca de pe�as, buscando a seguran�a e a economia para o dono do carro.</p>
-<p>O cliente ganha com a MANUTEN��O PREVENTIVA? O qu� ele ganha?</p>
-<p>Com toda a certeza. Seguran�a, economia, tempo, oportunidade de escolha, valoriza��o de seu patrim�nio e qualidade de vida.</p>
-<p>A MANUTEN��O PREVENTIVA colabora, tamb�m, para a redu��o do �ndice de acidentes no tr�nsito por causa de falhas mec�nicas, e tamb�m coopera para a melhoria do ar e da qualidade de vida das pessoas que vivem em grandes centros urbanos.</p>
+	<p>
+		O que toda empresa precisa inicialmente para crescer com padrão de qualidade é ter um planejamento estratégico. Isso significa traçar as metas e os objetivos que almeja e estruturar os meios e plano de ação para atingí-los. Todo mundo sabe disso, mas poucos empresários colocam efetivamente a rotina de planejar em prática. Determinar os seus objetivos, tendo a qualidade como guia: essa é provavelmente uma das fórmulas reais que podem levar a sua oficina para o sucesso e a satisfação do seu cliente.
+	</p>
+	<p>
+		Incorporar a qualidade na gestão da sua oficina e planejar as suas ações em busca de um objetivo determinado depende diretamente de alguns indicadores, controles essenciais que mostram o caminho para o crescimento, apontam onde estão as falhas e quais são os resultados reais do seu trabalho, se está tendo lucro ou prejuízo, por exemplo.
+	</p>
+	<p>
+		<img src="http://www.omecanico.com.br/images/upload/4825.jpg" alt="" class="ilustra" />
+		Para ajudar nessa tarefa, contamos com o apoio do IQA (Instituto da Qualidade Automotiva) com algumas dicas de como começar a utilizar os indicadores da qualidade em favor do seu negócio e os primeiros passos para trabalhar com planejamento estratégico. "Os indicadores servem para balizar como está o negócio, em termos de valores, padrões, satisfação do cliente, retrabalhos, ou seja, mostram o que o empresário está fazendo e se está no caminho certo", comenta José Palacio, auditor do Instituto. </p>
+	<p>
+		Os indicadores da qualidade são referências que mostram se a empresa está conforme se planejou anteriormente, para medir adiante se os resultados são favoráveis. De acordo com Palacio, o primeiro passo para entender e usar os indicadores em seu benefício é fazer um planejamento estratégico com os objetivos que quer atingir num determinado período. "E, depois, registrar todas as suas ações para acompanhamento dos resultados", aconselha.
+	</p>
+	<p>
+		Cada empresa de reparação pode criar os seus próprios indicadores, não existe uma regra, tudo vai depender de qual é o seu objetivo. Criar indicador sobre melhoria no atendimento, no visual da oficina, nos processos e na entrega do veículo. Tudo isso vai ajudar a melhorar as atividades do negócio e solucionar os problemas.
+	</p>
+	<p>
+		Utilizar estatísticas e gráficos, a partir dos seus registros, é o modelo mais recomendado para obter os benefícios dos indicadores. "Como ferramenta de trabalho podemos utilizar um fluxograma, um check list, procedimentos, planilhas, e vai por aí a fora para termos material suficiente em como demonstrar se os indicadores mostram realmente a evolução do planejamento estratégico", diz.
+	</p>
+	<p>
+		Muitas vezes, a oficina conta com uma boa estrutura, bons funcionários, ferramental adequado e, mesmo assim, não consegue terminar os serviços no tempo programado. Criando indicadores em todas as etapas do processo o mesmo vai mostrar o desenvolvimento do processo podendo efetuar as correções necessárias.
+	</p>
+	<p>
+		<b>Fluxograma dos processos:</b>
+	</p>
+	<p>
+		<IMG src="http://www.omecanico.com.br/images/upload/4805.jpg" alt="" class="ilustra" />
+		Descrever e registrar todas as etapas da manutenção, desde o momento em que o cliente chega à oficina. A começar pelo estacionamento, atendimento, diagnóstico, pessoal treinado, peças e ferramentas disponíveis, reparo, entrega do veículo e pesquisa de satisfação por exemplo, são algumas maneiras que podem ajudar o gestor a construir um gráfico ou qualquer tipo de tabela para registrar todas as ações e depois comparar as metas com os resultados obtidos.
+	<br />
+	<br />
+		"No começo é difícil traçar uma meta, pois não existe um histórico, mas conforme os dados forem sendo registrados, o caminho vai se desenhando. Além disso, o próprio pessoal da oficina é envolvido no processo e começa a se preocupar mais em atender as metas, crescer e até superar esses objetivos", acredita Palacio.
+	<br />
+	<br />
+		Os indicadores servem ainda como uma auto análise do seu trabalho diário: porque eu corro o dia todo e nunca termino o serviço? Será que estou fazendo a mesma coisa duas vezes? Será que estou tendo retrabalho? Mais uma vez, os indicadores vão mostrar-lhe o que está acontecendo. Em seguida, listar as dificuldades e discutir com seus funcionários pontos importantes que visem a melhoria do negócio em termos geral.
+	</p>
+	<p>
+		<img src="http://www.omecanico.com.br/images/upload/4816.jpg" alt="" class="ilustra" />
+		Na verdade, os indicadores não passam de sistemáticas do dia-a-dia planejadas, e tudo depende do que o empresário quer da sua empresa e qual a imagem que quer da sua empresa no mercado. Os indicadores da sua oficina devem ser criados para levar sempre a empresa para um trabalho com qualidade, visando sempre a satisfação do cliente, bem estar dos funcionários e o lucro do negócio.
+	</p>
+	<p class="fonte">Carolina Vilanova</p> 
+</div>
 
+<div id="conteudo_bottom">
+	<p>
+		Fonte: site "O Mecânico" - <a href="http://www.omecanico.com.br/modules/revista.php?recid=408&edid=37&topicid=2" target="_blank" />http://www.omecanico.com.br/modules/revista.php?recid=408&edid=37&topicid=2</a>
+	</p>
 </div>

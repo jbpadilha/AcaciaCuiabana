@@ -1,52 +1,40 @@
-<?php
-require_once ('../../class/Config.php');
-if(!isset($_SESSION['usuarioLogon']))
-{
-	header("Location:../views/home.php?p=login");
-}
+Ôªø<?php
+	require_once ('../../class/Config.php');
+	if(!isset($_SESSION['usuarioLogon']))
+	{
+		header("Location:../views/home.php?p=login");
+	}
 
 
-$logon = new Logon();
-$logon = $_SESSION["usuarioLogon"];
+	$logon = new Logon();
+	$logon = $_SESSION["usuarioLogon"];
 
-$empresa = new Empresas();
+	$empresa = new Empresas();
 
-if(isset($_GET['empresas']))
-{
-	$pessoa = (object)unserialize(urldecode($_GET['empresas']));
-}
+	if(isset($_GET['empresas']))
+	{
+		$empresa = (object)unserialize(urldecode($_GET['empresas']));
+	}
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<link rel="stylesheet" href="../css/meucpf.css" type="text/css" media="all" >
-<script type="text/javascript" language="javascript" src="../scripts/full.js" > </script>
-<script type="text/javascript" language="javascript" src="../cidades.js" > </script>
-</head>
-<body>
-<form method="post" action="../../class/RecebePostGet.php" onsubmit="return validaForm(this)">
-<input type="hidden" id="acao" name="acao" value="cadastroEmpresa">
-<input type="hidden" id="idCliente" name="idCliente" value="<?=$logon->getIdClientes()?>">
-<fieldset> 
-<p class="caption" onclick="blocking('geral');" > InformaÁıes gerais <span class="borda"> </span> </p>
+<form method="post" action="../../class/RecebePostGet.php">
+
+<fieldset>
+	<p class="caption">Informa√ß√µes gerais</p>
 
 <div id="geral">
-	<div id="left">
-		<p> <label>Raz„o social: </label> <input type="text" name="nome_empresa" class="x9" value="<?=$empresa->getNomeEmpresa()?>" /> </p>
-		<p> <label>Nome Fantasia: </label> <input type="text" name="nome_fantasia" class="x9" value="<?=$empresa->getNomeFantasiaEmpresa()?>" /> </p>
-		<p> <label>Data de FundaÁ„o: </label> <input type="text" name="data_fundacao" value="<?=$formataData->toViewDate($empresa->getDataFundacaoEmpresa())?>" onkeypress="return mascara(event,this,'##/##/####');" onKeyUp="return autoTab(this, 10, event);" maxlength="10" class="x2" /> </p>
+	<div class="left">
+		<label>Raz√£o social:<input type="text" name="nome_empresa" value="<?=$empresa->getNomeEmpresa()?>" class="long" /></label>
+		<br />
+		<label>Nome Fantasia:<input type="text" name="nome_fantasia" value="<?=$empresa->getNomeFantasiaEmpresa()?>" class="long" /></label>
+		<br />
+		<label>Data da funda√ß√£o:<input type="text" name="data_fundacao" value="<?=$formataData->toViewDate($empresa->getDataFundacaoEmpresa())?>" maxlength="10" class="data" /></label>
 	</div>
-	<div id="right">
-		<p> <label>CNPJ: </label> <input type="text" name="cnpj" value="<?=$empresa->getCnpjEmpresa()?>" onkeypress="return mascara(event,this,'##.###.###/####-##');" onKeyUp="return autoTab(this, 18, event);" maxlength="18" /> </p>
-		<p> <label>InscriÁ„o Estadual: </label> <input type="text" name="insc" value="<?=$empresa->getInscricaoEstadualEmpresa()?>" /> </p>
-		<p> <label>Ramo de atividade: </label>  <input type="text"  name="ramo" class="x3" value="<?=$empresa->getRamoEmpresa()?>" ></p>
-		<p> <label>Origem: </label> 
-		<select name="origem" class="x3" id="origem">
-			<option><?=SELECIONE?></option>
-			<option value="Nacional" <?=($empresa->getOrigemEmpresa()=="Nacional" ? "selected" : "")?>>Nacional</option>
-			<option value="Internacional" <?=($empresa->getOrigemEmpresa()=="Internacional" ? "selected" : "")?>>Internacional</option>
-		</select> 
-		</p>
+	<div class="right">
+		<label>CNPJ:<input type="text" name="cnpj" value="<?=$empresa->getCnpjEmpresa()?>" maxlength="18" class="doc" /></label>
+		<br />
+		<label>Inscri√ß√£o Estadual:<input type="text" name="insc" value="<?=$empresa->getInscricaoEstadualEmpresa()?>" class="doc" /></label>
+		<br />
+		<label>Ramo de atividade:<input type="text" name="ramo" value="<?=$empresa->getRamoEmpresa()?>" class="long" /></label>
 	</div>
 </div>
 </fieldset>
@@ -55,153 +43,167 @@ if(isset($_GET['empresas']))
 $endereco= new Endereco();
 if(isset($_GET['endereco']))
 {
-	$endereco = new Endereco(unserialize(urldecode($_GET['endereco'])));
+	$endereco = (object)unserialize(urldecode($_GET['endereco']));
 }
 ?>
-<fieldset> <p class="caption" onclick="blocking('contato');" > Contato <span class="borda"> </span> </p>
-<div id="contato">
-	<div id="left">
-		<p><label>Rua, avenida, logradouro:</label><input type="text" name="rua"  value="<?=$endereco->getRuaEndereco()?>" class="x9" /></p>
-		<p><label>Complemento:</label><input type="text" name="complemento"  value="<?=$endereco->getComplementoEndereco()?>" class="x9" /></p> 
-		<p><label>Bairro:</label><input type="text" name="bairro"  value="<?=$endereco->getBairroEndereco()?>" class="x5" /></p>
-		<p><label class="x15"> CEP:</label><input type="text" name="cep"  value="<?=$endereco->getCepEndereco()?>" onkeypress="return mascara(event,this,'##.###-###');return Onlynumbers(event);" onKeyUp="return autoTab(this, 10, event);" maxlength="10" class="x2" /></p>
-		<p><label>Cidade:</label><input type="text" name="cidade"  value="<?=$endereco->getCidadeEndereco()?>" class="x5" /></p>
-		<p><label class="x2">Estado:</label></p>
-		<select name="estado" class="x15" > 
-			<option selected="selected"><?=SELECIONE?></option>
-			<option value="MT" <?=($endereco->getEstadoEndereco()==="MT")? "selected":""?>>MT</option>
-		</select>
-		<p><label>E-mail:</label><input type="text" name="email"  value="<?=$endereco->getEmailEndereco()?>" class="email" /></p>
+<fieldset>
+	<p class="caption"> Contato</p>
+	<div class="left">
+		<label>Rua, avenida, logradouro:<input type="text" name="rua" value="<?=$endereco->getRuaEndereco()?>" class="long" /></label>
+		<label>N√∫mero:<input type="text" name="numero" value="<?=$endereco->getRuaEndereco()?>" class="small" /></label>
+		<br />
+		<label>Complemento:<input type="text" name="complemento" value="<?=$endereco->getComplementoEndereco()?>" class="long" /></label>
+		<br />
+		<label>Bairro:<input type="text" name="bairro" value="<?=$endereco->getBairroEndereco()?>" class="long" /></label>
+		<label>CEP:<input type="text" name="cep" value="<?=$endereco->getCepEndereco()?>" maxlength="10" class="data" /></label>
+		<br />
+		<label>Cidade:<input type="text" name="cidade" value="<?=$endereco->getCidadeEndereco()?>" class="long" /></label>
+		<label>Estado:
+			<select name="estado">
+				<option selected></option>
+				<option value="MT" <?=($endereco->getEstadoEndereco()==="MT")? "selected":""?>>MT</option>
+			</select>
+		</label>
 	</div>
-	<div id="right">
-			<p><label>DDD - Telefone:</label><input type="text" name="telefone" value="<?=$endereco->getTelefoneEndereco()?>" onkeypress="return mascara(event,this,'## ####-####');" onKeyUp="return autoTab(this, 12, event);" maxlength="12" class="x2" ></p>
-			<p><label>DDD - Celular:</label><input type="text" name="celular" value="<?=$endereco->getCelEndereco()?>" onkeypress="return mascara(event,this,'## ####-####');" 	onKeyUp="return autoTab(this, 12, event);" maxlength="12" class="x2" ></p>
-			<p><label>DDD - Fax:</label><input type="text" name="fax" value="<?=$endereco->getFaxEndereco()?>" onkeypress="return mascara(event,this,'## ####-####');" 	onKeyUp="return autoTab(this, 12, event);" maxlength="12" class="x2" ></p>
+	<div class="right">
+		<label>DDD - Telefone:<input type="text" name="telefone" value="<?=$endereco->getTelefoneEndereco()?>" maxlength="12" class="doc" ></label>
+		<br />
+		<label>DDD - Celular:<input type="text" name="celular" value="<?=$endereco->getCelEndereco()?>" maxlength="12" class="doc" ></label>
+		<br />
+		<label>DDD - Fax:<input type="text" name="fax" value="<?=$endereco->getFaxEndereco()?>" maxlength="12" class="doc" ></label>
+		<br />
+		<label>E-mail:<input type="text" name="email" value="<?=$endereco->getEmailEndereco()?>" class="long" /></label>
 	</div>
-</div>
 </fieldset>
-<?php 
-$pessoa = new Pessoa();
-if(isset($_GET['pessoaDiretor']))
-{
-	$pessoa = new Pessoa(unserialize(urldecode($_GET['pessoaDiretor'])));
-}
+<?php
+	$pessoa = new Pessoa();
+
+	if(isset($_GET['pessoaDiretor'])) {
+		$pessoa = (object)unserialize(urldecode($_GET['pessoaDiretor']));
+	}
 ?>
-<fieldset> <p class="caption" onclick="blocking('diretor');" > Dados do diretor <span class="borda"> </span> </p>
-	<p>
-		<label class="x0" >Deseja preencher os dados do diretor? </label>
-		<select name="preenche" onchange="sty6 = document.getElementById('layerFrm6'); if (this.value == 'Sim') { sty6.style.display = 'block'; IrPara('nome_diretor'); } else { sty6.style.display = 'none'; sty5.style.display = 'none'; };" >
-			<option> </option>
-			<option value="Sim">Sim</option>
-			<option value="N„o">N„o</option>
-		</select>
-	</p>
-	<div id="layerFrm6">
-		<div id="left">
-		<p><label>Nome:</label><input type="text" id="nome" name="nome" value="<?=$pessoa->getNomePessoa()?>" class="nome" onfocus="foco('nome', 'nome foco_on');" onblur="foco('nome', 'nome foco_off');" /></p>
-		<p><label>Nascimento:</label><input type="text" name="dataNascimento" id="dataNascimento" value="<?=$formataData->toViewDate($pessoa->getDataNascimentoPessoa())?>" onfocus="foco('dataNascimento', 'data foco_on');" onblur="foco('dataNascimento', 'data foco_off');" onkeypress="return mascara(event,this,'##/##/####');return Onlynumbers(event);" onKeyUp="return autoTab(this, 10, event);" maxlength="10" class="data" /></p>
-		<p><label>Sexo:</label>
-		<select name="sexo" class="x3" >
-			<option selected="selected"><?=SELECIONE?></option>
-			<option value="M"<?=($pessoa->getSexoPessoa()=="M")?"selected":""?>>Masculino</option>
-			<option value="F"<?=($pessoa->getSexoPessoa()=="F")?"selected":""?>>Feminino</option>
-		</select>
-		</p>
-		<p><label>Estado Civil:</label><select name="estadoCivil" onchange="sty1 = document.getElementById('layerFrm1');if (this.value == 'Casado(a)' || this.value == 'Uni„o Est·vel'){ sty1.style.visibility = 'visible';sty1.style.display = 'block'}else{ sty1.style.visibility = 'hidden';sty1.style.display = 'none'};" class="x3" >
-			<option selected="selected"><?=SELECIONE?></option>
-			<option value="Casado" <?=($pessoa->getEstadoCivilPessoa()==="Casado")?"selected":""?>>Casado(a)</option>
-			<option value="Solteiro" <?=($pessoa->getEstadoCivilPessoa()==="Solteiro")?"selected":""?>>Solteiro(a)</option>
-			<option value="Uni„o Est·vel" <?=($pessoa->getEstadoCivilPessoa()==="Uni„o Est·vel")?"selected":""?>>Uni„o Est·vel</option>
-		</select></p>
-		<p><label></label></p>
+<fieldset>
+	<p class="caption">Dados do diretor</p>
+	<label>Deseja preencher os dados do diretor?
+	<select name="preenche">
+		<option value="Sim" selected="selected">Sim</option>
+		<option value="N√£o">N√£o</option>
+	</select>
+	</label>
+	<br />
+	<div class="left">
+		<label>Nome:<input type="text" name="nome" value="<?=$pessoa->getNomePessoa()?>" class="long" /></label>
+		<label>Nascimento:<input type="text" name="dataNascimento" value="<?=$formataData->toViewDate($pessoa->getDataNascimentoPessoa())?>" maxlength="10" class="data" /></label>
+		<br />
+		<label>Sexo:
+			<select name="sexo">
+				<option selected></option>
+				<option value="M"<?=($pessoa->getSexoPessoa()=="M")?"selected":""?>>Masculino</option>
+				<option value="F"<?=($pessoa->getSexoPessoa()=="F")?"selected":""?>>Feminino</option>
+			</select>
+		</label>
+		<label>Estado Civil:
+			<select name="estadoCivil">
+				<option selected></option>
+				<option value="Casado" <?=($pessoa->getEstadoCivilPessoa()==="Casado")?"selected":""?>>Casado(a)</option>
+				<option value="Solteiro" <?=($pessoa->getEstadoCivilPessoa()==="Solteiro")?"selected":""?>>Solteiro(a)</option>
+				<option value="Uni√£o Est√°vel" <?=($pessoa->getEstadoCivilPessoa()==="Uni√£o Est√°vel")?"selected":""?>>Uni√£o Est√°vel</option>
+			</select>
+		</label>
 	</div>
-	<div id="right">
-		<p><label>RG:</label><input type="text" name="rg" value="<?=$pessoa->getRgPessoa()?>"onkeypress="return Onlynumbers(event)" class="x3" /></p>
-		<p><label>”rgao Exped./UF:</label><input type="text" name="rg_orgao"  value="<?=$pessoa->getOrgExpPessoa()?>"onkeypress="return Onlychars(event);" onKeyUp="return autoTab(this, 3, event);" maxlength="3" class="x1" />
-			<label class="x0">- </label>
-			<select name="rg_uf" class="x15"> 
-				<option selected="selected"><?=SELECIONE?></option>
+	<div class="right">
+		<label>RG:<input type="text" name="rg" value="<?=$pessoa->getRgPessoa()?>" class="doc" /></label>
+		<label>√ìrgao Exp.:<input type="text" name="rg_orgao" value="<?=$pessoa->getOrgExpPessoa()?>" maxlength="3" class="small" /></label>
+		<label>UF:
+			<select name="rg_uf">
+				<option selected></option>
 				<option value="MT" <?=($pessoa->getUfOrgExpPessoa()==="MT")? "selected":""?>>MT</option>
 			</select>
-		</p>
-		<p><label>CPF:</label><input type="text" name="cpf" id="cpf" value="<?=$pessoa->getCpfPessoa()?>" onkeypress="return mascara(event,this,'###.###.###-##');return Onlynumbers(event);" onKeyUp="return autoTab(this, 14, event);" onblur="VerificaCPF('cpf','x3');" maxlength="14" class="x3" /></p>
+		</label>
+		<br />
+		<label>CPF:<input type="text" name="cpf" value="<?=$pessoa->getCpfPessoa()?>" maxlength="14" class="doc" /></label>
 	</div>
-	<div id="clear"> </div>
-<?php 
+	
+	<div class="clear"></div>
 
-$enderecoDiretor= new Endereco();
-if(isset($_GET['enderecoDiretor']))
-{
-	$enderecoDiretor = new Endereco(unserialize(urldecode($_GET['enderecoDiretor'])));
-}
+<?php
+	$enderecoDiretor= new Endereco();
 
-?>		
-		
-	<p class="caption"> Dados de EndereÁo <span class="borda"></span></p>
-	<div id="left">
-		<p><label>Rua, avenida, logradouro:</label><input type="text" name="ruaDiretor"  value="<?=$enderecoDiretor->getRuaEndereco()?>" class="x9" /></p>
-		<p><label>Complemento:</label><input type="text" name="complementoDiretor"  value="<?=$enderecoDiretor->getComplementoEndereco()?>" class="x9" /></p> 
-		<p><label>Bairro:</label><input type="text" name="bairroDiretor"  value="<?=$enderecoDiretor->getBairroEndereco()?>" class="x5" /></p>
-		<p><label class="x15"> CEP:</label><input type="text" name="cepDiretor"  value="<?=$enderecoDiretor->getCepEndereco()?>" onkeypress="return mascara(event,this,'##.###-###');return Onlynumbers(event);" onKeyUp="return autoTab(this, 10, event);" maxlength="10" class="x2" /></p>
-		<p><label>Cidade:</label><input type="text" name="cidadeDiretor"  value="<?=$enderecoDiretor->getCidadeEndereco()?>" class="x5" /></p>
-		<p><label class="x2">Estado:</label></p>
-		<select name="estadoDiretor" class="x15" > 
-			<option selected="selected"><?=SELECIONE?></option>
-			<option value="MT" <?=($endereco->getEstadoEndereco()==="MT")? "selected":""?>>MT</option>
-		</select>
-		<p><label>E-mail:</label><input type="text" name="emailDiretor"  value="<?=$enderecoDiretor->getEmailEndereco()?>" class="email" /></p>
+	if(isset($_GET['enderecoDiretor'])) {
+		$enderecoDiretor = (object)unserialize(urldecode($_GET['enderecoDiretor']));
+	}
+?>
+
+	<p class="caption"> Dados de Endere√ßo</p>
+	<div class="left">
+		<label>Rua, avenida, logradouro:<input type="text" name="ruaDiretor" value="<?=$enderecoDiretor->getRuaEndereco()?>" class="long" /></label>
+		<label>N√∫mero:<input type="text" name="numeroDiretor" value="<?=$enderecoDiretor->getRuaEndereco()?>" class="small" /></label>
+		<br />
+		<label>Complemento:<input type="text" name="complementoDiretor" value="<?=$enderecoDiretor->getComplementoEndereco()?>" class="long" /></label>
+		<br />
+		<label>Bairro:<input type="text" name="bairroDiretor" value="<?=$enderecoDiretor->getBairroEndereco()?>" class="long" /></label>
+		<label>CEP:<input type="text" name="cepDiretor" value="<?=$enderecoDiretor->getCepEndereco()?>" maxlength="10" class="data" /></label>
+		<br />
+		<label>Cidade:<input type="text" name="cidadeDiretor" value="<?=$enderecoDiretor->getCidadeEndereco()?>" class="long" /></label>
+		<label>Estado:
+			<select name="estadoDiretor">
+				<option selected></option>
+				<option value="MT" <?=($endereco->getEstadoEndereco()==="MT")? "selected":""?>>MT</option>
+			</select>
+		</label>
 	</div>
-	<div id="right">
-			<p><label>DDD - Telefone:</label><input type="text" name="telefoneDiretor" value="<?=$enderecoDiretor->getTelefoneEndereco()?>" onkeypress="return mascara(event,this,'## ####-####');" 	onKeyUp="return autoTab(this, 12, event);" maxlength="12" class="x2" ></p>
-			<p><label>DDD - Celular:</label><input type="text" name="celularDiretor" value="<?=$enderecoDiretor->getCelEndereco()?>" onkeypress="return mascara(event,this,'## ####-####');" 	onKeyUp="return autoTab(this, 12, event);" maxlength="12" class="x2" ></p>
-			<p><label>DDD - Fax:</label><input type="text" name="faxDiretor" value="<?=$enderecoDiretor->getFaxEndereco()?>" onkeypress="return mascara(event,this,'## ####-####');" 	onKeyUp="return autoTab(this, 12, event);" maxlength="12" class="x2" ></p>
+	<div class="right">
+		<label>DDD - Telefone:<input type="text" name="telefoneDiretor" value="<?=$enderecoDiretor->getTelefoneEndereco()?>" maxlength="12" class="doc" ></label>
+		<br />
+		<label>DDD - Celular:<input type="text" name="celularDiretor" value="<?=$enderecoDiretor->getCelEndereco()?>" maxlength="12" class="doc" ></label>
+		<br />
+		<label>DDD - Fax:<input type="text" name="faxDiretor" value="<?=$enderecoDiretor->getFaxEndereco()?>" maxlength="12" class="doc" ></label>
+		<br />
+		<label>E-mail:<input type="text" name="emailDiretor" value="<?=$enderecoDiretor->getEmailEndereco()?>" class="long" /></label>
 	</div>
 
-	<div id="clear"> </div>
-	<?php 
+	<div class="clear"></div>
+	
+<?php
 	$pessoaConjugue = new Pessoa();
-	if(isset($_GET['pessoaConjugue']))
-	{
+
+	if(isset($_GET['pessoaConjugue'])) {
 		$pessoaConjugue = (object) unserialize(urldecode($_GET['pessoaConjugue']));
 	}
-	?>
-	<div id="layerFrm1" > <p class="caption" onclick="blocking('conjuge');" > Dados do(a) cÙnjuge <span class="borda"> </span> </p>
-		<div id="conjuge">
-			<div id="left">
-				<p><label>Nome:</label><input type="text" id="nomeConjugue" name="nomeConjugue" value="<?=$pessoaConjugue->getNomePessoa()?>" class="x3" onfocus="foco('nomeConjugue', 'nome foco_on');" onblur="foco('nomeConjugue', 'nome foco_off');" /></p>
-				<p><label>Nascimento:</label><input type="text" name="dataNascimentoConjugue" id="dataNascimentoConjugue" value="<?=$formataData->toViewDate($pessoaConjugue->getDataNascimentoPessoa())?>" onfocus="foco('dataNascimentoConjugue', 'data foco_on');" onblur="foco('dataNascimentoConjugue', 'data foco_off');" onkeypress="return mascara(event,this,'##/##/####');return Onlynumbers(event);" onKeyUp="return autoTab(this, 10, event);" maxlength="10" class="data" /></p>
-				<p><label>Sexo:</label>
-				<select name="sexoConjugue" class="x3" >
-					<option selected="selected"><?=SELECIONE?></option>
-					<option value="M"<?=($pessoaConjugue->getSexoPessoa()=="M")?"selected":""?>>Masculino</option>
-					<option value="F"<?=($pessoaConjugue->getSexoPessoa()=="F")?"selected":""?>>Feminino</option>
-				</select>
-				</p>
-				<p><label></label></p>
-			</div>
-			<div id="right">
-				<p><label>RG:</label><input type="text" name="rgConjugue" value="<?=$pessoaConjugue->getRgPessoa()?>"onkeypress="return Onlynumbers(event)" class="x3" /></p>
-				<p>
-					<label>”rgao Exped./UF:</label>
-					<input type="text" name="rg_orgaoConjugue"  value="<?=$pessoaConjugue->getOrgExpPessoa()?>"onkeypress="return Onlychars(event);" onKeyUp="return autoTab(this, 3, event);" maxlength="3" class="x1" />
-					<label class="x0">- </label>
-					<select name="rg_ufConjugue" class="x15"> 
-						<option selected="selected"><?=SELECIONE?></option>
-						<option value="MT" <?=($pessoa->getUfOrgExpPessoa()==="MT")? "selected":""?>>MT</option>
-					</select>
-				</p>
-				<p><label>CPF:</label><input type="text" name="cpfConjugue" id="cpfConjugue" value="<?=$pessoaConjugue->getCpfPessoa()?>" onkeypress="return mascara(event,this,'###.###.###-##');return Onlynumbers(event);" onKeyUp="return autoTab(this, 14, event);" onblur="VerificaCPF('cpf','x3');" maxlength="14" class="x3" /></p>
-			</div>
-		</div>
+?>
+	<p class="caption">Dados do(a) c√¥njuge</p>
+	<div class="left">
+		<label>Nome:<input type="text" name="nomeConjugue" value="<?=$pessoaConjugue->getNomePessoa()?>" class="long" /></label>
+		<label>Nascimento:<input type="text" name="dataNascimentoConjugue" value="<?=$formataData->toViewDate($pessoaConjugue->getDataNascimentoPessoa())?>" maxlength="10" class="data" /></label>
+		<br />
+		<label>Sexo:
+			<select name="sexoConjugue">
+				<option selected></option>
+				<option value="M"<?=($pessoaConjugue->getSexoPessoa()=="M")?"selected":""?>>Masculino</option>
+				<option value="F"<?=($pessoaConjugue->getSexoPessoa()=="F")?"selected":""?>>Feminino</option>
+			</select>
+		</label>
 	</div>
+	<div class="right">
+		<label>RG:<input type="text" name="rgConjugue" value="<?=$pessoaConjugue->getRgPessoa()?>" class="doc" /></label>
+		<label>√ìrgao Exp.:<input type="text" name="rg_orgaoConjugue" value="<?=$pessoaConjugue->getOrgExpPessoa()?>" maxlength="3" class="small" /></label>
+		<label>UF:
+			<select name="rg_ufConjugue">
+				<option selected></option>
+				<option value="MT" <?=($pessoa->getUfOrgExpPessoa()==="MT")? "selected":""?>>MT</option>
+			</select>
+		</label>
+		<br />
+		<label>CPF:<input type="text" name="cpfConjugue" value="<?=$pessoaConjugue->getCpfPessoa()?>" maxlength="14" class="doc" />
+		</label>
 	</div>
 </fieldset>
 
-<span class="borda"> </span>
-<p class="tright">
+<p class="botoes">
+	<input type="hidden" id="acao" name="acao" value="cadastroEmpresa">
+	<input type="hidden" id="idCliente" name="idCliente" value="<?=$logon->getIdClientes()?>">
 	<input type="reset" value="Limpar campos" name="reset">
 	<input type="submit" name="completo2" value="Confirmar" id="name">
 </p>
+
 </form>
-</body>
-</html>

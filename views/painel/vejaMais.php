@@ -55,7 +55,7 @@ if(!is_null($listaCnh))
 	foreach ($listaCnh as $cnhs)
 	{
 		if($cont == 0)
-			echo '<label class="ativo">CNH vencendo Hoje</label>';
+			echo '<label class="ativo">Vencimento de CNH</label>';
 		$cnhAtual = new Cnh();
 		$cnhAtual = $cnhs;		
 		$pessoaAtual = new Pessoa();
@@ -75,7 +75,7 @@ if(!is_null($listaIpva))
 	foreach ($listaIpva as $ipvas)
 	{
 		if($cont == 0)
-			echo '<label class="ativo">IPVA vencendo Hoje</label>';
+			echo '<label class="ativo">Vencimento de IPVA</label>';
 		$veiculoAtual = new Veiculos();
 		$veiculoAtual = $ipvas;
 		$clientes = new Clientes();
@@ -95,7 +95,7 @@ if(!is_null($listaSeguro))
 	foreach ($listaSeguro as $seguros)
 	{
 		if($cont == 0)
-			echo '<label class="ativo">Seguro do Carro vencendo Hoje</label>';
+			echo '<label class="ativo">Vencimento de Seguro do Carro</label>';
 		$veiculoAtual = new Veiculos(); 
 		$veiculoAtual = $seguros;
 		$clientes = new Clientes();
@@ -115,7 +115,7 @@ if(!is_null($listaGarantia))
 	foreach ($listaGarantia as $garantias)
 	{
 		if($cont == 0)
-			echo '<label class="ativo">Garantia vencendo hoje</label>';
+			echo '<label class="ativo">Vencimento de Garantia</label>';
 		$veiculoAtual = new Veiculos(); 
 		$veiculoAtual = $garantias;
 		$clientes = new Clientes();
@@ -135,7 +135,7 @@ if(!is_null($listaRevisoes))
 	foreach ($listaRevisoes as $revisoes)
 	{
 		if($cont == 0)
-			echo '<label class="ativo">Revisão agendanda</label>';
+			echo '<label class="ativo">Vencimento de Revisão</label>';
 		$revisoesAtual = new Revisoes();
 		$revisoesAtual = $revisoes;
 		$veiculoAtual = new Veiculos();

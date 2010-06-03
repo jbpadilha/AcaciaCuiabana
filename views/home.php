@@ -1,96 +1,85 @@
-<?php 
-if(isset($_GET['msg']))
-{
-	echo "<script>alert('{$_GET['msg']}');</script>";
-}
-?>
+ï»¿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
 
 <head>
-	<title>SMC</title>
-	<link href="imagens/smc.ico" rel="SHORTCUT ICON"/>
-	<link href="css/home.css" rel="stylesheet" type="text/css" >
-	<script language="javascript" type="text/javascript" src="scripts/inputs.js" ></script>
-	<meta name="description" lang="pt-BR" content="Manutenção como deve ser feita. - Bem vindo." xml:lang="pt-BR"/>
-	<meta name="keywords" lang="pt-BR" content="noticias, manutenção, preventiva, sucesso, empresa, smc" xml:lang="pt-BR"/>
+
+	<title>SMC - ServiÃ§o de ManutenÃ§Ã£o e Consultoria</title>
+	<link rel="SHORTCUT ICON" href="imagens/smc.ico" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Language" content="pt-BR" />
+	<meta name="author" content="JÃºnior MendonÃ§aa" />
+	<meta name="copyright" content="SMC - ServiÃ§o de ManutenÃ§Ã£o e Consultoria">
+	<meta name="description" content="SMC - ManutenÃ§Ã£o como deve ser feita." />
+	<meta name="keywords" lang="pt-br" content="smc, serviÃ§o despertador, servico despertador, servicodespertador, manutenÃ§Ã£o, preventiva, gestÃ£o, frotas, ativos" />
+
+    <link type="text/css" rel="Stylesheet" media="screen" href="_css/home.css" />
+
+	<script language="javascript" type="text/javascript" src="js/jquery.js" ></script>
+	<script language="javascript" type="text/javascript" src="js/acessibilidade.js" ></script>
+	<script language="javascript" type="text/javascript" src="js/geral.js" ></script>
+
+	<?php include '_php/scripts.php'; ?>
 </head>
 
-<link rel="stylesheet" media="screen" type="text/css" href="css/datepicker.css" />
-<script type="text/javascript" src="js/datepicker.js"></script>
+<body>
 
-<body class="home">
-<div id="topo">
-	<p><a href="index.php" ><img src="imagens/smc_logo.png" alt="SMC - Serviços, Manutenção e Consultoria" title="Serviços, Manutenção e Consultoria" ></a></p>
-	<p>A manutenção como deve ser feita.</p>
-</div>
+	<div id="barra">
+		<span id="ajustaFonte">
+			Tamanho do texto:
+			<label onclick="AjustaFonte('conteudo', 'menos');" >[-]</label>
+			<label onclick="AjustaFonte('conteudo', '12px');" >12px</label>
+			<label onclick="AjustaFonte('conteudo', 'mais');" >[+]</label>
+		</span>
+	</div>
 
-<?php /* Inicio conteudo */
-	$aba_selecionada = 'width:110px; color:#000; background:url("imagens/bg_abass.png") no-repeat left center;';
-	$aba = (isset($_GET['p'])) ? $_GET['p'] : '';
-	switch ($aba) {
-		default: ?><style>ul.abas .aba1 {<?php echo $aba_selecionada ?>}</style><?php ; break;
-		case 'noticias'; ?><style>ul.abas .aba2 {<?php echo $aba_selecionada ?>}</style><?php ; break;
-		case 'dicas'; ?><style>ul.abas .aba3 {<?php echo $aba_selecionada ?>}</style><?php ; break;
-		case 'servicos'; ?><style>ul.abas .aba4 {<?php echo $aba_selecionada ?>}</style><?php ; break;
-		case 'parceiros'; ?><style>ul.abas .aba5 {<?php echo $aba_selecionada ?>}</style><?php ; break;
-		case 'clientes'; ?><style>ul.abas .aba6 {<?php echo $aba_selecionada ?>}</style><?php ; break;
-		case 'login'; ?><style>ul.abas .aba7 {<?php echo $aba_selecionada ?>}</style><?php ; break;
-		case 'contato'; ?><style>ul.abas .aba8 {<?php echo $aba_selecionada ?>}</style><?php ; break;
+	<div id="site">
+
+		<div id="header">
+			<img src="_img/smc_logo_276x120.png" alt="SMC" />
+			<h1>ManutenÃ§Ã£o como deve ser feita</h1>
+		</div>
+
+		<div id="corpo">
+			<div id="corpo_top"> </div>
+			<div id="menu">
+				<a href="home.php?page=inicio">InÃ­cio<img src="_img/menu_home/home.png" alt="" /></a>
+				<a href="home.php?page=noticias">NotÃ­cias<img src="_img/menu_home/noticias.png" alt="" /></a>
+				<a href="home.php?page=dicas">Dicas<img src="_img/menu_home/dicas.png" alt="" /></a>
+				<a href="home.php?page=servicos">ServiÃ§os<img src="_img/menu_home/servicos.png" alt="" /></a>
+				<a href="home.php?page=parceiros">Parceiros<img src="_img/menu_home/parceiros.png" alt="" /></a>
+				<a href="home.php?page=clientes">Clientes<img src="_img/menu_home/clientes.png" alt="" /></a>
+				<a href="home.php?page=login">Login<img src="_img/menu_home/login.png" alt="" /></a>
+				<a href="home.php?page=contato">Contato<img src="_img/menu_home/contato.png" alt="" /></a>
+			</div>
+
+			<?php
+
+				$link = isset($_GET['page']) ? removeAcentos(strtolower($_GET['page'])) : 'inicio';
+
+				if (file_exists($link.'.php')) {
+					include $link.'.php';
+				} else {
+					include 'indisponivel.php';
+				}
+
+			?>
+
+			<div id="sidebar">
+			</div>
+
+			<div id="rodape">
+				<p>SMC - ServiÃ§o de ManutenÃ§Ã£o e Consultoria</p>
+				<p><a href="http://servicodespertador.net" title="Acesse" alt="Acesse" target="_blank">http://servicodespertador.net</a></p>
+			</div>
+		</div>
+	</div>
+
+<?php
+	if(isset($_GET['msg'])) {
+		echo "<script>alert('".$_GET['msg']."');</script>\n";
 	}
 ?>
-
-<div id="conteudo">
-
-	<ul class="abas">
-		<li class="aba aba1" onclick="window.location='?p=inicio';" ><img src="imagens/home.png" alt="Início" />Início</li>
-		<li class="aba aba2" onclick="window.location='?p=noticias';" ><img src="imagens/noticias.png" alt="Notícias" />Notícicas</li>
-		<li class="aba aba3" onclick="window.location='?p=dicas';" ><img src="imagens/dicas.png" alt="Dicas" />Dicas</li>
-		<li class="aba aba4" onclick="window.location='?p=servicos';" ><img src="imagens/servicos.png" alt="Serviços" />Nossos serviços</li>
-		<li class="aba aba5" onclick="window.location='?p=parceiros';" ><img src="imagens/parceiros.png" alt="Parceiros" />Nossos parceiros</li>
-		<li class="aba aba6" onclick="window.location='?p=clientes';" ><img src="imagens/clientes.png" alt="Clientes" />Nossos clientes</li>
-		<li class="aba aba7" onclick="window.location='?p=login';" ><img src="imagens/login.png" alt="Login" />Login</li>
-		<li class="aba aba8" onclick="window.location='?p=contato';" ><img src="imagens/small_contato.png" alt="Contato" />Contato</li>
-	</ul>
-
-	<div id="container">
-	<?php
-		$pagina = (isset($_GET['p'])) ? $_GET['p'] : '';
-		switch ($pagina) {
-			default: include ('inicio.php'); break;
-			case 'noticias'; include ('noticias.php'); break;
-			case 'dicas'; include ('dicas.php'); break;
-			case 'servicos'; include ('servicos.php'); break;
-			case 'parceiros'; include ('parceiros.php'); break;
-			case 'clientes'; include ('clientes.php'); break;
-			case 'login'; include ('login.php'); break;
-			case 'contato'; include ('contato.php'); break;
-		}
-	?>
-	</div>
-
-	<div id="sidebar">
-		<div id="parceiros"><p>PARCEIROS</p>
-			<img src="imagens/sejaparceiro.png" alt="Seja nosso parceiro" title="Seja nosso parceiro" onclick="window.location='?p=contato';" />
-			<img src="imagens/ng20.jpg" alt="NG 20 anos" title="NG 20 anos" onclick="window.open('http://www.ngi.com.br','NG20');" />
-		</div>
-		<div id="vertical"> </div>
-		<div id="links"><p>LINKS ÚTEIS</p>
-			<a href="http://www.denatran.gov.br/" target="_links"><img src="http://www.iti.gov.br/twiki/pub/Noticias/PressRelease2009Mar27_142336/logo_denatran.jpg" alt="DENATRAN" title="Departamento Nacional de Trânsito" /></a>
-			<a href="http://www.detran.mt.gov.br/" target="_links"><img src="http://www.detran.mt.gov.br/images/logo.jpg" alt="DETRAN - MT" title="Departamento Estadual de Trânsito de Mato Grosso" /></a>
-			<a href="http://www.correios.com.br/" target="_links"><img src="http://www.correios.com.br/imagesect/lg_correios_original.gif" alt="CORREIOS" title="Site dos correios" /></a>
-		</div>
-	</div>
-
-</div>
-
-<div id="separador"></div>
-
-<div id="rodape">
-	<p class="titulo">SMC - Serviços, Manutenção e Consultoria</p>
-	<p><a href="http://www.servicodespertador.net">www.servicodespertador.net</a></p>
-</div>
 
 </body>
 
