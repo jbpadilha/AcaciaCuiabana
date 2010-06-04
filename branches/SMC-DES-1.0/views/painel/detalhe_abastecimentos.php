@@ -23,7 +23,7 @@
 
 <form method="post" action="../../class/RecebePostGet.php">
 	<p class="caption">Alterar abastecimento</p>
-	<label>Placa do veículo:
+	<label>Placa do VeÃ­culo:
 <?php 
 		$veiculos = new Veiculos();
 		$veiculos->setIdClientes($logon->getIdClientes());
@@ -46,20 +46,20 @@
 		<input type="text" name="posto" value="<?=$abastecimentos->getPostoAbastecimentos()?>" class="long" />
 	</label>
 	<br />
-	<label>Nº da nota/cupom fiscal:
+	<label>NÂº da nota/cupom fiscal:
 		<input type="text" name="nf" value="<?=$abastecimentos->getNfAbastecimentos()?>" class="doc" />
 	</label>
-	<label>Tipo de combustível:
+	<label>Tipo de combustÃ­vel:
 		<select name="combustivel">
 			<option></option>
 			<option value="Gasolina" <?=($abastecimentos->getTipoCombustivelAbastecimentos() == "Gasolina")? "selected" : ""?>>Gasolina</option>
-			<option value="Álcool" <?=($abastecimentos->getTipoCombustivelAbastecimentos() == "Álcool")? "selected" : ""?>>Álcool</option>
+			<option value="Ã¡lcool" <?=($abastecimentos->getTipoCombustivelAbastecimentos() == "Ã¡lcool")? "selected" : ""?>>Ã¡lcool</option>
 			<option value="Flex" <?=($abastecimentos->getTipoCombustivelAbastecimentos() == "Flex")? "selected" : ""?>>Flex</option>
 			<option value="Diesel" <?=($abastecimentos->getTipoCombustivelAbastecimentos() == "Diesel")? "selected" : ""?>>Diesel</option>
 		</select>
 	</label>
 	<br />
-	<label>Valor unitário (R$):
+	<label>Valor unitÃ¡rio (R$):
 		<input type="text" name="valor" value="<?=$abastecimentos->getValorAbastecimentos()?>" maxlength="6" class="small" />
 	</label>
 	<label>Quantidade (litros):

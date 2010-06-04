@@ -1,19 +1,19 @@
 <?php
 require_once ('Config.php');
 /**
- * Classe para conexão com banco de dados MySQL usando a extensão MySQLi.
- * A classe contém o construtor de conexão, registrando os possíveus erros de conexão no arquivo db_errors.log,
- * e o destrutor, para fechar a conexão. As demais funções de banco de dados são padrões da classe myslqi:
- * @author João Batista Padilha e Silva
+ * Classe para conexÃ£o com banco de dados MySQL usando a extensÃ£o MySQLi.
+ * A classe contÃ©m o construtor de conexÃ£o, registrando os possÃ­veus erros de conexÃ£o no arquivo db_errors.log,
+ * e o destrutor, para fechar a conexÃ£o. As demais funÃ§Ãµes de banco de dados sÃ£o padrÃµes da classe myslqi:
+ * @author JoÃ£o Batista Padilha e Silva
  * @link Connect.php
- * @copyright João Batista Padilha e Silva Especialista em TI (http://www.joaopadilha.eti.br) / contato@joaopadilha.eti.br
+ * @copyright JoÃ£o Batista Padilha e Silva Especialista em TI (http://www.joaopadilha.eti.br) / contato@joaopadilha.eti.br
  * @version 1.0
  */
 class Connecta extends mysqli
 {
     /**
-     * Método Construtor da conexão.
-     * @author João Batista Padilha e Silva
+     * MÃ©todo Construtor da conexÃ£o.
+     * @author JoÃ£o Batista Padilha e Silva
      * @param DB_HOST, DB_USER, DB_PASSWD, DB_DATA
      */
 	public function __construct()
@@ -36,10 +36,10 @@ class Connecta extends mysqli
             //if (!file_exists (LOGS_PATH))
              //   mkdir (LOGS_PATH);
             
-            // mensagem que será salva no arquivo de logs do banco de dados
+            // mensagem que serÃ¡ salva no arquivo de logs do banco de dados
             $log = $data . " | " . $mensagem . " | " . $arquivo . " | " . $ip_visitante . "\r\n\r\n";
             error_log ($log, 3, LOGS_PATH . "db_errors.log");
-            echo "Erro ao conectar ao banco de dados MySQL. O erro foi reportado e o administrador do sistema tomará as devidas providências.";
+            echo "Erro ao conectar ao banco de dados MySQL. O erro foi reportado e o administrador do sistema tomarÃ¡ as devidas providÃªncias.";
             exit;
         }
     }

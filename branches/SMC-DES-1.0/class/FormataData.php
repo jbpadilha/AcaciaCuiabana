@@ -1,10 +1,10 @@
 <?php
 //####################################
-// * Jo„o Batista Padilha e Silva Analista/Desenvolvedor (¡baco Tecnologia)
+// * Jo√£o Batista Padilha e Silva Analista/Desenvolvedor
 // * Arquivo: index.php
-// * CriaÁ„o: Jo„o Batista Padilha e Silva
-// * Revis„o:
-// * Data de criaÁ„o: 23/06/2008
+// * Cria√ß√£o: Jo√£o Batista Padilha e Silva
+// * Revis√£o:
+// * Data de Cria√ß√£o: 23/06/2008
 //####################################
 /*
    Classe que formata data para Manter o banco de dados MySql e Oracle
@@ -24,7 +24,7 @@ class FormataData
 	private $separadorDataView;
 	private $separadorHora;	
 		
-	//Construtor - Seta par‚metros de configuraÁ„o
+	//Construtor - Seta par√¢metros de configura√ß√£o
 	function FormataData($banco = "mysqli")
 	 {
 		$this->db = $banco;
@@ -50,7 +50,7 @@ class FormataData
 		}		
 	}
 	
-	//MÈtodo respons·vel por converter a data para o formato do BD	
+	//M√©todo respons√°vel por converter a data para o formato do BD	
 	public function toDBDate($data = null)
 	 {	
 		if ($data == null) 
@@ -62,7 +62,7 @@ class FormataData
 		}
 	}
 	
-	//MÈtodo respons·vel por transformar a data do BD para o formato de visualizaÁ„o	
+	//M√©todo respons√°vel por transformar a data do BD para o formato de visualiza√ß√£o	
 	public function toViewDate($data = null)
 	{
 		if ($data == null) 
@@ -77,7 +77,7 @@ class FormataData
 		}
 	}
 	
-	//MÈtodo que converte uma data em timestamp
+	//M√©todo que converte uma data em timestamp
 	public function toTimeStamp($data)
 	{
 		$data = explode($this->separadorDataDB, $data);
@@ -95,7 +95,7 @@ class FormataData
 		return $time;
 	}
 	
-	//MÈtodo que converte a Hora
+	//M√©todo que converte a Hora
 	public function toTime($hora = null)
 	{
 		if ($hora == null) 
@@ -108,7 +108,7 @@ class FormataData
 	
 	}
 	
-	//MÈtodo respons·vel por converter a data e hora para o formato do BD
+	//M√©todo respons√°vel por converter a data e hora para o formato do BD
 	public function toDBDateTime($data = null) 
 	{
 		if ($data == null) 
@@ -122,7 +122,7 @@ class FormataData
 		
 	}
 	
-	//MÈtodo respons·vel por converter a data e hora para o formato do BD
+	//M√©todo respons√°vel por converter a data e hora para o formato do BD
 	public function toViewDateTime($data = null) 
 	{	
 		if ($data == null) 

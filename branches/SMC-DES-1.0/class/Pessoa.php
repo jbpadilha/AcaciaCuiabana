@@ -175,7 +175,7 @@ class Pessoa
 	}
 	
 	/**
-	 * Método que mostra todos os dados de uma pessoa, em formato String
+	 * MÃ©todo que mostra todos os dados de uma pessoa, em formato String
 	 * @return string
 	 */
 	public function mostraDadosPessoa()

@@ -33,13 +33,13 @@
 	if (!isset($day)) { $day=date('d'); }
 
 	$thisday = $year.'-'.$month-$day;
-	$day_name = array('Seg','Ter','Qua','Qui','Sex','S·b','Dom');
+	$day_name = array('Seg','Ter','Qua','Qui','Sex','S√°b','Dom');
 	$month_abbr = array('','Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez');
 
 	switch ($month) {
 		case 1: $month_name = 'Janeiro'; break;
 		case 2: $month_name = 'Fevereiro'; break;
-		case 3: $month_name = 'MarÁo'; break;
+		case 3: $month_name = 'Mar√ßo'; break;
 		case 4: $month_name = 'Abril'; break;
 		case 5: $month_name = 'Maio'; break;
 		case 6: $month_name = 'Junho'; break;
@@ -89,9 +89,9 @@
 
 <div id="cal">
 	<div class="titulo">
-		<img src="../imagens/left.png" alt="Anterior" title="mÍs anterior" onclick="Request('<?php echo 'rel_alertas.php?require=sim&mes='.($month-1).'&ano='.($year); ?>', 'cal')" />
+		<img src="../imagens/left.png" alt="Anterior" title="m√™s anterior" onclick="Request('<?php echo 'rel_alertas.php?require=sim&mes='.($month-1).'&ano='.($year); ?>', 'cal')" />
 		<label> <?php echo $month_name .' de '. $year; ?> </label>
-		<img src="../imagens/right.png" alt="PrÛximo" title="prÛximo mÍs" onclick="Request('<?php echo 'rel_alertas.php?require=sim&mes='.($month+1).'&ano='.($year); ?>', 'cal')" />
+		<img src="../imagens/right.png" alt="Pr√≥ximo" title="pr√≥ximo m√™s" onclick="Request('<?php echo 'rel_alertas.php?require=sim&mes='.($month+1).'&ano='.($year); ?>', 'cal')" />
 	</div>
 
 <table>
@@ -131,7 +131,7 @@
 			{
 				$pessoaAtual = new Pessoa();
 				$pessoaAtual = $collVoPessoa[0];
-				echo '<label class="ativo" title="'.$formataData->toViewDate($pessoaAtual->getDataNascimentoPessoa()).'">Anivers·rio de '.$pessoaAtual->getNomePessoa().'</label>';
+				echo '<label class="ativo" title="'.$formataData->toViewDate($pessoaAtual->getDataNascimentoPessoa()).'">Anivers√°rio de '.$pessoaAtual->getNomePessoa().'</label>';
 				$mostraLinkMais = true;
 			}
 			
@@ -166,15 +166,15 @@
 				$mostraLinkMais = true;
 			}
 			
-			//Lista de Revisıes
+			//Lista de Revis√µes
 			$collVoRevisoes = $controla->listaRevisoes($userLogon,$data);
 			if(!is_null($collVoGarantias) && count($collVoGarantias)>0)
 			{
-				echo '<label class="ativo" title="">Revis„o agendada para Hoje</label>';
+				echo '<label class="ativo" title="">Revis√£o agendada para Hoje</label>';
 				$mostraLinkMais = true;
 			}
 			if($mostraLinkMais)
-				echo "<label class=\"ativo\"><div id=\"vejaMais\"><a href=\"javascript:void(0);\" onClick=\"abrepagina('vejaMais.php?listaPessoa=".base64_encode(serialize($collVoPessoa))."&listaCnh=".base64_encode(serialize($collVoCnh))."&listaIpva=".base64_encode(serialize($collVoIpva))."&listaSeguro=".base64_encode(serialize($collVoSeguro))."&listaGarantia=".base64_encode(serialize($collVoGarantias))."&listaRevisoes=".base64_encode(serialize($collVoRevisoes))."', 300, 300);\">Veja mais ++</a></div></label>";
+				echo "<label class=\"ativo\"><div id=\"vejaMais\"><a href=\"javascript:void(0);\" onClick=\"abrepagina('vejaMais.php?listaPessoa=".base64_encode(serialize($collVoPessoa))."&listaCnh=".base64_encode(serialize($collVoCnh))."&listaIpva=".base64_encode(serialize($collVoIpva))."&listaSeguro=".base64_encode($collVoSeguro)."&listaGarantia=".base64_encode(serialize($collVoGarantias))."&listaRevisoes=".base64_encode(serialize($collVoRevisoes))."', 300, 300);\">Veja mais ++</a></div></label>";
 		?>
 	</td>
 		<?php

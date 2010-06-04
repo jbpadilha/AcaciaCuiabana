@@ -205,14 +205,14 @@ class Endereco
 	}
 
 	/**
-	 * Método de retorno dos dados do endereço
+	 * MÃ©todo de retorno dos dados do endereÃ§o
 	 * @return string
 	 */
 	public function mostraDadosEndereco()
 	{
 		$string = "";
 		$string = "
-		<b>Endereço: </b>{$this->ruaEndereco}<br>
+		<b>endereÃ§o: </b>{$this->ruaEndereco}<br>
 		<b>Complemento: </b>{$this->complementoEndereco}<br>
 		<b>Bairro: </b>{$this->bairroEndereco}<br>
 		<b>CEP: </b>{$this->cepEndereco}<br>

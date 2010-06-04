@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="_css/formPadrao.css" type="text/css" media="all" />
 
 <form method="post" action="../../class/RecebePostGet.php">
-	<p class="caption">Consulta de veículos</p>
+	<p class="caption">Consulta de VeÃ­culos</p>
 	<label>Placa:
 		<input type="text" name="busca" />
 	</label>

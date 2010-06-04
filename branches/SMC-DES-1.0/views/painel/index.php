@@ -1,9 +1,9 @@
 <?php
 /**
- * Página inicial do Sistema.
- * @author João Batista Padilha e Silva
+ * PÃ¡gina inicial do Sistema.
+ * @author JoÃ£o Batista Padilha e Silva
  * @link index.php
- * @copyright João Batista Padilha e Silva Especialista em TI (http://www.joaopadilha.eti.br) / joao.padilha@globo.com
+ * @copyright JoÃ£o Batista Padilha e Silva Especialista em TI (http://www.joaopadilha.eti.br) / joao.padilha@globo.com
  * @version 1.0
  */
 	header("Content-Type: text/html; charset=ISO-8859-1");
@@ -25,14 +25,13 @@
 
 <head>
 
-	<title>SMC - Serviço de Manutenção e Consultoria</title>
+	<title>SMC - ServiÃ§o de ManutenÃ§Ã£o e Consultoria</title>
 	<link rel="SHORTCUT ICON" href="imagens/smc.ico" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="Content-Language" content="pt-BR" />
-	<meta name="author" content="Júnior Mendonça" />
-	<meta name="copyright" content="SMC - Serviço de Manutenção e Consultoria">
-	<meta name="description" content="SMC - Manutenção como deve ser feita." />
-	<meta name="keywords" lang="pt-br" content="smc, serviço despertador, servico despertador, servicodespertador, manutenção, preventiva, gestÃ£o, frotas, ativos" />
+	<meta name="author" content="jÃ¡nior MendonÃ§a" />
+	<meta name="copyright" content="SMC - ServiÃ§o de ManutenÃ§Ã£o e Consultoria">
+	<meta name="description" content="SMC - ManutenÃ§Ã£o como deve ser feita." />
+	<meta name="keywords" lang="pt-br" content="smc, ServiÃ§o despertador, servico despertador, servicodespertador, manutenÃ§Ã£o, preventiva, gestÃ£o, frotas, ativos" />
 
 	<link rel="stylesheet" href="_css/formPadrao.css" type="text/css" media="all" />
 
@@ -74,11 +73,11 @@
 		} elseif ($link == 'home' OR $link == '') {
 			include_once ('rel_alertas.php');
 		} else {
-			echo "<br><br>Página não encontrada";
+			echo "<br><br>PÃ¡gina NÃ£o encontrada";
 		}
 
 	} else {
-		echo "<br><br>Acesso não autorizado.";
+		echo "<br><br>Acesso NÃ£o autorizado.";
 	}
 ?>
 		</center>
@@ -86,9 +85,9 @@
 
 	<table class="statusbar">
 		<tr>
-			<td class="left">Usuário logado:<b><?=$nome?></b></td>
+			<td class="left">usuÃ¡rio logado:<b><?=$nome?></b></td>
 			<td class="divisor"></td>
-			<td class="right">Último acesso:<?=$formataData->toViewDateTime($userLogon->getDataUltimoLogin())?></td>
+			<td class="right">Ãºltimo acesso:<?=$formataData->toViewDateTime($userLogon->getDataUltimoLogin())?></td>
 		</tr>
 	</table>
 

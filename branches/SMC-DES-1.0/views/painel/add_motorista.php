@@ -43,7 +43,7 @@
 		<br />
 	</div>
 	<div class="right">
-		<label>N° CNH
+		<label>NÂº CNH
 			<input type="text" name="cnh" value="<?=$cnh->getNumeroCnh()?>"	maxlength="12" class="doc" />
 		</label> 
 		<label>UF

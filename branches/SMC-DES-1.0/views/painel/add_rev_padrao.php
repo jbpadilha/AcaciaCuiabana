@@ -17,9 +17,9 @@
 <link rel="stylesheet" href="_css/formPadrao.css" type="text/css" media="all" />
 
 <form method="post" action="../../class/RecebePostGet.php">
-	<p class="caption">Cadastro de revisıes</p>
+	<p class="caption">Cadastro de Revis√µes</p>
 	<fieldset>
-		<label>Placa do veÌculo
+		<label>Placa do Ve√≠culo
 			<select name="placa">
 				<option></option>
 <?php 
@@ -42,7 +42,7 @@
 ?>
 			</select>
 		</label>
-		<label>DescriÁ„o do serviÁo:
+		<label>descri√ß√£o do Servi√ßo:
 			<select name="revisao">
 				<option></option>
 <?php 
@@ -63,17 +63,17 @@
 		</label>
 		<br />
 		<br />
-		<label><b>⁄ltima revis„o</b></label>
+		<label><b>√∫ltima Revis√£o</b></label>
 		<label>realizada no dia (x),
 			<input type="text" name="tult" maxlength="10" value="<?=$formataData->toViewDate($revisoes->getDataRevisoes())?>" class="data" />
 		</label>
 		<label>marcando (x)
 			<input type="text" name="kult" value="<?=$revisoes->getKmRevisoes()?>" class="small" />
 		</label>
-		<label>quilÙmetros.</label> 
+		<label>quil√¥metros.</label> 
 		<br />
 		<br />
-		<label><b>PrÛxima revis„o</b></label>
+		<label><b>Pr√≥xima Revis√£o</b></label>
 		<label>em (x) meses
 			<input type="text" name="tprox" value="<?=$formataData->toViewDate($revisoes->getProxDataRevisoes())?>" maxlength="10" class="data" />
 		</label>

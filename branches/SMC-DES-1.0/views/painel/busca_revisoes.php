@@ -13,8 +13,8 @@ $logon = $_SESSION["usuarioLogon"];
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	<title>SMC - Busca Revisões</title>
-	<meta name="Description" content="SMC - Busca Revisões" >
+	<title>SMC - Busca RevisÃµes</title>
+	<meta name="Description" content="SMC - Busca RevisÃµes" >
 	<meta http-equiv="X-UA-Compatible" content="IE=7" > 
 	<link rel="stylesheet" href="../css/meucpf.css" type="text/css" media="all" >
 </head>
@@ -23,8 +23,8 @@ $logon = $_SESSION["usuarioLogon"];
 	<form name="busca_revisoes" method="POST" action="../../class/RecebePostGet.php" >
 		<input type="hidden" id="acao" name="acao" value="buscaRevisoes">
 		<input type="hidden" id="idCliente" name="idCliente" value="<?=$logon->getIdClientes()?>">
-		<p class="caption"> Consulta Revisões</p>
-		<label>Placa do Veículo:</label>
+		<p class="caption"> Consulta RevisÃµes</p>
+		<label>Placa do VeÃ­culo:</label>
 		<input name="busca" type="text" class="nome" >
 		<span class="borda"> </span> 
 		<p class="tright"> <input class="f_right" type="submit" value="Procurar" > </p>
@@ -79,13 +79,13 @@ $logon = $_SESSION["usuarioLogon"];
 			<td>Ordem</td>
 			<td>Placa</td>
 			<td>Ult. data</td>
-			<td>Revisão</td>
+			<td>RevisÃ£o</td>
 			<td>Ult. km</td>
-			<td>Próx. data</td>
-			<td>Próx. KM</td>
+			<td>PrÃ³x. data</td>
+			<td>PrÃ³x. KM</td>
 		</tr>
 		<tr class="dados">
-			<td>Revisão Nº <?=$cont?>	</td>
+			<td>RevisÃ£o NÂº <?=$cont?>	</td>
 			<td><?=$veiculos->getPlacaVeiculos()?></td>
 			<td><?=$formataData->toViewDate($revisoes->getDataRevisoes())?></td>
 			<td><?=$revisoes->getTipoRevisoes()?></td>
