@@ -46,12 +46,12 @@ if(isset($_GET))
 									$pessoaTipo = $collVoTipo[0];
 									$dataNiver = explode("-",$pessoaTipo->getDataNascimentoPessoa());
 									$descricao = '
-									<b>SMC - ServiÁo Despertador</b>
-									<label class="ativo">Anivers·rio do Dia</label><br><br>
-									Anivers·rio de '.$pessoaTipo->getNomePessoa().'
+									<b>SMC - Servi√ßo Despertador</b>
+									<label class="ativo">Anivers√°rio do Dia</label><br><br>
+									Anivers√°rio de '.$pessoaTipo->getNomePessoa().'
 									Dia: '.$dataNiver[1].'/'.$dataNiver[2].'
 									';
-									$assunto = 'Aviso de Anivers·rio';
+									$assunto = 'Aviso de Anivers√°rio';
 									break;
 								}
 							case 2: 
@@ -63,9 +63,9 @@ if(isset($_GET))
 									$pessoaTipo = new Pessoa();
 									$pessoaTipo = $cnhAtual->returnaPessoa();
 									$descricao = '
-									<b>SMC - ServiÁo Despertador</b>
+									<b>SMC - Servi√ßo Despertador</b>
 									<label class="ativo">Vencimento de CNH</label><br><br>
-									CNH N∫ '.$cnhAtual->getNumeroCnh().'
+									CNH N¬∫ '.$cnhAtual->getNumeroCnh().'
 									Condutor: '.$pessoaTipo->getNomePessoa().'
 									Data do vencimento: '.$formataData->toViewDate($cnhAtual->getVencCnh()).'
 									';
@@ -79,9 +79,9 @@ if(isset($_GET))
 									$collVo = $controla->findVeiculos($veiculo);
 									$veiculo = $collVo[0]; 		
 									$descricao = '
-									<b>SMC - ServiÁo Despertador</b>
+									<b>SMC - Servi√ßo Despertador</b>
 									<label class="ativo">Vencimento de IPVA</label><br><br>
-									VeÌculo placa '.$veiculo->getPlacaVeiculos().'
+									Ve√≠culo placa '.$veiculo->getPlacaVeiculos().'
 									Data do vencimento: '.$formataData->toViewDate($veiculo->getVencimentoIpvaVeiculos()).'
 									';
 									$assunto = 'Aviso de Vencimento de IPVA';
@@ -94,9 +94,9 @@ if(isset($_GET))
 									$collVo = $controla->findVeiculos($veiculo);
 									$veiculo = $collVo[0]; 		
 									$descricao = '
-									<b>SMC - ServiÁo Despertador</b>
+									<b>SMC - Servi√ßo Despertador</b>
 									<label class="ativo">Vencimento de Seguro</label><br><br>
-									VeÌculo placa '.$veiculo->getPlacaVeiculos().'
+									Ve√≠culo placa '.$veiculo->getPlacaVeiculos().'
 									Data do vencimento: '.$formataData->toViewDate($veiculo->getVencimentoSeguroVeiculos()).'
 									';
 									$assunto = 'Aviso de Vencimento de Seguro';
@@ -109,9 +109,9 @@ if(isset($_GET))
 									$collVo = $controla->findVeiculos($veiculo);
 									$veiculo = $collVo[0];
 									$descricao = '
-									<b>SMC - ServiÁo Despertador</b>
+									<b>SMC - Servi√ßo Despertador</b>
 									<label class="ativo">Vencimento de Garantia</label><br><br>
-									VeÌculo placa '.$veiculo->getPlacaVeiculos().'
+									Ve√≠culo placa '.$veiculo->getPlacaVeiculos().'
 									Data do vencimento: '.$formataData->toViewDate($veiculo->getDataEntregaNfVeiculos()).'
 									';
 									$assunto = 'Aviso de Vencimento de Garantia';
@@ -126,16 +126,16 @@ if(isset($_GET))
 									$veiculo = new Veiculos();
 									$veiculo = $revisao->getVeiculo();
 									$descricao = '
-									<b>SMC - ServiÁo Despertador</b>
-									<label class="ativo">Revis„o Agendada</label><br><br>
-									VeÌculo placa '.$veiculo->getPlacaVeiculos().'
-									Data da Revis„o: '.$formataData->toViewDate($revisao->getDataRevisoes()).'
+									<b>SMC - Servi√ßo Despertador</b>
+									<label class="ativo">Revis√£o Agendada</label><br><br>
+									Ve√≠culo placa '.$veiculo->getPlacaVeiculos().'
+									Data da Revis√£o: '.$formataData->toViewDate($revisao->getDataRevisoes()).'
 									';
-									$assunto = 'Aviso de Revis„o agendada.';
+									$assunto = 'Aviso de Revis√£o agendada.';
 									break;
 								}
 						}
-						$controla->enviarEmail($nome,$endereco->getEmailEndereco(),"SMC - ServiÁo Despertador - $assunto",$descricao);
+						$controla->enviarEmail($nome,$endereco->getEmailEndereco(),"SMC - Servi√ßo Despertador - $assunto",$descricao);
 						$mensagem = 'E-mail enviado com sucesso.';
 						echo $mensagem;
 					}
@@ -194,7 +194,7 @@ if(isset($_POST))
 				}
 				else 
 				{
-					$mensagem = "Usu·rio ou senha incorreto.";
+					$mensagem = "usu√°rio ou senha incorreto.";
 					header("Location: ../views/home.php?p=login&msg=$mensagem");
 				}
 			}
@@ -206,7 +206,7 @@ if(isset($_POST))
 		}
 		else 
 		{
-			$mensagem = "Senha Incorreta ou Usu·rio Inv·lido.";
+			$mensagem = "Senha Incorreta ou usu√°rio Inv√°lido.";
 			header("Location: ../views/login.php?msg=$mensagem");
 		}
 	}
@@ -227,12 +227,12 @@ if(isset($_POST))
 				if($_POST['lnome'] != '')
 					$pessoa->setNomePessoa(trim($controla->validaNomes($_POST['lnome'])));
 				else
-					$mensagem .= "O nome n„o pode estar em branco.";
+					$mensagem .= "O nome N√£o pode estar em branco.";
 				
 				if($_POST['lemail'] != '')
 					$endereco->setEmailEndereco($controla->testaEmail($_POST['lemail']));
 				else
-					$mensagem .= "O E-mail n„o pode estar em branco.";
+					$mensagem .= "O E-mail N√£o pode estar em branco.";
 					
 				if($_POST['llogin'] != '')
 				{
@@ -241,7 +241,7 @@ if(isset($_POST))
 				}
 				else
 				{
-					$mensagem .= "O CPF n„o pode estar em branco.";
+					$mensagem .= "O CPF N√£o pode estar em branco.";
 				}
 				
 				$logon->setSenha(trim($_POST['lsenha']));
@@ -266,11 +266,11 @@ if(isset($_POST))
 					<br>
 					</fieldset>
 					<br><br>
-					Este È um e-mail autom·tico. N„o responda.
+					Este √© um e-mail autom√°tico. N√£o responda.
 					</div>
 					";
 					
-					$controla->enviarEmail($pessoa->getNomePessoa(),$endereco->getEmailEndereco(),"Cadastro de novo Usu·rio",$descricao);
+					$controla->enviarEmail($pessoa->getNomePessoa(),$endereco->getEmailEndereco(),"Cadastro de novo usu√°rio",$descricao);
 					$mensagem = "Cadastro realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
 					header("Location: ../views/home.php?msg=$mensagem");
 					
@@ -303,12 +303,12 @@ if(isset($_POST))
 				if($_POST['nome_cliente'] != '')
 					$pessoa->setNomePessoa($controla->validaNomes($_POST['nome_cliente']));
 				else
-					$mensagem .= 'O nome do Cliente n„o pode estar em branco.';
+					$mensagem .= 'O nome do Cliente N√£o pode estar em branco.';
 					
 				if($_POST['nascimento_cliente'] != '')
 					$pessoa->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['nascimento_cliente'])));
 				else
-					$mensagem .= 'O data de nascimento do Cliente n„o pode estar em branco.';
+					$mensagem .= 'O data de nascimento do Cliente N√£o pode estar em branco.';
 					
 				$pessoa->setSexoPessoa($_POST['sexo_cliente']);
 				$pessoa->setEstadoCivilPessoa($_POST['ecivil_cliente']);
@@ -320,7 +320,7 @@ if(isset($_POST))
 				if($_POST['cpf_cliente'] != '')
 					$pessoa->setCpfPessoa($_POST['cpf_cliente']);
 				else
-					$mensagem .= 'O CPF do Cliente n„o pode estar em branco.';
+					$mensagem .= 'O CPF do Cliente N√£o pode estar em branco.';
 				
 				
 				//ENDERECO
@@ -338,18 +338,18 @@ if(isset($_POST))
 				$endereco->setIdPessoa($pessoa->getIdPessoa());
 				
 				//Conjugue
-				if($pessoa->getEstadoCivilPessoa() == "Casado" || $pessoa->getEstadoCivilPessoa() == "Uni„o Est·vel")
+				if($pessoa->getEstadoCivilPessoa() == "Casado" || $pessoa->getEstadoCivilPessoa() == "Uni√£o Est√°vel")
 				{
 					$pessoaConjugue->setIdPessoa($_POST['idConjugue']);
 					if($_POST['nome_conjuge'] != '')
 						$pessoaConjugue->setNomePessoa($controla->validaNomes($_POST['nome_conjuge']));
 					else
-						$mensagem = "O nome do Conjugue n„o deve estar em branco.";
+						$mensagem = "O nome do Conjugue N√£o deve estar em branco.";
 					
 					if($_POST['nasc_conjuge']!= '')
 						$pessoaConjugue->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['nasc_conjuge'])));
 					else
-						$mensagem .= 'A data de nascimento do Conjugue n„o pode estar em branco.';
+						$mensagem .= 'A data de nascimento do Conjugue N√£o pode estar em branco.';
 					
 					$pessoaConjugue->setSexoPessoa($_POST['sexo_conjuge']);
 				}
@@ -365,7 +365,7 @@ if(isset($_POST))
 					$pessoa->setIdCliente($idCliente);
 					$controla->updatePessoa($pessoa);
 					$controla->updateEndereco($endereco);
-					if($pessoa->getEstadoCivilPessoa() == "Casado" || $pessoa->getEstadoCivilPessoa() == "Uni„o Est·vel")
+					if($pessoa->getEstadoCivilPessoa() == "Casado" || $pessoa->getEstadoCivilPessoa() == "Uni√£o Est√°vel")
 					{
 						$controla->updatePessoa($pessoaConjugue);
 					}
@@ -375,16 +375,16 @@ if(isset($_POST))
 					$logon->setIdClientes($idCliente);
 					$controla->updateLogon($logon);
 					
-					$mensagem="Usu·rio Criado com sucesso.";
+					$mensagem="usu√°rio Criado com sucesso.";
 					
 					$descricao = "
 					<div align='left' style='font-size:12px;'>
-					Seu cadastro no site SMC - ServiÁo Despertador foi concluÌdo com sucesso.<br>
-					Por precauÁ„o, salve este e-mail.<br><br>
-					<h3>AtenÁ„o: seu <font color='red'>CPF</font> È seu login de acesso para o painel de controle para gerenciamento de cadastro.<br>
-					Em breve vocÍ receber· um e-mail com a senha de acesso.<h3><br>
+					Seu cadastro no site SMC - Servi√ßo Despertador foi conclu√≠do com sucesso.<br>
+					Por precau√ß√£o, salve este e-mail.<br><br>
+					<h3>Aten√ß√£o: seu <font color='red'>CPF</font> √© seu login de acesso para o painel de controle para gerenciamento de cadastro.<br>
+					Em breve voc√™ receber√° um e-mail com a senha de acesso.<h3><br>
 					<font face=\"Verdana\">
-					Estes s„o os dados principais do seu cadastro:<br><br>
+					Estes s√£o os dados principais do seu cadastro:<br><br>
 					<fieldset><legend style='text-transform:capitalize;'>".$pessoa->getNomePessoa()."</legend>
 					RG: ".$pessoa->getRgPessoa().";<br>
 					CPF: ".$pessoa->getCpfPessoa().";<br>
@@ -396,7 +396,7 @@ if(isset($_POST))
 					Registrado em: ".$formataData->toViewDateTime($clientes->getDataRegistroClientes()).";<br>
 					</fieldset>
 					<br>
-					Este È um e-mail autom·tico.
+					Este √© um e-mail autom√°tico.
 					</div>
 					";
 					
@@ -431,7 +431,7 @@ if(isset($_POST))
 				if($_POST['nome'] != '')
 					$pessoaAtual->setNomePessoa(trim($controla->validaNomes($_POST['nome'])));
 				else 
-					$mensagem .= "O Nome da Pessoa n„o pode estar em branco.";
+					$mensagem .= "O Nome da Pessoa N√£o pode estar em branco.";
 				
 				if($_POST['dataNascimento'] != '')
 					$pessoaAtual->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['dataNascimento'])));
@@ -449,7 +449,7 @@ if(isset($_POST))
 				}
 				else
 				{
-					$mensagem .= "O RG da pessoa n„o deve estar em branco.";
+					$mensagem .= "O RG da pessoa N√£o deve estar em branco.";
 				}
 				
 				if($_POST['cpf'] != '')
@@ -458,7 +458,7 @@ if(isset($_POST))
 				}
 				else 
 				{
-					$mensagem .= "O CPF n„o deve estar em branco.";
+					$mensagem .= "O CPF N√£o deve estar em branco.";
 				}
 				
 				//CADASTRO DE ENDERECO PARA PESSOA
@@ -470,7 +470,14 @@ if(isset($_POST))
 				$endereco->setCidadeEndereco(trim($_POST['cidade']));
 				$endereco->setEstadoEndereco($_POST['estado']);
 				
-				$endereco->setEmailEndereco(trim($controla->testaEmail($_POST['email'])));
+				if($_POST['email'] != '')
+				{
+					$endereco->setEmailEndereco(trim($controla->testaEmail($_POST['email'])));
+				}
+				else
+				{
+					$mensagem .= "O E-mail da Pessoa N√£o pode estar em branco.";
+				}
 				
 				$endereco->setTelefoneEndereco(trim($_POST['telefone']));
 				$endereco->setCelEndereco(trim($_POST['celular']));
@@ -479,13 +486,13 @@ if(isset($_POST))
 				
 				//Cadastro do Conjugue
 				
-				if($pessoaAtual->getEstadoCivilPessoa() == "Casado" || $pessoaAtual->getEstadoCivilPessoa() == "Uni„o Est·vel" )
+				if($pessoaAtual->getEstadoCivilPessoa() == "Casado" || $pessoaAtual->getEstadoCivilPessoa() == "Uni√£o Est√°vel" )
 				{
 					
 					if($_POST['nomeConjugue'] != '')
 						$pessoaConjugue->setNomePessoa(trim($controla->validaNomes($_POST['nomeConjugue'])));
 					else 
-						$mensagem .= "O Nome do Conjugue n„o pode estar em branco.";
+						$mensagem .= "O Nome do Conjugue N√£o pode estar em branco.";
 					
 					if($_POST['dataNascimentoConjugue'] != '')
 						$pessoaConjugue->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['dataNascimentoConjugue'])));
@@ -503,16 +510,19 @@ if(isset($_POST))
 					}
 					else
 					{
-						$mensagem .= "O RG do Conjugue n„o deve estar em branco.";
+						$mensagem .= "O RG do Conjugue N√£o deve estar em branco.";
 					}
 					
 					if($_POST['cpfConjugue'] != '')
 					{
-						$pessoaConjugue->setCpfPessoa($controla->validaCpfIgual($controla->validaCPF($controla->retiraMascaraCPF($_POST['cpfConjugue']))));						
+						if($_POST['cpfConjugue'] != $pessoaAtual->getCpfPessoa())
+							$pessoaConjugue->setCpfPessoa($controla->validaCpfIgual($controla->validaCPF($controla->retiraMascaraCPF($_POST['cpfConjugue']))));
+						else
+							$mensagem = "O CPF do Conjugue deve ser diferente da Pessoa";						
 					}
 					else
 					{
-						$mensagem .= "O CPF do Conjugue n„o deve estar em branco.";
+						$mensagem .= "O CPF do Conjugue N√£o deve estar em branco.";
 					}
 				}
 				
@@ -520,13 +530,13 @@ if(isset($_POST))
 
 				if($mensagem == '')
 				{
-					//AtualizaÁ„o de EndereÁo
+					//atualiza√ß√£o de endere√ßo
 					$idPessoa = $controla->cadastraPessoa($pessoaAtual);
 					$endereco->setIdPessoa($idPessoa);
 					$controla->cadastraEndereco($endereco);
 					
 					//Cadastrando Conjugue
-					if($pessoaAtual->getEstadoCivilPessoa() == "Casado" || $pessoaAtual->getEstadoCivilPessoa() == "Uni„o Est·vel" )
+					if($pessoaAtual->getEstadoCivilPessoa() == "Casado" || $pessoaAtual->getEstadoCivilPessoa() == "Uni√£o Est√°vel" )
 					{
 						$idConjugue = $controla->cadastraPessoa($pessoaConjugue);
 						$endereco->setIdPessoa($idConjugue);
@@ -538,10 +548,10 @@ if(isset($_POST))
 					<b>DADOS DA PESSOA</b>
 					{$pessoaAtual->mostraDadosPessoa()}<br>
 					<br>
-					<b>ENDERE«O</b>
+					<b>endere√ßo</b>
 					{$endereco->mostraDadosEndereco()}<br>
 					<br>";
-					if($pessoaAtual->getEstadoCivilPessoa() == "Casado" || $pessoaAtual->getEstadoCivilPessoa() == "Uni„o Est·vel" )
+					if($pessoaAtual->getEstadoCivilPessoa() == "Casado" || $pessoaAtual->getEstadoCivilPessoa() == "Uni√£o Est√°vel" )
 					{
 						$descricao = "
 						<b>DADOS DO CONJUGUE</b>
@@ -572,6 +582,12 @@ if(isset($_POST))
 				$empresas = new Empresas();
 				
 				$cliente = new Clientes();
+				$pessoaDiretor = null;
+				$enderecoDiretor = null;
+				$pessoaConjugue = null;
+				$endereco = new Endereco();
+				
+				
 				$cliente->setIdClientes($_POST['idCliente']);
 				$collVoCliente = $controla->findClientes($cliente);
 				$cliente = $collVoCliente[0];
@@ -579,7 +595,7 @@ if(isset($_POST))
 				if($_POST['nome_empresa'] != '')
 					$empresas->setNomeEmpresa($controla->validaNomes($_POST['nome_empresa']));
 				else	
-					$mensagem .= "O nome da Empresa n„o deve estar em branco.";
+					$mensagem .= "O nome da Empresa N√£o deve estar em branco.";
 				
 				if($_POST['nome_fantasia'] != '')	
 					$empresas->setNomeFantasiaEmpresa($controla->validaNomes($_POST['nome_fantasia']));
@@ -598,14 +614,13 @@ if(isset($_POST))
 				}
 				else 
 				{
-					$mensagem .= "O CNPJ n„o pode estar em branco.";
+					$mensagem .= "O CNPJ N√£o pode estar em branco.";
 				}
 				
 				$empresas->setInscricaoEstadualEmpresa($_POST['insc']);
 				$empresas->setRamoEmpresa($_POST['ramo']);
 				
-				//DADOS DO ENDERE«O DA EMRPESA
-				$endereco = new Endereco();
+				//DADOS DO endere√ßo DA EMRPESA
 				
 				$endereco->setRuaEndereco(trim($_POST['rua']));
 				$endereco->setComplementoEndereco(trim($_POST['complemento']));
@@ -613,16 +628,21 @@ if(isset($_POST))
 				$endereco->setCepEndereco(trim($_POST['cep']));
 				$endereco->setCidadeEndereco(trim($_POST['cidade']));
 				$endereco->setEstadoEndereco($_POST['estado']);
-				$endereco->setEmailEndereco(trim($controla->testaEmail($_POST['email'])));
+				if($_POST['email'] != '')
+				{
+					$endereco->setEmailEndereco(trim($controla->testaEmail($_POST['email'])));
+				}
+				else 
+				{
+					$mensagem .= "O e-mail da empresa N√£o pode estar em branco.";	
+				}
 				$endereco->setTelefoneEndereco(trim($_POST['telefone']));
 				$endereco->setCelEndereco(trim($_POST['celular']));
 				$endereco->setFaxEndereco(trim($_POST['fax']));
 				
 
 				//DADOS DO DIRETOR DA EMPRESA
-				$pessoaDiretor = null;
-				$enderecoDiretor = null;
-				$pessoaConjugue = null;
+				
 				if($_POST['preenche'] != '' && $_POST['preenche'] == "Sim")
 				{
 					$pessoaDiretor = new Pessoa();
@@ -630,7 +650,7 @@ if(isset($_POST))
 					if($_POST['nome'] != '')
 						$pessoaDiretor->setNomePessoa(trim($controla->validaNomes($_POST['nome'])));
 					else 
-						$mensagem .= "O Nome da Pessoa n„o pode estar em branco.";
+						$mensagem .= "O Nome da Pessoa N√£o pode estar em branco.";
 					
 					if($_POST['dataNascimento'] != '')
 						$pessoaDiretor->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['dataNascimento'])));
@@ -648,7 +668,7 @@ if(isset($_POST))
 					}
 					else
 					{
-						$mensagem .= "O RG da pessoa n„o deve estar em branco.";
+						$mensagem .= "O RG da pessoa N√£o deve estar em branco.";
 					}
 					
 					if($_POST['cpf'] != '')
@@ -657,10 +677,10 @@ if(isset($_POST))
 					}
 					else
 					{
-						$mensagem .= "O CPF n„o deve estar em branco.";
+						$mensagem .= "O CPF N√£o deve estar em branco.";
 					}
 					
-					//ENDERE«O DIRETOR DA EMPRESA
+					//endere√ßo DIRETOR DA EMPRESA
 					$enderecoDiretor = new Endereco();
 					$enderecoDiretor->setRuaEndereco(trim($_POST['ruaDiretor']));
 					$enderecoDiretor->setComplementoEndereco(trim($_POST['complementoDiretor']));
@@ -668,7 +688,14 @@ if(isset($_POST))
 					$enderecoDiretor->setCepEndereco(trim($_POST['cepDiretor']));
 					$enderecoDiretor->setCidadeEndereco(trim($_POST['cidadeDiretor']));
 					$enderecoDiretor->setEstadoEndereco($_POST['estadoDiretor']);
-					$enderecoDiretor->setEmailEndereco(trim($controla->testaEmail($_POST['email'])));
+					if($_POST['email'] != '')
+					{
+						$enderecoDiretor->setEmailEndereco(trim($controla->testaEmail($_POST['email'])));
+					}
+					else
+					{
+						$mensagem .= "O e-mail do Diretor deve ser preenchido"; 
+					}	
 					$enderecoDiretor->setTelefoneEndereco(trim($_POST['telefoneDiretor']));
 					$enderecoDiretor->setCelEndereco(trim($_POST['celularDiretor']));
 					$enderecoDiretor->setFaxEndereco(trim($_POST['faxDiretor']));
@@ -676,13 +703,13 @@ if(isset($_POST))
 					
 					//DADOS CONJUGUE DIRETOR
 					
-					if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "Uni„o Est·vel" )
+					if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "Uni√£o Est√°vel" )
 					{
 						$pessoaConjugue = new Pessoa();
 						if($_POST['nomeConjugue'] != '')
 							$pessoaConjugue->setNomePessoa(trim($controla->validaNomes($_POST['nomeConjugue'])));
 						else 
-							$mensagem .= "O Nome do Conjugue n„o pode estar em branco.";
+							$mensagem .= "O Nome do Conjugue N√£o pode estar em branco.";
 						
 						if($_POST['dataNascimentoConjugue'] != '')
 							$pessoaConjugue->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['dataNascimentoConjugue'])));
@@ -700,13 +727,13 @@ if(isset($_POST))
 						}
 						else
 						{
-							$mensagem .= "O RG do Conjugue n„o deve estar em branco.";
+							$mensagem .= "O RG do Conjugue N√£o deve estar em branco.";
 						}
 						
 						if($_POST['cpfConjugue'] != '')
 							$pessoaConjugue->setCpfPessoa($controla->validaCpfIgual($controla->validaCPF($controla->retiraMascaraCPF($_POST['cpfConjugue']))));
 						else
-							$mensagem .= "O CPF do Conjugue n„o deve estar em branco.";
+							$mensagem .= "O CPF do Conjugue N√£o deve estar em branco.";
 					}
 				}
 				
@@ -717,7 +744,7 @@ if(isset($_POST))
 					{
 						//Cadastrando Conjugue
 						$idPessoaConjugue = null;
-						if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "Uni„o Est·vel" )
+						if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "Uni√£o Est√°vel" )
 						{
 							$pessoaConjugue->setIdCliente($cliente->getIdClientes());
 							$idPessoaConjugue = $controla->cadastraPessoa($pessoaConjugue);
@@ -747,10 +774,10 @@ if(isset($_POST))
 					<b>DADOS DA Empresa</b>
 					{$empresas->mostraDados()}<br>
 					<br>
-					<b>ENDERE«O</b>
+					<b>endere√ßo</b>
 					{$endereco->mostraDadosEndereco()}<br>
 					<br>";
-					if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "Uni„o Est·vel" )
+					if(!is_null($pessoaDiretor) && $pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "Uni√£o Est√°vel" )
 					{
 						$descricao = "
 						<b>DADOS DO CONJUGUE</b>
@@ -799,7 +826,7 @@ if(isset($_POST))
 				}
 				else
 				{
-					$mensagem .= "A placa do veÌculo deve ser informada";
+					$mensagem .= "A placa do Ve√≠culo deve ser informada";
 				}
 				
 				$veiculos->setMarcaVeiculos($_POST['marca']);
@@ -840,7 +867,7 @@ if(isset($_POST))
 				if($mensagem == '')
 				{
 					$controla->cadastraVeiculos($veiculos);
-					$mensagem = 'VeÌculo Cadastrado com sucesso.';
+					$mensagem = 'Ve√≠culo Cadastrado com sucesso.';
 					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
 				}
 				else
@@ -867,27 +894,27 @@ if(isset($_POST))
 				if($_POST['pessoaCondutor'] != '')
 					$pessoaCondutor->setIdPessoa($_POST['pessoaCondutor']);
 				else
-					$mensagem .= 'VocÍ deve escolher uma pessoa cadastrada para completar o cadastro.';
+					$mensagem .= 'voc√™ deve escolher uma pessoa cadastrada para completar o cadastro.';
 				
 				if($_POST['cnh'] != '')
 					$cnh->setNumeroCnh(trim($controla->validaCnhIgual($_POST['cnh'])));
 				else
-					$mensagem .= 'VocÍ deve preencher o n˙mero da CNH.';
+					$mensagem .= 'voc√™ deve preencher o n√∫mero da CNH.';
 					
 				if($_POST['cnhuf'] != '')
 					$cnh->setUfCnh(trim(strtoupper($_POST['cnhuf'])));
 				else
-					$mensagem .= 'VocÍ deve selecionar o estado da carteira de habilitaÁ„o.';
+					$mensagem .= 'voc√™ deve selecionar o estado da carteira de habilita√ß√£o.';
 				
 				if($_POST['cnhcat'] != '')
 					$cnh->setCategoriaCnh(trim($_POST['cnhcat']));
 				else
-					$mensagem .= 'VocÍ deve informar a categoria da carteira de habilitaÁ„o.';
+					$mensagem .= 'voc√™ deve informar a categoria da carteira de habilita√ß√£o.';
 				
 				if($_POST['cnhvcto'] != '')
 					$cnh->setVencCnh($formataData->toDBDate($controla->validaData($_POST['cnhvcto'])));
 				else
-					$mensagem .= 'VocÍ deve informar o a data do vencimento da carteira de habilitaÁ„o.';
+					$mensagem .= 'voc√™ deve informar o a data do vencimento da carteira de habilita√ß√£o.';
 
 				if($mensagem == '')
 				{
@@ -931,12 +958,12 @@ if(isset($_POST))
 				if($_POST['descricao'] != '')
 					$tipoRevisoes->setDescricaoTipoRevisoes($_POST['descricao']);
 				else
-					$mensagem .= 'A descriÁ„o do tipo de Revisıes n„o deve estar em branco.';
+					$mensagem .= 'A descri√ß√£o do tipo de Revis√µes N√£o deve estar em branco.';
 				
 				if($mensagem == '')
 				{
 					$controla->cadastrarTipoRevisoes($tipoRevisoes);
-					$mensagem = 'Tipo de revis„o cadastrado com sucesso.';
+					$mensagem = 'Tipo de Revis√£o cadastrado com sucesso.';
 					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
 				}	
 				else
@@ -960,17 +987,17 @@ if(isset($_POST))
 				if($_POST['placa'] != '')
 					$revisoes->setIdVeiculos($_POST['placa']);
 				else
-					$mensagem .= 'Um veÌculo deve ser selecionado.';
+					$mensagem .= 'Um Ve√≠culo deve ser selecionado.';
 				
 				if($_POST['revisao'] != '')
 					$revisoes->setIdTipoRevisoes($_POST['revisao']);
 				else
-					$mensagem .= 'O tipo da Revis„o deve ser selecionado.';
+					$mensagem .= 'O tipo da Revis√£o deve ser selecionado.';
 
 				if($_POST['tult'] != '')
 					$revisoes->setDataRevisoes($formataData->toDBDate($controla->validaData($_POST['tult'])));
 				else
-					$mensagem .= "A data da Revis„o deve ser preenchida.";
+					$mensagem .= "A data da Revis√£o deve ser preenchida.";
 				
 				$revisoes->setKmRevisoes($_POST['kult']);
 				if($_POST['tprox'] != '')
@@ -981,7 +1008,7 @@ if(isset($_POST))
 				if($mensagem == '')
 				{
 					$controla->cadastrarRevisoes($revisoes);
-					$mensagem = 'Revis„o cadastrado com sucesso.';
+					$mensagem = 'Revis√£o cadastrado com sucesso.';
 					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
 				}
 				else
@@ -1006,7 +1033,7 @@ if(isset($_POST))
 				if($_POST['placa'] != '')
 					$abastecimentos->setIdVeiculos($_POST['placa']);
 				else
-					$mensagem .= 'Um veÌculo deve ser selecionado.';
+					$mensagem .= 'Um Ve√≠culo deve ser selecionado.';
 				
 				if($_POST['data'] != '')
 					$abastecimentos->setDataAbastecimentos($formataData->toDBDate($controla->validaData($_POST['data'])));
@@ -1048,7 +1075,7 @@ if(isset($_POST))
 				if($_POST['busca'] != '')
 					$pessoa->setNomePessoa(trim($_POST['busca']));
 				else
-					$mensagem = 'Para efetuar a busca, vocÍ deve entrar com um par‚metro.';
+					$mensagem = 'Para efetuar a busca, voc√™ deve entrar com um par√¢metro.';
 				$logon = new Logon();
 				$logon = (object)$_SESSION['usuarioLogon'];
 				if($logon->getNivelAcessoLogin() != 5)
@@ -1089,7 +1116,7 @@ if(isset($_POST))
 				if($_POST['nome'] != '')
 					$pessoaAtual->setNomePessoa(trim($controla->validaNomes($_POST['nome'])));
 				else 
-					$mensagem .= "O Nome da Pessoa n„o pode estar em branco.";
+					$mensagem .= "O Nome da Pessoa N√£o pode estar em branco.";
 				
 				if($_POST['dataNascimento'] != '')
 					$pessoaAtual->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['dataNascimento'])));
@@ -1107,13 +1134,13 @@ if(isset($_POST))
 				}
 				else
 				{
-					$mensagem .= "O RG da pessoa n„o deve estar em branco.";
+					$mensagem .= "O RG da pessoa N√£o deve estar em branco.";
 				}
 				
 				if($_POST['cpf'] != '')
 					$pessoaAtual->setCpfPessoa($controla->retiraMascaraCPF($_POST['cpf']));
 				else
-					$mensagem .= "O CPF n„o deve estar em branco.";
+					$mensagem .= "O CPF N√£o deve estar em branco.";
 				
 				//CADASTRO DE ENDERECO PARA PESSOA
 				
@@ -1125,7 +1152,14 @@ if(isset($_POST))
 				$endereco->setCepEndereco(trim($_POST['cep']));
 				$endereco->setCidadeEndereco(trim($_POST['cidade']));
 				$endereco->setEstadoEndereco($_POST['estado']);
-				$endereco->setEmailEndereco(trim($controla->testaEmail($_POST['email'])));
+				if($_POST['email'] != '')
+				{
+					$endereco->setEmailEndereco(trim($controla->testaEmail($_POST['email'])));
+				}
+				else
+				{
+					$mensagem .= "O E-mail da pessoa deve ser preenchido.";
+				}
 				$endereco->setTelefoneEndereco(trim($_POST['telefone']));
 				$endereco->setCelEndereco(trim($_POST['celular']));
 				$endereco->setFaxEndereco(trim($_POST['fax']));
@@ -1134,7 +1168,7 @@ if(isset($_POST))
 				//Cadastro do Conjugue
 				
 				$pessoaConjugue = new Pessoa();
-				if($pessoaAtual->getEstadoCivilPessoa() == "Casado" || $pessoaAtual->getEstadoCivilPessoa() == "Uni„o Est·vel" )
+				if($pessoaAtual->getEstadoCivilPessoa() == "Casado" || $pessoaAtual->getEstadoCivilPessoa() == "Uni√£o Est√°vel" )
 				{
 					if($_POST['idPessoaConjugue'] != '')
 						$pessoaConjugue->setIdPessoa($_POST['idPessoaConjugue']);
@@ -1142,7 +1176,7 @@ if(isset($_POST))
 					if($_POST['nomeConjugue'] != '')
 						$pessoaConjugue->setNomePessoa(trim($controla->validaNomes($_POST['nomeConjugue'])));
 					else 
-						$mensagem .= "O Nome do Conjugue n„o pode estar em branco.";
+						$mensagem .= "O Nome do Conjugue N√£o pode estar em branco.";
 					
 					if($_POST['dataNascimentoConjugue'] != '')
 						$pessoaConjugue->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['dataNascimentoConjugue'])));
@@ -1160,13 +1194,13 @@ if(isset($_POST))
 					}
 					else
 					{
-						$mensagem .= "O RG do Conjugue n„o deve estar em branco.";
+						$mensagem .= "O RG do Conjugue N√£o deve estar em branco.";
 					}
 					
 					if($_POST['cpfConjugue'] != '')
 						$pessoaConjugue->setCpfPessoa($controla->retiraMascaraCPF($_POST['cpfConjugue']));
 					else
-						$mensagem .= "O CPF do Conjugue n„o deve estar em branco.";
+						$mensagem .= "O CPF do Conjugue N√£o deve estar em branco.";
 				}
 				
 				//TESTE DE ERRO e UPDATE DE CADASTRO
@@ -1174,7 +1208,7 @@ if(isset($_POST))
 				if($mensagem == '')
 				{
 					//Cadastrando Conjugue
-					if($pessoaAtual->getEstadoCivilPessoa() == "Casado" || $pessoaAtual->getEstadoCivilPessoa() == "Uni„o Est·vel" )
+					if($pessoaAtual->getEstadoCivilPessoa() == "Casado" || $pessoaAtual->getEstadoCivilPessoa() == "Uni√£o Est√°vel" )
 					{
 						if($pessoaConjugue->getIdPessoa() != null)
 						{
@@ -1189,7 +1223,7 @@ if(isset($_POST))
 						$controla->updateEndereco($endereco);
 						$pessoaAtual->setIdConjuguePessoa($pessoaConjugue->getIdPessoa());
 					}
-					//AtualizaÁ„o de EndereÁo
+					//atualiza√ß√£o de endere√ßo
 					$controla->updatePessoa($pessoaAtual);
 					$endereco->setIdPessoa($pessoaAtual->getIdPessoa());
 					$controla->updateEndereco($endereco);
@@ -1199,10 +1233,10 @@ if(isset($_POST))
 					<b>DADOS DA PESSOA</b>
 					{$pessoaAtual->mostraDadosPessoa()}<br>
 					<br>
-					<b>ENDERE«O</b>
+					<b>endere√ßo</b>
 					{$endereco->mostraDadosEndereco()}<br>
 					<br>";
-					if($pessoaAtual->getEstadoCivilPessoa() == "Casado" || $pessoaAtual->getEstadoCivilPessoa() == "Uni„o Est·vel" )
+					if($pessoaAtual->getEstadoCivilPessoa() == "Casado" || $pessoaAtual->getEstadoCivilPessoa() == "Uni√£o Est√°vel" )
 					{
 						$descricao = "
 						<b>DADOS DO CONJUGUE</b>
@@ -1210,7 +1244,7 @@ if(isset($_POST))
 					}
 					
 					$controla->enviarEmail($pessoaAtual->getNomePessoa(),$endereco->getEmailEndereco(),"Cadastro de Pessoa",$descricao);
-					$mensagem = "AtualizaÁ„o realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
+					$mensagem = "atualiza√ß√£o realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
 					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
 				}
 				else
@@ -1237,7 +1271,7 @@ if(isset($_POST))
 					$empresas->setNomeFantasiaEmpresa(trim($_POST['busca']));
 				}
 				else
-					$mensagem = 'Para efetuar a busca, vocÍ deve entrar com um par‚metro.';
+					$mensagem = 'Para efetuar a busca, voc√™ deve entrar com um par√¢metro.';
 				$logon = new Logon();
 				$logon = (object)$_SESSION['usuarioLogon'];
 				if($logon->getNivelAcessoLogin() != 5)
@@ -1282,12 +1316,12 @@ if(isset($_POST))
 				if($_POST['nome_empresa'] != '')
 					$empresas->setNomeEmpresa($controla->validaNomes($_POST['nome_empresa']));
 				else
-					$mensagem .= "O nome da Empresa n„o permitido.";
+					$mensagem .= "O nome da Empresa N√£o permitido.";
 				
 				if($_POST['nome_fantasia'] != '')
 					$empresas->setNomeFantasiaEmpresa($controla->validaNomes($_POST['nome_fantasia']));
 				else
-					$mensagem .= "O nome Fantasia n„o permitido.";
+					$mensagem .= "O nome Fantasia N√£o permitido.";
 				
 				if($_POST['data_fundacao'] != '')
 					$empresas->setDataFundacaoEmpresa($formataData->toDBDate($controla->validaData($_POST['data_fundacao'])));
@@ -1296,13 +1330,13 @@ if(isset($_POST))
 				if($_POST['cnpj'] != '')
 					$empresas->setCnpjEmpresa($_POST['cnpj']);
 				else
-					$mensagem = "O CNPJ n„o pode estar em branco";
+					$mensagem = "O CNPJ N√£o pode estar em branco";
 				
 				$empresas->setInscricaoEstadualEmpresa($_POST['insc']);
 				$empresas->setRamoEmpresa($_POST['ramo']);
 				$empresas->setOrigemEmpresa($_POST['origem']);
 				
-				//DADOS DO ENDERE«O DA EMRPESA
+				//DADOS DO endere√ßo DA EMRPESA
 				$endereco = new Endereco();
 				
 				$endereco->setIdEndereco($_POST['idEndereco']);
@@ -1312,7 +1346,14 @@ if(isset($_POST))
 				$endereco->setCepEndereco(trim($_POST['cep']));
 				$endereco->setCidadeEndereco(trim($_POST['cidade']));
 				$endereco->setEstadoEndereco($_POST['estado']);
-				$endereco->setEmailEndereco(trim($controla->testaEmail($_POST['email'])));
+				if($_POST['email'] != '')
+				{
+					$endereco->setEmailEndereco(trim($controla->testaEmail($_POST['email'])));
+				}
+				else
+				{
+					$mensagem .= "O e-mail da Empresa N√£o pode estar em Branco.";
+				}
 				$endereco->setTelefoneEndereco(trim($_POST['telefone']));
 				$endereco->setCelEndereco(trim($_POST['celular']));
 				$endereco->setFaxEndereco(trim($_POST['fax']));
@@ -1328,7 +1369,7 @@ if(isset($_POST))
 					if($_POST['nome'] != '')
 						$pessoaDiretor->setNomePessoa(trim($controla->validaNomes($_POST['nome'])));
 					else 
-						$mensagem .= "O Nome da Pessoa n„o permitido.";
+						$mensagem .= "O Nome da Pessoa N√£o permitido.";
 					
 					if($_POST['dataNascimento'] != '')
 						$pessoaDiretor->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['dataNascimento'])));
@@ -1350,15 +1391,15 @@ if(isset($_POST))
 					}
 					else
 					{
-						$mensagem .= "O RG da pessoa n„o deve estar em branco.";
+						$mensagem .= "O RG da pessoa N√£o deve estar em branco.";
 					}
 					
 					if($_POST['cpf'] != '')
 						$pessoaDiretor->setCpfPessoa($controla->retiraMascaraCPF($_POST['cpf']));
 					else
-						$mensagem .= "O CPF n„o deve estar em branco.";
+						$mensagem .= "O CPF N√£o deve estar em branco.";
 					
-					//ENDERE«O DIRETOR DA EMPRESA
+					//endere√ßo DIRETOR DA EMPRESA
 					$enderecoDiretor = new Endereco();
 					$enderecoDiretor->setRuaEndereco(trim($_POST['ruaDiretor']));
 					$enderecoDiretor->setComplementoEndereco(trim($_POST['complementoDiretor']));
@@ -1366,7 +1407,14 @@ if(isset($_POST))
 					$enderecoDiretor->setCepEndereco(trim($_POST['cepDiretor']));
 					$enderecoDiretor->setCidadeEndereco(trim($_POST['cidadeDiretor']));
 					$enderecoDiretor->setEstadoEndereco($_POST['estadoDiretor']);
-					$enderecoDiretor->setEmailEndereco(trim($controla->testaEmail($_POST['email'])));
+					if($_POST['email'] != '')
+					{
+						$enderecoDiretor->setEmailEndereco(trim($controla->testaEmail($_POST['email'])));
+					}
+					else
+					{
+						$mensagem .= "O E-mail do Diretor deve ser preenchido.";
+					}
 					$enderecoDiretor->setTelefoneEndereco(trim($_POST['telefoneDiretor']));
 					$enderecoDiretor->setCelEndereco(trim($_POST['celularDiretor']));
 					$enderecoDiretor->setFaxEndereco(trim($_POST['faxDiretor']));
@@ -1374,12 +1422,12 @@ if(isset($_POST))
 					
 					//DADOS CONJUGUE DIRETOR
 					$pessoaConjugue = new Pessoa();
-					if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "Uni„o Est·vel" )
+					if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "Uni√£o Est√°vel" )
 					{
 						if($_POST['nomeConjugue'] != '')
 							$pessoaConjugue->setNomePessoa(trim($controla->validaNomes($_POST['nomeConjugue'])));
 						else 
-							$mensagem .= "O Nome do Conjugue inv·lido.";
+							$mensagem .= "O Nome do Conjugue inv√°lido.";
 						
 						if($_POST['dataNascimentoConjugue'] != '')
 							$pessoaConjugue->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['dataNascimentoConjugue'])));
@@ -1398,24 +1446,24 @@ if(isset($_POST))
 						}
 						else
 						{
-							$mensagem .= "O RG do Conjugue n„o deve estar em branco.";
+							$mensagem .= "O RG do Conjugue N√£o deve estar em branco.";
 						}
 						
 						if($_POST['cpfConjugue'] != '')
 							$pessoaConjugue->setCpfPessoa($controla->retiraMascaraCPF($_POST['cpfConjugue']));
 						else
-							$mensagem .= "O CPF do Conjugue n„o deve estar em branco.";
+							$mensagem .= "O CPF do Conjugue N√£o deve estar em branco.";
 					}
 				}
 				
 				//TESTE E CADASTRO
 				if($mensagem == '')
 				{
-					//AtualizaÁ„o DO DIRETOR DA EMPRESA E ENDERECO DO DIRETOR
+					//atualiza√ß√£o DO DIRETOR DA EMPRESA E ENDERECO DO DIRETOR
 					if($pessoaDiretor != null)
 					{
-						//AtualizaÁ„o Conjugue
-						if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "Uni„o Est·vel" )
+						//atualiza√ß√£o Conjugue
+						if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "Uni√£o Est√°vel" )
 						{
 							$pessoaConjugue->setIdCliente($cliente->getIdClientes());
 							if(!is_null($pessoaConjugue->getIdPessoa()) && $pessoaConjugue->getIdPessoa()!='')
@@ -1465,7 +1513,7 @@ if(isset($_POST))
 						}
 					}
 
-					//AtualizaÁ„o da Empresa
+					//atualiza√ß√£o da Empresa
 					$empresas->setIdDiretor($pessoaDiretor->getIdPessoa());
 					$controla->updateEmpresa($empresas);
 					$endereco->setIdEmpresa($empresas->getIdEmpresa());
@@ -1477,7 +1525,7 @@ if(isset($_POST))
 					{
 						$controla->cadastraEndereco($endereco);
 					}
-					//AtualizaÁ„o de EndereÁo da Empresa
+					//atualiza√ß√£o de endere√ßo da Empresa
 					
 					$controla->updateEmpresa($empresas);
 					
@@ -1490,7 +1538,7 @@ if(isset($_POST))
 					<b>DADOS DA Empresa</b><br>
 					{$empresas->mostraDados()}<br>
 					<br>
-					<b>ENDERE«O</b><br>
+					<b>endere√ßo</b><br>
 					{$endereco->mostraDadosEndereco()}<br>
 					<br>
 					<b>DIRETOR</b><br>
@@ -1498,7 +1546,7 @@ if(isset($_POST))
 					";
 					
 					$controla->enviarEmail($empresas->getNomeEmpresa(),$endereco->getEmailEndereco(),"Cadastro de Pessoa",$descricao);
-					$mensagem = "AtualizaÁ„o de Empresas realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
+					$mensagem = "atualiza√ß√£o de Empresas realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
 					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
 				}
 				else 
@@ -1524,7 +1572,7 @@ if(isset($_POST))
 					$veiculos->getPlacaVeiculos(trim($_POST['busca']));
 				}
 				else
-					$mensagem = 'Para efetuar a busca, vocÍ deve entrar com um par‚metro.';
+					$mensagem = 'Para efetuar a busca, voc√™ deve entrar com um par√¢metro.';
 				$logon = new Logon();
 				$logon = (object)$_SESSION['usuarioLogon'];
 				if($logon->getNivelAcessoLogin() != 5)
@@ -1565,7 +1613,7 @@ if(isset($_POST))
 				if($_POST['placa'] != '')
 					$veiculos->setPlacaVeiculos($_POST['placa']);
 				else
-					$mensagem .= "A placa do veÌculo deve ser informada";
+					$mensagem .= "A placa do Ve√≠culo deve ser informada";
 				
 				$veiculos->setMarcaVeiculos($_POST['marca']);
 				$veiculos->setModeloVeiculos($_POST['modelo']);
@@ -1603,7 +1651,7 @@ if(isset($_POST))
 				if($mensagem == '')
 				{
 					$controla->updateVeiculos($veiculos);
-					$mensagem = 'VeÌculo Alterado com sucesso.';
+					$mensagem = 'Ve√≠culo Alterado com sucesso.';
 					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
 				}
 				else
@@ -1631,7 +1679,7 @@ if(isset($_POST))
 					$cnh->setNumeroCnh(trim($_POST['busca']));
 				}
 				else
-					$mensagem = 'Para efetuar a busca, vocÍ deve entrar com um par‚metro.';
+					$mensagem = 'Para efetuar a busca, voc√™ deve entrar com um par√¢metro.';
 					
 				$logon = new Logon();
 				$logon = (object)$_SESSION['usuarioLogon'];
@@ -1699,22 +1747,22 @@ if(isset($_POST))
 				if($_POST['cnh'] != '')
 					$cnh->setNumeroCnh(trim($_POST['cnh']));
 				else
-					$mensagem .= 'VocÍ deve preencher o n˙mero da CNH.';
+					$mensagem .= 'voc√™ deve preencher o n√∫mero da CNH.';
 					
 				if($_POST['cnhuf'] != '')
 					$cnh->setUfCnh(trim(strtoupper($_POST['cnhuf'])));
 				else
-					$mensagem .= 'VocÍ deve selecionar o estado da carteira de habilitaÁ„o.';
+					$mensagem .= 'voc√™ deve selecionar o estado da carteira de habilita√ß√£o.';
 				
 				if($_POST['cnhcat'] != '')
 					$cnh->setCategoriaCnh(trim($_POST['cnhcat']));
 				else
-					$mensagem .= 'VocÍ deve informar a categoria da carteira de habilitaÁ„o.';
+					$mensagem .= 'voc√™ deve informar a categoria da carteira de habilita√ß√£o.';
 				
 				if($_POST['cnhvcto'] != '')
 					$cnh->setVencCnh($formataData->toDBDate($controla->validaData($_POST['cnhvcto'])));
 				else
-					$mensagem .= 'VocÍ deve informar o a data do vencimento da carteira de habilitaÁ„o.';
+					$mensagem .= 'voc√™ deve informar o a data do vencimento da carteira de habilita√ß√£o.';
 
 				if($mensagem == '')
 				{
@@ -1748,7 +1796,7 @@ if(isset($_POST))
 					$veiculos->setPlacaVeiculos(trim($_POST['busca']));
 				}
 				else
-					$mensagem = 'Para efetuar a busca, vocÍ deve entrar com um par‚metro.';
+					$mensagem = 'Para efetuar a busca, voc√™ deve entrar com um par√¢metro.';
 				
 				$logon = new Logon();
 				$logon = (object)$_SESSION['usuarioLogon'];
@@ -1801,7 +1849,7 @@ if(isset($_POST))
 				if($_POST['tult'] != '')
 					$revisoes->setDataRevisoes($formataData->toDBDate($controla->validaData($_POST['tult'])));
 				else	
-					$mensagem .= "A data da Revis„o deve ser preenchida.";
+					$mensagem .= "A data da Revis√£o deve ser preenchida.";
 					
 				$revisoes->setKmRevisoes($_POST['kult']);
 				
@@ -1813,7 +1861,7 @@ if(isset($_POST))
 				if($mensagem == '')
 				{
 					$controla->updateRevisoes($revisoes);
-					$mensagem = 'Revis„o alterado com sucesso.';
+					$mensagem = 'Revis√£o alterado com sucesso.';
 					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
 				}
 				else
@@ -1839,7 +1887,7 @@ if(isset($_POST))
 					$abastecimentos->setIdVeiculos(trim($_POST['veiculo']));
 				}
 				else
-					$mensagem = 'Para efetuar a busca, vocÍ deve entrar com um par‚metro.';
+					$mensagem = 'Para efetuar a busca, voc√™ deve entrar com um par√¢metro.';
 					
 				if($mensagem == '')
 				{

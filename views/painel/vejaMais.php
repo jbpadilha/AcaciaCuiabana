@@ -1,4 +1,3 @@
-
 <style>
 	body { margin:0px auto; padding:0px; font:normal 12px "Segoe UI", Verdana, Arial; color:#000; }
 	table { width:100%; }
@@ -38,12 +37,12 @@ if(!is_null($listaAniversarios) && $listaAniversarios->count() > 0)
 	foreach ($listaAniversarios as $pessoas)
 	{
 		if($cont == 0)
-			echo '<label class="ativo">Anivers·rio do Dia</label>';
+			echo '<label class="ativo">Anivers√°rio do Dia</label>';
 		$pessoaAtual = new Pessoa();
 		$pessoaAtual = (object)$pessoas;
 		$endereco = new Endereco();
 		$endereco = (object)$pessoaAtual->retornaEndereco(); 
-		echo '<label class="ativo" title="'.$formataData->toViewDate($pessoaAtual->getDataNascimentoPessoa()).'">Anivers·rio de '.$pessoaAtual->getNomePessoa().'&nbsp;&nbsp;<input type="button" value="Enviar E-mail" onclick="enviaEmail('.$endereco->getIdEndereco().',1,'.$pessoaAtual->getIdPessoa().')"/></label>';
+		echo '<label class="ativo" title="'.$formataData->toViewDate($pessoaAtual->getDataNascimentoPessoa()).'">Anivers√°rio de '.$pessoaAtual->getNomePessoa().'&nbsp;&nbsp;<input type="button" value="Enviar E-mail" onclick="enviaEmail('.$endereco->getIdEndereco().',1,'.$pessoaAtual->getIdPessoa().')"/></label>';
 		$cont++;
 	}
 	echo '<br><br>';
@@ -89,7 +88,7 @@ if(!is_null($listaIpva) && $listaIpva->count() > 0)
 	echo '<br><br>';
 }
 
-$listaSeguro = unserialize(base64_decode(trim($_GET['listaSeguro'])));
+$listaSeguro = base64_decode(trim($_GET['listaSeguro']));
 if(!is_null($listaSeguro) && $listaSeguro->count() > 0)
 {
 	$cont = 0;
@@ -136,7 +135,7 @@ if(!is_null($listaRevisoes) && $listaRevisoes->count() > 0)
 	foreach ($listaRevisoes as $revisoes)
 	{
 		if($cont == 0)
-			echo '<label class="ativo">Vencimento de Revis„o</label>';
+			echo '<label class="ativo">Vencimento de Revis√£o</label>';
 		$revisoesAtual = new Revisoes();
 		$revisoesAtual = $revisoes;
 		$veiculoAtual = new Veiculos();
@@ -147,7 +146,7 @@ if(!is_null($listaRevisoes) && $listaRevisoes->count() > 0)
 		$clientes = $veiculoAtual->retornaClientes();
 		$endereco = new Endereco();
 		$endereco = $clientes->getEnderecoCliente();
-		echo '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - Revis„o agendada&nbsp;&nbsp;<input type="button" value="Enviar E-mail" onclick="enviaEmail('.$endereco->getIdEndereco().',6,'.$revisoesAtual->getIdRevisoes().')"/></label>';
+		echo '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - Revis√£o agendada&nbsp;&nbsp;<input type="button" value="Enviar E-mail" onclick="enviaEmail('.$endereco->getIdEndereco().',6,'.$revisoesAtual->getIdRevisoes().')"/></label>';
 		$cont++;
 	}
 	echo '<br><br>';

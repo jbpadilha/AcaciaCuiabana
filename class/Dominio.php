@@ -1,9 +1,9 @@
 <?php
 /**
  * Interface Dominios do Sistema
- * @author João Batista Padilha e Silva
+ * @author JoÃ£o Batista Padilha e Silva
  * @link Dominio.php
- * @copyright João Batista Padilha e Silva Especialista em TI (http://www.joaopadilha.eti.br) / joao.padilha@globo.com
+ * @copyright JoÃ£o Batista Padilha e Silva Especialista em TI (http://www.joaopadilha.eti.br) / joao.padilha@globo.com
  * @version 1.0
  */
 class Dominio

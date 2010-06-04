@@ -10,7 +10,7 @@
 ?>
 <form method="post" action="../../class/RecebePostGet.php">
 	<p class="caption">Consulta abastecimentos</p>
-	<label>Veículo:
+	<label>VeÃ­culo:
 		<select name="veiculo">
 			<option></option>
 <?php
@@ -72,7 +72,7 @@
 			<td> KM marcado </td>
 			<td> Posto </td>
 			<td> Nota fiscal </td>
-			<td> Combustível </td>
+			<td> CombustÃ­vel </td>
 			<td> Qtd (litros) </td>
 			<td> Valor total </td>
 		</thead>

@@ -47,10 +47,10 @@
 					<option selected="selected"><?=SELECIONE?></option>
 					<option value="Casado" <?=($pessoa->getEstadoCivilPessoa()==="Casado")?"selected":""?>>Casado(a)</option>
 					<option value="Solteiro" <?=($pessoa->getEstadoCivilPessoa()==="Solteiro")?"selected":""?>>Solteiro(a)</option>
-					<option value="União Estável" <?=($pessoa->getEstadoCivilPessoa()==="União Estável")?"selected":""?>>União Estável</option>
+					<option value="UniÃ£o EstÃ¡vel" <?=($pessoa->getEstadoCivilPessoa()==="UniÃ£o EstÃ¡vel")?"selected":""?>>UniÃ£o EstÃ¡vel</option>
 				</select>
  			</label>
-			<label>Observações:
+			<label>ObservaÃ§Ãµes:
 				<input type="text" name="nota" value="<?=$pessoa->getComplementoPessoa()?>" />
  			</label>
 		</div>
@@ -58,7 +58,7 @@
 			<label>RG:
 				<input type="text" name="rg_cliente" value="<?=$pessoa->getRgPessoa()?>" class="doc" />
 			</label>
-			<label>Órgao Exp.:
+			<label>Ã³rgao Exp.:
 				<input type="text" name="orgexprg_cliente" value="<?=$pessoa->getOrgExpPessoa()?>" maxlength="3" class="small" />
 			</label>
 			<label>UF:
@@ -91,7 +91,7 @@
 		<label>Rua, avenida, logradouro:
 			<input type="text" name="rua_contato" value="<?=$endereco->getRuaEndereco()?>" class="long" />
 		</label>
-		<label>Número:
+		<label>nÃºmero:
 			<input type="text" name="numero" value="<?=$endereco->getRuaEndereco()?>" class="small" />
 		</label>
 		<br />
@@ -147,7 +147,7 @@
 		}
 	}
 ?>
-	<p class="caption">Dados do(a) cônjuge</p>
+	<p class="caption">Dados do(a) cÃ´njuge</p>
 	<fieldset>
 		<div class="left">
 			<label>Nome:

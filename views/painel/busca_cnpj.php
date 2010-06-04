@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="_css/formPadrao.css" type="text/css" media="all" />
 
 <form method="post" action="../../class/RecebePostGet.php">
-	<p class="caption">Consulta de Pessoa Jurídica</p>
+	<p class="caption">Consulta de Pessoa JurÃ­dica</p>
 
 	<label>Nome da empresa:
 		<input type="text" name="busca" class="long" />

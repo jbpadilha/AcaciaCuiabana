@@ -11,7 +11,7 @@ $destinatario = $avisa['email'];
 
 $headers = "MIME-Version: 1.0\r\n";
 $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
-$headers .= "From: SMC - Serviço Despertador \r\n";
+$headers .= "From: SMC - ServiÃ§o Despertador \r\n";
 
 $conteudo = '
 	<style>
@@ -30,11 +30,11 @@ $conteudo = '
 	<div id="mensagem">
 		<div id="texto">
 			<img src="http://servicodespertador.net/imagens/fogos.jpg" alt="" title="" class="back" />
-			<img src="http://servicodespertador.net/imagens/brinde.png" alt="Se beber, não diriga!" title="Se beber, não diriga!" class="brinde" />
+			<img src="http://servicodespertador.net/imagens/brinde.png" alt="Se beber, NÃ£o diriga!" title="Se beber, NÃ£o diriga!" class="brinde" />
 			<br><br>
 			<p><b>'.$avisa["nome"].'</b>,</p>
 			<br><br><br>
-			<p>A <b class="smc">SMC</b> deseja a você e a sua família um 2010 repleto de <b>saúde</b> e <b>sucesso</b>.</p>
+			<p>A <b class="smc">SMC</b> deseja a vocÃª e a sua famï¿½lia um 2010 repleto de <b>saï¿½de</b> e <b>sucesso</b>.</p>
 			<br>
 			<p align="center"><b>Boas festas!</b></p>
 			<br>
@@ -42,10 +42,10 @@ $conteudo = '
 			</center>
 		</div>
 	<a href="http://servicodespertador.net" target="SMC" title="Visite-nos.">
-		<img src="http://servicodespertador.net/imagens/smc_logo.png" alt="A manutenção como deve ser feita." title="A manutenção como deve ser feita." class="logo" />
+		<img src="http://servicodespertador.net/imagens/smc_logo.png" alt="A manutenï¿½ï¿½o como deve ser feita." title="A manutenï¿½ï¿½o como deve ser feita." class="logo" />
 	</a>
 	
-	<p class="logo"> <b>S</b>erviços, <b>M</b>anutenção e <b>C</b>onsultoria. </p>
+	<p class="logo"> <b>S</b>erviï¿½os, <b>M</b>anutenï¿½ï¿½o e <b>C</b>onsultoria. </p>
 	<p> <a href="http://servicodespertador.net" target="SMC" title="Visite-nos.">servicodespertador.net</a>
 	</div>
 ';

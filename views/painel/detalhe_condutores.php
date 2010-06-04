@@ -55,7 +55,7 @@ if(isset($_GET['cnh']))
 			echo $pessoas->getNomePessoa();
 			?>
 	</p>
-    <p> <label>N° CNH - UF:</label> 
+    <p> <label>NÂº CNH - UF:</label> 
     <input type="text" name="cnh" value="<?=$cnh->getNumeroCnh()?>"	onkeypress="return Onlynumbers(event)" onKeyUp="return autoTab(this, 11, event);" maxlength="12" class="x3" />
 	<label class="x0">-						</label> 
 	<select name="cnhuf"  class="x15" />

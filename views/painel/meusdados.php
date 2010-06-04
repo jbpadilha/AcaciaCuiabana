@@ -25,11 +25,11 @@ if(!is_null($collVoPessoa))
 		<p> <label class="normal">Nascimento: 		</label> <input type="text" name="nascimento_cliente" 	readonly="readonly" value="<?=$formataData->toViewDate($pessoa->getDataNascimentoPessoa())?>" class="x2" /></p>
 		<p> <label class="normal">Sexo: 			</label> <input type="text" name="sexo_cliente" 		readonly="readonly" value="<?=$pessoa->getSexoPessoa()?>" class="x3" /></p>
 		<p> <label class="normal">Estado Civil: 	</label> <input type="text" name="ecivil_cliente" 		readonly="readonly" value="<?=$pessoa->getEstadoCivilPessoa()?>" class="x3"></p>
-		<p> <label class="normal">Observações: 	</label> <input type="text" name="nota" 				readonly="readonly" value="<?=$pessoa->getComplementoPessoa()?>" class="x9" /></p>
+		<p> <label class="normal">ObservaÃ§Ãµes: 	</label> <input type="text" name="nota" 				readonly="readonly" value="<?=$pessoa->getComplementoPessoa()?>" class="x9" /></p>
 	</div>
 	<div id="right">
 		<p> <label class="normal">RG: 				</label> <input type="text" name="rg_cliente" 		readonly="readonly" value="<?=$pessoa->getRgPessoa()?>" class="x3" /></p>
-		<p> <label class="normal">Órgao Exped./UF: </label> <input type="text" name="orgexprg_cliente" readonly="readonly" value="<?=$pessoa->getOrgExpPessoa()?>" class="x1" />
+		<p> <label class="normal">Ã³rgao Exped./UF: </label> <input type="text" name="orgexprg_cliente" readonly="readonly" value="<?=$pessoa->getOrgExpPessoa()?>" class="x1" />
 		<label class="x0"> - </label>		 <input type="text" name="ufexprg_cliente" 	readonly="readonly" value="<?=$pessoa->getUfOrgExpPessoa()?>" class="x1"></p>
 		<p> <label class="normal">CPF: 			</label> <input type="text" name="cpf_cliente" 	  	readonly="readonly" value="<?=$pessoa->getCpfPessoa()?>" class="x3" /></p>
 </fieldset>
@@ -70,7 +70,7 @@ if($pessoa->getIdConjuguePessoa() != null)
 		$pessoaConjugue = $collVoConjugue[0];
 	}
 ?>
-<fieldset> <legend>Dados do cônjuge</legend>
+<fieldset> <legend>Dados do cÃ´njuge</legend>
 <div id="left">
 		<p><label class="normal">Nome: 					</label> <input type="text" name="nome_conjuge"  readonly="readonly" value="<?=$pessoaConjugue->getNomePessoa()?>" class="x9" /></p>
 </div>

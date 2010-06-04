@@ -13,8 +13,8 @@ $logon = $_SESSION["usuarioLogon"];
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	<title>SMC - Cadastro de clientes (Pessoa física)</title>
-	<meta name="Description" content="SMC - Novo cadastro de Pessoa Física" >
+	<title>SMC - Cadastro de clientes (Pessoa fÃ­sica)</title>
+	<meta name="Description" content="SMC - Novo cadastro de Pessoa fÃ­sica" >
 	<meta http-equiv="X-UA-Compatible" content="IE=7" > 
 	<link rel="stylesheet" href="../css/meucpf.css" type="text/css" media="all" >
 	<script type="text/javascript" language="javascript" src="../scripts/full.js" > </script>
@@ -43,16 +43,16 @@ elseif (isset($_GET['idVeiculosAlterar']) && $_GET['idVeiculosAlterar'] != '')
 }
 ?>
 <input type="hidden" name="idVeiculos" id="idVeiculos" value="<?=$veiculos->getIdVeiculos()?>"/>
-<fieldset> <p class="caption" onclick="blocking('geral');" > Informações gerais do veículo <span class="borda"> </span> </p>
+<fieldset> <p class="caption" onclick="blocking('geral');" > InformaÃ§Ãµes gerais do VeÃ­culo <span class="borda"> </span> </p>
 	<div id="geral">
 		<div id="left" >
 			<p> <label> Placa: </label> <input type="text" name="placa" value="<?=$veiculos->getPlacaVeiculos()?>" onKeyUp="return autoTab(this, 7, event);" maxlength="7" class="placa" /> </p>
 			<p> <label> Marca: </label> <input type="text" name="marca" value="<?=$veiculos->getMarcaVeiculos()?>" class="x4 upper" /> </p>
 			<p> <label> Modelo: </label> <input type="text" name="modelo" value="<?=$veiculos->getModeloVeiculos()?>" class="x4 upper" /> </p>
 			<p> <label> Cor: </label> <input type="text" name="cor" value="<?=$veiculos->getCorVeiculos()?>" class="x4 upper" /> </p>
-			<p> <label> Combustível: </label> <input type="text" name="combustivel" value="<?=$veiculos->getCombustivelVeiculos()?>" class="x4 upper" /> </p>
+			<p> <label> CombustÃ­vel: </label> <input type="text" name="combustivel" value="<?=$veiculos->getCombustivelVeiculos()?>" class="x4 upper" /> </p>
 			<p> <label> Capacidade: </label> <input type="text" name="capacidade" value="<?=$veiculos->getCapacidadeTanqueVeiculos()?>" onkeypress="return Onlynumbers(event)" onKeyUp="return autoTab(this, 2, event);" maxlength="2" class="x15" /> </p>
-			<p> <label> Ano de Fabricação: </label> <input type="text" name="anofab" value="<?$veiculos->getAnoFabricacaoVeiculos()?>" onkeypress="return mascara(event,this,'####');" onKeyUp="return autoTab(this, 4, event);" maxlength="4" class="x15" /> </p>
+			<p> <label> Ano de FabricaÃ§Ã£o: </label> <input type="text" name="anofab" value="<?$veiculos->getAnoFabricacaoVeiculos()?>" onkeypress="return mascara(event,this,'####');" onKeyUp="return autoTab(this, 4, event);" maxlength="4" class="x15" /> </p>
 		</div>		
 		<div id="right" >
 			<p> <label> Renavam: </label> <input type="text" name="renavam" value="<?=$veiculos->getRenavamVeiculos()?>" onkeypress="return mascara(event,this,'#########');" onKeyUp="return autoTab(this, 9, event);" maxlength="9" class="x3" /> </p>
@@ -66,11 +66,11 @@ elseif (isset($_GET['idVeiculosAlterar']) && $_GET['idVeiculosAlterar'] != '')
 				<option value="Bitrem" <?=($veiculos->getTipoVeiculos() == "Bitrem") ? "Selected" : ""?>>Bitrem</option>
 				<option value="Pickup" <?=($veiculos->getTipoVeiculos() == "Pickup") ? "Selected" : ""?>>Pickup</option>
 				<option value="Moto" <?=($veiculos->getTipoVeiculos() == "Moto") ? "Selected" : ""?>>Moto</option>
-				<option value="Caminhão" <?=($veiculos->getTipoVeiculos() == "Caminhão") ? "Selected" : ""?>>Caminhão</option>
+				<option value="CaminhÃ£o" <?=($veiculos->getTipoVeiculos() == "CaminhÃ£o") ? "Selected" : ""?>>CaminhÃ£o</option>
 				<option value="Carreta" <?=($veiculos->getTipoVeiculos() == "Carreta") ? "Selected" : ""?>>Carreta</option>
 			</p>
 				<p style="height:21px"> </p>
-			<p> <label> Código Fipe: </label> <input type="text" value="<?=$veiculos->getCodFipeVeiculos()?>" name="codigo_fipe" onkeypress="return mascara(event,this,'######-#');" onKeyUp="return autoTab(this, 8, event);" maxlength="8" > <label class="obs1">Opcional </label> </p>
+			<p> <label> CÃ³digo Fipe: </label> <input type="text" value="<?=$veiculos->getCodFipeVeiculos()?>" name="codigo_fipe" onkeypress="return mascara(event,this,'######-#');" onKeyUp="return autoTab(this, 8, event);" maxlength="8" > <label class="obs1">Opcional </label> </p>
 		</div>
 	</div>
 </fieldset>
@@ -86,13 +86,13 @@ elseif (isset($_GET['idVeiculosAlterar']) && $_GET['idVeiculosAlterar'] != '')
 				<option value="MT" <?=($veiculos->getEstadoNfVeiculos()=="MT")?"MT":""?>>MT</option>
 				</select>
 			</p>
-			<p> <label> Proprietário: </label> <input type="text" value="<?=$veiculos->getProprietarioNfVeiculos()?>" name="proprietario_nf" class="x9 nome" /> </p>
-			<p> <label> Arrendatário: </label> <input type="text" value="<?=$veiculos->getArrendatarioNfVeiculos()?>" name="arrendatario_nf" class="x9 nome" /> </p>
+			<p> <label> ProprietÃ¡rio: </label> <input type="text" value="<?=$veiculos->getProprietarioNfVeiculos()?>" name="proprietario_nf" class="x9 nome" /> </p>
+			<p> <label> ArrendatÃ¡rio: </label> <input type="text" value="<?=$veiculos->getArrendatarioNfVeiculos()?>" name="arrendatario_nf" class="x9 nome" /> </p>
 		</div>
 		<div id="right">
 			<p> <label> Placa anterior: </label> <input type="text" value="<?=$veiculos->getPlacaNfVeiculos()?>" name="placa_nf" onKeyUp="return autoTab(this, 7, event);" maxlength="7" class="placa" /> </p>
-			<p> <label> Número da NF: </label> <input type="text" value="<?=$veiculos->getNumeroNfVeiculos()?>" name="numero_nf" class="x3 upper" /> </p>
-			<p> <label> Data de aquisição: </label> <input type="text" value="<?=$formataData->toViewDate($veiculos->getDataNfVeiculos())?>" name="data_nf" onkeypress="return mascara(event,this,'##/##/####');return Onlynumbers(event);" onKeyUp="return autoTab(this, 10, event);" maxlength="10" class="x3" /> </p>
+			<p> <label> nÃºmero da NF: </label> <input type="text" value="<?=$veiculos->getNumeroNfVeiculos()?>" name="numero_nf" class="x3 upper" /> </p>
+			<p> <label> Data de aquisiÃ§Ã£o: </label> <input type="text" value="<?=$formataData->toViewDate($veiculos->getDataNfVeiculos())?>" name="data_nf" onkeypress="return mascara(event,this,'##/##/####');return Onlynumbers(event);" onKeyUp="return autoTab(this, 10, event);" maxlength="10" class="x3" /> </p>
 			<p> <label> Data da entrega: </label> <input type="text" value="<?=$formataData->toViewDate($veiculos->getDataEntregaNfVeiculos())?>" name="data_entrega_nf" onkeypress="return mascara(event,this,'##/##/####');return Onlynumbers(event);" onKeyUp="return autoTab(this, 10, event);" maxlength="10" class="x3" /> </p>
 			<p> <label> KM Entrega: </label> <input type="text" value="<?=$veiculos->getKmEntregaNfVeiculos()?>" name="km_entrega_nf" onkeypress="return mascara(event,this,'###############');" maxlength="15" class="x3" /> </p>
 		</div>
@@ -101,7 +101,7 @@ elseif (isset($_GET['idVeiculosAlterar']) && $_GET['idVeiculosAlterar'] != '')
 
 <fieldset> <!-- Garantia e Vencimentos -->
 	<div id="left" >
-		<fieldset> <p class="caption" onclick="blocking('garantia');" > Garantia e manutenção <span class="borda"> </span> </p>
+		<fieldset> <p class="caption" onclick="blocking('garantia');" > Garantia e manutenÃ§Ã£o <span class="borda"> </span> </p>
 			<div id="garantia">
 				<p> <label> Tempo: </label> <input type="text" value="<?=$veiculos->getTempoGarantiaNfVeiculos()?>" name="tempo_garantia" onkeypress="return mascara(event,this,'####');" maxlength="4" class="x2" /> </p>
 				<p> <label> KM: </label> <input type="text" value="<?=$veiculos->getKmGarantiaVeiculos()?>" name="km_garantia" maxlength="10" onkeypress="return mascara(event,this,'###############');" class="x2" /> </p>
