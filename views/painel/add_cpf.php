@@ -10,8 +10,8 @@
 	$logon = $_SESSION["usuarioLogon"];
 
 	$pessoa = new Pessoa();
-	if(isset($_GET['pessoa'])) {
-		$pessoa = unserialize(base64_decode($_GET['pessoa']));
+	if(isset($_SESSION['pessoaAtual'])) {
+		$pessoa = $_SESSION['pessoaAtual'];
 	}
 
 ?>
@@ -59,8 +59,8 @@
 <?php
 	$endereco= new Endereco();
 
-	if(isset($_GET['endereco'])) {
-		$endereco = unserialize(base64_decode($_GET['endereco']));
+	if(isset($_SESSION['enderecoAtual'])) {
+		$endereco = $_SESSION['enderecoAtual'];
 	}
 ?>
 
@@ -96,8 +96,8 @@
 <?php 
 	$pessoaConjugue = new Pessoa();
 	
-	if(isset($_GET['pessoaConjugue'])) {
-		$pessoaConjugue = (object) unserialize(base64_decode($_GET['pessoaConjugue']));
+	if(isset($_SESSION['pessoaConjugueAtual'])) {
+		$pessoaConjugue = $_SESSION['pessoaConjugueAtual'];
 	}
 ?>
 <fieldset>
