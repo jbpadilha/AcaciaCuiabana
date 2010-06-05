@@ -8,7 +8,7 @@
 <p>Confira a tabela:</p>
 
 <table class="vencipva">
-	<tr><td class="topo"> Placas com ï¿½ltimo nÃºmero igual a 			</td>
+	<tr><td class="topo"> Placas com ï¿½ltimo número igual a 			</td>
 		<td class="topo"> Recolhimento em cota ï¿½nica (desc. 5%) 	</td>
 		<td class="topo"> Recolhimento integral ou parcelamento 	</td>
 		<td class="topo"> Recolhimento integral com multa 			</td></tr>

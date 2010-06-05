@@ -1,24 +1,24 @@
 <?php
 /**
- * Classe de Persist√™ncia do Sistema. Inclus√£o / Altera√ß√£o / Dele√ß√£o
- * @author Jo√£o Batista Padilha e Silva	
+ * Classe de PersistÍncia do Sistema. Inclus„o / AlteraÁ„o / DeleÁ„o
+ * @author Jo„o Batista Padilha e Silva	
  * @link DAO.php
- * @copyright Jo√£o Batista Padilha e Silva Especialista em TI (http://www.joaopadilha.eti.br) / joao.padilha@globo.com
+ * @copyright Jo„o Batista Padilha e Silva Especialista em TI (http://www.joaopadilha.eti.br) / joao.padilha@globo.com
  * @version 1.0
  */
 class DAO
 {
 	
 	/**
-	 *  M√©todo de retorno do ultimo Id Inserido na tabela
-	 * @author Jo√£o Batista Padilha e Silva  * @param connect $conexao
+	 *  MÈtodo de retorno do ultimo Id Inserido na tabela
+	 * @author Jo„o Batista Padilha e Silva  * @param connect $conexao
 	 * @return int
 	*/
 	public function ultimoIdInserido($conexao)
 	{
 		$prepare = mysqli_prepare($conexao,"SELECT LAST_INSERT_ID()");
 		if(!mysqli_stmt_execute($prepare))
-			throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+			throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 		$id = "";
 		mysqli_stmt_bind_result($prepare,$id);
 		while(mysqli_stmt_fetch($prepare))
@@ -29,8 +29,8 @@ class DAO
 	}
 	
 	/**
-	 * M√©todo de cadastramento de Clientes
-	 * @author Jo√£o Batista Padilha e Silva
+	 * MÈtodo de cadastramento de Clientes
+	 * @author Jo„o Batista Padilha e Silva
 	 * @param Logon $logon
 	 */
 	public function cadastrarLogon(Logon $logon)
@@ -62,7 +62,7 @@ class DAO
 			$idClientes = $valueObj->getIdClientes();
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 		}
 		catch ( Exception $e)
 		{
@@ -72,8 +72,8 @@ class DAO
 	}
 	
 	/**
-	 * M√©todo de Altera√ß√£o de Usu√°rios
-	 * @author Jo√£o Batista Padilha e Silva
+	 * MÈtodo de AlteraÁ„o de Usu·rios
+	 * @author Jo„o Batista Padilha e Silva
 	 * @param Logon $logon
 	 */
 	public function updateLogon(Logon $logon)
@@ -102,7 +102,7 @@ class DAO
 			$idClientes = $valueObj->getIdClientes();
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel realizar a opera√ß√£o.");
+				throw new Exception("N„o foi posss„vel realizar a operaÁ„o.");
 		}
 		catch ( Exception $e)
 		{
@@ -112,8 +112,8 @@ class DAO
 	}
 	
 	/**
-	 * M√©todo de update de senha de Logon
-	 * @author Jo√£o Batista Padilha e Silva
+	 * MÈtodo de update de senha de Logon
+	 * @author Jo„o Batista Padilha e Silva
 	 * @param Logon $logon
 	 */
 	public function alteraSenhaLogon(Logon $logon)
@@ -134,7 +134,7 @@ class DAO
 			$idlogon = $valueObj->getIdLogin();
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel realizar a opera√ß√£o.");
+				throw new Exception("N„o foi posss„vel realizar a operaÁ„o.");
 		}
 		catch ( Exception $e)
 		{
@@ -144,7 +144,7 @@ class DAO
 	}
 	
 	/**
-	 * M√©todo de cadastramento de pessoa
+	 * MÈtodo de cadastramento de pessoa
 	 * @param Pessoa $pessoa
 	 */
 	public function cadastrarPessoa(Pessoa $pessoa)
@@ -186,7 +186,7 @@ class DAO
 			$idCliente = $valueObj->getIdCliente();
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 			return $ultimoId = self::ultimoIdInserido($conecta);
 		}
@@ -197,7 +197,7 @@ class DAO
 	}
 
 	/**
-	 * M√©todo de atualiza√ß√£o de pessoa
+	 * MÈtodo de atualizaÁ„o de pessoa
 	 * @param Pessoa $pessoa
 	 */
 	public function updatePessoa(Pessoa $pessoa)
@@ -240,7 +240,7 @@ class DAO
 			$idPessoa = $valueObj->getIdPessoa();
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 			return $ultimoId = self::ultimoIdInserido($conecta);
 		}
@@ -251,7 +251,7 @@ class DAO
 	}
 	
 	/**
-	 * M√©todo de cadastramento de endere√ßo
+	 * MÈtodo de cadastramento de endereÁo
 	 * @param Endereco $endereco
 	 */
 	public function cadastrarEndereco(Endereco $endereco)
@@ -296,7 +296,7 @@ class DAO
 			
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 		}
 		catch ( Exception $e)
@@ -306,7 +306,7 @@ class DAO
 	}
 
 	/**
-	 * M√©todo de UPDATE do endereco
+	 * MÈtodo de UPDATE do endereco
 	 * @param Endereco $endereco
 	 */
 	public function updateEndereco(Endereco $endereco)
@@ -352,7 +352,7 @@ class DAO
 			$idEndereco = $valueObj->getIdEndereco();
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 		}
 		catch ( Exception $e)
@@ -362,7 +362,7 @@ class DAO
 	}
 	
 	/**
-	 * M√©todo de Cadastrar uma empresa
+	 * MÈtodo de Cadastrar uma empresa
 	 * @param $empresas
 	 */
 	public function cadastrarEmpresa(Empresas $empresas)
@@ -400,7 +400,7 @@ class DAO
 			$idClientes = $valueObj->getIdClientes();			
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 				
 			return $ultimoId = self::ultimoIdInserido($conecta);
 		}
@@ -411,7 +411,7 @@ class DAO
 	}
 
 	/**
-	 * M√©todo de Update em Empresa
+	 * MÈtodo de Update em Empresa
 	 * @param Empresas $empresas
 	 */
 	public function updateEmpresa(Empresas $empresas)
@@ -452,7 +452,7 @@ class DAO
 			$idClientes = $valueObj->getIdClientes();		
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 		}
 		catch ( Exception $e)
@@ -462,7 +462,7 @@ class DAO
 	}
 	
 	/**
-	 * M√©todo de cadastramento de clientes
+	 * MÈtodo de cadastramento de clientes
 	 * @param Clientes $clientes
 	 */
 	public function cadastrarClientes(Clientes $clientes)
@@ -487,7 +487,7 @@ class DAO
 			$idEmpresa = $valueObj->getIdEmpresa();			
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 			return $ultimoId = self::ultimoIdInserido($conecta);
 		}
@@ -498,7 +498,7 @@ class DAO
 	}
 
 	/**
-	 * M√©todo de atualiza√ß√£o em Clientes
+	 * MÈtodo de atualizaÁ„o em Clientes
 	 * @param Clientes $clientes
 	 */
 	public function updateClientes(Clientes $clientes)
@@ -525,7 +525,7 @@ class DAO
 			$idClientes = $valueObj->getIdClientes();			
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 		}
 		catch ( Exception $e)
@@ -535,7 +535,7 @@ class DAO
 	}
 
 	/**
-	 * M√©todo de Cadastramento de Ve√≠culos
+	 * MÈtodo de Cadastramento de Ves„culos
 	 * @param Veiculos $veiculos
 	 */
 	public function cadastrarVeiculos(Veiculos $veiculos)
@@ -622,7 +622,7 @@ class DAO
 			$idClientes = $valueObj->getIdClientes();			
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 			return $ultimoId = self::ultimoIdInserido($conecta);
 		}
@@ -633,7 +633,7 @@ class DAO
 	}
 	
 	/**
-	 * M√©todo de Updade em Ve√≠culos
+	 * MÈtodo de Updade em Ves„culos
 	 * @param Veiculos $veiculos
 	 */
 	public function updateVeiculos(Veiculos $veiculos)
@@ -721,7 +721,7 @@ class DAO
 			$idVeiculos = $valueObj->getIdVeiculos();	
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 		}
 		catch ( Exception $e)
@@ -731,7 +731,7 @@ class DAO
 	}
 	
 	/**
-	 * M√©todo de cadastramento de Cnh
+	 * MÈtodo de cadastramento de Cnh
 	 * @param Cnh $cnh
 	 */
 	public function cadastrarCnh(Cnh $cnh)
@@ -757,7 +757,7 @@ class DAO
 			$vencCnh = $valueObj->getVencCnh();			
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 			return $ultimoId = self::ultimoIdInserido($conecta);
 		}
@@ -768,7 +768,7 @@ class DAO
 	}
 	
 	/**
-	 * M√©todo de atualiza√ß√£o de Cnh
+	 * MÈtodo de atualizaÁ„o de Cnh
 	 * @param Cnh $cnh
 	 */
 	public function updateCnh(Cnh $cnh)
@@ -795,7 +795,7 @@ class DAO
 			$idCnh = $valueObj->getIdCnh();		
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 		}
 		catch ( Exception $e)
@@ -805,7 +805,7 @@ class DAO
 	}
 
 	/**
-	 * M√©todo de Cadastramento de Condutores
+	 * MÈtodo de Cadastramento de Condutores
 	 * @param Condutores $condutores
 	 */
 	public function cadastrarCondutor(Condutores $condutores)
@@ -831,7 +831,7 @@ class DAO
 			$idCnh = $valueObj->getIdCnh();			
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 		}
 		catch ( Exception $e)
@@ -841,7 +841,7 @@ class DAO
 	}
 	
 	/**
-	 * M√©todo de atualiza√ß√£o de Condutores
+	 * MÈtodo de atualizaÁ„o de Condutores
 	 * @param Condutores $condutores
 	 */
 	public function updateCondutor(Condutores $condutores)
@@ -868,7 +868,7 @@ class DAO
 			$idCondutores = $valueObj->getIdCondutores();		
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 		}
 		catch ( Exception $e)
@@ -878,7 +878,7 @@ class DAO
 	}
 	
 	/**
-	 * M√©todo de cadastramento de Tipo de Revis√µes
+	 * MÈtodo de cadastramento de Tipo de Revis√µes
 	 * @param Tiporevisoes $tipoRevisoes
 	 */
 	public function cadastrarTipoRevisoes(Tiporevisoes $tipoRevisoes)
@@ -898,7 +898,7 @@ class DAO
 			$descricaoTipoRevisoes = $valueObj->getDescricaoTipoRevisoes();			
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 		}
 		catch ( Exception $e)
@@ -908,7 +908,7 @@ class DAO
 	}
 	
 	/**
-	 * M√©todo de atualiza√ß√£o de Tipo de Revis√µes
+	 * MÈtodo de atualizaÁ„o de Tipo de Revis√µes
 	 * @param Tiporevisoes $tipoRevisoes
 	 */
 	public function updateTipoRevisoes(Tiporevisoes $tipoRevisoes)
@@ -928,7 +928,7 @@ class DAO
 			$idTipoRevisoes = $valueObj->getIdTipoRevisoes();	
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 		}
 		catch ( Exception $e)
@@ -938,7 +938,7 @@ class DAO
 	}
 	
 	/**
-	 * M√©todo de cadastramento de Revis√µes
+	 * MÈtodo de cadastramento de Revis√µes
 	 * @param Revisoes $revisoes
 	 */
 	public function cadastrarRevisoes(Revisoes $revisoes)
@@ -972,7 +972,7 @@ class DAO
 			$idTipoRevisoes = $valueObj->getIdTipoRevisoes();			
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 		}
 		catch ( Exception $e)
@@ -982,7 +982,7 @@ class DAO
 	}
 	
 	/**
-	 * M√©todo de atualiza√ß√£o de Revis√µes
+	 * MÈtodo de atualizaÁ„o de Revis√µes
 	 * @param Revisoes $revisoes
 	 */
 	public function updateRevisoes(Revisoes $revisoes)
@@ -1017,7 +1017,7 @@ class DAO
 			$idRevisoes = $valueObj->getIdRevisoes();			
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 		}
 		catch ( Exception $e)
@@ -1027,7 +1027,7 @@ class DAO
 	}
 
 	/**
-	 * M√©todo de cadastramento de Abastecimentos
+	 * MÈtodo de cadastramento de Abastecimentos
 	 * @param Abastecimentos $abastecimentos
 	 */
 	public function cadastrarAbastecimentos(Abastecimentos $abastecimentos)
@@ -1067,7 +1067,7 @@ class DAO
 			$idPessoa = $valueObj->getIdPessoa();	
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 		}
 		catch ( Exception $e)
@@ -1077,7 +1077,7 @@ class DAO
 	}
 	
 	/**
-	 * M√©todo de atualiza√ß√£o de Abastecimentos
+	 * MÈtodo de atualizaÁ„o de Abastecimentos
 	 * @param Abastecimentos $abastecimentos
 	 */
 	public function updateAbastecimentos(Abastecimentos $abastecimentos)
@@ -1117,7 +1117,7 @@ class DAO
 			$idAbastecimentos = $valueObj->getIdAbastecimentos();
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 		}
 		catch ( Exception $e)
@@ -1127,7 +1127,7 @@ class DAO
 	}
 	
 	/**
-	 * M√©todo de Cadastramento de Avisos
+	 * MÈtodo de Cadastramento de Avisos
 	 * @param Avisos $avisos
 	 */
 	public function cadastrarAvisos(Avisos $avisos)
@@ -1151,7 +1151,7 @@ class DAO
 			$assuntoAvisos = $valueObj->getAssuntoAvisos();	
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 		}
 		catch ( Exception $e)
@@ -1161,7 +1161,7 @@ class DAO
 	}
 	
 	/**
-	 * M√©todo de atualiza√ß√£o de Aviso de Veiculos
+	 * MÈtodo de atualizaÁ„o de Aviso de Veiculos
 	 * @param Avisosveiculos $avisosVeiculos
 	 */
 	public function updateAvisos(Avisos $avisos)
@@ -1186,7 +1186,7 @@ class DAO
 			$idAvisos = $valueObj->getIdAvisos();	
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("N√£o foi poss√≠vel conectar no banco de dados.");
+				throw new Exception("N„o foi posss„vel conectar no banco de dados.");
 			
 		}
 		catch ( Exception $e)

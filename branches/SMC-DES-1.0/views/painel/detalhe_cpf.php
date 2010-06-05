@@ -29,8 +29,8 @@ elseif (isset($_GET['idPessoaAlterar']) && $_GET['idPessoaAlterar'] != '')
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	<title>SMC - Cadastro de clientes (Pessoa fÃ­sica)</title>
-	<meta name="Description" content="SMC - Novo cadastro de Pessoa FÃ­sica" >
+	<title>SMC - Cadastro de clientes (Pessoa fsãsica)</title>
+	<meta name="Description" content="SMC - Novo cadastro de Pessoa Fsãsica" >
 	<meta http-equiv="X-UA-Compatible" content="IE=7" > 
 	<link rel="stylesheet" href="../css/meucpf.css" type="text/css" media="all" >
 	<script type="text/javascript" language="javascript" src="../scripts/full.js" > </script>
@@ -40,7 +40,7 @@ elseif (isset($_GET['idPessoaAlterar']) && $_GET['idPessoaAlterar'] != '')
 	function verificaHabilitaConjugue(selecao)
 	{
 		sty1 = document.getElementById('layerConjugue');
-		if (selecao.value == 'Casado(a)' || selecao.value == 'UniÃ£o EstÃ¡vel')
+		if (selecao.value == 'Casado(a)' || selecao.value == 'União Estável')
 		{ 
 			sty1.style.display = 'block';
 		}
@@ -77,7 +77,7 @@ elseif (isset($_GET['idPessoaAlterar']) && $_GET['idPessoaAlterar'] != '')
 			<option selected="selected"><?=SELECIONE?></option>
 			<option value="Casado" <?=($pessoa->getEstadoCivilPessoa()==="Casado")?"selected":""?>>Casado(a)</option>
 			<option value="Solteiro" <?=($pessoa->getEstadoCivilPessoa()==="Solteiro")?"selected":""?>>Solteiro(a)</option>
-			<option value="UniÃ£o EstÃ¡vel" <?=($pessoa->getEstadoCivilPessoa()==="UniÃ£o EstÃ¡vel")?"selected":""?>>UniÃ£o EstÃ¡vel</option>
+			<option value="União Estável" <?=($pessoa->getEstadoCivilPessoa()==="União Estável")?"selected":""?>>União Estável</option>
 		</select></p>
 		<p><label></label></p>
 	</div>
@@ -109,7 +109,7 @@ elseif (isset($_GET['idPessoaAlterar']) && $_GET['idPessoaAlterar'] != '')
 }
 ?>
 
-<fieldset><p class="caption"> Dados de endereÃ§o <span class="borda"></span></p>
+<fieldset><p class="caption"> Dados de endereço <span class="borda"></span></p>
 <input type="hidden" id="idEndereco" name="idEndereco" value="<?=$endereco->getIdEndereco()?>">
 <div id="left">
 		<p><label>Rua, avenida, logradouro:</label><input type="text" name="rua"  value="<?=$endereco->getRuaEndereco()?>" class="x9" /></p>
@@ -145,7 +145,7 @@ elseif (isset($_GET['idPessoaAlterar']) && $_GET['idPessoaAlterar'] != '')
 }
 ?>
 <input type="hidden" id="idPessoaConjugue" name="idPessoaConjugue" value="<?=$pessoaConjugue->getIdPessoa()?>">
-<fieldset id="layerConjugue"><p class="caption"> Dados do(a) cÃ´njuge <span class="borda"></span></p>
+<fieldset id="layerConjugue"><p class="caption"> Dados do(a) cônjuge <span class="borda"></span></p>
 	<div id="left">
 		<p><label>Nome:</label><input type="text" id="nomeConjugue" name="nomeConjugue" value="<?=$pessoaConjugue->getNomePessoa()?>" class="x3" onfocus="foco('nomeConjugue', 'nome foco_on');" onblur="foco('nomeConjugue', 'nome foco_off');" /></p>
 		<p><label>Nascimento:</label><input type="text" name="dataNascimentoConjugue" id="dataNascimentoConjugue" value="<?=$formataData->toViewDate($pessoaConjugue->getDataNascimentoPessoa())?>" onfocus="foco('dataNascimentoConjugue', 'data foco_on');" onblur="foco('dataNascimentoConjugue', 'data foco_off');" onkeypress="return mascara(event,this,'##/##/####');return Onlynumbers(event);" onKeyUp="return autoTab(this, 10, event);" maxlength="10" class="data" /></p>

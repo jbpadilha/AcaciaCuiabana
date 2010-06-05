@@ -28,8 +28,15 @@ function enviaEmail(idEndereco,tipo,idTipo)
 </script>
 <?php
 require ('../../class/Config.php');
+$listaAniversarios = null;
+$listaCnh = null;
+$listaIpva = null;
+$listaSeguro = null;
+$listaGarantia = null;
+$listaRevisoes = null;
 
-$listaAniversarios = unserialize(base64_decode(trim($_GET['listaPessoa'])));
+if(isset($_SESSION['listaPessoa']))
+	$listaAniversarios = $_SESSION['listaPessoa'];
 
 if(!is_null($listaAniversarios) && $listaAniversarios->count() > 0)
 {
@@ -37,18 +44,19 @@ if(!is_null($listaAniversarios) && $listaAniversarios->count() > 0)
 	foreach ($listaAniversarios as $pessoas)
 	{
 		if($cont == 0)
-			echo '<label class="ativo">Anivers√°rio do Dia</label>';
+			echo '<label class="ativo">Anivers·rio do Dia</label>';
 		$pessoaAtual = new Pessoa();
 		$pessoaAtual = (object)$pessoas;
 		$endereco = new Endereco();
 		$endereco = (object)$pessoaAtual->retornaEndereco(); 
-		echo '<label class="ativo" title="'.$formataData->toViewDate($pessoaAtual->getDataNascimentoPessoa()).'">Anivers√°rio de '.$pessoaAtual->getNomePessoa().'&nbsp;&nbsp;<input type="button" value="Enviar E-mail" onclick="enviaEmail('.$endereco->getIdEndereco().',1,'.$pessoaAtual->getIdPessoa().')"/></label>';
+		echo '<label class="ativo" title="'.$formataData->toViewDate($pessoaAtual->getDataNascimentoPessoa()).'">Anivers·rio de '.$pessoaAtual->getNomePessoa().'&nbsp;&nbsp;<input type="button" value="Enviar E-mail" onclick="enviaEmail('.$endereco->getIdEndereco().',1,'.$pessoaAtual->getIdPessoa().')"/></label>';
 		$cont++;
 	}
 	echo '<br><br>';
 }
 
-$listaCnh = unserialize(base64_decode(trim($_GET['listaCnh'])));
+if(isset($_SESSION['listaCnh']))
+	$listaCnh = $_SESSION['listaCnh'];
 if(!is_null($listaCnh)  && $listaCnh->count() > 0)
 {
 	$cont = 0;
@@ -68,7 +76,8 @@ if(!is_null($listaCnh)  && $listaCnh->count() > 0)
 	echo '<br><br>';
 }
 
-$listaIpva = unserialize(base64_decode(trim($_GET['listaIpva'])));
+if(isset($_SESSION['listaIpva']))
+	$listaIpva = $_SESSION['listaIpva'];
 if(!is_null($listaIpva) && $listaIpva->count() > 0)
 {
 	$cont = 0;
@@ -88,7 +97,8 @@ if(!is_null($listaIpva) && $listaIpva->count() > 0)
 	echo '<br><br>';
 }
 
-$listaSeguro = base64_decode(trim($_GET['listaSeguro']));
+if(isset($_SESSION['listaSeguro']))
+	$listaSeguro = $_SESSION['listaSeguro'];
 if(!is_null($listaSeguro) && $listaSeguro->count() > 0)
 {
 	$cont = 0;
@@ -108,7 +118,8 @@ if(!is_null($listaSeguro) && $listaSeguro->count() > 0)
 	echo '<br><br>';
 }
 
-$listaGarantia = unserialize(base64_decode(trim($_GET['listaGarantia'])));
+if(isset($_SESSION['listaGarantia']))
+	$listaGarantia = $_SESSION['listaGarantia'];
 if(!is_null($listaGarantia) && $listaGarantia->count() > 0)
 {
 	$cont = 0;
@@ -128,14 +139,15 @@ if(!is_null($listaGarantia) && $listaGarantia->count() > 0)
 	echo '<br><br>';
 }
 
-$listaRevisoes = unserialize(base64_decode(trim($_GET['listaRevisoes'])));
+if(isset($_SESSION['listaRevisoes']))
+	$listaRevisoes = $_SESSION['listaRevisoes'];
 if(!is_null($listaRevisoes) && $listaRevisoes->count() > 0)
 {
 	$cont = 0;
 	foreach ($listaRevisoes as $revisoes)
 	{
 		if($cont == 0)
-			echo '<label class="ativo">Vencimento de Revis√£o</label>';
+			echo '<label class="ativo">Vencimento de Revis„o</label>';
 		$revisoesAtual = new Revisoes();
 		$revisoesAtual = $revisoes;
 		$veiculoAtual = new Veiculos();
@@ -146,7 +158,7 @@ if(!is_null($listaRevisoes) && $listaRevisoes->count() > 0)
 		$clientes = $veiculoAtual->retornaClientes();
 		$endereco = new Endereco();
 		$endereco = $clientes->getEnderecoCliente();
-		echo '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - Revis√£o agendada&nbsp;&nbsp;<input type="button" value="Enviar E-mail" onclick="enviaEmail('.$endereco->getIdEndereco().',6,'.$revisoesAtual->getIdRevisoes().')"/></label>';
+		echo '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - Revis„o agendada&nbsp;&nbsp;<input type="button" value="Enviar E-mail" onclick="enviaEmail('.$endereco->getIdEndereco().',6,'.$revisoesAtual->getIdRevisoes().')"/></label>';
 		$cont++;
 	}
 	echo '<br><br>';

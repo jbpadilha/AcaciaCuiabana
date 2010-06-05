@@ -1,17 +1,17 @@
 <?php
 /**
- * Classe Value Object para transferÃªncia entre as camadas.
- * @author JoÃ£o Batista Padilha e Silva
+ * Classe Value Object para transferência entre as camadas.
+ * @author João Batista Padilha e Silva
  * @link QDAO.php
- * @copyright JoÃ£o Batista Padilha e Silva Especialista em TI (http://www.joaopadilha.eti.br) / joao.padilha@globo.com
+ * @copyright João Batista Padilha e Silva Especialista em TI (http://www.joaopadilha.eti.br) / joao.padilha@globo.com
  * @version 1.0
  */
 class QDAO 
 {
 	
 	/**
-	 * MÃ©todo de Procurar logon
-	 * @author JoÃ£o Padilha
+	 * Método de Procurar logon
+	 * @author João Padilha
 	 * @param Logon $logon
 	 */
 	public function findLogon(Logon $logon)
@@ -71,7 +71,7 @@ class QDAO
 			$idClientes = $valueObj->getIdClientes();
 			
 			if(!mysqli_stmt_execute($prepare))
-				throw new Exception("NÃ£o foi possÃ­vel conectar no banco de dados.");
+				throw new Exception("Não foi posssãvel conectar no banco de dados.");
 			
 			mysqli_stmt_bind_result($prepare,$idlogon,$login,$senha,$dataUltimoLogin,$nivelAcessoLogin,$idPessoa,$idClientes);
 			while(mysqli_stmt_fetch($prepare))
@@ -89,7 +89,7 @@ class QDAO
 		}
 		catch (Exception $e)
 		{
-			throw new Exception("NÃ£o foi possÃ­vel listar a tabela logon. ".$e->getMessage());
+			throw new Exception("Não foi posssãvel listar a tabela logon. ".$e->getMessage());
 		}
 		$conecta = null;
 		$valueObj = null;
@@ -97,7 +97,7 @@ class QDAO
 	}
 
 	/**
-	 * MÃ©todo de procura de Clientes
+	 * Método de procura de Clientes
 	 * @param $cliente
 	 */
 	public function findClientes(Clientes $cliente)
@@ -154,7 +154,7 @@ class QDAO
 			$idEmpresa = $valueObj->getIdEmpresa();
 			
 			if(!mysqli_stmt_execute($prepare))
-				throw new Exception("NÃ£o foi possÃ­vel conectar no banco de dados.");
+				throw new Exception("Não foi posssãvel conectar no banco de dados.");
 			
 			mysqli_stmt_bind_result($prepare,$idClientes,$dataRegistroClientes,$statusClientes,
 			$idPessoa,$idEmpresa);
@@ -171,7 +171,7 @@ class QDAO
 		}
 		catch (Exception $e)
 		{
-			throw new Exception("NÃ£o foi possÃ­vel listar a tabela Clientes. ".$e->getMessage());
+			throw new Exception("Não foi posssãvel listar a tabela Clientes. ".$e->getMessage());
 		}
 		$conecta = null;
 		$valueObj = null;
@@ -179,7 +179,7 @@ class QDAO
 	}
 
 	/**
-	 * MÃ©todo de procura de pessoas
+	 * Método de procura de pessoas
 	 * @param Pessoa $pessoa
 	 */
 	public function findPessoa(Pessoa $pessoa)
@@ -288,7 +288,7 @@ class QDAO
 			$cpfPessoa = $valueObj->getCpfPessoa();
 			$nomePessoa = "%".$valueObj->getNomePessoa()."%";
 			if(!mysqli_stmt_execute($prepare))
-				throw new Exception("NÃ£o foi possÃ­vel conectar no banco de dados.");
+				throw new Exception("Não foi posssãvel conectar no banco de dados.");
 			
 			mysqli_stmt_bind_result($prepare,$idPessoa,$cpfPessoa,$nomePessoa,$dataNascimentoPessoa,$sexoPessoa,
 			$estadoCivilPessoa,$rgPessoa,$orgExpPessoa,$ufOrgExpPessoa,$complementoPessoa,$idConjuguePessoa,$idCliente);
@@ -312,7 +312,7 @@ class QDAO
 		}
 		catch (Exception $e)
 		{
-			throw new Exception("NÃ£o foi possÃ­vel listar a tabela pessoa. ".$e->getMessage());
+			throw new Exception("Não foi posssãvel listar a tabela pessoa. ".$e->getMessage());
 		}
 		$conecta = null;
 		$valueObj = null;
@@ -320,7 +320,7 @@ class QDAO
 	}
 	
 	/**
-	 * MÃ©todo que retorna empresas
+	 * Método que retorna empresas
 	 * @param $empresas
 	 */
 	public function findEmpresas(Empresas $empresas)
@@ -387,7 +387,7 @@ class QDAO
 			$cnpjEmpresa = $valueObj->getCnpjEmpresa();
 			
 			if(!mysqli_stmt_execute($prepare))
-				throw new Exception("NÃ£o foi possÃ­vel conectar no banco de dados.");
+				throw new Exception("Não foi posssãvel conectar no banco de dados.");
 			
 			mysqli_stmt_bind_result($prepare,$idEmpresa,$cnpjEmpresa,$nomeEmpresa,
 			$nomeFantasiaEmpresa,$dataFundacaoEmpresa,$origemEmpresa,
@@ -411,7 +411,7 @@ class QDAO
 		}
 		catch (Exception $e)
 		{
-			throw new Exception("NÃ£o foi possÃ­vel listar a tabela empresas. ".$e->getMessage());
+			throw new Exception("Não foi posssãvel listar a tabela empresas. ".$e->getMessage());
 		}
 		$conecta = null;
 		$valueObj = null;
@@ -419,7 +419,7 @@ class QDAO
 	}
 	
 	/**
-	 * MÃ©todo de busca de EmpresaCondutores
+	 * Método de busca de EmpresaCondutores
 	 * @param EmpresaCondutores $empresaCondutores
 	 */
 	public function findEmpresasCondutores(EmpresaCondutores $empresaCondutores)
@@ -464,7 +464,7 @@ class QDAO
 			$idEmpresa = $valueObj->getIdEmpresa();
 			
 			if(!mysqli_stmt_execute($prepare))
-				throw new Exception("NÃ£o foi possÃ­vel conectar no banco de dados.");
+				throw new Exception("Não foi posssãvel conectar no banco de dados.");
 			
 			mysqli_stmt_bind_result($prepare,$idEmpresaCondutores,$idEmpresa,$idCondutores);
 			
@@ -479,7 +479,7 @@ class QDAO
 		}
 		catch (Exception $e)
 		{
-			throw new Exception("NÃ£o foi possÃ­vel listar a tabela empresascondutores. ".$e->getMessage());
+			throw new Exception("Não foi posssãvel listar a tabela empresascondutores. ".$e->getMessage());
 		}
 		$conecta = null;
 		$valueObj = null;
@@ -487,7 +487,7 @@ class QDAO
 	}
 
 	/**
-	 * MÃ©todo de procura de Condutores
+	 * Método de procura de Condutores
 	 * @param Condutores $condutores
 	 */
 	public function findCondutores(Condutores $condutores)
@@ -545,7 +545,7 @@ class QDAO
 			$idPessoa = $valueObj->getIdPessoa();
 			
 			if(!mysqli_stmt_execute($prepare))
-				throw new Exception("NÃ£o foi possÃ­vel conectar no banco de dados.");
+				throw new Exception("Não foi posssãvel conectar no banco de dados.");
 			
 			mysqli_stmt_bind_result($prepare,$idCondutores,$dataRegistroCondutores,
 			$obsCondutores,$idPessoa,$idCnh);
@@ -563,7 +563,7 @@ class QDAO
 		}
 		catch (Exception $e)
 		{
-			throw new Exception("NÃ£o foi possÃ­vel listar a tabela condutores. ".$e->getMessage());
+			throw new Exception("Não foi posssãvel listar a tabela condutores. ".$e->getMessage());
 		}
 		$conecta = null;
 		$valueObj = null;
@@ -571,7 +571,7 @@ class QDAO
 	}
 	
 	/**
-	 * MÃ©todo de procura de CNh
+	 * Método de procura de CNh
 	 * @param Cnh $cnh
 	 */
 	public function findCnh(Cnh $cnh)
@@ -666,7 +666,7 @@ class QDAO
 			$numeroCnh = $valueObj->getNumeroCnh();
 			
 			if(!mysqli_stmt_execute($prepare))
-				throw new Exception("NÃ£o foi possÃ­vel conectar no banco de dados.");
+				throw new Exception("Não foi posssãvel conectar no banco de dados.");
 			
 			mysqli_stmt_bind_result($prepare,$idCnh,$numeroCnh,$categoriaCnh,$ufCnh,$vencCnh);
 			while(mysqli_stmt_fetch($prepare))
@@ -682,7 +682,7 @@ class QDAO
 		}
 		catch (Exception $e)
 		{
-			throw new Exception("NÃ£o foi possÃ­vel listar a tabela Cnh. ".$e->getMessage());
+			throw new Exception("Não foi posssãvel listar a tabela Cnh. ".$e->getMessage());
 		}
 		$conecta = null;
 		$valueObj = null;
@@ -690,7 +690,7 @@ class QDAO
 	}
 	
 	/**
-	 * Lista de VeÃ­culos
+	 * Lista de Vesãculos
 	 * @param Veiculos $veiculos
 	 */
 	public function findVeiculos(Veiculos $veiculos)
@@ -863,7 +863,7 @@ class QDAO
 			$placaVeiculos = $valueObj->getPlacaVeiculos();
 			
 			if(!mysqli_stmt_execute($prepare))
-				throw new Exception("NÃ£o foi possÃ­vel conectar no banco de dados.");
+				throw new Exception("Não foi posssãvel conectar no banco de dados.");
 			
 			mysqli_stmt_bind_result($prepare,$idVeiculos,$placaVeiculos,$marcaVeiculos,
 			$modeloVeiculos,$corVeiculos,$combustivelVeiculos,$capacidadeTanqueVeiculos,
@@ -911,7 +911,7 @@ class QDAO
 		}
 		catch (Exception $e)
 		{
-			throw new Exception("NÃ£o foi possÃ­vel listar a tabela veiculos. ".$e->getMessage());
+			throw new Exception("Não foi posssãvel listar a tabela veiculos. ".$e->getMessage());
 		}
 		$conecta = null;
 		$valueObj = null;
@@ -919,7 +919,7 @@ class QDAO
 	}
 	
 	/**
-	 * MÃ©todo de procura de RevisÃµes
+	 * Método de procura de RevisÃµes
 	 * @param Revisoes $revisoes
 	 */
 	public function findRevisoes(Revisoes $revisoes)
@@ -1017,7 +1017,7 @@ class QDAO
 			$idVeiculos = $valueObj->getIdVeiculos();
 			
 			if(!mysqli_stmt_execute($prepare))
-				throw new Exception("NÃ£o foi possÃ­vel conectar no banco de dados.");
+				throw new Exception("Não foi posssãvel conectar no banco de dados.");
 			
 			mysqli_stmt_bind_result($prepare,$idRevisoes,$dataRevisoes,$kmRevisoes,$proxDataRevisoes,
 			$proxKmRevisoes,$oleoKmRevisoes,$idVeiculos,$idTipoRevisoes);
@@ -1037,7 +1037,7 @@ class QDAO
 		}
 		catch (Exception $e)
 		{
-			throw new Exception("NÃ£o foi possÃ­vel listar a tabela Revisoes. ".$e->getMessage());
+			throw new Exception("Não foi posssãvel listar a tabela Revisoes. ".$e->getMessage());
 		}
 		$conecta = null;
 		$valueObj = null;
@@ -1045,7 +1045,7 @@ class QDAO
 	}
 
 	/**
-	 * MÃ©todo de procura de Endereco
+	 * Método de procura de Endereco
 	 * @param Endereco $endereco
 	 */
 	public function findEndereco(Endereco $endereco)
@@ -1119,7 +1119,7 @@ class QDAO
 			$idEmpresa = $valueObj->getIdEmpresa();
 			
 			if(!mysqli_stmt_execute($prepare))
-				throw new Exception("NÃ£o foi possÃ­vel conectar no banco de dados.");
+				throw new Exception("Não foi posssãvel conectar no banco de dados.");
 			
 			mysqli_stmt_bind_result($prepare,$idEndereco,$ruaEndereco,$complementoEndereco,
 			$bairroEndereco,$cepEndereco,$estadoEndereco,$cidadeEndereco,$telefoneEndereco,
@@ -1145,7 +1145,7 @@ class QDAO
 		}
 		catch (Exception $e)
 		{
-			throw new Exception("NÃ£o foi possÃ­vel listar a tabela endereÃ§o. ".$e->getMessage());
+			throw new Exception("Não foi posssãvel listar a tabela endereço. ".$e->getMessage());
 		}
 		$conecta = null;
 		$valueObj = null;
@@ -1153,7 +1153,7 @@ class QDAO
 	}
 	
 	/**
-	 * MÃ©todo de Procura de Tipo de RevisÃµes
+	 * Método de Procura de Tipo de RevisÃµes
 	 * @param Revisoes $revisoes
 	 */
 	public function findTipoRevisoes(Tiporevisoes  $tipoRevisoes)
@@ -1190,7 +1190,7 @@ class QDAO
 			$idTipoRevisoes = $valueObj->getIdTipoRevisoes();
 			
 			if(!mysqli_stmt_execute($prepare))
-				throw new Exception("NÃ£o foi possÃ­vel conectar no banco de dados.");
+				throw new Exception("Não foi posssãvel conectar no banco de dados.");
 			
 			mysqli_stmt_bind_result($prepare,$idTipoRevisoes,$descricaoTipoRevisoes);
 			while(mysqli_stmt_fetch($prepare))
@@ -1203,7 +1203,7 @@ class QDAO
 		}
 		catch (Exception $e)
 		{
-			throw new Exception("NÃ£o foi possÃ­vel listar a tabela Tipo de RevisÃµes. ".$e->getMessage());
+			throw new Exception("Não foi posssãvel listar a tabela Tipo de RevisÃµes. ".$e->getMessage());
 		}
 		$conecta = null;
 		$valueObj = null;
@@ -1211,7 +1211,7 @@ class QDAO
 	}
 
 	/**
-	 * MÃ©todo de Procura/Listagem de Abastecimentos
+	 * Método de Procura/Listagem de Abastecimentos
 	 * @param Abastecimentos $abastecimentos
 	 */
 	public function findAbastecimentos(Abastecimentos $abastecimentos)
@@ -1274,7 +1274,7 @@ class QDAO
 			$idPessoa = $valueObj->getIdPessoa();
 			
 			if(!mysqli_stmt_execute($prepare))
-				throw new Exception("NÃ£o foi possÃ­vel conectar no banco de dados.");
+				throw new Exception("Não foi posssãvel conectar no banco de dados.");
 			
 			mysqli_stmt_bind_result($prepare,$idAbastecimentos,$dataAbastecimentos,
 			$kmAbastecimentos,$postoAbastecimentos,$nfAbastecimentos,$tipoCombustivelAbastecimentos,
@@ -1297,7 +1297,7 @@ class QDAO
 		}
 		catch (Exception $e)
 		{
-			throw new Exception("NÃ£o foi possÃ­vel listar a tabela Abastecimentos. ".$e->getMessage());
+			throw new Exception("Não foi posssãvel listar a tabela Abastecimentos. ".$e->getMessage());
 		}
 		$conecta = null;
 		$valueObj = null;
@@ -1305,7 +1305,7 @@ class QDAO
 	}
 
 	/**
-	 * MÃ©todo de Procura/Listagem de Aviso de VeÃ­culos
+	 * Método de Procura/Listagem de Aviso de Vesãculos
 	 * @param Avisosveiculos $avisoVeiculos
 	 */
 	public function findAvisos(Avisos $avisos)
@@ -1359,7 +1359,7 @@ class QDAO
 			$idClientes = $valueObj->getIdClientes();
 			
 			if(!mysqli_stmt_execute($prepare))
-				throw new Exception("NÃ£o foi possÃ­vel conectar no banco de dados.");
+				throw new Exception("Não foi posssãvel conectar no banco de dados.");
 			
 			mysqli_stmt_bind_result($prepare,$idAvisos,$dataAvisos,
 			$idClientes, $assuntoAvisos);
@@ -1375,7 +1375,7 @@ class QDAO
 		}
 		catch (Exception $e)
 		{
-			throw new Exception("NÃ£o foi possÃ­vel listar a tabela Aviso. ".$e->getMessage());
+			throw new Exception("Não foi posssãvel listar a tabela Aviso. ".$e->getMessage());
 		}
 		$conecta = null;
 		$valueObj = null;

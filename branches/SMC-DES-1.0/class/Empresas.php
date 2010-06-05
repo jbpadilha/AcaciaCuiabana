@@ -173,7 +173,7 @@ class Empresas
 	}
 	
 	/**
-	 * MÃ©todo que lista os dados da empresa
+	 * Método que lista os dados da empresa
 	 */
 	public function mostraDados()
 	{
@@ -183,10 +183,10 @@ class Empresas
 		<b>Nome da Empresa:</b> {$this->nomeEmpresa}<br>
 		<b>Nome Fantasia:</b> {$this->nomeFantasiaEmpresa}<br>
 		<b>CNPJ:</b> {$this->cnpjEmpresa}<br>
-		<b>Data de FundaÃ§Ã£o:</b> {$formataData->toViewDate($this->dataFundacaoEmpresa)}<br>
+		<b>Data de Fundação:</b> {$formataData->toViewDate($this->dataFundacaoEmpresa)}<br>
 		<b>Origem:</b> {$this->origemEmpresa}<br>
 		<b>Ramo:</b> {$this->ramoEmpresa}<br>
-		<b>InscriÃ§Ã£o Estadual:</b> {$this->inscricaoEstadualEmpresa}<br>
+		<b>Inscrição Estadual:</b> {$this->inscricaoEstadualEmpresa}<br>
 		";
 		return $string;
 		

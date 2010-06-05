@@ -14,7 +14,7 @@ $logon = $_SESSION["usuarioLogon"];
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<title>SMC - Busca Condutor</title>
-	<meta name="Description" content="SMC - Novo cadastro de Pessoa FÃ­sica" >
+	<meta name="Description" content="SMC - Novo cadastro de Pessoa Fsãsica" >
 	<meta http-equiv="X-UA-Compatible" content="IE=7" > 
 	<link rel="stylesheet" href="../css/meucpf.css" type="text/css" media="all" >
 	<link rel="stylesheet" href="../css/default.css" type="text/css" media="all">

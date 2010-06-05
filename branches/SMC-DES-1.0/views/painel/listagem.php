@@ -13,8 +13,8 @@ $logon = $_SESSION["usuarioLogon"];
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	<title>SMC - Cadastro de clientes (Pessoa fÃ­sica)</title>
-	<meta name="Description" content="SMC - Novo cadastro de Pessoa fÃ­sica" >
+	<title>SMC - Cadastro de clientes (Pessoa fsãsica)</title>
+	<meta name="Description" content="SMC - Novo cadastro de Pessoa fsãsica" >
 	<meta http-equiv="X-UA-Compatible" content="IE=7" > 
 	<link rel="stylesheet" href="../css/default.css" type="text/css" media="all" />
 	<script type="text/javascript" language="javascript" src="../scripts/full.js" > </script>
@@ -38,10 +38,10 @@ if(!is_null($collVoPessoa))
 	foreach ($collVoPessoa as $pessoas)
 	{
 		if($cont == 0)
-			echo '<label class="ativo">AniversÃ¡rio do Dia</label><br><br>';
+			echo '<label class="ativo">Aniversário do Dia</label><br><br>';
 		$pessoaAtual = new Logon();
 		$pessoaAtual = $pessoas;
-		echo '<label class="ativo" title="'.$formataData->toViewDate($pessoaAtual->getDataNascimentoPessoa()).'">AniversÃ¡rio de '.$pessoaAtual->getNomePessoa().'</label><br>';
+		echo '<label class="ativo" title="'.$formataData->toViewDate($pessoaAtual->getDataNascimentoPessoa()).'">Aniversário de '.$pessoaAtual->getNomePessoa().'</label><br>';
 		$cont++;
 	}
 	echo '<br><br>';
@@ -125,14 +125,14 @@ if(!is_null($collVoRevisoes))
 	foreach ($collVoRevisoes as $revisoes)
 	{
 		if($cont == 0)
-			echo '<label class="ativo">RevisÃ£o agendanda</label><br>';
+			echo '<label class="ativo">Revisão agendanda</label><br>';
 		$revisoesAtual = new Revisoes();
 		$revisoesAtual = $revisoes;
 		$veiculoAtual = new Veiculos();
 		$veiculoAtual->setIdVeiculos($revisoesAtual->getIdVeiculos());
 		$collVeiculos = $controla->findVeiculos($veiculoAtual);
 		$veiculoAtual = $collVeiculos[0]; 
-		echo '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - RevisÃ£o agendada</label><br>';
+		echo '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - Revisão agendada</label><br>';
 		$cont++;
 	}
 	echo '<br><br>';

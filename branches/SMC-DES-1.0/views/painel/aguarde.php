@@ -40,8 +40,8 @@ setTimeout("count()",1000);
 
 <div id="wait">
 
-<p>vocÃª serÃ¡ redirecionado para a pÃ¡gina com seus dados em <span id="tempo">10</span> segundos...</p>
-<p><a href="meusdados.php" target="_self">Clique aqui</a> se NÃ£o deseja esperar ou <a href="../home.php">aqui</a> para voltar Ã© pÃ¡gina principal.</p>
+<p>você será redirecionado para a página com seus dados em <span id="tempo">10</span> segundos...</p>
+<p><a href="meusdados.php" target="_self">Clique aqui</a> se Não deseja esperar ou <a href="../home.php">aqui</a> para voltar é página principal.</p>
 <br><br>
 <img src="../imagens/loading.gif" alt="loading">
 
@@ -78,8 +78,8 @@ setTimeout("count()",1000);
 
 <div id="wait">
 
-<p>vocÃª ainda NÃ£o possui um registro em nosso banco de dados.</p>
-<p>Para preencher o formulÃ¡rio <a href="add_meucpf.php" target="_self">clique aqui</a> ou aguarde <span id="tempo">10</span> segundos...</p>
+<p>você ainda Não possui um registro em nosso banco de dados.</p>
+<p>Para preencher o formulário <a href="add_meucpf.php" target="_self">clique aqui</a> ou aguarde <span id="tempo">10</span> segundos...</p>
 <br><br>
 <img src="../imagens/loading.gif" alt="loading">
 

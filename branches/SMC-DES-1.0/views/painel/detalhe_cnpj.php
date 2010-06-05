@@ -38,17 +38,17 @@ elseif (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
 <input type="hidden" id="idCliente" name="idCliente" value="<?=$logon->getIdClientes()?>">
 <input type="hidden" id="idEmpresa" name="idEmpresa" value="<?=$empresa->getIdEmpresa()?>">
 <fieldset> 
-<p class="caption" onclick="blocking('geral');" > Informações gerais <span class="borda"> </span> </p>
+<p class="caption" onclick="blocking('geral');" > Informa�ões gerais <span class="borda"> </span> </p>
 
 <div id="geral">
 	<div id="left">
-		<p> <label>Razão social: </label> <input type="text" name="nome_empresa" class="x9" value="<?=$empresa->getNomeEmpresa()?>" /> </p>
+		<p> <label>Raz�o social: </label> <input type="text" name="nome_empresa" class="x9" value="<?=$empresa->getNomeEmpresa()?>" /> </p>
 		<p> <label>Nome Fantasia: </label> <input type="text" name="nome_fantasia" class="x9" value="<?=$empresa->getNomeFantasiaEmpresa()?>" /> </p>
-		<p> <label>Data de Fundação: </label> <input type="text" name="data_fundacao" value="<?=$formataData->toViewDate($empresa->getDataFundacaoEmpresa())?>" onkeypress="return mascara(event,this,'##/##/####');" onKeyUp="return autoTab(this, 10, event);" maxlength="10" class="x2" /> </p>
+		<p> <label>Data de Funda��o: </label> <input type="text" name="data_fundacao" value="<?=$formataData->toViewDate($empresa->getDataFundacaoEmpresa())?>" onkeypress="return mascara(event,this,'##/##/####');" onKeyUp="return autoTab(this, 10, event);" maxlength="10" class="x2" /> </p>
 	</div>
 	<div id="right">
 		<p> <label>CNPJ: </label> <input type="text" name="cnpj" value="<?=$empresa->getCnpjEmpresa()?>" onkeypress="return mascara(event,this,'##.###.###/####-##');" onKeyUp="return autoTab(this, 18, event);" maxlength="18" /> </p>
-		<p> <label>Inscrição Estadual: </label> <input type="text" name="insc" value="<?=$empresa->getInscricaoEstadualEmpresa()?>" /> </p>
+		<p> <label>Inscri��o Estadual: </label> <input type="text" name="insc" value="<?=$empresa->getInscricaoEstadualEmpresa()?>" /> </p>
 		<p> <label>Ramo de atividade: </label>  <input type="text"  name="ramo" class="x3" value="<?=$empresa->getRamoEmpresa()?>" ></p>
 		<p> <label>Origem: </label> 
 		<select name="origem" class="x3" id="origem">
@@ -119,7 +119,7 @@ elseif (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
 		<select name="preenche" onchange="sty6 = document.getElementById('layerFrm6'); if (this.value == 'Sim') { sty6.style.display = 'block'; IrPara('nome_diretor'); } else { sty6.style.display = 'none'; sty5.style.display = 'none'; };" >
 			<option> </option>
 			<option value="Sim">Sim</option>
-			<option value="Não">Não</option>
+			<option value="N�o">N�o</option>
 		</select>
 	</p>
 	<div id="layerFrm6">
@@ -133,11 +133,11 @@ elseif (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
 			<option value="F"<?=($pessoa->getSexoPessoa()=="F")?"selected":""?>>Feminino</option>
 		</select>
 		</p>
-		<p><label>Estado Civil:</label><select name="estadoCivil" onchange="sty1 = document.getElementById('layerFrm1');if (this.value == 'Casado(a)' || this.value == 'União Estável'){ sty1.style.visibility = 'visible';sty1.style.display = 'block'}else{ sty1.style.visibility = 'hidden';sty1.style.display = 'none'};" class="x3" >
+		<p><label>Estado Civil:</label><select name="estadoCivil" onchange="sty1 = document.getElementById('layerFrm1');if (this.value == 'Casado(a)' || this.value == 'Uni�o Est�vel'){ sty1.style.visibility = 'visible';sty1.style.display = 'block'}else{ sty1.style.visibility = 'hidden';sty1.style.display = 'none'};" class="x3" >
 			<option selected="selected"><?=SELECIONE?></option>
 			<option value="Casado" <?=($pessoa->getEstadoCivilPessoa()==="Casado")?"selected":""?>>Casado(a)</option>
 			<option value="Solteiro" <?=($pessoa->getEstadoCivilPessoa()==="Solteiro")?"selected":""?>>Solteiro(a)</option>
-			<option value="União Estável" <?=($pessoa->getEstadoCivilPessoa()==="União Estável")?"selected":""?>>União Estável</option>
+			<option value="Uni�o Est�vel" <?=($pessoa->getEstadoCivilPessoa()==="Uni�o Est�vel")?"selected":""?>>Uni�o Est�vel</option>
 		</select></p>
 		<p><label></label></p>
 	</div>
@@ -169,7 +169,7 @@ elseif ($pessoa->getIdPessoa() != null)
 }
 ?>		
 <input type="hidden" id="idEnderecoDiretor" name="idEnderecoDiretor" value="<?=$enderecoDiretor->getIdEndereco()?>">		
-	<p class="caption"> Dados de endereço <span class="borda"></span></p>
+	<p class="caption"> Dados de endere�o <span class="borda"></span></p>
 	<div id="left">
 		<p><label>Rua, avenida, logradouro:</label><input type="text" name="ruaDiretor"  value="<?=$enderecoDiretor->getRuaEndereco()?>" class="x9" /></p>
 		<p><label>Complemento:</label><input type="text" name="complementoDiretor"  value="<?=$enderecoDiretor->getComplementoEndereco()?>" class="x9" /></p> 
@@ -210,7 +210,7 @@ elseif ($pessoa->getIdPessoa() != null)
 	?>
 	<input type="hidden" id="idConjugueDiretor" name="idConjugueDiretor" value="<?=$pessoaConjugue->getIdPessoa()?>">
 	<input type="hidden" id="idEnderecoConjugueDiretor" name="idEnderecoConjugueDiretor" value="<?=$enderecoConjugueDiretor->getIdEndereco()?>">
-	<div id="layerFrm1" > <p class="caption" onclick="blocking('conjuge');" > Dados do(a) cônjuge <span class="borda"> </span> </p>
+	<div id="layerFrm1" > <p class="caption" onclick="blocking('conjuge');" > Dados do(a) c�njuge <span class="borda"> </span> </p>
 		<div id="conjuge">
 			<div id="left">
 				<p><label>Nome:</label><input type="text" id="nomeConjugue" name="nomeConjugue" value="<?=$pessoaConjugue->getNomePessoa()?>" class="x3" onfocus="foco('nomeConjugue', 'nome foco_on');" onblur="foco('nomeConjugue', 'nome foco_off');" /></p>
