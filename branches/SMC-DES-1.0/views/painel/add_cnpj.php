@@ -11,9 +11,9 @@
 
 	$empresa = new Empresas();
 
-	if(isset($_GET['empresas']))
+	if(isset($_SESSION['empresaAtual']))
 	{
-		$empresa = (object)unserialize(base64_decode($_GET['empresas']));
+		$empresa = $_SESSION['empresaAtual'];
 	}
 ?>
 <form method="post" action="../../class/RecebePostGet.php">
@@ -41,9 +41,9 @@
 
 <?php
 $endereco= new Endereco();
-if(isset($_GET['endereco']))
+if(isset($_SESSION['enderecoEmpresaAtual']))
 {
-	$endereco = (object)unserialize(base64_decode($_GET['endereco']));
+	$endereco = $_SESSION['enderecoEmpresaAtual'];
 }
 ?>
 <fieldset>
@@ -78,8 +78,8 @@ if(isset($_GET['endereco']))
 <?php
 	$pessoa = new Pessoa();
 
-	if(isset($_GET['pessoaDiretor'])) {
-		$pessoa = (object)unserialize(base64_decode($_GET['pessoaDiretor']));
+	if(isset($_SESSION['pessoaDiretorAtual'])) {
+		$pessoa = $_SESSION['pessoaDiretorAtual'];
 	}
 ?>
 <fieldset>
@@ -129,8 +129,8 @@ if(isset($_GET['endereco']))
 <?php
 	$enderecoDiretor= new Endereco();
 
-	if(isset($_GET['enderecoDiretor'])) {
-		$enderecoDiretor = (object)unserialize(base64_decode($_GET['enderecoDiretor']));
+	if(isset($_SESSION['enderecoDiretorAtual'])) {
+		$enderecoDiretor = $_SESSION['enderecoDiretorAtual'];
 	}
 ?>
 
@@ -167,8 +167,8 @@ if(isset($_GET['endereco']))
 <?php
 	$pessoaConjugue = new Pessoa();
 
-	if(isset($_GET['pessoaConjugue'])) {
-		$pessoaConjugue = (object) unserialize(base64_decode($_GET['pessoaConjugue']));
+	if(isset($_SESSION['pessoaDiretorConjugueAtual'])) {
+		$pessoaConjugue = $_SESSION['pessoaDiretorConjugueAtual'];
 	}
 ?>
 	<p class="caption">Dados do(a) cônjuge</p>

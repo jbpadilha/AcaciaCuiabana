@@ -17,5 +17,11 @@ class Dominio
 	public $path_interno = "C:/Paginas_Sistemas/SMC/www/new";
 	public $path_imagens = "C:/Paginas_Sistemas/SMC/www/new/imagens";
 	
+	
+	public $ADMINISTRADOR = 5;
+	public $CLIENTE = 1;
+	public $ADMINISTRADOR_TXT = "Administrador";
+	public $CLIENTE_TXT = "Cliente";
+	
 }
 ?>

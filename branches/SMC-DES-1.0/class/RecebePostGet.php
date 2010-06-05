@@ -451,12 +451,14 @@ if(isset($_POST))
 		{
 			try 
 			{
+				$logon = new Logon();
+				$logon = $_SESSION["usuarioLogon"];
+				
 				$mensagem = '';
 				//CADASTRO DE PESSOA
 				$pessoaAtual = new Pessoa();
 				$pessoaConjugue = new Pessoa();
 				$endereco = new Endereco();
-				$pessoaAtual->setIdCliente($_POST['idCliente']);
 				
 				if($_POST['nome'] != '')
 					$pessoaAtual->setNomePessoa(trim($controla->validaNomes($_POST['nome'])));
@@ -560,19 +562,21 @@ if(isset($_POST))
 
 				if($mensagem == '')
 				{
-					//atualização de endereço
+					$pessoaAtual->setIdCliente($_POST['idCliente']);
+
+					//Cadastrando Conjugue
+					if($pessoaAtual->getEstadoCivilPessoa() == "Casado" || $pessoaAtual->getEstadoCivilPessoa() == "União Estável" )
+					{
+						$pessoaConjugue->setIdCliente($_POST['idCliente']);
+						$idConjugue = $controla->cadastraPessoa($pessoaConjugue);
+						$endereco->setIdPessoa($idConjugue);
+						$controla->cadastraEndereco($endereco);
+						$pessoaAtual->setIdConjuguePessoa($idConjugue);
+					}
 					$idPessoa = $controla->cadastraPessoa($pessoaAtual);
 					$endereco->setIdPessoa($idPessoa);
 					$controla->cadastraEndereco($endereco);
 					
-					//Cadastrando Conjugue
-					if($pessoaAtual->getEstadoCivilPessoa() == "Casado" || $pessoaAtual->getEstadoCivilPessoa() == "União Estável" )
-					{
-						$idConjugue = $controla->cadastraPessoa($pessoaConjugue);
-						$endereco->setIdPessoa($idConjugue);
-						$pessoaAtual->setIdConjuguePessoa($idConjugue);	
-						$controla->cadastraEndereco($endereco);
-					}
 					
 					$descricao = "
 					<b>DADOS DA PESSOA</b>
@@ -591,16 +595,25 @@ if(isset($_POST))
 					$controla->enviarEmail($pessoaAtual->getNomePessoa(),$endereco->getEmailEndereco(),"Cadastro de Pessoa",$descricao);
 					$mensagem = "Cadastro realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
 					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
+					unset($_SESSION['pessoaAtual']);
+					unset($_SESSION['enderecoAtual']);
+					unset($_SESSION['pessoaConjugueAtual']);
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cpf&msg=$mensagem&pessoa=".base64_encode(serialize($pessoaAtual))."&endereco=".base64_encode(serialize($endereco))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>"; 
+					$_SESSION['pessoaAtual'] = $pessoaAtual;
+					$_SESSION['enderecoAtual'] = $endereco;
+					$_SESSION['pessoaConjugueAtual'] = $pessoaConjugue;
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cpf&msg=$mensagem'</script>"; 
 				}
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cpf&msg=$mensagem&pessoa=".base64_encode(serialize($pessoaAtual))."&endereco=".base64_encode(serialize($endereco))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>";
+				$_SESSION['pessoaAtual'] = $pessoaAtual;
+				$_SESSION['endereco'] = $endereco;
+				$_SESSION['pessoaConjugue'] = $pessoaConjugue;
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cpf&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -796,10 +809,6 @@ if(isset($_POST))
 					$endereco->setIdEmpresa($idEmpresa);
 					$controla->cadastraEndereco($endereco);
 					
-					$cliente->setIdEmpresa($idEmpresa);
-					$controla->updateClientes($cliente);
-					
-					
 					$descricao = "
 					<b>DADOS DA Empresa</b>
 					{$empresas->mostraDados()}<br>
@@ -814,31 +823,33 @@ if(isset($_POST))
 						";
 					}
 					
-					$controla->enviarEmail($empresa->getNomeEmpresa(),$endereco->getEmailEndereco(),"Cadastro de Empresa",$descricao);
+					$controla->enviarEmail($empresas->getNomeEmpresa(),$endereco->getEmailEndereco(),"Cadastro de Empresa",$descricao);
 					$mensagem = "Cadastro realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
 					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
+					unset($_SESSION['empresaAtual']);
+					unset($_SESSION['enderecoEmpresaAtual']);
+					unset($_SESSION['pessoaDiretorAtual']);
+					unset($_SESSION['enderecoDiretorAtual']);
+					unset($_SESSION['pessoaDiretorConjugueAtual']);
 				}
 				else 
 				{
-					if(is_null($pessoaDiretor))
-						$pessoaDiretor = new Pessoa();
-					if(is_null($enderecoDiretor))
-						$enderecoDiretor = new Endereco();
-					if(is_null($pessoaConjugue))
-						$pessoaConjugue = new Pessoa();
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cnpj&msg=$mensagem&empresas=".base64_encode(serialize($empresas))."&endereco=".base64_encode(serialize($endereco))."&pessoaDiretor=".base64_encode(serialize($pessoaDiretor))."&enderecoDiretor=".base64_encode(serialize($enderecoDiretor))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>";
+					$_SESSION['empresaAtual'] = $empresas;
+					$_SESSION['enderecoEmpresaAtual'] = $endereco;
+					$_SESSION['pessoaDiretorAtual'] = $pessoaDiretor;
+					$_SESSION['enderecoDiretorAtual'] = $enderecoDiretor;
+					$_SESSION['pessoaDiretorConjugueAtual'] = $pessoaConjugue;
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cnpj&msg=$mensagem'</script>";
 				}
 			}
 			catch (Exception $e)
 			{
-				if(is_null($pessoaDiretor))
-					$pessoaDiretor = new Pessoa();
-				if(is_null($enderecoDiretor))
-					$enderecoDiretor = new Endereco();
-				if(is_null($pessoaConjugue))
-					$pessoaConjugue = new Pessoa();
-				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cnpj&msg=$mensagem&empresas=".base64_encode(serialize($empresas))."&endereco=".base64_encode(serialize($endereco))."&pessoaDiretor=".base64_encode(serialize($pessoaDiretor))."&enderecoDiretor=".base64_encode(serialize($enderecoDiretor))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>";
+				$_SESSION['empresaAtual'] = $empresas;
+				$_SESSION['enderecoEmpresaAtual'] = $endereco;
+				$_SESSION['pessoaDiretorAtual'] = $pessoaDiretor;
+				$_SESSION['enderecoDiretorAtual'] = $enderecoDiretor;
+				$_SESSION['pessoaDiretorConjugueAtual'] = $pessoaConjugue;
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cnpj&msg=$mensagem'</script>";
 			}
 		}
 		

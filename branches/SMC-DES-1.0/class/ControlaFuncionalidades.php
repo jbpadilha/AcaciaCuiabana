@@ -158,14 +158,23 @@ class ControlaFuncionalidades
 	 */
 	public function validaData($data)
 	{
-		$dataN = explode("/",$data);
-		if($dataN[2] < 1900)
+		if (!preg_match ('/^\d{1,2}\/\d{1,2}\/\d{4}$/', $data))
 		{
 			throw new Exception("Data Inválida.");
 		}
-		if(strlen($dataN[2]) < 4 || strlen($dataN[2]) > 4)
+		else
 		{
-			throw new Exception("Data Inválida.");
+			$dataN = explode("/",$data);
+			if($dataN[0]>31 || $dataN[0]<0)
+				throw new Exception("Data Inválida.");
+			
+			if($dataN[1]>12 || $dataN[1] < 1)
+				throw new Exception("Data Inválida.");
+				
+			if($dataN[2] < 1900)
+			{
+				throw new Exception("Data Inválida.");
+			}
 		}
 		return $data;
 	}
