@@ -19,7 +19,7 @@
 <form method="post" action="../../class/RecebePostGet.php">
 	<p class="caption">Cadastro de Revis√µes</p>
 	<fieldset>
-		<label>Placa do Ve√≠culo
+		<label>Placa do Ves„culo
 			<select name="placa">
 				<option></option>
 <?php 
@@ -42,7 +42,7 @@
 ?>
 			</select>
 		</label>
-		<label>descri√ß√£o do Servi√ßo:
+		<label>descriÁ„o do ServiÁo:
 			<select name="revisao">
 				<option></option>
 <?php 
@@ -63,17 +63,17 @@
 		</label>
 		<br />
 		<br />
-		<label><b>√∫ltima Revis√£o</b></label>
+		<label><b>˙ltima Revis„o</b></label>
 		<label>realizada no dia (x),
 			<input type="text" name="tult" maxlength="10" value="<?=$formataData->toViewDate($revisoes->getDataRevisoes())?>" class="data" />
 		</label>
 		<label>marcando (x)
 			<input type="text" name="kult" value="<?=$revisoes->getKmRevisoes()?>" class="small" />
 		</label>
-		<label>quil√¥metros.</label> 
+		<label>quilÙmetros.</label> 
 		<br />
 		<br />
-		<label><b>Pr√≥xima Revis√£o</b></label>
+		<label><b>Pr√≥xima Revis„o</b></label>
 		<label>em (x) meses
 			<input type="text" name="tprox" value="<?=$formataData->toViewDate($revisoes->getProxDataRevisoes())?>" maxlength="10" class="data" />
 		</label>

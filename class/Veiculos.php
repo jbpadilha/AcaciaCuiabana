@@ -206,7 +206,7 @@ class Veiculos
 	}
 
 	/**
-	 * @return the $arrendatÃ¡rioNfVeiculos
+	 * @return the $arrendatárioNfVeiculos
 	 */
 	public function getArrendatarioNfVeiculos() {
 		return $this->arrendatarioNfVeiculos;
@@ -402,7 +402,7 @@ class Veiculos
 	}
 
 	/**
-	 * @param $arrendatÃ¡rioNfVeiculos the $arrendatÃ¡rioNfVeiculos to set
+	 * @param $arrendatárioNfVeiculos the $arrendatárioNfVeiculos to set
 	 */
 	public function setArrendatarioNfVeiculos($arrendatarioNfVeiculos) {
 		$this->arrendatarioNfVeiculos = $arrendatarioNfVeiculos;

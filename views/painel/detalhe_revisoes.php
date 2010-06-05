@@ -29,8 +29,8 @@ elseif (isset($_GET['idRevisoesAlterar']) && $_GET['idRevisoesAlterar'] != '')
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	<title>SMC - Cadastro de clientes (Pessoa fÃ­sica)</title>
-	<meta name="Description" content="SMC - Nova RevisÃ£o" >
+	<title>SMC - Cadastro de clientes (Pessoa fsãsica)</title>
+	<meta name="Description" content="SMC - Nova Revisão" >
 	<meta http-equiv="X-UA-Compatible" content="IE=7" > 
 	<link rel="stylesheet" href="../css/meucpf.css" type="text/css" media="all" >
 	<script type="text/javascript" language="javascript" src="../scripts/full.js" > </script>
@@ -46,9 +46,9 @@ elseif (isset($_GET['idRevisoesAlterar']) && $_GET['idRevisoesAlterar'] != '')
 		<input type="hidden" id="idTipoRevisoes" name="idTipoRevisoes" value="<?=$revisoes->getIdTipoRevisoes()?>">
 		<input type="hidden" id="idVeiculos" name="idVeiculos" value="<?=$revisoes->getIdVeiculos()?>">
 		
-		<p class="caption"> AlteraÃ§Ã£o DE RevisÃµes </p>
+		<p class="caption"> Alteração DE RevisÃµes </p>
 		<p><span class="esq">
-			<label class="x5 tright" for="get_placa">VeÃ­culo (placa):</label>
+			<label class="x5 tright" for="get_placa">Vesãculo (placa):</label>
 			<?php 
 			$veiculos = new Veiculos();
 			$veiculos->setIdVeiculos($revisoes->getIdVeiculos());
@@ -62,24 +62,24 @@ elseif (isset($_GET['idRevisoesAlterar']) && $_GET['idRevisoesAlterar'] != '')
 			</span>
 		</p>
 		<p><span class="box">
-		  <label for="tult">		<b>Ãºltima RevisÃ£o</b> - realizada no dia</label>
+		  <label for="tult">		<b>última Revisão</b> - realizada no dia</label>
 		  <input type="text" name="tult" id="tult" class="x3 tcenter" onkeypress="return mascara(event,this,'##/##/####');" maxlength="10" value="<?=$formataData->toViewDate($revisoes->getDataRevisoes())?>" >
 		  
 		  <label for="kult">, marcando</label>
-		  <input type="text" name="kult" id="kult" class="x2 km tcenter" onkeypress="return Onlynumbers(event);" value="<?=$revisoes->getKmRevisoes()?>" ><label for="kprox">kilÃ´metros.</label> 
+		  <input type="text" name="kult" id="kult" class="x2 km tcenter" onkeypress="return Onlynumbers(event);" value="<?=$revisoes->getKmRevisoes()?>" ><label for="kprox">kilômetros.</label> 
 	    </span>
 	  </p>
 
 		<p id="add_rev_padrao">
 			<span id="linha" class="linha">
-		<label class="x5 tright" for="revisao">descriÃ§Ã£o do ServiÃ§o:</label>
+		<label class="x5 tright" for="revisao">descrição do Serviço:</label>
 				<?=$revisoes->getTipoRevisoes()?><br/><br/>
 				<span class="left">
 					<label for="tprox"><b>PrÃ³ximas RevisÃµes</b> - a cada</label>
 					<input type="text" name="tprox" id="tprox" class="x1 tcenter" maxlength="10" value="<?=$formataData->toViewDate($revisoes->getProxDataRevisoes())?>" />
 					
 					<label for="tprox">meses ou</label> 
-					<input type="text" name="kprox" id="kprox" class="x2 km tcenter" value="<?=$revisoes->getProxKmRevisoes()?>" /><label for="kprox">kilÃ´metros.</label> 
+					<input type="text" name="kprox" id="kprox" class="x2 km tcenter" value="<?=$revisoes->getProxKmRevisoes()?>" /><label for="kprox">kilômetros.</label> 
 				</span>
 			</span>
 		</p>

@@ -24,7 +24,7 @@ $logon = $_SESSION["usuarioLogon"];
 		<input type="hidden" id="acao" name="acao" value="buscaRevisoes">
 		<input type="hidden" id="idCliente" name="idCliente" value="<?=$logon->getIdClientes()?>">
 		<p class="caption"> Consulta Revisões</p>
-		<label>Placa do Veículo:</label>
+		<label>Placa do Ves�culo:</label>
 		<input name="busca" type="text" class="nome" >
 		<span class="borda"> </span> 
 		<p class="tright"> <input class="f_right" type="submit" value="Procurar" > </p>
@@ -79,13 +79,13 @@ $logon = $_SESSION["usuarioLogon"];
 			<td>Ordem</td>
 			<td>Placa</td>
 			<td>Ult. data</td>
-			<td>Revisão</td>
+			<td>Revis�o</td>
 			<td>Ult. km</td>
 			<td>Próx. data</td>
 			<td>Próx. KM</td>
 		</tr>
 		<tr class="dados">
-			<td>Revisão Nº <?=$cont?>	</td>
+			<td>Revis�o Nº <?=$cont?>	</td>
 			<td><?=$veiculos->getPlacaVeiculos()?></td>
 			<td><?=$formataData->toViewDate($revisoes->getDataRevisoes())?></td>
 			<td><?=$revisoes->getTipoRevisoes()?></td>

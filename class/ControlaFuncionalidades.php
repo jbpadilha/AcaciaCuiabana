@@ -22,9 +22,9 @@ require_once ('DAO.php');
 
 /**
  * Classe Controladora das funcionalidades do Sistema
- * @author Jo√£o Batista Padilha e Silva
+ * @author Jo„o Batista Padilha e Silva
  * @link Controla_Funcionalidades.php
- * @copyright Jo√£o Batista Padilha e Silva Especialista em TI (http://www.joaopadilha.eti.br) / joao.padilha@globo.com
+ * @copyright Jo„o Batista Padilha e Silva Especialista em TI (http://www.joaopadilha.eti.br) / joao.padilha@globo.com
  * @version 1.0
  */
 class ControlaFuncionalidades 
@@ -33,8 +33,8 @@ class ControlaFuncionalidades
 	private $valueObj = null;
 	
 	/**
-	 * M√©todo que destroi a sess√£o e encaminha para a pagina inicial
-	 * @author Jo√£o Batista Padilha e Silva
+	 * MÈtodo que destroi a sess„o e encaminha para a pagina inicial
+	 * @author Jo„o Batista Padilha e Silva
 	 */
 	public function destroiSessao()
 	{
@@ -46,7 +46,7 @@ class ControlaFuncionalidades
 	{
 		$dominio = new Dominio();
 		
-		$assunto_email = "Formul√°rio de Contato";
+		$assunto_email = "Formul·rio de Contato";
 	
 		$msg  = "<b>{$assunto}</b><br>
 		<b>E-mail:</b> $mail <br>
@@ -54,10 +54,10 @@ class ControlaFuncionalidades
 		
 		$emailRetorno = "cadastro@servicodespertador.net";
 		$headers = "Content-Type: text/html; charset=iso-8859-1\n";
-		$headers .="From: SMC Servi√ßo Despertador <$emailRetorno>";
+		$headers .="From: SMC ServiÁo Despertador <$emailRetorno>";
 		if (@mail($mail,$assunto_email,$msg,$headers))
 		{
-			$assunto = "Enviado E-mail para Usu√°rio pelo Servi√ßo Despertador - SMC";
+			$assunto = "Enviado E-mail para Usu·rio pelo ServiÁo Despertador - SMC";
 			mail($emailRetorno,$assunto_email,$msg,$headers);
 			$msgResposta = "Mensagem enviada com sucesso.";
 			return $msgResposta;
@@ -70,8 +70,8 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo que testa o e-mail verificando se o e-mail √© v√°lido.
-	 * @author Jo√£o Batista Padilha e Silva
+	 * MÈtodo que testa o e-mail verificando se o e-mail È v·lido.
+	 * @author Jo„o Batista Padilha e Silva
 	 * @param var $email 
 	 */
 	public function testaEmail($email = '')
@@ -80,14 +80,14 @@ class ControlaFuncionalidades
 		{
 			if (!preg_match ("/^[A-Za-z0-9]+([_.-][A-Za-z0-9]+)*@[A-Za-z0-9]+([_.-][A-Za-z0-9]+)*\\.[A-Za-z0-9]{2,4}$/", $email))
 			{
-		        throw new Exception("O Email √© inv√°lido.");
+		        throw new Exception("O Email È inv·lido.");
 		    }
 		}
 		return $email;
 	}
 	
 	/**
-	 * M√©todo que retira caracteres que possam prejudicar ao gravar no banco de dados
+	 * MÈtodo que retira caracteres que possam prejudicar ao gravar no banco de dados
 	 * @param unknown_type $html
 	 */
 	public function corrigeHTML($html)
@@ -101,20 +101,20 @@ class ControlaFuncionalidades
 	}	
 	
 	/**
-	 * M√©todo de valida√ß√£o de CPF
+	 * MÈtodo de validaÁ„o de CPF
 	 * @param $cpf
 	 */
 	public function validaCPF($cpf)
-	{	// Verifiva se o n√∫mero digitado cont√©m todos os digitos
+	{	// Verifiva se o n˙mero digitado contÈm todos os digitos
 	    $cpf = str_pad(ereg_replace('[^0-9]', '', $cpf), 11, '0', STR_PAD_LEFT);
 		
-		// Verifica se nenhuma das sequ√™ncias abaixo foi digitada, caso seja, retorna falso
+		// Verifica se nenhuma das sequÍncias abaixo foi digitada, caso seja, retorna falso
 	    if (strlen($cpf) != 11 || $cpf == '00000000000' || $cpf == '11111111111' || $cpf == '22222222222' || $cpf == '33333333333' || $cpf == '44444444444' || $cpf == '55555555555' || $cpf == '66666666666' || $cpf == '77777777777' || $cpf == '88888888888' || $cpf == '99999999999')
 		{
-			throw new Exception("CPF Inv√°lido.");
+			throw new Exception("CPF Inv·lido.");
 	    }
 		else
-		{   // Calcula os n√∫meros para verificar se o CPF √© verdadeiro
+		{   // Calcula os n˙meros para verificar se o CPF È verdadeiro
 	        for ($t = 9; $t < 11; $t++) {
 	            for ($d = 0, $c = 0; $c < $t; $c++) {
 	                $d += $cpf{$c} * (($t + 1) - $c);
@@ -123,7 +123,7 @@ class ControlaFuncionalidades
 	            $d = ((10 * $d) % 11) % 10;
 	
 	            if ($cpf{$c} != $d) {
-	                throw new Exception("CPF Inv√°lido.");
+	                throw new Exception("CPF Inv·lido.");
 	            }
 	        }
 	    }
@@ -138,12 +138,12 @@ class ControlaFuncionalidades
 	public function validaCNPJ($str)
 	{
 		if (!preg_match('|^(\d{2,3})\.?(\d{3})\.?(\d{3})\/?(\d{4})\-?(\d{2})$|', $str, $matches))
-			throw new Exception("CNPJ Inv√°lido.");
+			throw new Exception("CNPJ Inv·lido.");
 		return $str;
 	}
 	
 	/**
-	 * M√©todo que retira a mascara do CPF
+	 * MÈtodo que retira a mascara do CPF
 	 * @param string $cpf
 	 */
 	public function retiraMascaraCPF($cpf)
@@ -154,24 +154,24 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de valida√ß√£o de data
+	 * MÈtodo de validaÁ„o de data
 	 */
 	public function validaData($data)
 	{
 		$dataN = explode("/",$data);
 		if($dataN[2] < 1900)
 		{
-			throw new Exception("Data Inv√°lida.");
+			throw new Exception("Data Inv·lida.");
 		}
 		if(strlen($dataN[2]) < 4 || strlen($dataN[2]) > 4)
 		{
-			throw new Exception("Data Inv√°lida.");
+			throw new Exception("Data Inv·lida.");
 		}
 		return $data;
 	}
 	
 	/**
-	 * M√©todo que retira a mascara do CNPJ
+	 * MÈtodo que retira a mascara do CNPJ
 	 * @param string $cnpj
 	 */
 	public function retiraMascaraCNPJ($cnpj)
@@ -183,7 +183,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * valida√ß√£o de Tamanho de Nomes
+	 * validaÁ„o de Tamanho de Nomes
 	 * @param unknown_type $nomes
 	 */
 	public function validaNomes($nomes)
@@ -195,7 +195,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * valida√ß√£o de CPF
+	 * validaÁ„o de CPF
 	 * @param unknown_type $cpf
 	 */
 	public function validaCpfIgual($cpf)
@@ -206,13 +206,13 @@ class ControlaFuncionalidades
 		$collVo = $qdao->findPessoa($pessoa);
 		if(!is_null($collVo))
 		{
-			throw new Exception("CPF j√° cadastrado.");
+			throw new Exception("CPF j· cadastrado.");
 		}
 		return $cpf;
 	}
 
 	/**
-	 * valida√ß√£o de CNPJ
+	 * validaÁ„o de CNPJ
 	 * @param unknown_type $cnpj
 	 */
 	public function validaCnpjIgual($cnpj)
@@ -223,13 +223,13 @@ class ControlaFuncionalidades
 		$collVo = $qdao->findEmpresas($empresas);
 		if(!is_null($collVo))
 		{
-			throw new Exception("CNPJ j√° cadastrado.");
+			throw new Exception("CNPJ j· cadastrado.");
 		}
 		return $cnpj;
 	}
 
 	/**
-	 * valida√ß√£o de Veiculo
+	 * validaÁ„o de Veiculo
 	 * @param unknown_type $placa
 	 */
 	public function validaVeiculoIgual($placa)
@@ -240,13 +240,13 @@ class ControlaFuncionalidades
 		$collVo = $qdao->findVeiculos($veiculos);
 		if(!is_null($collVo))
 		{
-			throw new Exception("Ve√≠culo j√° cadastrado.");
+			throw new Exception("Ves„culo j· cadastrado.");
 		}
 		return $placa;
 	}
 
 	/**
-	 * valida√ß√£o de CNh
+	 * validaÁ„o de CNh
 	 * @param unknown_type $cnh
 	 */
 	public function validaCnhIgual($ncnh)
@@ -257,14 +257,14 @@ class ControlaFuncionalidades
 		$collVo = $qdao->findCnh($cnh);
 		if(!is_null($collVo))
 		{
-			throw new Exception("CNH j√° cadastrada.");
+			throw new Exception("CNH j· cadastrada.");
 		}
 		return $ncnh;
 	}
 	
 	/**
-	 * M√©todo de listagem de Usu√°rios
-	 * @author Jo√£o Batista Padilha e Silva
+	 * MÈtodo de listagem de Usu·rios
+	 * @author Jo„o Batista Padilha e Silva
 	 * @param Logon $logon
 	 * @return array $this->collVo
 	 */
@@ -283,7 +283,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de busca de Clientes
+	 * MÈtodo de busca de Clientes
 	 * @param Clientes $clientes
 	 */
 	public function findClientes(Clientes $clientes)
@@ -301,7 +301,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de busca de pessoas
+	 * MÈtodo de busca de pessoas
 	 * @param Pessoa $pessoa
 	 */
 	public function findPessoas(Pessoa $pessoa)
@@ -319,7 +319,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo que retorna empresa
+	 * MÈtodo que retorna empresa
 	 * @param Empresas $empresas
 	 */
 	public function findEmpresas(Empresas $empresas)
@@ -337,7 +337,7 @@ class ControlaFuncionalidades
 	}
 
 	/**
-	 * M√©todo de busca de Empresas Condutores
+	 * MÈtodo de busca de Empresas Condutores
 	 * @param EmpresaCondutores $empresaCondutores
 	 */
 	public function findEmpresasCond(EmpresaCondutores $empresaCondutores)
@@ -391,7 +391,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * Lista de Ve√≠culos
+	 * Lista de Ves„culos
 	 * @param Veiculos $veiculos
 	 */
 	public function findVeiculos(Veiculos $veiculos)
@@ -409,7 +409,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo que lista Revisoes
+	 * MÈtodo que lista Revisoes
 	 * @param $revisoes
 	 */
 	public function findRevisoes(Revisoes $revisoes)
@@ -427,7 +427,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo que lista endere√ßos
+	 * MÈtodo que lista endereÁos
 	 * @param Endereco $endereco
 	 */
 	public function findEndereco(Endereco $endereco)
@@ -445,7 +445,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de procura de Revis√µes
+	 * MÈtodo de procura de Revis√µes
 	 * @param Tiporevisoes $tipoRevisoes
 	 */
 	public function findTipoRevisoes(Tiporevisoes $tipoRevisoes)
@@ -463,7 +463,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de Procura/Listagem de Abastecimentos
+	 * MÈtodo de Procura/Listagem de Abastecimentos
 	 * @param Abastecimentos $abastecimentos
 	 */
 	public function findAbastecimentos(Abastecimentos $abastecimentos)
@@ -481,7 +481,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de Procura/Listagem de Avisos de Ve√≠culos
+	 * MÈtodo de Procura/Listagem de Avisos de Ves„culos
 	 * @param Avisos $avisosVeiculos
 	 */
 	public function findAvisos(Avisos $avisos)
@@ -499,7 +499,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de soma de datas
+	 * MÈtodo de soma de datas
 	 * @param DateTime $dataInicio
 	 * @param DateTime $dataFinal
 	 */
@@ -509,9 +509,9 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de listagem de anivers√°rios de clientes 
+	 * MÈtodo de listagem de anivers·rios de clientes 
 	 * @param Logon $usuario Logado , DateTime  $data
-	 * @author Jo√£o Padilha
+	 * @author Jo„o Padilha
 	 */
 	public function listarAniversariosClientes(Logon $logon, $data)
 	{
@@ -520,7 +520,7 @@ class ControlaFuncionalidades
 		if(!is_null($logon))
 		{
 			$collVoPessoas = new ArrayObject();
-			// Verificar anivers√°rios de Clientes - Caso Seja Administrador trazer todos.
+			// Verificar anivers·rios de Clientes - Caso Seja Administrador trazer todos.
 			if($logon->getNivelAcessoLogin() == 5)
 			{
 				$pessoa = new Pessoa();
@@ -557,7 +557,7 @@ class ControlaFuncionalidades
 		}
 		else
 		{
-			throw new Exception("N√£o existe usu√°rio logado.");
+			throw new Exception("N„o existe usu·rio logado.");
 		}
 	}
 	
@@ -629,12 +629,12 @@ class ControlaFuncionalidades
 		}
 		else
 		{
-			throw new Exception("N√£o existe usu√°rio logado.");
+			throw new Exception("N„o existe usu·rio logado.");
 		}
 	}
 	
 	/**
-	 * M√©todo que lista os IPVA vencidos
+	 * MÈtodo que lista os IPVA vencidos
 	 * @param Logon $logon
 	 * @param DateTime $data
 	 */
@@ -677,12 +677,12 @@ class ControlaFuncionalidades
 		}
 		else
 		{
-			throw new Exception("N√£o existe usu√°rio logado.");
+			throw new Exception("N„o existe usu·rio logado.");
 		}
 	}
 	
 	/**
-	 * M√©todo que lista os seguros vencidos dos Ve√≠culos
+	 * MÈtodo que lista os seguros vencidos dos Ves„culos
 	 * @param Logon $logon
 	 * @param DateTime $data
 	 */
@@ -725,12 +725,12 @@ class ControlaFuncionalidades
 		}
 		else
 		{
-			throw new Exception("N√£o existe usu√°rio logado.");
+			throw new Exception("N„o existe usu·rio logado.");
 		}
 	}
 	
 	/**
-	 * M√©todo para listar garantias de veiculos vencido
+	 * MÈtodo para listar garantias de veiculos vencido
 	 * @param Logon $logon
 	 * @param DateTime $data
 	 */
@@ -740,7 +740,7 @@ class ControlaFuncionalidades
 		$formataData = new FormataData();
 		if(!is_null($logon))
 		{
-			// Verificar Garantias Vencida dos Ve√≠culos dos clientes - Caso Seja Administrador trazer todos.
+			// Verificar Garantias Vencida dos Ves„culos dos clientes - Caso Seja Administrador trazer todos.
 			$collVoGarantias = new ArrayObject();
 			if($logon->getNivelAcessoLogin() == 5)
 			{
@@ -805,12 +805,12 @@ class ControlaFuncionalidades
 		}
 		else
 		{
-			throw new Exception("N√£o existe usu√°rio logado.");
+			throw new Exception("N„o existe usu·rio logado.");
 		}
 	}
 
 	/**
-	 * M√©todo que lista todas as revisoes por data
+	 * MÈtodo que lista todas as revisoes por data
 	 * @param $logon
 	 * @param $data
 	 */
@@ -820,7 +820,7 @@ class ControlaFuncionalidades
 		$data = explode("-",$data);
 		if(!is_null($logon))
 		{
-			// Verificar Revisoes dos Ve√≠culos dos clientes - Caso Seja Administrador trazer todos.
+			// Verificar Revisoes dos Ves„culos dos clientes - Caso Seja Administrador trazer todos.
 			$collVoRevisoes = new ArrayObject();
 			if($logon->getNivelAcessoLogin() == 5)
 			{
@@ -862,14 +862,14 @@ class ControlaFuncionalidades
 		}
 		else
 		{
-			throw new Exception("N√£o existe usu√°rio logado.");
+			throw new Exception("N„o existe usu·rio logado.");
 		}
 	}
 	
 	// FUNCIONALIDADE CADASTRO e UPDADE
 	
 	/**
-	 * M√©todo de UPDATE de usu√°rio
+	 * MÈtodo de UPDATE de usu·rio
 	 * @param Logon $logon
 	 */
 	public function updateLogon(Logon $logon)
@@ -886,7 +886,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de atualiza√ß√£o de Pessoa
+	 * MÈtodo de atualizaÁ„o de Pessoa
 	 * @param Pessoa $pessoa
 	 */
 	public function updatePessoa(Pessoa $pessoa)
@@ -903,7 +903,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de atualiza√ß√£o de Endereco
+	 * MÈtodo de atualizaÁ„o de Endereco
 	 * @param Endereco $endereco
 	 */
 	public function updateEndereco(Endereco $endereco)
@@ -920,7 +920,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de atualiza√ß√£o de Empresas
+	 * MÈtodo de atualizaÁ„o de Empresas
 	 * @param $empresas
 	 */
 	public function updateEmpresa(Empresas $empresas)
@@ -937,7 +937,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de atualiza√ß√£o de Clientes
+	 * MÈtodo de atualizaÁ„o de Clientes
 	 * @param Clientes $clientes
 	 */
 	public function updateClientes(Clientes $clientes)
@@ -954,7 +954,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de Update Ve√≠culos
+	 * MÈtodo de Update Ves„culos
 	 * @param $veiculos
 	 */
 	public function updateVeiculos(Veiculos $veiculos)
@@ -971,7 +971,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de atualiza√ß√£o de condutores
+	 * MÈtodo de atualizaÁ„o de condutores
 	 * @param Condutores $condutores
 	 */
 	public function updateCondutores(Condutores $condutores)
@@ -988,7 +988,7 @@ class ControlaFuncionalidades
 	}
 
 	/**
-	 * M√©todo de atualiza√ß√£o de Revisoes
+	 * MÈtodo de atualizaÁ„o de Revisoes
 	 * @param Revisoes $revisoes
 	 */
 	public function updateRevisoes(Revisoes $revisoes)
@@ -1005,7 +1005,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de atualiza√ß√£o de Revis√µes
+	 * MÈtodo de atualizaÁ„o de Revis√µes
 	 * @param Tiporevisoes $tipoRevisoes
 	 */
 	public function updateTipoRevisoes(Tiporevisoes $tipoRevisoes)
@@ -1022,7 +1022,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de atualiza√ß√£o de Abastecimentos
+	 * MÈtodo de atualizaÁ„o de Abastecimentos
 	 * @param Abastecimentos $abastecimentos
 	 */
 	public function updateAbastecimentos(Abastecimentos $abastecimentos)
@@ -1039,7 +1039,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de atualiza√ß√£o de Aviso de Ve√≠culos
+	 * MÈtodo de atualizaÁ„o de Aviso de Ves„culos
 	 * @param Avisos $avisosVeiculos
 	 */
 	public function updateAvisos(Avisos $avisos)
@@ -1056,7 +1056,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de atualiza√ß√£o de Cnh
+	 * MÈtodo de atualizaÁ„o de Cnh
 	 * @param Cnh $cnh
 	 */
 	public function updateCnh(Cnh $cnh)
@@ -1073,7 +1073,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de cadastramento de Logon
+	 * MÈtodo de cadastramento de Logon
 	 * @param Logon $logon
 	 */
 	public function cadastraLogon(Logon $logon)
@@ -1090,7 +1090,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de cadastramento de pessoa
+	 * MÈtodo de cadastramento de pessoa
 	 * @param Pessoa $pessoa
 	 */
 	public function cadastraPessoa(Pessoa $pessoa)
@@ -1107,7 +1107,7 @@ class ControlaFuncionalidades
 	}
 
 	/**
-	 * M√©todo de cadastramento de endere√ßo
+	 * MÈtodo de cadastramento de endereÁo
 	 * @param Endereco $endereco
 	 */
 	public function cadastraEndereco(Endereco $endereco)
@@ -1124,7 +1124,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de cadastramento de Empresas
+	 * MÈtodo de cadastramento de Empresas
 	 * @param Empresas $empresas
 	 */
 	public function cadastraEmpresa(Empresas $empresas)
@@ -1141,7 +1141,7 @@ class ControlaFuncionalidades
 	}
 
 	/**
-	 * M√©todo de cadastrar clientes
+	 * MÈtodo de cadastrar clientes
 	 * @param Clientes $clientes
 	 */
 	public function cadastraClientes(Clientes $clientes)
@@ -1158,7 +1158,7 @@ class ControlaFuncionalidades
 	}
 
 	/**
-	 * M√©todo de Cadastrar Ve√≠culos
+	 * MÈtodo de Cadastrar Ves„culos
 	 * @param $veiculos
 	 */
 	public function cadastraVeiculos(Veiculos $veiculos)
@@ -1175,7 +1175,7 @@ class ControlaFuncionalidades
 	}
 
 	/**
-	 * M√©todo de cadastramento de Cnh
+	 * MÈtodo de cadastramento de Cnh
 	 * @param Cnh $cnh
 	 */
 	public function cadastrarCnh(Cnh $cnh)
@@ -1192,7 +1192,7 @@ class ControlaFuncionalidades
 	}
 
 	/**
-	 * M√©todo de cadastramento de condutores
+	 * MÈtodo de cadastramento de condutores
 	 * @param Condutores $condutores
 	 */
 	public function cadastrarCondutores(Condutores $condutores)
@@ -1209,7 +1209,7 @@ class ControlaFuncionalidades
 	}
 
 	/**
-	 * M√©todo de Cadastrar Revis√µes
+	 * MÈtodo de Cadastrar Revis√µes
 	 * @param Revisoes $revisoes
 	 */
 	public function cadastrarRevisoes(Revisoes $revisoes)
@@ -1226,7 +1226,7 @@ class ControlaFuncionalidades
 	}
 
 	/**
-	 * M√©todo de Cadastramento de Tipo de Revis√µes
+	 * MÈtodo de Cadastramento de Tipo de Revis√µes
 	 * @param Tiporevisoes $tipoRevisoes
 	 */
 	public function cadastrarTipoRevisoes(Tiporevisoes $tipoRevisoes)
@@ -1243,7 +1243,7 @@ class ControlaFuncionalidades
 	}
 	
 	/**
-	 * M√©todo de Cadastramento de Abastecimentos
+	 * MÈtodo de Cadastramento de Abastecimentos
 	 * @param Abastecimentos $abastecimentos
 	 */
 	public function cadastrarAbastecimentos(Abastecimentos $abastecimentos)
@@ -1260,7 +1260,7 @@ class ControlaFuncionalidades
 	}
 
 	/**
-	 * M√©todo de Cadastramento de Avisos de Ve√≠culos
+	 * MÈtodo de Cadastramento de Avisos de Ves„culos
 	 * @param $avisosVeiculos
 	 */
 	public function cadastrarAvisos(Avisos $avisos)
@@ -1360,16 +1360,16 @@ class ControlaFuncionalidades
 						foreach ($collVoPessoa as $pessoas)
 						{
 							if($cont == 0)
-								$descricao .= '<label class="ativo">Anivers√°rio do Dia</label><br><br>';
+								$descricao .= '<label class="ativo">Anivers·rio do Dia</label><br><br>';
 							$pessoaAtual = new Logon();
 							$pessoaAtual = $pessoas;
-							$descricao .= '<label class="ativo" title="'.$formataData->toViewDate($pessoaAtual->getDataNascimentoPessoa()).'">Anivers√°rio de '.$pessoaAtual->getNomePessoa().'</label><br>';
+							$descricao .= '<label class="ativo" title="'.$formataData->toViewDate($pessoaAtual->getDataNascimentoPessoa()).'">Anivers·rio de '.$pessoaAtual->getNomePessoa().'</label><br>';
 							$cont++;
 						}
 						$descricao .= '<br><br>';
-						$this->enviarEmail($nome,$email,"SMC - Servi√ßo Despertador - Aviso de Anivers√°rio",$descricao);
+						$this->enviarEmail($nome,$email,"SMC - ServiÁo Despertador - Aviso de Anivers·rio",$descricao);
 						$avisosGrava = new Avisos();
-						$avisosGrava->setAssuntoAvisos("SMC - Servi√ßo Despertador - Aviso de Anivers√°rio");
+						$avisosGrava->setAssuntoAvisos("SMC - ServiÁo Despertador - Aviso de Anivers·rio");
 						$avisosGrava->setDataAvisos(date("Y-m-d H:i:s"));
 						$avisosGrava->setIdClientes($clientes->getIdClientes());
 						$this->cadastrarAvisos($avisosGrava);
@@ -1390,9 +1390,9 @@ class ControlaFuncionalidades
 							$cont++;
 						}
 						$descricao .= '<br><br>';
-						$this->enviarEmail($nome,$email,"SMC - Servi√ßo Despertador - Aviso de Vencimento de CNH",$descricao);
+						$this->enviarEmail($nome,$email,"SMC - ServiÁo Despertador - Aviso de Vencimento de CNH",$descricao);
 						$avisosGrava = new Avisos();
-						$avisosGrava->setAssuntoAvisos("SMC - Servi√ßo Despertador - Aviso de Vencimento de CNH");
+						$avisosGrava->setAssuntoAvisos("SMC - ServiÁo Despertador - Aviso de Vencimento de CNH");
 						$avisosGrava->setDataAvisos(date("Y-m-d H:i:s"));
 						$avisosGrava->setIdClientes($clientes->getIdClientes());
 						$this->cadastrarAvisos($avisosGrava);
@@ -1410,9 +1410,9 @@ class ControlaFuncionalidades
 							$cont++;
 						}
 						$descricao .= '<br><br>';
-						$this->enviarEmail($nome,$email,"SMC - Servi√ßo Despertador - Aviso de Vencimento de IPVa",$descricao);
+						$this->enviarEmail($nome,$email,"SMC - ServiÁo Despertador - Aviso de Vencimento de IPVa",$descricao);
 						$avisosGrava = new Avisos();
-						$avisosGrava->setAssuntoAvisos("SMC - Servi√ßo Despertador - Aviso de Vencimento de IPVA");
+						$avisosGrava->setAssuntoAvisos("SMC - ServiÁo Despertador - Aviso de Vencimento de IPVA");
 						$avisosGrava->setDataAvisos(date("Y-m-d H:i:s"));
 						$avisosGrava->setIdClientes($clientes->getIdClientes());
 						$this->cadastrarAvisos($avisosGrava);
@@ -1430,9 +1430,9 @@ class ControlaFuncionalidades
 							$cont++;
 						}
 						$descricao .= '<br><br>';
-						$this->enviarEmail($nome,$email,"SMC - Servi√ßo Despertador - Aviso de Vencimento de Seguro",$descricao);
+						$this->enviarEmail($nome,$email,"SMC - ServiÁo Despertador - Aviso de Vencimento de Seguro",$descricao);
 						$avisosGrava = new Avisos();
-						$avisosGrava->setAssuntoAvisos("SMC - Servi√ßo Despertador - Aviso de Vencimento de Seguro");
+						$avisosGrava->setAssuntoAvisos("SMC - ServiÁo Despertador - Aviso de Vencimento de Seguro");
 						$avisosGrava->setDataAvisos(date("Y-m-d H:i:s"));
 						$avisosGrava->setIdClientes($clientes->getIdClientes());
 						$this->cadastrarAvisos($avisosGrava);
@@ -1450,9 +1450,9 @@ class ControlaFuncionalidades
 							$cont++;
 						}
 						$descricao .= '<br><br>';
-						$this->enviarEmail($nome,$email,"SMC - Servi√ßo Despertador - Aviso de Vencimento de Garantia",$descricao);
+						$this->enviarEmail($nome,$email,"SMC - ServiÁo Despertador - Aviso de Vencimento de Garantia",$descricao);
 						$avisosGrava = new Avisos();
-						$avisosGrava->setAssuntoAvisos("SMC - Servi√ßo Despertador - Aviso de Vencimento de Garantia");
+						$avisosGrava->setAssuntoAvisos("SMC - ServiÁo Despertador - Aviso de Vencimento de Garantia");
 						$avisosGrava->setDataAvisos(date("Y-m-d H:i:s"));
 						$avisosGrava->setIdClientes($clientes->getIdClientes());
 						$this->cadastrarAvisos($avisosGrava);
@@ -1463,20 +1463,20 @@ class ControlaFuncionalidades
 						foreach ($collVoRevisoes as $revisoes)
 						{
 							if($cont == 0)
-								$descricao .= '<label class="ativo">Revis√£o agendanda</label><br>';
+								$descricao .= '<label class="ativo">Revis„o agendanda</label><br>';
 							$revisoesAtual = new Revisoes();
 							$revisoesAtual = $revisoes;
 							$veiculoAtual = new Veiculos();
 							$veiculoAtual->setIdVeiculos($revisoesAtual->getIdVeiculos());
 							$collVeiculos = $controla->findVeiculos($veiculoAtual);
 							$veiculoAtual = $collVeiculos[0]; 
-							$descricao .= '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - Revis√£o agendada</label><br>';
+							$descricao .= '<label class="ativo" title="">'.$veiculoAtual->getPlacaVeiculos().' - Revis„o agendada</label><br>';
 							$cont++;
 						}
 						$descricao .= '<br><br>';
-						$this->enviarEmail($nome,$email,"SMC - Servi√ßo Despertador - Aviso de Revis√£o agendada",$descricao);
+						$this->enviarEmail($nome,$email,"SMC - ServiÁo Despertador - Aviso de Revis„o agendada",$descricao);
 						$avisosGrava = new Avisos();
-						$avisosGrava->setAssuntoAvisos("SMC - Servi√ßo Despertador - Aviso de Revis√£o agendada");
+						$avisosGrava->setAssuntoAvisos("SMC - ServiÁo Despertador - Aviso de Revis„o agendada");
 						$avisosGrava->setDataAvisos(date("Y-m-d H:i:s"));
 						$avisosGrava->setIdClientes($clientes->getIdClientes());
 						$this->cadastrarAvisos($avisosGrava);

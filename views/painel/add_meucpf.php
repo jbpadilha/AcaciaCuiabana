@@ -11,14 +11,20 @@
 
 	$logon = new Logon();
 	$logon = $_SESSION["usuarioLogon"];
-	$pessoa = new Pessoa();
-
-	if(!is_null($logon->getIdPessoa())) {
-		$pessoa->setIdPessoa($logon->getIdPessoa());
-		$collVoPessoa = $controla->findPessoas($pessoa);
-
-		if(!is_null($collVoPessoa)) {
-			$pessoa = $collVoPessoa[0];
+	$pessoa = new Pessoa();	
+	if(isset($_SESSION['pessoaAtual']))
+	{
+		$pessoa = $_SESSION['pessoaAtual'];
+	}
+	else
+	{
+		if(!is_null($logon->getIdPessoa())) {
+			$pessoa->setIdPessoa($logon->getIdPessoa());
+			$collVoPessoa = $controla->findPessoas($pessoa);
+	
+			if(!is_null($collVoPessoa)) {
+				$pessoa = $collVoPessoa[0];
+			}
 		}
 	}
 ?>
@@ -47,10 +53,10 @@
 					<option selected="selected"><?=SELECIONE?></option>
 					<option value="Casado" <?=($pessoa->getEstadoCivilPessoa()==="Casado")?"selected":""?>>Casado(a)</option>
 					<option value="Solteiro" <?=($pessoa->getEstadoCivilPessoa()==="Solteiro")?"selected":""?>>Solteiro(a)</option>
-					<option value="Uni√£o Est√°vel" <?=($pessoa->getEstadoCivilPessoa()==="Uni√£o Est√°vel")?"selected":""?>>Uni√£o Est√°vel</option>
+					<option value="Uni„o Est·vel" <?=($pessoa->getEstadoCivilPessoa()==="Uni„o Est·vel")?"selected":""?>>Uni„o Est·vel</option>
 				</select>
  			</label>
-			<label>Observa√ß√µes:
+			<label>ObservaÁ√µes:
 				<input type="text" name="nota" value="<?=$pessoa->getComplementoPessoa()?>" />
  			</label>
 		</div>
@@ -75,13 +81,19 @@
 	</fieldset>
 <?php
 	$endereco= new Endereco();
-
-	if(!is_null($pessoa->getIdPessoa())) {
-		$endereco->setIdPessoa($pessoa->getIdPessoa());
-		$collVoEnd = $controla->findEndereco($endereco);
-
-		if(!is_null($collVoEnd)) {
-			$endereco = $collVoEnd[0];
+	if(isset($_SESSION['enderecoAtual']))
+	{
+		$endereco = $_SESSION['enderecoAtual'];
+	}
+	else 
+	{
+		if(!is_null($pessoa->getIdPessoa())) {
+			$endereco->setIdPessoa($pessoa->getIdPessoa());
+			$collVoEnd = $controla->findEndereco($endereco);
+	
+			if(!is_null($collVoEnd)) {
+				$endereco = $collVoEnd[0];
+			}
 		}
 	}
 ?>
@@ -91,7 +103,7 @@
 		<label>Rua, avenida, logradouro:
 			<input type="text" name="rua_contato" value="<?=$endereco->getRuaEndereco()?>" class="long" />
 		</label>
-		<label>n√∫mero:
+		<label>n˙mero:
 			<input type="text" name="numero" value="<?=$endereco->getRuaEndereco()?>" class="small" />
 		</label>
 		<br />
@@ -100,7 +112,7 @@
 		</label>
 		<br />
 		<label>Bairro:
-			<input type="text" name="bairro_contato" value""<?=$endereco->getBairroEndereco()?> class="long" />
+			<input type="text" name="bairro_contato" value="<?=$endereco->getBairroEndereco()?>" class="long">
 		</label>
 		<label>CEP:
 			<input type="text" name="cep_contato" value="<?=$endereco->getCepEndereco()?>" maxlength="10" class="data" />
@@ -137,21 +149,19 @@
 	</fieldset>
 <?php
 	$pessoaConjugue = new Pessoa();
-
-	if($pessoa->getIdConjuguePessoa() != null) {
-		$pessoaConjugue->setIdPessoa($pessoa->getIdConjuguePessoa());
-		$collVoConjugue = $controla->findPessoas($pessoaConjugue);
-
-		if(!is_null($collVoConjugue)) {
-			$pessoaConjugue = $collVoConjugue[0];
-		}
+	if(isset($_SESSION['pessoaConjugueAtual']))
+	{
+		$pessoaConjugue = $_SESSION['pessoaConjugueAtual'];
 	}
 ?>
-	<p class="caption">Dados do(a) c√¥njuge</p>
+	<p class="caption">Dados do(a) cÙnjuge</p>
 	<fieldset>
 		<div class="left">
 			<label>Nome:
 				<input type="text" name="nome_conjuge" value="<?=$pessoaConjugue->getNomePessoa()?>" class="long" />
+			</label>
+			<label>CPF:
+				<input type="text" name="cpf_conjuge" value="<?=$pessoaConjugue->getCpfPessoa()?>" class="long" />
 			</label>
 		</div>
 		<div class="right">
@@ -167,11 +177,6 @@
 			</label>
 		</div>
 	</fieldset>
-<?php
-	if($pessoaConjugue->getIdPessoa() != null) {
-		echo '<script>document.layerFrm1.style = "display:block"</script>';
-	}
-?>
 	<p class="botoes">
 		<input type="hidden" id="idPessoa" name="idPessoa" value="<?=$pessoa->getIdPessoa()?>"/>
 		<input type="hidden" id="idEndereco" name="idEndereco" value="<?=$endereco->getIdEndereco()?>"/>

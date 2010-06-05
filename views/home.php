@@ -6,7 +6,7 @@
 
 	<title>SMC - Serviço de Manutenção e Consultoria</title>
 	<link rel="SHORTCUT ICON" href="imagens/smc.ico" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<meta http-equiv="Content-Language" content="pt-BR" />
 	<meta name="author" content="Júnior Mendonçaa" />
 	<meta name="copyright" content="SMC - Serviço de Manutenção e Consultoria">
@@ -19,7 +19,6 @@
 	<script language="javascript" type="text/javascript" src="js/acessibilidade.js" ></script>
 	<script language="javascript" type="text/javascript" src="js/geral.js" ></script>
 
-	<?php include '_php/scripts.php'; ?>
 </head>
 
 <body>
@@ -55,7 +54,7 @@
 
 			<?php
 
-				$link = isset($_GET['page']) ? removeAcentos(strtolower($_GET['page'])) : 'inicio';
+				$link = isset($_GET['page']) ? strtolower($_GET['page']) : 'inicio';
 
 				if (file_exists($link.'.php')) {
 					include $link.'.php';
