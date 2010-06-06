@@ -14,7 +14,7 @@
 					<li class="opcao" onclick="window.location='?p=add_veiculos';">Ves�culos</a></li>
 					<li class="opcao" onclick="window.location='?p=add_motorista';">Condutores</a></li>
 					<li class="opcao" onclick="window.location='?p=add_tipo_rev';">Revisões (tipos)</a></li>
-					<li class="opcao" onclick="window.location='?p=add_rev_padrao';">Revisões</a></li>
+					<li class="opcao" onclick="window.location='?p=add_rev_padrao&limpa=1';">Revisões</a></li>
 					<li class="opcao" onclick="window.location='?p=add_abastece';">Abastecimentos</a></li>
 				</ul>
 			</li>

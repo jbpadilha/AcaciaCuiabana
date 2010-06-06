@@ -12,7 +12,6 @@ class Revisoes
 	private $kmRevisoes;
 	private $proxDataRevisoes;
 	private $proxKmRevisoes;
-	private $oleoKmRevisoes;
 	private $idVeiculos;
 	private $idTipoRevisoes;
 
@@ -50,13 +49,6 @@ class Revisoes
 	 */
 	public function getProxKmRevisoes() {
 		return $this->proxKmRevisoes;
-	}
-
-	/**
-	 * @return the $oleoKmRevisoes
-	 */
-	public function getOleoKmRevisoes() {
-		return $this->oleoKmRevisoes;
 	}
 
 	/**
@@ -106,13 +98,6 @@ class Revisoes
 	 */
 	public function setProxKmRevisoes($proxKmRevisoes) {
 		$this->proxKmRevisoes = $proxKmRevisoes;
-	}
-
-	/**
-	 * @param $oleoKmRevisoes the $oleoKmRevisoes to set
-	 */
-	public function setOleoKmRevisoes($oleoKmRevisoes) {
-		$this->oleoKmRevisoes = $oleoKmRevisoes;
 	}
 
 	/**

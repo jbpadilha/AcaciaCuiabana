@@ -10,12 +10,12 @@
 	$condutores = new Condutores();
 	$cnh = new Cnh();
 	
-	if(isset($_GET['condutores'])) {
-		$condutores = unserialize(base64_decode($_GET['condutores']));
+	if(isset($_SESSION['condutoresAtual'])) {
+		$condutores = $_SESSION['condutoresAtual'];
 	}
 	
-	if(isset($_GET['cnh'])) {
-		$cnh = unserialize(base64_decode($_GET['cnh']));
+	if(isset($_SESSION['cnhAtual'])) {
+		$cnh = $_SESSION['cnhAtual'];
 	}
 ?>
 <form method="post" action="../../class/RecebePostGet.php">

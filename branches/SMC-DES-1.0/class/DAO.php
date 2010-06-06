@@ -951,23 +951,21 @@ class DAO
 		$kmRevisoes = '';
 		$proxDataRevisoes = '';
 		$proxKmRevisoes = '';
-		$oleoKmRevisoes = '';
 		$idVeiculos = '';
 		$idTipoRevisoes = '';
 		
 		try 
 		{
 			$sql = mysqli_prepare($conecta,"INSERT INTO revisoes (idRevisoes, dataRevisoes, kmRevisoes,
-			proxDataRevisoes,proxKmRevisoes,oleoKmRevisoes,idVeiculos,idTipoRevisoes) 
-			VALUES('',?,?,?,?,?,?,?)");
+			proxDataRevisoes,proxKmRevisoes,idVeiculos,idTipoRevisoes) 
+			VALUES('',?,?,?,?,?,?)");
 			mysqli_bind_param($sql,'sssssss',$dataRevisoes,$kmRevisoes,$proxDataRevisoes,$proxKmRevisoes,
-			$oleoKmRevisoes,$idVeiculos,$idTipoRevisoes);
+			$idVeiculos,$idTipoRevisoes);
 			
 			$dataRevisoes = $valueObj->getDataRevisoes();
 			$kmRevisoes = $valueObj->getKmRevisoes();
 			$proxDataRevisoes = $valueObj->getProxDataRevisoes();
 			$proxKmRevisoes = $valueObj->getProxKmRevisoes();
-			$oleoKmRevisoes = $valueObj->getOleoKmRevisoes();
 			$idVeiculos = $valueObj->getIdVeiculos();
 			$idTipoRevisoes = $valueObj->getIdTipoRevisoes();			
 			
@@ -995,23 +993,21 @@ class DAO
 		$kmRevisoes = '';
 		$proxDataRevisoes = '';
 		$proxKmRevisoes = '';
-		$oleoKmRevisoes = '';
 		$idVeiculos = '';
 		$idTipoRevisoes = '';
 		
 		try 
 		{
 			$sql = mysqli_prepare($conecta,"UPDATE revisoes SET dataRevisoes=?, kmRevisoes=?,
-			proxDataRevisoes=?,proxKmRevisoes=?,oleoKmRevisoes=?,idVeiculos=?,idTipoRevisoes=? 
+			proxDataRevisoes=?,proxKmRevisoes=?,idVeiculos=?,idTipoRevisoes=? 
 			WHERE idRevisoes=?");
-			mysqli_bind_param($sql,'sssssssi',$dataRevisoes,$kmRevisoes,$proxDataRevisoes,$proxKmRevisoes,
-			$oleoKmRevisoes,$idVeiculos,$idTipoRevisoes,$idRevisoes);
+			mysqli_bind_param($sql,'ssssssi',$dataRevisoes,$kmRevisoes,$proxDataRevisoes,$proxKmRevisoes,
+			$idVeiculos,$idTipoRevisoes,$idRevisoes);
 			
 			$dataRevisoes = $valueObj->getDataRevisoes();
 			$kmRevisoes = $valueObj->getKmRevisoes();
 			$proxDataRevisoes = $valueObj->getProxDataRevisoes();
 			$proxKmRevisoes = $valueObj->getProxKmRevisoes();
-			$oleoKmRevisoes = $valueObj->getOleoKmRevisoes();
 			$idVeiculos = $valueObj->getIdVeiculos();
 			$idTipoRevisoes = $valueObj->getIdTipoRevisoes();
 			$idRevisoes = $valueObj->getIdRevisoes();			

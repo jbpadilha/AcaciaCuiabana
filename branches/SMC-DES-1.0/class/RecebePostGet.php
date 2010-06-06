@@ -867,7 +867,7 @@ if(isset($_POST))
 				}
 				else
 				{
-					$mensagem .= "A placa do Vesãculo deve ser informada";
+					$mensagem .= "A placa do Veículo deve ser informada";
 				}
 				
 				$veiculos->setMarcaVeiculos($_POST['marca']);
@@ -876,12 +876,19 @@ if(isset($_POST))
 				$veiculos->setCombustivelVeiculos($_POST['combustivel']);
 				$veiculos->setCapacidadeTanqueVeiculos($_POST['capacidade']);
 				$veiculos->setAnoFabricacaoVeiculos($_POST['anofab']);
+				if($_POST['tipo_veiculo']!='')
+					$veiculos->setTipoVeiculos($_POST['tipo_veiculo']);
+					
 				$veiculos->setRenavamVeiculos($_POST['renavam']);
 				$veiculos->setChassiVeiculos($_POST['chassi']);
 				$veiculos->setCodFipeVeiculos($_POST['codigo_fipe']);
 				$veiculos->setFornecedorNfVeiculos($_POST['fornecedor_nf']);
 				$veiculos->setCidadeNfVeiculos($_POST['cidade_nf']);
-				$veiculos->setProprietarioNfVeiculos($_POST['proprietario_nf']);
+				$veiculos->setEstadoNfVeiculos($_POST['estado_nf']);
+				if($_POST['proprietario_nf'] != '')
+					$veiculos->setProprietarioNfVeiculos($_POST['proprietario_nf']);
+				else
+					$mensagem .= "É necessário informar o Proprietátio do Veículo.";
 				if($_POST['arrendatario_nf'] != '')
 				{
 					$veiculos->setArrendatarioNfVeiculos($_POST['arrendatario_nf']);
@@ -892,35 +899,46 @@ if(isset($_POST))
 				{
 					$veiculos->setDataNfVeiculos($formataData->toDBDate($controla->validaData($_POST['data_nf'])));
 				}
-				$veiculos->setKmEntregaNfVeiculos($_POST['km_entrega_nf']);
-				if($_POST['tempo_garantia'] != '')
-					$veiculos->setTempoGarantiaNfVeiculos();
-					
-				$veiculos->setKmGarantiaVeiculos($_POST['km_garantia']);
-				if($_POST['vencimento_ipva'] != '')
-					$veiculos->setVencimentoIpvaVeiculos($formataData->toDBDate($controla->validaData($_POST['vencimento_ipva'])));
-				else
-					$mensagem .= "O vencimento do IPVA deve ser preenchido.";
-				
-				if($_POST['vencimento_seguro']!= '')
-					$veiculos->setVencimentoSeguroVeiculos($formataData->toDBDate($controla->validaData($_POST['vencimento_seguro'])));
-
-				if($mensagem == '')
+				if($_POST['data_entrega_nf'] != '')
 				{
-					$controla->cadastraVeiculos($veiculos);
-					$mensagem = 'Vesãculo Cadastrado com sucesso.';
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
+					$veiculos->setDataEntregaNfVeiculos($formataData->toDBDate($controla->validaData($_POST['data_entrega_nf'])));
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_veiculos&msg=$mensagem&veiculos=".base64_encode(serialize($veiculos))."'</script>";
+					$mensagem .= "A data de entrega deve ser preenchida.";
+				}
+				$veiculos->setKmEntregaNfVeiculos($_POST['km_entrega_nf']);
+				
+				if($_POST['tempo_garantia'] != '')
+					$veiculos->setTempoGarantiaNfVeiculos($_POST['tempo_garantia']);
+					
+				$veiculos->setKmGarantiaVeiculos($_POST['km_garantia']);
+				
+				if($_POST['vencimento_seguro']!= '')
+				{
+					$veiculos->setVencimentoSeguroVeiculos($formataData->toDBDate($controla->validaData($_POST['vencimento_seguro'])));
+				}
+				if($mensagem == '')
+				{
+					$controla->cadastraVeiculos($veiculos);
+					$mensagem = 'Veículo Cadastrado com sucesso.';
+					
+					unset($_SESSION['veiculoAtual']);
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
+					
+				}
+				else
+				{
+					$_SESSION['veiculoAtual'] = $veiculos;
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_veiculos&msg=$mensagem'</script>";
 				}
 				
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_veiculos&msg=$mensagem&veiculos=".base64_encode(serialize($veiculos))."'</script>";
+				$_SESSION['veiculoAtual'] = $veiculos;
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_veiculos&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -935,7 +953,7 @@ if(isset($_POST))
 				if($_POST['pessoaCondutor'] != '')
 					$pessoaCondutor->setIdPessoa($_POST['pessoaCondutor']);
 				else
-					$mensagem .= 'você deve escolher uma pessoa cadastrada para completar o cadastro.';
+					$mensagem .= 'Você deve escolher uma pessoa cadastrada para completar o cadastro.';
 				
 				if($_POST['cnh'] != '')
 					$cnh->setNumeroCnh(trim($controla->validaCnhIgual($_POST['cnh'])));
@@ -960,33 +978,27 @@ if(isset($_POST))
 				if($mensagem == '')
 				{
 					$idCnh = $controla->cadastrarCnh($cnh);
-					$collVoPessoa = $controla->findCondutores($pessoaCondutor);
-					if(is_null($collVoPessoa))
-					{
-						$pessoaCondutor->setDataRegistroCondutores(date("Y-m-d H:i:s"));
-						$pessoaCondutor->setIdCnh($idCnh);
-						$controla->cadastrarCondutores($pessoaCondutor);
-					}
-					else
-					{
-						$pessoaCondutor = $collVoPessoa[0];
-						$pessoaCondutor->setDataRegistroCondutores(date("Y-m-d H:i:s"));
-						$pessoaCondutor->setIdCnh($idCnh);
-						$controla->updateCondutores($pessoaCondutor);
-						
-					}
+					$pessoaCondutor->setDataRegistroCondutores(date("Y-m-d H:i:s"));
+					$pessoaCondutor->setIdCnh($idCnh);
+					$controla->cadastrarCondutores($pessoaCondutor);
 					$mensagem = 'Condutor cadastrado com sucesso.';
 					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
+					unset($_SESSION['condutoresAtual']);
+					unset($_SESSION['cnhAtual']);
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_motorista&msg=$mensagem&condutores=".base64_encode(serialize($pessoaCondutor))."&cnh=".base64_encode(serialize($cnh))."'</script>";
+					$_SESSION['condutoresAtual'] = $pessoaCondutor;
+					$_SESSION['cnhAtual'] = $cnh;
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_motorista&msg=$mensagem'</script>";
 				}				
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_motorista&msg=$mensagem&condutores=".base64_encode(serialize($pessoaCondutor))."&cnh=".base64_encode(serialize($cnh))."'</script>";
+				$_SESSION['condutoresAtual'] = $pessoaCondutor;
+				$_SESSION['cnhAtual'] = $cnh;
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_motorista&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -1006,16 +1018,19 @@ if(isset($_POST))
 					$controla->cadastrarTipoRevisoes($tipoRevisoes);
 					$mensagem = 'Tipo de Revisão cadastrado com sucesso.';
 					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
+					unset($_SESSION['tipoRevisoes']);
 				}	
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_tipo_rev&msg=$mensagem&tipoRevisoes=".base64_encode(serialize($tipoRevisoes))."'</script>";
+					$_SESSION['tipoRevisoes'] = $tipoRevisoes; 
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_tipo_rev&msg=$mensagem'</script>";
 				}	
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_tipo_rev&msg=$mensagem&tipoRevisoes=".base64_encode(serialize($tipoRevisoes))."'</script>";
+				$_SESSION['tipoRevisoes'] = $tipoRevisoes;
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_tipo_rev&msg=$mensagem'</script>";
 			}
 		}
 		if($_POST['acao'] == "cadastroRevisoes")
@@ -1028,40 +1043,65 @@ if(isset($_POST))
 				if($_POST['placa'] != '')
 					$revisoes->setIdVeiculos($_POST['placa']);
 				else
-					$mensagem .= 'Um Vesãculo deve ser selecionado.';
+					$mensagem .= 'Um Veículo deve ser selecionado.';
 				
 				if($_POST['revisao'] != '')
 					$revisoes->setIdTipoRevisoes($_POST['revisao']);
 				else
 					$mensagem .= 'O tipo da Revisão deve ser selecionado.';
-
-				if($_POST['tult'] != '')
-					$revisoes->setDataRevisoes($formataData->toDBDate($controla->validaData($_POST['tult'])));
-				else
-					$mensagem .= "A data da Revisão deve ser preenchida.";
 				
-				$revisoes->setKmRevisoes($_POST['kult']);
-				if($_POST['tprox'] != '')
-					$revisoes->setProxDataRevisoes($formataData->toDBDate($controla->validaData($_POST['tprox'])));
+				$cont = $_SESSION['contRevisoes'];	
+				$valores = null;
+				for($i = 0 ; $i < $cont; $i++)
+				{	
+					if($_POST['data'.$i] != '')
+						$valores[$i][0] = $controla->validaData($_POST['data'.$i]);
+					else
+						$mensagem .= "A data da Revisão deve ser preenchida.";
 					
-				$revisoes->setProxKmRevisoes($_POST['kprox']);
+					if($_POST['km'.$i] != '')
+						$valores[$i][1] = $_POST['km'.$i];
+						
+				}
 				
-				if($mensagem == '')
+				if($_POST['adicionaRevisao'] == "sim")
 				{
-					$controla->cadastrarRevisoes($revisoes);
+					$valores[$cont-1][0] = '';
+					$valores[$cont-1][1] = '';
+					$_SESSION['valoresAtual'] = $valores;
+					$_SESSION['revisoesAtual'] = $revisoes;
+					$_SESSION['contRevisoes'] = $cont + 1;
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao'</script>";
+					
+				}
+				elseif($mensagem == '')
+				{
+					for($i = 0 ; $i < $cont; $i++)
+					{
+						$revisoes->setProxDataRevisoes($formataData->toDBDate($valores[$i][0]));
+						$revisoes->setProxKmRevisoes($valores[$i][1]);
+						$controla->cadastrarRevisoes($revisoes);	
+					}
 					$mensagem = 'Revisão cadastrado com sucesso.';
+					unset($_SESSION['revisoesAtual']);
+					unset($_SESSION['valores']);
+					unset($_SESSION['contRevisoes']);
 					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao&msg=$mensagem&revisoes=".base64_encode(serialize($revisoes))."'</script>";
+					$_SESSION['valores'] = $valores;
+					$_SESSION['revisoesAtual'] = $revisoes;
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao&msg=$mensagem'</script>";
 				}
 				
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao&msg=$mensagem&revisoes=".base64_encode(serialize($revisoes))."'</script>";
+				$_SESSION['valores'] = $valores;
+				$_SESSION['revisoesAtual'] = $revisoes;
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -1119,7 +1159,7 @@ if(isset($_POST))
 					$mensagem = 'Para efetuar a busca, você deve entrar com um parÃ¢metro.';
 				$logon = new Logon();
 				$logon = (object)$_SESSION['usuarioLogon'];
-				if($logon->getNivelAcessoLogin() != 5)
+				if($logon->getNivelAcessoLogin() != Dominio::$ADMINISTRADOR)
 				{	
 					$pessoa->setIdCliente($_POST['idCliente']);
 				}
@@ -1315,7 +1355,7 @@ if(isset($_POST))
 					$mensagem = 'Para efetuar a busca, você deve entrar com um parÃ¢metro.';
 				$logon = new Logon();
 				$logon = (object)$_SESSION['usuarioLogon'];
-				if($logon->getNivelAcessoLogin() != 5)
+				if($logon->getNivelAcessoLogin() != Dominio::$ADMINISTRADOR)
 				{
 					$empresas->setIdClientes($_POST['idCliente']);
 				}	
@@ -1616,7 +1656,7 @@ if(isset($_POST))
 					$mensagem = 'Para efetuar a busca, você deve entrar com um parÃ¢metro.';
 				$logon = new Logon();
 				$logon = (object)$_SESSION['usuarioLogon'];
-				if($logon->getNivelAcessoLogin() != 5)
+				if($logon->getNivelAcessoLogin() != Dominio::$ADMINISTRADOR)
 				{
 					$veiculos->setIdClientes($_POST['idCliente']);
 				}	
@@ -1723,7 +1763,7 @@ if(isset($_POST))
 					$mensagem = 'Para efetuar a busca, você deve entrar com um parÃ¢metro.';
 					
 				$logon = new Logon();
-				$logon = (object)$_SESSION['usuarioLogon'];
+				$logon = $_SESSION['usuarioLogon'];
 	
 				if($mensagem == '')
 				{
@@ -1746,7 +1786,7 @@ if(isset($_POST))
 									$pessoaAtual->setIdPessoa($condutorPesquisa->getIdPessoa());
 									$collVoPessoaAtual = $controla->findPessoas($pessoaAtual);
 									$pessoaAtual = $collVoPessoaAtual[0];
-									if($pessoaAtual->getIdCliente() == $_POST['idCliente'] || $logon->getNivelAcessoLogin() == 5)
+									if($pessoaAtual->getIdCliente() == $_POST['idCliente'] || $logon->getNivelAcessoLogin() == Dominio::$ADMINISTRADOR)
 									{
 										$collVo[] = $condutorPesquisa;
 										
@@ -1841,7 +1881,7 @@ if(isset($_POST))
 				
 				$logon = new Logon();
 				$logon = (object)$_SESSION['usuarioLogon'];
-				if($logon->getNivelAcessoLogin() != 5)
+				if($logon->getNivelAcessoLogin() != Dominio::$ADMINISTRADOR)
 				{
 					$veiculos->setIdClientes($_GET['idCliente']);
 				}	

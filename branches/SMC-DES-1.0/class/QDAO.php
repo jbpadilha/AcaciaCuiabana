@@ -936,7 +936,6 @@ class QDAO
 		$kmRevisoes = "";
 		$proxDataRevisoes = "";
 		$proxKmRevisoes = "";
-		$oleoKmRevisoes = "";
 		$idVeiculos = null;
 		$idTipoRevisoes = null;
 		
@@ -1020,7 +1019,7 @@ class QDAO
 				throw new Exception("Não foi posssãvel conectar no banco de dados.");
 			
 			mysqli_stmt_bind_result($prepare,$idRevisoes,$dataRevisoes,$kmRevisoes,$proxDataRevisoes,
-			$proxKmRevisoes,$oleoKmRevisoes,$idVeiculos,$idTipoRevisoes);
+			$proxKmRevisoes,$idVeiculos,$idTipoRevisoes);
 			while(mysqli_stmt_fetch($prepare))
 			{
 				$valueObj = new Revisoes();
@@ -1029,7 +1028,6 @@ class QDAO
 				$valueObj->setKmRevisoes($kmRevisoes);
 				$valueObj->setProxDataRevisoes($proxDataRevisoes);
 				$valueObj->setProxKmRevisoes($proxKmRevisoes);
-				$valueObj->setOleoKmRevisoes($oleoKmRevisoes);
 				$valueObj->setIdVeiculos($idVeiculos);
 				$valueObj->setIdTipoRevisoes($idTipoRevisoes);
 				$collVo[] = $valueObj;
