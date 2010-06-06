@@ -530,7 +530,7 @@ class ControlaFuncionalidades
 		{
 			$collVoPessoas = new ArrayObject();
 			// Verificar aniversários de Clientes - Caso Seja Administrador trazer todos.
-			if($logon->getNivelAcessoLogin() == 5)
+			if($logon->getNivelAcessoLogin() == Dominio::$ADMINISTRADOR)
 			{
 				$pessoa = new Pessoa();
 				$pessoa->setDataNascimentoPessoa($data[0]."-".$data[1]."-".$data[2]);
@@ -581,7 +581,7 @@ class ControlaFuncionalidades
 		{
 			$collVoCnh = new ArrayObject();
 			// Verificar CNH de Clientes Vencidos - Caso Seja Administrador trazer todos.
-			if($logon->getNivelAcessoLogin() == 5)
+			if($logon->getNivelAcessoLogin() == Dominio::$ADMINISTRADOR)
 			{
 				$cnh = new Cnh();
 				$cnh->setVencCnh($data[0]."-".$data[1]."-".$data[2]);
@@ -655,7 +655,7 @@ class ControlaFuncionalidades
 		{
 			// Verificar IPVA de Veiculos de Clientes Vencidos - Caso Seja Administrador trazer todos.
 			$collVoVei = new ArrayObject();
-			if($logon->getNivelAcessoLogin() == 5)
+			if($logon->getNivelAcessoLogin() == Dominio::$ADMINISTRADOR)
 			{
 				$veiculos = new Veiculos();
 				$veiculos->setVencimentoIpvaVeiculos($data[0]."-".$data[1]."-".$data[2]);
@@ -703,7 +703,7 @@ class ControlaFuncionalidades
 		{
 			// Verificar Seguro de carro Vencidos dos clientes - Caso Seja Administrador trazer todos.
 			$collVoSeguros = new ArrayObject();
-			if($logon->getNivelAcessoLogin() == 5)
+			if($logon->getNivelAcessoLogin() == Dominio::$ADMINISTRADOR)
 			{
 				$veiculos = new Veiculos();
 				$veiculos->setVencimentoSeguroVeiculos($data[0]."-".$data[1]."-".$data[2]);
@@ -751,7 +751,7 @@ class ControlaFuncionalidades
 		{
 			// Verificar Garantias Vencida dos Vesãculos dos clientes - Caso Seja Administrador trazer todos.
 			$collVoGarantias = new ArrayObject();
-			if($logon->getNivelAcessoLogin() == 5)
+			if($logon->getNivelAcessoLogin() == Dominio::$ADMINISTRADOR)
 			{
 				$veiculos = new Veiculos();
 				$collVoVeiculos = $this->findVeiculos($veiculos);
@@ -831,7 +831,7 @@ class ControlaFuncionalidades
 		{
 			// Verificar Revisoes dos Vesãculos dos clientes - Caso Seja Administrador trazer todos.
 			$collVoRevisoes = new ArrayObject();
-			if($logon->getNivelAcessoLogin() == 5)
+			if($logon->getNivelAcessoLogin() == Dominio::$ADMINISTRADOR)
 			{
 				$revisoes = new Revisoes();
 				$revisoes->setProxDataRevisoes($data[0]."-".$data[1]."-".$data[2]);

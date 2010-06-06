@@ -34,10 +34,29 @@ $listaIpva = null;
 $listaSeguro = null;
 $listaGarantia = null;
 $listaRevisoes = null;
+$userLogon = new Logon();
+$userLogon = $_SESSION['usuarioLogon'];
+$data = $_GET['data'];
 
-if(isset($_SESSION['listaPessoa']))
-	$listaAniversarios = $_SESSION['listaPessoa'];
 
+if(isset($_GET['listaPessoa']))
+	$listaAniversarios = $controla->listarAniversariosClientes($userLogon,$data);
+
+if(isset($_GET['listaCnh']))
+	$listaCnh = $controla->listaCnhVencida($userLogon,$data);
+
+if(isset($_GET['listaIpva']))
+	$listaCnh = $controla->listaIpvaVencidos($userLogon,$data);
+
+if(isset($_GET['listaSeguro']))
+	$listaCnh = $controla->listaSeguroVencidos($userLogon,$data);	
+
+if(isset($_GET['listaGarantia']))
+	$listaCnh = $controla->ListaGarantiasVenc($userLogon,$data);	
+
+if(isset($_GET['listaRevisoes']))
+	$listaCnh = $controla->listaRevisoes($userLogon,$data);	
+	
 if(!is_null($listaAniversarios) && $listaAniversarios->count() > 0)
 {
 	$cont = 0;
@@ -55,8 +74,6 @@ if(!is_null($listaAniversarios) && $listaAniversarios->count() > 0)
 	echo '<br><br>';
 }
 
-if(isset($_SESSION['listaCnh']))
-	$listaCnh = $_SESSION['listaCnh'];
 if(!is_null($listaCnh)  && $listaCnh->count() > 0)
 {
 	$cont = 0;
@@ -76,8 +93,6 @@ if(!is_null($listaCnh)  && $listaCnh->count() > 0)
 	echo '<br><br>';
 }
 
-if(isset($_SESSION['listaIpva']))
-	$listaIpva = $_SESSION['listaIpva'];
 if(!is_null($listaIpva) && $listaIpva->count() > 0)
 {
 	$cont = 0;
@@ -97,8 +112,6 @@ if(!is_null($listaIpva) && $listaIpva->count() > 0)
 	echo '<br><br>';
 }
 
-if(isset($_SESSION['listaSeguro']))
-	$listaSeguro = $_SESSION['listaSeguro'];
 if(!is_null($listaSeguro) && $listaSeguro->count() > 0)
 {
 	$cont = 0;
@@ -118,8 +131,6 @@ if(!is_null($listaSeguro) && $listaSeguro->count() > 0)
 	echo '<br><br>';
 }
 
-if(isset($_SESSION['listaGarantia']))
-	$listaGarantia = $_SESSION['listaGarantia'];
 if(!is_null($listaGarantia) && $listaGarantia->count() > 0)
 {
 	$cont = 0;
@@ -139,8 +150,6 @@ if(!is_null($listaGarantia) && $listaGarantia->count() > 0)
 	echo '<br><br>';
 }
 
-if(isset($_SESSION['listaRevisoes']))
-	$listaRevisoes = $_SESSION['listaRevisoes'];
 if(!is_null($listaRevisoes) && $listaRevisoes->count() > 0)
 {
 	$cont = 0;

@@ -15,9 +15,9 @@ if($logon->getNivelAcessoLogin() <= 5)
 } 
 
 $tipoRevisoes = new Tiporevisoes();
-if(isset($_GET['tipoRevisoes']))
+if(isset($_SESSION['tipoRevisoes']))
 {
-	$tipoRevisoes = unserialize(base64_decode($_GET['tipoRevisoes']));
+	$tipoRevisoes = $_SESSION['tipoRevisoes'];
 }
 
 ?>

@@ -18,10 +18,10 @@ class Dominio
 	public $path_imagens = "C:/Paginas_Sistemas/SMC/www/new/imagens";
 	
 	
-	public $ADMINISTRADOR = 5;
-	public $CLIENTE = 1;
-	public $ADMINISTRADOR_TXT = "Administrador";
-	public $CLIENTE_TXT = "Cliente";
+	public static $ADMINISTRADOR = 5;
+	public static $CLIENTE = 1;
+	public static $ADMINISTRADOR_TXT = "Administrador";
+	public static $CLIENTE_TXT = "Cliente";
 	
 }
 ?>

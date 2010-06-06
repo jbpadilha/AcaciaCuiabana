@@ -122,18 +122,18 @@
 			$userLogon = new Logon();
 			$userLogon = $_SESSION['usuarioLogon'];
 			$mostraLinkMais = false;
+			$linkVejaMais = '';
 			
 			//Aniversariantes - Clientes ou Administrador (todos os cadastros)
 			
-			$collVoPessoa = $controla->listarAniversariosClientes($userLogon,$data);
-				
+			$collVoPessoa = $controla->listarAniversariosClientes($userLogon,$data);	
 			if(!is_null($collVoPessoa) && count($collVoPessoa)>0)
 			{
 				$pessoaAtual = new Pessoa();
 				$pessoaAtual = $collVoPessoa[0];
 				echo '<label class="ativo" title="'.$formataData->toViewDate($pessoaAtual->getDataNascimentoPessoa()).'">Anivers·rio de '.$pessoaAtual->getNomePessoa().'</label>';
 				$mostraLinkMais = true;
-				$_SESSION['listaPessoa'] = $collVoPessoa;
+				$linkVejaMais .= 'listaPessoa=1';
 			}
 			
 			//Lista CNH de Clientes
@@ -142,7 +142,9 @@
 			{
 				echo '<label class="ativo" title="">Vencimento de CNH</label>';
 				$mostraLinkMais = true;
-				$_SESSION['listaCnh'] = $collVoPessoa;
+				if($linkVejaMais != '')
+					$linkVejaMais .= '&';
+				$linkVejaMais .= 'listaCnh=1';
 			}
 			
 			//Lista de IPVA Vencido
@@ -151,7 +153,9 @@
 			{
 				echo '<label class="ativo" title="">Vencimento de IPVA</label>';
 				$mostraLinkMais = true;
-				$_SESSION['listaIpva'] = $collVoPessoa;
+				if($linkVejaMais != '')
+					$linkVejaMais .= '&';
+				$linkVejaMais .= 'listaIpva=1';
 			}
 			
 			//Lista Seguros vencidos
@@ -160,7 +164,9 @@
 			{
 				echo '<label class="ativo" title="">Vencimento de Seguro</label>';
 				$mostraLinkMais = true;
-				$_SESSION['listaSeguro'] = $collVoPessoa;
+				if($linkVejaMais != '')
+					$linkVejaMais .= '&';
+				$linkVejaMais .= 'listaSeguro=1';
 			}
 			
 			$collVoGarantias = $controla->ListaGarantiasVenc($userLogon,$data);
@@ -168,7 +174,9 @@
 			{
 				echo '<label class="ativo" title="">Vencimento de Garantia</label>';
 				$mostraLinkMais = true;
-				$_SESSION['listaRevisoes'] = $collVoPessoa;
+				if($linkVejaMais != '')
+					$linkVejaMais .= '&';
+				$linkVejaMais .= 'listaGarantia=1';
 			}
 			
 			//Lista de Revis√µes
@@ -177,11 +185,14 @@
 			{
 				echo '<label class="ativo" title="">Revis„o agendada para Hoje</label>';
 				$mostraLinkMais = true;
+				if($linkVejaMais != '')
+					$linkVejaMais .= '&';
+				$linkVejaMais .= 'listaRevisoes=1';
 			}
 			if($mostraLinkMais)
 			{
 				echo "<label class=\"ativo\"><div id=\"vejaMais\">
-				<a href=\"javascript:void(0);\" onClick=\"abrepagina('vejaMais.php', 300, 300);\">Veja mais ++</a></div></label>";
+				<a href=\"javascript:void(0);\" onClick=\"abrepagina('vejaMais.php?$linkVejaMais&data=$data', 300, 300);\">Veja mais ++</a></div></label>";
 			}
 		?>
 	</td>

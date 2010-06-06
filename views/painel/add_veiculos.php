@@ -17,8 +17,8 @@
 <?php
 	$veiculos = new Veiculos();
 
-	if(isset($_GET['veiculos'])){
-		$veiculos = unserialize(base64_decode($_GET['veiculos']));
+	if(isset($_SESSION['veiculoAtual'])){
+		$veiculos = $_SESSION['veiculoAtual'];
 	}
 ?>
 
@@ -31,8 +31,8 @@
 		<label>Modelo:<input type="text" name="modelo" value="<?=$veiculos->getModeloVeiculos()?>" class="" /></label>
 		<label>Cor:<input type="text" name="cor" value="<?=$veiculos->getCorVeiculos()?>" class="" /></label>
 		<br />
-		<label>Ano fabricação:<input type="text" name="anofab" value="<?$veiculos->getAnoFabricacaoVeiculos()?>" maxlength="4" class="small" /></label>
-		<label>Ano modelo:<input type="text" name="anomod" value="<?$veiculos->getAnoFabricacaoVeiculos()?>" maxlength="4" class="small" /></label>
+		<label>Ano fabricação:
+		<input type="text" name="anofab" value="<?=$veiculos->getAnoFabricacaoVeiculos()?>" maxlength="4" class="small" /></label>
 		<br />
 		<label>Combustível:<input type="text" name="combustivel" value="<?=$veiculos->getCombustivelVeiculos()?>" class="" /></label>
 		<label>Capacidade:<input type="text" name="capacidade" value="<?=$veiculos->getCapacidadeTanqueVeiculos()?>" maxlength="2" class="small" /></label>
@@ -70,11 +70,34 @@
 		<label>Estado:
 			<select name="estado_nf">
 				<option></option>
-				<option value="MT" <?=($veiculos->getEstadoNfVeiculos()=="MT")?"MT":""?>>MT</option>
+				<option value="MT" <?=($veiculos->getEstadoNfVeiculos()=="MT")?"selected=\"selected\"":""?>>MT</option>
 			</select>
 		</label>
 		<br />
-		<label>Proprietário:<input type="text" value="<?=$veiculos->getProprietarioNfVeiculos()?>" name="proprietario_nf" class="long" /></label>
+		<label>Proprietário:
+			<select name="proprietario_nf">
+				<option value=""><?=SELECIONE?></option>
+				<?php
+				$pessoasProprietario = new Pessoa();
+				if($logon->getNivelAcessoLogin() == Dominio::$CLIENTE)
+				{
+					$pessoasProprietario->setIdCliente($logon->getIdClientes());
+				}
+				$collPro = $controla->findPessoas($pessoasProprietario);
+				if(!is_null($collPro))
+				{
+					for($i = 0; $i<count($collPro);$i++) 
+					{
+						$pessoasProprietario = $collPro[$i];
+						echo "<option value=\"{$pessoasProprietario->getIdPessoa()}\"";
+						if($veiculos->getProprietarioNfVeiculos() == $pessoasProprietario->getIdPessoa())
+							echo "selected=\"selected\"";
+						echo ">{$pessoasProprietario->getNomePessoa()}</option>";
+					}
+				}
+				?>
+			</select>
+		</label>
 		<br />
 		<label>Arrendatário:<input type="text" value="<?=$veiculos->getArrendatarioNfVeiculos()?>" name="arrendatario_nf" class="long" /></label>
 	</div>
@@ -97,9 +120,7 @@
 		<label>Quilometragem:<input type="text" value="<?=$veiculos->getKmGarantiaVeiculos()?>" name="km_garantia" maxlength="10" class="data" /></label>
 	</div>
 	<div class="right">
-		<label>IPVA:<input type="text" name="vencimento_ipva" value="<?=$veiculos->getVencimentoIpvaVeiculos()?>" maxlength="10" class="data" /></label>
-		<br />
-		<label>SEGURO:<input type="text" name="vencimento_seguro" value="<?=$veiculos->getVencimentoSeguroVeiculos()?>" maxlength="10" class="data" /></label>
+		<label>SEGURO:<input type="text" name="vencimento_seguro" value="<?=$formataData->toViewDate($veiculos->getVencimentoSeguroVeiculos())?>" maxlength="10" class="data" /></label>
 	</div>
 </fieldset>
 

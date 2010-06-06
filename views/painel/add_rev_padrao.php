@@ -4,28 +4,39 @@
 	if(!isset($_SESSION['usuarioLogon'])) {
 		header("Location:../views/home.php?p=login");
 	}
-
+	if(isset($_GET['limpa']))
+	{
+		unset($_SESSION['valoresAtual']);
+		unset($_SESSION['contRevisoes']);
+		unset($_SESSION['revisoesAtual']);
+	}
 	$logon = new Logon();
 	$logon = $_SESSION["usuarioLogon"];
 
 	$revisoes = new Revisoes();
 	
-	if(isset($_GET['revisoes'])) {
-		$revisoes = unserialize(base64_decode($_GET['revisoes']));
+	if(isset($_SESSION['revisoesAtual'])) {
+		$revisoes = $_SESSION['revisoesAtual'];
 	}
 ?>
 <link rel="stylesheet" href="_css/formPadrao.css" type="text/css" media="all" />
-
-<form method="post" action="../../class/RecebePostGet.php">
-	<p class="caption">Cadastro de RevisÃµes</p>
+<script type="text/javascript">
+function adicionaCampoRevisao()
+{
+	document.form1.adicionaRevisao.value = "sim";
+	document.form1.submit();
+}
+</script>
+<form method="post" action="../../class/RecebePostGet.php" name="form1" id="form1">
+	<p class="caption">Cadastro de Revisões</p>
 	<fieldset>
-		<label>Placa do Vesãculo
+		<label>Placa do Veículo
 			<select name="placa">
-				<option></option>
+				<option><?=SELECIONE?></option>
 <?php 
 	$veiculos = new Veiculos();
 	
-	if($logon->getNivelAcessoLogin() != 5) {
+	if($logon->getNivelAcessoLogin() != Dominio::$ADMINISTRADOR) {
 		$veiculos->setIdClientes($logon->getIdClientes());
 	}
 	
@@ -44,7 +55,7 @@
 		</label>
 		<label>descrição do Serviço:
 			<select name="revisao">
-				<option></option>
+				<option><?=SELECIONE?></option>
 <?php 
 	$tipoRevisoes = new Tiporevisoes();
 	
@@ -53,9 +64,9 @@
 	if(!is_null($collVoTipos)) {
 		foreach ($collVoTipos as $tipos) {
 			$tipoRevisoes = $tipos;
-?>
-				<option value="<?=$tipoRevisoes->getIdTipoRevisoes()?>" <?=($tipoRevisoes->getIdTipoRevisoes() == $revisoes->getIdTipoRevisoes()) ? "selected" : ""?>><?=$tipoRevisoes->getDescricaoTipoRevisoes()?></option>
-<?
+				echo "<option value=\"{$tipoRevisoes->getIdTipoRevisoes()}\"";
+				echo ($tipoRevisoes->getIdTipoRevisoes() == $revisoes->getIdTipoRevisoes()) ? "selected" : "";
+				echo ">{$tipoRevisoes->getDescricaoTipoRevisoes()}</option>";
 		}
 	}
 ?>
@@ -63,26 +74,35 @@
 		</label>
 		<br />
 		<br />
-		<label><b>última Revisão</b></label>
-		<label>realizada no dia (x),
-			<input type="text" name="tult" maxlength="10" value="<?=$formataData->toViewDate($revisoes->getDataRevisoes())?>" class="data" />
-		</label>
-		<label>marcando (x)
-			<input type="text" name="kult" value="<?=$revisoes->getKmRevisoes()?>" class="small" />
-		</label>
-		<label>quilômetros.</label> 
-		<br />
-		<br />
-		<label><b>PrÃ³xima Revisão</b></label>
-		<label>em (x) meses
-			<input type="text" name="tprox" value="<?=$formataData->toViewDate($revisoes->getProxDataRevisoes())?>" maxlength="10" class="data" />
-		</label>
-		<label>ou (x) quilometros.
-			<input type="text" name="kprox" value="<?=$revisoes->getProxKmRevisoes()?>" class="small" />
-		</label> 
-
+		<b>Próximas Revisões</b><br/><br/>
+		<?php
+		$valores = null;
+		if(isset($_SESSION['valoresAtual']))
+		{
+			$valores = $_SESSION['valoresAtual'];
+		}
+			  
+		$cont = 1;
+		if(isset($_SESSION['contRevisoes']))
+			$cont = $_SESSION['contRevisoes'];
+		
+		$_SESSION['contRevisoes'] = $cont;
+			
+		for($i=0;$i<$cont;$i++)
+		{
+			?>
+			<br/>
+			Data da Revisão: <input type="text" name="data<?=$i?>" value="<?=$valores[$i][0]?>"/><br/>
+			ou<br/>
+			Km da Revisão: <input type="text" name="km<?=$i?>" value="<?=$valores[$i][1]?>"/>
+			<br/>
+			<?php
+		}
+		?>
+		<input type="button" onclick="adicionaCampoRevisao();" value="Adicionar Revisão">
 		<p class="botoes">
 			<input type="hidden" name="acao" value="cadastroRevisoes" />
+			<input type="hidden" name="adicionaRevisao" value="" />
 			<input type="submit" name="revpad" value="Concluir" />
 		</p>
 		
