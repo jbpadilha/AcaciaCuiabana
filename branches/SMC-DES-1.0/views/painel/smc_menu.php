@@ -24,12 +24,12 @@
 					<li class="titulo" >Procurar...</li>
 					<li class="opcao" onclick="window.location='?p=listagem';">Lista vencimentos</a></li>
 					<li class="divisor"></li>
-					<li class="opcao" onclick="window.location='?p=busca_cpf';">Clientes - Pessoa fs„sica</a></li>
-					<li class="opcao" onclick="window.location='?p=busca_cnpj';">Clientes - Pessoa jurs„dica</a></li>
-					<li class="opcao" onclick="window.location='?p=busca_veiculos';">Ves„culos</a></li>
-					<li class="opcao" onclick="window.location='?p=busca_condutores';">Condutores</a></li>
-					<li class="opcao" onclick="window.location='?p=busca_revisoes';">Revis√µes</a></li>
-					<li class="opcao" onclick="window.location='?p=busca_abastece';">Abastecimentos</a></li>
+					<li class="opcao" onclick="window.location='?p=busca_cpf&limpa=1';">Clientes - Pessoa fs„sica</a></li>
+					<li class="opcao" onclick="window.location='?p=busca_cnpj&limpa=1';">Clientes - Pessoa jurs„dica</a></li>
+					<li class="opcao" onclick="window.location='?p=busca_veiculos&limpa=1';">Ves„culos</a></li>
+					<li class="opcao" onclick="window.location='?p=busca_condutores&limpa=1';">Condutores</a></li>
+					<li class="opcao" onclick="window.location='?p=busca_revisoes&limpa=1';">Revis√µes</a></li>
+					<li class="opcao" onclick="window.location='?p=busca_abastece&limpa=1';">Abastecimentos</a></li>
 				</ul>
 			</li>
 

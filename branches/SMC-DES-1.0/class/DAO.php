@@ -312,7 +312,7 @@ class DAO
 	public function updateEndereco(Endereco $endereco)
 	{
 		$conecta = new Connecta();
-		$valueObj = (object)$endereco;
+		$valueObj = $endereco;
 		
 		$idEndereco = null;
 		$ruaEndereco = '';
