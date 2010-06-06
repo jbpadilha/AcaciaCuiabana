@@ -1066,11 +1066,12 @@ if(isset($_POST))
 				
 				if($_POST['adicionaRevisao'] == "sim")
 				{
+					$cont++;
+					$_SESSION['contRevisoes'] = $cont;
 					$valores[$cont-1][0] = '';
 					$valores[$cont-1][1] = '';
 					$_SESSION['valoresAtual'] = $valores;
 					$_SESSION['revisoesAtual'] = $revisoes;
-					$_SESSION['contRevisoes'] = $cont + 1;
 					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao'</script>";
 					
 				}
@@ -1080,17 +1081,17 @@ if(isset($_POST))
 					{
 						$revisoes->setProxDataRevisoes($formataData->toDBDate($valores[$i][0]));
 						$revisoes->setProxKmRevisoes($valores[$i][1]);
-						$controla->cadastrarRevisoes($revisoes);	
+						$controla->cadastrarRevisoes($revisoes);
 					}
 					$mensagem = 'Revisão cadastrado com sucesso.';
 					unset($_SESSION['revisoesAtual']);
-					unset($_SESSION['valores']);
+					unset($_SESSION['valoresAtual']);
 					unset($_SESSION['contRevisoes']);
 					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
 				}
 				else
 				{
-					$_SESSION['valores'] = $valores;
+					$_SESSION['valoresAtual'] = $valores;
 					$_SESSION['revisoesAtual'] = $revisoes;
 					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao&msg=$mensagem'</script>";
 				}
@@ -1127,15 +1128,17 @@ if(isset($_POST))
 				$abastecimentos->setTipoCombustivelAbastecimentos($_POST['combustivel']);
 				$abastecimentos->setValorAbastecimentos($_POST['valor']);
 				$abastecimentos->setLitrosAbastecimentos($_POST['litros']);
-
+				
 				if($mensagem == '')
 				{
 					$controla->cadastrarAbastecimentos($abastecimentos);
 					$mensagem = 'Abastecimento cadastrado com sucesso.';
+					unset($_SESSION['abastecimentosAtual']);
 					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
 				}
 				else
 				{
+					$_SESSION['abastecimentosAtual'] = $abastecimentos;
 					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_abastece&msg=$mensagem'</script>";
 				}
 				
@@ -1143,6 +1146,7 @@ if(isset($_POST))
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
+				$_SESSION['abastecimentosAtual'] = $abastecimentos;
 				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_abastece&msg=$mensagem'</script>";
 			}
 		}
@@ -1156,9 +1160,9 @@ if(isset($_POST))
 				if($_POST['busca'] != '')
 					$pessoa->setNomePessoa(trim($_POST['busca']));
 				else
-					$mensagem = 'Para efetuar a busca, você deve entrar com um parÃ¢metro.';
+					$mensagem = 'Para efetuar a busca, você deve entrar com um parâmetro.';
 				$logon = new Logon();
-				$logon = (object)$_SESSION['usuarioLogon'];
+				$logon = $_SESSION['usuarioLogon'];
 				if($logon->getNivelAcessoLogin() != Dominio::$ADMINISTRADOR)
 				{	
 					$pessoa->setIdCliente($_POST['idCliente']);
@@ -1167,10 +1171,8 @@ if(isset($_POST))
 				if($mensagem == '')
 				{
 					$collVo = $controla->findPessoas($pessoa);
-					if(!is_null($collVo))
-						echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_cpf&pessoasPesquisadas=".base64_encode(serialize($collVo))."'</script>";
-					else
-						header("Location: ../views/painel/index.php?p=busca_cpf&pessoasPesquisadas=");
+					$_SESSION['pessoasPesquisadas'] = $collVo;
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_cpf'</script>";
 				}
 				else
 				{

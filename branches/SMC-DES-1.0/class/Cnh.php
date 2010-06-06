@@ -92,7 +92,7 @@ class Cnh
 		return $condutor = $collVo[0];  
 	}
 	
-	public function returnaPessoa()
+	public function retornaPessoa()
 	{
 		$controla = new ControlaFuncionalidades();
 		$condutor = new Condutores($this->retornaCondutor());
