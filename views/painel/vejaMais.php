@@ -82,9 +82,9 @@ if(!is_null($listaCnh)  && $listaCnh->count() > 0)
 		if($cont == 0)
 			echo '<label class="ativo">Vencimento de CNH</label>';
 		$cnhAtual = new Cnh();
-		$cnhAtual = $cnhs;		
+		//$cnhAtual = $cnhs;		
 		$pessoaAtual = new Pessoa();
-		$pessoaAtual = $cnhAtual->returnaPessoa();
+		$pessoaAtual = $cnhAtual->retornaPessoa();
 		$endereco = new Endereco();
 		$endereco = (object)$pessoaAtual->retornaEndereco();
 		echo '<label class="ativo" title="">CNH numero '.$cnhAtual->getNumeroCnh().', <b>nome:</b> '.$pessoaAtual->getNomePessoa().'&nbsp;&nbsp;<input type="button" value="Enviar E-mail" onclick="enviaEmail('.$endereco->getIdEndereco().',2,'.$cnhAtual->getIdCnh().')"/></label>';

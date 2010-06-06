@@ -944,7 +944,7 @@ class DAO
 	public function cadastrarRevisoes(Revisoes $revisoes)
 	{
 		$conecta = new Connecta();
-		$valueObj = (object)$revisoes;
+		$valueObj = $revisoes;
 		
 		$idRevisoes = '';
 		$dataRevisoes = '';
@@ -959,7 +959,7 @@ class DAO
 			$sql = mysqli_prepare($conecta,"INSERT INTO revisoes (idRevisoes, dataRevisoes, kmRevisoes,
 			proxDataRevisoes,proxKmRevisoes,idVeiculos,idTipoRevisoes) 
 			VALUES('',?,?,?,?,?,?)");
-			mysqli_bind_param($sql,'sssssss',$dataRevisoes,$kmRevisoes,$proxDataRevisoes,$proxKmRevisoes,
+			mysqli_bind_param($sql,'ssssss',$dataRevisoes,$kmRevisoes,$proxDataRevisoes,$proxKmRevisoes,
 			$idVeiculos,$idTipoRevisoes);
 			
 			$dataRevisoes = $valueObj->getDataRevisoes();
@@ -970,7 +970,7 @@ class DAO
 			$idTipoRevisoes = $valueObj->getIdTipoRevisoes();			
 			
 			if(!mysqli_stmt_execute($sql))
-				throw new Exception("Não foi posssãvel conectar no banco de dados.");
+				throw new Exception("Não foi possível conectar no banco de dados.");
 			
 		}
 		catch ( Exception $e)

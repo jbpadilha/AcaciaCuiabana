@@ -10,8 +10,8 @@
 
 	$abastecimentos = new Abastecimentos();
 	
-	if(isset($_GET['abastecimentos'])) {
-		$abastecimentos = unserialize(base64_decode($_GET['abastecimentos']));
+	if(isset($_SESSION['abastecimentosAtual'])) {
+		$abastecimentos = $_SESSION['abastecimentosAtual'];
 	}
 ?>
 <link rel="stylesheet" href="_css/formPadrao.css" type="text/css" media="all" />
@@ -21,12 +21,13 @@
 <fieldset>
 	<p class="caption">Lançar abastecimento</p>
 	<fieldset>
-		<label>Placa do Vesãculo:
+		<label>Placa do Veículo:
 			<select name="placa">
-				<option selected></option>
+				<option selected="selected"><?=SELECIONE?></option>
 <?php
 	$veiculos = new Veiculos();
-	$veiculos->setIdClientes($logon->getIdClientes());
+	if($logon->getNivelAcessoLogin() != Dominio::$ADMINISTRADOR)
+		$veiculos->setIdClientes($logon->getIdClientes());
 	$collVoVeiculos = $controla->findVeiculos($veiculos);
 	
 	if(!is_null($collVoVeiculos)) {
@@ -52,10 +53,10 @@
 			<input type="text" name="posto" value="<?=$abastecimentos->getPostoAbastecimentos()?>" class="long" />
 		</label>
 		<br />
-		<label>Nã da nota/cupom fiscal:
-			<input type="text" value="<?=$abastecimentos->getNfAbastecimentos()?>" class="doc" />
+		<label>Nº da nota/cupom fiscal:
+			<input type="text" value="<?=$abastecimentos->getNfAbastecimentos()?>" class="doc" name="nf" />
 		</label>
-		<label>Tipo de combustsãvel:
+		<label>Tipo de combustível:
 			<select name="combustivel">
 				<option></option>
 				<option value="Gasolina" <?=($abastecimentos->getTipoCombustivelAbastecimentos() == "Gasolina")? "selected" : ""?>>Gasolina</option>
