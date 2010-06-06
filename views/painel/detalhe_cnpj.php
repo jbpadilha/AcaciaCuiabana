@@ -11,12 +11,10 @@ $logon = $_SESSION["usuarioLogon"];
 
 $empresa = new Empresas();
 
-if(isset($_GET['empresas']))
+if (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
 {
-	$empresa = (object)unserialize(base64_decode($_GET['empresas']));
-}
-elseif (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
-{
+	if(isset($_SESSION['empresaAtual']))
+		unset($_SESSION['empresaAtual']);
 	$empresa->setIdEmpresa($_GET['idEmpresaAlterar']);
 	$collVoAlterar = $controla->findEmpresas($empresa);
 	if(!is_null($collVoAlterar))
@@ -24,21 +22,18 @@ elseif (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
 		$empresa = $collVoAlterar[0]; 
 	}
 }
+elseif(isset($_SESSION['empresaAtual']))
+{
+	$empresa = $_SESSION['empresaAtual'];
+}
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<link rel="stylesheet" href="../css/meucpf.css" type="text/css" media="all" >
-<script type="text/javascript" language="javascript" src="../scripts/full.js" > </script>
-<script type="text/javascript" language="javascript" src="../cidades.js" > </script>
-</head>
-<body>
+
 <form method="post" action="../../class/RecebePostGet.php" onsubmit="return validaForm(this)">
 <input type="hidden" id="acao" name="acao" value="alterarEmpresa">
 <input type="hidden" id="idCliente" name="idCliente" value="<?=$logon->getIdClientes()?>">
 <input type="hidden" id="idEmpresa" name="idEmpresa" value="<?=$empresa->getIdEmpresa()?>">
 <fieldset> 
-<p class="caption" onclick="blocking('geral');" > InformaçÃµes gerais <span class="borda"> </span> </p>
+<p class="caption" > Informações Gerais <span class="borda"> </span> </p>
 
 <div id="geral">
 	<div id="left">
@@ -63,16 +58,18 @@ elseif (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
 
 <?php
 $endereco= new Endereco();
-if(isset($_GET['endereco']))
+if (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
 {
-	$endereco = (object)unserialize(base64_decode($_GET['endereco']));
-}
-elseif (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
-{
+	if(isset($_SESSION['enderecoAtual']))
+		unset($_SESSION['enderecoAtual']);
 	$endereco->setIdEmpresa($_GET['idEmpresaAlterar']);
 	$collVoAlterarEnd = $controla->findEndereco($endereco);
 	if(!is_null($collVoAlterarEnd))
 		$endereco = $collVoAlterarEnd[0]; 
+}
+elseif(isset($_SESSION['enderecoAtual']))
+{
+	$endereco = $_SESSION['enderecoAtual'];
 }
 ?>
 <input type="hidden" id="idEndereco" name="idEndereco" value="<?=$endereco->getIdEndereco()?>">
@@ -100,16 +97,19 @@ elseif (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
 </fieldset>
 <?php 
 $pessoa = new Pessoa();
-if(isset($_GET['pessoaDiretor']))
+
+if (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
 {
-	$pessoa = (object)unserialize(base64_decode($_GET['pessoaDiretor']));
-}
-elseif (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
-{
+	if(isset($_SESSION['pessoaDiretorAtual']))
+		unset($_SESSION['pessoaDiretorAtual']);
 	$pessoa->setIdPessoa($empresa->getIdDiretor());
 	$collVoAlterarPessoaConju = $controla->findPessoas($pessoa);
 	if(!is_null($collVoAlterarPessoaConju))
 		$pessoa = $collVoAlterarPessoaConju[0]; 
+}
+elseif(isset($_SESSION['pessoaDiretorAtual']))
+{
+	$pessoa = $_SESSION['pessoaDiretorAtual'];
 }
 ?>
 <input type="hidden" id="idDiretor" name="idDiretor" value="<?=$pessoa->getIdPessoa()?>">
@@ -117,9 +117,8 @@ elseif (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
 	<p>
 		<label class="x0" >Deseja preencher os dados do diretor? </label>
 		<select name="preenche" onchange="sty6 = document.getElementById('layerFrm6'); if (this.value == 'Sim') { sty6.style.display = 'block'; IrPara('nome_diretor'); } else { sty6.style.display = 'none'; sty5.style.display = 'none'; };" >
-			<option> </option>
-			<option value="Sim">Sim</option>
-			<option value="Não">Não</option>
+			<option value="Não" selected="selected">Não</option>
+			<option value="Sim" <?=($pessoa->getIdPessoa() != null)?"selected=\"selected\"":""?>>Sim</option>
 		</select>
 	</p>
 	<div id="layerFrm6">
@@ -156,16 +155,19 @@ elseif (isset($_GET['idEmpresaAlterar']) && $_GET['idEmpresaAlterar'] != '')
 <?php 
 
 $enderecoDiretor= new Endereco();
-if(isset($_GET['enderecoDiretor']))
+
+if ($pessoa->getIdPessoa() != null)
 {
-	$enderecoDiretor = (object)unserialize(base64_decode($_GET['enderecoDiretor']));
-}
-elseif ($pessoa->getIdPessoa() != null)
-{
+	if(isset($_SESSION['enderecoDiretorAtual']))
+		unset($_SESSION['enderecoDiretorAtual']);
 	$enderecoDiretor->setIdPessoa($pessoa->getIdPessoa());
 	$collVoAlterarEndDir = $controla->findEndereco($enderecoDiretor);
 	if(!is_null($collVoAlterarEndDir))
 		$enderecoDiretor = $collVoAlterarEndDir[0]; 
+}
+elseif(isset($_SESSION['enderecoDiretorAtual']))
+{
+	$enderecoDiretor = $_SESSION['enderecoDiretorAtual'];
 }
 ?>		
 <input type="hidden" id="idEnderecoDiretor" name="idEnderecoDiretor" value="<?=$enderecoDiretor->getIdEndereco()?>">		
@@ -193,19 +195,24 @@ elseif ($pessoa->getIdPessoa() != null)
 	<?php 
 	$pessoaConjugue = new Pessoa();
 	$enderecoConjugueDiretor = new Endereco();
-	if(isset($_GET['pessoaConjugue']))
+	
+	if ($pessoa->getIdConjuguePessoa() != null)
 	{
-		$pessoaConjugue = (object) unserialize(base64_decode($_GET['pessoaConjugue']));
-	}
-	elseif ($pessoa->getIdConjuguePessoa() != null)
-	{
+		if(isset($_SESSION['pessoaConjugueAtual']))
+		{
+			unset($_SESSION['pessoaConjugueAtual']);
+		}
 		$pessoaConjugue->setIdPessoa($pessoa->getIdConjuguePessoa());
 		$collVoAlterarConjugueDir = $controla->findPessoas($pessoaConjugue);
 		if(!is_null($collVoAlterarConjugueDir))
 		{
 			$pessoaConjugue = $collVoAlterarConjugueDir[0];
-			$enderecoConjugueDiretor->setIdPessoa($pessoaConjugue->getIdPessoa());
+			$enderecoConjugueDiretor = $pessoaConjugue->retornaEndereco();
 		} 
+	}
+	elseif(isset($_SESSION['pessoaConjugueAtual']))
+	{
+		$pessoaConjugue = $_SESSION['pessoaConjugueAtual'];
 	}
 	?>
 	<input type="hidden" id="idConjugueDiretor" name="idConjugueDiretor" value="<?=$pessoaConjugue->getIdPessoa()?>">
@@ -248,5 +255,3 @@ elseif ($pessoa->getIdPessoa() != null)
 	<input type="submit" name="completo2" value="Confirmar" id="name">
 </p>
 </form>
-</body>
-</html>

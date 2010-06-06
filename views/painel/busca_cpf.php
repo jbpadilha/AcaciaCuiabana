@@ -24,20 +24,29 @@
 
 <div id="resultados">
 <?php 
+	if(isset($_GET['limpa']))
+	{
+		unset($_SESSION['pessoasPesquisadas']);
+	}
 	$collPessoasPesquisadas = null;
 	
-	if(isset($_GET['pessoasPesquisadas'])) {
-		if($_GET['pessoasPesquisadas'] != '') {
-			$collPessoasPesquisadas = unserialize(base64_decode($_GET['pessoasPesquisadas']));
-		} else {
-			$collPessoasPesquisadas = null;
+	if(isset($_SESSION['pessoasPesquisadas']))
+	{ 
+		if($_SESSION['pessoasPesquisadas'] != '')
+		{ 
+			$collPessoasPesquisadas = $_SESSION['pessoasPesquisadas'];
+
+			if(!is_null($collPessoasPesquisadas) && count($collPessoasPesquisadas) > 0) {
+				if(count($collPessoasPesquisadas) > 1)
+				echo "<p>".count($collPessoasPesquisadas)." resultados encontrados</p><br /><br />";
+				else
+				echo "<p>".count($collPessoasPesquisadas)." resultado encontrado</p><br /><br />";
+			} else {
+				echo "<p>Nenhum resultado encontrado.</p>";
+			}
 		}
-		if(!is_null($collPessoasPesquisadas) && count($collPessoasPesquisadas) > 0) {
-			if(count($collPessoasPesquisadas) > 1)
-			echo "<p>".count($collPessoasPesquisadas)." resultados encontrados</p><br /><br />";
-			else
-			echo "<p>".count($collPessoasPesquisadas)." resultado encontrado</p><br /><br />";
-		} else {
+		else 
+		{
 			echo "<p>Nenhum resultado encontrado.</p>";
 		}
 	}

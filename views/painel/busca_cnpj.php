@@ -26,20 +26,31 @@
 
 <div id="resultados">
 <?php
+	if(isset($_GET['limpa']))
+	{
+		unset($_SESSION['empresasPesquisadas']);
+	}
+	
 	$collEmpresasPesquisadas = null;
-	if(isset($_GET['empresasPesquisadas'])) {
-		if($_GET['empresasPesquisadas'] != '') {
-			$collEmpresasPesquisadas = unserialize(base64_decode($_GET['empresasPesquisadas']));
-		} else {
-			$collEmpresasPesquisadas = null;
-		}
-		if(!is_null($collEmpresasPesquisadas) && count($collEmpresasPesquisadas) > 0) {
-			if(count($collEmpresasPesquisadas) > 1) {
-				echo "<p>".count($collEmpresasPesquisadas)." resultados encontrados</p><br><br>";
+	if(isset($_SESSION['empresasPesquisadas'])) 
+	{
+		if($_SESSION['empresasPesquisadas'] != '')
+		{
+			$collEmpresasPesquisadas = $_SESSION['empresasPesquisadas'];
+		
+			if(!is_null($collEmpresasPesquisadas) && count($collEmpresasPesquisadas) > 0) 
+			{
+				if(count($collEmpresasPesquisadas) > 1) {
+					echo "<p>".count($collEmpresasPesquisadas)." resultados encontrados</p><br><br>";
+				} else {
+					echo "<p>".count($collEmpresasPesquisadas)." resultado encontrado</p><br><br>";
+				}
 			} else {
-				echo "<p>".count($collEmpresasPesquisadas)." resultado encontrado</p><br><br>";
+				echo "<p>Nenhum resultado encontrado.</p>";
 			}
-		} else {
+		}
+		else 
+		{
 			echo "<p>Nenhum resultado encontrado.</p>";
 		}
 	}

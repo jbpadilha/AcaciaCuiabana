@@ -1172,6 +1172,8 @@ if(isset($_POST))
 				{
 					$collVo = $controla->findPessoas($pessoa);
 					$_SESSION['pessoasPesquisadas'] = $collVo;
+					if(is_null($_SESSION['pessoasPesquisadas']))
+						$_SESSION['pessoasPesquisadas'] = '';
 					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_cpf'</script>";
 				}
 				else
@@ -1193,6 +1195,8 @@ if(isset($_POST))
 				$mensagem = '';
 				//CADASTRO DE PESSOA
 				$pessoaAtual = new Pessoa();
+				$pessoaConjugue = new Pessoa();
+				$endereco = new Endereco();
 				$pessoaAtual->setIdPessoa($_POST['idPessoa']);
 				$pessoaAtual->setIdCliente($_POST['idCliente']);
 				
@@ -1200,12 +1204,11 @@ if(isset($_POST))
 					$pessoaAtual->setNomePessoa(trim($controla->validaNomes($_POST['nome'])));
 				else 
 					$mensagem .= "O Nome da Pessoa Não pode estar em branco.";
-				
+					
 				if($_POST['dataNascimento'] != '')
 					$pessoaAtual->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['dataNascimento'])));
 				else
 					$mensagem .= "A data de nascimento da pessoa deve ser preenchida.";
-				
 				$pessoaAtual->setSexoPessoa($_POST['sexo']);
 				$pessoaAtual->setEstadoCivilPessoa($_POST['estadoCivil']);
 				
@@ -1221,14 +1224,23 @@ if(isset($_POST))
 				}
 				
 				if($_POST['cpf'] != '')
-					$pessoaAtual->setCpfPessoa($controla->retiraMascaraCPF($_POST['cpf']));
+				{
+					$pessoaTeste = new Pessoa();
+					$pessoaTeste->setIdPessoa($pessoaAtual->getIdPessoa());
+					$collVoTeste = $controla->findPessoas($pessoaTeste);
+					$pessoaTeste = $collVoTeste[0]; 
+					if($pessoaTeste->getCpfPessoa() == $controla->retiraMascaraCPF($_POST['cpf']))
+						$pessoaAtual->setCpfPessoa($controla->retiraMascaraCPF($_POST['cpf']));
+					else
+						$pessoaAtual->setCpfPessoa($controla->validaCpfIgual($controla->validaCPF($controla->retiraMascaraCPF($_POST['cpf']))));
+				}
 				else
+				{
 					$mensagem .= "O CPF Não deve estar em branco.";
+				}
 				
 				//CADASTRO DE ENDERECO PARA PESSOA
 				
-				$endereco = new Endereco();
-				$endereco->setIdEndereco($_POST['idEndereco']);
 				$endereco->setRuaEndereco(trim($_POST['rua']));
 				$endereco->setComplementoEndereco(trim($_POST['complemento']));
 				$endereco->setBairroEndereco(trim($_POST['bairro']));
@@ -1250,9 +1262,9 @@ if(isset($_POST))
 				
 				//Cadastro do Conjugue
 				
-				$pessoaConjugue = new Pessoa();
 				if($pessoaAtual->getEstadoCivilPessoa() == "Casado" || $pessoaAtual->getEstadoCivilPessoa() == "União Estável" )
 				{
+					$pessoaConjugue->setIdCliente($_POST['idCliente']);
 					if($_POST['idPessoaConjugue'] != '')
 						$pessoaConjugue->setIdPessoa($_POST['idPessoaConjugue']);
 						
@@ -1275,19 +1287,40 @@ if(isset($_POST))
 						$pessoaConjugue->setOrgExpPessoa(trim($_POST['rg_orgaoConjugue']));
 						$pessoaConjugue->setUfOrgExpPessoa(strtoupper($_POST['rg_ufConjugue']));
 					}
-					else
-					{
-						$mensagem .= "O RG do Conjugue Não deve estar em branco.";
-					}
+
 					
 					if($_POST['cpfConjugue'] != '')
-						$pessoaConjugue->setCpfPessoa($controla->retiraMascaraCPF($_POST['cpfConjugue']));
-					else
+					{
+						if($_POST['cpfConjugue'] != $pessoaAtual->getCpfPessoa())
+						{
+							if(!is_null($pessoaConjugue->getIdPessoa()))
+							{
+								$pessoaConjugueTeste = new Pessoa();
+								$pessoaConjugueTeste->setIdPessoa($pessoaConjugue->getIdPessoa());
+								$collVoConjugueTeste = $controla->findPessoas($pessoaConjugueTeste);
+								$pessoaConjugueTeste = $collVoConjugueTeste[0]; 
+								if($pessoaConjugueTeste->getCpfPessoa() == $controla->retiraMascaraCPF($_POST['cpfConjugue']))
+									$pessoaConjugue->setCpfPessoa($controla->retiraMascaraCPF($_POST['cpfConjugue']));
+								else
+									$pessoaConjugue->setCpfPessoa($controla->validaCpfIgual($controla->validaCPF($controla->retiraMascaraCPF($_POST['cpfConjugue']))));
+							}
+							else
+							{
+								$pessoaConjugue->setCpfPessoa($formataData->toDBDate($controla->validaCpfIgual($controla->validaCPF($controla->retiraMascaraCPF($_POST['cpfConjugue'])))));
+							}
+						}
+						else
+						{
+							$mensagem .= "O CPF do Conjugue não pode ser igual a da Pessoa.";
+						}
+					}
+					else 
+					{
 						$mensagem .= "O CPF do Conjugue Não deve estar em branco.";
+					}
 				}
 				
 				//TESTE DE ERRO e UPDATE DE CADASTRO
-				
 				if($mensagem == '')
 				{
 					//Cadastrando Conjugue
@@ -1296,21 +1329,25 @@ if(isset($_POST))
 						if($pessoaConjugue->getIdPessoa() != null)
 						{
 							$controla->updatePessoa($pessoaConjugue);
+							$endereco->setIdPessoa($pessoaConjugue->getIdPessoa());
+							$endereco->setIdEndereco($_POST['idEnderecoConjugue']);
+							$controla->updateEndereco($endereco);
 						}
 						else
 						{
 							$idPessoaConjugue = $controla->cadastraPessoa($pessoaConjugue);
-							$pessoaConjugue->setIdPessoa($idPessoaConjugue);					
+							$pessoaConjugue->setIdPessoa($idPessoaConjugue);
+							$endereco->setIdPessoa($pessoaConjugue->getIdPessoa());
+							$endereco->setIdEndereco(null);
+							$controla->cadastraEndereco($endereco);
 						}
-						$endereco->setIdPessoa($pessoaConjugue->getIdPessoa());	
-						$controla->updateEndereco($endereco);
 						$pessoaAtual->setIdConjuguePessoa($pessoaConjugue->getIdPessoa());
 					}
 					//atualização de endereço
 					$controla->updatePessoa($pessoaAtual);
 					$endereco->setIdPessoa($pessoaAtual->getIdPessoa());
+					$endereco->setIdEndereco($_POST['idEndereco']);
 					$controla->updateEndereco($endereco);
-					
 					
 					$descricao = "
 					<b>DADOS DA PESSOA</b>
@@ -1324,21 +1361,31 @@ if(isset($_POST))
 						$descricao = "
 						<b>DADOS DO CONJUGUE</b>
 						";
+						echo $pessoaConjugue->mostraDadosPessoa();
 					}
 					
 					$controla->enviarEmail($pessoaAtual->getNomePessoa(),$endereco->getEmailEndereco(),"Cadastro de Pessoa",$descricao);
 					$mensagem = "atualização realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
+					unset($_SESSION['pessoaAtual']);
+					unset($_SESSION['enderecoAtual']);
+					unset($_SESSION['pessoaConjugueAtual']);
 					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cpf&msg=$mensagem&pessoa=".base64_encode(serialize($pessoaAtual))."&endereco=".base64_encode(serialize($endereco))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>";
+					$_SESSION['pessoaAtual'] = $pessoaAtual;
+					$_SESSION['enderecoAtual'] = $endereco;
+					$_SESSION['pessoaConjugueAtual'] = $pessoaConjugue;
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cpf&msg=$mensagem'</script>";
 				}
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cpf&msg=$mensagem&pessoa=".base64_encode(serialize($pessoaAtual))."&endereco=".base64_encode(serialize($endereco))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>";
+				$_SESSION['pessoaAtual'] = $pessoaAtual;
+				$_SESSION['enderecoAtual'] = $endereco;
+				$_SESSION['pessoaConjugueAtual'] = $pessoaConjugue;
+				//echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cpf&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -1364,12 +1411,11 @@ if(isset($_POST))
 					
 				if($mensagem == '')
 				{
-					$collVo = null;
 					$collVo = $controla->findEmpresas($empresas);
-					if(!is_null($collVo))
-						echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_cnpj&empresasPesquisadas=".base64_encode(serialize($collVo))."'</script>";	
-					else
-						header("Location: ../views/painel/index.php?p=busca_cnpj&empresasPesquisadas=");
+					$_SESSION['empresasPesquisadas'] = $collVo;
+					if(is_null($_SESSION['empresasPesquisadas']))
+						$_SESSION['empresasPesquisadas'] = '';
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_cnpj'</script>";	
 				}
 				else
 				{
@@ -1389,8 +1435,12 @@ if(isset($_POST))
 			{
 				$mensagem = '';
 				$empresas = new Empresas();
-				
+				$endereco = new Endereco();
 				$cliente = new Clientes();
+				$enderecoDiretor = null;
+				$pessoaDiretor = null;
+				$pessoaConjugue = null;
+				
 				$cliente->setIdClientes($_POST['idCliente']);
 				$collVoCliente = $controla->findClientes($cliente);
 				$cliente = $collVoCliente[0];
@@ -1420,7 +1470,6 @@ if(isset($_POST))
 				$empresas->setOrigemEmpresa($_POST['origem']);
 				
 				//DADOS DO endereço DA EMRPESA
-				$endereco = new Endereco();
 				
 				$endereco->setIdEndereco($_POST['idEndereco']);
 				$endereco->setRuaEndereco(trim($_POST['rua']));
@@ -1442,7 +1491,6 @@ if(isset($_POST))
 				$endereco->setFaxEndereco(trim($_POST['fax']));
 				$endereco->setIdEmpresa($empresas->getIdEmpresa());
 
-				$pessoaDiretor = null;
 				if($_POST['preenche'] == "Sim")
 				{
 					//DADOS DO DIRETOR DA EMPRESA
@@ -1538,7 +1586,6 @@ if(isset($_POST))
 							$mensagem .= "O CPF do Conjugue Não deve estar em branco.";
 					}
 				}
-				
 				//TESTE E CADASTRO
 				if($mensagem == '')
 				{
@@ -1549,6 +1596,9 @@ if(isset($_POST))
 						if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "União Estável" )
 						{
 							$pessoaConjugue->setIdCliente($cliente->getIdClientes());
+							if($_POST['idConjugueDiretor'])
+								$pessoaConjugue->setIdPessoa($_POST['idConjugueDiretor']);
+							
 							if(!is_null($pessoaConjugue->getIdPessoa()) && $pessoaConjugue->getIdPessoa()!='')
 							{
 								$controla->updatePessoa($pessoaConjugue);
@@ -1630,17 +1680,27 @@ if(isset($_POST))
 					
 					$controla->enviarEmail($empresas->getNomeEmpresa(),$endereco->getEmailEndereco(),"Cadastro de Pessoa",$descricao);
 					$mensagem = "atualização de Empresas realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
-					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
+					//header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
 				}
 				else 
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cnpj&msg=$mensagem&empresas=".base64_encode(serialize($empresas))."&endereco=".base64_encode(serialize($endereco))."&pessoaDiretor=".base64_encode(serialize($pessoaDiretor))."&enderecoDiretor=".base64_encode(serialize($enderecoDiretor))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>";
+					$_SESSION['empresaAtual'] = $empresas;
+					$_SESSION['enderecoAtual'] = $endereco;
+					$_SESSION['pessoaDiretorAtual'] = $pessoaDiretor;
+					$_SESSION['enderecoDiretorAtual'] = $enderecoDiretor;
+					$_SESSION['pessoaConjugueAtual'] = $pessoaConjugue;
+					//echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cnpj&msg=$mensagem'</script>";
 				}
 			}
 			catch (Exception $e)
 			{
+				$_SESSION['empresaAtual'] = $empresas;
+				$_SESSION['enderecoAtual'] = $endereco;
+				$_SESSION['pessoaDiretorAtual'] = $pessoaDiretor;
+				$_SESSION['enderecoDiretorAtual'] = $enderecoDiretor;
+				$_SESSION['pessoaConjugueAtual'] = $pessoaConjugue;
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cnpj&msg=$mensagem&empresas=".base64_encode(serialize($empresas))."&endereco=".base64_encode(serialize($endereco))."&pessoaDiretor=".base64_encode(serialize($pessoaDiretor))."&enderecoDiretor=".base64_encode(serialize($enderecoDiretor))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>";
+				//echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cnpj&msg=$mensagem&empresas=".base64_encode(serialize($empresas))."&endereco=".base64_encode(serialize($endereco))."&pessoaDiretor=".base64_encode(serialize($pessoaDiretor))."&enderecoDiretor=".base64_encode(serialize($enderecoDiretor))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>";
 			}
 		}
 		
