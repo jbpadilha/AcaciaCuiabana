@@ -11,12 +11,11 @@ $logon = $_SESSION["usuarioLogon"];
 
 $condutores = new Condutores();
 $cnh = new Cnh();
-if(isset($_GET['condutores']))
+
+if (isset($_GET['idCondutorAlterar']) && $_GET['idCondutorAlterar'] != '')
 {
-	$condutores = unserialize(base64_decode($_GET['condutores']));
-}
-elseif (isset($_GET['idCondutorAlterar']) && $_GET['idCondutorAlterar'] != '')
-{
+	if(isset($_SESSION['condutoresAtual']))
+		unset($_SESSION['condutoresAtual']); 
 	$condutores->setIdCondutores($_GET['idCondutorAlterar']);
 	$collVoAlterar = $controla->findCondutores($condutores);
 	if(!is_null($collVoAlterar))
@@ -26,6 +25,10 @@ elseif (isset($_GET['idCondutorAlterar']) && $_GET['idCondutorAlterar'] != '')
 		$collVoCnh = $controla->findCnh($cnh);
 		$cnh = $collVoCnh[0]; 
 	}
+}
+elseif(isset($_SESSION['condutoresAtual']))
+{
+	$condutores = $_SESSION['condutoresAtual'];
 }
 if(isset($_GET['cnh']))
 {

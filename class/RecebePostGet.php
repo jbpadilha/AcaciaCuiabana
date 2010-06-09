@@ -1596,7 +1596,7 @@ if(isset($_POST))
 						if($pessoaDiretor->getEstadoCivilPessoa() == "Casado" || $pessoaDiretor->getEstadoCivilPessoa() == "União Estável" )
 						{
 							$pessoaConjugue->setIdCliente($cliente->getIdClientes());
-							if($_POST['idConjugueDiretor'])
+							if($_POST['idConjugueDiretor'] != '')
 								$pessoaConjugue->setIdPessoa($_POST['idConjugueDiretor']);
 							
 							if(!is_null($pessoaConjugue->getIdPessoa()) && $pessoaConjugue->getIdPessoa()!='')
@@ -1610,7 +1610,10 @@ if(isset($_POST))
 							}
 							if($_POST['idConjugueDiretor'] != '')
 								$enderecoDiretor->setIdEndereco($_POST['idConjugueDiretor']);
+							
 							$enderecoDiretor->setIdPessoa($pessoaConjugue->getIdPessoa());
+							if($_POST['idEnderecoConjugueDiretor'] != '')
+								$enderecoDiretor->setIdEndereco($_POST['idEnderecoConjugueDiretor']);
 							
 							if(!is_null($enderecoDiretor->getIdEndereco()) && $enderecoDiretor->getIdEndereco()!='')
 							{
@@ -1622,6 +1625,7 @@ if(isset($_POST))
 							}
 						}
 						$pessoaDiretor->setIdCliente($cliente->getIdClientes());
+						
 						if($pessoaDiretor->getIdPessoa()!=null)
 						{
 							$controla->updatePessoa($pessoaDiretor);
@@ -1649,7 +1653,7 @@ if(isset($_POST))
 					//atualização da Empresa
 					$empresas->setIdDiretor($pessoaDiretor->getIdPessoa());
 					$controla->updateEmpresa($empresas);
-					$endereco->setIdEmpresa($empresas->getIdEmpresa());
+					
 					if(!is_null($endereco->getIdEndereco()) && $endereco->getIdEndereco() != '')
 					{
 						$controla->updateEndereco($endereco);
@@ -1661,10 +1665,7 @@ if(isset($_POST))
 					//atualização de endereço da Empresa
 					
 					$controla->updateEmpresa($empresas);
-					
-					$cliente->setIdEmpresa($empresas->getIdEmpresa());
-					$controla->updateClientes($cliente);
-					
+										
 					//
 					
 					$descricao = "
@@ -1680,7 +1681,12 @@ if(isset($_POST))
 					
 					$controla->enviarEmail($empresas->getNomeEmpresa(),$endereco->getEmailEndereco(),"Cadastro de Pessoa",$descricao);
 					$mensagem = "atualização de Empresas realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
-					//header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
+					unset($_SESSION['empresaAtual']);
+					unset($_SESSION['enderecoAtual']);
+					unset($_SESSION['pessoaDiretorAtual']);
+					unset($_SESSION['enderecoDiretorAtual']);
+					unset($_SESSION['pessoaConjugueAtual']);
+					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
 				}
 				else 
 				{
@@ -1689,7 +1695,7 @@ if(isset($_POST))
 					$_SESSION['pessoaDiretorAtual'] = $pessoaDiretor;
 					$_SESSION['enderecoDiretorAtual'] = $enderecoDiretor;
 					$_SESSION['pessoaConjugueAtual'] = $pessoaConjugue;
-					//echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cnpj&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cnpj&msg=$mensagem'</script>";
 				}
 			}
 			catch (Exception $e)
@@ -1700,7 +1706,7 @@ if(isset($_POST))
 				$_SESSION['enderecoDiretorAtual'] = $enderecoDiretor;
 				$_SESSION['pessoaConjugueAtual'] = $pessoaConjugue;
 				$mensagem .= $e->getMessage();
-				//echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cnpj&msg=$mensagem&empresas=".base64_encode(serialize($empresas))."&endereco=".base64_encode(serialize($endereco))."&pessoaDiretor=".base64_encode(serialize($pessoaDiretor))."&enderecoDiretor=".base64_encode(serialize($enderecoDiretor))."&pessoaConjugue=".base64_encode(serialize($pessoaConjugue))."'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cnpj&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -1712,7 +1718,7 @@ if(isset($_POST))
 				$veiculos = new Veiculos();
 				if($_POST['busca'] != '')
 				{
-					$veiculos->getPlacaVeiculos(trim($_POST['busca']));
+					$veiculos->setPlacaVeiculos(trim($_POST['busca']));
 				}
 				else
 					$mensagem = 'Para efetuar a busca, você deve entrar com um parÃ¢metro.';
@@ -1722,15 +1728,15 @@ if(isset($_POST))
 				{
 					$veiculos->setIdClientes($_POST['idCliente']);
 				}	
-					
 				if($mensagem == '')
 				{
-					$collVo = null;
 					$collVo = $controla->findVeiculos($veiculos);
-					if(!is_null($collVo))
-						echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_veiculos&veiculosPesquisados=".base64_encode(serialize($collVo))."'</script>";	 
-					else
-						header("Location: ../views/painel/index.php?p=busca_veiculos&veiculosPesquisados=");
+
+					$_SESSION['veiculosPesquisados'] = $collVo;
+					
+					if(is_null($_SESSION['veiculosPesquisados']))
+						$_SESSION['veiculosPesquisados'] = '';
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_veiculos'</script>";	 
 				}
 				else
 				{
@@ -1758,55 +1764,82 @@ if(isset($_POST))
 				else
 					$mensagem .= "A placa do Vesãculo deve ser informada";
 				
+				//teste de Placa Igual
+				$veiculoTeste = new Veiculos();
+				$veiculoTeste->setIdVeiculos($veiculos->getIdVeiculos());
+				$collVoVeiculoTeste = $controla->findVeiculos($veiculoTeste);
+				$veiculoTeste = $collVoVeiculoTeste[0]; 	
+				if($veiculoTeste->getPlacaVeiculos() != $veiculos->getPlacaVeiculos())	
+					$veiculos->setPlacaVeiculos($controla->validaVeiculoIgual($_POST['placa']));
+				
 				$veiculos->setMarcaVeiculos($_POST['marca']);
 				$veiculos->setModeloVeiculos($_POST['modelo']);
 				$veiculos->setCorVeiculos($_POST['cor']);
 				$veiculos->setCombustivelVeiculos($_POST['combustivel']);
 				$veiculos->setCapacidadeTanqueVeiculos($_POST['capacidade']);
 				$veiculos->setAnoFabricacaoVeiculos($_POST['anofab']);
+				if($_POST['tipo_veiculo']!='')
+					$veiculos->setTipoVeiculos($_POST['tipo_veiculo']);
+					
 				$veiculos->setRenavamVeiculos($_POST['renavam']);
 				$veiculos->setChassiVeiculos($_POST['chassi']);
 				$veiculos->setCodFipeVeiculos($_POST['codigo_fipe']);
 				$veiculos->setFornecedorNfVeiculos($_POST['fornecedor_nf']);
 				$veiculos->setCidadeNfVeiculos($_POST['cidade_nf']);
-				$veiculos->setProprietarioNfVeiculos($_POST['proprietario_nf']);
-				
+				$veiculos->setEstadoNfVeiculos($_POST['estado_nf']);
+				if($_POST['proprietario_nf'] != '')
+					$veiculos->setProprietarioNfVeiculos($_POST['proprietario_nf']);
+				else
+					$mensagem .= "É necessário informar o Proprietátio do Veículo.";
 				if($_POST['arrendatario_nf'] != '')
+				{
 					$veiculos->setArrendatarioNfVeiculos($_POST['arrendatario_nf']);
-					
+				}
 				$veiculos->setPlacaNfVeiculos($_POST['placa_nf']);
 				$veiculos->setNumeroNfVeiculos($_POST['numero_nf']);
-				
 				if($_POST['data_nf'] != '')
+				{
 					$veiculos->setDataNfVeiculos($formataData->toDBDate($controla->validaData($_POST['data_nf'])));
-					
-				$veiculos->setKmEntregaNfVeiculos($_POST['km_entrega_nf']);
-				$veiculos->setTempoGarantiaNfVeiculos($formataData->toDBDate($controla->validaData($_POST['tempo_garantia'])));
-				$veiculos->setKmGarantiaVeiculos($_POST['km_garantia']);
-				if($_POST['vencimento_ipva'] != '')
-					$veiculos->setVencimentoIpvaVeiculos($formataData->toDBDate($controla->validaData($_POST['vencimento_ipva'])));
+				}
+				if($_POST['data_entrega_nf'] != '')
+				{
+					$veiculos->setDataEntregaNfVeiculos($formataData->toDBDate($controla->validaData($_POST['data_entrega_nf'])));
+				}
 				else
-					$mensagem .= "O vencimento do IPVA deve ser preenchido.";
+				{
+					$mensagem .= "A data de entrega deve ser preenchida.";
+				}
+				$veiculos->setKmEntregaNfVeiculos($_POST['km_entrega_nf']);
 				
-				if($_POST['vencimento_seguro'] != '')
+				if($_POST['tempo_garantia'] != '')
+					$veiculos->setTempoGarantiaNfVeiculos($_POST['tempo_garantia']);
+					
+				$veiculos->setKmGarantiaVeiculos($_POST['km_garantia']);
+				
+				if($_POST['vencimento_seguro']!= '')
+				{
 					$veiculos->setVencimentoSeguroVeiculos($formataData->toDBDate($controla->validaData($_POST['vencimento_seguro'])));
+				}
 				
 				if($mensagem == '')
 				{
 					$controla->updateVeiculos($veiculos);
-					$mensagem = 'Vesãculo Alterado com sucesso.';
+					$mensagem = 'Veículo Alterado com sucesso.';
+					unset($_SESSION['veiculos']);
 					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_veiculo&msg=$mensagem&veiculos=".base64_encode(serialize($veiculos))."'</script>";
+					$_SESSION['veiculosAtual'] = $veiculos; 
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_veiculo&msg=$mensagem'</script>";
 				}
 				
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_veiculo&msg=$mensagem&veiculos=".base64_encode(serialize($veiculos))."'</script>";
+				$_SESSION['veiculosAtual'] = $veiculos;
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_veiculo&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -1857,10 +1890,9 @@ if(isset($_POST))
 							}
 						}
 					}
-					if(!is_null($collVo))
-						header("Location: ../views/painel/index.php?p=busca_condutores&condutoresPesquisados=".base64_encode(serialize($collVo)).""); 
-					else
-						header("Location: ../views/painel/index.php?p=busca_condutores&condutoresPesquisados=");
+					
+					$_SESSION['condutoresPesquisados'] = $collVo;
+					header("Location: ../views/painel/index.php?p=busca_condutores"); 
 				}
 				else
 				{
@@ -1891,6 +1923,15 @@ if(isset($_POST))
 					$cnh->setNumeroCnh(trim($_POST['cnh']));
 				else
 					$mensagem .= 'você deve preencher o número da CNH.';
+
+				// Teste de Cnh Igual
+				$cnhTeste = new Cnh();
+				$cnhTeste->setIdCnh($_POST['idCnh']);
+				$collTeste = $controla->findCnh($cnhTeste);
+				$cnhTeste = $collTeste[0];
+				if($cnhTeste->getNumeroCnh() != $cnh->getNumeroCnh())
+					$cnh->setNumeroCnh($controla->validaCnhIgual(trim($_POST['cnh']))); 
+					
 					
 				if($_POST['cnhuf'] != '')
 					$cnh->setUfCnh(trim(strtoupper($_POST['cnhuf'])));
@@ -1912,17 +1953,22 @@ if(isset($_POST))
 					$controla->updateCnh($cnh);
 					$controla->updateCondutores($pessoaCondutor);
 					$mensagem = 'Condutor alterado com sucesso.';
+					unset($_SESSION['condutoresAtual']);
 					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_condutores&msg=$mensagem&condutores=".base64_encode(serialize($pessoaCondutor))."&cnh=".base64_encode(serialize($cnh))."'</script>";
+					$_SESSION['CnhAtual'] = $cnh;
+					$_SESSION['condutoresAtual'] = $pessoaCondutor;
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_condutores&msg=$mensagem'</script>";
 				}				
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_condutores&msg=$mensagem&condutores=".base64_encode(serialize($pessoaCondutor))."&cnh=".base64_encode(serialize($cnh))."'</script>";
+				$_SESSION['CnhAtual'] = $cnh;
+				$_SESSION['condutoresAtual'] = $pessoaCondutor; 
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_condutores&msg=$mensagem'</script>";
 			}
 		}
 		

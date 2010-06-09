@@ -24,21 +24,33 @@
 
 <div id="resultados">
 <?php
+	if(isset($_GET['limpa']))
+	{
+		unset($_SESSION['veiculosPesquisados']);
+	}
 	$collVeiculosPesquisados = null;
-	if(isset($_GET['veiculosPesquisados'])) {
-		if($_GET['veiculosPesquisados'] != '') {
-			$collVeiculosPesquisados = unserialize(base64_decode($_GET['veiculosPesquisados']));
-		} else {
-			$collVeiculosPesquisados = null;
-		}
-		if(!is_null($collVeiculosPesquisados) && count($collVeiculosPesquisados) > 0) {
-			if(count($collVeiculosPesquisados) > 1) {
-				echo "<p>".count($collVeiculosPesquisados)." resultados encontrados</p><br><br>";
-			} else {
-				echo "<p>".count($collVeiculosPesquisados)." resultado encontrado</p><br><br>";
+	
+	if(isset($_SESSION['veiculosPesquisados'])) 
+	{
+		if($_SESSION['veiculosPesquisados'] != '') 
+		{
+			$collVeiculosPesquisados = $_SESSION['veiculosPesquisados'];
+			if(!is_null($collVeiculosPesquisados) && count($collVeiculosPesquisados) > 0) 
+			{
+				if(count($collVeiculosPesquisados) > 1) {
+					echo "<p>".count($collVeiculosPesquisados)." resultados encontrados</p><br><br>";
+				} else {
+					echo "<p>".count($collVeiculosPesquisados)." resultado encontrado</p><br><br>";
+				}
+			} 
+			else 
+			{
+				echo "<p align=\"center\">Nenhum resultado encontrado.</p>";
 			}
-		} else {
-			echo "<p align=\"center\">Nenhum resultado encontrado.</p>";
+		}
+		else 
+		{
+			echo "<p>Nenhum resultado encontrado.</p>";
 		}
 	}
 
