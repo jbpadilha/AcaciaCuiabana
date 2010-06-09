@@ -1,107 +1,98 @@
 <?php
 require_once ('../../class/Config.php');
-if(!isset($_SESSION['usuarioLogon']))
-{
-	header("Location:../views/home.php?p=login");
+if(!isset($_SESSION['usuarioLogon'])) {
+    header("Location:../views/home.php?p=login");
 }
 $logon = new Logon();
 $logon = $_SESSION["usuarioLogon"];
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
-<html xmlns="http://www.w3.org/1999/xhtml" >
+<form name="busca_revisoes" method="POST" action="../../class/RecebePostGet.php" >
+    <p class="caption"> Consulta Revisï¿½es</p>
+    <fieldset>
+        <label>Placa do Veï¿½culo:
+            <input name="busca" type="text" class="nome" />
+        </label>
 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	<title>SMC - Busca RevisÃµes</title>
-	<meta name="Description" content="SMC - Busca RevisÃµes" >
-	<meta http-equiv="X-UA-Compatible" content="IE=7" > 
-	<link rel="stylesheet" href="../css/meucpf.css" type="text/css" media="all" >
-</head>
-<body>
-<div id="form_busca">
-	<form name="busca_revisoes" method="POST" action="../../class/RecebePostGet.php" >
-		<input type="hidden" id="acao" name="acao" value="buscaRevisoes">
-		<input type="hidden" id="idCliente" name="idCliente" value="<?=$logon->getIdClientes()?>">
-		<p class="caption"> Consulta RevisÃµes</p>
-		<label>Placa do Vesãculo:</label>
-		<input name="busca" type="text" class="nome" >
-		<span class="borda"> </span> 
-		<p class="tright"> <input class="f_right" type="submit" value="Procurar" > </p>
-	</form>	
-
-</div>
-<?php
-		$collRevisoesPesquisadas = null;
-		if(isset($_GET['revisoesPesquisados']))
-		{
-			if($_GET['revisoesPesquisados'] != '')
-			{
-				$collRevisoesPesquisadas = unserialize(base64_decode($_GET['revisoesPesquisados']));
-			}
-			else 
-			{
-				$collRevisoesPesquisadas = null;
-			}
-			if(!is_null($collRevisoesPesquisadas) && count($collRevisoesPesquisadas) > 0)
-			{
-				if(count($collRevisoesPesquisadas) > 1)
-					echo "<p>".count($collRevisoesPesquisadas)." resultados encontrados</p><br><br>";
-				else
-					echo "<p>".count($collRevisoesPesquisadas)." resultado encontrado</p><br><br>";
-			}
-			else
-			{
-				echo "<p align=\"center\">Nenhum resultado encontrado.</p>";
-			}
-		} 
-		
-		$revisoes = new Revisoes();
-		if(!is_null($collRevisoesPesquisadas) && count($collRevisoesPesquisadas) > 0)
-		{
-?>
-<div id="form_resultados">
-<div align='center'>
+        <p class="botoes">
+            <input type="hidden" id="acao" name="acao" value="buscaRevisoes">
+            <input type="hidden" id="idCliente" name="idCliente" value="<?=$logon->getIdClientes()?>">
+            <input class="f_right" type="submit" value="Procurar" >
+        </p>
+    </fieldset>
+</form>	
 
 <?php
-	$cont = 1;
-	foreach ($collRevisoesPesquisadas as $revisaoAtual)
+if(isset($_GET['limpa']))
+{
+	unset($_SESSION['revisoesPesquisados']);
+}
+$collRevisoesPesquisadas = null;
+if(isset($_SESSION['revisoesPesquisados'])) 
+{
+    if($_SESSION['revisoesPesquisados'] != '') 
+    {
+        $collRevisoesPesquisadas = $_SESSION['revisoesPesquisados'];
+
+	    if(!is_null($collRevisoesPesquisadas) && count($collRevisoesPesquisadas) > 0) {
+	        if(count($collRevisoesPesquisadas) > 1)
+	            echo "<p>".count($collRevisoesPesquisadas)." resultados encontrados</p><br><br>";
+	        else
+	            echo "<p>".count($collRevisoesPesquisadas)." resultado encontrado</p><br><br>";
+	    } else {
+	        echo "<p align=\"center\">Nenhum resultado encontrado.</p>";
+	    }
+    }
+	else 
 	{
-		$revisoes = (object)$revisaoAtual;
-		$veiculos = new Veiculos();
-		$veiculos = (object)unserialize(base64_decode($_GET['veiculos']));
-?>
-<form class="center" action="index.php" method="get">
-	<input type="hidden" value="<?=$revisoes->getIdRevisoes()?>" name="idRevisoesAlterar" />
-	<input type="hidden" value="detalhe_revisoes" name="p" />
-	<table>
-		<tr class="topo">
-			<td>Ordem</td>
-			<td>Placa</td>
-			<td>Ult. data</td>
-			<td>Revisão</td>
-			<td>Ult. km</td>
-			<td>PrÃ³x. data</td>
-			<td>PrÃ³x. KM</td>
-		</tr>
-		<tr class="dados">
-			<td>Revisão NÂº <?=$cont?>	</td>
-			<td><?=$veiculos->getPlacaVeiculos()?></td>
-			<td><?=$formataData->toViewDate($revisoes->getDataRevisoes())?></td>
-			<td><?=$revisoes->getTipoRevisoes()?></td>
-			<td><?=$revisoes->getKmRevisoes()?></td>
-			<td><?=$revisoes->getProxDataRevisoes()?></td>
-			<td><?=$revisoes->getProxKmRevisoes()?></td>
-		</tr>
-		<tr>
-			<td colspan="7"><input type="submit" value="Detalhar / Alterar"/></td>
-		</tr>
-</table>
-
-</form>
-<?php
+	        echo "<p align=\"center\">Nenhum resultado encontrado.</p>";
 	}
-		}
-?>
-</div>
+} 
+
+$revisoes = new Revisoes();
+if(!is_null($collRevisoesPesquisadas) && count($collRevisoesPesquisadas) > 0) {
+    ?>
+
+<div id="form_resultados">
+    <table>
+        <tr class="topo">
+            <td>Ordem</td>
+            <td>Placa</td>
+            <td>Ult. data</td>
+            <td>Revisï¿½o</td>
+            <td>Ult. km</td>
+            <td>Prï¿½x. data</td>
+            <td>Prï¿½x. KM</td>
+        </tr>
+    
+            <?php
+            $cont = 1;
+            foreach ($collRevisoesPesquisadas as $revisaoAtual) {
+                $revisoes = (object)$revisaoAtual;
+                $veiculos = new Veiculos();
+                $veiculos = $_SESSION['veiculosAtual'];
+                ?>
+        <tr>
+            <td>Revisãoo Nº <?=$cont?>	</td>
+            <td><?=$veiculos->getPlacaVeiculos()?></td>
+            <td><?=$formataData->toViewDate($revisoes->getDataRevisoes())?></td>
+            <td><?=$revisoes->getTipoRevisoes()?></td>
+            <td><?=$revisoes->getKmRevisoes()?></td>
+            <td><?=$revisoes->getProxDataRevisoes()?></td>
+            <td><?=$revisoes->getProxKmRevisoes()?></td>
+            <td colspan="7">
+                <form class="center" action="index.php" method="get">
+                    <input type="hidden" value="<?=$revisoes->getIdRevisoes()?>" name="idRevisoesAlterar" />
+                    <input type="hidden" value="detalhe_revisoes" name="p" />
+                    <input type="submit" value="Detalhar / Alterar"/>
+                </form>
+            </td>
+        </tr>
+
+                <?php
+                $cont++;
+            }
+        }
+        ?>
+    </table>
 </div>

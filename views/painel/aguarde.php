@@ -1,93 +1,89 @@
 <?php
 require_once ('../../class/Config.php');
-if(!isset($_SESSION['usuarioLogon']))
-{
-	header("Location:../views/home.php?p=login");
+if(!isset($_SESSION['usuarioLogon'])) {
+    header("Location:../views/home.php?p=login");
 }
 $logon = new Logon();
 $logon = $_SESSION['usuarioLogon'];
 $clientes = new Clientes();
 $collVo = null;
-if(!is_null($logon->getIdClientes()))
-{
-	$clientes->setIdClientes($logon->getIdClientes());
-	$collVo = $controla->findClientes($clientes);
+if(!is_null($logon->getIdClientes())) {
+    $clientes->setIdClientes($logon->getIdClientes());
+    $collVo = $controla->findClientes($clientes);
 }
-if(!is_null($collVo))
-{
-?>
+if(!is_null($collVo)) {
+    ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	<link rel="stylesheet" href="../css/home.css" type="text/css" media="all" >
-</head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <link rel="stylesheet" href="../css/home.css" type="text/css" media="all" />
+    </head>
 
-<script type="text/javascript">
-	function count(){
-		if(document.getElementById('tempo').innerHTML!='0'){
-			document.getElementById('tempo').innerHTML=document.getElementById('tempo').innerHTML-1;
-			setTimeout("count()",1500);
-		}else{
-			window.location='meusdados.php';
-		}
-	}
-setTimeout("count()",1000);
-</script>
+    <script type="text/javascript">
+        function count(){
+            if(document.getElementById('tempo').innerHTML!='0'){
+                document.getElementById('tempo').innerHTML=document.getElementById('tempo').innerHTML-1;
+                setTimeout("count()",1500);
+            }else{
+                window.location='meusdados.php';
+            }
+        }
+        setTimeout("count()",1000);
+    </script>
 
-<body onload="count()">
+    <body onload="count()">
 
-<div id="wait">
+        <div id="wait">
 
-<p>você será redirecionado para a página com seus dados em <span id="tempo">10</span> segundos...</p>
-<p><a href="meusdados.php" target="_self">Clique aqui</a> se Não deseja esperar ou <a href="../home.php">aqui</a> para voltar é página principal.</p>
-<br><br>
-<img src="../imagens/loading.gif" alt="loading">
+            <p>Vocï¿½ serï¿½ redirecionado para a pï¿½gina com seus dados em <span id="tempo">10</span> segundos...</p>
+            <p><a href="meusdados.php" target="_self">Clique aqui</a> se nï¿½o deseja esperar ou <a href="../home.php">aqui</a> para voltar ï¿½ pï¿½gina principal.</p>
+            <br /><br />
+            <img src="../imagens/loading.gif" alt="loading" />
 
-</div>
-</body>
+        </div>
+    </body>
 </html>
-<?php 
+    <?php
 }
-else
-{
-?>
+else {
+    ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	<link rel="stylesheet" href="../css/home.css" type="text/css" media="all" >
-</head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <link rel="stylesheet" href="../css/home.css" type="text/css" media="all" />
+    </head>
 
-<script type="text/javascript">
-	function count(){
-		if(document.getElementById('tempo').innerHTML!='0'){
-			document.getElementById('tempo').innerHTML=document.getElementById('tempo').innerHTML-1;
-			setTimeout("count()",1500);
-		}else{
-			window.location='add_meucpf.php';
-		}
-		
-	}
-setTimeout("count()",1000);
-</script>
+    <script type="text/javascript">
+        function count(){
+            if(document.getElementById('tempo').innerHTML!='0'){
+                document.getElementById('tempo').innerHTML=document.getElementById('tempo').innerHTML-1;
+                setTimeout("count()",1500);
+            }else{
+                window.location='add_meucpf.php';
+            }
 
-<body onload="count()">
+        }
+        setTimeout("count()",1000);
+    </script>
 
-<div id="wait">
+    <body onload="count()">
 
-<p>você ainda Não possui um registro em nosso banco de dados.</p>
-<p>Para preencher o formulário <a href="add_meucpf.php" target="_self">clique aqui</a> ou aguarde <span id="tempo">10</span> segundos...</p>
-<br><br>
-<img src="../imagens/loading.gif" alt="loading">
+        <div id="wait">
 
-</div>
+            <p>VocÃª ainda nÃ£o possui um registro em nosso banco de dados.</p>
+            <p>Para preencher o formulÃ¡rio <a href="add_meucpf.php" target="_self">clique aqui</a> ou aguarde <span id="tempo">10</span> segundos...</p>
+            <br /><br />
+            <img src="../imagens/loading.gif" alt="loading" />
 
-</body>
+        </div>
+
+    </body>
 
 </html>
-<?php 
+    <?php
 }
 ?>

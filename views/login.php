@@ -1,4 +1,4 @@
-﻿<link type="text/css" rel="Stylesheet" media="screen" href="_css/login.css" />
+<link type="text/css" rel="Stylesheet" media="screen" href="_css/login.css" />
 
 <div id="conteudo_top" style="border-bottom:4px solid #F84; ">
 	<a href="home.php?page=login&acao=login" target="_self" class="login">
@@ -20,10 +20,10 @@
 	if (!$_GET['acao'] || $_GET['acao'] == 'login') {
 ?>
 		<label>Login:
-			<input type="text" name="login" onblur="VerificaCPF(this, 'hint');" maxlength="14" />
+			<input type="text" name="login" onblur="VerificaCPF(this, 'hint');" maxlength="14" size="14" />
 		</label>
 		<label>Senha:
-			<input type="password" name="senha" />
+			<input type="password" name="senha" maxlength="12" size="12" />
 		</label>
 		
 		<input type="submit" value="Entrar" />
@@ -32,20 +32,20 @@
 	} else {
 ?>
 		<label>Nome completo:
-			<input type="text" name="lnome" onblur="validaNome(this, 'hint');" />
+			<input type="text" name="lnome" onblur="validaNome(this, 'hint');" size="50" />
 		</label>
 		<label>E-mail:
-			<input type="text" name="lemail" onblur="ValidaEmail(this,'hint');" />
+			<input type="text" name="lemail" onblur="ValidaEmail(this,'hint');" size="50" />
 		</label>
 		<label>CPF:
-			<input type="text" name="llogin" onblur="VerificaCPF(this, 'hint');" maxlength="14" />
+			<input type="text" name="llogin" onblur="VerificaCPF(this, 'hint');" maxlength="14" size="14" />
 		</label>
 		<label>Senha:
-			<input type="password" name="lsenha" maxlength="14" />
+			<input type="password" name="lsenha" maxlength="12" size="12" />
 		</label>
 		
-		<input type="submit" name="cadastra" value="Cadastrar" />
 		<input type="hidden" name="acao" value="cadastroLogin" />
+		<input type="submit" name="cadastra" value="Cadastrar" />
 <?php
 	}
 ?>
