@@ -1,57 +1,142 @@
-<link type="text/css" rel="stylesheet" href="../css/smc_menu.css" />
+<link type="text/css" rel="stylesheet" href="_css/smc_menu.css" />
 
-<body class="painel">
-<div id="painel">
-	<div class="menu">
-		<ul id="nav-container" class="nav-container">
-			<li class="opcao" onclick="window.location='?p=home';"><img class="ico" src="../imagens/home.png" alt="Ins„cio" />Ins„cio </li>
+<ul id="painel">
 
-			<li class="opcao" ><img class="ico" src="../imagens/cadastro.png" alt="Cadastros" />Cadastros
-				<ul>
-					<li class="titulo" >Cadastrar...</li>
-					<li class="opcao" onclick="window.location='?p=add_cpf';">Clientes - Pessoa fs„sica</a></li>
-					<li class="opcao" onclick="window.location='?p=add_cnpj';">Clientes - Pessoa jurs„dica</a></li>
-					<li class="opcao" onclick="window.location='?p=add_veiculos';">Ves„culos</a></li>
-					<li class="opcao" onclick="window.location='?p=add_motorista';">Condutores</a></li>
-					<li class="opcao" onclick="window.location='?p=add_tipo_rev';">Revis√µes (tipos)</a></li>
-					<li class="opcao" onclick="window.location='?p=add_rev_padrao&limpa=1';">Revis√µes</a></li>
-					<li class="opcao" onclick="window.location='?p=add_abastece';">Abastecimentos</a></li>
-				</ul>
-			</li>
+    <li>
+        <a href="?p=home" alt="">
+            <img src="../imagens/home.png" alt="In√≠cio" />
+            In√≠cio
+        </a>
+    </li>
 
-			<li class="opcao" ><img class="ico" src="../imagens/search.png" alt="Consultar" />Consultas
-				<ul>
-					<li class="titulo" >Procurar...</li>
-					<li class="opcao" onclick="window.location='?p=listagem';">Lista vencimentos</a></li>
-					<li class="divisor"></li>
-					<li class="opcao" onclick="window.location='?p=busca_cpf&limpa=1';">Clientes - Pessoa fs„sica</a></li>
-					<li class="opcao" onclick="window.location='?p=busca_cnpj&limpa=1';">Clientes - Pessoa jurs„dica</a></li>
-					<li class="opcao" onclick="window.location='?p=busca_veiculos&limpa=1';">Ves„culos</a></li>
-					<li class="opcao" onclick="window.location='?p=busca_condutores&limpa=1';">Condutores</a></li>
-					<li class="opcao" onclick="window.location='?p=busca_revisoes&limpa=1';">Revis√µes</a></li>
-					<li class="opcao" onclick="window.location='?p=busca_abastece&limpa=1';">Abastecimentos</a></li>
-				</ul>
-			</li>
+    <li>
+        <img src="../imagens/cadastro.png" alt="Cadastros" />
+        Cadastros
+        <ul>
+            <li class="titulo">
+                Cadastrar...
+            </li>
+            <li>
+                <a href="?p=add_cpf" alt="">
+                    Clientes - Pessoa f√≠sica
+                </a>
+            </li>
+            <li>
+                <a href="?p=add_cnpj" alt="">
+                    Clientes - Pessoa jur√≠dica
+                </a>
+            </li>
+            <li>
+                <a href="?p=add_veiculos" alt="">
+                    Ve√≠culos
+                </a>
+            </li>
+            <li>
+                <a href="?p=add_motorista" alt="">
+                    Condutores
+                </a>
+            </li>
+            <li>
+                <a href="?p=add_tipo_rev" alt="">
+                    Revis√µes (tipos)
+                </a>
+            </li>
+            <li>
+                <a href="?p=add_rev_padrao&limpa=1" alt="">
+                    Revis√µes
+                </a>
+            </li>
+            <li>
+                <a href="?p=add_abastece" alt="">
+                    Abastecimentos
+                </a>
+            </li>
+        </ul>
+    </li>
 
-			<li class="opcao" onclick="window.location='?p=rev_confirma';"><img class="ico" src="../imagens/engrenagens.gif" alt="Confirma" />Confirmar Revis„o </li>
+    <li>
+        <img src="../imagens/search.png" alt="Consultar" />
+        Consultas
+        <ul>
+            <li class="titulo">
+                Procurar...
+            </li>
+            <li>
+                <a href="?p=listagem" alt="">
+                    Lista vencimentos
+                </a>
+            </li>
+            <li class="divisor"></li>
+            <li>
+                <a href="?p=busca_cpf&limpa=1" alt="">
+                    Clientes - Pessoa f√≠sica
+                </a>
+            </li>
+            <li>
+                <a href="?p=busca_cnpj&limpa=1" alt="">
+                    Clientes - Pessoa jur√≠dica
+                </a>
+            </li>
+            <li>
+                <a href="?p=busca_veiculos&limpa=1" alt="">
+                    Ve√≠culos
+                </a>
+            </li>
+            <li>
+                <a href="?p=busca_condutores&limpa=1" alt="">
+                    Condutores
+                </a>
+            </li>
+            <li>
+                <a href="?p=busca_revisoes&limpa=1" alt="">
+                    Revis√µes
+                </a>
+            </li>
+            <li>
+                <a href="?p=busca_abastece&limpa=1" alt="">
+                    Abastecimentos
+                </a>
+            </li>
+        </ul>
+    </li>
 
-			<li class="opcao" onclick="ToggleDiv('webmail');" ><img class="ico" src="../imagens/small_contato.png" alt="Webmail" />Webmail </li>
+    <li>
+        <a href="?p=rev_confirma" alt="">
+            <img src="../imagens/engrenagens.gif" alt="Confirma" />
+            Confirmar Revis√£o
+        </a>
+    </li>
 
-			<li class="opcao" title="Encerrar sess„o" onclick="window.location='?destroi=sim';"><img class="ico" src="../imagens/ico_cancel.png" alt="Sair" />Sair </li>
-			
-		<li class="opcao fright" title="Acessar"> <img class="ng" src="../imagens/ng20.png" alt="" onclick="window.open('http://acesso.ngi.com.br:8088/clientes/MntFrota.html','NGi','width=100%','height=100%');"/> </li>
+    <li>
+        <a href="http://webmail.servicodespertador.net" target="_blank">
+            <img src="../imagens/small_contato.png" alt="Webmail" />
+            Webmail
+        </a>
+    </li>
 
-		</ul>
-	</div>
-</div>
+    <li title="Encerrar sess√£o">
+        <a href="?destroi=sim" alt="">
+            <img src="../imagens/ico_cancel.png" alt="Sair" />
+            Sair
+        </a>
+    </li>
 
-<div id="separador"></div>
+    <li>
+        <a href="http://acesso.ngi.com.br:8088/clientes/MntFrota.html" target="_blank">
+            <img src="../imagens/ng20.png" alt="" />
+        </a>
+    </li>
+
+</ul>
 
 <div id="webmail">
-	<form class="webmail" name="f_webmail" method="POST" action="http://webmail.servicodespertador.net/mod_perl/chklogin.pl" target="_new">
-	<p><label for="username">Login:</label><input type="text"name="username" id="username" /><label for="username">@servicodespertador.net</label></p>
-	<p><label for="password">Senha:</label><input type="password" name="password" id="password"><input type="submit" value="Entrar"></p>
-	</form>
+    <form class="webmail" name="f_webmail" method="POST" action="http://webmail.servicodespertador.net/mod_perl/chklogin.pl" target="_blank">
+        <label for="username">Login:</label>
+        <input type="text" name="username" />
+        <label for="username">@servicodespertador.net</label>
+        <br />
+        <label for="password">Senha:</label>
+        <input type="password" name="password" />
+        <input type="submit" value="Entrar" />
+    </form>
 </div>
-
-</body>

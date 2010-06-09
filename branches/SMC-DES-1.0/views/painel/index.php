@@ -1,106 +1,97 @@
 <?php
-/**
- * Página inicial do Sistema.
- * @author João Batista Padilha e Silva
- * @link index.php
- * @copyright João Batista Padilha e Silva Especialista em TI (http://www.joaopadilha.eti.br) / joao.padilha@globo.com
- * @version 1.0
- */
-	header("Content-Type: text/html; charset=ISO-8859-1");
+require_once("../../class/Config.php");
 
-	require_once("../../class/Config.php");
-
-	if(isset($_GET['destroi'])) {
-		$controla->destroiSessao();
-		header("Location:../home.php");
-	} else {
-		if(!isset($_SESSION['usuarioLogon'])) {
-			header("Location:/views/home.php?page=login");
-		}
-	}
+if(isset($_GET['destroi'])) {
+    $controla->destroiSessao();
+    header("Location:../home.php");
+} else {
+    if(!isset($_SESSION['usuarioLogon'])) {
+        header("Location:/views/home.php?page=login");
+    }
+}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
 
-<head>
+    <head>
 
-	<title>SMC - Serviço de Manutenção e Consultoria</title>
-	<link rel="SHORTCUT ICON" href="imagens/smc.ico" />
-	<meta http-equiv="Content-Language" content="pt-BR" />
-	<meta name="author" content="jánior Mendonça" />
-	<meta name="copyright" content="SMC - Serviço de Manutenção e Consultoria">
-	<meta name="description" content="SMC - Manutenção como deve ser feita." />
-	<meta name="keywords" lang="pt-br" content="smc, Serviço despertador, servico despertador, servicodespertador, manutenção, preventiva, gestão, frotas, ativos" />
+        <title>SMC - Serviï¿½o de Manutenï¿½ï¿½o e Consultoria</title>
+        <link rel="SHORTCUT ICON" href="imagens/smc.ico" />
+        <meta http-equiv="Content-Language" content="pt-BR" />
+        <meta name="author" content="Jï¿½nior Mendonï¿½a" />
+        <meta name="copyright" content="SMC - Serviï¿½o de Manutenï¿½ï¿½o e Consultoria">
+        <meta name="description" content="SMC - Manutenï¿½ï¿½o como deve ser feita." />
+        <meta name="keywords" lang="pt-br" content="smc, serviï¿½o despertador, servico despertador, servicodespertador, manutenï¿½ï¿½o, preventiva, gestÃ£o, frotas, ativos" />
 
-	<link rel="stylesheet" href="_css/formPadrao.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="_css/formPadrao.css" type="text/css" media="all" />
 
-	<script type="text/javascript" language="javascript" src="../scripts/full.js"></script>
-	<script type="text/javascript" language="javascript" src="../scripts/inputs.js"></script>
+        <script type="text/javascript" language="javascript" src="../scripts/full.js"></script>
+        <script type="text/javascript" language="javascript" src="../scripts/inputs.js"></script>
 
-</head>
+    </head>
 
-<body>
+    <body>
 
-<?php
-	include ('smc_menu.php');
-?>
+        <?php
+        include ('smc_menu.php');
+        ?>
 
-	<div id="corpo">
-	<center>
+        <div id="corpo">
+            <center>
 
-<?php
-	$userLogon = new Logon();
-	$userLogon = $_SESSION['usuarioLogon'];
+                <?php
+                $userLogon = new Logon();
+                $userLogon = $_SESSION['usuarioLogon'];
 
-	if($userLogon->getNivelAcessoLogin() > 0) {
+                if($userLogon->getNivelAcessoLogin() > 0) {
 
-		$nome = "Administrador";
+                    $nome = "Administrador";
 
-		if($userLogon->getIdClientes() != null) {
-			$clientes = new Clientes();
-			$clientes->setIdClientes($userLogon->getIdClientes());
-			$collVo = $controla->findClientes($clientes);
-			$clientes = (object)$collVo[0];
-			$nome = $clientes->getNomeCliente();
-		}
+                    if($userLogon->getIdClientes() != null) {
+                        $clientes = new Clientes();
+                        $clientes->setIdClientes($userLogon->getIdClientes());
+                        $collVo = $controla->findClientes($clientes);
+                        $clientes = (object)$collVo[0];
+                        $nome = $clientes->getNomeCliente();
+                    }
 
-		$link = isset ($_GET['p']) ? $_GET['p']: '';
-		$pagina = $link.".php";
+                    $link = isset ($_GET['p']) ? $_GET['p']: '';
+                    $pagina = $link.".php";
 
-		if (file_exists($pagina)) {
-			include("$pagina");
-		} elseif ($link == 'home' OR $link == '') {
-			include_once ('rel_alertas.php');
-		} else {
-			echo "<br><br>Página Não encontrada";
-		}
+                    if (file_exists($pagina)) {
+                        include("$pagina");
+                    } elseif ($link == 'home' OR $link == '') {
+                        include_once ('rel_alertas.php');
+                    } else {
+                        echo "<br><br>Pï¿½gina nï¿½o encontrada";
+                    }
 
-	} else {
-		echo "<br><br>Acesso Não autorizado.";
-	}
-?>
-		</center>
-	</div>
+                } else {
+                    echo "<br><br>Acesso nï¿½o autorizado.";
+                }
+                ?>
+            </center>
+        </div>
 
-	<table class="statusbar">
-		<tr>
-			<td class="left">usuário logado:<b><?=$nome?></b></td>
-			<td class="divisor"></td>
-			<td class="right">último acesso:<?=$formataData->toViewDateTime($userLogon->getDataUltimoLogin())?></td>
-		</tr>
-	</table>
+        <table class="statusbar">
+            <tr>
+                <td class="left">Usuï¿½rio logado:<b><?=$nome?></b></td>
+                <td class="divisor"></td>
+                <td class="right">ï¿½ltimo acesso:<?=$formataData->toViewDateTime($userLogon->getDataUltimoLogin())?></td>
+            </tr>
+        </table>
 
-<?php
-	if(isset($_GET['msg'])) {
-?>
-	<script>
-		alert("<?php echo $_GET['msg']; ?>");
-	</script>";
-<?
-	}
-?>
+        <?php
+        if(isset($_GET['msg'])) {
+            ?>
+        <script>
+            alert("<?php echo $_GET['msg']; ?>");
+        </script>";
+            <?
+        }
+        ?>
 
-</body>
+    </body>
 
 </html>

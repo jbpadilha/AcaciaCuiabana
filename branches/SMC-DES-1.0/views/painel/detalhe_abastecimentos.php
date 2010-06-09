@@ -9,21 +9,26 @@
 	$logon = $_SESSION["usuarioLogon"];
 	$abastecimentos = new Abastecimentos();
 
-	if(isset($_GET['abastecimentos'])) {
-		$abastecimentos = unserialize(base64_decode($_GET['abastecimentos']));
-	} elseif (isset($_GET['idAbastecimentos']) && $_GET['idAbastecimentos'] != '') {
+	if (isset($_GET['idAbastecimentos']) && $_GET['idAbastecimentos'] != '') 
+	{
+		if(isset($_SESSION['abastecimentosAtual']))
+			unset($_SESSION['abastecimentosAtual']);
 		$abastecimentos->setIdAbastecimentos($_GET['idAbastecimentos']);
 		$collVoAlterar = $controla->findAbastecimentos($abastecimentos);
 		if(!is_null($collVoAlterar)) {
 			$abastecimentos =  $collVoAlterar[0];
 		}
 	}
+	elseif(isset($_SESSION['abastecimentosAtual'])) 
+	{
+		$abastecimentos = $_SESSION['abastecimentosAtual'];
+	}
 ?>
 <link rel="stylesheet" href="_css/formPadrao.css" type="text/css" media="all" />
 
 <form method="post" action="../../class/RecebePostGet.php">
 	<p class="caption">Alterar abastecimento</p>
-	<label>Placa do Vesãculo:
+	<label>Placa do veículo:
 <?php 
 		$veiculos = new Veiculos();
 		$veiculos->setIdClientes($logon->getIdClientes());
@@ -46,14 +51,14 @@
 		<input type="text" name="posto" value="<?=$abastecimentos->getPostoAbastecimentos()?>" class="long" />
 	</label>
 	<br />
-	<label>NÂº da nota/cupom fiscal:
+	<label>Nº da nota/cupom fiscal:
 		<input type="text" name="nf" value="<?=$abastecimentos->getNfAbastecimentos()?>" class="doc" />
 	</label>
-	<label>Tipo de combustsãvel:
+	<label>Tipo de combustível:
 		<select name="combustivel">
 			<option></option>
 			<option value="Gasolina" <?=($abastecimentos->getTipoCombustivelAbastecimentos() == "Gasolina")? "selected" : ""?>>Gasolina</option>
-			<option value="álcool" <?=($abastecimentos->getTipoCombustivelAbastecimentos() == "álcool")? "selected" : ""?>>álcool</option>
+			<option value="Álcool" <?=($abastecimentos->getTipoCombustivelAbastecimentos() == "Álcool")? "selected" : ""?>>Álcool</option>
 			<option value="Flex" <?=($abastecimentos->getTipoCombustivelAbastecimentos() == "Flex")? "selected" : ""?>>Flex</option>
 			<option value="Diesel" <?=($abastecimentos->getTipoCombustivelAbastecimentos() == "Diesel")? "selected" : ""?>>Diesel</option>
 		</select>

@@ -10,7 +10,7 @@
 ?>
 <form method="post" action="../../class/RecebePostGet.php">
 	<p class="caption">Consulta abastecimentos</p>
-	<label>Vesãculo:
+	<label>Veículo:
 		<select name="veiculo">
 			<option></option>
 <?php
@@ -41,24 +41,32 @@
 </form>
 
 <div id="resultados">
-<?php 
+<?php
+ if(isset($_GET['limpa']))
+	{
+		unset($_SESSION['abastecimentosPesquisados']);
+	} 
 	$collAbastecimentosPesquisadas = null;
 	
-	if(isset($_GET['abastecimentosPesquisados'])) {
-		if($_GET['abastecimentosPesquisados'] != '') {
-			$collAbastecimentosPesquisadas = unserialize(base64_decode($_GET['abastecimentosPesquisados']));
-		} else {
-			$collAbastecimentosPesquisadas = null;
-		}
+	if(isset($_SESSION['abastecimentosPesquisados'])) 
+	{
+		if($_SESSION['abastecimentosPesquisados'] != '') 
+		{
+			$collAbastecimentosPesquisadas = $_SESSION['abastecimentosPesquisados'];
 
-		if(!is_null($collAbastecimentosPesquisadas) && count($collAbastecimentosPesquisadas) > 0) {
-			if(count($collAbastecimentosPesquisadas) > 1) {
-				echo "<p>".count($collAbastecimentosPesquisadas)." resultados encontrados</p><br><br>";
+			if(!is_null($collAbastecimentosPesquisadas) && count($collAbastecimentosPesquisadas) > 0) {
+				if(count($collAbastecimentosPesquisadas) > 1) {
+					echo "<p>".count($collAbastecimentosPesquisadas)." resultados encontrados</p><br><br>";
+				} else {
+					echo "<p>".count($collAbastecimentosPesquisadas)." resultado encontrado</p><br><br>";
+				}
 			} else {
-				echo "<p>".count($collAbastecimentosPesquisadas)." resultado encontrado</p><br><br>";
+				echo "<p>Nenhum resultado encontrado.</p>";
 			}
-		} else {
-			echo "<p>Nenhum resultado encontrado.</p>";
+		}
+		else 
+		{
+				echo "<p>Nenhum resultado encontrado.</p>";
 		}
 	}
 
@@ -72,12 +80,12 @@
 			<td> KM marcado </td>
 			<td> Posto </td>
 			<td> Nota fiscal </td>
-			<td> Combustsãvel </td>
+			<td> Combustível </td>
 			<td> Qtd (litros) </td>
 			<td> Valor total </td>
 		</thead>
 <?php
-		foreach ($collAbastecimentosPesquisadas as $abastecimentoAtual) {
+	foreach ($collAbastecimentosPesquisadas as $abastecimentoAtual) {
 			$abastecimentos = (object)$abastecimentoAtual;
 ?>
 		<tr>

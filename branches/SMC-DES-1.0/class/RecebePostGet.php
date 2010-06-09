@@ -1991,38 +1991,36 @@ if(isset($_POST))
 				$logon = (object)$_SESSION['usuarioLogon'];
 				if($logon->getNivelAcessoLogin() != Dominio::$ADMINISTRADOR)
 				{
-					$veiculos->setIdClientes($_GET['idCliente']);
+					$veiculos->setIdClientes($_POST["idCliente"]);
 				}	
 					
 				if($mensagem == '')
 				{
-					$collVo = null;
 					$collVoVeiculos = $controla->findVeiculos($veiculos);
+					$collVo = null;
 					if(!is_null($collVoVeiculos))
 					{
 						$veiculos = $collVoVeiculos[0];
 						$revisoes->setIdVeiculos($veiculos->getIdVeiculos());
 						$collVo = $controla->findRevisoes($revisoes);
 					}
-					if(!is_null($collVo))
-					{
-						
-						header("Location: ../views/painel/index.php?p=busca_revisoes&revisoesPesquisados=".base64_encode(serialize($collVo))."&veiculos=".base64_encode(serialize($veiculos))."");
-					} 
-					else 
-					{
-						header("Location: ../views/painel/index.php?p=busca_revisoes&revisoesPesquisados=");
-					}
+					$_SESSION['revisoesPesquisados'] = $collVo;
+					$_SESSION['veiculosAtual'] = $veiculos;
+					
+					if(is_null($_SESSION['revisoesPesquisados']))
+						$_SESSION['revisoesPesquisados'] = '';
+					
+					header("Location: ../views/painel/index.php?p=busca_revisoes");
 				}
 				else
 				{
-					header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
+					header("Location: ../views/painel/index.php?p=busca_revisoes&msg=$mensagem");
 				}
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
+				header("Location: ../views/painel/index.php?p=busca_revisoes&msg=$mensagem");
 			}
 		}
 		if($_POST['acao'] == "alterarRevisoes")
@@ -2035,34 +2033,32 @@ if(isset($_POST))
 				$revisoes->setIdVeiculos($_POST['idVeiculos']);
 				$revisoes->setIdTipoRevisoes($_POST['idTipoRevisoes']);
 
-				if($_POST['tult'] != '')
-					$revisoes->setDataRevisoes($formataData->toDBDate($controla->validaData($_POST['tult'])));
+				if($_POST['data'] != '')
+					$revisoes->setProxDataRevisoes($formataData->toDBDate($controla->validaData($_POST['data'])));
 				else	
 					$mensagem .= "A data da Revisão deve ser preenchida.";
 					
-				$revisoes->setKmRevisoes($_POST['kult']);
+				$revisoes->setProxKmRevisoes($_POST['km']);
 				
-				if($_POST['tprox'] != '')
-					$revisoes->setProxDataRevisoes($formataData->toDBDate($controla->validaData($_POST['tprox'])));
-					
-				$revisoes->setProxKmRevisoes($_POST['kprox']);
-
 				if($mensagem == '')
 				{
 					$controla->updateRevisoes($revisoes);
 					$mensagem = 'Revisão alterado com sucesso.';
+					unset($_SESSION['revisoesAtual']);
 					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
 				}
 				else
 				{					
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_revisoes&msg=$mensagem&revisoes=".base64_encode(serialize($revisoes))."'</script>";
+					$_SESSION['revisoesAtual'] = $revisoes;
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_revisoes&msg=$mensagem'</script>";
 				}
 				
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_revisoes&msg=$mensagem&revisoes=".base64_encode(serialize($revisoes))."'</script>";
+				$_SESSION['revisoesAtual'] = $revisoes;
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_revisoes&msg=$mensagem'</script>";
 			}
 		}
 		if($_POST['acao'] == "buscaAbastecimentos")
@@ -2081,16 +2077,12 @@ if(isset($_POST))
 				if($mensagem == '')
 				{
 					$collVo = $controla->findAbastecimentos($abastecimentos);
+					$_SESSION['abastecimentosPesquisados'] = $collVo;
 					
-					if(!is_null($collVo))
-					{
+					if(is_null($_SESSION['abastecimentosPesquisados']))
+						$_SESSION['abastecimentosPesquisados'] = '';
 						
-						header("Location: ../views/painel/index.php?p=busca_abastece&abastecimentosPesquisados=".base64_encode(serialize($collVo))."");
-					} 
-					else 
-					{
-						header("Location: ../views/painel/index.php?p=busca_abastece&abastecimentosPesquisados=");
-					}
+					header("Location: ../views/painel/index.php?p=busca_abastece");
 				}
 				else
 				{
@@ -2127,18 +2119,21 @@ if(isset($_POST))
 				{
 					$controla->updateAbastecimentos($abastecimentos);
 					$mensagem = 'Abastecimento alterado com sucesso.';
+					unset($_SESSION['abastecimentosAtual']);
 					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_abastecimentos&msg=$mensagem&abastecimentos=".base64_encode(serialize($abastecimentos))."'</script>";
+					$_SESSION['abastecimentosAtual'] = $abastecimentos;
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_abastecimentos&msg=$mensagem'</script>";
 				}
 				
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_abastecimentos&msg=$mensagem&abastecimentos=".base64_encode(serialize($abastecimentos))."'</script>";
+				$_SESSION['abastecimentosAtual'] = $abastecimentos;
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_abastecimentos&msg=$mensagem'</script>";
 			}
 		}
 	}

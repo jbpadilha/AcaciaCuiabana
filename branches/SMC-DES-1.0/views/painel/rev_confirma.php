@@ -23,25 +23,25 @@
 
 	<form name="rev_confirma" method="post">
 
-		<p class="caption">CONFIRMAÃ‡ÃƒO DE Revisão</p>
+		<p class="caption">CONFIRMAÇÃO DE REVISÃO</p>
 
 	<fieldset>
-		<p><label>Cliente (proprietário do Vesãculo)</label></p>
+		<p><label>Cliente (proprietário do veículo)</label></p>
 		<p><input type="text" id="cliente" value="<?=$array3['nome_cliente']?>" class="cli_nome" readonly >
 			<img src="../imagens/search.png" class="ico_inside" onclick="ShowDiv('pop_cli'); IrPara('busca_cli');" alt="Procurar" title="Procurar" /></p>
 
-		<p><label>Vesãculo (placa)</label></p>
+		<p><label>Veículo (placa)</label></p>
 		<p><input type="text" id="placa" value="<?=$placa?>" class="placa" maxlength="8" readonly >
 			<img src="../imagens/search.png" class="ico_inside" onclick="ShowDiv('pop_placa'); IrPara('busca_placa');" alt="Procurar" title="Procurar" /></p>
 		
-		<p><label>descrição do Serviço</label></p>
+		<p><label>Descrição do serviço</label></p>
 		<p><input type="text" id="revisao" value="<?=$array['revisao']?>" class="rev_nome" readonly >
 			<img src="../imagens/search.png" class="ico_inside" onclick="ShowDiv('pop_rev'); IrPara('busca_rev');" alt="Procurar" title="Procurar" /></p>
 		
-		<p><label>Data da realização do Serviço</label></p>
+		<p><label>Data da realização do serviço</label></p>
 		<p><input type="text" name="ult_data" value="" class="data" maxlength="10" onkeypress="return mascara(event,this,'##/##/####');return Onlynumbers(event);" ></p>
 		
-		<p><label>KM informado na Revisão</label></p>
+		<p><label>KM informado na revisão</label></p>
 		<p><input type="text" value="" class="rev_km" name="ult_km" ></p>
 	</fieldset>
 
@@ -103,8 +103,8 @@
 
 	<div id="pop_rev" class="popup">
 		<div class="tit_bt drag" onmouseover="__dragId = 'pop_rev'" >
-			<img src="../imagens/search.png" alt="ico" title="Consulta de tipos RevisÃµes" class="small f_left" />
-			<label>Escolha uma Revisão da lista</label>
+			<img src="../imagens/search.png" alt="ico" title="Consulta de tipos revisões" class="small f_left" />
+			<label>Escolha uma revisão da lista</label>
 			<span class="bt" onclick="CloseDiv('pop_rev');" ></span>
 		</div>
 		<span class="bar">
