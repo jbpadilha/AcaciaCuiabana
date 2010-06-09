@@ -13,7 +13,7 @@ $logon = $_SESSION["usuarioLogon"];
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	<title>SMC - Cadastro de clientes (Pessoa fsãsica)</title>
+	<title>SMC - Cadastro de clientes (Pessoa física)</title>
 	<meta name="Description" content="SMC - Novo cadastro de Pessoa fsãsica" >
 	<meta http-equiv="X-UA-Compatible" content="IE=7" > 
 	<link rel="stylesheet" href="../css/meucpf.css" type="text/css" media="all" >
@@ -28,18 +28,21 @@ $logon = $_SESSION["usuarioLogon"];
 <input type="hidden" id="acao" name="acao" value="alterarVeiculos"/>
 <?php 
 $veiculos = new Veiculos();
-if(isset($_GET['veiculos']))
+
+if (isset($_GET['idVeiculosAlterar']) && $_GET['idVeiculosAlterar'] != '')
 {
-	$veiculos = unserialize(base64_decode($_GET['veiculos']));
-}
-elseif (isset($_GET['idVeiculosAlterar']) && $_GET['idVeiculosAlterar'] != '')
-{
+	if(isset($_SESSION['veiculosAtual']))
+		unset($_SESSION['veiculosAtual']);
 	$veiculos->setIdVeiculos($_GET['idVeiculosAlterar']);
 	$collVoAlterar = $controla->findVeiculos($veiculos);
 	if(!is_null($collVoAlterar))
 	{
 		$veiculos = $collVoAlterar[0]; 
 	}
+}
+elseif(isset($_SESSION['veiculosAtual']))
+{
+	$veiculos = $_SESSION['veiculosAtual'];
 }
 ?>
 <input type="hidden" name="idVeiculos" id="idVeiculos" value="<?=$veiculos->getIdVeiculos()?>"/>
