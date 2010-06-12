@@ -1,0 +1,11 @@
+form { width:960px; margin:10px auto 0px auto; padding:10px; }
+#form { width:960px; margin:10px auto 0px auto; padding:10px; }
+fieldset { background:#DDD; border-width:1px; padding:10px; margin:0px 0px 10px 0px; }
+#caption { height:auto; margin:-11px -11px 10px -11px; padding:2px 4px; width:auto; border-width:1px; background:#CCC; text-align:left; }
+#caption p { clear:both; margin:4px 0px; }
+input { padding:0px 2px; }
+label { float:left; text-align:right; padding-right:4px; }
+select { margin-top:-2px; }
+.botao { width:auto; padding:0px 4px ; border-width:1px; background:#FFF; width:100px; float:left; text-align:center; cursor:pointer; margin:-1px 4px; }
+.botao:hover { font-weight:bold; border-color:orange; }
+#clear { clear:both; }

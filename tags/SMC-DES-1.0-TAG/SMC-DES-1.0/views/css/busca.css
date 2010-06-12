@@ -1,0 +1,17 @@
+* { margin:0px; padding:0px; border:0px solid #AAA; font:normal 12px "Segoe UI", Verdana; text-decoration:none; width:auto; }
+#formulario { width:600px; margin:10px auto; padding:5px; background:#EEE; }
+#dados { width:600px; margin:0px auto; }
+#dados #titulos .esq, .center { border:1px solid #000; border-color:#EEE #AAA #AAA #EEE; background:#DDD; padding:2px; }
+#titulos label.esq { float:left; width:455px; text-align:left; }
+#titulos label.center { float:right; width:132px; text-align:center; }
+input[type=text] { border:1px solid #FFAA00; padding:2px 2px 1px 2px; }
+.nome { text-transform:capitalize; }
+input[type=text]:hover { border-width:1px 1px 1px 4px; padding:2px 2px 1px 2px; background:#FFF url('../imagens/editar16.png') no-repeat right center; }
+
+input[type=submit] { background:url('../imagens/bg_right_arrow.png') no-repeat left center; border:none; padding:2px 12px; }
+input[type=submit]:hover { background:url('../imagens/bg_orange.png'); }
+
+label.cpf { float:right; padding:2px; width:136px; }
+form.esq { float:left; width:460px; }
+.tleft { text-align:left; float:left; width:100%; }
+.tcenter { text-align:center; }
