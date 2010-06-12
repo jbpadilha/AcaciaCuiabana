@@ -1,0 +1,7 @@
+﻿body { font:normal 12px "Segoe UI", Verdana, Arial; text-align:center; background:#FFF url('../_img/bg_10px.png'); }
+body, p { margin:0px; padding:0px; }
+a img { border:none; }
+div#intro { position:absolute; width:460px; height:240px; top:50%; left:50%; margin:-140px 0px 0px -230px; padding:10px 0px; }
+div#intro img { width:400px; }
+div#intro p { font-size:16px; padding:5px 0px; }
+div#intro a { text-decoration:none; color:#FA0; }
