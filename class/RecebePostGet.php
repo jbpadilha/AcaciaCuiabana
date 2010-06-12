@@ -146,6 +146,21 @@ if(isset($_GET))
 				echo $e;
 			}
 		}
+		
+		if($_GET['acao'] == "pesquisaRevisao")
+		{
+			$logon = new Logon();
+			$logon = $_SESSION["usuarioLogon"];
+			
+			$revisoes = new Revisoes();
+			$revisoes->setIdVeiculos($_GET['placa']);
+			$collVo = $controla->findRevisoes($revisoes);
+			if(!is_null($collVo))
+				$_SESSION['revisoes'] = $collVo;
+			else
+				$_SESSION['revisoes'] = '';
+			echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=rev_confirma';</script>";
+		}
 	}
 }
 if(isset($_POST))
@@ -2134,6 +2149,46 @@ if(isset($_POST))
 				$mensagem .= $e->getMessage();
 				$_SESSION['abastecimentosAtual'] = $abastecimentos;
 				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_abastecimentos&msg=$mensagem'</script>";
+			}
+		}
+		
+		if($_POST['acao'] == "confirmarRevisao")
+		{
+			$mensagem = '';
+			try
+			{
+				$revisao = new Revisoes();
+				$revisao->setIdRevisoes($_POST['idRevisao']);
+				
+				$collVo = $controla->findRevisoes($revisao);
+				$revisao = $collVo[0];
+				
+				if(!is_null($_POST['data']))
+					$revisao->setDataRevisoes($formataData->toDBDate($controla->validaData($_POST['data'])));
+				else
+					$mensagem .= 'A data da Revisão deve ser informada.';
+				if(!is_null($_POST['km']))
+					$revisao->setKmRevisoes($_POST['km']);
+				else
+					$mensagem .= 'O Km da revisão deve ser informada.';
+				
+				if($mensagem == '')
+				{
+					
+					$controla->updateRevisoes($revisao);
+					unset($_SESSION['revisoes']);
+					$mensagem = 'A revisão foi confirmada.';
+					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
+				}
+				else
+				{
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=rev_confirma&msg=$mensagem'</script>";
+				}
+			}
+			catch (Exception $e)
+			{
+				$mensagem .= $e->getMessage();
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=rev_confirma&msg=$mensagem'</script>";
 			}
 		}
 	}

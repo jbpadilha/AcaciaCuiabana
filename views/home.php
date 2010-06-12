@@ -77,7 +77,11 @@
 
         <?php
         if(isset($_GET['msg'])) {
-            echo "<script>alert('".$_GET['msg']."');</script>\n";
+           ?>
+           <script type="text/javascript">
+           alert('<?=$_GET['msg']?>');
+           </script>
+          <?
         }
         ?>
 
