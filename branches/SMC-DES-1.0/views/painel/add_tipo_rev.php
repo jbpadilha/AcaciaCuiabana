@@ -7,11 +7,14 @@ if(!isset($_SESSION['usuarioLogon'])) {
 
 $logon = new Logon();
 $logon = $_SESSION["usuarioLogon"];
-
-//if($logon->getNivelAcessoLogin() <= 5) {
-//    $mensagem = 'Usuário não autorizado para a funcionalidade';
-//    header("Location:index.php?pg=home&msg=$mensagem");
-//}
+var_dump($logon);
+if($logon->getNivelAcessoLogin() != Dominio::$ADMINISTRADOR) {
+    $mensagem = 'Usuário não autorizado para a funcionalidade';
+    echo "
+    <script type=\"text/javascript\">
+		document.location='index.php?pg=home&msg=$mensagem';
+	</script>";
+}
 
 $tipoRevisoes = new Tiporevisoes();
 
@@ -19,7 +22,6 @@ if(isset($_GET['tipoRevisoes'])) {
     $tipoRevisoes = unserialize(base64_decode($_GET['tipoRevisoes']));
 }
 ?>
-
 <form method="post" action="../../class/RecebePostGet.php" >
     <p class="caption"> Novo item de revisão </p>
 
