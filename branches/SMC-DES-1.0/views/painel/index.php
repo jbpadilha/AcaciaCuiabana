@@ -86,8 +86,8 @@ if(isset($_GET['destroi'])) {
         if(isset($_GET['msg'])) {
             ?>
         <script>
-            alert("<?php echo $_GET['msg']; ?>");
-        </script>";
+            alert("<?=$_GET['msg']?>");
+        </script>
             <?
         }
         ?>

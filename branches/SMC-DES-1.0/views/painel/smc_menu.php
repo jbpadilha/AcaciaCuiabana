@@ -18,17 +18,17 @@
             </li>
             <li>
                 <a href="?p=add_cpf" alt="">
-                    Clientes - Pessoa f√≠sica
+                    Clientes - Pessoa fÌsica
                 </a>
             </li>
             <li>
                 <a href="?p=add_cnpj" alt="">
-                    Clientes - Pessoa jur√≠dica
+                    Clientes - Pessoa jurÌdica
                 </a>
             </li>
             <li>
                 <a href="?p=add_veiculos" alt="">
-                    Ve√≠culos
+                    VeÌculos
                 </a>
             </li>
             <li>
@@ -69,17 +69,17 @@
             <li class="divisor"></li>
             <li>
                 <a href="?p=busca_cpf&limpa=1" alt="">
-                    Clientes - Pessoa f√≠sica
+                    Clientes - Pessoa fÌsica
                 </a>
             </li>
             <li>
                 <a href="?p=busca_cnpj&limpa=1" alt="">
-                    Clientes - Pessoa jur√≠dica
+                    Clientes - Pessoa jurÌdica
                 </a>
             </li>
             <li>
                 <a href="?p=busca_veiculos&limpa=1" alt="">
-                    Ve√≠culos
+                    VeÌculos
                 </a>
             </li>
             <li>
@@ -89,7 +89,7 @@
             </li>
             <li>
                 <a href="?p=busca_revisoes&limpa=1" alt="">
-                    Revis√µes
+                    Revisıes
                 </a>
             </li>
             <li>
@@ -103,7 +103,7 @@
     <li>
         <a href="?p=rev_confirma" alt="">
             <img src="../imagens/engrenagens.gif" alt="Confirma" />
-            Confirmar Revis√£o
+            Confirmar Revis„o
         </a>
     </li>
 
@@ -114,7 +114,7 @@
         </a>
     </li>
 
-    <li title="Encerrar sess√£o">
+    <li title="Encerrar sess„o">
         <a href="?destroi=sim" alt="">
             <img src="../imagens/ico_cancel.png" alt="Sair" />
             Sair

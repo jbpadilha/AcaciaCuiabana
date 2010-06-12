@@ -94,7 +94,7 @@
 			<td><?=$abastecimentos->getPostoAbastecimentos()?></td>
 			<td><?=$abastecimentos->getNfAbastecimentos()?></td>
 			<td><?=$abastecimentos->getTipoCombustivelAbastecimentos()?></td>
-			<td><?$abastecimentos->getLitrosAbastecimentos()?></td>
+			<td><?=$abastecimentos->getLitrosAbastecimentos()?></td>
 			<td><?=$abastecimentos->getValorAbastecimentos()?></td>
 			<td>
 				<form name="form" method="get" action="index.php" >
