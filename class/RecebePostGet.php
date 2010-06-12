@@ -1182,7 +1182,6 @@ if(isset($_POST))
 				{	
 					$pessoa->setIdCliente($_POST['idCliente']);
 				}
-				
 				if($mensagem == '')
 				{
 					$collVo = $controla->findPessoas($pessoa);
@@ -1224,14 +1223,22 @@ if(isset($_POST))
 					$pessoaAtual->setDataNascimentoPessoa($formataData->toDBDate($controla->validaData($_POST['dataNascimento'])));
 				else
 					$mensagem .= "A data de nascimento da pessoa deve ser preenchida.";
-				$pessoaAtual->setSexoPessoa($_POST['sexo']);
-				$pessoaAtual->setEstadoCivilPessoa($_POST['estadoCivil']);
+				if($_POST['sexo'] != '')
+					$pessoaAtual->setSexoPessoa($_POST['sexo']);
+				if($_POST['estadoCivil'] != '')
+					$pessoaAtual->setEstadoCivilPessoa($_POST['estadoCivil']);
 				
 				if($_POST['rg'] != '')
 				{
 					$pessoaAtual->setRgPessoa(trim($_POST['rg']));
-					$pessoaAtual->setOrgExpPessoa(trim($_POST['rg_orgao']));
-					$pessoaAtual->setUfOrgExpPessoa(strtoupper($_POST['rg_uf']));
+					if($_POST['rg_orgao'] != '')
+						$pessoaAtual->setOrgExpPessoa(trim($_POST['rg_orgao']));
+					else
+						$mensagem .= "O órgão expeditor do RG deve ser informado.";
+					if($_POST['rg_uf'] != '')
+						$pessoaAtual->setUfOrgExpPessoa(strtoupper($_POST['rg_uf']));
+					else
+						$mensagem .= "A UF do RG deve ser informado.";
 				}
 				else
 				{

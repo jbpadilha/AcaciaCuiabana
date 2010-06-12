@@ -94,70 +94,89 @@ class Pessoa
 	 * @param $idPessoa the $idPessoa to set
 	 */
 	public function setIdPessoa($idPessoa) {
-		$this->idPessoa = $idPessoa;
+		if($idPessoa != '')
+			$this->idPessoa = $idPessoa;
 	}
 
 	/**
 	 * @param $cpfPessoa the $cpfPessoa to set
 	 */
-	public function setCpfPessoa($cpfPessoa) {
-		$this->cpfPessoa = $cpfPessoa;
+	public function setCpfPessoa($cpfPessoa) 
+	{
+		if($cpfPessoa != '')
+			$this->cpfPessoa = $cpfPessoa;
 	}
 
 	/**
 	 * @param $NomePessoa the $NomePessoa to set
 	 */
-	public function setNomePessoa($nomePessoa) {
-		$this->nomePessoa = $nomePessoa;
+	public function setNomePessoa($nomePessoa) 
+	{
+		if($nomePessoa != '')
+			$this->nomePessoa = $nomePessoa;
 	}
 
 	/**
 	 * @param $dataNascimentoPessoa the $dataNascimentoPessoa to set
 	 */
-	public function setDataNascimentoPessoa($dataNascimentoPessoa) {
-		$this->dataNascimentoPessoa = $dataNascimentoPessoa;
+	public function setDataNascimentoPessoa($dataNascimentoPessoa) 
+	{
+		if($dataNascimentoPessoa != '')
+			$this->dataNascimentoPessoa = $dataNascimentoPessoa;
 	}
 
 	/**
 	 * @param $sexoPessoa the $sexoPessoa to set
 	 */
-	public function setSexoPessoa($sexoPessoa) {
-		$this->sexoPessoa = $sexoPessoa;
+	public function setSexoPessoa($sexoPessoa) 
+	{
+		if($sexoPessoa != '')
+			$this->sexoPessoa = $sexoPessoa;
 	}
 
 	/**
 	 * @param $estadoCivilPessoa the $estadoCivilPessoa to set
 	 */
-	public function setEstadoCivilPessoa($estadoCivilPessoa) {
-		$this->estadoCivilPessoa = $estadoCivilPessoa;
+	public function setEstadoCivilPessoa($estadoCivilPessoa) 
+	{
+		if($estadoCivilPessoa != '')
+			$this->estadoCivilPessoa = $estadoCivilPessoa;
 	}
 
 	/**
 	 * @param $rgPessoa the $rgPessoa to set
 	 */
-	public function setRgPessoa($rgPessoa) {
-		$this->rgPessoa = $rgPessoa;
+	public function setRgPessoa($rgPessoa) 
+	{
+		if($rgPessoa != '')
+			$this->rgPessoa = $rgPessoa;
 	}
 
 	/**
 	 * @param $orgExpPessoa the $orgExpPessoa to set
 	 */
-	public function setOrgExpPessoa($orgExpPessoa) {
-		$this->orgExpPessoa = $orgExpPessoa;
+	public function setOrgExpPessoa($orgExpPessoa) 
+	{
+		if($orgExpPessoa != '')
+			$this->orgExpPessoa = $orgExpPessoa;
 	}
 
 	/**
 	 * @param $ufOrgExpPessoa the $ufOrgExpPessoa to set
 	 */
-	public function setUfOrgExpPessoa($ufOrgExpPessoa) {
-		$this->ufOrgExpPessoa = $ufOrgExpPessoa;
+	public function setUfOrgExpPessoa($ufOrgExpPessoa) 
+	{
+		if($ufOrgExpPessoa != '')
+			$this->ufOrgExpPessoa = $ufOrgExpPessoa;
 	}
 
 	/**
 	 * @param $complementoPessoa the $complementoPessoa to set
 	 */
-	public function setComplementoPessoa($complementoPessoa) {
-		$this->complementoPessoa = $complementoPessoa;
+	public function setComplementoPessoa($complementoPessoa) 
+	{
+		if($complementoPessoa != '')
+			$this->complementoPessoa = $complementoPessoa;
 	}
 
 	/**
@@ -170,8 +189,10 @@ class Pessoa
 	/**
 	 * @param $idConjuguePessoa the $idConjuguePessoa to set
 	 */
-	public function setIdConjuguePessoa($idConjuguePessoa) {
-		$this->idConjuguePessoa = $idConjuguePessoa;
+	public function setIdConjuguePessoa($idConjuguePessoa) 
+	{
+		if($idConjuguePessoa != '')
+			$this->idConjuguePessoa = $idConjuguePessoa;
 	}
 	
 	/**
@@ -204,8 +225,10 @@ class Pessoa
 	/**
 	 * @param $idCliente the $idCliente to set
 	 */
-	public function setIdCliente($idCliente) {
-		$this->idCliente = $idCliente;
+	public function setIdCliente($idCliente) 
+	{
+		if($idCliente != '')
+			$this->idCliente = $idCliente;
 	}
 
 	public function retornaEndereco()

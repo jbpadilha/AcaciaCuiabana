@@ -122,10 +122,13 @@ elseif(isset($_SESSION['pessoaAtual']))
 	{
 		if(isset($_SESSION['pessoaConjugueAtual']))
 			unset($_SESSION['pessoaConjugueAtual']);
-		$pessoaConjugue->setIdPessoa($pessoa->getIdConjuguePessoa());
-		$collVoAlterarConj = $controla->findPessoas($pessoaConjugue);
-		$pessoaConjugue = $collVoAlterarConj[0];
-		$enderecoConjugue = $pessoaConjugue->retornaEndereco();
+		if(!is_null($pessoa->getIdConjuguePessoa()))
+		{
+			$pessoaConjugue->setIdPessoa($pessoa->getIdConjuguePessoa());
+			$collVoAlterarConj = $controla->findPessoas($pessoaConjugue);
+			$pessoaConjugue = $collVoAlterarConj[0];
+			$enderecoConjugue = $pessoaConjugue->retornaEndereco();
+		}
 	}
 	elseif(isset($_SESSION['pessoaConjugueAtual'])) 
 	{

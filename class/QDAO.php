@@ -260,6 +260,10 @@ class QDAO
 		{
 			$where = "WHERE cpfPessoa = ?";
 		}
+		elseif(is_null($valueObj->getIdCliente()) && !is_null($valueObj->getNomePessoa()))
+		{
+			$where = "WHERE nomePessoa like ?";
+		}
 		
 		try 
 		{
@@ -281,6 +285,10 @@ class QDAO
 			elseif(!is_null($valueObj->getCpfPessoa($cpfPessoa)))
 			{
 				mysqli_stmt_bind_param($prepare,'s',$valueObj->getCpfPessoa($cpfPessoa));
+			}
+			elseif(is_null($valueObj->getIdCliente()) && !is_null($valueObj->getNomePessoa()))
+			{
+				mysqli_stmt_bind_param($prepare,'s',$nomePessoa);
 			}
 						
 			$idPessoa = $valueObj->getIdPessoa();
