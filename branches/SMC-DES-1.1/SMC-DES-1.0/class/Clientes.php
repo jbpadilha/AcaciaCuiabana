@@ -91,7 +91,7 @@ class Clientes
 			$pessoa = new Pessoa();
 			$pessoa->setIdPessoa($this->getIdPessoa());
 			$valueObj =  $controle->findPessoas($pessoa);
-			$pessoa = $valueObj[0];
+			$pessoa = new Pessoa($valueObj[0]);
 			return $pessoa->getNomePessoa();
 		}
 		elseif ($this->getIdEmpresa())
@@ -99,7 +99,7 @@ class Clientes
 			$empresas = new Empresas();
 			$empresas->setIdEmpresa($this->getIdEmpresa());
 			$valueObj =  $controle->findEmpresas($empresas);
-			$empresas = $valueObj[0];
+			$empresas = new Empresas($valueObj[0]);
 			return $empresas->getNomeEmpresa();
 		}
 	}

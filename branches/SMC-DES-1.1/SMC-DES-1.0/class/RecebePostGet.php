@@ -159,7 +159,7 @@ if(isset($_GET))
 				$_SESSION['revisoes'] = $collVo;
 			else
 				$_SESSION['revisoes'] = '';
-			echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=rev_confirma';</script>";
+			echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=rev_confirma';</script>";
 		}
 	}
 }
@@ -169,6 +169,7 @@ if(isset($_POST))
 	$msg = "";
 	$controla = new ControlaFuncionalidades();
 	$formataData = new FormataData();
+	$dominio = new Dominio();
 	
 	if(isset($_POST['loginAdm']))
 	{
@@ -177,7 +178,7 @@ if(isset($_POST))
 		if($_POST['login'] == "" || $_POST['senha'] == "")
 		{
 			$mensagem = "Todos os campos devem ser peenchido.";
-			header("Location: ../views/home.php?p=login&msg=$mensagem");
+			header("Location: ../home.php?p=login&msg=$mensagem");
 		}
 		
 		if($_POST['login'] != '' && $_POST['senha'] != '')
@@ -200,29 +201,29 @@ if(isset($_POST))
 					$controla->updateLogon($logon_aux);
 					if($logon_aux->getNivelAcessoLogin() > 0)
 					{
-						header("Location:../views/painel/index.php?p=home");
+						header("Location:../painel/index.php?p=home");
 					}
 					else
 					{
-						header("Location:../views/painel/aguarde.php");
+						header("Location:../painel/aguarde.php");
 					}
 				}
 				else 
 				{
 					$mensagem = "usuário ou senha incorreto.";
-					header("Location: ../views/home.php?p=login&msg=$mensagem");
+					header("Location: ../home.php?p=login&msg=$mensagem");
 				}
 			}
 			catch (Exception $e)
 			{
 				$mensagem = $e->getMessage();
-				header("Location: ../views/home.php?p=login&msg=$mensagem");
+				header("Location: ../home.php?p=login&msg=$mensagem");
 			}
 		}
 		else 
 		{
 			$mensagem = "Senha Incorreta ou usuário Inválido.";
-			header("Location: ../views/login.php?msg=$mensagem");
+			header("Location: ../login.php?msg=$mensagem");
 		}
 	}
 	
@@ -270,6 +271,7 @@ if(isset($_POST))
 					
 					$logon->setIdPessoa($idPessoa);
 					$logon->setNivelAcessoLogin(0);
+					echo "teste";
 					$controla->cadastraLogon($logon);
 					
 					$descricao = "
@@ -287,18 +289,18 @@ if(isset($_POST))
 					
 					$controla->enviarEmail($pessoa->getNomePessoa(),$endereco->getEmailEndereco(),"Cadastro de novo usuário",$descricao);
 					$mensagem = "Cadastro realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
-					header("Location: ../views/home.php?msg=$mensagem");
+					header("Location: ../home.php?page=login&msg=$mensagem");
 					
 				}
 				else
 				{
-					header("Location: ../views/home.php?msg=$mensagem");
+					header("Location: ../home.php?page=login&acao=cadastro&msg=$mensagem");
 				}
 			}
 			catch (Exception $e)
 			{
-				$mensagem .= $e;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/home.php?p=login&msg=$mensagem&pessoa=".base64_encode(serialize($pessoa))."&endereco=".base64_encode(serialize($endereco))."&logon=".base64_encode(serialize($logon))."'</script>";
+				$mensagem .= $e->getMessage();
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../home.php?p=login&msg=$mensagem'</script>";
 			}
 			
 		}		
@@ -355,11 +357,11 @@ if(isset($_POST))
 				}
 				$endereco->setTelefoneEndereco($_POST['tel_contato']);
 				$endereco->setCelEndereco($_POST['cel_contato']);
-				$endereco->setFaxEndereco($_POST['cel_contato']);
+				$endereco->setFaxEndereco($_POST['fax_contato']);
 				$endereco->setIdPessoa($pessoa->getIdPessoa());
 				
 				//Conjugue
-				if($pessoa->getEstadoCivilPessoa() == "Casado" || $pessoa->getEstadoCivilPessoa() == "União Estável")
+				if($pessoa->getEstadoCivilPessoa() == $dominio->CASADO || $pessoa->getEstadoCivilPessoa() == $dominio->UNIAO)
 				{
 					$pessoaConjugue->setIdPessoa($_POST['idConjugue']);
 					if($_POST['nome_conjuge'] != '')
@@ -389,7 +391,7 @@ if(isset($_POST))
 					$idCliente = $controla->cadastraClientes($clientes);
 					$pessoa->setIdCliente($idCliente);
 					$controla->updateEndereco($endereco);
-					if($pessoa->getEstadoCivilPessoa() == "Casado" || $pessoa->getEstadoCivilPessoa() == "União Estável")
+					if($pessoa->getEstadoCivilPessoa() == $dominio->CASADO || $pessoa->getEstadoCivilPessoa() == $dominio->UNIAO)
 					{
 						$pessoaConjugue->setIdCliente($idCliente);
 						$idConjugue = $controla->cadastraPessoa($pessoaConjugue);
@@ -422,7 +424,7 @@ if(isset($_POST))
 					<b>Fax para contato:</b> ".$endereco->getFaxEndereco().";<br>
 					<b>Email para contato:</b> ".$endereco->getEmailEndereco().";<br>
 					<br><br><br>";
-					if($pessoa->getEstadoCivilPessoa() == "Casado" || $pessoa->getEstadoCivilPessoa() == "União Estável")
+					if($pessoa->getEstadoCivilPessoa() == $dominio->CASADO || $pessoa->getEstadoCivilPessoa() == $dominio->UNIAO)
 					{
 						$descricao .= "
 						<b>DADOS DO CONJUGUE</b><br><br>
@@ -441,14 +443,14 @@ if(isset($_POST))
 					unset($_SESSION['pessoaAtual']);
 					unset($_SESSION['enderecoAtual']);
 					unset($_SESSION['pessoaConjugueAtual']);
-					header("Location: ../views/home.php?msg=$mensagem");
+					header("Location: ../home.php?msg=$mensagem");
 				}
 				else
 				{
 					$_SESSION['pessoaAtual'] = $pessoa;
 					$_SESSION['enderecoAtual'] = $endereco;
 					$_SESSION['pessoaConjugueAtual'] = $pessoaConjugue;
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/add_meucpf.php?msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/add_meucpf.php?msg=$mensagem'</script>";
 				}
 					
 			}
@@ -458,7 +460,7 @@ if(isset($_POST))
 				$_SESSION['pessoaAtual'] = $pessoa;
 				$_SESSION['enderecoAtual'] = $endereco;
 				$_SESSION['pessoaConjugueAtual'] = $pessoaConjugue;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/add_meucpf.php?msg=$mensagem'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/add_meucpf.php?msg=$mensagem'</script>";
 			}
 		}
 		
@@ -609,7 +611,7 @@ if(isset($_POST))
 					
 					$controla->enviarEmail($pessoaAtual->getNomePessoa(),$endereco->getEmailEndereco(),"Cadastro de Pessoa",$descricao);
 					$mensagem = "Cadastro realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=home&msg=$mensagem'</script>";
 					unset($_SESSION['pessoaAtual']);
 					unset($_SESSION['enderecoAtual']);
 					unset($_SESSION['pessoaConjugueAtual']);
@@ -619,7 +621,7 @@ if(isset($_POST))
 					$_SESSION['pessoaAtual'] = $pessoaAtual;
 					$_SESSION['enderecoAtual'] = $endereco;
 					$_SESSION['pessoaConjugueAtual'] = $pessoaConjugue;
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cpf&msg=$mensagem'</script>"; 
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=add_cpf&msg=$mensagem'</script>"; 
 				}
 			}
 			catch (Exception $e)
@@ -628,7 +630,7 @@ if(isset($_POST))
 				$_SESSION['pessoaAtual'] = $pessoaAtual;
 				$_SESSION['endereco'] = $endereco;
 				$_SESSION['pessoaConjugue'] = $pessoaConjugue;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cpf&msg=$mensagem'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=add_cpf&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -840,7 +842,7 @@ if(isset($_POST))
 					
 					$controla->enviarEmail($empresas->getNomeEmpresa(),$endereco->getEmailEndereco(),"Cadastro de Empresa",$descricao);
 					$mensagem = "Cadastro realizado com sucesso. Um e-mail foi enviado para o e-mail cadastrado.";
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=home&msg=$mensagem'</script>";
 					unset($_SESSION['empresaAtual']);
 					unset($_SESSION['enderecoEmpresaAtual']);
 					unset($_SESSION['pessoaDiretorAtual']);
@@ -854,7 +856,7 @@ if(isset($_POST))
 					$_SESSION['pessoaDiretorAtual'] = $pessoaDiretor;
 					$_SESSION['enderecoDiretorAtual'] = $enderecoDiretor;
 					$_SESSION['pessoaDiretorConjugueAtual'] = $pessoaConjugue;
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cnpj&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=add_cnpj&msg=$mensagem'</script>";
 				}
 			}
 			catch (Exception $e)
@@ -864,7 +866,7 @@ if(isset($_POST))
 				$_SESSION['pessoaDiretorAtual'] = $pessoaDiretor;
 				$_SESSION['enderecoDiretorAtual'] = $enderecoDiretor;
 				$_SESSION['pessoaDiretorConjugueAtual'] = $pessoaConjugue;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_cnpj&msg=$mensagem'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=add_cnpj&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -939,13 +941,13 @@ if(isset($_POST))
 					$mensagem = 'Veículo Cadastrado com sucesso.';
 					
 					unset($_SESSION['veiculoAtual']);
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=home&msg=$mensagem'</script>";
 					
 				}
 				else
 				{
 					$_SESSION['veiculoAtual'] = $veiculos;
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_veiculos&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=add_veiculos&msg=$mensagem'</script>";
 				}
 				
 			}
@@ -953,7 +955,7 @@ if(isset($_POST))
 			{
 				$mensagem .= $e->getMessage();
 				$_SESSION['veiculoAtual'] = $veiculos;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_veiculos&msg=$mensagem'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=add_veiculos&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -997,7 +999,7 @@ if(isset($_POST))
 					$pessoaCondutor->setIdCnh($idCnh);
 					$controla->cadastrarCondutores($pessoaCondutor);
 					$mensagem = 'Condutor cadastrado com sucesso.';
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=home&msg=$mensagem'</script>";
 					unset($_SESSION['condutoresAtual']);
 					unset($_SESSION['cnhAtual']);
 				}
@@ -1005,7 +1007,7 @@ if(isset($_POST))
 				{
 					$_SESSION['condutoresAtual'] = $pessoaCondutor;
 					$_SESSION['cnhAtual'] = $cnh;
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_motorista&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=add_motorista&msg=$mensagem'</script>";
 				}				
 			}
 			catch (Exception $e)
@@ -1013,7 +1015,7 @@ if(isset($_POST))
 				$mensagem .= $e->getMessage();
 				$_SESSION['condutoresAtual'] = $pessoaCondutor;
 				$_SESSION['cnhAtual'] = $cnh;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_motorista&msg=$mensagem'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=add_motorista&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -1032,20 +1034,20 @@ if(isset($_POST))
 				{
 					$controla->cadastrarTipoRevisoes($tipoRevisoes);
 					$mensagem = 'Tipo de Revisão cadastrado com sucesso.';
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=home&msg=$mensagem'</script>";
 					unset($_SESSION['tipoRevisoes']);
 				}	
 				else
 				{
 					$_SESSION['tipoRevisoes'] = $tipoRevisoes; 
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_tipo_rev&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=add_tipo_rev&msg=$mensagem'</script>";
 				}	
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
 				$_SESSION['tipoRevisoes'] = $tipoRevisoes;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_tipo_rev&msg=$mensagem'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=add_tipo_rev&msg=$mensagem'</script>";
 			}
 		}
 		if($_POST['acao'] == "cadastroRevisoes")
@@ -1087,7 +1089,7 @@ if(isset($_POST))
 					$valores[$cont-1][1] = '';
 					$_SESSION['valoresAtual'] = $valores;
 					$_SESSION['revisoesAtual'] = $revisoes;
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=add_rev_padrao'</script>";
 					
 				}
 				elseif($mensagem == '')
@@ -1102,13 +1104,13 @@ if(isset($_POST))
 					unset($_SESSION['revisoesAtual']);
 					unset($_SESSION['valoresAtual']);
 					unset($_SESSION['contRevisoes']);
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=home&msg=$mensagem'</script>";
 				}
 				else
 				{
 					$_SESSION['valoresAtual'] = $valores;
 					$_SESSION['revisoesAtual'] = $revisoes;
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=add_rev_padrao&msg=$mensagem'</script>";
 				}
 				
 			}
@@ -1117,7 +1119,7 @@ if(isset($_POST))
 				$mensagem .= $e->getMessage();
 				$_SESSION['valores'] = $valores;
 				$_SESSION['revisoesAtual'] = $revisoes;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_rev_padrao&msg=$mensagem'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=add_rev_padrao&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -1149,12 +1151,12 @@ if(isset($_POST))
 					$controla->cadastrarAbastecimentos($abastecimentos);
 					$mensagem = 'Abastecimento cadastrado com sucesso.';
 					unset($_SESSION['abastecimentosAtual']);
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=home&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=home&msg=$mensagem'</script>";
 				}
 				else
 				{
 					$_SESSION['abastecimentosAtual'] = $abastecimentos;
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_abastece&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=add_abastece&msg=$mensagem'</script>";
 				}
 				
 			}
@@ -1162,7 +1164,7 @@ if(isset($_POST))
 			{
 				$mensagem .= $e->getMessage();
 				$_SESSION['abastecimentosAtual'] = $abastecimentos;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=add_abastece&msg=$mensagem'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=add_abastece&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -1188,17 +1190,17 @@ if(isset($_POST))
 					$_SESSION['pessoasPesquisadas'] = $collVo;
 					if(is_null($_SESSION['pessoasPesquisadas']))
 						$_SESSION['pessoasPesquisadas'] = '';
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_cpf'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=busca_cpf'</script>";
 				}
 				else
 				{
-					header("Location: ../views/painel/index.php?p=busca_cpf&msg=$mensagem");
+					header("Location: ../painel/index.php?p=busca_cpf&msg=$mensagem");
 				}
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				header("Location: ../views/painel/index.php?p=busca_cpf&msg=$mensagem");
+				header("Location: ../painel/index.php?p=busca_cpf&msg=$mensagem");
 			}
 		}
 		
@@ -1391,14 +1393,14 @@ if(isset($_POST))
 					unset($_SESSION['pessoaAtual']);
 					unset($_SESSION['enderecoAtual']);
 					unset($_SESSION['pessoaConjugueAtual']);
-					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
+					header("Location: ../painel/index.php?p=home&msg=$mensagem");
 				}
 				else
 				{
 					$_SESSION['pessoaAtual'] = $pessoaAtual;
 					$_SESSION['enderecoAtual'] = $endereco;
 					$_SESSION['pessoaConjugueAtual'] = $pessoaConjugue;
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cpf&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=detalhe_cpf&msg=$mensagem'</script>";
 				}
 			}
 			catch (Exception $e)
@@ -1407,7 +1409,7 @@ if(isset($_POST))
 				$_SESSION['pessoaAtual'] = $pessoaAtual;
 				$_SESSION['enderecoAtual'] = $endereco;
 				$_SESSION['pessoaConjugueAtual'] = $pessoaConjugue;
-				//echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cpf&msg=$mensagem'</script>";
+				//echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=detalhe_cpf&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -1437,17 +1439,17 @@ if(isset($_POST))
 					$_SESSION['empresasPesquisadas'] = $collVo;
 					if(is_null($_SESSION['empresasPesquisadas']))
 						$_SESSION['empresasPesquisadas'] = '';
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_cnpj'</script>";	
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=busca_cnpj'</script>";	
 				}
 				else
 				{
-					header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
+					header("Location: ../painel/index.php?p=busca_cnpj&msg=$mensagem");
 				}
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
+				header("Location: ../painel/index.php?p=busca_cnpj&msg=$mensagem");
 			}
 		}
 		
@@ -1708,7 +1710,7 @@ if(isset($_POST))
 					unset($_SESSION['pessoaDiretorAtual']);
 					unset($_SESSION['enderecoDiretorAtual']);
 					unset($_SESSION['pessoaConjugueAtual']);
-					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
+					header("Location: ../painel/index.php?p=home&msg=$mensagem");
 				}
 				else 
 				{
@@ -1717,7 +1719,7 @@ if(isset($_POST))
 					$_SESSION['pessoaDiretorAtual'] = $pessoaDiretor;
 					$_SESSION['enderecoDiretorAtual'] = $enderecoDiretor;
 					$_SESSION['pessoaConjugueAtual'] = $pessoaConjugue;
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cnpj&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=detalhe_cnpj&msg=$mensagem'</script>";
 				}
 			}
 			catch (Exception $e)
@@ -1728,7 +1730,7 @@ if(isset($_POST))
 				$_SESSION['enderecoDiretorAtual'] = $enderecoDiretor;
 				$_SESSION['pessoaConjugueAtual'] = $pessoaConjugue;
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_cnpj&msg=$mensagem'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=detalhe_cnpj&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -1758,17 +1760,17 @@ if(isset($_POST))
 					
 					if(is_null($_SESSION['veiculosPesquisados']))
 						$_SESSION['veiculosPesquisados'] = '';
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=busca_veiculos'</script>";	 
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=busca_veiculos'</script>";	 
 				}
 				else
 				{
-					header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
+					header("Location: ../painel/index.php?p=busca_cnpj&msg=$mensagem");
 				}
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
+				header("Location: ../painel/index.php?p=busca_cnpj&msg=$mensagem");
 			}
 		}
 		
@@ -1848,12 +1850,12 @@ if(isset($_POST))
 					$controla->updateVeiculos($veiculos);
 					$mensagem = 'Veículo Alterado com sucesso.';
 					unset($_SESSION['veiculos']);
-					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
+					header("Location: ../painel/index.php?p=home&msg=$mensagem");
 				}
 				else
 				{
 					$_SESSION['veiculosAtual'] = $veiculos; 
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_veiculo&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=detalhe_veiculo&msg=$mensagem'</script>";
 				}
 				
 			}
@@ -1861,7 +1863,7 @@ if(isset($_POST))
 			{
 				$mensagem .= $e->getMessage();
 				$_SESSION['veiculosAtual'] = $veiculos;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_veiculo&msg=$mensagem'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=detalhe_veiculo&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -1914,17 +1916,17 @@ if(isset($_POST))
 					}
 					
 					$_SESSION['condutoresPesquisados'] = $collVo;
-					header("Location: ../views/painel/index.php?p=busca_condutores"); 
+					header("Location: ../painel/index.php?p=busca_condutores"); 
 				}
 				else
 				{
-					header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
+					header("Location: ../painel/index.php?p=busca_cnpj&msg=$mensagem");
 				}
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				header("Location: ../views/painel/index.php?p=busca_cnpj&msg=$mensagem");
+				header("Location: ../painel/index.php?p=busca_cnpj&msg=$mensagem");
 			}
 		}
 		
@@ -1976,13 +1978,13 @@ if(isset($_POST))
 					$controla->updateCondutores($pessoaCondutor);
 					$mensagem = 'Condutor alterado com sucesso.';
 					unset($_SESSION['condutoresAtual']);
-					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
+					header("Location: ../painel/index.php?p=home&msg=$mensagem");
 				}
 				else
 				{
 					$_SESSION['CnhAtual'] = $cnh;
 					$_SESSION['condutoresAtual'] = $pessoaCondutor;
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_condutores&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=detalhe_condutores&msg=$mensagem'</script>";
 				}				
 			}
 			catch (Exception $e)
@@ -1990,7 +1992,7 @@ if(isset($_POST))
 				$mensagem .= $e->getMessage();
 				$_SESSION['CnhAtual'] = $cnh;
 				$_SESSION['condutoresAtual'] = $pessoaCondutor; 
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_condutores&msg=$mensagem'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=detalhe_condutores&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -2032,17 +2034,17 @@ if(isset($_POST))
 					if(is_null($_SESSION['revisoesPesquisados']))
 						$_SESSION['revisoesPesquisados'] = '';
 					
-					header("Location: ../views/painel/index.php?p=busca_revisoes");
+					header("Location: ../painel/index.php?p=busca_revisoes");
 				}
 				else
 				{
-					header("Location: ../views/painel/index.php?p=busca_revisoes&msg=$mensagem");
+					header("Location: ../painel/index.php?p=busca_revisoes&msg=$mensagem");
 				}
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				header("Location: ../views/painel/index.php?p=busca_revisoes&msg=$mensagem");
+				header("Location: ../painel/index.php?p=busca_revisoes&msg=$mensagem");
 			}
 		}
 		if($_POST['acao'] == "alterarRevisoes")
@@ -2067,12 +2069,12 @@ if(isset($_POST))
 					$controla->updateRevisoes($revisoes);
 					$mensagem = 'Revisão alterado com sucesso.';
 					unset($_SESSION['revisoesAtual']);
-					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
+					header("Location: ../painel/index.php?p=home&msg=$mensagem");
 				}
 				else
 				{					
 					$_SESSION['revisoesAtual'] = $revisoes;
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_revisoes&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=detalhe_revisoes&msg=$mensagem'</script>";
 				}
 				
 			}
@@ -2080,7 +2082,7 @@ if(isset($_POST))
 			{
 				$mensagem .= $e->getMessage();
 				$_SESSION['revisoesAtual'] = $revisoes;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_revisoes&msg=$mensagem'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=detalhe_revisoes&msg=$mensagem'</script>";
 			}
 		}
 		if($_POST['acao'] == "buscaAbastecimentos")
@@ -2104,17 +2106,17 @@ if(isset($_POST))
 					if(is_null($_SESSION['abastecimentosPesquisados']))
 						$_SESSION['abastecimentosPesquisados'] = '';
 						
-					header("Location: ../views/painel/index.php?p=busca_abastece");
+					header("Location: ../painel/index.php?p=busca_abastece");
 				}
 				else
 				{
-					header("Location: ../views/painel/index.php?p=busca_abastece&msg=$mensagem");
+					header("Location: ../painel/index.php?p=busca_abastece&msg=$mensagem");
 				}
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				header("Location: ../views/painel/index.php?p=busca_abastece&msg=$mensagem");
+				header("Location: ../painel/index.php?p=busca_abastece&msg=$mensagem");
 			}
 		}
 		
@@ -2142,12 +2144,12 @@ if(isset($_POST))
 					$controla->updateAbastecimentos($abastecimentos);
 					$mensagem = 'Abastecimento alterado com sucesso.';
 					unset($_SESSION['abastecimentosAtual']);
-					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
+					header("Location: ../painel/index.php?p=home&msg=$mensagem");
 				}
 				else
 				{
 					$_SESSION['abastecimentosAtual'] = $abastecimentos;
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_abastecimentos&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=detalhe_abastecimentos&msg=$mensagem'</script>";
 				}
 				
 			}
@@ -2155,7 +2157,7 @@ if(isset($_POST))
 			{
 				$mensagem .= $e->getMessage();
 				$_SESSION['abastecimentosAtual'] = $abastecimentos;
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=detalhe_abastecimentos&msg=$mensagem'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=detalhe_abastecimentos&msg=$mensagem'</script>";
 			}
 		}
 		
@@ -2185,17 +2187,17 @@ if(isset($_POST))
 					$controla->updateRevisoes($revisao);
 					unset($_SESSION['revisoes']);
 					$mensagem = 'A revisão foi confirmada.';
-					header("Location: ../views/painel/index.php?p=home&msg=$mensagem");
+					header("Location: ../painel/index.php?p=home&msg=$mensagem");
 				}
 				else
 				{
-					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=rev_confirma&msg=$mensagem'</script>";
+					echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=rev_confirma&msg=$mensagem'</script>";
 				}
 			}
 			catch (Exception $e)
 			{
 				$mensagem .= $e->getMessage();
-				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../views/painel/index.php?p=rev_confirma&msg=$mensagem'</script>";
+				echo "<script type=\"text/javascript\" language=\"javascript\">document.location='../painel/index.php?p=rev_confirma&msg=$mensagem'</script>";
 			}
 		}
 	}

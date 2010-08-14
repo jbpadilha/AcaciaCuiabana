@@ -1,10 +1,10 @@
 <?php
 //####################################
-// * João Batista Padilha e Silva Analista/Desenvolvedor
+// * João Batista Padilha e Silva Analista/Desenvolvedor (Ábaco Tecnologia)
 // * Arquivo: index.php
 // * Criação: João Batista Padilha e Silva
 // * Revisão:
-// * Data de Criação: 23/06/2008
+// * Data de criação: 23/06/2008
 //####################################
 /*
    Classe que formata data para Manter o banco de dados MySql e Oracle
@@ -24,7 +24,7 @@ class FormataData
 	private $separadorDataView;
 	private $separadorHora;	
 		
-	//Construtor - Seta parÃ¢metros de configuração
+	//Construtor - Seta parâmetros de configuração
 	function FormataData($banco = "mysqli")
 	 {
 		$this->db = $banco;
