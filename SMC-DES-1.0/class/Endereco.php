@@ -212,7 +212,7 @@ class Endereco
 	{
 		$string = "";
 		$string = "
-		<b>endereço: </b>{$this->ruaEndereco}<br>
+		<b>Endereço: </b>{$this->ruaEndereco}<br>
 		<b>Complemento: </b>{$this->complementoEndereco}<br>
 		<b>Bairro: </b>{$this->bairroEndereco}<br>
 		<b>CEP: </b>{$this->cepEndereco}<br>

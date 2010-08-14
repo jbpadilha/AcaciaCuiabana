@@ -39,7 +39,7 @@ class ControlaFuncionalidades
 	public function destroiSessao()
 	{
 		session_destroy();
-		header("Location:../views/index.php");
+		header("Location:../index.php");
 	}
 	
 	public function enviarEmail($nom,$mail,$assunto,$desc)

@@ -1,0 +1,43 @@
+#painel {
+    position:fixed; top:0px; margin:-5px 0px 0px 0px; padding:0px; width:100%; height:43px;
+    background:#FA0 url(../_img/smc_menu/nav-bg.jpg) bottom; z-index:1;
+}
+
+#painel li {
+    float:left; display:block; margin:6px 0px 0px 0px; padding:7px 17px;
+    background:none; 
+    text-align:left; font:bold 12px "Segoe UI", Arial; color:#FFFFFF; cursor:pointer;
+}
+#painel li.divisor { margin:4px 2px -6px 2px; width:110px; height:1px; border-top:1px solid #FFF; }
+#painel li > a { color:#FFF; text-decoration:none; }
+#painel li img { height:16px; border:none; margin:2px 4px -2px 0px; padding:0px; }
+#painel li > a img { border:none; }
+#painel li:hover { color:#000; background:url('../_img/smc_menu/item-primary-bg.jpg') no-repeat center center; }
+#painel li:hover > a { color:#000; }
+#painel li:hover ul { display:block; }
+
+#painel ul {
+    position:absolute; display:none; top:38px; width:148px; list-style:none;
+    margin:0px; padding:10px 4px 10px 2px; border-bottom:1px solid #CA6500;
+    background:#F90 url('../_img/smc_menu/item-secondary-container-bg.jpg') repeat-x;
+}
+#painel ul li { border:none; width:142px; margin:0px !important; padding:0px !important; }
+#painel ul li.titulo { color:#000; cursor:default; margin:4px 4px 2px 4px !important; padding-bottom:4px !important; border-bottom:1px solid #FC3; }
+#painel ul li a { display:block; width:100%; padding:4px; font-size:11px; }
+#painel ul li:hover { background:none !important; }
+#painel ul li a:hover { background:url('../_img/smc_menu/item-secondary-bg.jpg') no-repeat left center !important; color:#C00; }
+#painel ul li a:active { background:url('../_img/smc_menu/item-secondary-title-bg.jpg') no-repeat left center !important; color:#C00; }
+
+#webmail { display:none; z-index:50; position:fixed; left:50%; margin-left:-170px; top:38px; border:none; border-width:0px 1px 1px 1px; border-style:solid; border-color:#AAA; }
+#webmail form.webmail { float:left; background:url('../_img/bg_laranja.jpg'); padding:5px; width:340px; }
+#webmail form.webmail p { float:left; width:100%; margin:0px; padding:0px; }
+#webmail form.webmail label { float:left; width:auto; min-width:50px; text-align:right; padding-top:6px; }
+#webmail form.webmail input[type=text] { float:left; margin:0px 2px; }
+#webmail form.webmail input[type=password] { float:left; margin:0px 2px; }
+#webmail form.webmail input[type=submit] { margin:0px; padding:1px; min-width:80px; background:none; border:1px solid #AAA; width:auto; height:auto; }
+
+table.statusbar { position:fixed; bottom:0px; width:100%; height:22px; background:#222 url('../_img/statusbar_bg.jpg'); color:#FFF; }
+table.statusbar table tr td { margin:0px; padding:0px; padding:2px 0px; }
+table.statusbar td.left { width:80%; text-align:left; border:none; padding:2px; }
+table.statusbar td.right { width:20%; text-align:center; border:none; padding:2px; }
+table.statusbar td.divisor { background:url('../_img/statusbar_divisor.jpg'); width:3px; padding:1px; border:none; }

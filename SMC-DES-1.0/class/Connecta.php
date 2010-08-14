@@ -2,8 +2,8 @@
 require_once ('Config.php');
 /**
  * Classe para conexão com banco de dados MySQL usando a extensão MySQLi.
- * A classe contém o construtor de conexão, registrando os posssãveus erros de conexão no arquivo db_errors.log,
- * e o destrutor, para fechar a conexão. As demais funçÃµes de banco de dados são padrÃµes da classe myslqi:
+ * A classe contém o construtor de conexão, registrando os possíveus erros de conexão no arquivo db_errors.log,
+ * e o destrutor, para fechar a conexão. As demais funções de banco de dados são padrões da classe myslqi:
  * @author João Batista Padilha e Silva
  * @link Connect.php
  * @copyright João Batista Padilha e Silva Especialista em TI (http://www.joaopadilha.eti.br) / contato@joaopadilha.eti.br
