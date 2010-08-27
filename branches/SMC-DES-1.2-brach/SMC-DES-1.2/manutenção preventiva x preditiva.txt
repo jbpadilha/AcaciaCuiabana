@@ -1,0 +1,26 @@
+Manutenção Preventiva e Manutenção Preditiva 
+  
+Muller (1991) destaca que até os anos 60 era prática comum continuar utilizando os equipamentos até os mesmos apresentarem sérios problemas de performance ou até mesmo quebrarem, destaca ainda que tal abordagem conduziu a muitas falhas catastróficas, o que na maioria das vezes foi substituída por manutenções nos equipamentos críticos em datas planejadas. Tal método de manutenção preventiva que muitas vezes é utilizado nos processos industriais, tem efetivamente minimizado falhas graves. Contudo sua maior limitação é que uma manutenção fixa programada pode às vezes resultar em custosas inspeções freqüentes.  
+Conforme TAVARES  (1987) Manutenção Preventiva é aquela que se conduz aos intervalos pré-determinados com o objetivo de reduzir a possibilidade de o Equipamento situar-se em uma condição abaixo do nível requerido de aceitação. Esta manutenção pode tomar por base intervalos de tempo pré-determinados e/ou condições preestabelecidas de funcionamento, podendo ainda requerer que, para sua execução o equipamento seja retirado de operação. 
+SOTHARD (1996) ressalta que a manutenção preventiva envolve cuidados rotineiros sobre equipamentos e inclui lubrificação das máquinas e reposição de peças de desgaste intensivo. Complementa que isoladamente a manutenção preventiva não propicia condições de previsão mais aprofundada sobre falhas dos componentes ou sobre como evitar conseqüências na produção. 
+SOTHARD (1996) complementa que a manutenção preditiva revisa a performance do passado para prever quando um componente específico irá falhar. Exemplifica que a manutenção pode optar pela troca de um componente a cada 380 horas de uso, trocando a peça prematuramente de forma a evitar parada.  
+A manutenção preditiva é a manutenção preventiva efetuada no momento exato, detectado através de análises estatísticas e análises de sintomas. TAVARES define a manutenção preditiva da seguinte forma: 
+  
+“Entende-se por controle preditivo de manutenção, a determinação do ponto ótimo para executar a manutenção preventiva num equipamento, ou seja, o ponto a partir do qual a probabilidade do equipamento falhar assume valores indesejáveis. A determinação desse ponto traz como resultado índices ideais de prevenção de falhas, tanto sob o aspecto técnico como pelo aspecto econômico, uma vez que a intervenção no equipamento não é feita durante o período que ainda está em condições de prestar o serviço, nem no período em que suas características operativas estão comprometidas” (TAVARES; 1996). 
+  
+Para PARKINSON (1991) a manutenção preditiva permite refinar os sistemas de manutenção preventiva, sendo a manutenção envolvida por um esforço conjunto onde: as unidades são descentralizadas , os especialistas em manutenção são envolvidos nos projetos dos equipamentos e decisões sobre preparação de equipamentos ( “set up” ) e mantêm contatos com fornecedores para assegurar qualidade. 
+Destacam-se abaixo algumas técnicas preditivas baseadas em D’AQUINO & SANTOS (1997): 
+¨      Ensaios não destrutivos. 
+¨      Termologia. 
+¨      Análise de vibrações. 
+¨      Análise de lubrificantes. 
+¨      Propriedades físico-químicas. 
+¨      Cromatografia gasosa. 
+¨      Espectrometria. 
+¨      Ferrografia. 
+¨      Radiografia. 
+¨      Energia acústica (ultra-som). 
+¨      Energia Eletromagnética (partículas magnéticas, correntes parasíticas). 
+¨      Fenômenos de viscosidade (líquidos penetrantes). 
+¨      Radiações ionizantes(Raio X ou Gamagrafia). 
+Com a manutenção preditiva o pessoal de manufatura passa a conviver rotineiramente com técnicas e ferramentas, que possibilitam detectar previamente problemas que sem a mesma não seriam detectados.  MATUSHESKI (1997) destaca que com a aplicação de técnicas preditivas as plantas se tornam mais confiáveis, requerendo menos recursos de manutenção no longo prazo, acrescentamos que o ciclo de vida das máquinas e equipamentos tendem a aumentar além de possibilitarem uma operação com melhoria nos níveis de rendimento e produtividade.
