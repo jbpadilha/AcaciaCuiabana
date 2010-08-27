@@ -1,0 +1,8 @@
+#Wed Aug 25 22:26:59 AMT 2010
+eclipse.preferences.version=1
+include_path=0;/SMC-DES-1.0
+org.eclipse.php.core.taskCaseSensitive=enabled
+org.eclipse.php.core.taskPriorities=NORMAL,HIGH,NORMAL,NORMAL
+org.eclipse.php.core.taskTags=TODO,FIXME,XXX,@todo
+phpVersion=php5
+use_asp_tags_as_php=false
