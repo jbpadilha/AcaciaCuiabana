@@ -1,0 +1,24 @@
+/* 
+    Document   : listagem
+    Created on : 04/06/2010, 10:13:50
+    Author     : Júnior Mendonça
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+div#listagem {
+    text-align:left; width:800px; margin:50px auto 40px auto; 
+}
+
+div#listagem p.evento {
+    font:bold 14px "Segoe UI", Verdana, Arial; color:#FA0;
+    border-bottom:2px solid #FA0;
+}
+
+div#listagem label { font-family:Consolas, Verdana, Arial; }
+div#listagem label:hover { font-weight:bold; }
