@@ -40,16 +40,7 @@
                 </select>
             </label>
             <label>Estado Civil:
-                <select name="estadoCivil">
-					<option></option>
-					<?php
-					foreach ($estadoCivil as $x) {
-						$x = strtoupper($x);
-						$attr = $pessoa->getEstadoCivilPessoa() == $x ? " selected" : "";
-						echo "\n<option value=\"".$x."\"".$attr.">".$x."</option>";
-					}
-					?>
-                </select>
+					<?=$dominio->listaDominioEstadoCivilSelect($pessoa->getEstadoCivilPessoa())?>
             </label>
         </div>
 
