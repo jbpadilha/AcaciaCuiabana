@@ -114,12 +114,7 @@ if(isset($_GET['empresas'])) {
                 </select>
             </label>
             <label>Estado Civil:
-                <select name="estadoCivil">
-                    <option selected></option>
-                    <option value="Casado" <?php echo ($pessoa->getEstadoCivilPessoa()==="Casado")?"selected":""; ?>>Casado(a)</option>
-                    <option value="Solteiro" <?php echo ($pessoa->getEstadoCivilPessoa()==="Solteiro")?"selected":""; ?>>Solteiro(a)</option>
-                    <option value="Uni„o Est√°vel" <?php echo ($pessoa->getEstadoCivilPessoa()==="Uni„o Est√°vel")?"selected":""; ?>>Uni„o Est√°vel</option>
-                </select>
+                <?=$dominio->listaDominioEstadoCivilSelect($pessoa->getEstadoCivilPessoa())?>
             </label>
         </div>
         <div class="right">
