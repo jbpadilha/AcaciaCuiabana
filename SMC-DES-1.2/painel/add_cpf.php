@@ -14,12 +14,47 @@
 	}
 ?>
 <form method="post" action="../class/RecebePostGet.php">
-
+	<input type="hidden" name="acao" value="cadastroPessoa" />
     <div class="botoes">
         <button type="reset" accesskey="L">Limpar campos</button>
         <button type="submit" name="completo" accesskey="C">Confirmar</button>
     </div>
-
+	<p class="caption">
+		Cliente
+	</p>
+	<fieldset>
+       	<?php
+       	if($logon->getIdClientes() != null)
+       	{ 
+       	?>
+       	<input type="hidden" name="idCliente" value="<?=$logon->getIdClientes(); ?>" />
+       	<?php 
+       	}
+       	else
+       	{
+       	?>
+             <label>Nome
+				<select name="idCliente" class="long">
+					<option><?=SELECIONE?></option>
+                    <?php 
+						$clientes = new Clientes();
+                    	$listaClientes = $controla->findClientes($clientes);
+						if($listaClientes != null)
+						{
+							$clientes = new Clientes();
+							foreach ($listaClientes as $cliente)
+							{
+								$clientes = $cliente;
+								echo "<option value=\"{$clientes->getIdClientes()}\">{$clientes->getNomeCliente()}</option>";
+							}
+						} 
+					?>
+                    </select>
+             </label>
+		<?php 
+       	}
+		?>
+    </fieldset>
 	<p class="caption">Dados pessoais</p>
     <fieldset>
         <div class="left">
@@ -151,8 +186,4 @@
             <label>CPF:<input type="text" name="cpfConjugue" value="<?php echo $pessoaConjugue->getCpfPessoa(); ?>" maxlength="14" class="docCPF" /></label>
         </div>
     </fieldset>
-
-        <input type="hidden" name="acao" value="cadastroPessoa" />
-        <input type="hidden" name="idCliente" value="<?php echo $logon->getIdClientes(); ?>" />
-		
 </form>
