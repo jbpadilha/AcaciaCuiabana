@@ -535,7 +535,7 @@ if(isset($_POST))
 				
 				//Cadastro do Conjugue
 				
-				if($pessoa->getEstadoCivilPessoa() == $dominio->CASADO || $pessoa->getEstadoCivilPessoa() == $dominio->UNIAO)
+				if($pessoaAtual->getEstadoCivilPessoa() == $dominio->CASADO || $pessoaAtual->getEstadoCivilPessoa() == $dominio->UNIAO)
 				{
 					
 					if($_POST['nomeConjugue'] != '')
@@ -549,7 +549,7 @@ if(isset($_POST))
 						$mensagem .= "A data de nascimento do Conjugue deve ser preenchida.";
 					
 					$pessoaConjugue->setSexoPessoa($_POST['sexoConjugue']);
-					$pessoaConjugue->setEstadoCivilPessoa($_POST['estadoCivil']);
+					$pessoaConjugue->setEstadoCivilPessoa($_POST['ecivil_cliente']);
 					
 					if($_POST['rgConjugue'] != '')
 					{
@@ -582,7 +582,7 @@ if(isset($_POST))
 					$pessoaAtual->setIdCliente($_POST['idCliente']);
 
 					//Cadastrando Conjugue
-					if($pessoa->getEstadoCivilPessoa() == $dominio->CASADO || $pessoa->getEstadoCivilPessoa() == $dominio->UNIAO)
+					if($pessoaAtual->getEstadoCivilPessoa() == $dominio->CASADO || $pessoaAtual->getEstadoCivilPessoa() == $dominio->UNIAO)
 					{
 						$pessoaConjugue->setIdCliente($_POST['idCliente']);
 						$idConjugue = $controla->cadastraPessoa($pessoaConjugue);
@@ -602,7 +602,7 @@ if(isset($_POST))
 					<b>endereço</b>
 					{$endereco->mostraDadosEndereco()}<br>
 					<br>";
-					if($pessoa->getEstadoCivilPessoa() == $dominio->CASADO || $pessoa->getEstadoCivilPessoa() == $dominio->UNIAO)
+					if($pessoaAtual->getEstadoCivilPessoa() == $dominio->CASADO || $pessoaAtual->getEstadoCivilPessoa() == $dominio->UNIAO)
 					{
 						$descricao = "
 						<b>DADOS DO CONJUGUE</b>
@@ -763,7 +763,7 @@ if(isset($_POST))
 					
 					//DADOS CONJUGUE DIRETOR
 					
-					if($pessoa->getEstadoCivilPessoa() == $dominio->CASADO || $pessoa->getEstadoCivilPessoa() == $dominio->UNIAO)
+					if($pessoaDiretor->getEstadoCivilPessoa() == $dominio->CASADO || $pessoaDiretor->getEstadoCivilPessoa() == $dominio->UNIAO)
 					{
 						$pessoaConjugue = new Pessoa();
 						if($_POST['nomeConjugue'] != '')
@@ -777,7 +777,7 @@ if(isset($_POST))
 							$mensagem .= "A data de nascimento do Conjugue deve ser preenchida.";
 						
 						$pessoaConjugue->setSexoPessoa($_POST['sexoConjugue']);
-						$pessoaConjugue->setEstadoCivilPessoa($_POST['estadoCivil']);
+						$pessoaConjugue->setEstadoCivilPessoa($_POST['ecivil_cliente']);
 						
 						if($_POST['rgConjugue'] != '')
 						{
@@ -804,7 +804,7 @@ if(isset($_POST))
 					{
 						//Cadastrando Conjugue
 						$idPessoaConjugue = null;
-						if($pessoa->getEstadoCivilPessoa() == $dominio->CASADO || $pessoa->getEstadoCivilPessoa() == $dominio->UNIAO)
+						if($pessoaDiretor->getEstadoCivilPessoa() == $dominio->CASADO || $pessoaDiretor->getEstadoCivilPessoa() == $dominio->UNIAO)
 						{
 							$pessoaConjugue->setIdCliente($cliente->getIdClientes());
 							$idPessoaConjugue = $controla->cadastraPessoa($pessoaConjugue);
@@ -833,7 +833,7 @@ if(isset($_POST))
 					<b>endereço</b>
 					{$endereco->mostraDadosEndereco()}<br>
 					<br>";
-					if($pessoa->getEstadoCivilPessoa() == $dominio->CASADO || $pessoa->getEstadoCivilPessoa() == $dominio->UNIAO)
+					if($pessoaDiretor->getEstadoCivilPessoa() == $dominio->CASADO || $pessoaDiretor->getEstadoCivilPessoa() == $dominio->UNIAO)
 					{
 						$descricao = "
 						<b>DADOS DO CONJUGUE</b>

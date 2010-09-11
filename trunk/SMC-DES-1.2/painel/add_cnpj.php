@@ -14,14 +14,47 @@ if(isset($_SESSION['empresaAtual'])) {
 }
 ?>
 <form method="post" action="../class/RecebePostGet.php">
-
+	<input type="hidden" id="acao" name="acao" value="cadastroEmpresa">
     <div class="botoes">
-        <input type="hidden" id="acao" name="acao" value="cadastroEmpresa">
-        <input type="hidden" id="idCliente" name="idCliente" value="<?php echo $logon->getIdClientes(); ?>">
         <button type="reset" accesskey="L">Limpar campos</button>
         <button type="submit" name="completo2" accesskey="C">Confirmar</button>
     </div>
-
+	<p class="caption">
+		Cliente
+	</p>
+	<fieldset>
+       	<?php
+       	if($logon->getIdClientes() != null)
+       	{ 
+       	?>
+       	<input type="hidden" name="idCliente" value="<?=$logon->getIdClientes(); ?>" />
+       	<?php 
+       	}
+       	else
+       	{
+       	?>
+             <label>Nome
+				<select name="idCliente" class="long">
+					<option><?=SELECIONE?></option>
+                    <?php 
+						$clientes = new Clientes();
+                    	$listaClientes = $controla->findClientes($clientes);
+						if($listaClientes != null)
+						{
+							$clientes = new Clientes();
+							foreach ($listaClientes as $cliente)
+							{
+								$clientes = $cliente;
+								echo "<option value=\"{$clientes->getIdClientes()}\">{$clientes->getNomeCliente()}</option>";
+							}
+						} 
+					?>
+                    </select>
+             </label>
+		<?php 
+       	}
+		?>
+    </fieldset>
 	<p class="caption">Informações gerais</p>
     <fieldset>
 		<div class="left">
