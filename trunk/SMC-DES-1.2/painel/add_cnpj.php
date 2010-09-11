@@ -9,8 +9,8 @@ $logon = new Logon();
 $logon = $_SESSION["usuarioLogon"];
 $empresa = new Empresas();
 
-if(isset($_GET['empresas'])) {
-    $empresa = (object)unserialize(base64_decode($_GET['empresas']));
+if(isset($_SESSION['empresaAtual'])) {
+	$empresa = $_SESSION['empresaAtual'];
 }
 ?>
 <form method="post" action="../class/RecebePostGet.php">
@@ -46,8 +46,8 @@ if(isset($_GET['empresas'])) {
     <?php
     $endereco= new Endereco();
 
-    if(isset($_GET['endereco'])) {
-        $endereco = (object)unserialize(base64_decode($_GET['endereco']));
+    if(isset($_SESSION['enderecoEmpresaAtual'])) {
+        $endereco = $_SESSION['enderecoEmpresaAtual'];
     }
     ?>
 
@@ -84,8 +84,8 @@ if(isset($_GET['empresas'])) {
     <?php
     $pessoa = new Pessoa();
 
-    if(isset($_GET['pessoaDiretor'])) {
-        $pessoa = (object)unserialize(base64_decode($_GET['pessoaDiretor']));
+    if(isset($_SESSION['pessoaDiretorAtual'])) {
+        $pessoa = $_SESSION['pessoaDiretorAtual'];
     }
 
     ?>
@@ -134,8 +134,8 @@ if(isset($_GET['empresas'])) {
         <?php
         $enderecoDiretor= new Endereco();
 
-        if(isset($_GET['enderecoDiretor'])) {
-            $enderecoDiretor = (object)unserialize(base64_decode($_GET['enderecoDiretor']));
+        if(isset($_SESSION['enderecoDiretorAtual'])) {
+            $enderecoDiretor = $_SESSION['enderecoDiretorAtual'];
         }        
         ?>
 
@@ -172,8 +172,8 @@ if(isset($_GET['empresas'])) {
         <?php
         $pessoaConjugue = new Pessoa();
 
-        if(isset($_GET['pessoaConjugue'])) {
-            $pessoaConjugue = (object) unserialize(base64_decode($_GET['pessoaConjugue']));
+        if(isset($_SESSION['pessoaDiretorConjugueAtual'])) {
+            $pessoaConjugue = $_SESSION['pessoaDiretorConjugueAtual'];
         }
 
         ?>
@@ -186,7 +186,7 @@ if(isset($_GET['empresas'])) {
             <br />
             <label>Sexo:
                 <select name="sexoConjugue">
-                    <option selected></option>
+                    <option selected><?=SELECIONE?></option>
                     <option value="M"<?php echo ($pessoaConjugue->getSexoPessoa()=="M")?"selected":""; ?>>Masculino</option>
                     <option value="F"<?php echo ($pessoaConjugue->getSexoPessoa()=="F")?"selected":""; ?>>Feminino</option>
                 </select>
