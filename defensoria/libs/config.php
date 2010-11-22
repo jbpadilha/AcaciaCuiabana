@@ -1,8 +1,12 @@
 <?php
 
-require_once 'control/DefensoriaControl.php';
+// carrega Lumine
+require_once 'lumine/Lumine.php';
 // carrega as configuracoes de Lumine
 require_once dirname(dirname(__FILE__)).'/lumine-conf.php';
+
+Lumine_Util::import('application.control','application.model');
+
 // instancia uma configuracao
 $cfg = new Lumine_Configuration($lumineConfig);
 // indica o timezone padrao
