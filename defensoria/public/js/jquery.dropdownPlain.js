@@ -1,6 +1,6 @@
 $(function(){
 
-    $("ul.menu2 li").hover(function(){
+    $("ul.dropdown li").hover(function(){
     
         $(this).addClass("hover");
         $('ul:first',this).css('visibility', 'visible');
@@ -12,6 +12,6 @@ $(function(){
     
     });
     
-    $("ul.menu2 li ul li:has(ul)").find("a:first").append(" &raquo; ");
+    $("ul.dropdown li ul li:has(ul)").find("a:first").append(" &raquo; ");
 
 });
