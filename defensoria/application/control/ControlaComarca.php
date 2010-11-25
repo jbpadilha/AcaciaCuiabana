@@ -1,6 +1,12 @@
 <?php
 
-class ControlaComarca {
+class ControlaComarca extends DefensoriaControl{
+	
+	public function ControlaComarca($GET)
+	{
+		echo "teste";
+		var_dump($GET);
+	}
 	
 	public function cadastrar(Comarca $comarca)
 	{
@@ -31,7 +37,30 @@ class ControlaComarca {
 			$comarca->update();
 		}
 	}
+	
+	/**
+	 * @param unknown_type unknown_type $GET
+	 */
+	public function get($GET) {
+		
+	}
 
+	/**
+	 * @param unknown_type unknown_type $POST
+	 */
+	public function post($POST) {
+		
+	}
+
+	/**
+	 * @param unknown_type unknown_type $grupo
+	 */
+	public function permiteAcesso($grupo) {
+			
+	}
+
+
+	
 }
 
 ?>
