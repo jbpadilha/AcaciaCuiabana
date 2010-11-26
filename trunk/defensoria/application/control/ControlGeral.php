@@ -4,6 +4,7 @@
  * @author Joao Padilha joao.padilha@globo.com
  *
  */
+require_once ('ProjetoUtil.php');
 abstract class ControlGeral
 {
 	public static $PAGINA_INICIAL;
