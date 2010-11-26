@@ -43,7 +43,7 @@ class ProjetoUtil
 				        'use_formatter_as_default' => '', 
 				        'empty_as_null' => '', 
 				        'create_paths' => '', 
-				        'create_dtos' => ''
+				        'create_dtos' => '1'
 				    )
 				);
 		//Lumine_Util::import($arquivo);

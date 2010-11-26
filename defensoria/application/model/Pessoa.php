@@ -4,7 +4,7 @@ class Pessoa extends Lumine_Base{
 	
 	// sobrecarga
     protected $_tablename = 'pessoa';
-    protected $_package   = 'application';
+    protected $_package   = 'model';
     
 	public $idpessoa;		 	 	 	 	 	 	
 	public $datacadastropessoa;		 	 	 	 	 	 	

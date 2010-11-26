@@ -4,7 +4,7 @@ class Comarca extends Lumine_Base{
 	
 	// sobrecarga
     protected $_tablename = 'comarca';
-    protected $_package   = 'application';
+    protected $_package   = 'model';
     
 	public $idcomarca;
 	public $nomecomarca;

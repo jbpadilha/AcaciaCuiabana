@@ -4,7 +4,7 @@ class NaturezaAcao extends Lumine_Base{
 	
 	// sobrecarga
     protected $_tablename = 'naturezaacao';
-    protected $_package   = 'application';
+    protected $_package   = 'model';
     
 	public $idnaturezaacao;
 	public $naturezaacao;

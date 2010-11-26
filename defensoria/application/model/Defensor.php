@@ -4,7 +4,7 @@ class Defensor extends Lumine_Base{
 	
 	// sobrecarga
     protected $_tablename = 'defensor';
-    protected $_package   = 'application';
+    protected $_package   = 'model';
     
 	public $iddefensor;
 	public $idpessoa;

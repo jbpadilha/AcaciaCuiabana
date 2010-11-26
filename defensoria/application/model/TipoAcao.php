@@ -4,7 +4,7 @@ class TipoAcao extends Lumine_Base {
 	
 	// sobrecarga
     protected $_tablename = 'atividades';
-    protected $_package   = 'application';
+    protected $_package   = 'model';
     
 	public $idtipoacao;
 	public $tipoacao;
