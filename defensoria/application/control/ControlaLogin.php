@@ -1,13 +1,11 @@
 <?php
-
-require_once ('control\ControlGeral.php');
-
+require_once ('ControlGeral.php');
 class ControlaLogin extends ControlGeral {
 	/**
 	 * @param Array $GET
 	 */
 	public function get($GET) {
-		header(ControlGeral::$PAGINA_INICIAL);
+		//header("Location:".ControlGeral::$PAGINA_INICIAL);
 	}
 
 	/**
@@ -24,7 +22,10 @@ class ControlaLogin extends ControlGeral {
 			if($usuarios->find() > 0)
 			{
 				$usuarios->registraUsuarioSessao();
-				header(ControlGeral::$PAGINA_INICIAL_LOGADO);
+				var_dump($usuarios);
+				echo "<br><br><br>";
+				var_dum($_SESSION);
+				//header("Location:".ControlGeral::$PAGINA_INICIAL_LOGADO);
 			}
 			else
 			{
