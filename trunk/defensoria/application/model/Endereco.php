@@ -4,7 +4,7 @@ class Endereco extends Lumine_Base{
 
 	// sobrecarga
     protected $_tablename = 'endereco';
-    protected $_package   = 'application';
+    protected $_package   = 'model';
     
 	public $idendereco;
 	public $idpessoa;

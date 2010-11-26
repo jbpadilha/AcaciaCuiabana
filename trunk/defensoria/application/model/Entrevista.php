@@ -4,7 +4,7 @@ class Entrevista extends Lumine_Base{
 	
 	// sobrecarga
     protected $_tablename = 'entrevista';
-    protected $_package   = 'application';
+    protected $_package   = 'model';
     
 	public $identrevista;	 	 	 	 	 	 	
 	public $dataentrevista;		 	 	 	 	 	 	

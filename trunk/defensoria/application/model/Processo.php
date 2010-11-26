@@ -4,7 +4,7 @@ class Processo extends Lumine_Base{
 	
 	// sobrecarga
     protected $_tablename = 'processo';
-    protected $_package   = 'application';
+    protected $_package   = 'model';
     
 	public $idprocesso;
 	public $numeroprocesso;		 	 	 	 	 	 	

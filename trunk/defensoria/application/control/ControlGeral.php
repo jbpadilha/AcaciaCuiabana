@@ -15,7 +15,7 @@ abstract class ControlGeral
 	public function __construct()
 	{
 		$PAGINA_INICIAL = dirname(dirname(__FILE__))."/index.php";
-		$PAGINA_INICIAL = dirname(dirname(__FILE__))."/index_logado.php";
+		$PAGINA_INICIAL = dirname(dirname(__FILE__))."/inicio.php";
 	}
 	
 	public abstract function get($GET);

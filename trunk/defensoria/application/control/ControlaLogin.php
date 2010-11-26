@@ -14,26 +14,28 @@ class ControlaLogin extends ControlGeral {
 	public function post($POST) {
 		
 		$usuarios = null;
-		if(!ProjetoUtil::verificaBrancoNulo($POST['usuario']) && !ProjetoUtil::verificaBrancoNulo($POST['senha']))
+		try 
 		{
-			$usuarios = new Usuarios();
-			$usuarios->setUsuario(trim($POST['usuario']));
-			$usuarios->setSenha(trim($POST['senha']));
-			if($usuarios->find() > 0)
+			if(!ProjetoUtil::verificaBrancoNulo($POST['usuario']) && !ProjetoUtil::verificaBrancoNulo($POST['senha']))
 			{
-				$usuarios->registraUsuarioSessao();
-				var_dump($usuarios);
-				echo "<br><br><br>";
-				var_dum($_SESSION);
-				//header("Location:".ControlGeral::$PAGINA_INICIAL_LOGADO);
-			}
-			else
-			{
-				$this->MENSAGEM_ERRO[] = "Usuario ou senha incorreto. Tente novamente";
-				$this->get();
-			}
+				$usuarios = new Usuarios();
+				$usuarios->setUsuario(trim($POST['usuario']));
+				$usuarios->setSenha(trim($POST['senha']));
+				if($usuarios->find() > 0)
+				{
+					$usuarios->registraUsuarioSessao();
+					header("Location:".ControlGeral::$PAGINA_INICIAL_LOGADO);
+				}
+				else
+				{
+					$this->MENSAGEM_ERRO[] = Mensagens::$arrayMensagens["USUARIO_SENHA_INCORRETO"];
+				}
+			}	
 		}
-		
+		catch (Exception $e)
+		{
+			throw new Exception(Mensagens::$arrayMensagens["ACESSAR_BANCO_DADOS"].$e->getMessage());
+		}
 	}
 
 	/**
@@ -42,9 +44,6 @@ class ControlaLogin extends ControlGeral {
 	public function permiteAcesso($grupo) {
 		return true;
 	}
-
-	
-	
 	
 }
 

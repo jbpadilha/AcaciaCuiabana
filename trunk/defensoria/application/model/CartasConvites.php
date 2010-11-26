@@ -4,7 +4,7 @@ class CartasConvites extends Lumine_Base {
 	
 	// sobrecarga
     protected $_tablename = 'cartasconvites';
-    protected $_package   = 'application';
+    protected $_package   = 'model';
     
 	public $idcartaconvite;	 	 	 	 	 	 	
 	public $datacartaconvite;		 	 	 	 	 	 	

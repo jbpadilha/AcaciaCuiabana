@@ -4,7 +4,7 @@ class Atividades extends Lumine_Base {
 	
 	// sobrecarga
     protected $_tablename = 'atividades';
-    protected $_package   = 'application.model';
+    protected $_package   = 'model';
     
 	public $idatividades;
 	public $atividades;

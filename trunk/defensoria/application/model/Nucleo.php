@@ -4,7 +4,7 @@ class Nucleo extends Lumine_Base{
 
 	// sobrecarga
     protected $_tablename = 'nucleo';
-    protected $_package   = 'application';
+    protected $_package   = 'model';
     
 	public $idnucleo;
 	public $nomenucleo;

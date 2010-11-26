@@ -25,8 +25,7 @@
 			<?php 
 			if(isset($_GET['mensagemErro']))
 			{
-				$teste = $_GET['mensagemErro'];
-				$MENSAGEM_ERRO = new ArrayIterator();
+				$MENSAGEM_ERRO = new ArrayIterator(unserialize(urldecode($_GET['mensagemErro'])));
 				echo "<div class=\"erro\">";
 				foreach ($MENSAGEM_ERRO as $mensagem)
 				{

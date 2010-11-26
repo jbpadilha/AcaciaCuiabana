@@ -4,7 +4,7 @@ class Usuarios extends Lumine_Base{
 	
 	// sobrecarga
     protected $_tablename = 'Usuarios';
-    protected $_package   = 'application';
+    protected $_package   = 'model';
     
 	public $idusuarios;
 	public $datacadastropessoa;		 	 	 	 	 	 	

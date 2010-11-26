@@ -4,7 +4,7 @@ class Dependentes extends Lumine_Base {
 
 	// sobrecarga
     protected $_tablename = 'dependentes';
-    protected $_package   = 'application';
+    protected $_package   = 'model';
     
 	public $iddependente;
 	public $nomedependente;

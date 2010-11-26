@@ -197,7 +197,11 @@ input.radio {
   border: 0px;
 }
 
-
+.erro
+{
+	color: #FF0000;
+	font-weight: bold;
+}
 
 
 

@@ -7,6 +7,7 @@
  * @since 23/11/2010
  */
 require_once 'ProjetoUtil.php';
+require_once 'Mensagens.php';
 new ProjetoUtil();
 $MENSAGEM_SUCESSO = Array();
 $MENSAGEM_ERRO = Array();
@@ -27,7 +28,7 @@ try {
 					}
 					else
 					{
-						$MENSAGEM_ERRO[] = "Acesso não autorizado.";		
+						$MENSAGEM_ERRO[] = Mensagens::$arrayMensagens["ACESSO_NEGADO"];		
 					}
 				}
 				else
@@ -48,7 +49,7 @@ try {
 					}
 					else
 					{
-						$MENSAGEM_ERRO[] = "Acesso não autorizado.";		
+						$MENSAGEM_ERRO[] = Mensagens::$arrayMensagens["ACESSO_NEGADO"];		
 					}
 				}
 				else
@@ -65,6 +66,6 @@ try {
 }
 catch (Exception $e)
 {
-	$MENSAGEM_ERRO[] = "Erro ao tentar carregar o menu. {$e->getMessage()}";
-	header("Location:../public/index.php?mensagemErro=".$MENSAGEM_ERRO); 
+	$MENSAGEM_ERRO[] = Mensagens::$arrayMensagens["ERRO"].$e->getMessage();
+	header("Location:../public/index.php?mensagemErro=".urlencode(serialize($MENSAGEM_ERRO))); 
 }
