@@ -3,10 +3,10 @@
 class Usuarios extends Lumine_Base{
 	
 	// sobrecarga
-    protected $_tablename = 'Usuarios';
+    protected $_tablename = 'usuarios';
     protected $_package   = 'model';
     
-	public $idusuarios;
+	public $idusuario;
 	public $datacadastropessoa;		 	 	 	 	 	 	
 	public $usuario;		 	 	 	 	 	 	 
 	public $senha;
@@ -22,7 +22,7 @@ class Usuarios extends Lumine_Base{
     {
 		# idatividades, atividades
         
-        $this->_addField("idusuarios", "idusuarios", "int", 11, array('primary' => true, 'notnull' => true, 'autoincrement' => true));
+        $this->_addField("idusuario", "idusuario", "int", 11, array('primary' => true, 'notnull' => true, 'autoincrement' => true));
         $this->_addField("datacadastropessoa", "datacadastropessoa", "datetime", null, array('notnull' => true));
         $this->_addField("usuario", "usuario", "varchar", 255, array('notnull' => true));
         $this->_addField("senha", "senha", "varchar", 255, array('notnull' => true));
@@ -52,10 +52,10 @@ class Usuarios extends Lumine_Base{
 		parent::__destruct();
 	}
 	/**
-	 * @return the $idusuarios
+	 * @return the $idusuario
 	 */
-	public function getIdusuarios() {
-		return $this->idusuarios;
+	public function getIdusuario() {
+		return $this->idusuario;
 	}
 
 	/**
@@ -90,7 +90,7 @@ class Usuarios extends Lumine_Base{
 	 * @param $idusuarios the $idusuarios to set
 	 */
 	public function setIdusuarios($idusuarios) {
-		$this->idusuarios = $idusuarios;
+		$this->idusuario = $idusuarios;
 	}
 
 	/**

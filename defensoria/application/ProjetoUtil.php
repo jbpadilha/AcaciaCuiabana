@@ -2,8 +2,10 @@
 
 class ProjetoUtil
 {	
+	
 	public function __construct()
 	{
+		
 		// carrega Lumine
 		$teste = dirname(__FILE__);
 		require_once '../libs/lumine/Lumine.php';
@@ -71,6 +73,8 @@ class ProjetoUtil
 			return false;
 		}
 	}
+	
+	
 	
 }
 

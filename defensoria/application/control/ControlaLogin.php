@@ -24,7 +24,7 @@ class ControlaLogin extends ControlGeral {
 				if($usuarios->find() > 0)
 				{
 					$usuarios->registraUsuarioSessao();
-					header("Location:".ControlGeral::$PAGINA_INICIAL_LOGADO);
+					header("Location:".ControlGeral::$PAGINA_INICIO_LOGADO);
 				}
 				else
 				{
