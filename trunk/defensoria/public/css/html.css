@@ -1,26 +1,42 @@
 /**************************************************************
-   Visit studio7designs.com for more layouts and downloads for this template!
+   All page content except for footer
  **************************************************************/
 
+#content {
+  position: relative;
+  height: auto !important;
+  height: 100%;
+  min-height: 100%;
+  width:100%;
+}
+
+.titulo
+{
+	color:#FFF;
+	font-size:18px;
+	text-align:center;
+	text-shadow:#CCC;
+}
 /*********************************************************
    HTML Elements
  *********************************************************/
-
+{ margin: 0; padding: 0; }
 html,
 body {
   height: 100%;
-}
-
-body {
   margin: 0;
   padding: 0;
   text-align: center;
   background: #FFFFFF;
   font: 400 0.7em verdana, arial, sans-serif;
-  line-height: 170%;
-  
+  line-height: 170%;  
   color: #555;
+  font: 12px Helvetica, Sans-Serif;
 }
+* 									
+#page-wrap	{ width: 800px; margin: 25px auto; } 
+
+p { margin: 15px 0; }
 
 
 /* Headers */
@@ -107,21 +123,39 @@ img.floatLeft {
 
 
 
-/* Lists */
-ul li {
-  list-style-image: url(../images/bg/submenu1.gif);
-}
+/* MENU*/
+ul { list-style: none; }
 
-ol li {
-  font-weight: bold;
-  color: #668FA3;
-}
+/* 
+	LEVEL ONE
+*/
+ul.dropdown                         { position: relative; }
+ul.dropdown li                      { font-weight: bold; float: left; zoom: 1; background: #ccc; }
+ul.dropdown a:hover		            { color: #000; }
+ul.dropdown a:active                { color: #ffa500; }
+ul.dropdown li a                    { display: block; padding: 4px 8px; border-right: 1px solid #333;
+	 								  color: #222; }
+ul.dropdown li:last-child a         { border-right: none; } /* Doesn't work in IE */
+ul.dropdown li.hover,
+ul.dropdown li:hover                { background: #F3D673; color: black; position: relative; }
+ul.dropdown li.hover a              { color: black; }
 
-ol li span {
-  font-weight: normal;
-  color: #444;
-}
 
+/* 
+	LEVEL TWO
+*/
+ul.dropdown ul 						{ width: 220px; visibility: hidden; position: absolute; top: 100%; left: 0; }
+ul.dropdown ul li 					{ font-weight: normal; background: #f6f6f6; color: #000; 
+									  border-bottom: 1px solid #ccc; float: none; }
+									  
+                                    /* IE 6 & 7 Needs Inline Block */
+ul.dropdown ul li a					{ border-right: none; width: 100%; display: inline-block; } 
+
+/* 
+	LEVEL THREE
+*/
+ul.dropdown ul ul 					{ left: 100%; top: 0; }
+ul.dropdown li:hover > ul 			{ visibility: visible; }
 
 
 /* Blockquote */
@@ -203,5 +237,194 @@ input.radio {
 	font-weight: bold;
 }
 
+.sucesso
+{
+	color: #00F;
+	font-weight: bold;
+}
+
+/**************************************************************
+   Login
+ **************************************************************/
+#form {
+	background-color:#FFFFFF;
+	border-bottom: 0px solid #48525B;
+	border-left: 1px solid #48525B;
+	height:65px;
+	width:300px;	
+}
+
+#form fieldset {
+	border:none;
+	height:65px;
+	text-align:center;
+	padding:5px;
+	margin:2px;
+	line-height:20px;
+}
+
+#form #username, #password{
+	width:70px;
+}
+
+/**************************************************************
+   Top menu and logo
+ **************************************************************/
+
+#header {
+	clear: both;
+	position: relative;
+	height: 30px;
+	margin: 0 auto;
+	background: #48525B url(../images/bg/header.gif) repeat-x bottom left;
+	border-bottom: 2px solid #48525B;
+	background-color: #48525B;
+}
 
 
+#header img {
+  position: absolute;
+  top: 1%;
+  left: 10px;
+}
+
+/**************************************************************
+   Header Image/Flash Movie
+ **************************************************************/
+
+#headerImg {
+  clear:left;
+  position:relative;
+  margin:0;
+  padding:0;	
+  height: 65px;
+  border-bottom:#333333 2px solid;
+p {padding: 20px 40px 80px 400px;}
+}
+
+#headerImg1 {
+	height: 65px;
+	width: 100px;
+	background: url(../images/bg/header_image.jpg) no-repeat #CCC;
+	float:left;
+	z-index: 1000;
+	position:absolute;
+	left: 3px;
+	top: 2px;
+}
+
+#headerImg2 {
+	height: 65px;
+	width:915px;
+	position:absolute;
+	background: url(../images/bg/header_image_bg.jpg) repeat-x #CCC;
+	float:left;
+	z-index:0;
+	left: 102px;
+	top: 1px;
+}
+
+/**************************************************************
+   Page Content
+ **************************************************************/
+
+#page {
+  clear: both;
+  float: left;
+  width: 100%;
+  text-align: center;
+}
+/* Column widths */
+.width {
+  width: 100%;
+}
+
+.widthPad {
+  width: 90%;
+}
+
+.width25 {
+  width: 90%;
+}
+
+.width50 {
+  width: 50%;
+}
+
+.width73 {
+  width: 73%;
+}
+
+.width75 {
+  width: 75%;
+}
+
+.width100 {
+  width: 100%;
+}
+.subtitulo
+{
+	font-weight: bold;
+	font-size: 14px;
+	color: black;
+}
+
+/**************************************************************
+   Footer
+ **************************************************************/
+
+
+#footer {
+  clear: both;
+  float: left;
+  width: 100%;
+  height: 5em;
+  margin-top: -5em;
+}
+
+#footer #bg {
+  position: relative;
+  height: 5em;
+  margin: 0 auto;
+  background: #49525B url(../images/bg/header.gif) repeat-x bottom left;
+}
+
+#footer #bg ul {
+  float: right;
+  margin: 3em 1em 0 0 !important;
+  margin: 3em 0.5em 0 0;
+  padding: 0;
+}
+
+#footer #bg ul li {
+  display: inline;
+  list-style: none;
+}
+
+#footer #bg ul li a {
+  float: left;
+  padding: 0 1em;
+
+  font: 400 1em arial, sans-serif;
+  letter-spacing: 0.1em;
+  line-height: 0.8em !important;
+  line-height: 1em;
+
+  color: #4D5760;
+  border-right: 1px solid #4D5760;
+}
+
+#footer #bg ul li a.last {
+  padding-right: 0;
+  border-right: 0;
+}
+
+#footer #bg ul li a:hover {
+  color: #6C0;
+}
+
+#footer #bg img {
+  position: absolute;
+  top: 6%;
+  left: 10px;
+}

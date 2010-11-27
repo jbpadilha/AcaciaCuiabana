@@ -7,7 +7,7 @@
 
 abstract class ControlGeral
 {
-	public static $PAGINA_INICIO_LOGADO = "../../public/inicio.php";
+	public static $PAGINA_INICIO_LOGADO = "../public/inicio.php";
 	
 	public static $MENSAGEM_SUCESSO = Array();
 	public static $MENSAGEM_ERRO = Array();
