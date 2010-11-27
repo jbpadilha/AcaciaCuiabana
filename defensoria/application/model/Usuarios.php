@@ -130,8 +130,6 @@ class Usuarios extends Lumine_Base{
 	
 	public function registraUsuarioSessao()
 	{
-		session_cache_limiter(5);
-		session_start();
 		$_SESSION["loginusuario"] = $this->getUsuario();
 	}
 	

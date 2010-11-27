@@ -16,13 +16,16 @@ class ControlaLogin extends ControlGeral {
 		$usuarios = null;
 		try 
 		{
-			if(!ProjetoUtil::verificaBrancoNulo($POST['usuario']) && !ProjetoUtil::verificaBrancoNulo($POST['senha']))
+			$user = (isset($POST['usuario']))?$POST['usuario']:null;
+			$senha = (isset($POST['senha']))?$POST['senha']:null;
+			if(!ProjetoUtil::verificaBrancoNulo($user) && !ProjetoUtil::verificaBrancoNulo($senha))
 			{
 				$usuarios = new Usuarios();
 				$usuarios->setUsuario(trim($POST['usuario']));
 				$usuarios->setSenha(trim($POST['senha']));
 				if($usuarios->find() > 0)
 				{
+					session_start();
 					$usuarios->registraUsuarioSessao();
 					header("Location:".ControlGeral::$PAGINA_INICIO_LOGADO);
 				}

@@ -12,7 +12,7 @@ new ProjetoUtil();
 $MENSAGEM_SUCESSO = Array();
 $MENSAGEM_ERRO = Array();
 $grupo = (isset($_SESSION['grupo'])) ?$_SESSION['grupo'] : null;
-
+header("Content-Type: text/html; charset=ISO-8859-1",true);
 try {
 	switch($_SERVER['REQUEST_METHOD'])
 	{
@@ -20,7 +20,7 @@ try {
 			{
 				if(isset($_GET['control']))				
 				{
-					$control = $_GET['control']; //Classe Control
+					$control = "Controla".$_GET['control']; //Classe Control
 					require 'control/'.$control.".php";
 					$controla = new $control($_GET);
 					if($controla->permiteAcesso($grupo)){
@@ -41,7 +41,7 @@ try {
 			{
 				if(isset($_POST['control']))
 				{
-					$control = $_POST['control']; //Classe Control
+					$control = "Controla".$_POST['control']; //Classe Control
 					require 'control/'.$control.".php";
 					$controla = new $control($_POST);
 					if($controla->permiteAcesso($grupo)){
