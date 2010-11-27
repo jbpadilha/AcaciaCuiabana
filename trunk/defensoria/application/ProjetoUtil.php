@@ -5,7 +5,8 @@ class ProjetoUtil
 	
 	public function __construct()
 	{
-		
+		session_cache_limiter(5);
+		session_start();
 		// carrega Lumine
 		$teste = dirname(__FILE__);
 		require_once '../libs/lumine/Lumine.php';
