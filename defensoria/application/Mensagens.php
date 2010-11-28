@@ -1,8 +1,7 @@
 <?php
-
 class Mensagens {
 	
-	public static $arrayMensagens = Array();
+	public $arrayMensagens = Array();
 	
 	public function __construct()
 	{
@@ -18,8 +17,22 @@ class Mensagens {
 		
 		//MENSAGENS DE SUCESSO
 		$this->arrayMensagens["SUCESSO_CADASTRO"] = "Cadastro realizado com sucesso.";
+		$this->arrayMensagens["SUCESSO_DELETAR"] = "Deletado com sucesso.";
+		$this->arrayMensagens["SUCESSO_ALTERAR"] = "Alterado com sucesso.";
 	}
 	
+	public function getMensagem($chavemensagem)
+	{
+		$mensagens = new Mensagens();
+		if(array_key_exists($chavemensagem,$mensagens->arrayMensagens))
+		{
+			return $mensagens->arrayMensagens[$chavemensagem];
+		}
+		else
+		{
+			return "";
+		}
+	}
 	
 }
 

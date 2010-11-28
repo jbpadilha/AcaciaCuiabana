@@ -4,10 +4,11 @@
  * @author Joao Padilha joao.padilha@globo.com
  *
  */
-
+require_once 'Mensagens.php';
 abstract class ControlGeral
 {
 	public static $PAGINA_INICIO_LOGADO = "../public/inicio.php";
+	public static $PAGINA_INICIO = "../public/index.php";
 	
 	public static $MENSAGEM_SUCESSO = Array();
 	public static $MENSAGEM_ERRO = Array();

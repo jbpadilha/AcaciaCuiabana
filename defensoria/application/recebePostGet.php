@@ -28,7 +28,7 @@ try {
 					}
 					else
 					{
-						$MENSAGEM_ERRO[] = Mensagens::$arrayMensagens["ACESSO_NEGADO"];		
+						$MENSAGEM_ERRO[] = Mensagens::getMensagem("ACESSO_NEGADO");		
 					}
 				}
 				else
@@ -49,12 +49,12 @@ try {
 					}
 					else
 					{
-						$MENSAGEM_ERRO[] = Mensagens::$arrayMensagens["ACESSO_NEGADO"];		
+						$MENSAGEM_ERRO[] = Mensagens::getMensagem("ACESSO_NEGADO");		
 					}
 				}
 				else
 				{
-					header("Location: ../public/index.php");
+					echo 'Erro ao tentar carregar a funcionalidade.';
 				}
 				break;
 			}
@@ -66,6 +66,6 @@ try {
 }
 catch (Exception $e)
 {
-	$MENSAGEM_ERRO[] = Mensagens::$arrayMensagens["ERRO"].$e->getMessage();
+	$MENSAGEM_ERRO[] = Mensagens::getMensagem("ERRO").$e->getMessage();
 	header("Location:../public/index.php?mensagemErro=".urlencode(serialize($MENSAGEM_ERRO))); 
 }

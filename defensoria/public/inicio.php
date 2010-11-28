@@ -1,5 +1,6 @@
 <?php 
-
+header("Content-Type: text/html; charset=ISO-8859-1",true);
+session_start();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -12,13 +13,20 @@
 <script type="text/javascript" language="javascript" src="js/jquery.dropdownPlain.js"></script>
 <script type="text/javascript">
 	function carregaPagina(url,id) {
+		$( '#erros' ).html( '' );
+		$( '#sucesso' ).html( '' ); 
 	    $("div#"+id).html("<div aligh='center'><font color=\"#FF0000\">Carregando ...</font>  <img src='images/loading.gif' align='top' alt='aguarde' /></div>");
 	            $.get(url,{ }
 	            ,function(retorno){$("#"+id).html(retorno)});
 	}
-	function enviaFormulario(url,id) {
+	function carregaPaginaSemLimpar(url,id) {
 	    $("div#"+id).html("<div aligh='center'><font color=\"#FF0000\">Carregando ...</font>  <img src='images/loading.gif' align='top' alt='aguarde' /></div>");
-	            $.post(url,{ }
+	            $.get(url,{ }
+	            ,function(retorno){$("#"+id).html(retorno)});
+	}
+	function enviaFormulario(url,id,dados) {
+	    $("div#"+id).html("<div aligh='center'><font color=\"#FF0000\">Carregando ...</font>  <img src='images/loading.gif' align='top' alt='aguarde' /></div>");
+	            $.post(url,dados
 	            ,function(retorno){$("#"+id).html(retorno)});
 	}
 </script>
@@ -32,9 +40,14 @@
 	<div id="headerImg">	
 	  <div id="headerImg1"></div>
 		<div id="headerImg2">
-        <? include("menu.php");?>
+		<?php 
+			include("menu.php");
+		?>
         </div>
-  </div>
+  	</div>
+    <?php 
+    include 'mensagensErroSucesso.php';
+    ?>
     <div id="page">
     </div>
 </div>
@@ -42,3 +55,9 @@
 </div>
 </body>
 </html>
+<?php 
+if(isset($_GET['page']))
+{
+	echo "<script>carregaPaginaSemLimpar('{$_GET['page']}.php','page');</script>";
+}
+?>

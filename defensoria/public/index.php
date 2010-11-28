@@ -24,7 +24,7 @@
   </div>
     <div id="page">
     	<?php 
-		include 'mensagensErro_sucesso.php';
+		include 'mensagensErroSucesso.php';
 		?>
     	<form name="form" action="../application/recebePostGet.php" method="post">
 			<input type="hidden" id="control" name="control" value="Login"/>
