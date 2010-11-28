@@ -36,13 +36,6 @@ class ControlaComarca extends ControlGeral{
 	 * @param array $GET
 	 */
 	public function get($GET) {
-		$comarcaPesquisa = new Comarca();
-		$comarcaPesquisa->find();
-		if($comarcaPesquisa->count()>0)
-		{
-			session_start();
-			$_SESSION['comarcas'] = $comarcaPesquisa->allToObject();
-		} 
 		header("Location:../public/comarca.php");
 	}
 
@@ -62,30 +55,58 @@ class ControlaComarca extends ControlGeral{
 					if(!ProjetoUtil::verificaBrancoNulo($nome))
 					{
 						$comarca->setNomecomarca($POST['nome']);
-						$this->cadastrar($comarca);
-						
-						$comarcaPesquisa = new Comarca();
-						$comarcaPesquisa->find();
-						$_SESSION['comarcas'] = $comarcaPesquisa->allToObject();
-						
-						$this->MENSAGEM_SUCESSO[] = Mensagens::$arrayMensagens["SUCESSO_CADASTRO"];
-						header("Location:../public/comarca.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						$this->cadastrar($comarca);						
+						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO"); 
+						header("Location:../public/inicio.php?page=comarca&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{
-						throw new Exception(Mensagens::$arrayMensagens["CAMPO_OBRIGATORIO"]);
+						throw new Exception(Mensagens::getMensagem("CAMPO_OBRIGATORIO"));
+					}
+				}
+				elseif($POST['function'] == "deletar")
+				{
+					$idComarca = (isset($POST['idComarca']))?$POST['idComarca']:null;
+					if(!ProjetoUtil::verificaBrancoNulo($idComarca))
+					{
+						$comarca->setIdcomarca($POST['idComarca']);
+						$this->deletar($comarca);
+						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
+						header("Location:../public/inicio.php?page=comarca&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+					}
+					else	
+					{
+						throw new Exception(Mensagens::getMensagem("CAMPO_OBRIGATORIO"));
+					}
+					
+				}
+				elseif($POST['function'] == "alterar")
+				{
+					$idComarca = (isset($POST['idComarca']))?$POST['idComarca']:null;
+					$nome = (isset($POST['nome']))?$POST['nome']:null; 
+					if(!ProjetoUtil::verificaBrancoNulo($idComarca) && !ProjetoUtil::verificaBrancoNulo($nome))
+					{
+						$comarca->setIdcomarca($idComarca);
+						$comarca->setNomecomarca($nome);
+						$this->alterar($comarca);
+						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_ALTERAR"); 
+						header("Location:../public/inicio.php?page=comarca&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+					}
+					else
+					{
+						throw new Exception(Mensagens::getMensagem("CAMPO_OBRIGATORIO"));
 					}
 				}
 			}
 			else
 			{
-				throw new Exception(Mensagens::$arrayMensagens["ERRO_ACESSAR_FUNCIONALIDADE"]);
+				throw new Exception(Mensagens::getMensagem("ERRO_ACESSAR_FUNCIONALIDADE"));
 			}
 		}
 		catch (Exception $e)
 		{
 			$this->MENSAGEM_ERRO[] = $e->getMessage();
-			header("Location:../public/comarca.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+			header("Location:../public/inicio.php?page=comarca&mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 		}
 	}
 

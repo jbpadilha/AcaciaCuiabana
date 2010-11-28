@@ -14,12 +14,11 @@ class ControlaLogin extends ControlGeral {
 	public function post($POST) {
 		
 		$usuarios = null;
-		try 
+		$user = (isset($POST['usuario']))?$POST['usuario']:null;
+		$senha = (isset($POST['senha']))?$POST['senha']:null;
+		if(!ProjetoUtil::verificaBrancoNulo($user) && !ProjetoUtil::verificaBrancoNulo($senha))
 		{
-			$user = (isset($POST['usuario']))?$POST['usuario']:null;
-			$senha = (isset($POST['senha']))?$POST['senha']:null;
-			if(!ProjetoUtil::verificaBrancoNulo($user) && !ProjetoUtil::verificaBrancoNulo($senha))
-			{
+			try {				
 				$usuarios = new Usuarios();
 				$usuarios->setUsuario(trim($POST['usuario']));
 				$usuarios->setSenha(trim($POST['senha']));
@@ -31,14 +30,15 @@ class ControlaLogin extends ControlGeral {
 				}
 				else
 				{
-					$this->MENSAGEM_ERRO[] = Mensagens::$arrayMensagens["USUARIO_SENHA_INCORRETO"];
+					$this->MENSAGEM_ERRO[] = Mensagens::getMensagem("USUARIO_SENHA_INCORRETO");
+					header("Location:".ControlGeral::$PAGINA_INICIO."?mensagemErro".urlencode(serialize($this->MENSAGEM_ERRO)));
 				}
-			}	
-		}
-		catch (Exception $e)
-		{
-			throw new Exception(Mensagens::$arrayMensagens["ACESSAR_BANCO_DADOS"].$e->getMessage());
-		}
+			}
+			catch (Exception $e)
+			{
+				throw new Exception(Mensagens::getMensagem("ACESSAR_BANCO_DADOS").$e->getMessage());
+			}
+		}	
 	}
 
 	/**
