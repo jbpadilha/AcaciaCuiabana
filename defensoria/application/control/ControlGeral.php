@@ -15,8 +15,7 @@ abstract class ControlGeral
 	
 	public abstract function get($GET);
 	public abstract function post($POST);
-	public abstract function permiteAcesso($grupo);	
-
+	public abstract function permiteAcesso($grupo);
 }
 
 ?>
