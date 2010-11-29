@@ -87,26 +87,27 @@ if($vara->find()>0)
 {
 ?>
 <form name="deletaAltera" id="deletaAltera" method="post" action="../application/recebePostGet.php" >
-	<input type="hidden" id="control" name="control" value="Comarca"/>
+	<input type="hidden" id="control" name="control" value="Vara"/>
 	<input type="hidden" id="function" name="function" value=""/>
-	<input type="hidden" id="idComarca" name="idComarca" value=""/>
+	<input type="hidden" id="idVara" name="idVara" value=""/>
 <table>
 	<tr>
-		<td colspan="4">&nbsp;</td>
+		<td colspan="5">&nbsp;</td>
 	</tr>
 	<tr>
-		<td colspan="4">&nbsp;</td>
+		<td colspan="5">&nbsp;</td>
 	</tr>
 	<tr>
-		<td colspan="4"><strong>Varas Cadastradas</strong></td>
+		<td colspan="5"><strong>Varas Cadastradas</strong></td>
 	</tr>
 	<tr>
 		<td width="126">&nbsp;</td>
-		<td colspan="3">&nbsp;</td>
+		<td colspan="4">&nbsp;</td>
 	</tr>
 	<tr>
 		<td><strong>Código</strong></td>
-		<td colspan="3"><strong>Vara</strong></td>
+		<td><strong>Vara</strong></td>
+		<td colspan="3"><strong>Comarca</strong></td>
 	</tr>
   <?php 
 	while($vara->fetch())
@@ -115,6 +116,7 @@ if($vara->find()>0)
 	<tr>
 	  	<td><?=$vara->getCodvara()?></td>
 		<td width="243"><?=$vara->getNomevara()?></td>
+		<td width="243"><?=$vara->getNomeComarca()?></td>
 		<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$vara->getIdvara() ?>)"><img src="images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
 		<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$vara->getIdvara() ?>)"><img src="images/botao_apagar.gif" width="16" height="16" border="0" /></a></td>
   	</tr>

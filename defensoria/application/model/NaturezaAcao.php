@@ -18,8 +18,8 @@ class NaturezaAcao extends Lumine_Base{
     {
 		# idnaturezaacao, naturezaacao
         
-        $this->_addField("idnaturezaacao", "iddependente", "int", 11, array('primary' => true, 'notnull' => true, 'autoincrement' => true));
-        $this->_addField("naturezaacao", "nomedependente", "varchar", 255, array('notnull' => true));
+        $this->_addField("idnaturezaacao", "idnaturezaacao", "int", 11, array('primary' => true, 'notnull' => true, 'autoincrement' => true));
+        $this->_addField("naturezaacao", "naturezaacao", "varchar", 255, array('notnull' => true));
     }
 
     /**

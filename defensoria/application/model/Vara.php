@@ -110,7 +110,15 @@ class Vara extends Lumine_Base{
     # END AUTOCODE                                         #
     #------------------------------------------------------#
     #### END AUTOCODE
-
+	
+	public function getNomeComarca()
+	{
+		$comarca = new Comarca();
+		$comarca->setIdcomarca($this->getIdcomarca());
+		$comarca->find(true);
+		return $comarca->getNomecomarca();
+	}
+	
 }
 
 ?>

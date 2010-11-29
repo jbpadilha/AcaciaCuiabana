@@ -5,30 +5,55 @@ class ControlaComarca extends ControlGeral{
 	public function cadastrar(Comarca $comarca)
 	{
 		try {
-		if($comarca->getNomecomarca()!=null)
-		{
-			$comarca->save();
-		}
+			if($comarca->getNomecomarca()!=null)
+			{
+				$comarca->save();
+			}
+			else
+			{
+				throw new Exception(Mensagens::getMensagem("CAMPO_OBRIGATORIO"));
+			}
 		}
 		catch (Exception $e)
 		{
-			throw new Exception();
+			throw new Exception(Mensagens::getMensagem("ERRO_ACESSAR_FUNCIONALIDADE")+$e->getMessage());
 		}
 	}
 	
 	public function deletar(Comarca $comarca)
 	{
-		if($comarca->getIdcomarca()!= null)
+		try {
+			if($comarca->getIdcomarca()!= null)
+			{
+				$comarca->delete();
+			}
+			else
+			{
+				throw new Exception(Mensagens::getMensagem("CAMPO_OBRIGATORIO"));	
+			}
+		}
+		catch (Exception $e)
 		{
-			$comarca->delete();
+			throw new Exception(Mensagens::getMensagem("ERRO_ACESSAR_FUNCIONALIDADE")+$e->getMessage());
 		}
 	}
 	
 	public function alterar(Comarca $comarca)
 	{
-		if($comarca->getIdcomarca()!= null && $comarca->getNomecomarca()!=null)
+		try
 		{
-			$comarca->update();
+			if($comarca->getIdcomarca()!= null && $comarca->getNomecomarca()!=null)
+			{
+				$comarca->update();
+			}
+			else
+			{
+				throw new Exception(Mensagens::getMensagem("CAMPO_OBRIGATORIO"));
+			}
+		}
+		catch (Exception $e)
+		{
+			throw new Exception(Mensagens::getMensagem("ERRO_ACESSAR_FUNCIONALIDADE")+$e->getMessage());
 		}
 	}
 	
@@ -54,7 +79,7 @@ class ControlaComarca extends ControlGeral{
 					$nome = (isset($POST['nome']))?$POST['nome']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($nome))
 					{
-						$comarca->setNomecomarca($POST['nome']);
+						$comarca->setNomecomarca($nome);
 						$this->cadastrar($comarca);						
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO"); 
 						header("Location:../public/inicio.php?page=comarca&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
@@ -69,7 +94,7 @@ class ControlaComarca extends ControlGeral{
 					$idComarca = (isset($POST['idComarca']))?$POST['idComarca']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($idComarca))
 					{
-						$comarca->setIdcomarca($POST['idComarca']);
+						$comarca->setIdcomarca($idComarca);
 						$this->deletar($comarca);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
 						header("Location:../public/inicio.php?page=comarca&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
