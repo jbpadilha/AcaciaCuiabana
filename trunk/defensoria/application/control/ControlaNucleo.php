@@ -1,38 +1,35 @@
 <?php
 
-require_once ('ControlGeral.php');
+require_once ('control\ControlGeral.php');
 
-class ControlaVara extends ControlGeral {
-	/**
-	 * @param array $GET
-	 */
-	public function get($GET) {
-		header("Location:../public/vara.php");
+class ControlaNucleo extends ControlGeral {
+	
+	public function permiteAcesso($grupo) {
+		return true;
 	}
-
-	/**
-	 * @param array $POST
-	 */
+	
+	public function get($GET) {
+		header("Location:../public/nucleo.php");
+	}	
+	
 	public function post($POST) {
-		$vara = null;
+		$nucleo = null;
 		try {
 			$function = (isset($POST['function']))?$POST['function']:null;
 			if(!ProjetoUtil::verificaBrancoNulo($function))
 			{
-				$vara = new Vara();
+				$nucleo = new Nucleo();
 				if($POST['function'] == "cadastrar")
 				{
 					$nome = (isset($POST['nome']))?$POST['nome']:null;
-					$codVara = (isset($POST['codVara']))?$POST['codVara']:null;
 					$idComarca = (isset($POST['idComarca']))?$POST['idComarca']:null;
-					if(!ProjetoUtil::verificaBrancoNulo($nome) && !ProjetoUtil::verificaBrancoNulo($codVara) && !ProjetoUtil::verificaBrancoNulo($idComarca))
+					if(!ProjetoUtil::verificaBrancoNulo($nome) && !ProjetoUtil::verificaBrancoNulo($idComarca))
 					{
-						$vara->setNomevara($nome);
-						$vara->setCodvara($codVara);
-						$vara->setIdcomarca($idComarca);
-						$this->cadastrar($vara);						
+						$nucleo->setNomenucleo($nome);
+						$nucleo->setIdcomarca($idComarca);
+						$this->cadastrar($nucleo);						
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO"); 
-						header("Location:../public/inicio.php?page=vara&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/inicio.php?page=nucleo&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{
@@ -41,13 +38,13 @@ class ControlaVara extends ControlGeral {
 				}
 				elseif($POST['function'] == "deletar")
 				{
-					$idVara = (isset($POST['idVara']))?$POST['idVara']:null;
-					if(!ProjetoUtil::verificaBrancoNulo($idVara))
+					$idNucleo = (isset($POST['idNucleo']))?$POST['idNucleo']:null;
+					if(!ProjetoUtil::verificaBrancoNulo($idNucleo))
 					{
-						$vara->setIdvara($idVara);
-						$this->deletar($vara);
+						$nucleo->setIdnucleo($idNucleo);
+						$this->deletar($nucleo);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
-						header("Location:../public/inicio.php?page=vara&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/inicio.php?page=nucleo&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else	
 					{
@@ -57,19 +54,17 @@ class ControlaVara extends ControlGeral {
 				}
 				elseif($POST['function'] == "alterar")
 				{
-					$idVara = (isset($POST['idVara']))?$POST['idVara']:null;
+					$idNucleo = (isset($POST['idNucleo']))?$POST['idNucleo']:null;
 					$nome = (isset($POST['nome']))?$POST['nome']:null;
-					$codVara = (isset($POST['codVara']))?$POST['codVara']:null;
 					$idComarca = (isset($POST['idComarca']))?$POST['idComarca']:null; 
-					if(!ProjetoUtil::verificaBrancoNulo($idVara) && !ProjetoUtil::verificaBrancoNulo($nome) && !ProjetoUtil::verificaBrancoNulo($idComarca))
+					if(!ProjetoUtil::verificaBrancoNulo($idNucleo) && !ProjetoUtil::verificaBrancoNulo($nome) && !ProjetoUtil::verificaBrancoNulo($idComarca))
 					{
-						$vara->setIdvara($idVara);
-						$vara->setCodvara($codVara);
-						$vara->setNomevara($nome);
-						$vara->setIdcomarca($idComarca);
-						$this->alterar($vara);
+						$nucleo->setIdnucleo($idNucleo);
+						$nucleo->setNomenucleo($nome);
+						$nucleo->setIdcomarca($idComarca);
+						$this->alterar($nucleo);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_ALTERAR"); 
-						header("Location:../public/inicio.php?page=vara&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/inicio.php?page=nucleo&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{
@@ -85,23 +80,16 @@ class ControlaVara extends ControlGeral {
 		catch (Exception $e)
 		{
 			$this->MENSAGEM_ERRO[] = $e->getMessage();
-			header("Location:../public/inicio.php?page=vara&mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+			header("Location:../public/inicio.php?page=nucleo&mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 		}
 	}
 
-	/**
-	 * @param  int $grupo
-	 */
-	public function permiteAcesso($grupo) {
-		return true;
-	}
-	
-	public function cadastrar(Vara $vara)
+	public function cadastrar(Nucleo $nucleo)
 	{
 		try {
-			if($vara->getNomevara()!=null)
+			if($nucleo->getNomenucleo()!=null && $nucleo->getIdcomarca())
 			{
-				$vara->save();
+				$nucleo->save();
 			}
 			else
 			{
@@ -114,12 +102,12 @@ class ControlaVara extends ControlGeral {
 		}
 	}
 	
-	public function deletar(Vara $vara)
+	public function deletar(Nucleo $nucleo)
 	{
 		try{
-			if($vara->getIdvara()!= null)
+			if($nucleo->getIdnucleo()!= null)
 			{
-				$vara->delete();
+				$nucleo->delete();
 			}
 			else
 			{
@@ -128,16 +116,17 @@ class ControlaVara extends ControlGeral {
 		}
 		catch (Exception $e)
 		{
+			
 			throw new Exception(Mensagens::getMensagem("ERRO_ACESSAR_FUNCIONALIDADE")+$e->getMessage());
 		}
 	}
 	
-	public function alterar(Vara $vara)
+	public function alterar(Nucleo $nucleo)
 	{
 		try {
-			if($vara->getIdvara()!= null && $vara->getNomevara()!=null)
+			if($nucleo->getIdnucleo()!= null && $nucleo->getIdcomarca()!=null)
 			{
-				$vara->update();
+				$nucleo->update();
 			}
 			else
 			{
@@ -150,7 +139,6 @@ class ControlaVara extends ControlGeral {
 		}
 	}
 	
-
 }
 
 ?>
