@@ -10,20 +10,21 @@
 			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Usuarios','page')">Usuários do Sistema</a></li>
 		</ul>
 	</li>
-	<li><a href="#">Cadastro</a>
+	<li><a href="#">Cadastros Usuais</a>
 		<ul class="sub_menu">
 			<li>
-				<a href="#">Parte</a>
-				<ul>
-					<li><a href="#">Cadastrar Nova Parte</a></li>
-					<li><a href="#">Pesquisa de Partes</a></li>
-					<li><a href="#">Pesquisa de Dependentes</a></li>
-				</ul>
+				<a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Pessoa','page')">Pessoa</a>
 			</li>
-			<li><a href="#">Defensor</a></li>
+			<li>
+				<a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Defensor','page')">Defensor</a>
+			</li>
+		</ul>
+	</li>
+	<li><a href="#">Cadastros Funcionais</a>
+		<ul class="sub_menu">
 			<li><a href="#">Entrevista</a></li>
 			<li><a href="#">Hipossuficiência</a></li>
 			<li><a href="#">Vara</a></li>
-		</ul>
+		</ul>	
 	</li>
 </ul>

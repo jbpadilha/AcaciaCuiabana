@@ -2,11 +2,21 @@
 
 class ProjetoUtil
 {	
+	public static $DOMINIO_SOLTEIRO = 1;
+	public static $DOMINIO_CASADO = 2;
+	public static $DOMINIO_SEPARADO = 3;
+	public static $DOMINIO_VIUVO = 4;
+	public static $DOMINIO_OUTROS = 5;
+	
+	public static $DOMINIO_SOLTEIRO_TXT = "Solteiro";
+	public static $DOMINIO_CASADO_TXT = "Casado";
+	public static $DOMINIO_SEPARADO_TXT = "Separado";
+	public static $DOMINIO_VIUVO_TXT = "Viúvo";
+	public static $DOMINIO_OUTROS_TXT = "Outros";
 	
 	public function __construct()
 	{
 		session_cache_limiter(5);
-		session_start();
 		// carrega Lumine
 		$teste = dirname(__FILE__);
 		require_once '../libs/lumine/Lumine.php';
@@ -60,7 +70,9 @@ class ProjetoUtil
 		// auto-carregamento de classes DTO de Lumine
 		spl_autoload_register(array('Lumine','ImportDTO'));
 		// registra uma funcao para o fechamento da conexao ao termino do script
-		register_shutdown_function(array($cfg->getConnection(),'close'));
+		//register_shutdown_function(array($cfg->getConnection(),'close'));
+		
+		
 	}
 	
 	public static function verificaBrancoNulo($string)
@@ -75,7 +87,29 @@ class ProjetoUtil
 		}
 	}
 	
-	
+	public static function getEstadoCivil($dominio)
+	{
+		if($dominio == ProjetoUtil::$DOMINIO_CASADO)
+		{
+			return ProjetoUtil::$DOMINIO_CASADO_TXT;
+		}
+		else if($dominio == ProjetoUtil::$DOMINIO_OUTROS)
+		{
+			return ProjetoUtil::$DOMINIO_OUTROS_TXT;
+		}
+		else if($dominio == ProjetoUtil::$DOMINIO_SEPARADO)
+		{
+			return ProjetoUtil::$DOMINIO_SEPARADO_TXT;
+		}
+		else if($dominio == ProjetoUtil::$DOMINIO_SOLTEIRO)
+		{
+			return ProjetoUtil::$DOMINIO_SOLTEIRO_TXT;
+		}
+		else if($dominio == ProjetoUtil::$DOMINIO_VIUVO)
+		{
+			return ProjetoUtil::$DOMINIO_VIUVO_TXT;
+		}
+	}
 	
 }
 

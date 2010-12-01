@@ -9,7 +9,7 @@ class Pessoa extends Lumine_Base{
 	public $idpessoa;		 	 	 	 	 	 	
 	public $datacadastropessoa;		 	 	 	 	 	 	
 	public $nomepessoa;		 	 	 	 	 	 	 
-	public $rgpesso;		 	 	 	 	 	 	 
+	public $rgpessoa;		 	 	 	 	 	 	 
 	public $emissorpessoa;		 	 	 	 	 	 	 
 	public $sexopessoa;		 	 	 	 	 	 	 
 	public $cpfpessoa;		 	 	 	 	 	 	 
@@ -30,7 +30,7 @@ class Pessoa extends Lumine_Base{
         $this->_addField("idpessoa", "idpessoa", "int", 11, array('primary' => true, 'notnull' => true, 'autoincrement' => true));
         $this->_addField("datacadastropessoa", "datacadastropessoa", "datetime", null, array('notnull' => true));
         $this->_addField("nomepessoa", "nomepessoa", "varchar", 255, array('notnull' => true));
-        $this->_addField("rgpesso", "rgpesso", "varchar", 255, array('notnull' => false));
+        $this->_addField("rgpessoa", "rgpessoa", "varchar", 255, array('notnull' => false));
         $this->_addField("emissorpessoa", "emissorpessoa", "varchar", 255, array('notnull' => false));
         $this->_addField("sexopessoa", "sexopessoa", "varchar", 1, array('notnull' => true));
         $this->_addField("cpfpessoa", "cpfpessoa", "varchar", 11, array('notnull' => true));
@@ -89,10 +89,10 @@ class Pessoa extends Lumine_Base{
 	}
 
 	/**
-	 * @return the $rgpesso
+	 * @return the $rgpessoa
 	 */
-	public function getRgpesso() {
-		return $this->rgpesso;
+	public function getRgpessoa() {
+		return $this->rgpessoa;
 	}
 
 	/**
@@ -168,8 +168,8 @@ class Pessoa extends Lumine_Base{
 	/**
 	 * @param $rgpesso the $rgpesso to set
 	 */
-	public function setRgpesso($rgpesso) {
-		$this->rgpesso = $rgpesso;
+	public function setRgpessoa($rgpessoa) {
+		$this->rgpessoa = $rgpessoa;
 	}
 
 	/**
@@ -227,7 +227,33 @@ class Pessoa extends Lumine_Base{
     # END AUTOCODE                                         #
     #------------------------------------------------------#
     #### END AUTOCODE
-
+	
+	public function getDataNascimentoFormatado()
+	{
+		if($this->getDatanascimentopessoa()!=null)
+		{
+			$data = explode("-",$this->getDatanascimentopessoa());
+			$dataRetorno = $data[2]."/".$data[1]."/".$data[0];
+			return $dataRetorno;
+		}
+		else
+		{
+			return "";
+		}
+	}
+	
+	public function toDataNascimentoDB()
+	{
+		if($this->getDatanascimentopessoa())
+		{
+			$data = explode("/",$this->getDatanascimentopessoa());
+			return $data[2]."-".$data[1]."-".$data[0];
+		}
+		else
+		{
+			return null;
+		}
+	}
 }
 
 ?>
