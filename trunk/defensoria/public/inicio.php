@@ -19,6 +19,13 @@ session_start();
 	            $.get(url,{ }
 	            ,function(retorno){$("#"+id).html(retorno)});
 	}
+	function carregaPaginaPesquisa(url,id,formulario) {
+		$( '#erros' ).html( '' );
+		$( '#sucesso' ).html( '' ); 
+	    $("div#"+id).html("<div aligh='center'><font color=\"#FF0000\">Carregando ...</font>  <img src='images/loading.gif' align='top' alt='aguarde' /></div>");
+	            $.get(url,formulario
+	            ,function(retorno){$("#"+id).html(retorno)});
+	}
 	function carregaPaginaSemLimpar(url,id) {
 	    $("div#"+id).html("<div aligh='center'><font color=\"#FF0000\">Carregando ...</font>  <img src='images/loading.gif' align='top' alt='aguarde' /></div>");
 	            $.get(url,{ }

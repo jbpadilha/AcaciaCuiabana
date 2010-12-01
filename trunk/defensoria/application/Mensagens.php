@@ -11,6 +11,11 @@ class Mensagens {
 		$this->arrayMensagens["ACESSAR_BANCO_DADOS"] = "Erro ao tentar acessar o banco de dados.";
 		$this->arrayMensagens["ERRO_ACESSAR_FUNCIONALIDADE"] = "Erro ao tentar acessar a funcionalidade.";
 		
+		//Pessoa
+		$this->arrayMensagens["PESSOA_NAO_ENCONTRADA"] = "A pessoa pesquisada não foi encontrado.";
+		//DEFENSOR
+		$this->arrayMensagens["DEFENSOR_NAO_ENCONTRADA"] = "O defensor pesquisado não foi encontrado.";
+		
 		//CAMPOS
 		$this->arrayMensagens["USUARIO_SENHA_INCORRETO"] = "Usuario ou senha incorreto. Tente novamente.";
 		$this->arrayMensagens["CAMPO_OBRIGATORIO"] = "Por favor, preencher todos os campos obrigatórios.";
