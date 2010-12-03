@@ -42,6 +42,13 @@ class ControlaPessoa extends ControlGeral {
 					&nomeDefensor={$GET['nomeDefensor']}&idDefensor={$GET['idDefensor']}&tipoParte={$GET['tipoParte']}
 					&MensagemErro=".urlencode(serialize(Mensagens::getMensagem("PESSOA_NAO_ENCONTRADA"))));
 				}
+				elseif(isset($GET['paramentrosPessoaHipo']))
+				{
+					header("Location:../public/hipossuficiencia.php?paramentrosPessoaHipo={$GET['paramentrosPessoaHipo']}
+					&profHipo={$GET['profHipo']}&salarioHipo={$GET['salarioHipo']}
+					&empresaHipo={$GET['empresaHipo']}&rendaHipo={$GET['rendaHipo']}
+					&observacoesHipo={$GET['observacoesHipo']}");
+				}
 				else
 				{
 					header("Location:../public/pessoa.php?cadastro=1&MensagemErro=".urlencode(serialize(Mensagens::getMensagem("PESSOA_NAO_ENCONTRADA"))));
@@ -57,6 +64,13 @@ class ControlaPessoa extends ControlGeral {
 					&idpessoaPromovente={$GET['idpessoaPromovente']}&idpessoaPromovido={$GET['idpessoaPromovido']}
 					&assunto={$GET['assunto']}&nomePromovente={$_GET['nomePromovente']}&tipoParte={$GET['tipoParte']}
 					&nomeDefensor={$GET['nomeDefensor']}&idDefensor={$GET['idDefensor']}&nomePromovido={$_GET['nomePromovido']}");	
+				}
+				elseif(isset($GET['paramentrosPessoaHipo']))
+				{
+					header("Location:../public/pessoa.php?paramentrosPessoaHipo={$GET['paramentrosPessoaHipo']}
+					&profHipo={$GET['profHipo']}&salarioHipo={$GET['salarioHipo']}
+					&empresaHipo={$GET['empresaHipo']}&rendaHipo={$GET['rendaHipo']}
+					&observacoesHipo={$GET['observacoesHipo']}");
 				}
 				else
 				{
