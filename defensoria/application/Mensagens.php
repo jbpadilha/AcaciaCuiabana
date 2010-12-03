@@ -14,7 +14,7 @@ class Mensagens {
 		//Pessoa
 		$this->arrayMensagens["PESSOA_NAO_ENCONTRADA"] = "A pessoa pesquisada não foi encontrado.";
 		//DEFENSOR
-		$this->arrayMensagens["DEFENSOR_NAO_ENCONTRADA"] = "O defensor pesquisado não foi encontrado.";
+		$this->arrayMensagens["DEFENSOR_NAO_ENCONTRADO"] = "O defensor pesquisado não foi encontrado.";
 		
 		//CAMPOS
 		$this->arrayMensagens["USUARIO_SENHA_INCORRETO"] = "Usuario ou senha incorreto. Tente novamente.";

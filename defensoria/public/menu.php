@@ -22,9 +22,8 @@
 	</li>
 	<li><a href="#">Cadastros Funcionais</a>
 		<ul class="sub_menu">
-			<li><a href="#">Entrevista</a></li>
-			<li><a href="#">Hipossuficiência</a></li>
-			<li><a href="#">Vara</a></li>
+			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Entrevista','page')">Entrevista</a></li>
+			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Hipossuficiencia','page')">Hipossuficiência</a></li>
 		</ul>	
 	</li>
 </ul>

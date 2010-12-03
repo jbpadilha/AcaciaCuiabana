@@ -12,10 +12,7 @@ class Processo extends Lumine_Base{
 	public $idcomarca;		 	 	 	 	 	 	
 	public $juizo;		 	 	 	 	 	 	
 	public $idtipoacao;		 	 	 	 	 	 	
-	public $idnaturezaacao;
-	
-	public static $juizo_Primeiro_Grau = 1;
-	public static $juizo_Segundo_Grau = 2;
+	public $idnaturezaacao;	
 	
 	/**
      * Inicia os valores da classe
@@ -27,12 +24,12 @@ class Processo extends Lumine_Base{
 		# iddefensor, idpessoa, oabdefensor, compoabdefensor, estadooabdefensor
         
         $this->_addField("idprocesso", "idprocesso", "int", 11, array('primary' => true, 'notnull' => true, 'autoincrement' => true));
-        $this->_addField("numeroprocesso", "numeroprocesso", "bigint", 50, array('notnull' => true));
-        $this->_addField('idvara', 'idvara', 'int', 11, array('foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE', 'linkOn' => 'idvara', 'class' => 'Vara'));
+        $this->_addField("numeroprocesso", "numeroprocesso", "bigint", 50, array('notnull' => false));
+        $this->_addField('idvara', 'idvara', 'int', 11, array('notnull' => false,'foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE', 'linkOn' => 'idvara', 'class' => 'Vara'));
         $this->_addField('idcomarca', 'idcomarca', 'int', 11, array('foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE', 'linkOn' => 'idcomarca', 'class' => 'Comarca'));
         $this->_addField("juizo", "juizo", "int", 11, array('notnull' => true));
-        $this->_addField('idtipoacao', 'idtipoacao', 'int', 11, array('foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE', 'linkOn' => 'idtipoacao', 'class' => 'TipoAcao'));
-        $this->_addField('idnaturezaacao', 'idnaturezaacao', 'int', 11, array('foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE', 'linkOn' => 'idnaturezaacao', 'class' => 'Processo'));
+        $this->_addField('idtipoacao', 'idtipoacao', 'int', 11, array('notnull' => false, 'foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE', 'linkOn' => 'idtipoacao', 'class' => 'TipoAcao'));
+        $this->_addField('idnaturezaacao', 'idnaturezaacao', 'int', 11, array('notnull' => false, 'foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE', 'linkOn' => 'idnaturezaacao', 'class' => 'Processo'));
         
         $this->_addForeignRelation('entrevistas', self::ONE_TO_MANY, 'Entrevista', 'idprocesso', null, null, null);
         $this->_addForeignRelation('partesprocesso', self::ONE_TO_MANY, 'ParteProcesso', 'idprocesso', null, null, null);
