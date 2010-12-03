@@ -76,6 +76,17 @@ session_start();
 			<?php 
 			}
 			?>
+			<?php 
+			if(isset($_GET['paramentrosPessoaHipo']))
+			{
+			?>
+			function selecionarPessoa(idPessoa,nomePessoa)
+			{
+				carregaPagina('hipossuficiencia.php?nomeHipo='+nomePessoa+'&idpessoaHipo='+idPessoa+'&profHipo=<?=$_GET['profHipo']?>&salarioHipo=<?=$_GET['salarioHipo']?>&empresaHipo=<?=$_GET['empresaHipo']?>&rendaHipo=<?=$_GET['rendaHipo']?>&observacoesHipo=<?=$_GET['observacoesHipo']?>','page');
+			}
+			<?php 
+			}
+			?>
 		</script>
 	</head>
 	<body>
@@ -101,6 +112,18 @@ session_start();
 	<input type="hidden" id="nomePromovido" name="nomePromovido" value="<?=$_GET['nomePromovido']?>">
 	<input type="hidden" id="assunto" name="assunto" value="<?=$_GET['assunto']?>">
 	<input type="hidden" id="tipoParte" name="tipoParte" value="<?=$_GET['tipoParte']?>">
+	<?php 
+	}
+	if(isset($_GET['paramentrosPessoaHipo']))
+	{
+	?>
+	<input type="hidden" id="paramentrosPessoaHipo" name="paramentrosPessoaHipo" value="<?=$_GET['paramentrosPessoaHipo']?>">
+	<input type="hidden" id="profHipo" name="profHipo" value="<?=$_GET['profHipo']?>">
+	<input type="hidden" id="salarioHipo" name="salarioHipo" value="<?=$_GET['salarioHipo']?>">
+	<input type="hidden" id="empresaHipo" name="empresaHipo" value="<?=$_GET['empresaHipo']?>">
+	<input type="hidden" id="rendaHipo" name="rendaHipo" value="<?=$_GET['rendaHipo']?>">
+	<input type="hidden" id="observacoesHipo" name="observacoesHipo" value="<?=$_GET['observacoesHipo']?>">
+
 	<?php 
 	}
 	?>
@@ -241,7 +264,7 @@ else if(isset($_SESSION['pessoaPesquisa']))
 		<td><?=$pessoaAtual->getNomepessoa()?></td>
 		<td width="243"><?=$pessoaAtual->getCpfpessoa()?></td>
 		<?php 
-		if(!isset($_GET['paramentrosPessoa']))
+		if(!isset($_GET['paramentrosPessoa']) && !isset($_GET['paramentrosPessoaHipo']))
 		{
 		?>
 		<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$pessoaAtual->getIdpessoa()?>)"><img src="images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
