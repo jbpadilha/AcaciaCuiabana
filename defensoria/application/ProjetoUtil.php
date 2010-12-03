@@ -14,6 +14,12 @@ class ProjetoUtil
 	public static $DOMINIO_VIUVO_TXT = "Viúvo";
 	public static $DOMINIO_OUTROS_TXT = "Outros";
 	
+	public static $juizo_Primeiro_Grau = 1;
+	public static $juizo_Segundo_Grau = 2;
+	
+	public static $juizo_Primeiro_Grau_TXT = "Juízo de Primeiro Grau";
+	public static $juizo_Segundo_Grau_TXT = "Juízo de Segundo Grau";
+	
 	public function __construct()
 	{
 		session_cache_limiter(5);
@@ -111,6 +117,17 @@ class ProjetoUtil
 		}
 	}
 	
+	public static function getJuizo($juizo)
+	{
+		if(ProjetoUtil::$juizo_Primeiro_Grau == $juizo)
+		{
+			return ProjetoUtil::$juizo_Primeiro_Grau_TXT;
+		}
+		elseif(ProjetoUtil::$juizo_Segundo_Grau == $juizo)
+		{
+			return ProjetoUtil::$juizo_Segundo_Grau_TXT;
+		}
+	}
 }
 
 ?>
