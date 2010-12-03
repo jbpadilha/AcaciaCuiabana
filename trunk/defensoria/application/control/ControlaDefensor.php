@@ -15,6 +15,7 @@ class ControlaDefensor extends ControlGeral {
 			{
 				$defensor = new Defensor();
 				$pessoa = new Pessoa();
+				
 				if(isset($GET['cpfpesquisa']) && $GET['cpfpesquisa'] != "")
 					$pessoa->setCpfpessoa(trim($GET['cpfpesquisa']));
 				if(isset($GET['nomePesquisa']) && $GET['nomePesquisa'] != "")
@@ -24,32 +25,53 @@ class ControlaDefensor extends ControlGeral {
 				if(isset($GET['complementoOAB']) && $GET['complementoOAB'] != "")
 					$defensor->setCompoabdefensor(trim($GET['complementoOAB']));
 				if(isset($GET['estadoOAB']) && $GET['estadoOAB'] != "")
-					$defensor->setEstadooabdefensor(trim($GET['estadoOAB']));	
-					
-				if($pessoa->find(true) && $defensor->find(true))
-				{
-					session_start();
-					$_SESSION['pessoaPesquisa'] = $pessoa->getIdpessoa(); 
-					$_SESSION['defensorPesquisa'] = $defensor->getIddefensor();
-				}
-				else
-				{
-					$this->MENSAGEM_ERRO[] = Mensagens::getMensagem("DEFENSOR_NAO_ENCONTRADA");
-				}
+					$defensor->setEstadooabdefensor(trim($GET['estadoOAB']));
+				$this->gravaUsuarioSessao($pessoa,$defensor);
 			}
 			if(count($this->MENSAGEM_ERRO)>0)
 			{
-				header("Location:../public/defensor.php?cadastro=1&MensagemErro=".Mensagens::getMensagem("DEFENSOR_NAO_ENCONTRADA"));
+				if(isset($GET['paramentrosDefensor']))
+				{
+					header("Location:../public/defensor.php?paramentrosDefensor={$GET['paramentrosDefensor']}
+					&comarca={$GET['comarca']}&tipoAcao={$GET['tipoAcao']}
+					&naturezaAcao={$GET['naturezaAcao']}&juizo={$GET['juizo']}
+					&idpessoaPromovente={$GET['idpessoaPromovente']}&idpessoaPromovido={$GET['idpessoaPromovido']}
+					&assunto={$GET['assunto']}&nomePromovente={$_GET['nomePromovente']}&nomePromovido={$_GET['nomePromovido']}&MensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+				}
+				else{
+					header("Location:../public/defensor.php?cadastro=1&MensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+				}
 			}
 			else
 			{
-				header("Location:../public/defensor.php");
+				if(isset($GET['paramentrosDefensor']))
+				{
+					header("Location:../public/defensor.php?paramentrosDefensor={$GET['paramentrosDefensor']}
+					&comarca={$GET['comarca']}&tipoAcao={$GET['tipoAcao']}
+					&naturezaAcao={$GET['naturezaAcao']}&juizo={$GET['juizo']}
+					&idpessoaPromovente={$GET['idpessoaPromovente']}&idpessoaPromovido={$GET['idpessoaPromovido']}
+					&assunto={$GET['assunto']}&nomePromovente={$_GET['nomePromovente']}&nomePromovido={$_GET['nomePromovido']}");
+				}
+				else
+				{
+					header("Location:../public/defensor.php");
+				}
 			}
 		}
 		catch (Exception $e)
 		{
 			$this->MENSAGEM_ERRO[] = $e->getMessage();
-			header("Location:../public/defensor.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+			if(isset($GET['paramentrosDefensor']))
+			{
+				header("Location:../public/defensor.php?paramentrosDefensor={$GET['paramentrosDefensor']}
+					&comarca={$GET['comarca']}&tipoAcao={$GET['tipoAcao']}
+					&naturezaAcao={$GET['naturezaAcao']}&juizo={$GET['juizo']}
+					&idpessoaPromovente={$GET['idpessoaPromovente']}&idpessoaPromovido={$GET['idpessoaPromovido']}
+					&assunto={$GET['assunto']}&nomePromovente={$_GET['nomePromovente']}&nomePromovido={$_GET['nomePromovido']}&mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+			}
+			else {
+				header("Location:../public/defensor.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+			}
 		}
 	}
 	
@@ -256,6 +278,50 @@ class ControlaDefensor extends ControlGeral {
 		catch (Exception $e)
 		{
 			throw new Exception(Mensagens::getMensagem("ERRO_ACESSAR_FUNCIONALIDADE")+$e->getMessage());
+		}
+	}
+	
+	private function gravaUsuarioSessao(Pessoa $pessoa, Defensor $defensor)
+	{
+		$gravaSessao = false;
+		try
+		{
+			if($pessoa->getCpfpessoa()!=null || $pessoa->getNomepessoa()!=null)
+			{
+				if($pessoa->find(true))
+				{
+					$defensor->setIdpessoa($pessoa->getIdpessoa());
+					if($defensor->find(true))
+					{
+						$gravaSessao = true;
+					}
+				}
+			}else if($defensor->getOabdefensor() != null ||	$defensor->getCompoabdefensor() != null ||
+				$defensor->getEstadooabdefensor() != null){
+					
+				if($defensor->find(true))
+				{
+					$pessoa->setIdpessoa($defensor->getIdpessoa());
+					if($pessoa->find(true))
+					{
+						$gravaSessao = true;
+					}
+				}
+			}
+		}
+		catch (Exception $e)
+		{
+			$this->MENSAGEM_ERRO[] = $e->getMessage();
+		}
+		if($gravaSessao)
+		{
+			session_start();
+			$_SESSION['pessoaPesquisa'] = $pessoa->getIdpessoa(); 
+			$_SESSION['defensorPesquisa'] = $defensor->getIddefensor();
+		}
+		else
+		{
+			$this->MENSAGEM_ERRO[] = Mensagens::getMensagem("DEFENSOR_NAO_ENCONTRADO");
 		}
 	}
 	

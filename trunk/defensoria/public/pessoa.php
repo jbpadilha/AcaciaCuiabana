@@ -3,71 +3,107 @@ require '../application/ProjetoUtil.php';
 include 'carregamentoInicial.php';
 session_start();
 ?>
-<legend class="subtitulo">Cadastro de Pessoa:</legend>
+<html>
+	<head>
+		<script type="text/javascript">
+
+			function pesquisar()
+			{
+				if ( $('#nomePesquisa').val() == '' && $('#cpfPesquisa').val() == '') {
+					alert('O nome ou CPF deve ser informado.');
+					return false;
+				}
+				else
+				{
+					var formulario = $('#pesquisaPessoa').serialize(true);
+					carregaPaginaPesquisa($('#pesquisaPessoa').attr("action"),'page',formulario);
+				}
+			}
+			
+			function alterar(idPessoa)
+			{
+				var formulario = $('#deletaAltera').serialize(true);
+				carregaPagina('pessoa.php?idPessoa='+idPessoa+'&cadastro=true','page');
+			}
+			
+			function deletar(idPessoa)
+			{
+				document.deletaAltera.function.value = "deletar";
+				document.deletaAltera.idPessoa.value = idPessoa;
+				var formulario = $('#deletaAltera').serialize(true);
+				enviaFormulario($('#deletaAltera').attr("action"),'page',formulario);
+			}
+			function cadastra()
+			{
+				$(document).ready(function(){
+					$('#pessoa').submit(function() {
+						if ( $('#nomeCadastro').val() == '' ) {
+							alert('O nome deve ser informado');
+							return false;
+						} 
+						else if ( $('#sexo').val() == '' ) {
+							alert('O sexo deve ser informado');
+							return false;
+						}
+						else if ( $('#cpfCadastro').val() == '' ) {
+							alert('O cpf deve ser informado');
+							return false;
+						}
+						else if ( $('#estadocivil').val() == '' ) {
+							alert('O estado civil deve ser informado');
+							return false;
+						}
+						else if ( $('#datanascimento').val() == '' ) {
+							alert('A data de nascimento deve ser informado');
+							return false;
+						}	
+						else {
+							var formulario = $('#pessoa').serialize(true);
+							enviaFormulario($(this).attr("action"),'page',formulario);
+						}
+					});
+				});
+			}
+			
+			<?php 
+			if(isset($_GET['paramentrosPessoa']))
+			{
+			?>
+			function selecionarPessoa(idPessoa,nomePessoa)
+			{
+				carregaPagina('entrevista.php?nomePromovente=<?=($_GET['tipoParte'] == 1)?"'+nomePessoa+'":$_GET['nomePromovente']?>&nomePromovido=<?=($_GET['tipoParte'] == 2)?"'+nomePessoa+'":$_GET['nomePromovido']?>&idpessoaPromovente=<?=($_GET['tipoParte'] == 1)?"'+idPessoa+'":$_GET['idpessoaPromovente']?>&idpessoaPromovido=<?=($_GET['tipoParte'] == 2) ? "'+idPessoa+'" : $_GET['idpessoaPromovido']?>&nomeDefensor=<?=$_GET['nomeDefensor']?>&idDefensor=<?=$_GET['idDefensor']?>&paramentrosPessoa=<?=$_GET['paramentrosPessoa']?>&comarca=<?=$_GET['comarca']?>&tipoAcao=<?=$_GET['tipoAcao']?>&naturezaAcao=<?=$_GET['naturezaAcao']?>&juizo=<?=$_GET['juizo']?>&assunto=<?=$_GET['assunto']?>','page');
+			}
+			<?php 
+			}
+			?>
+		</script>
+	</head>
+	<body>
+<legend class="subtitulo"><?=(!isset($_GET['paramentrosPessoa']))?"Cadastro de Pessoa":"Pesquisa de Pessoa"?>:</legend>
 <br/>
-<script type="text/javascript">
 
-function pesquisar()
-{
-	if ( $('#nomePesquisa').val() == '' && $('#cpfPesquisa').val() == '') {
-		alert('O nome ou CPF deve ser informado.');
-		return false;
-	}
-	else
-	{
-		var formulario = $('#pesquisaPessoa').serialize(true);
-		carregaPaginaPesquisa($('#pesquisaPessoa').attr("action"),'page',formulario);
-	}
-}
-
-function alterar(idPessoa)
-{
-	var formulario = $('#deletaAltera').serialize(true);
-	carregaPagina('pessoa.php?idPessoa='+idPessoa+'&cadastro=true','page');
-}
-
-function deletar(idPessoa)
-{
-	document.deletaAltera.function.value = "deletar";
-	document.deletaAltera.idPessoa.value = idPessoa;
-	var formulario = $('#deletaAltera').serialize(true);
-	enviaFormulario($('#deletaAltera').attr("action"),'page',formulario);
-}
-function cadastra()
-{
-	$(document).ready(function(){
-		$('#pessoa').submit(function() {
-			if ( $('#nomeCadastro').val() == '' ) {
-				alert('O nome deve ser informado');
-				return false;
-			} 
-			else if ( $('#sexo').val() == '' ) {
-				alert('O sexo deve ser informado');
-				return false;
-			}
-			else if ( $('#cpfCadastro').val() == '' ) {
-				alert('O cpf deve ser informado');
-				return false;
-			}
-			else if ( $('#estadocivil').val() == '' ) {
-				alert('O estado civil deve ser informado');
-				return false;
-			}
-			else if ( $('#datanascimento').val() == '' ) {
-				alert('A data de nascimento deve ser informado');
-				return false;
-			}	
-			else {
-				var formulario = $('#pessoa').serialize(true);
-				enviaFormulario($(this).attr("action"),'page',formulario);
-			}
-		});
-	});
-}
-</script>
 <form name="pesquisaPessoa" id="pesquisaPessoa" method="get" action="../application/recebePostGet.php" >
 	<input type="hidden" id="control" name="control" value="Pessoa"/>
 	<input type="hidden" id="pesquisa" name="pesquisa" value="true"/>
+	<?php 
+	if(isset($_GET['paramentrosPessoa']))
+	{
+	?>
+	<input type="hidden" id="paramentrosPessoa" name="paramentrosPessoa" value="<?=$_GET['paramentrosPessoa']?>">
+	<input type="hidden" id="comarca" name="comarca" value="<?=$_GET['comarca']?>">
+	<input type="hidden" id="tipoAcao" name="tipoAcao" value="<?=$_GET['tipoAcao']?>">
+	<input type="hidden" id="idDefensor" name="idDefensor" value="<?=$_GET['idDefensor']?>">
+	<input type="hidden" id="naturezaAcao" name="naturezaAcao" value="<?=$_GET['naturezaAcao']?>">
+	<input type="hidden" id="juizo" name="juizo" value="<?=$_GET['juizo']?>">
+	<input type="hidden" id="idpessoaPromovente" name="idpessoaPromovente" value="<?=$_GET['idpessoaPromovente']?>">
+	<input type="hidden" id="nomePromovente" name="nomePromovente" value="<?=$_GET['nomePromovente']?>">
+	<input type="hidden" id="idpessoaPromovido" name="idpessoaPromovido" value="<?=$_GET['idpessoaPromovido']?>">
+	<input type="hidden" id="nomePromovido" name="nomePromovido" value="<?=$_GET['nomePromovido']?>">
+	<input type="hidden" id="assunto" name="assunto" value="<?=$_GET['assunto']?>">
+	<input type="hidden" id="tipoParte" name="tipoParte" value="<?=$_GET['tipoParte']?>">
+	<?php 
+	}
+	?>
 	<fieldset>
 		<legend class="subtitulo">Pesquisar Pessoa:</legend>
 		<table>
@@ -81,7 +117,7 @@ function cadastra()
 			<tr>
 				<td>CPF:</td>
 				<td><input type="text" name="cpfpesquisa" id="cpfpesquisa" /></td>
-				<td><input type="button" name="submit" id="submit" value="Pesquisar" onclick="pesquisar()"/></td>
+				<td><input type="button" name="submit" id="submit" value="Pesquisar" onclick="pesquisar();"/></td>
 			</tr>
 		</table>
 	</fieldset>
@@ -101,6 +137,25 @@ if(isset($_GET['cadastro']))
 	<input type="hidden" id="control" name="control" value="Pessoa"/>
 	<input type="hidden" id="function" name="function" value="<?=(isset($_GET['idPessoa']))?"alterar":"cadastrar"?>"/>
 	<input type="hidden" id="idPessoa" name="idPessoa" value="<?=$pessoaAtual->getIdpessoa()?>"/>
+	<?php 
+	if(isset($_GET['paramentrosPessoa']))
+	{
+	?>
+	<input type="hidden" id="paramentrosPessoa" name="paramentrosPessoa" value="<?=$_GET['paramentrosPessoa']?>">
+	<input type="hidden" id="comarca" name="comarca" value="<?=$_GET['comarca']?>">
+	<input type="hidden" id="tipoAcao" name="tipoAcao" value="<?=$_GET['tipoAcao']?>">
+	<input type="hidden" id="idDefensor" name="idDefensor" value="<?=$_GET['idDefensor']?>">
+	<input type="hidden" id="naturezaAcao" name="naturezaAcao" value="<?=$_GET['naturezaAcao']?>">
+	<input type="hidden" id="juizo" name="juizo" value="<?=$_GET['juizo']?>">
+	<input type="hidden" id="idpessoaPromovente" name="idpessoaPromovente" value="<?=$_GET['idpessoaPromovente']?>">
+	<input type="hidden" id="nomePromovente" name="nomePromovente" value="<?=$_GET['nomePromovente']?>">
+	<input type="hidden" id="idpessoaPromovido" name="idpessoaPromovido" value="<?=$_GET['idpessoaPromovido']?>">
+	<input type="hidden" id="nomePromovido" name="nomePromovido" value="<?=$_GET['nomePromovido']?>">
+	<input type="hidden" id="assunto" name="assunto" value="<?=$_GET['assunto']?>">
+	<input type="hidden" id="tipoParte" name="tipoParte" value="<?=$_GET['tipoParte']?>">
+	<?php 
+	}
+	?>
 	<table>
 		<tr>
 			<td width="120">Nome:</td>
@@ -185,8 +240,21 @@ else if(isset($_SESSION['pessoaPesquisa']))
 	<tr>
 		<td><?=$pessoaAtual->getNomepessoa()?></td>
 		<td width="243"><?=$pessoaAtual->getCpfpessoa()?></td>
+		<?php 
+		if(!isset($_GET['paramentrosPessoa']))
+		{
+		?>
 		<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$pessoaAtual->getIdpessoa()?>)"><img src="images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
 		<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$pessoaAtual->getIdpessoa()?>)"><img src="images/botao_apagar.gif" width="16" height="16" border="0" /></a></td>
+  		<?php 
+		}
+		else
+		{
+  		?>
+  		<td width="20" colspan="2"><a href="javascript:void(0);" onclick="selecionarPessoa(<?=$pessoaAtual->getIdpessoa()?>,'<?=$pessoaAtual->getNomepessoa()?>')"><img src="images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
+  		<?php 
+		}
+  		?>
   	</tr>
 </table>
 </form>
@@ -194,3 +262,5 @@ else if(isset($_SESSION['pessoaPesquisa']))
 unset($_SESSION['pessoaPesquisa']); 
 }
 ?>
+	</body>
+</html>

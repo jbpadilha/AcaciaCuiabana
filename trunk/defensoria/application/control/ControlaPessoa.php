@@ -32,11 +32,36 @@ class ControlaPessoa extends ControlGeral {
 			}
 			if(count($this->MENSAGEM_ERRO)>0)
 			{
-				header("Location:../public/pessoa.php?cadastro=1&MensagemErro=".Mensagens::getMensagem("PESSOA_NAO_ENCONTRADA"));
+				if(isset($GET['paramentrosPessoa']))
+				{
+					header("Location:../public/pessoa.php?cadastro=1&paramentrosPessoa={$GET['paramentrosPessoa']}
+					&comarca={$GET['comarca']}&tipoAcao={$GET['tipoAcao']}
+					&naturezaAcao={$GET['naturezaAcao']}&juizo={$GET['juizo']}
+					&idpessoaPromovente={$GET['idpessoaPromovente']}&idpessoaPromovido={$GET['idpessoaPromovido']}
+					&assunto={$GET['assunto']}&nomePromovente={$_GET['nomePromovente']}&nomePromovido={$_GET['nomePromovido']}
+					&nomeDefensor={$GET['nomeDefensor']}&idDefensor={$GET['idDefensor']}&tipoParte={$GET['tipoParte']}
+					&MensagemErro=".urlencode(serialize(Mensagens::getMensagem("PESSOA_NAO_ENCONTRADA"))));
+				}
+				else
+				{
+					header("Location:../public/pessoa.php?cadastro=1&MensagemErro=".urlencode(serialize(Mensagens::getMensagem("PESSOA_NAO_ENCONTRADA"))));
+				}
 			}
 			else
 			{
-				header("Location:../public/pessoa.php");
+				if(isset($GET['paramentrosPessoa']))
+				{
+					header("Location:../public/pessoa.php?paramentrosPessoa={$GET['paramentrosPessoa']}
+					&comarca={$GET['comarca']}&tipoAcao={$GET['tipoAcao']}
+					&naturezaAcao={$GET['naturezaAcao']}&juizo={$GET['juizo']}
+					&idpessoaPromovente={$GET['idpessoaPromovente']}&idpessoaPromovido={$GET['idpessoaPromovido']}
+					&assunto={$GET['assunto']}&nomePromovente={$_GET['nomePromovente']}&tipoParte={$GET['tipoParte']}
+					&nomeDefensor={$GET['nomeDefensor']}&idDefensor={$GET['idDefensor']}&nomePromovido={$_GET['nomePromovido']}");	
+				}
+				else
+				{
+					header("Location:../public/pessoa.php");
+				}
 			}
 		}
 		catch (Exception $e)
@@ -59,12 +84,38 @@ class ControlaPessoa extends ControlGeral {
 					if(count($this->MENSAGEM_ERRO)<=0)
 					{
 						$this->cadastrar($pessoa);						
-						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO"); 
-						header("Location:../public/inicio.php?page=pessoa&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO");
+						if(isset($POST['paramentrosPessoa']))
+						{
+							session_start();
+							$_SESSION['pessoaPesquisa'] = $pessoa->getIdpessoa(); 
+							header("Location:../public/pessoa.php?paramentrosPessoa={$POST['paramentrosPessoa']}
+							&comarca={$POST['comarca']}&tipoAcao={$POST['tipoAcao']}
+							&naturezaAcao={$POST['naturezaAcao']}&juizo={$POST['juizo']}
+							&idpessoaPromovente={$POST['idpessoaPromovente']}&idpessoaPromovido={$POST['idpessoaPromovido']}
+							&assunto={$POST['assunto']}&nomePromovente={$POST['nomePromovente']}&tipoParte={$POST['tipoParte']}
+							&nomeDefensor={$POST['nomeDefensor']}&idDefensor={$POST['idDefensor']}&nomePromovido={$POST['nomePromovido']}");
+						}
+						else
+						{
+							header("Location:../public/inicio.php?page=pessoa&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						}
 					}
 					else
 					{
-						throw new Exception();
+						if(isset($POST['paramentrosPessoa']))
+						{
+							header("Location:../public/pessoa.php?paramentrosPessoa={$POST['paramentrosPessoa']}
+							&comarca={$POST['comarca']}&tipoAcao={$POST['tipoAcao']}
+							&naturezaAcao={$POST['naturezaAcao']}&juizo={$POST['juizo']}
+							&idpessoaPromovente={$POST['idpessoaPromovente']}&idpessoaPromovido={$POST['idpessoaPromovido']}
+							&assunto={$POST['assunto']}&nomeDefensor={$$POST['nomeDefensor']}&idDefensor={$POST['idDefensor']}
+							&nomePromovente={$POST['nomePromovente']}&nomePromovido={$POST['nomePromovido']}&tipoParte={$POST['tipoParte']}");
+						}
+						else
+						{
+							throw new Exception();
+						}
 					}
 				}
 				elseif($POST['function'] == "deletar")
