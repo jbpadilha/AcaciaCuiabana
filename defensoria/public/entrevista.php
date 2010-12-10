@@ -16,22 +16,18 @@ function pesquisaPromovente(tipoParte)
 }
 function cadastra()
 {
-	$(document).ready(function(){
-		$('#entrevista').submit(function() {
-			if ( $('#comarca').val() == '' ) {
-				alert('A comarca deve ser informado.');
-				return false;
-			} else {
-				var formulario = $(this).serialize(true);
-				enviaFormulario($(this).attr("action"),'page',formulario);
-			}
-		});
-	});
+	if ( $('#comarca').val() == '' ) {
+		alert('A comarca deve ser informado.');
+		return false;
+	} else {
+		var formulario = $('#entrevista').serialize(true);
+		enviaFormulario($('#entrevista').attr("action"),'page',formulario);
+	}
 }
 </script>
-<form name="entrevista" id="entrevista" method="post" action="../application/recebePostGet.php" onclick="cadastra()" >
+<form name="entrevista" id="entrevista" method="post" action="../application/recebePostGet.php">
 	<input type="hidden" id="control" name="control" value="Entrevista"/>
-	<input type="hidden" id="function" name="function" value="cadastrar"/>
+	<input type="hidden" id="funcao" name="funcao" value="cadastrar"/>
 	<table>
 		<tr>
 			<td width="120">Comarca:</td>
@@ -131,5 +127,5 @@ function cadastra()
 			</td>
 		</tr>
 	</table>
-	<td width="49"><input type="submit" name="submit" id="submit" value="Cadastrar"/></td>
+	<td width="49"><input type="button" name="submit" id="submit" value="Cadastrar" onclick="cadastra();"/></td>
 </form>

@@ -11,22 +11,18 @@ function pesquisaPessoa()
 }
 function cadastra()
 {
-	$(document).ready(function(){
-		$('#hipossuficiencia').submit(function() {
-			if ( $('#idPessoa').val() == '' ) {
-				alert('A pessoa deve ser informado.');
-				return false;
-			} else {
-				var formulario = $(this).serialize(true);
-				enviaFormulario($(this).attr("action"),'page',formulario);
-			}
-		});
-	});
+	if ( $('#idPessoa').val() == '' ) {
+		alert('A pessoa deve ser informado.');
+		return false;
+	} else {
+		var formulario = $('#hipossuficiencia').serialize(true);
+		enviaFormulario($('#hipossuficiencia').attr("action"),'page',formulario);
+	}
 }
 </script>
-<form name="hipossuficiencia" id="hipossuficiencia" method="post" action="../application/recebePostGet.php" onclick="cadastra()" >
+<form name="hipossuficiencia" id="hipossuficiencia" method="post" action="../application/recebePostGet.php">
 	<input type="hidden" id="control" name="control" value="Hipossuficiencia"/>
-	<input type="hidden" id="function" name="function" value="cadastrar"/>
+	<input type="hidden" id="funcao" name="funcao" value="cadastrar"/>
 	<table>
 		<tr>
 			<td>Pessoa:</td>
@@ -66,7 +62,7 @@ function cadastra()
 			<td>
 				<textarea rows="8" cols="100" id="observacoesHipo" name="observacoesHipo"><?=(isset($_GET['observacoesHipo']))?$_GET['observacoesHipo']:""?></textarea>
 			</td>
-			<td width="49"><input type="submit" name="submit" id="submit" value="Cadastrar"/></td>
+			<td width="49"><input type="button" name="submit" id="submit" value="Cadastrar" onclick="cadastra();"/></td>
 		</tr>
 	</table>
 </form>

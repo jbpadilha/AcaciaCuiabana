@@ -1,22 +1,23 @@
 <?php
-
+echo '<script type="text/javascript">';
 if(isset($_GET['mensagemErro']) || isset($_SESSION['mensagemErro']))
 {   
 	$MENSAGEM_ERRO = new ArrayIterator(unserialize(urldecode($_GET['mensagemErro'])));
-	echo "<div id=\"erros\" class=\"erros\">";
+	echo "$( '#erros' ).html( '";
 	foreach ($MENSAGEM_ERRO as $mensagem)
 	{
 		echo $mensagem."<br/>";
 	}
-	echo "</div>";
+	echo "' );";
 }
-elseif(isset($_GET['mensagemSucesso']) || isset($_SESSION['mensagemSucesso']))
+if(isset($_GET['mensagemSucesso']) || isset($_SESSION['mensagemSucesso']))
 {   
 	$MENSAGEM_SUCESSO = new ArrayIterator(unserialize(urldecode($_GET['mensagemSucesso'])));
-	echo "<div id=\"sucesso\" class=\"sucesso\">";
+	echo "$( '#sucesso' ).html( '";
 	foreach ($MENSAGEM_SUCESSO as $mensagem)
 	{
 		echo $mensagem."<br/>";
 	}
-	echo "</div>";
+	echo "' );";
 }
+echo '</script>';

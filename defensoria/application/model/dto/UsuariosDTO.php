@@ -9,6 +9,7 @@ class UsuariosDTO {
 	public $usuario;		 	 	 	 	 	 	 
 	public $senha;
 	public $grupousuario;
+	public $idpessoa;
 
 }
 

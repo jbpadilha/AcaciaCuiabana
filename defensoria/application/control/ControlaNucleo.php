@@ -15,11 +15,11 @@ class ControlaNucleo extends ControlGeral {
 	public function post($POST) {
 		$nucleo = null;
 		try {
-			$function = (isset($POST['function']))?$POST['function']:null;
+			$function = (isset($POST['funcao']))?$POST['funcao']:null;
 			if(!ProjetoUtil::verificaBrancoNulo($function))
 			{
 				$nucleo = new Nucleo();
-				if($POST['function'] == "cadastrar")
+				if($POST['funcao'] == "cadastrar")
 				{
 					$nome = (isset($POST['nome']))?$POST['nome']:null;
 					$idComarca = (isset($POST['idComarca']))?$POST['idComarca']:null;
@@ -29,14 +29,14 @@ class ControlaNucleo extends ControlGeral {
 						$nucleo->setIdcomarca($idComarca);
 						$this->cadastrar($nucleo);						
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO"); 
-						header("Location:../public/inicio.php?page=nucleo&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/nucleo.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{
 						throw new Exception(Mensagens::getMensagem("CAMPO_OBRIGATORIO"));
 					}
 				}
-				elseif($POST['function'] == "deletar")
+				elseif($POST['funcao'] == "deletar")
 				{
 					$idNucleo = (isset($POST['idNucleo']))?$POST['idNucleo']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($idNucleo))
@@ -44,7 +44,7 @@ class ControlaNucleo extends ControlGeral {
 						$nucleo->setIdnucleo($idNucleo);
 						$this->deletar($nucleo);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
-						header("Location:../public/inicio.php?page=nucleo&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/nucleo.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else	
 					{
@@ -52,7 +52,7 @@ class ControlaNucleo extends ControlGeral {
 					}
 					
 				}
-				elseif($POST['function'] == "alterar")
+				elseif($POST['funcao'] == "alterar")
 				{
 					$idNucleo = (isset($POST['idNucleo']))?$POST['idNucleo']:null;
 					$nome = (isset($POST['nome']))?$POST['nome']:null;
@@ -64,7 +64,7 @@ class ControlaNucleo extends ControlGeral {
 						$nucleo->setIdcomarca($idComarca);
 						$this->alterar($nucleo);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_ALTERAR"); 
-						header("Location:../public/inicio.php?page=nucleo&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/nucleo.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{
@@ -80,7 +80,7 @@ class ControlaNucleo extends ControlGeral {
 		catch (Exception $e)
 		{
 			$this->MENSAGEM_ERRO[] = $e->getMessage();
-			header("Location:../public/inicio.php?page=nucleo&mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+			header("Location:../public/nucleo.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 		}
 	}
 

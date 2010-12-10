@@ -19,6 +19,10 @@ else
 <br/>
 <script type="text/javascript">
 
+$(document).ready(function(){
+	$("#datanascimento").mask("99/99/9999");
+});
+
 function pesquisar()
 {
 	if ( $('#nomePesquisa').val() == '' && $('#cpfPesquisa').val() == '' && $('#oabPesquisa').val() == '' && $('#complementoPesquisa').val() == '') {
@@ -32,58 +36,66 @@ function pesquisar()
 	}
 }
 
-function alterar(idPessoa,idDefensor)
+function alterar(idPessoa,idDefensor, idUsuario)
 {
 	var formulario = $('#deletaAltera').serialize(true);
-	carregaPagina('defensor.php?idPessoa='+idPessoa+'&idDefensor='+idDefensor+'&cadastro=true','page');
+	carregaPagina('defensor.php?idPessoa='+idPessoa+'&idDefensor='+idDefensor+'&idUsuario='+idUsuario+'&cadastro=true','page');
 }
 
-function deletar(idDefensor)
+function deletar(idPessoa,idDefensor, idUsuario)
 {
-	document.deletaAltera.function.value = "deletar";
+	document.deletaAltera.funcao.value = "deletar";
+	document.deletaAltera.idPessoa.value = idPessoa;
 	document.deletaAltera.idDefensor.value = idDefensor;
+	document.deletaAltera.idUsuario.value = idUsuario;
 	var formulario = $('#deletaAltera').serialize(true);
 	enviaFormulario($('#deletaAltera').attr("action"),'page',formulario);
 }
 function cadastra()
 {
-	$(document).ready(function(){
-		$('#defensor').submit(function() {
-			if ( $('#nomeCadastro').val() == '' ) {
-				alert('O nome deve ser informado');
-				return false;
-			} 
-			else if ( $('#sexo').val() == '' ) {
-				alert('O sexo deve ser informado');
-				return false;
-			}
-			else if ( $('#cpfCadastro').val() == '' ) {
-				alert('O cpf deve ser informado');
-				return false;
-			}
-			else if ( $('#estadocivil').val() == '' ) {
-				alert('O estado civil deve ser informado');
-				return false;
-			}
-			else if ( $('#datanascimento').val() == '' ) {
-				alert('A data de nascimento deve ser informado');
-				return false;
-			}
-			else if ( $('#oabCadastro').val() == '' ) {
-				alert('A oab deve ser informado');
-				return false;
-			}
-			else if ( $('#complementoCadastro').val() == '' ) {
-				alert('o Complemento da oab deve ser informado');
-				return false;
-			}
-			else {
-				var formulario = $('#defensor').serialize(true);
-				enviaFormulario($(this).attr("action"),'page',formulario);
-			}
-		});
-	});
+		if ( $('#nomeCadastro').val() == '' ) {
+			alert('O nome deve ser informado');
+			return false;
+		} 
+		else if ( $('#sexo').val() == '' ) {
+			alert('O sexo deve ser informado');
+			return false;
+		}
+		else if ( $('#cpfCadastro').val() == '' ) {
+			alert('O cpf deve ser informado');
+			return false;
+		}
+		else if ( $('#estadocivil').val() == '' ) {
+			alert('O estado civil deve ser informado');
+			return false;
+		}
+		else if ( $('#datanascimento').val() == '' ) {
+			alert('A data de nascimento deve ser informado');
+			return false;
+		}
+		else if ( $('#oabCadastro').val() == '' ) {
+			alert('A oab deve ser informado');
+			return false;
+		}
+		else if ( $('#complementoCadastro').val() == '' ) {
+			alert('o Complemento da oab deve ser informado');
+			return false;
+		}
+		else if ( $('#usuario').val() == '' ) {
+			alert('o Complemento da oab deve ser informado');
+			return false;
+		}
+		else if ( $('#senha').val() == '' ) {
+			alert('o Complemento da oab deve ser informado');
+			return false;
+		}
+		else {
+			var formulario = $('#defensor').serialize(true);
+			enviaFormulario($('#defensor').attr("action"),'page',formulario);
+		}
 }
+
+
 
 <?php 
 if(isset($_GET['paramentrosDefensor']))
@@ -193,20 +205,24 @@ if(isset($_GET['cadastro']) && !isset($_GET['paramentrosDefensor']))
 {
 	$pessoaAtual = new Pessoa();
 	$defensor = new Defensor();
-	if(isset($_GET['idPessoa']) && isset($_GET['idDefensor']))
+	$usuarios = new Usuarios();
+	if(isset($_GET['idPessoa']) && isset($_GET['idDefensor']) && isset($_GET['idUsuario']))
 	{
 		$pessoaAtual->setIdpessoa($_GET['idPessoa']);
 		$pessoaAtual->find(true);
 		$defensor->setIddefensor($_GET['idDefensor']);
 		$defensor->find(true);
+		$usuarios->setIdusuario($_GET['idUsuario']);
+		$usuarios->find(true);
 	}
 ?>
 <br/><br/><br/><br/>
 <form name="defensor" id="defensor" method="post" action="../application/recebePostGet.php" >
 	<input type="hidden" id="control" name="control" value="Defensor"/>
-	<input type="hidden" id="function" name="function" value="<?=(isset($_GET['idPessoa']))?"alterar":"cadastrar"?>"/>
+	<input type="hidden" id="funcao" name="funcao" value="<?=(isset($_GET['idPessoa']))?"alterar":"cadastrar"?>"/>
 	<input type="hidden" id="idPessoa" name="idPessoa" value="<?=$pessoaAtual->getIdpessoa()?>"/>
 	<input type="hidden" id="idDefensor" name="idDefensor" value="<?=$defensor->getIddefensor()?>"/>
+	<input type="hidden" id="idUsuario" name="idUsuario" value="<?=$usuarios->getIdusuario()?>"/>
 	<table>
 		<tr>
 			<td width="120">Nome:</td>
@@ -278,7 +294,7 @@ if(isset($_GET['cadastro']) && !isset($_GET['paramentrosDefensor']))
 		</tr>
 		<tr>
 			<td>Estado OAB:</td>
-			<td>
+			<td colspan="2">
 				<select name="estadoOABCadastro" id="estadoOABCadastro" >
 	                    <option value="AC" <?=($defensor->getEstadooabdefensor() == "AC")?"Selected":""?>>AC</option>
 	                    <option value="AL" <?=($defensor->getEstadooabdefensor() == "AL")?"Selected":""?>>AL</option>
@@ -309,13 +325,25 @@ if(isset($_GET['cadastro']) && !isset($_GET['paramentrosDefensor']))
 	                    <option value="TO" <?=($defensor->getEstadooabdefensor() == "TO")?"Selected":""?>>TO</option>		 
                		</select>
 			</td>
-			<td width="49"><input type="submit" name="submit" id="submit" onclick="cadastra();" value="<?=(isset($_GET['idPessoa']))?"Alterar":"Cadastrar"?>"/></td>
+		</tr>
+		<tr>
+			<td>Usuário:</td>
+			<td colspan="2">
+				<input type="text" id="usuario" name="usuario" value="<?=$usuarios->getUsuario()?>"/>
+			</td>
+		</tr>
+		<tr>
+			<td>Senha:</td>
+			<td>
+				<input type="password" id="senha" name="senha" value="<?=$usuarios->getSenha()?>"/>
+			</td>
+			<td width="49"><input type="button" name="submit" id="submit" onclick="cadastra();" value="<?=(isset($_GET['idPessoa']))?"Alterar":"Cadastrar"?>"/></td>
 		</tr>
 	</table>
 </form>
 <?php
 }
-else if(isset($_SESSION['pessoaPesquisa']) && isset($_SESSION['defensorPesquisa']))
+else if(isset($_SESSION['pessoaPesquisa']) && isset($_SESSION['defensorPesquisa']) && isset($_SESSION['usuarioPesquisa']))
 {
 	$pessoaAtual = new Pessoa();
 	$pessoaAtual->setIdpessoa($_SESSION['pessoaPesquisa']);
@@ -324,11 +352,17 @@ else if(isset($_SESSION['pessoaPesquisa']) && isset($_SESSION['defensorPesquisa'
 	$defensor = new Defensor();
 	$defensor->setIddefensor($_SESSION['defensorPesquisa']);
 	$defensor->find(true);
+	
+	$usuarios = new Usuarios();
+	$usuarios->setIdusuario($_SESSION['usuarioPesquisa']);
+	$usuarios->find(true);
 ?>
 <form name="deletaAltera" id="deletaAltera" method="post" action="../application/recebePostGet.php" >
 	<input type="hidden" id="control" name="control" value="Defensor"/>
 	<input type="hidden" id="function" name="function" value=""/>
 	<input type="hidden" id="idPessoa" name="idPessoa" value=""/>
+	<input type="hidden" id="idDefensor" name="idDefensor" value=""/>
+	<input type="hidden" id="idUsuario" name="idUsuario" value=""/>
 <table>
 	<tr>
 		<td colspan="4">&nbsp;</td>
@@ -353,8 +387,8 @@ else if(isset($_SESSION['pessoaPesquisa']) && isset($_SESSION['defensorPesquisa'
 		if(!isset($_GET['paramentrosDefensor']))
 		{
 		?>
-		<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$pessoaAtual->getIdpessoa()?>,<?=$defensor->getIddefensor()?>)"><img src="images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
-		<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$pessoaAtual->getIdpessoa()?>,<?=$defensor->getIddefensor()?>)"><img src="images/botao_apagar.gif" width="16" height="16" border="0" /></a></td>
+		<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$pessoaAtual->getIdpessoa()?>,<?=$defensor->getIddefensor()?>,<?=$usuarios->getIdusuario()?>)"><img src="images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
+		<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$pessoaAtual->getIdpessoa()?>,<?=$defensor->getIddefensor()?>,<?=$usuarios->getIdusuario()?>)"><img src="images/botao_apagar.gif" width="16" height="16" border="0" /></a></td>
 		<?php 
 		}
 		else{
@@ -368,6 +402,7 @@ else if(isset($_SESSION['pessoaPesquisa']) && isset($_SESSION['defensorPesquisa'
 </form>
 <?php
 unset($_SESSION['pessoaPesquisa']); 
-unset($_SESSION['pessoaPesquisa']);
+unset($_SESSION['defensorPesquisa']);
+unset($_SESSION['usuarioPesquisa']);
 }
 ?>
