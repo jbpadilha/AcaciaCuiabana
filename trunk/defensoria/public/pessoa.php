@@ -6,7 +6,9 @@ session_start();
 <html>
 	<head>
 		<script type="text/javascript">
-
+		$(document).ready(function(){
+			$("#datanascimento").mask("99/99/9999");
+		});
 			function pesquisar()
 			{
 				if ( $('#nomePesquisa').val() == '' && $('#cpfPesquisa').val() == '') {
@@ -28,41 +30,37 @@ session_start();
 			
 			function deletar(idPessoa)
 			{
-				document.deletaAltera.function.value = "deletar";
+				document.deletaAltera.funcao.value = "deletar";
 				document.deletaAltera.idPessoa.value = idPessoa;
 				var formulario = $('#deletaAltera').serialize(true);
 				enviaFormulario($('#deletaAltera').attr("action"),'page',formulario);
 			}
 			function cadastra()
 			{
-				$(document).ready(function(){
-					$('#pessoa').submit(function() {
-						if ( $('#nomeCadastro').val() == '' ) {
-							alert('O nome deve ser informado');
-							return false;
-						} 
-						else if ( $('#sexo').val() == '' ) {
-							alert('O sexo deve ser informado');
-							return false;
-						}
-						else if ( $('#cpfCadastro').val() == '' ) {
-							alert('O cpf deve ser informado');
-							return false;
-						}
-						else if ( $('#estadocivil').val() == '' ) {
-							alert('O estado civil deve ser informado');
-							return false;
-						}
-						else if ( $('#datanascimento').val() == '' ) {
-							alert('A data de nascimento deve ser informado');
-							return false;
-						}	
-						else {
-							var formulario = $('#pessoa').serialize(true);
-							enviaFormulario($(this).attr("action"),'page',formulario);
-						}
-					});
-				});
+				if ( $('#nomeCadastro').val() == '' ) {
+					alert('O nome deve ser informado');
+					return false;
+				} 
+				else if ( $('#sexo').val() == '' ) {
+					alert('O sexo deve ser informado');
+					return false;
+				}
+				else if ( $('#cpfCadastro').val() == '' ) {
+					alert('O cpf deve ser informado');
+					return false;
+				}
+				else if ( $('#estadocivil').val() == '' ) {
+					alert('O estado civil deve ser informado');
+					return false;
+				}
+				else if ( $('#datanascimento').val() == '' ) {
+					alert('A data de nascimento deve ser informado');
+					return false;
+				}	
+				else {
+					var formulario = $('#pessoa').serialize(true);
+					enviaFormulario($('#pessoa').attr("action"),'page',formulario);
+				}
 			}
 			
 			<?php 
@@ -158,7 +156,7 @@ if(isset($_GET['cadastro']))
 <br/><br/><br/><br/>
 <form name="pessoa" id="pessoa" method="post" action="../application/recebePostGet.php" >
 	<input type="hidden" id="control" name="control" value="Pessoa"/>
-	<input type="hidden" id="function" name="function" value="<?=(isset($_GET['idPessoa']))?"alterar":"cadastrar"?>"/>
+	<input type="hidden" id="funcao" name="funcao" value="<?=(isset($_GET['idPessoa']))?"alterar":"cadastrar"?>"/>
 	<input type="hidden" id="idPessoa" name="idPessoa" value="<?=$pessoaAtual->getIdpessoa()?>"/>
 	<?php 
 	if(isset($_GET['paramentrosPessoa']))
@@ -231,7 +229,7 @@ if(isset($_GET['cadastro']))
 			<td width="144" colspan="2"><input type="text" name="datanascimento" id="datanascimento" value="<?=$pessoaAtual->getDataNascimentoFormatado()?>" /> (ex. 11/11/2010)</td>		
 		</tr>
 	</table>
-	<td width="49"><input type="submit" name="submit" id="submit" onclick="cadastra();" value="<?=(isset($_GET['idPessoa']))?"Alterar":"Cadastrar"?>"/></td>
+	<td width="49"><input type="button" name="submit" id="submit" onclick="cadastra();" value="<?=(isset($_GET['idPessoa']))?"Alterar":"Cadastrar"?>"/></td>
 </form>
 <?php
 }
@@ -243,7 +241,7 @@ else if(isset($_SESSION['pessoaPesquisa']))
 ?>
 <form name="deletaAltera" id="deletaAltera" method="post" action="../application/recebePostGet.php" >
 	<input type="hidden" id="control" name="control" value="Pessoa"/>
-	<input type="hidden" id="function" name="function" value=""/>
+	<input type="hidden" id="funcao" name="funcao" value=""/>
 	<input type="hidden" id="idPessoa" name="idPessoa" value=""/>
 <table>
 	<tr>

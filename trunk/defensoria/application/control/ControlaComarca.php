@@ -70,11 +70,11 @@ class ControlaComarca extends ControlGeral{
 	public function post($POST) {
 		$comarca = null;
 		try {
-			$function = (isset($POST['function']))?$POST['function']:null;
+			$function = (isset($POST['funcao']))?$POST['funcao']:null;
 			if(!ProjetoUtil::verificaBrancoNulo($function))
 			{
 				$comarca = new Comarca();
-				if($POST['function'] == "cadastrar")
+				if($POST['funcao'] == "cadastrar")
 				{
 					$nome = (isset($POST['nome']))?$POST['nome']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($nome))
@@ -82,14 +82,14 @@ class ControlaComarca extends ControlGeral{
 						$comarca->setNomecomarca($nome);
 						$this->cadastrar($comarca);						
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO"); 
-						header("Location:../public/inicio.php?page=comarca&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/comarca.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{
 						throw new Exception(Mensagens::getMensagem("CAMPO_OBRIGATORIO"));
 					}
 				}
-				elseif($POST['function'] == "deletar")
+				elseif($POST['funcao'] == "deletar")
 				{
 					$idComarca = (isset($POST['idComarca']))?$POST['idComarca']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($idComarca))
@@ -97,7 +97,7 @@ class ControlaComarca extends ControlGeral{
 						$comarca->setIdcomarca($idComarca);
 						$this->deletar($comarca);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
-						header("Location:../public/inicio.php?page=comarca&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/comarca.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else	
 					{
@@ -105,7 +105,7 @@ class ControlaComarca extends ControlGeral{
 					}
 					
 				}
-				elseif($POST['function'] == "alterar")
+				elseif($POST['funcao'] == "alterar")
 				{
 					$idComarca = (isset($POST['idComarca']))?$POST['idComarca']:null;
 					$nome = (isset($POST['nome']))?$POST['nome']:null; 
@@ -115,7 +115,7 @@ class ControlaComarca extends ControlGeral{
 						$comarca->setNomecomarca($nome);
 						$this->alterar($comarca);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_ALTERAR"); 
-						header("Location:../public/inicio.php?page=comarca&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/comarca.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{
@@ -131,7 +131,7 @@ class ControlaComarca extends ControlGeral{
 		catch (Exception $e)
 		{
 			$this->MENSAGEM_ERRO[] = $e->getMessage();
-			header("Location:../public/inicio.php?page=comarca&mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+			header("Location:../public/comarca.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 		}
 	}
 

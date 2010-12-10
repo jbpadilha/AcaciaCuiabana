@@ -15,11 +15,11 @@ class ControlaTipoAcao extends ControlGeral {
 	public function post($POST) {
 		$tipoAcao = null;
 		try {
-			$function = (isset($POST['function']))?$POST['function']:null;
+			$function = (isset($POST['funcao']))?$POST['funcao']:null;
 			if(!ProjetoUtil::verificaBrancoNulo($function))
 			{
 				$tipoAcao = new TipoAcao();
-				if($POST['function'] == "cadastrar")
+				if($POST['funcao'] == "cadastrar")
 				{
 					$nome = (isset($POST['nome']))?$POST['nome']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($nome))
@@ -27,14 +27,14 @@ class ControlaTipoAcao extends ControlGeral {
 						$tipoAcao->setTipoacao($POST['nome']);
 						$this->cadastrar($tipoAcao);						
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO"); 
-						header("Location:../public/inicio.php?page=tipoacao&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/tipoacao.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{
 						throw new Exception(Mensagens::getMensagem("CAMPO_OBRIGATORIO"));
 					}
 				}
-				elseif($POST['function'] == "deletar")
+				elseif($POST['funcao'] == "deletar")
 				{
 					$idTipoAcao = (isset($POST['idTipoAcao']))?$POST['idTipoAcao']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($idTipoAcao))
@@ -42,7 +42,7 @@ class ControlaTipoAcao extends ControlGeral {
 						$tipoAcao->setIdtipoacao($idTipoAcao);
 						$this->deletar($tipoAcao);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
-						header("Location:../public/inicio.php?page=tipoacao&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/tipoacao.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else	
 					{
@@ -50,7 +50,7 @@ class ControlaTipoAcao extends ControlGeral {
 					}
 					
 				}
-				elseif($POST['function'] == "alterar")
+				elseif($POST['funcao'] == "alterar")
 				{
 					$idTipoAcao = (isset($POST['idTipoAcao']))?$POST['idTipoAcao']:null;
 					$nome = (isset($POST['nome']))?$POST['nome']:null; 
@@ -60,7 +60,7 @@ class ControlaTipoAcao extends ControlGeral {
 						$tipoAcao->setTipoacao($nome);
 						$this->alterar($tipoAcao);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_ALTERAR"); 
-						header("Location:../public/inicio.php?page=tipoacao&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/tipoacao.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{
@@ -76,7 +76,7 @@ class ControlaTipoAcao extends ControlGeral {
 		catch (Exception $e)
 		{
 			$this->MENSAGEM_ERRO[] = $e->getMessage();
-			header("Location:../public/inicio.php?page=tipoacao&mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+			header("Location:../public/tipoacao.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 		}
 	}
 	

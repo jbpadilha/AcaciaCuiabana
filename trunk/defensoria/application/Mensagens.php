@@ -10,6 +10,7 @@ class Mensagens {
 		$this->arrayMensagens["ACESSO_NEGADO"] = "Acesso não autorizado.";
 		$this->arrayMensagens["ACESSAR_BANCO_DADOS"] = "Erro ao tentar acessar o banco de dados.";
 		$this->arrayMensagens["ERRO_ACESSAR_FUNCIONALIDADE"] = "Erro ao tentar acessar a funcionalidade.";
+		$this->arrayMensagens["ERRO_USUARIO_EXISTENTE"] = "Usuário Informado já foi utilizado.";
 		
 		//Pessoa
 		$this->arrayMensagens["PESSOA_NAO_ENCONTRADA"] = "A pessoa pesquisada não foi encontrado.";

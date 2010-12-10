@@ -88,11 +88,11 @@ class ControlaPessoa extends ControlGeral {
 	public function post($POST) {
 		$pessoa = null;
 		try {
-			$function = (isset($POST['function']))?$POST['function']:null;
+			$function = (isset($POST['funcao']))?$POST['funcao']:null;
 			if(!ProjetoUtil::verificaBrancoNulo($function))
 			{
 				$pessoa = new Pessoa();
-				if($POST['function'] == "cadastrar")
+				if($POST['funcao'] == "cadastrar")
 				{
 					$this->preencheObjeto($pessoa, $POST);
 					if(count($this->MENSAGEM_ERRO)<=0)
@@ -112,7 +112,7 @@ class ControlaPessoa extends ControlGeral {
 						}
 						else
 						{
-							header("Location:../public/inicio.php?page=pessoa&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+							header("Location:../public/pessoa.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 						}
 					}
 					else
@@ -132,7 +132,7 @@ class ControlaPessoa extends ControlGeral {
 						}
 					}
 				}
-				elseif($POST['function'] == "deletar")
+				elseif($POST['funcao'] == "deletar")
 				{
 					$idPessoa = (isset($POST['idPessoa']))?$POST['idPessoa']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($idPessoa))
@@ -140,7 +140,7 @@ class ControlaPessoa extends ControlGeral {
 						$pessoa->setIdpessoa($idPessoa);
 						$this->deletar($pessoa);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
-						header("Location:../public/inicio.php?page=pessoa&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/pessoa.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else	
 					{
@@ -148,7 +148,7 @@ class ControlaPessoa extends ControlGeral {
 					}
 					
 				}
-				elseif($POST['function'] == "alterar")
+				elseif($POST['funcao'] == "alterar")
 				{
 					$idPessoa = (isset($POST['idPessoa']))?$POST['idPessoa']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($idPessoa))
@@ -158,7 +158,7 @@ class ControlaPessoa extends ControlGeral {
 					{
 						$this->alterar($pessoa);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_ALTERAR"); 
-						header("Location:../public/inicio.php?page=pessoa&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/pessoa.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{
@@ -174,7 +174,7 @@ class ControlaPessoa extends ControlGeral {
 		catch (Exception $e)
 		{
 			$this->MENSAGEM_ERRO[] = $e->getMessage();
-			header("Location:../public/inicio.php?page=pessoa&mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+			header("Location:../public/pessoa.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 		}
 	}
 	

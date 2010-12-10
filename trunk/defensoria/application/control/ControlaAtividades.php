@@ -15,11 +15,11 @@ class ControlaAtividades extends ControlGeral {
 	public function post($POST) {
 		$atividades = null;
 		try {
-			$function = (isset($POST['function']))?$POST['function']:null;
+			$function = (isset($POST['funcao']))?$POST['funcao']:null;
 			if(!ProjetoUtil::verificaBrancoNulo($function))
 			{
 				$atividades = new Atividades();
-				if($POST['function'] == "cadastrar")
+				if($POST['funcao'] == "cadastrar")
 				{
 					$nome = (isset($POST['nome']))?$POST['nome']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($nome))
@@ -27,14 +27,14 @@ class ControlaAtividades extends ControlGeral {
 						$atividades->setAtividades($nome);
 						$this->cadastrar($atividades);						
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO"); 
-						header("Location:../public/inicio.php?page=atividades&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/atividades.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{
 						throw new Exception(Mensagens::getMensagem("CAMPO_OBRIGATORIO"));
 					}
 				}
-				elseif($POST['function'] == "deletar")
+				elseif($POST['funcao'] == "deletar")
 				{
 					$idAtividades = (isset($POST['idAtividades']))?$POST['idAtividades']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($idAtividades))
@@ -42,7 +42,7 @@ class ControlaAtividades extends ControlGeral {
 						$atividades->setIdatividades($idAtividades);
 						$this->deletar($atividades);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
-						header("Location:../public/inicio.php?page=atividades&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/atividades.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else	
 					{
@@ -50,7 +50,7 @@ class ControlaAtividades extends ControlGeral {
 					}
 					
 				}
-				elseif($POST['function'] == "alterar")
+				elseif($POST['funcao'] == "alterar")
 				{
 					$idAtividades = (isset($POST['idAtividades']))?$POST['idAtividades']:null;
 					$nome = (isset($POST['nome']))?$POST['nome']:null;
@@ -60,7 +60,7 @@ class ControlaAtividades extends ControlGeral {
 						$atividades->setAtividades($nome);
 						$this->alterar($atividades);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_ALTERAR"); 
-						header("Location:../public/inicio.php?page=atividades&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/atividades.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{
@@ -76,7 +76,7 @@ class ControlaAtividades extends ControlGeral {
 		catch (Exception $e)
 		{
 			$this->MENSAGEM_ERRO[] = $e->getMessage();
-			header("Location:../public/inicio.php?page=atividades&mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+			header("Location:../public/atividades.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 		}
 	}
 

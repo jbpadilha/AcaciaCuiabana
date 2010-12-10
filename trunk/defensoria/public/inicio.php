@@ -11,6 +11,7 @@ session_start();
 <![endif]-->
 <script type="text/javascript" src="js/jquery-1.3.1.min.js"></script>	
 <script type="text/javascript" language="javascript" src="js/jquery.dropdownPlain.js"></script>
+<script type="text/javascript" src="js/jquery.maskedinput-1.2.2.js"></script>
 <script type="text/javascript">
 	function carregaPagina(url,id) {
 		$( '#erros' ).html( '' );
@@ -24,11 +25,6 @@ session_start();
 		$( '#sucesso' ).html( '' ); 
 	    $("div#"+id).html("<div aligh='center'><font color=\"#FF0000\">Carregando ...</font>  <img src='images/loading.gif' align='top' alt='aguarde' /></div>");
 	            $.get(url,formulario
-	            ,function(retorno){$("#"+id).html(retorno)});
-	}
-	function carregaPaginaSemLimpar(url,id) {
-	    $("div#"+id).html("<div aligh='center'><font color=\"#FF0000\">Carregando ...</font>  <img src='images/loading.gif' align='top' alt='aguarde' /></div>");
-	            $.get(url,{ }
 	            ,function(retorno){$("#"+id).html(retorno)});
 	}
 	function enviaFormulario(url,id,dados) {
@@ -52,9 +48,9 @@ session_start();
 		?>
         </div>
   	</div>
-    <?php 
-    include 'mensagensErroSucesso.php';
-    ?>
+  	<div id="erros" class="erros"></div>
+  	<div id="sucesso" class="sucesso"></div>
+  	<br/><br/><br/>
     <div id="page">
     </div>
 </div>
@@ -62,9 +58,3 @@ session_start();
 </div>
 </body>
 </html>
-<?php 
-if(isset($_GET['page']))
-{
-	echo "<script>carregaPaginaSemLimpar('{$_GET['page']}.php','page');</script>";
-}
-?>

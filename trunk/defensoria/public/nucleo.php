@@ -13,32 +13,28 @@ function alterar(idNucleo)
 
 function deletar(idNucleo)
 {
-	document.deletaAltera.function.value = "deletar";
+	document.deletaAltera.funcao.value = "deletar";
 	document.deletaAltera.idNucleo.value = idNucleo;
 	var formulario = $('#deletaAltera').serialize(true);
 	enviaFormulario($('#deletaAltera').attr("action"),'page',formulario);
 }
 function cadastra()
 {
-	$(document).ready(function(){
-		$('#nucleo').submit(function() {
-			if ( $('#nome').val() == '' ) {
-				alert('O nome do núcleo da defensoria deve ser informado.');
-				return false;
-			} 
-			else if ( $('#idComarca').val() == '' ) {
-				alert('A comarca do núcleo da defensoria deve ser informado.');
-				return false;
-			}
-			else {
-				var formulario = $(this).serialize(true);
-				enviaFormulario($(this).attr("action"),'page',formulario);
-			}
-		});
-	});
+	if ( $('#nome').val() == '' ) {
+		alert('O nome do núcleo da defensoria deve ser informado.');
+		return false;
+	} 
+	else if ( $('#idComarca').val() == '' ) {
+		alert('A comarca do núcleo da defensoria deve ser informado.');
+		return false;
+	}
+	else {
+		var formulario = $('#nucleo').serialize(true);
+		enviaFormulario($('#nucleo').attr("action"),'page',formulario);
+	}
 }
 </script>
-<form name="nucleo" id="nucleo" method="post" action="../application/recebePostGet.php" onclick="cadastra()" >
+<form name="nucleo" id="nucleo" method="post" action="../application/recebePostGet.php">
 	<?php
 	$nucleo = null;
 	$nucleo = new Nucleo();
@@ -50,7 +46,7 @@ function cadastra()
 	}
 	?>
 	<input type="hidden" id="control" name="control" value="Nucleo"/>
-	<input type="hidden" id="function" name="function" value="<?=(isset($_GET['idNucleo']))?"alterar":"cadastrar"?>"/>
+	<input type="hidden" id="funcao" name="funcao" value="<?=(isset($_GET['idNucleo']))?"alterar":"cadastrar"?>"/>
 	<input type="hidden" id="idNucleo" name="idNucleo" value="<?=$nucleo->getIdnucleo()?>"/>
 	<table>
 		<tr>
@@ -76,7 +72,7 @@ function cadastra()
 			?>
 			</select>
 			</td>
-			<td width="49"><input type="submit" name="submit" id="submit" value="<?=(isset($_GET['idNucleo']))?"Alterar":"Cadastrar"?>"/></td>
+			<td width="49"><input type="button" onclick="cadastra()" name="submit" id="submit" value="<?=(isset($_GET['idNucleo']))?"Alterar":"Cadastrar"?>"/></td>
 		</tr>
 	</table>
 </form>
@@ -89,7 +85,7 @@ if($nucleo->find()>0)
 ?>
 <form name="deletaAltera" id="deletaAltera" method="post" action="../application/recebePostGet.php" >
 	<input type="hidden" id="control" name="control" value="Nucleo"/>
-	<input type="hidden" id="function" name="function" value=""/>
+	<input type="hidden" id="funcao" name="funcao" value=""/>
 	<input type="hidden" id="idNucleo" name="idNucleo" value=""/>
 <table>
 	<tr>

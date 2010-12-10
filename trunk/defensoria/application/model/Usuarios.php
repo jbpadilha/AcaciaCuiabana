@@ -11,6 +11,7 @@ class Usuarios extends Lumine_Base{
 	public $usuario;		 	 	 	 	 	 	 
 	public $senha;
 	public $grupousuario;
+	public $idpessoa;
 	
 	
 	/**
@@ -27,6 +28,7 @@ class Usuarios extends Lumine_Base{
         $this->_addField("usuario", "usuario", "varchar", 255, array('notnull' => true));
         $this->_addField("senha", "senha", "varchar", 255, array('notnull' => true));
         $this->_addField("grupousuario", "grupousuario", "int", 11, array('notnull' => true));
+        $this->_addField('idpessoa', 'idpessoa', 'int', 11, array('foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE', 'linkOn' => 'idpessoa', 'class' => 'Pessoa'));
         
         $this->_addForeignRelation('cartasconvites', self::ONE_TO_MANY, 'CartasConvites', 'idatendente', null, null, null);
     }
@@ -87,10 +89,10 @@ class Usuarios extends Lumine_Base{
 	}
 
 	/**
-	 * @param $idusuarios the $idusuarios to set
+	 * @param $idusuario the $idusuarios to set
 	 */
-	public function setIdusuarios($idusuarios) {
-		$this->idusuario = $idusuarios;
+	public function setIdusuario($idusuario) {
+		$this->idusuario = $idusuario;
 	}
 
 	/**
@@ -132,6 +134,20 @@ class Usuarios extends Lumine_Base{
 	{
 		$_SESSION["loginusuario"] = $this->getUsuario();
 	}
+	/**
+	 * @return the $idpessoa
+	 */
+	public function getIdpessoa() {
+		return $this->idpessoa;
+	}
+
+	/**
+	 * @param $idpessoa the $idpessoa to set
+	 */
+	public function setIdpessoa($idpessoa) {
+		$this->idpessoa = $idpessoa;
+	}
+
 	
 }
 

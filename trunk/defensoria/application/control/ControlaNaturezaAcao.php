@@ -15,11 +15,11 @@ class ControlaNaturezaAcao extends ControlGeral {
 	public function post($POST) {
 		$naturezaAcao = null;
 		try {
-			$function = (isset($POST['function']))?$POST['function']:null;
+			$function = (isset($POST['funcao']))?$POST['funcao']:null;
 			if(!ProjetoUtil::verificaBrancoNulo($function))
 			{
 				$naturezaAcao = new NaturezaAcao();
-				if($POST['function'] == "cadastrar")
+				if($POST['funcao'] == "cadastrar")
 				{
 					$nome = (isset($POST['nome']))?$POST['nome']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($nome))
@@ -27,14 +27,14 @@ class ControlaNaturezaAcao extends ControlGeral {
 						$naturezaAcao->setNaturezaacao($nome);
 						$this->cadastrar($naturezaAcao);						
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO"); 
-						header("Location:../public/inicio.php?page=naturezaAcao&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/naturezaAcao.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{
 						throw new Exception(Mensagens::getMensagem("CAMPO_OBRIGATORIO"));
 					}
 				}
-				elseif($POST['function'] == "deletar")
+				elseif($POST['funcao'] == "deletar")
 				{
 					$idNaturezaAcao = (isset($POST['idNaturezaAcao']))?$POST['idNaturezaAcao']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($idNaturezaAcao))
@@ -42,7 +42,7 @@ class ControlaNaturezaAcao extends ControlGeral {
 						$naturezaAcao->setIdnaturezaacao($idNaturezaAcao);
 						$this->deletar($naturezaAcao);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
-						header("Location:../public/inicio.php?page=naturezaAcao&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/naturezaAcao.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else	
 					{
@@ -50,7 +50,7 @@ class ControlaNaturezaAcao extends ControlGeral {
 					}
 					
 				}
-				elseif($POST['function'] == "alterar")
+				elseif($POST['funcao'] == "alterar")
 				{
 					$idNaturezaAcao = (isset($POST['idNaturezaAcao']))?$POST['idNaturezaAcao']:null;
 					$nome = (isset($POST['nome']))?$POST['nome']:null;
@@ -60,7 +60,7 @@ class ControlaNaturezaAcao extends ControlGeral {
 						$naturezaAcao->setNaturezaacao($nome);
 						$this->alterar($naturezaAcao);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_ALTERAR"); 
-						header("Location:../public/inicio.php?page=naturezaAcao&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/naturezaAcao.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{
@@ -76,7 +76,7 @@ class ControlaNaturezaAcao extends ControlGeral {
 		catch (Exception $e)
 		{
 			$this->MENSAGEM_ERRO[] = $e->getMessage();
-			header("Location:../public/inicio.php?page=naturezaAcao&mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+			header("Location:../public/naturezaAcao.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 		}
 	}
 	

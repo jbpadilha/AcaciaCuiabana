@@ -25,7 +25,6 @@ class Pessoa extends Lumine_Base{
      */
     protected function _initialize()
     {
-		# idparteprocesso, idpessoa, tipoparte, idprocesso, iddefensor
         
         $this->_addField("idpessoa", "idpessoa", "int", 11, array('primary' => true, 'notnull' => true, 'autoincrement' => true));
         $this->_addField("datacadastropessoa", "datacadastropessoa", "datetime", null, array('notnull' => true));
@@ -44,6 +43,7 @@ class Pessoa extends Lumine_Base{
         $this->_addForeignRelation('enderecos', self::ONE_TO_MANY, 'Endereco', 'idpessoa', null, null, null);
         $this->_addForeignRelation('hipossuficiencias', self::ONE_TO_MANY, 'Hipossuficiencia', 'idpessoa', null, null, null);
         $this->_addForeignRelation('parteprocessos', self::ONE_TO_MANY, 'ParteProcesso', 'idpessoa', null, null, null);
+        $this->_addForeignRelation('usuarios', self::ONE_TO_MANY, 'Usuarios', 'idpessoa', null, null, null);
 
     }
 

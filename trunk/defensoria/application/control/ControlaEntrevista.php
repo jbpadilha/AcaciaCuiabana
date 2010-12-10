@@ -18,21 +18,21 @@ class ControlaEntrevista extends ControlGeral {
 		$parteProcessoPromovente = null;
 		$parteProcessoPromovido = null;
 		try {
-			$function = (isset($POST['function']))?$POST['function']:null;
+			$function = (isset($POST['funcao']))?$POST['funcao']:null;
 			if(!ProjetoUtil::verificaBrancoNulo($function))
 			{
 				$entrevista = new Entrevista();
 				$processo = new Processo();
 				$parteProcessoPromovente = new ParteProcesso();
 				$parteProcessoPromovido = new ParteProcesso();
-				if($POST['function'] == "cadastrar")
+				if($POST['funcao'] == "cadastrar")
 				{
 					$this->preencheObjeto($entrevista,$processo,$parteProcessoPromovente,$parteProcessoPromovido,$POST);
 					if(count($this->MENSAGEM_ERRO)<=0)
 					{
 						$this->cadastrar($entrevista,$processo,$parteProcessoPromovente,$parteProcessoPromovido);						
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO"); 
-						header("Location:../public/inicio.php?page=entrevista&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/entrevista.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{
@@ -48,7 +48,7 @@ class ControlaEntrevista extends ControlGeral {
 		catch (Exception $e)
 		{
 			$this->MENSAGEM_ERRO[] = $e->getMessage();
-			header("Location:../public/inicio.php?page=entrevista&mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+			header("Location:../public/entrevista.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 		}
 	}
 	

@@ -13,27 +13,23 @@ function alterar(idNaturezaAcao)
 
 function deletar(idNaturezaAcao)
 {
-	document.deletaAltera.function.value = "deletar";
+	document.deletaAltera.funcao.value = "deletar";
 	document.deletaAltera.idNaturezaAcao.value = idNaturezaAcao;
 	var formulario = $('#deletaAltera').serialize(true);
 	enviaFormulario($('#deletaAltera').attr("action"),'page',formulario);
 }
 function cadastra()
 {
-	$(document).ready(function(){
-		$('#naturezaAcao').submit(function() {
-			if ( $('#nome').val() == '' ) {
-				alert('O nome da natureza da ação deve ser inserido !');
-				return false;
-			} else {
-				var formulario = $(this).serialize(true);
-				enviaFormulario($(this).attr("action"),'page',formulario);
-			}
-		});
-	});
+	if ( $('#nome').val() == '' ) {
+		alert('O nome da natureza da ação deve ser inserido !');
+		return false;
+	} else {
+		var formulario = $('#naturezaAcao').serialize(true);
+		enviaFormulario($('#naturezaAcao').attr("action"),'page',formulario);
+	}
 }
 </script>
-<form name="naturezaAcao" id="naturezaAcao" method="post" action="../application/recebePostGet.php" onclick="cadastra()" >
+<form name="naturezaAcao" id="naturezaAcao" method="post" action="../application/recebePostGet.php">
 	<?php
 	$naturezaAcao = null;
 	$naturezaAcao = new NaturezaAcao();
@@ -45,13 +41,13 @@ function cadastra()
 	}
 	?>
 	<input type="hidden" id="control" name="control" value="NaturezaAcao"/>
-	<input type="hidden" id="function" name="function" value="<?=(isset($_GET['idNaturezaAcao']))?"alterar":"cadastrar"?>"/>
+	<input type="hidden" id="funcao" name="funcao" value="<?=(isset($_GET['idNaturezaAcao']))?"alterar":"cadastrar"?>"/>
 	<input type="hidden" id="idNaturezaAcao" name="idNaturezaAcao" value="<?=$naturezaAcao->getIdnaturezaacao()?>"/>
 	<table>
 		<tr>
 			<td width="120">Nome da Natureza da Ação:</td>
 			<td width="144"><input type="text" name="nome" value="<?=$naturezaAcao->getNaturezaacao()?>" id="nome"/></td>
-			<td width="49"><input type="submit" name="submit" id="submit" value="<?=(isset($_GET['idNaturezaAcao']))?"Alterar":"Cadastrar"?>"/></td>
+			<td width="49"><input type="button" onclick="cadastra();" name="submit" id="submit" value="<?=(isset($_GET['idNaturezaAcao']))?"Alterar":"Cadastrar"?>"/></td>
 		</tr>
 	</table>
 </form>
@@ -64,7 +60,7 @@ if($naturezaAcao->find()>0)
 ?>
 <form name="deletaAltera" id="deletaAltera" method="post" action="../application/recebePostGet.php" >
 	<input type="hidden" id="control" name="control" value="NaturezaAcao"/>
-	<input type="hidden" id="function" name="function" value=""/>
+	<input type="hidden" id="funcao" name="funcao" value=""/>
 	<input type="hidden" id="idNaturezaAcao" name="idNaturezaAcao" value=""/>
 <table>
 	<tr>

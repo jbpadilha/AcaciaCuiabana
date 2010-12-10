@@ -16,11 +16,11 @@ class ControlaVara extends ControlGeral {
 	public function post($POST) {
 		$vara = null;
 		try {
-			$function = (isset($POST['function']))?$POST['function']:null;
+			$function = (isset($POST['funcao']))?$POST['funcao']:null;
 			if(!ProjetoUtil::verificaBrancoNulo($function))
 			{
 				$vara = new Vara();
-				if($POST['function'] == "cadastrar")
+				if($POST['funcao'] == "cadastrar")
 				{
 					$nome = (isset($POST['nome']))?$POST['nome']:null;
 					$codVara = (isset($POST['codVara']))?$POST['codVara']:null;
@@ -32,14 +32,14 @@ class ControlaVara extends ControlGeral {
 						$vara->setIdcomarca($idComarca);
 						$this->cadastrar($vara);						
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO"); 
-						header("Location:../public/inicio.php?page=vara&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/vara.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{
 						throw new Exception(Mensagens::getMensagem("CAMPO_OBRIGATORIO"));
 					}
 				}
-				elseif($POST['function'] == "deletar")
+				elseif($POST['funcao'] == "deletar")
 				{
 					$idVara = (isset($POST['idVara']))?$POST['idVara']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($idVara))
@@ -47,7 +47,7 @@ class ControlaVara extends ControlGeral {
 						$vara->setIdvara($idVara);
 						$this->deletar($vara);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
-						header("Location:../public/inicio.php?page=vara&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/vara.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else	
 					{
@@ -55,7 +55,7 @@ class ControlaVara extends ControlGeral {
 					}
 					
 				}
-				elseif($POST['function'] == "alterar")
+				elseif($POST['funcao'] == "alterar")
 				{
 					$idVara = (isset($POST['idVara']))?$POST['idVara']:null;
 					$nome = (isset($POST['nome']))?$POST['nome']:null;
@@ -69,7 +69,7 @@ class ControlaVara extends ControlGeral {
 						$vara->setIdcomarca($idComarca);
 						$this->alterar($vara);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_ALTERAR"); 
-						header("Location:../public/inicio.php?page=vara&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/vara.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{
@@ -85,7 +85,7 @@ class ControlaVara extends ControlGeral {
 		catch (Exception $e)
 		{
 			$this->MENSAGEM_ERRO[] = $e->getMessage();
-			header("Location:../public/inicio.php?page=vara&mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+			header("Location:../public/vara.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 		}
 	}
 

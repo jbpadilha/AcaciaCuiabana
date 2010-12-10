@@ -13,7 +13,7 @@
 .titulo
 {
 	color:#FFF;
-	font-size:18px;
+	font-size:20px;
 	text-align:center;
 	text-shadow:#CCC;
 }
@@ -231,7 +231,7 @@ input.radio {
   border: 0px;
 }
 
-.erro
+.erros
 {
 	color: #FF0000;
 	font-weight: bold;
@@ -365,7 +365,7 @@ p {padding: 20px 40px 80px 400px;}
 .subtitulo
 {
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 18px;
 	color: black;
 }
 
