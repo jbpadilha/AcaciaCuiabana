@@ -1,7 +1,7 @@
 <?php
 require '../application/ProjetoUtil.php'; 
 include 'carregamentoInicial.php';
-session_start();
+@session_start();
 
 if(!isset($_GET['paramentrosDefensor']))
 {
@@ -343,19 +343,8 @@ if(isset($_GET['cadastro']) && !isset($_GET['paramentrosDefensor']))
 </form>
 <?php
 }
-else if(isset($_SESSION['pessoaPesquisa']) && isset($_SESSION['defensorPesquisa']) && isset($_SESSION['usuarioPesquisa']))
+else if(isset($_SESSION['defensorPesquisa']))
 {
-	$pessoaAtual = new Pessoa();
-	$pessoaAtual->setIdpessoa($_SESSION['pessoaPesquisa']);
-	$pessoaAtual->find(true);
-	
-	$defensor = new Defensor();
-	$defensor->setIddefensor($_SESSION['defensorPesquisa']);
-	$defensor->find(true);
-	
-	$usuarios = new Usuarios();
-	$usuarios->setIdusuario($_SESSION['usuarioPesquisa']);
-	$usuarios->find(true);
 ?>
 <form name="deletaAltera" id="deletaAltera" method="post" action="../application/recebePostGet.php" >
 	<input type="hidden" id="control" name="control" value="Defensor"/>
@@ -374,6 +363,23 @@ else if(isset($_SESSION['pessoaPesquisa']) && isset($_SESSION['defensorPesquisa'
 		<td width="126">&nbsp;</td>
 		<td colspan="3">&nbsp;</td>
 	</tr>
+	<?php 
+	$arrayDefensor = array();
+	$arrayDefensor = $_SESSION['defensorPesquisa'];
+	if(count($arrayDefensor)>0)
+	{
+    	foreach ($arrayDefensor as $array)
+    	{
+		$defensor = new Defensor();
+		$defensor->setIddefensor($array);
+		$defensor->find(true);
+		$pessoaAtual = new Pessoa();
+		$pessoaAtual->setIdpessoa($defensor->getIdpessoa());
+		$pessoaAtual->find(true);
+		$usuarios = new Usuarios();
+		$usuarios->setIdpessoa($pessoaAtual->getIdpessoa());
+		$usuarios->find(true);
+	?>
 	<tr>
 		<td><strong>Nome</strong></td>
 		<td><strong>OAB</strong></td>
@@ -398,6 +404,10 @@ else if(isset($_SESSION['pessoaPesquisa']) && isset($_SESSION['defensorPesquisa'
 		}
 		?>
   	</tr>
+  	<?php
+    	} 
+	}
+  	?>
 </table>
 </form>
 <?php

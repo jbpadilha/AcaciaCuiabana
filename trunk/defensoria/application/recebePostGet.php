@@ -8,7 +8,7 @@
  */
 require_once 'ProjetoUtil.php';
 require_once 'Mensagens.php';
-new ProjetoUtil();
+new ProjetoUtil(); 
 $MENSAGEM_SUCESSO = Array();
 $MENSAGEM_ERRO = Array();
 $grupo = (isset($_SESSION['grupo'])) ?$_SESSION['grupo'] : null;

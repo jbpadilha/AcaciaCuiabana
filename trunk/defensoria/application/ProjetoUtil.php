@@ -30,10 +30,10 @@ class ProjetoUtil
 		$lumineConfig = array(
 					'dialect' => 'MySQL',
 					'database' => 'defensoria',
-				    'user' => 'joaopadilhacom',
-				    'password' => 'padilha10',
+				    'user' => 'root',
+				    'password' => '',
 				    'port' => '3306',
-				    'host' => 'mysql01.joaopadilha.com',
+				    'host' => 'localhost',
 				    'class_path' => dirname(__FILE__),
 				    'package' => 'model',
 					'keep_foreign_column_name' => '1', 
@@ -127,6 +127,12 @@ class ProjetoUtil
 		{
 			return ProjetoUtil::$juizo_Segundo_Grau_TXT;
 		}
+	}
+
+	public static function getConfiguration()
+	{
+		new ProjetoUtil();
+		return $this->cfg;
 	}
 }
 
