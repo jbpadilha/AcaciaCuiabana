@@ -4,6 +4,8 @@ require_once ('ControlGeral.php');
 
 class ControlaDefensor extends ControlGeral {
 	
+	private $arrayDefensor = array();
+	
 	public function permiteAcesso($grupo) {
 		return true;
 	}
@@ -19,14 +21,17 @@ class ControlaDefensor extends ControlGeral {
 				if(isset($GET['cpfpesquisa']) && $GET['cpfpesquisa'] != "")
 					$pessoa->setCpfpessoa(trim($GET['cpfpesquisa']));
 				if(isset($GET['nomePesquisa']) && $GET['nomePesquisa'] != "")
+				{
+					$pessoa->where("nomepessoa like '%".trim($GET['nomePesquisa'])."%'");
 					$pessoa->setNomepessoa(trim($GET['nomePesquisa']));
+				}
 				if(isset($GET['oabpesquisa']) && $GET['oabpesquisa'] != "")
 					$defensor->setOabdefensor(trim($GET['oabpesquisa']));
 				if(isset($GET['complementoOAB']) && $GET['complementoOAB'] != "")
 					$defensor->setCompoabdefensor(trim($GET['complementoOAB']));
 				if(isset($GET['estadoOAB']) && $GET['estadoOAB'] != "")
 					$defensor->setEstadooabdefensor(trim($GET['estadoOAB']));
-				$this->gravaUsuarioSessao($pessoa,$defensor);
+				$this->pesquisaDefensor($pessoa,$defensor);
 			}
 			if(count($this->MENSAGEM_ERRO)>0)
 			{
@@ -232,14 +237,16 @@ class ControlaDefensor extends ControlGeral {
 			{
 				$pessoaPesquisa = new Pessoa();
 				$pessoaPesquisa->setCpfpessoa($pessoa->getCpfpessoa());
-				if(!$pessoaPesquisa->find(true))
+				if(!$pessoaPesquisa->find())
 				{
+					$pessoa->_setConnection($conexao);
 					$pessoa->setDatacadastropessoa(date("Y-m-d H:i:s"));
 					$pessoa->save();
 					
 					if($defensor->getOabdefensor() != null && $defensor->getCompoabdefensor() != null
 					&& $defensor->getEstadooabdefensor()!=null)
 					{
+						$defensor->_setConnection($conexao);
 						$defensor->setIdpessoa($pessoa->getIdpessoa());
 						$defensor->save();
 						
@@ -247,8 +254,9 @@ class ControlaDefensor extends ControlGeral {
 						{
 							$usuarioPesquisa = new Usuarios();
 							$usuarioPesquisa->setUsuario($usuarios->getUsuario());
-							if(!$usuarioPesquisa->find(true))
+							if(!$usuarioPesquisa->find())
 							{
+								$usuarios->_setConnection($conexao);
 								$usuarios->save();
 							}
 							else
@@ -344,52 +352,60 @@ class ControlaDefensor extends ControlGeral {
 		}
 	}
 	
-	private function gravaUsuarioSessao(Pessoa $pessoa, Defensor $defensor)
+	private function pesquisaDefensor(Pessoa $pessoa, Defensor $defensor)
 	{
-		$gravaSessao = false;
 		$usuarios = new Usuarios();
 		try
 		{
 			if($pessoa->getCpfpessoa()!=null || $pessoa->getNomepessoa()!=null)
 			{
-				if($pessoa->find(true))
+				if($pessoa->getNomepessoa()!=null)
+					$pessoa->setNomepessoa(null);
+				if($pessoa->find())
 				{
-					$defensor->setIdpessoa($pessoa->getIdpessoa());
-					$usuarios->setIdpessoa($pessoa->getIdpessoa());
-					if($defensor->find(true) && $usuarios->find(true))
+					while($pessoa->fetch())
 					{
-						$gravaSessao = true;
+						$defensor->setIdpessoa($pessoa->getIdpessoa());
+						$usuarios->setIdpessoa($pessoa->getIdpessoa());
+						if($defensor->find(true) && $usuarios->find(true))
+						{
+							$this->arrayDefensor[]=$defensor->getIddefensor();
+						}
 					}
 				}
 			}else if($defensor->getOabdefensor() != null ||	$defensor->getCompoabdefensor() != null ||
 				$defensor->getEstadooabdefensor() != null){
 					
-				if($defensor->find(true))
+				if($defensor->find())
 				{
-					$pessoa->setIdpessoa($defensor->getIdpessoa());
-					$usuarios->setIdpessoa($pessoa->getIdpessoa());
-					if($pessoa->find(true) && $usuarios->find(true))
+					while($defensor->fetch())
 					{
-						$gravaSessao = true;
+						$pessoa->setIdpessoa($defensor->getIdpessoa());
+						$usuarios->setIdpessoa($pessoa->getIdpessoa());
+						if($pessoa->find(true) && $usuarios->find(true))
+						{
+							$this->arrayDefensor[]=$defensor->getIddefensor();
+						}
 					}
 				}
 			}
+			
+			if( count($this->arrayDefensor) > 0)
+			{
+				session_start();
+				$_SESSION['defensorPesquisa'] = $this->arrayDefensor;
+			}
+			else
+			{
+				$this->MENSAGEM_ERRO[] = Mensagens::getMensagem("DEFENSOR_NAO_ENCONTRADO");
+			}
+			
 		}
 		catch (Exception $e)
 		{
 			$this->MENSAGEM_ERRO[] = $e->getMessage();
 		}
-		if($gravaSessao)
-		{
-			session_start();
-			$_SESSION['pessoaPesquisa'] = $pessoa->getIdpessoa(); 
-			$_SESSION['defensorPesquisa'] = $defensor->getIddefensor();
-			$_SESSION['usuarioPesquisa'] = $usuarios->getIdusuario();
-		}
-		else
-		{
-			$this->MENSAGEM_ERRO[] = Mensagens::getMensagem("DEFENSOR_NAO_ENCONTRADO");
-		}
+		
 	}
 	
 }

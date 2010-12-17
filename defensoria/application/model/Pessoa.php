@@ -254,6 +254,21 @@ class Pessoa extends Lumine_Base{
 			return null;
 		}
 	}
+	
+	public function isUsuario()
+	{
+		$usuario = new Usuarios();
+		$usuario->setIdpessoa($this->getIdpessoa());
+		if($usuario->find(true))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 }
 
 ?>

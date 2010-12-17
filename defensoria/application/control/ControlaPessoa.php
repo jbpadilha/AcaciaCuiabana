@@ -4,6 +4,8 @@ require_once ('ControlGeral.php');
 
 class ControlaPessoa extends ControlGeral {
 	
+	private $arrayPessoa = array();
+	
 	public function permiteAcesso($grupo) {
 		return true;
 	}
@@ -18,11 +20,15 @@ class ControlaPessoa extends ControlGeral {
 					$pessoa->setCpfpessoa(trim($GET['cpfpesquisa']));
 				if(isset($GET['nomePesquisa']) && $GET['nomePesquisa'] != "")
 					$pessoa->setNomepessoa(trim($GET['nomePesquisa']));
-				
-				if($pessoa->find(true))
+				if($pessoa->find())
 				{
+					while($pessoa->fetch())
+					{
+						if(!$pessoa->isUsuario())
+							$arrayPessoa[] =  $pessoa->getIdpessoa();
+					}
 					session_start();
-					$_SESSION['pessoaPesquisa'] = $pessoa->getIdpessoa(); 
+					$_SESSION['pessoaPesquisa'] = $arrayPessoa;
 				}
 				else
 				{
