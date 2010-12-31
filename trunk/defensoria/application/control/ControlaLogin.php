@@ -21,17 +21,16 @@ class ControlaLogin extends ControlGeral {
 			try {				
 				$usuarios = new Usuarios();
 				$usuarios->setUsuario(trim($POST['usuario']));
-				$usuarios->setSenha(trim($POST['senha']));
-				if($usuarios->find() > 0)
+				$usuarios->setSenha(sha1(trim($POST['senha'])));
+				if($usuarios->find(true) > 0)
 				{
-					session_start();
 					$usuarios->registraUsuarioSessao();
 					header("Location:".ControlGeral::$PAGINA_INICIO_LOGADO);
 				}
 				else
 				{
 					$this->MENSAGEM_ERRO[] = Mensagens::getMensagem("USUARIO_SENHA_INCORRETO");
-					header("Location:".ControlGeral::$PAGINA_INICIO."?mensagemErro".urlencode(serialize($this->MENSAGEM_ERRO)));
+					header("Location:".ControlGeral::$PAGINA_INICIO."?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 				}
 			}
 			catch (Exception $e)

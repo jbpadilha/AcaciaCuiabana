@@ -22,6 +22,9 @@
 		<div id="headerImg2">
         </div>
   </div>
+  	<div id="erros" class="erros"></div>
+  	<div id="sucesso" class="sucesso"></div>
+  	<br/><br/><br/>
     <div id="page">
     	<?php 
 		include 'mensagensErroSucesso.php';

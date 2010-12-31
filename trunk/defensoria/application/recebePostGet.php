@@ -8,8 +8,10 @@
  */
 require_once 'ProjetoUtil.php';
 require_once 'GruposUsuarios.php';
+require_once 'control/ControlGeral.php';
 require_once 'Mensagens.php';
-new ProjetoUtil(); 
+new ProjetoUtil();
+session_start();
 $MENSAGEM_SUCESSO = Array();
 $MENSAGEM_ERRO = Array();
 $grupo = (isset($_SESSION['grupo'])) ?$_SESSION['grupo'] : null;
@@ -29,12 +31,19 @@ try {
 					}
 					else
 					{
-						$MENSAGEM_ERRO[] = Mensagens::getMensagem("ACESSO_NEGADO");		
+						$MENSAGEM_ERRO[] = Mensagens::getMensagem("ACESSO_NEGADO");
+						header("Location:../public/conteudoInicial.php?mensagemErro=".urlencode(serialize($MENSAGEM_ERRO)));		
 					}
+				}
+				elseif (isset($_GET['sair']))
+				{
+					session_destroy();
+					header("Location: ".ControlGeral::$PAGINA_INICIO);
 				}
 				else
 				{
-					header("Location: ../public/index.php");
+					$MENSAGEM_ERRO[] = Mensagens::getMensagem("ERRO_ACESSAR_FUNCIONALIDADE");
+					header("Location:../public/conteudoInicial.php?mensagemErro=".urlencode(serialize($MENSAGEM_ERRO)));
 				}
 				break;	
 			}
@@ -50,18 +59,20 @@ try {
 					}
 					else
 					{
-						$MENSAGEM_ERRO[] = Mensagens::getMensagem("ACESSO_NEGADO");		
+						$MENSAGEM_ERRO[] = Mensagens::getMensagem("ACESSO_NEGADO");
+						header("Location:../public/conteudoInicial.php?mensagemErro=".urlencode(serialize($MENSAGEM_ERRO)));		
 					}
 				}
 				else
 				{
-					echo 'Erro ao tentar carregar a funcionalidade.';
+					$MENSAGEM_ERRO[] = Mensagens::getMensagem("ERRO_ACESSAR_FUNCIONALIDADE");
+					header("Location:../public/conteudoInicial.php?mensagemErro=".urlencode(serialize($MENSAGEM_ERRO)));
 				}
 				break;
 			}
 		default:
 			{
-				header("Location: ../public/index.php");
+				header("Location: ".ControlGeral::$PAGINA_INICIO);
 			}
 	}
 }

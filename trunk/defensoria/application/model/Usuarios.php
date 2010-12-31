@@ -115,7 +115,9 @@ class Usuarios extends Lumine_Base{
 	
 	public function registraUsuarioSessao()
 	{
+		session_start();
 		$_SESSION["loginusuario"] = $this->getUsuario();
+		$_SESSION['grupo'] = $this->getGrupousuario();
 	}
 	/**
 	 * @return the $idpessoa
@@ -146,7 +148,6 @@ class Usuarios extends Lumine_Base{
 
 	public function getNomeGrupoUsuarios()
 	{
-		require 'GruposUsuarios.php';
 		switch ($this->grupousuario)
 		{
 			case GruposUsuarios::$GRUPO_ADMIN:

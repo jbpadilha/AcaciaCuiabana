@@ -1,7 +1,6 @@
 <?php
 require '../application/ProjetoUtil.php'; 
 include 'carregamentoInicial.php';
-@session_start();
 
 if(!isset($_GET['paramentrosDefensor']))
 {
@@ -23,6 +22,7 @@ $(document).ready(function(){
 	$("#datanascimentopessoa").mask("99/99/9999");
 	$("#cpfpessoa").mask("999.999.999-99");
 	$("#cpfPesquisa").mask("999.999.999-99");
+	$("#cependereco").mask("99999-999");
 });
 
 function pesquisar()
@@ -437,7 +437,7 @@ else if(isset($_SESSION['defensorPesquisa']))
 ?>
 <form name="deletaAltera" id="deletaAltera" method="post" action="../application/recebePostGet.php" >
 	<input type="hidden" id="control" name="control" value="Defensor"/>
-	<input type="hidden" id="function" name="function" value=""/>
+	<input type="hidden" id=funcao name="funcao" value=""/>
 	<input type="hidden" id="idPessoa" name="idPessoa" value=""/>
 	<input type="hidden" id="idDefensor" name="idDefensor" value=""/>
 	<input type="hidden" id="idUsuario" name="idUsuario" value=""/>

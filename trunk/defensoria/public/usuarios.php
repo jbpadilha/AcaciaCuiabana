@@ -1,19 +1,24 @@
 <?php 
+require '../application/GruposUsuarios.php';
 include 'carregamentoInicial.php';
 ?>
 <legend class="subtitulo">Cadastro de Usuários:</legend>
 <br/>
 <script type="text/javascript">
-
-function alterar(idUsuario)
+$(document).ready(function(){
+	$("#datanascimentopessoa").mask("99/99/9999");
+	$("#cpfpessoa").mask("999.999.999-99");
+	$("#cependereco").mask("99999-999");
+});
+function alterar(idusuario)
 {
 	var formulario = $('#deletaAltera').serialize(true);
-	carregaPagina('usuarios.php?idUsuario='+idusuario,'page');
+	carregaPagina('usuarios.php?idusuario='+idusuario+'&cadastro=true','page');
 }
 
 function deletar(idusuario)
 {
-	document.deletaAltera.function.value = "deletar";
+	document.deletaAltera.funcao.value = "deletar";
 	document.deletaAltera.idusuario.value = idusuario;
 	var formulario = $('#deletaAltera').serialize(true);
 	enviaFormulario($('#deletaAltera').attr("action"),'page',formulario);
@@ -30,6 +35,10 @@ function cadastra()
 				alert('A senha do usuário deve ser informado !');
 				return false;
 			} 
+			if ( $('#grupousuario').val() == '' ) {
+				alert('O grupo de acesso do usuário deve ser informado !');
+				return false;
+			}
 			if ( $('#nomepessoa').val() == '' ) {
 				alert('O nome deve ser informado');
 				return false;
@@ -75,7 +84,7 @@ function cadastra()
 	}
 	?>
 	<input type="hidden" id="control" name="control" value="Usuarios"/>
-	<input type="hidden" id="function" name="function" value="<?=(isset($_GET['idusuario']))?"alterar":"cadastrar"?>"/>
+	<input type="hidden" id="funcao" name="funcao" value="<?=(isset($_GET['idusuario']))?"alterar":"cadastrar"?>"/>
 	<input type="hidden" id="idusuario" name="idusuario" value="<?=$usuarios->getIdusuario()?>"/>
 	<table>
 		<tr>
@@ -93,7 +102,6 @@ function cadastra()
 					<option value="">Selecione</option>
 					<option value="<?=GruposUsuarios::$GRUPO_ADMIN?>" <?=($usuarios->getGrupousuario() == GruposUsuarios::$GRUPO_ADMIN)?"selected":""?>><?=GruposUsuarios::$GRUPO_ADMIN_TXT?></option>
 					<option value="<?=GruposUsuarios::$GRUPO_ATENDENTE?>" <?=($usuarios->getGrupousuario() == GruposUsuarios::$GRUPO_ATENDENTE)?"selected":""?>><?=GruposUsuarios::$GRUPO_ATENDENTE_TXT?></option>
-					<option value="<?=GruposUsuarios::$GRUPO_DEFENSOR?>" <?=($usuarios->getGrupousuario() == GruposUsuarios::$GRUPO_DEFENSOR)?"selected":""?>><?=GruposUsuarios::$GRUPO_DEFENSOR?></option>
 					<option value="<?=GruposUsuarios::$GRUPO_ESTAGIARIO?>" <?=($usuarios->getGrupousuario() == GruposUsuarios::$GRUPO_ESTAGIARIO)?"selected":""?>><?=GruposUsuarios::$GRUPO_ESTAGIARIO_TXT?></option>
 				</select>
 			</td>
@@ -226,14 +234,14 @@ function cadastra()
 <?php
 $usuarios = null;
 $usuarios = new Usuarios();
-$usuarios->reset();
+$usuarios->where("grupousuario != ".GruposUsuarios::$GRUPO_DEFENSOR);
 if($usuarios->find()>0)
 {
 ?>
 <form name="deletaAltera" id="deletaAltera" method="post" action="../application/recebePostGet.php" >
 	<input type="hidden" id="control" name="control" value="Usuarios"/>
-	<input type="hidden" id="function" name="function" value=""/>
-	<input type="hidden" id="idusuarios" name="idusuarios" value=""/>
+	<input type="hidden" id="funcao" name="funcao" value=""/>
+	<input type="hidden" id="idusuario" name="idusuario" value=""/>
 <table>
 	<tr>
 		<td colspan="6">&nbsp;</td>
