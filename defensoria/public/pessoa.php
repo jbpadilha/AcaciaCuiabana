@@ -1,7 +1,6 @@
 <?php
 require '../application/ProjetoUtil.php'; 
 include 'carregamentoInicial.php';
-session_start();
 ?>
 <html>
 	<head>
@@ -10,6 +9,7 @@ session_start();
 			$("#datanascimentopessoa").mask("99/99/9999");
 			$("#cpfpessoa").mask("999.999.999-99");
 			$("#cpfpesquisa").mask("999.999.999-99");
+			$("#cependereco").mask("99999-999");
 		});
 			function pesquisar()
 			{

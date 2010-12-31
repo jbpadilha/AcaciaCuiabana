@@ -108,6 +108,7 @@ class ControlaUsuarios extends ControlGeral {
 				$endereco->setIdpessoa($pessoa->getIdpessoa());
 				$endereco->save();
 				$usuarios->setIdpessoa($pessoa->getIdpessoa());
+				$usuarios->setSenha(sha1($usuarios->getSenha()));
 				$usuarios->save();
 			}
 			else
