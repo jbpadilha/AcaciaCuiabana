@@ -159,7 +159,16 @@ class Processo extends Lumine_Base{
     # END AUTOCODE                                         #
     #------------------------------------------------------#
     #### END AUTOCODE
-
+	public function validate(){
+		
+		// limpa os validators anteriores
+		Lumine_Validator_PHPValidator::clearValidations($this);
+		
+		// adicionando as regras 
+		Lumine_Validator_PHPValidator::addValidation($this, 'juizo', Lumine_Validator::REQUIRED_STRING, 'Informe o Juizo');
+		
+		return parent::validate();
+	}
 }
 
 ?>

@@ -4,6 +4,10 @@ include 'carregamentoInicial.php';
 <legend class="subtitulo">Cadastro de Hipossuficiência:</legend>
 <br/>
 <script type="text/javascript">
+$(document).ready(function(){
+	$("#salarioHipo").maskMoney({symbol:"R$",decimal:",",thousands:"."})
+	$("#rendaHipo").maskMoney({symbol:"R$",decimal:",",thousands:"."})
+});
 function pesquisaPessoa()
 {
 	var formulario = $('#hipossuficiencia').serialize(true);

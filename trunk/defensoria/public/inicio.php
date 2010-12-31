@@ -12,6 +12,7 @@ session_start();
 <script type="text/javascript" src="js/jquery-1.3.1.min.js"></script>	
 <script type="text/javascript" language="javascript" src="js/jquery.dropdownPlain.js"></script>
 <script type="text/javascript" src="js/jquery.maskedinput-1.2.2.js"></script>
+<script type="text/javascript" src="js/jquery.maskMoney.0.2.js"></script>
 <script type="text/javascript">
 	function carregaPagina(url,id) {
 		$( '#erros' ).html( '' );

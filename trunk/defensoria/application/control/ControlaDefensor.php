@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 require_once ('ControlGeral.php');
 
@@ -18,8 +18,8 @@ class ControlaDefensor extends ControlGeral {
 				$defensor = new Defensor();
 				$pessoa = new Pessoa();
 				
-				if(isset($GET['cpfpesquisa']) && $GET['cpfpesquisa'] != "")
-					$pessoa->setCpfpessoa(trim($GET['cpfpesquisa']));
+				if(isset($GET['cpfPesquisa']) && $GET['cpfPesquisa'] != "")
+					$pessoa->setCpfpessoa(trim($GET['cpfPesquisa']));
 				if(isset($GET['nomePesquisa']) && $GET['nomePesquisa'] != "")
 				{
 					$pessoa->where("nomepessoa like '%".trim($GET['nomePesquisa'])."%'");
@@ -38,10 +38,10 @@ class ControlaDefensor extends ControlGeral {
 				if(isset($GET['paramentrosDefensor']))
 				{
 					header("Location:../public/defensor.php?paramentrosDefensor={$GET['paramentrosDefensor']}
-					&comarca={$GET['comarca']}&tipoAcao={$GET['tipoAcao']}
-					&naturezaAcao={$GET['naturezaAcao']}&juizo={$GET['juizo']}
+					&idcomarca={$GET['idcomarca']}&idtipoacao={$GET['idtipoacao']}
+					&idnaturezaacao={$GET['idnaturezaacao']}&juizo={$GET['juizo']}
 					&idpessoaPromovente={$GET['idpessoaPromovente']}&idpessoaPromovido={$GET['idpessoaPromovido']}
-					&assunto={$GET['assunto']}&nomePromovente={$_GET['nomePromovente']}&nomePromovido={$_GET['nomePromovido']}&MensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+					&assuntoentrevista={$GET['assuntoentrevista']}&nomePromovente={$_GET['nomePromovente']}&nomePromovido={$_GET['nomePromovido']}&MensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 				}
 				else{
 					header("Location:../public/defensor.php?cadastro=1&MensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
@@ -52,10 +52,10 @@ class ControlaDefensor extends ControlGeral {
 				if(isset($GET['paramentrosDefensor']))
 				{
 					header("Location:../public/defensor.php?paramentrosDefensor={$GET['paramentrosDefensor']}
-					&comarca={$GET['comarca']}&tipoAcao={$GET['tipoAcao']}
-					&naturezaAcao={$GET['naturezaAcao']}&juizo={$GET['juizo']}
+					&idcomarca={$GET['idcomarca']}&idtipoacao={$GET['idtipoacao']}
+					&idnaturezaacao={$GET['idnaturezaacao']}&juizo={$GET['juizo']}
 					&idpessoaPromovente={$GET['idpessoaPromovente']}&idpessoaPromovido={$GET['idpessoaPromovido']}
-					&assunto={$GET['assunto']}&nomePromovente={$_GET['nomePromovente']}&nomePromovido={$_GET['nomePromovido']}");
+					&assuntoentrevista={$GET['assuntoentrevista']}&nomePromovente={$_GET['nomePromovente']}&nomePromovido={$_GET['nomePromovido']}");
 				}
 				else
 				{
@@ -69,10 +69,10 @@ class ControlaDefensor extends ControlGeral {
 			if(isset($GET['paramentrosDefensor']))
 			{
 				header("Location:../public/defensor.php?paramentrosDefensor={$GET['paramentrosDefensor']}
-					&comarca={$GET['comarca']}&tipoAcao={$GET['tipoAcao']}
-					&naturezaAcao={$GET['naturezaAcao']}&juizo={$GET['juizo']}
+					&idcomarca={$GET['idcomarca']}&idtipoacao={$GET['idtipoacao']}
+					&idnaturezaacao={$GET['idnaturezaacao']}&juizo={$GET['juizo']}
 					&idpessoaPromovente={$GET['idpessoaPromovente']}&idpessoaPromovido={$GET['idpessoaPromovido']}
-					&assunto={$GET['assunto']}&nomePromovente={$_GET['nomePromovente']}&nomePromovido={$_GET['nomePromovido']}&mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+					&assuntoentrevista={$GET['assuntoentrevista']}&nomePromovente={$_GET['nomePromovente']}&nomePromovido={$_GET['nomePromovido']}&mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 			}
 			else {
 				header("Location:../public/defensor.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
@@ -91,12 +91,13 @@ class ControlaDefensor extends ControlGeral {
 				$pessoa = new Pessoa();
 				$defensor = new Defensor();
 				$usuarios = new Usuarios();
+				$endereco = new Endereco();
 				if($POST['funcao'] == "cadastrar")
 				{
-					$this->preencheObjeto($pessoa,$defensor, $usuarios, $POST);
+					$this->preencheObjeto($pessoa,$defensor, $usuarios, $endereco, $POST);
 					if(count($this->MENSAGEM_ERRO)<=0)
 					{
-						$this->cadastrar($pessoa,$defensor, $usuarios);						
+						$this->cadastrar($pessoa,$defensor, $usuarios, $endereco);						
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO"); 
 						header("Location:../public/defensor.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
@@ -111,7 +112,9 @@ class ControlaDefensor extends ControlGeral {
 						$pessoa->setIdpessoa($idPessoa);
 						$defensor->setIddefensor($idDefensor);
 						$usuarios->setIdusuario($idUsuario);
-						$this->deletar($pessoa,$defensor, $usuarios);
+						$endereco->setIdpessoa($idPessoa);
+						$endereco->find(true);
+						$this->deletar($pessoa,$defensor, $usuarios, $endereco);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
 						header("Location:../public/defensor.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
@@ -125,16 +128,18 @@ class ControlaDefensor extends ControlGeral {
 					$idPessoa = (isset($POST['idPessoa']))?$POST['idPessoa']:null;
 					$idDefensor = (isset($POST['idDefensor']))?$POST['idDefensor']:null;
 					$idUsuario = (isset($POST['idUsuario']))?$POST['idUsuario']:null;
-					if(!ProjetoUtil::verificaBrancoNulo($idPessoa) && !ProjetoUtil::verificaBrancoNulo($idDefensor) && !ProjetoUtil::verificaBrancoNulo($idUsuario))
+					$idEndereco = (isset($POST['idEndereco'])?$POST['idEndereco']:null);
+					if(!ProjetoUtil::verificaBrancoNulo($idPessoa) && !ProjetoUtil::verificaBrancoNulo($idDefensor) && !ProjetoUtil::verificaBrancoNulo($idUsuario) && !ProjetoUtil::verificaBrancoNulo($idEndereco))
 					{
 						$pessoa->setIdpessoa($idPessoa);
 						$defensor->setIddefensor($idDefensor);
 						$usuarios->setIdusuario($idUsuario);
+						$endereco->setIdendereco($idEndereco);
 					}
-					$this->preencheObjeto($pessoa, $defensor, $usuarios, $POST);
+					$this->preencheObjeto($pessoa, $defensor, $usuarios, $endereco, $POST);
 					if(count($this->MENSAGEM_ERRO)<=0)
 					{
-						$this->alterar($pessoa,$defensor, $usuarios);
+						$this->alterar($pessoa,$defensor, $usuarios, $endereco);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_ALTERAR"); 
 						header("Location:../public/defensor.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
@@ -158,123 +163,40 @@ class ControlaDefensor extends ControlGeral {
 		}
 	}
 	
-	private function preencheObjeto(Pessoa $pessoa, Defensor $defensor, Usuarios $usuarios, $POST)
+	private function preencheObjeto(Pessoa $pessoa, Defensor $defensor, Usuarios $usuarios, Endereco $endereco, $POST)
 	{
-		$pessoa->setRgpessoa((isset($POST['rg']))?$POST['rg']:null);
-		$pessoa->setEmissorpessoa((isset($POST['emissor']))?$POST['emissor']:null);
-		$pessoa->setApelidopessoa((isset($POST['apelido']))?$POST['apelido']:null);
-		$pessoa->setNaturalidadepessoa((isset($POST['naturalidade']))?$POST['naturalidade']:null);
+		$pessoa->_setFrom($POST);
+		$endereco->_setFrom($POST);
+		$defensor->_setFrom($POST);
+		$usuarios->setGrupousuario(GruposUsuarios::$GRUPO_DEFENSOR);
+		$usuarios->_setFrom($POST);
 		
-		$usuarios->setSenha((isset($POST['senha']) && $POST['senha'] != null)?$POST['senha']:null);
-		
-		$nome = (isset($POST['nomeCadastro']))?$POST['nomeCadastro']:null;
-		$sexo = (isset($POST['sexo']))?$POST['sexo']:null;
-		$cpf = (isset($POST['cpfCadastro']))?$POST['cpfCadastro']:null;
-		$estadocivil = (isset($POST['estadocivil']))?$POST['estadocivil']:null;
-		$dataNascimento = (isset($POST['datanascimento']))?$POST['datanascimento']:null;
-		$oab = (isset($POST['oabCadastro']))?$POST['oabCadastro']:null;
-		$complementoOab = (isset($POST['complementoOABCadastro']))?$POST['complementoOABCadastro']:null;
-		$estadoOab = (isset($POST['estadoOABCadastro']))?$POST['estadoOABCadastro']:null;
-		
-		$usuario = (isset($POST['usuario']))?$POST['usuario']:null;
-		$senha = (isset($POST['senha']))?$POST['senha']:null;
-		
-		if(ProjetoUtil::verificaBrancoNulo($nome))
-			$this->MENSAGEM_ERRO[] = "O nome deve ser preenchido.".Mensagens::getMensagem("CAMPO_OBRIGATORIO");
-		else
-			$pessoa->setNomepessoa(trim($nome));
-			
-		if(ProjetoUtil::verificaBrancoNulo($sexo))
-			$this->MENSAGEM_ERRO[] = "O sexo deve ser informado.".Mensagens::getMensagem("CAMPO_OBRIGATORIO");
-		else
-			$pessoa->setSexopessoa($sexo);
-		
-		if(ProjetoUtil::verificaBrancoNulo($cpf))
-			$this->MENSAGEM_ERRO[] = "O CPF deve ser informado.".Mensagens::getMensagem("CAMPO_OBRIGATORIO");
-		else
-			$pessoa->setCpfpessoa(trim($cpf));
-			
-		if(ProjetoUtil::verificaBrancoNulo($estadocivil))
-			$this->MENSAGEM_ERRO[] = "O Estado civil deve ser informado.".Mensagens::getMensagem("CAMPO_OBRIGATORIO");
-		else
-			$pessoa->setEstadocivilpessoa($estadocivil);
-		
-		if(ProjetoUtil::verificaBrancoNulo($dataNascimento))
-		{
-			$this->MENSAGEM_ERRO[] = "A data de nascimento deve ser informado.".Mensagens::getMensagem("CAMPO_OBRIGATORIO");
-		}
-		else {
-			$pessoa->setDatanascimentopessoa($dataNascimento);
-			$pessoa->setDatanascimentopessoa($pessoa->toDataNascimentoDB());
-		}
-		if (ProjetoUtil::verificaBrancoNulo($oab))
-			$this->MENSAGEM_ERRO[] = "A oab deve ser informado.".Mensagens::getMensagem("CAMPO_OBRIGATORIO");
-		else
-			$defensor->setOabdefensor($oab);
-			
-		if(ProjetoUtil::verificaBrancoNulo($complementoOab))
-			$this->MENSAGEM_ERRO[] = "O complemento da oab deve ser informado.".Mensagens::getMensagem("CAMPO_OBRIGATORIO");
-		else
-			$defensor->setCompoabdefensor($complementoOab);
-			
-		if(ProjetoUtil::verificaBrancoNulo($estadoOab))
-			$this->MENSAGEM_ERRO[] = "O estado da oab deve ser informado.".Mensagens::getMensagem("CAMPO_OBRIGATORIO");
-		else
-			$defensor->setEstadooabdefensor($estadoOab);
-
-		if(ProjetoUtil::verificaBrancoNulo($usuario))
-			$this->MENSAGEM_ERRO[] = "O usuário deve ser informado.".Mensagens::getMensagem("CAMPO_OBRIGATORIO");
-		else
-			$usuarios->setUsuario($usuario);
-		
+		$this->MENSAGEM_ERRO = array_merge($this->MENSAGEM_ERRO,$pessoa->validate(),$defensor->validate(),$usuarios->validate(), $endereco->validate());
 	}
 
-	public function cadastrar(Pessoa $pessoa, Defensor $defensor, Usuarios $usuarios)
+	public function cadastrar(Pessoa $pessoa, Defensor $defensor, Usuarios $usuarios, Endereco $endereco)
 	{
 		try {
-			if($pessoa->getNomepessoa()!=null && $pessoa->getSexopessoa()!=null && $pessoa->getCpfpessoa()!=null
-			&& $pessoa->getEstadocivilpessoa()!=null && $pessoa->getDatanascimentopessoa()!=null)
-			{
 				$pessoaPesquisa = new Pessoa();
+				$usuarioPesquisa = new Usuarios();
 				$pessoaPesquisa->setCpfpessoa($pessoa->getCpfpessoa());
-				if(!$pessoaPesquisa->find())
+				$usuarioPesquisa->setUsuario($usuarios->getUsuario());
+				if(!$pessoaPesquisa->find() && !$usuarioPesquisa->find())
 				{
-					$pessoa->_setConnection($conexao);
+					$pessoa->setDatanascimentopessoa($pessoa->toDataNascimentoDB());
 					$pessoa->setDatacadastropessoa(date("Y-m-d H:i:s"));
 					$pessoa->save();
-					
-					if($defensor->getOabdefensor() != null && $defensor->getCompoabdefensor() != null
-					&& $defensor->getEstadooabdefensor()!=null)
-					{
-						$defensor->_setConnection($conexao);
-						$defensor->setIdpessoa($pessoa->getIdpessoa());
-						$defensor->save();
-						
-						if($usuarios->getUsuario() != null && $usuarios->getSenha() != null)
-						{
-							$usuarioPesquisa = new Usuarios();
-							$usuarioPesquisa->setUsuario($usuarios->getUsuario());
-							if(!$usuarioPesquisa->find())
-							{
-								$usuarios->_setConnection($conexao);
-								$usuarios->save();
-							}
-							else
-							{
-								throw new Exception(Mensagens::getMensagem("ERRO_USUARIO_EXISTENTE"));
-							}
-						}
-					}
+					$defensor->setIdpessoa($pessoa->getIdpessoa());
+					$defensor->save();
+					$usuarios->setIdpessoa($pessoa->getIdpessoa());
+					$usuarios->save();
+					$endereco->setIdpessoa($pessoa->getIdpessoa());
+					$endereco->save();
 				}
 				else
 				{
 					throw new Exception(Mensagens::getMensagem("ERRO_USUARIO_EXISTENTE"));
 				}
-			}
-			else
-			{
-				throw new Exception(Mensagens::getMensagem("CAMPO_OBRIGATORIO"));
-			}
 		}
 		catch (Exception $e)
 		{
@@ -282,14 +204,16 @@ class ControlaDefensor extends ControlGeral {
 		}
 	}
 	
-	public function deletar(Pessoa $pessoa, Defensor $defensor, Usuarios $usuarios)
+	public function deletar(Pessoa $pessoa, Defensor $defensor, Usuarios $usuarios, Endereco $endereco)
 	{
 		try {
 			if($pessoa->getIdpessoa()!= null && $defensor->getIddefensor() && $usuarios->getIdusuario())
 			{
-				$pessoa->delete();
-				$defensor->delete();
 				$usuarios->delete();
+				$defensor->delete();
+				$endereco->delete();
+				$pessoa->delete();
+				
 			}
 			else
 			{
@@ -302,38 +226,27 @@ class ControlaDefensor extends ControlGeral {
 		}
 	}
 	
-	public function alterar(Pessoa $pessoa, Defensor $defensor, Usuarios $usuarios)
+	public function alterar(Pessoa $pessoa, Defensor $defensor, Usuarios $usuarios, Endereco $endereco)
 	{
 		try
 		{
-			if($pessoa->getNomepessoa()!=null && $pessoa->getSexopessoa()!=null && $pessoa->getCpfpessoa()!=null
-			&& $pessoa->getEstadocivilpessoa()!=null && $pessoa->getDatanascimentopessoa()!=null)
+			$pessoaPesquisa = new Pessoa();
+			$pessoaPesquisa->setCpfpessoa($pessoa->getCpfpessoa());
+			$pessoaPesquisa->find(true);
+			if($pessoaPesquisa->getIdpessoa() == $pessoa->getIdpessoa())
 			{
-				$pessoaPesquisa = new Pessoa();
-				$pessoaPesquisa->setCpfpessoa($pessoa->getCpfpessoa());
-				$pessoaPesquisa->find(true);
-				if($pessoaPesquisa->getIdpessoa() == $pessoa->getIdpessoa())
+				$usuarioPesquisa = new Usuarios();
+				$usuarioPesquisa->setUsuario($usuarios->getUsuario());
+				$usuarioPesquisa->find(true);
+				if($usuarioPesquisa->getIdpessoa() == $usuarios->getIdpessoa())
 				{
-					$pessoa->update();
-					if($defensor->getOabdefensor() != null && $defensor->getCompoabdefensor() != null
-					&& $defensor->getEstadooabdefensor()!=null)
+					if($usuarios->getUsuario() != $usuarioPesquisa->getUsuario() 
+						|| $usuarios->getSenha() != $usuarioPesquisa->getSenha())
 					{
+						$pessoa->update();
+						$endereco->update();
 						$defensor->update();
-						$usuarioPesquisa = new Usuarios();
-						$usuarioPesquisa->setUsuario($usuarios->getUsuario());
-						$usuarioPesquisa->find(true);
-						if($usuarioPesquisa->getIdpessoa() == $usuarios->getIdpessoa())
-						{
-							if($usuarios->getUsuario() != $usuarioPesquisa->getUsuario() 
-								|| $usuarios->getSenha() != $usuarioPesquisa->getSenha())
-							{
-								$usuarios->update();
-							}
-						}
-						else
-						{
-							throw new Exception(Mensagens::getMensagem("ERRO_USUARIO_EXISTENTE"));
-						}
+						$usuarios->update();
 					}
 				}
 				else
@@ -343,7 +256,7 @@ class ControlaDefensor extends ControlGeral {
 			}
 			else
 			{
-				throw new Exception(Mensagens::getMensagem("CAMPO_OBRIGATORIO"));
+				throw new Exception(Mensagens::getMensagem("ERRO_USUARIO_EXISTENTE"));
 			}
 		}
 		catch (Exception $e)
@@ -359,8 +272,7 @@ class ControlaDefensor extends ControlGeral {
 		{
 			if($pessoa->getCpfpessoa()!=null || $pessoa->getNomepessoa()!=null)
 			{
-				if($pessoa->getNomepessoa()!=null)
-					$pessoa->setNomepessoa(null);
+				$pessoa->setNomepessoa(null);
 				if($pessoa->find())
 				{
 					while($pessoa->fetch())

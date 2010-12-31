@@ -127,7 +127,18 @@ class Defensor extends Lumine_Base{
     # END AUTOCODE                                         #
     #------------------------------------------------------#
     #### END AUTOCODE
-
+	public function validate(){
+		
+		// limpa os validators anteriores
+		Lumine_Validator_PHPValidator::clearValidations($this);
+		
+		// adicionando as regras 
+		Lumine_Validator_PHPValidator::addValidation($this, 'oabdefensor', Lumine_Validator::REQUIRED_NUMBER, 'Informe a OAB do defensor');
+		Lumine_Validator_PHPValidator::addValidation($this, 'compoabdefensor', Lumine_Validator::REQUIRED_STRING, 'Informe o complemento da OAB');
+		Lumine_Validator_PHPValidator::addValidation($this, 'estadooabdefensor', Lumine_Validator::REQUIRED_STRING, 'Informe o estado da OAB');
+		
+		return parent::validate();
+	}
 }
 
 ?>

@@ -16,10 +16,15 @@ function pesquisaPromovente(tipoParte)
 }
 function cadastra()
 {
-	if ( $('#comarca').val() == '' ) {
+	if ( $('#idcomarca').val() == '' ) {
 		alert('A comarca deve ser informado.');
 		return false;
-	} else {
+	}
+	if ( $('#assuntoentrevista').val() == '' ) {
+		alert('O assunto deve ser informado.');
+		return false;
+	} 
+	else {
 		var formulario = $('#entrevista').serialize(true);
 		enviaFormulario($('#entrevista').attr("action"),'page',formulario);
 	}
@@ -32,7 +37,7 @@ function cadastra()
 		<tr>
 			<td width="120">Comarca:</td>
 			<td width="144" colspan="2" align="left">
-				<select id="comarca" name="comarca">
+				<select id="idcomarca" name="idcomarca">
 					<option value="">Selecione</option>
 					<?php 
 					$comarca = new Comarca();
@@ -40,7 +45,7 @@ function cadastra()
 					if($comarca->fetch())
 					{
 					?>
-					<option value="<?=$comarca->getIdcomarca()?>" <?=(isset($_GET['comarca']) && $_GET['comarca'] == $comarca->getIdcomarca())?"selected":""?>><?=$comarca->getNomecomarca()?></option>
+					<option value="<?=$comarca->getIdcomarca()?>" <?=(isset($_GET['"idcomarca"']) && $_GET['"idcomarca"'] == $comarca->getIdcomarca())?"selected":""?>><?=$comarca->getNomecomarca()?></option>
 					<?php 
 					}
 					?>
@@ -50,7 +55,7 @@ function cadastra()
 		<tr>
 			<td>Defensor:</td>
 			<td align="left">
-				<input type="hidden" id="idDefensor" name="idDefensor" value="<?=(isset($_GET['idDefensor']))?$_GET['idDefensor']:""?>"/>
+				<input type="hidden" id="iddefensor" name="iddefensor" value="<?=(isset($_GET['iddefensor']))?$_GET['iddefensor']:""?>"/>
 				<input type="hidden" id="nomeDefensor" name="nomeDefensor" value="<?=(isset($_GET['nomeDefensor']))?$_GET['nomeDefensor']:""?>"/>
 				<?=(isset($_GET['nomeDefensor']))?$_GET['nomeDefensor']:""?>
 			</td>
@@ -59,7 +64,7 @@ function cadastra()
 		<tr>
 			<td>Tipo da Ação:</td>
 			<td colspan="2" align="left">
-				<select id="tipoAcao" name="tipoAcao">
+				<select id="idtipoacao" name="idtipoacao">
 					<option value="">Selecione</option>
 					<?php 
 					$tipoAcao = new TipoAcao();
@@ -67,7 +72,7 @@ function cadastra()
 					if($tipoAcao->fetch())
 					{
 					?>
-					<option value="<?=$tipoAcao->getIdtipoacao()?>" <?=(isset($_GET['tipoAcao']) && $_GET['tipoAcao'] == $tipoAcao->getIdtipoacao())?"selected":""?>><?=$tipoAcao->getTipoacao()?></option>
+					<option value="<?=$tipoAcao->getIdtipoacao()?>" <?=(isset($_GET['idtipoacao']) && $_GET['idtipoacao'] == $tipoAcao->getIdtipoacao())?"selected":""?>><?=$tipoAcao->getTipoacao()?></option>
 					<?php 
 					}
 					?>
@@ -77,7 +82,7 @@ function cadastra()
 		<tr>
 			<td>Natureza da Ação:</td>
 			<td colspan="2" align="left">
-				<select id="naturezaAcao" name="naturezaAcao">
+				<select id="idnaturezaacao" name="idnaturezaacao">
 					<option value="">Selecione</option>
 					<?php 
 					$naturezaAcao = new NaturezaAcao();
@@ -85,7 +90,7 @@ function cadastra()
 					if($naturezaAcao->fetch())
 					{
 					?>
-					<option value="<?=$naturezaAcao->getIdnaturezaacao()?>" <?=(isset($_GET['naturezaAcao']) && $_GET['naturezaAcao'] == $naturezaAcao->getIdnaturezaacao())?"selected":""?>><?=$naturezaAcao->getNaturezaacao()?></option>
+					<option value="<?=$naturezaAcao->getIdnaturezaacao()?>" <?=(isset($_GET['idnaturezaacao']) && $_GET['idnaturezaacao'] == $naturezaAcao->getIdnaturezaacao())?"selected":""?>><?=$naturezaAcao->getNaturezaacao()?></option>
 					<?php 
 					}
 					?>
@@ -123,7 +128,7 @@ function cadastra()
 		<tr>
 			<td>Assunto:</td>
 			<td colspan="2">
-				<textarea rows="8" cols="100" id="assunto" name="assunto"><?=(isset($_GET['assunto']))?$_GET['assunto']:""?></textarea>
+				<textarea rows="8" cols="100" id="assuntoentrevista" name="assuntoentrevista"><?=(isset($_GET['assuntoentrevista']))?$_GET['assuntoentrevista']:""?></textarea>
 			</td>
 		</tr>
 	</table>

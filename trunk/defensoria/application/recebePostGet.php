@@ -7,6 +7,7 @@
  * @since 23/11/2010
  */
 require_once 'ProjetoUtil.php';
+require_once 'GruposUsuarios.php';
 require_once 'Mensagens.php';
 new ProjetoUtil(); 
 $MENSAGEM_SUCESSO = Array();

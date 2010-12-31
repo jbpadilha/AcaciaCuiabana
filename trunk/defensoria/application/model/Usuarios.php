@@ -7,7 +7,6 @@ class Usuarios extends Lumine_Base{
     protected $_package   = 'model';
     
 	public $idusuario;
-	public $datacadastropessoa;		 	 	 	 	 	 	
 	public $usuario;		 	 	 	 	 	 	 
 	public $senha;
 	public $grupousuario;
@@ -21,16 +20,13 @@ class Usuarios extends Lumine_Base{
      */
     protected function _initialize()
     {
-		# idatividades, atividades
-        
         $this->_addField("idusuario", "idusuario", "int", 11, array('primary' => true, 'notnull' => true, 'autoincrement' => true));
-        $this->_addField("datacadastropessoa", "datacadastropessoa", "datetime", null, array('notnull' => true));
         $this->_addField("usuario", "usuario", "varchar", 255, array('notnull' => true));
         $this->_addField("senha", "senha", "varchar", 255, array('notnull' => true));
         $this->_addField("grupousuario", "grupousuario", "int", 11, array('notnull' => true));
         $this->_addField('idpessoa', 'idpessoa', 'int', 11, array('foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE', 'linkOn' => 'idpessoa', 'class' => 'Pessoa'));
         
-        $this->_addForeignRelation('cartasconvites', self::ONE_TO_MANY, 'CartasConvites', 'idatendente', null, null, null);
+        $this->_addForeignRelation('cartasconvites', self::ONE_TO_MANY, 'CartasConvites', 'idatendente', null, null, null);        
     }
 
     /**
@@ -61,13 +57,6 @@ class Usuarios extends Lumine_Base{
 	}
 
 	/**
-	 * @return the $datacadastropessoa
-	 */
-	public function getDatacadastropessoa() {
-		return $this->datacadastropessoa;
-	}
-
-	/**
 	 * @return the $usuario
 	 */
 	public function getUsuario() {
@@ -95,12 +84,6 @@ class Usuarios extends Lumine_Base{
 		$this->idusuario = $idusuario;
 	}
 
-	/**
-	 * @param $datacadastropessoa the $datacadastropessoa to set
-	 */
-	public function setDatacadastropessoa($datacadastropessoa) {
-		$this->datacadastropessoa = $datacadastropessoa;
-	}
 
 	/**
 	 * @param $usuario the $usuario to set
@@ -148,6 +131,50 @@ class Usuarios extends Lumine_Base{
 		$this->idpessoa = $idpessoa;
 	}
 
+	public function validate(){
+		
+		// limpa os validators anteriores
+		Lumine_Validator_PHPValidator::clearValidations($this);
+		
+		// adicionando as regras 
+		Lumine_Validator_PHPValidator::addValidation($this, 'usuario', Lumine_Validator::REQUIRED_STRING, 'Informe o usuário de acesso');
+		Lumine_Validator_PHPValidator::addValidation($this, 'senha', Lumine_Validator::REQUIRED_STRING, 'Informe a senha de acesso');
+		Lumine_Validator_PHPValidator::addValidation($this, 'grupousuario', Lumine_Validator::REQUIRED_NUMBER, 'Grupo de acesso não informado');
+		
+		return parent::validate();
+	}
+
+	public function getNomeGrupoUsuarios()
+	{
+		require 'GruposUsuarios.php';
+		switch ($this->grupousuario)
+		{
+			case GruposUsuarios::$GRUPO_ADMIN:
+				{
+					return GruposUsuarios::$GRUPO_ADMIN_TXT;
+					break;
+				}
+			case GruposUsuarios::$GRUPO_ATENDENTE:
+				{
+					return GruposUsuarios::$GRUPO_ATENDENTE_TXT;
+					break;
+				}
+			case GruposUsuarios::$GRUPO_DEFENSOR:
+				{
+					return GruposUsuarios::$GRUPO_DEFENSOR_TXT;
+					break;
+				}
+			case GruposUsuarios::$GRUPO_ESTAGIARIO:
+				{
+					return GruposUsuarios::$GRUPO_ESTAGIARIO_TXT;
+					break;
+				}
+			default:
+					return "";
+					break;
+		}
+		
+	}
 	
 }
 

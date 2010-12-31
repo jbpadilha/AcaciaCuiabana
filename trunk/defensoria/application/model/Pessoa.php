@@ -32,7 +32,7 @@ class Pessoa extends Lumine_Base{
         $this->_addField("rgpessoa", "rgpessoa", "varchar", 255, array('notnull' => false));
         $this->_addField("emissorpessoa", "emissorpessoa", "varchar", 255, array('notnull' => false));
         $this->_addField("sexopessoa", "sexopessoa", "varchar", 1, array('notnull' => true));
-        $this->_addField("cpfpessoa", "cpfpessoa", "varchar", 11, array('notnull' => true));
+        $this->_addField("cpfpessoa", "cpfpessoa", "varchar", 14, array('notnull' => true));
         $this->_addField("estadocivilpessoa", "estadocivilpessoa", "int", 1, array('notnull' => true));
         $this->_addField("apelidopessoa", "apelidopessoa", "varchar", 255, array('notnull' => false));
         $this->_addField("naturalidadepessoa", "naturalidadepessoa", "varchar", 255, array('notnull' => false));
@@ -268,7 +268,38 @@ class Pessoa extends Lumine_Base{
 			return false;
 		}
 	}
-
+	
+	public function isDefensor()
+	{
+		$defensor = new Defensor();
+		$defensor->setIdpessoa($this->getIdpessoa());
+		if($defensor->find(true))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public function validate(){
+		
+		// limpa os validators anteriores
+		Lumine_Validator_PHPValidator::clearValidations($this);
+		
+		// adicionando as regras 
+		Lumine_Validator_PHPValidator::addValidation($this, 'nomepessoa', Lumine_Validator::REQUIRED_STRING, 'Informe o nome');
+		Lumine_Validator_PHPValidator::addValidation($this, 'sexopessoa', Lumine_Validator::REQUIRED_STRING, 'Informe o sexo');
+		Lumine_Validator_PHPValidator::addValidation($this, 'cpfpessoa', Lumine_Validator::REQUIRED_CPF, 'Informe o CPF corretamente');
+		Lumine_Validator_PHPValidator::addValidation($this, 'estadocivilpessoa', Lumine_Validator::REQUIRED_STRING, 'Informe o estado civil corretamente');
+		Lumine_Validator_PHPValidator::addValidation($this, 'datanascimentopessoa', Lumine_Validator::REQUIRED_DATE, 'Informe a Data de Nascimento');
+		
+		return parent::validate();
+	}
+	
+	
+	
 }
 
 ?>

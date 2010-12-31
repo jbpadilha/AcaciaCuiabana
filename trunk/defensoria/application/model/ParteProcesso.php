@@ -127,7 +127,7 @@ class ParteProcesso extends Lumine_Base{
     # END AUTOCODE                                         #
     #------------------------------------------------------#
     #### END AUTOCODE
-
+	
 }
 
 ?>
