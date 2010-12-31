@@ -54,14 +54,9 @@ class ControlaEntrevista extends ControlGeral {
 	
 	private function preencheObjeto(Entrevista $entrevista, Processo $processo, ParteProcesso $parteProcessoPromovente, ParteProcesso $parteProcessoPromovido, $POST)
 	{
-		if(isset($POST['comarca']))
-			$processo->setIdcomarca($POST['comarca']);
-		if(isset($POST['tipoAcao']))
-			$processo->setIdtipoacao($POST['tipoAcao']);
-		if(isset($POST['naturezaAcao']))
-			$processo->setIdnaturezaacao($POST['naturezaAcao']);
-		if(isset($POST['juizo']))
-			$processo->setJuizo($POST['juizo']);
+		$entrevista->_setFrom($POST);
+		$processo->_setFrom($POST);
+		
 		if(isset($POST['idpessoaPromovente']))
 		{
 			$parteProcessoPromovente->setIdpessoa($POST['idpessoaPromovente']);
@@ -73,53 +68,22 @@ class ControlaEntrevista extends ControlGeral {
 			$parteProcessoPromovido->setIdpessoa($POST['idpessoaPromovido']);
 			$parteProcessoPromovido->setTipoparte(2);
 		}
-		if(isset($POST['assunto']))
-			$entrevista->setAssuntoentrevista($POST['assunto']);
-				
+		$this->MENSAGEM_ERRO = array_merge($this->MENSAGEM_ERRO, $entrevista->validate(), $processo->validate());
 	}
 
 	
 	public function cadastrar(Entrevista $entrevista, Processo $processo, ParteProcesso $parteProcessoPromovente, ParteProcesso $parteProcessoPromovido)
 	{
-		$erro = false;
 		try {
-			if($processo->getIdcomarca()!= null && $processo->getIdtipoacao()!= null && $processo->getIdnaturezaacao() != null)
-			{
-				$processo->save();
-				$parteProcessoPromovente->setIdprocesso($processo->getIdprocesso());
-				$parteProcessoPromovido->setIdprocesso($processo->getIdprocesso());
-				if($parteProcessoPromovente->getIdpessoa()!= null && $parteProcessoPromovente->getTipoparte()!= null)
-				{
-					$parteProcessoPromovente->save();
-					
-					if($parteProcessoPromovido->getIdpessoa()!= null && $parteProcessoPromovido->getTipoparte()!= null)
-					{
-						$parteProcessoPromovido->save();
-						
-						$entrevista->setIdprocesso($processo->getIdprocesso());
-						$entrevista->setProtocoloatendimento($this->genereteKey());
-						$entrevista->setDataentrevista(date("Y-m-d H:i:s"));
-						
-						$entrevista->save();
-					}
-					else{
-						$erro = true;
-					}
-				}
-				else
-				{
-					$erro = true;
-				}
-			}
-			else
-			{
-				$erro = true;
-			}
-			
-			if($erro)
-			{
-				throw new Exception(Mensagens::getMensagem("CAMPO_OBRIGATORIO"));
-			}
+			$processo->save();
+			$parteProcessoPromovente->setIdprocesso($processo->getIdprocesso());
+			$parteProcessoPromovido->setIdprocesso($processo->getIdprocesso());
+			$parteProcessoPromovente->save();
+			$parteProcessoPromovido->save();
+			$entrevista->setIdprocesso($processo->getIdprocesso());
+			$entrevista->setProtocoloatendimento($this->genereteKey());
+			$entrevista->setDataentrevista(date("Y-m-d H:i:s"));
+			$entrevista->save();
 		}
 		catch (Exception $e)
 		{

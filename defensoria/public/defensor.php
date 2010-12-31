@@ -20,7 +20,9 @@ else
 <script type="text/javascript">
 
 $(document).ready(function(){
-	$("#datanascimento").mask("99/99/9999");
+	$("#datanascimentopessoa").mask("99/99/9999");
+	$("#cpfpessoa").mask("999.999.999-99");
+	$("#cpfPesquisa").mask("999.999.999-99");
 });
 
 function pesquisar()
@@ -53,31 +55,31 @@ function deletar(idPessoa,idDefensor, idUsuario)
 }
 function cadastra()
 {
-		if ( $('#nomeCadastro').val() == '' ) {
+		if ( $('#nomepessoa').val() == '' ) {
 			alert('O nome deve ser informado');
 			return false;
 		} 
-		else if ( $('#sexo').val() == '' ) {
+		else if ( $('#sexopessoa').val() == '' ) {
 			alert('O sexo deve ser informado');
 			return false;
 		}
-		else if ( $('#cpfCadastro').val() == '' ) {
+		else if ( $('#cpfpessoa').val() == '' ) {
 			alert('O cpf deve ser informado');
 			return false;
 		}
-		else if ( $('#estadocivil').val() == '' ) {
+		else if ( $('#estadocivilpessoa').val() == '' ) {
 			alert('O estado civil deve ser informado');
 			return false;
 		}
-		else if ( $('#datanascimento').val() == '' ) {
+		else if ( $('#datanascimentopessoa').val() == '' ) {
 			alert('A data de nascimento deve ser informado');
 			return false;
 		}
-		else if ( $('#oabCadastro').val() == '' ) {
+		else if ( $('#oabdefensor').val() == '' ) {
 			alert('A oab deve ser informado');
 			return false;
 		}
-		else if ( $('#complementoCadastro').val() == '' ) {
+		else if ( $('#compoabdefensor').val() == '' ) {
 			alert('o Complemento da oab deve ser informado');
 			return false;
 		}
@@ -101,10 +103,14 @@ function cadastra()
 if(isset($_GET['paramentrosDefensor']))
 {
 ?>
-function selecionarDefensor(idDefensor,nomeDefensor)
+function selecionarDefensor(defensor,nomeDefensor)
 {
-
-	carregaPagina('entrevista.php?nomeDefensor='+nomeDefensor+'&idDefensor='+idDefensor+'&paramentrosDefensor=<?=$_GET['paramentrosDefensor']?>&comarca=<?=$_GET['comarca']?>&tipoAcao=<?=$_GET['tipoAcao']?>&naturezaAcao=<?=$_GET['naturezaAcao']?>&juizo=<?=$_GET['juizo']?>&idpessoaPromovente=<?=$_GET['idpessoaPromovente']?>&idpessoaPromovido=<?=$_GET['idpessoaPromovido']?>&assunto=<?=$_GET['assunto']?>&nomePromovente=<?=$_GET['nomePromovente']?>&nomePromovido=<?=$_GET['nomePromovido']?>','page');
+	carregaPagina(
+			'entrevista.php?nomeDefensor='
+			+nomeDefensor+
+			'&idDefensor='
+			+defensor+
+			'&paramentrosDefensor=<?=$_GET['paramentrosDefensor']?>&comarca=<?=$_GET['idcomarca']?>&tipoAcao=<?=$_GET['idtipoacao']?>&naturezaAcao=<?=$_GET['idnaturezaacao']?>&juizo=<?=$_GET['juizo']?>&idpessoaPromovente=<?=$_GET['idpessoaPromovente']?>&idpessoaPromovido=<?=$_GET['idpessoaPromovido']?>&assunto=<?=$_GET['assuntoentrevista']?>&nomePromovente=<?=$_GET['nomePromovente']?>&nomePromovido=<?=$_GET['nomePromovido']?>','page');
 }
 <?php 
 }
@@ -134,19 +140,19 @@ function selecionarDefensor(idDefensor,nomeDefensor)
 		<legend class="subtitulo">Pesquisar Defensor:</legend>
 		<table>
 			<tr>
-				<td>A pesquisa por um dos parâmetros é obrigatório.</td>
+				<td colspan="3">A pesquisa por um dos parâmetros é obrigatório.</td>
 			</tr>
 			<tr>
-				<td>Nome:</td>
-				<td colspan="2" align="left"><input type="text" name="nomePesquisa" id="nomePesquisa" style="text-transform: lowercase;" /></td>
+				<td width="143">Nome:</td>
+				<td colspan="2" align="left"><input type="text" name="nomePesquisa" id="nomePesquisa" style="text-transform: uppercase;" /></td>
 			</tr>
 			<tr>
 				<td>CPF:</td>
-				<td colspan="2"><input type="text" name="cpfPesquisa" id="cpfPesquisa" /></td>
+				<td colspan="2" align="left"><input type="text" name="cpfPesquisa" id="cpfPesquisa" /></td>
 			</tr>
 			<tr>
 				<td>OAB:</td>
-				<td colspan="2"><input type="text" name="oabPesquisa" id="oabPesquisa" /></td>
+				<td colspan="2" align="left"><input type="text" name="oabPesquisa" id="oabPesquisa" /></td>
 			</tr>
 			<tr>
 				<td>Complemento OAB:</td>
@@ -164,7 +170,7 @@ function selecionarDefensor(idDefensor,nomeDefensor)
 			</tr>
 			<tr>
 				<td>Estado OAB:</td>
-				<td>
+				<td width="154">
 					<select name="estadoOABPesquisa" id="estadoOABPesquisa" >
 	                    <option>AC</option>
 	                    <option>AL</option>
@@ -195,7 +201,7 @@ function selecionarDefensor(idDefensor,nomeDefensor)
 	                    <option>TO</option>		 
                		</select>
 				</td>
-				<td><input type="button" name="submit" id="submit" value="Pesquisar" onclick="pesquisar()"/></td>
+				<td width="71"><input type="button" name="submit" id="submit" value="Pesquisar" onclick="pesquisar()"/></td>
 			</tr>
 		</table>
 	</fieldset>
@@ -206,10 +212,13 @@ if(isset($_GET['cadastro']) && !isset($_GET['paramentrosDefensor']))
 	$pessoaAtual = new Pessoa();
 	$defensor = new Defensor();
 	$usuarios = new Usuarios();
+	$enderecoAtual = new Endereco();
 	if(isset($_GET['idPessoa']) && isset($_GET['idDefensor']) && isset($_GET['idUsuario']))
 	{
 		$pessoaAtual->setIdpessoa($_GET['idPessoa']);
 		$pessoaAtual->find(true);
+		$enderecoAtual->setIdpessoa($_GET['idPessoa']);
+		$enderecoAtual->find(true);
 		$defensor->setIddefensor($_GET['idDefensor']);
 		$defensor->find(true);
 		$usuarios->setIdusuario($_GET['idUsuario']);
@@ -223,36 +232,40 @@ if(isset($_GET['cadastro']) && !isset($_GET['paramentrosDefensor']))
 	<input type="hidden" id="idPessoa" name="idPessoa" value="<?=$pessoaAtual->getIdpessoa()?>"/>
 	<input type="hidden" id="idDefensor" name="idDefensor" value="<?=$defensor->getIddefensor()?>"/>
 	<input type="hidden" id="idUsuario" name="idUsuario" value="<?=$usuarios->getIdusuario()?>"/>
-	<table>
+	<input type="hidden" id="idEndereco" name="idEndereco" value="<?=$enderecoAtual->getIdendereco()?>"/>
+	<table width="644">
 		<tr>
-			<td width="120">Nome:</td>
-			<td width="144" colspan="2"><input type="text" name="nomeCadastro" id="nomeCadastro" value="<?=$pessoaAtual->getNomepessoa()?>"/></td>		
+			<td colspan="3"><span class="subTitulo">DADOS PESSOAIS</span></td>
 		</tr>
 		<tr>
-			<td width="120">CPF:</td>
-			<td width="144" colspan="2"><input type="text" name="cpfCadastro" id="cpfCadastro" value="<?=$pessoaAtual->getCpfpessoa()?>" /></td>		
+			<td width="104" align="left">Nome:</td>
+			<td colspan="2" align="left"><input name="nomepessoa" type="text" id="nomepessoa" style="text-transform: uppercase;" value="<?=$pessoaAtual->getNomepessoa()?>" size="60"/></td>		
 		</tr>
 		<tr>
-			<td width="120">RG:</td>
-			<td width="144" colspan="2"><input type="text" name="rg" id="rg" value="<?=$pessoaAtual->getRgpessoa()?>" /></td>		
+			<td align="left">CPF:</td>
+			<td colspan="2" align="left"><input name="cpfpessoa" type="text" id="cpfpessoa" value="<?=$pessoaAtual->getCpfpessoa()?>" size="14" /></td>		
 		</tr>
 		<tr>
-			<td width="120">Emissor:</td>
-			<td width="144" colspan="2"><input type="text" name="emissor" id="emissor" value="<?=$pessoaAtual->getEmissorpessoa()?>" /></td>		
+			<td align="left">RG:</td>
+			<td colspan="2" align="left"><input type="text" name="rgpessoa" id="rgpessoa" value="<?=$pessoaAtual->getRgpessoa()?>" /></td>		
 		</tr>
 		<tr>
-			<td width="120">Sexo:</td>
-			<td width="144" colspan="2">
-				<select id="sexo" name="sexo">
+			<td align="left">Emissor:</td>
+			<td colspan="2" align="left"><input type="text" name="emissorpessoa" id="emissorpessoa" value="<?=$pessoaAtual->getEmissorpessoa()?>" /></td>		
+		</tr>
+		<tr>
+			<td align="left">Sexo:</td>
+			<td colspan="2" align="left">
+				<select id="sexopessoa" name="sexopessoa">
 					<option selected="selected" value="M">Masculino</option>
 					<option value="F" <?=($pessoaAtual->getSexopessoa() == "F")?"selected":""?>>Feminino</option>
 				</select>
 			</td>		
 		</tr>
 		<tr>
-			<td width="120">Estado Civil:</td>
-			<td width="144" colspan="2">
-				<select id="estadocivil" name="estadocivil">
+			<td align="left">Estado Civil:</td>
+			<td colspan="2" align="left">
+				<select id="estadocivilpessoa" name="estadocivilpessoa">
 					<option value="">Escolha o Estado Civil</option>
 					<option value="<?=ProjetoUtil::$DOMINIO_CASADO?>" <?=($pessoaAtual->getEstadocivilpessoa() == ProjetoUtil::$DOMINIO_CASADO)?"selected":""?>><?=ProjetoUtil::$DOMINIO_CASADO_TXT?></option>
 					<option value="<?=ProjetoUtil::$DOMINIO_OUTROS?>" <?=($pessoaAtual->getEstadocivilpessoa() == ProjetoUtil::$DOMINIO_OUTROS)?"selected":""?>><?=ProjetoUtil::$DOMINIO_OUTROS_TXT?></option>
@@ -263,25 +276,97 @@ if(isset($_GET['cadastro']) && !isset($_GET['paramentrosDefensor']))
 			</td>
 		</tr>
 		<tr>
-			<td width="120">Apelido:</td>
-			<td width="144" colspan="2"><input type="text" name="apelido" id="apelido" value="<?=$pessoaAtual->getApelidopessoa()?>" /></td>		
+			<td align="left">Apelido:</td>
+			<td colspan="2" align="left"><input type="text" name="apelidopessoa" id="apelidopessoa" value="<?=$pessoaAtual->getApelidopessoa()?>" /></td>		
 		</tr>
 		<tr>
-			<td width="120">Naturalidade:</td>
-			<td width="144" colspan="2"><input type="text" name="naturalidade" id="naturalidade" value="<?=$pessoaAtual->getNaturalidadepessoa()?>" /></td>		
+			<td align="left">Naturalidade:</td>
+			<td colspan="2" align="left"><input type="text" name="naturalidadepessoa" id="naturalidadepessoa" value="<?=$pessoaAtual->getNaturalidadepessoa()?>" /></td>		
 		</tr>
 		<tr>
-			<td width="120">Data de Nascimento:</td>
-			<td width="144" colspan="2"><input type="text" name="datanascimento" id="datanascimento" value="<?=$pessoaAtual->getDataNascimentoFormatado()?>" /> (ex. 11/11/2010)</td>		
+			<td align="left">Data de Nascimento:</td>
+			<td colspan="2" align="left"><input type="text" name="datanascimentopessoa" id="datanascimentopessoa" value="<?=$pessoaAtual->getDataNascimentoFormatado()?>" /> (ex. 11/11/2010)</td>		
 		</tr>
 		<tr>
-			<td>OAB:</td>
-			<td colspan="2"><input type="text" name="oabCadastro" id="oabCadastro"  value="<?=$defensor->getOabdefensor()?>"/></td>
+			<td colspan="3" class="subTitulo">ENDEREÇO</td>
 		</tr>
 		<tr>
-			<td>Complemento OAB:</td>
-			<td colspan="2">
-				<select name="complementoOABCadastro" id="complementoOABCadastro" >
+			<td align="left">Logradouro:</td>
+			<td colspan="2" align="left"><input name="logradouroendereco" type="text" id="logradouroendereco" value="<?=$enderecoAtual->getLogradouroendereco()?>" size="60" /></td>		
+		</tr>
+		<tr>
+			<td align="left">Complemento:</td>
+			<td colspan="2" align="left"><input name="complementoendereco" type="text" id="complementoendereco" value="<?=$enderecoAtual->getComplementoendereco()?>" size="60" /></td>		
+		</tr>
+		<tr>
+			<td align="left">Bairro:</td>
+			<td colspan="2" align="left"><input name="bairroendereco" type="text" id="bairroendereco" value="<?=$enderecoAtual->getBairroendereco()?>" size="30" /></td>		
+		</tr>
+		<tr>
+			<td align="left">Número:</td>
+			<td colspan="2" align="left"><input type="text" name="numeroendereco" id="numeroendereco" value="<?=$enderecoAtual->getNumeroendereco()?>" /></td>		
+		</tr>
+		<tr>
+			<td align="left">CEP:</td>
+			<td colspan="2" align="left"><input type="text" name="cependereco" id="cependereco" value="<?=$enderecoAtual->getCependereco()?>" /></td>		
+		</tr>
+		<tr>
+			<td align="left">Cidade:</td>
+			<td colspan="2" align="left"><input type="text" name="cidadeendereco" id="cidadeendereco" value="<?=$enderecoAtual->getCidadeendereco()?>" /></td>		
+		</tr>
+		<tr>
+			<td align="left">Estado:</td>
+			<td colspan="2" align="left">
+				<select name="estadoendereco" id="estadoendereco" >
+                    <option value="AC" <?=($enderecoAtual->getEstadoendereco() == "AC")?"Selected":""?>>AC</option>
+                    <option value="AL" <?=($enderecoAtual->getEstadoendereco() == "AL")?"Selected":""?>>AL</option>
+                    <option value="AM" <?=($enderecoAtual->getEstadoendereco() == "AM")?"Selected":""?>>AM</option>
+                    <option value="AP" <?=($enderecoAtual->getEstadoendereco() == "AP")?"Selected":""?>>AP</option>		
+                    <option value="BA" <?=($enderecoAtual->getEstadoendereco() == "BA")?"Selected":""?>>BA</option>
+                    <option value="CE" <?=($enderecoAtual->getEstadoendereco() == "CE")?"Selected":""?>>CE</option>
+                    <option value="DF" <?=($enderecoAtual->getEstadoendereco() == "DF")?"Selected":""?>>DF</option>
+                    <option value="ES" <?=($enderecoAtual->getEstadoendereco() == "ES")?"Selected":""?>>ES</option>
+                    <option value="GO" <?=($enderecoAtual->getEstadoendereco() == "GO")?"Selected":""?>>GO</option>
+                    <option value="MA" <?=($enderecoAtual->getEstadoendereco() == "MA")?"Selected":""?>>MA</option>
+                    <option value="MG" <?=($enderecoAtual->getEstadoendereco() == "MG")?"Selected":""?>>MG</option>
+                    <option value="MS" <?=($enderecoAtual->getEstadoendereco() == "MS")?"Selected":""?>>MS</option>
+                    <option value="MT" <?=($enderecoAtual->getEstadoendereco() == "MT")?"Selected":""?>>MT</option>
+                    <option value="PA" <?=($enderecoAtual->getEstadoendereco() == "PA")?"Selected":""?>>PA</option>
+                    <option value="PB" <?=($enderecoAtual->getEstadoendereco() == "PB")?"Selected":""?>>PB</option>
+                    <option value="PE" <?=($enderecoAtual->getEstadoendereco() == "PE")?"Selected":""?>>PE</option>
+                    <option value="PI" <?=($enderecoAtual->getEstadoendereco() == "PI")?"Selected":""?>>PI</option>
+                    <option value="PR" <?=($enderecoAtual->getEstadoendereco() == "PR")?"Selected":""?>>PR</option>
+                    <option value="RJ" <?=($enderecoAtual->getEstadoendereco() == "RJ")?"Selected":""?>>RJ</option>
+                    <option value="RN" <?=($enderecoAtual->getEstadoendereco() == "RN")?"Selected":""?>>RN</option>
+                    <option value="RO" <?=($enderecoAtual->getEstadoendereco() == "RO")?"Selected":""?>>RO</option>
+                    <option value="RR" <?=($enderecoAtual->getEstadoendereco() == "RR")?"Selected":""?>>RR</option>
+                    <option value="RS" <?=($enderecoAtual->getEstadoendereco() == "RS")?"Selected":""?>>RS</option>
+                    <option value="SC" <?=($enderecoAtual->getEstadoendereco() == "SC")?"Selected":""?>>SC</option>
+                    <option value="SE" <?=($enderecoAtual->getEstadoendereco() == "SE")?"Selected":""?>>SE</option>
+                    <option value="SP" <?=($enderecoAtual->getEstadoendereco() == "SP")?"Selected":""?>>SP</option>
+                    <option value="TO" <?=($enderecoAtual->getEstadoendereco() == "TO")?"Selected":""?>>TO</option>		 
+               	</select>
+			</td>		
+		</tr>
+		<tr>
+			<td align="left">Telefone:</td>
+			<td colspan="2" align="left"><input type="text" name="telefoneendereco" id="telefoneendereco" value="<?=$enderecoAtual->getTelefoneendereco()?>" /></td>		
+		</tr>
+		<tr>
+			<td align="left">Referência:</td>
+			<td colspan="2" align="left"><input type="text" name="referenciaendereco" id="referenciaendereco" value="<?=$enderecoAtual->getReferenciaendereco()?>" /></td>		
+		</tr>
+		<tr>
+			<td colspan="3" class="subTitulo">DADOS DEFENSOR</td>
+		</tr>
+		<tr>
+			<td align="left">OAB:</td>
+			<td colspan="2" align="left"><input type="text" name="oabdefensor" id="oabdefensor"  value="<?=$defensor->getOabdefensor()?>"/></td>
+		</tr>
+		<tr>
+			<td align="left">Complemento OAB:</td>
+			<td colspan="2" align="left">
+				<select name="compoabdefensor" id="compoabdefensor" >
 					<option value="">Selecione</option>        
 					<option value="A" <?=($defensor->getCompoabdefensor() == "A")? "Selected":""?>>A</option>					
                 	<option value="B" <?=($defensor->getCompoabdefensor() == "B")? "Selected":""?>>B</option>
@@ -293,9 +378,9 @@ if(isset($_GET['cadastro']) && !isset($_GET['paramentrosDefensor']))
 			</td>
 		</tr>
 		<tr>
-			<td>Estado OAB:</td>
-			<td colspan="2">
-				<select name="estadoOABCadastro" id="estadoOABCadastro" >
+			<td align="left">Estado OAB:</td>
+			<td colspan="2" align="left">
+				<select name="estadooabdefensor" id="estadooabdefensor" >
 	                    <option value="AC" <?=($defensor->getEstadooabdefensor() == "AC")?"Selected":""?>>AC</option>
 	                    <option value="AL" <?=($defensor->getEstadooabdefensor() == "AL")?"Selected":""?>>AL</option>
 	                    <option value="AM" <?=($defensor->getEstadooabdefensor() == "AM")?"Selected":""?>>AM</option>
@@ -327,19 +412,23 @@ if(isset($_GET['cadastro']) && !isset($_GET['paramentrosDefensor']))
 			</td>
 		</tr>
 		<tr>
-			<td>Usuário:</td>
-			<td colspan="2">
+			<td colspan="3" class="subTitulo">DADOS DE USUÁRIO DE ACESSO</td>
+		</tr>
+		<tr>
+			<td align="left">Usuário:</td>
+			<td colspan="2" align="left">
 				<input type="text" id="usuario" name="usuario" value="<?=$usuarios->getUsuario()?>"/>
 			</td>
 		</tr>
 		<tr>
-			<td>Senha:</td>
-			<td>
+			<td align="left">Senha:</td>
+			<td width="194" align="left">
 				<input type="password" id="senha" name="senha" value="<?=$usuarios->getSenha()?>"/>
 			</td>
-			<td width="49"><input type="button" name="submit" id="submit" onclick="cadastra();" value="<?=(isset($_GET['idPessoa']))?"Alterar":"Cadastrar"?>"/></td>
+			<td width="330" align="left"><input type="button" name="submit" id="submit" onclick="cadastra();" value="<?=(isset($_GET['idPessoa']))?"Alterar":"Cadastrar"?>"/></td>
 		</tr>
 	</table>
+	<br/><br/><br/>
 </form>
 <?php
 }

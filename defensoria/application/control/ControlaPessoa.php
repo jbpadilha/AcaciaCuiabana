@@ -19,21 +19,29 @@ class ControlaPessoa extends ControlGeral {
 				if(isset($GET['cpfpesquisa']) && $GET['cpfpesquisa'] != "")
 					$pessoa->setCpfpessoa(trim($GET['cpfpesquisa']));
 				if(isset($GET['nomePesquisa']) && $GET['nomePesquisa'] != "")
-					$pessoa->setNomepessoa(trim($GET['nomePesquisa']));
+				{
+					$pessoa->where("nomepessoa like '%".trim($GET['nomePesquisa'])."%'");
+				}
 				if($pessoa->find())
 				{
 					while($pessoa->fetch())
 					{
-						if(!$pessoa->isUsuario())
+						if(!$pessoa->isUsuario() && !$pessoa->isDefensor())
 							$arrayPessoa[] =  $pessoa->getIdpessoa();
 					}
-					session_start();
-					$_SESSION['pessoaPesquisa'] = $arrayPessoa;
+					if(count($arrayPessoa)>0)
+					{
+						session_start();
+						$_SESSION['pessoaPesquisa'] = $arrayPessoa;
+					}
+					else
+					{
+						$this->MENSAGEM_ERRO[] = Mensagens::getMensagem("PESSOA_NAO_ENCONTRADA");
+					}
 				}
 				else
 				{
 					$this->MENSAGEM_ERRO[] = Mensagens::getMensagem("PESSOA_NAO_ENCONTRADA");
-					
 				}
 			}
 			if(count($this->MENSAGEM_ERRO)>0)
@@ -41,11 +49,11 @@ class ControlaPessoa extends ControlGeral {
 				if(isset($GET['paramentrosPessoa']))
 				{
 					header("Location:../public/pessoa.php?cadastro=1&paramentrosPessoa={$GET['paramentrosPessoa']}
-					&comarca={$GET['comarca']}&tipoAcao={$GET['tipoAcao']}
-					&naturezaAcao={$GET['naturezaAcao']}&juizo={$GET['juizo']}
+					&idcomarca={$GET['idcomarca']}&idtipoacao={$GET['idtipoacao']}
+					&idnaturezaacao={$GET['idnaturezaacao']}&juizo={$GET['juizo']}
 					&idpessoaPromovente={$GET['idpessoaPromovente']}&idpessoaPromovido={$GET['idpessoaPromovido']}
-					&assunto={$GET['assunto']}&nomePromovente={$_GET['nomePromovente']}&nomePromovido={$_GET['nomePromovido']}
-					&nomeDefensor={$GET['nomeDefensor']}&idDefensor={$GET['idDefensor']}&tipoParte={$GET['tipoParte']}
+					&assuntoentrevista={$GET['assuntoentrevista']}&nomePromovente={$_GET['nomePromovente']}&nomePromovido={$_GET['nomePromovido']}
+					&nomeDefensor={$GET['nomeDefensor']}&iddefensor={$GET['iddefensor']}&tipoParte={$GET['tipoParte']}
 					&MensagemErro=".urlencode(serialize(Mensagens::getMensagem("PESSOA_NAO_ENCONTRADA"))));
 				}
 				elseif(isset($GET['paramentrosPessoaHipo']))
@@ -65,11 +73,11 @@ class ControlaPessoa extends ControlGeral {
 				if(isset($GET['paramentrosPessoa']))
 				{
 					header("Location:../public/pessoa.php?paramentrosPessoa={$GET['paramentrosPessoa']}
-					&comarca={$GET['comarca']}&tipoAcao={$GET['tipoAcao']}
-					&naturezaAcao={$GET['naturezaAcao']}&juizo={$GET['juizo']}
+					&idcomarca={$GET['idcomarca']}&idtipoacao={$GET['idtipoacao']}
+					&idnaturezaacao={$GET['idnaturezaacao']}&juizo={$GET['juizo']}
 					&idpessoaPromovente={$GET['idpessoaPromovente']}&idpessoaPromovido={$GET['idpessoaPromovido']}
-					&assunto={$GET['assunto']}&nomePromovente={$_GET['nomePromovente']}&tipoParte={$GET['tipoParte']}
-					&nomeDefensor={$GET['nomeDefensor']}&idDefensor={$GET['idDefensor']}&nomePromovido={$_GET['nomePromovido']}");	
+					&assuntoentrevista={$GET['assuntoentrevista']}&nomePromovente={$_GET['nomePromovente']}&tipoParte={$GET['tipoParte']}
+					&nomeDefensor={$GET['nomeDefensor']}&iddefensor={$GET['iddefensor']}&nomePromovido={$_GET['nomePromovido']}");	
 				}
 				elseif(isset($GET['paramentrosPessoaHipo']))
 				{
@@ -98,12 +106,13 @@ class ControlaPessoa extends ControlGeral {
 			if(!ProjetoUtil::verificaBrancoNulo($function))
 			{
 				$pessoa = new Pessoa();
+				$endereco = new Endereco();
 				if($POST['funcao'] == "cadastrar")
 				{
-					$this->preencheObjeto($pessoa, $POST);
+					$this->preencheObjeto($pessoa, $endereco, $POST);
 					if(count($this->MENSAGEM_ERRO)<=0)
 					{
-						$this->cadastrar($pessoa);						
+						$this->cadastrar($pessoa, $endereco);						
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO");
 						if(isset($POST['paramentrosPessoa']))
 						{
@@ -144,7 +153,8 @@ class ControlaPessoa extends ControlGeral {
 					if(!ProjetoUtil::verificaBrancoNulo($idPessoa))
 					{
 						$pessoa->setIdpessoa($idPessoa);
-						$this->deletar($pessoa);
+						$endereco->setIdpessoa($idPessoa);
+						$this->deletar($pessoa, $endereco);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
 						header("Location:../public/pessoa.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
@@ -157,12 +167,17 @@ class ControlaPessoa extends ControlGeral {
 				elseif($POST['funcao'] == "alterar")
 				{
 					$idPessoa = (isset($POST['idPessoa']))?$POST['idPessoa']:null;
+					$idEndereco = (isset($POST['idEndereco'])?$POST['idEndereco']:null);
 					if(!ProjetoUtil::verificaBrancoNulo($idPessoa))
-						$pessoa->setIdpessoa($POST['idPessoa']);
-					$this->preencheObjeto($pessoa, $POST);
+					{
+						$pessoa->setIdpessoa($idPessoa);
+						$endereco->setIdpessoa($idPessoa);
+						$endereco->setIdendereco($idEndereco);
+					}
+					$this->preencheObjeto($pessoa, $endereco, $POST);
 					if(count($this->MENSAGEM_ERRO)<=0)
 					{
-						$this->alterar($pessoa);
+						$this->alterar($pessoa, $endereco);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_ALTERAR"); 
 						header("Location:../public/pessoa.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
@@ -184,62 +199,21 @@ class ControlaPessoa extends ControlGeral {
 		}
 	}
 	
-	private function preencheObjeto(Pessoa $pessoa, $POST)
+	private function preencheObjeto(Pessoa $pessoa, Endereco $endereco, $POST)
 	{
-		$pessoa->setRgpessoa((isset($POST['rg']))?$POST['rg']:null);
-		$pessoa->setEmissorpessoa((isset($POST['emissor']))?$POST['emissor']:null);
-		$pessoa->setApelidopessoa((isset($POST['apelido']))?$POST['apelido']:null);
-		$pessoa->setNaturalidadepessoa((isset($POST['naturalidade']))?$POST['naturalidade']:null);
-		
-		$nome = (isset($POST['nomeCadastro']))?$POST['nomeCadastro']:null;
-		$sexo = (isset($POST['sexo']))?$POST['sexo']:null;
-		$cpf = (isset($POST['cpfCadastro']))?$POST['cpfCadastro']:null;
-		$estadocivil = (isset($POST['estadocivil']))?$POST['estadocivil']:null;
-		$dataNascimento = (isset($POST['datanascimento']))?$POST['datanascimento']:null;
-		if(ProjetoUtil::verificaBrancoNulo($nome))
-			$this->MENSAGEM_ERRO[] = "O nome deve ser preenchido.".Mensagens::getMensagem("CAMPO_OBRIGATORIO");
-		else
-			$pessoa->setNomepessoa(trim($nome));
-			
-		if(ProjetoUtil::verificaBrancoNulo($sexo))
-			$this->MENSAGEM_ERRO[] = "O sexo deve ser informado.".Mensagens::getMensagem("CAMPO_OBRIGATORIO");
-		else
-			$pessoa->setSexopessoa($sexo);
-		
-		if(ProjetoUtil::verificaBrancoNulo($cpf))
-			$this->MENSAGEM_ERRO[] = "O CPF deve ser informado.".Mensagens::getMensagem("CAMPO_OBRIGATORIO");
-		else
-			$pessoa->setCpfpessoa(trim($cpf));
-			
-		if(ProjetoUtil::verificaBrancoNulo($estadocivil))
-			$this->MENSAGEM_ERRO[] = "O Estado civil deve ser informado.".Mensagens::getMensagem("CAMPO_OBRIGATORIO");
-		else
-			$pessoa->setEstadocivilpessoa($estadocivil);
-		
-		if(ProjetoUtil::verificaBrancoNulo($dataNascimento))
-		{
-			$this->MENSAGEM_ERRO[] = "A data de nascimento deve ser informado.".Mensagens::getMensagem("CAMPO_OBRIGATORIO");
-		}
-		else {
-			$pessoa->setDatanascimentopessoa($dataNascimento);
-			$pessoa->setDatanascimentopessoa($pessoa->toDataNascimentoDB());
-		}
-			
+		$pessoa->_setFrom($POST);
+		$pessoa->setDatanascimentopessoa($pessoa->toDataNascimentoDB());
+		$endereco->_setFrom($POST);
+		$this->MENSAGEM_ERRO = array_merge($this->MENSAGEM_ERRO, $pessoa->validate(), $endereco->validate());
 	}
 	
-	public function cadastrar(Pessoa $pessoa)
+	public function cadastrar(Pessoa $pessoa, Endereco $endereco)
 	{
 		try {
-			if($pessoa->getNomepessoa()!=null && $pessoa->getSexopessoa()!=null && $pessoa->getCpfpessoa()!=null
-			&& $pessoa->getEstadocivilpessoa()!=null && $pessoa->getDatanascimentopessoa()!=null)
-			{
-				$pessoa->setDatacadastropessoa(date("Y-m-d H:i:s"));
-				$pessoa->save();
-			}
-			else
-			{
-				throw new Exception(Mensagens::getMensagem("CAMPO_OBRIGATORIO"));
-			}
+			$pessoa->setDatacadastropessoa(date("Y-m-d H:i:s"));
+			$pessoa->save();
+			$endereco->setIdpessoa($pessoa->getIdpessoa());
+			$endereco->save();
 		}
 		catch (Exception $e)
 		{
@@ -247,11 +221,13 @@ class ControlaPessoa extends ControlGeral {
 		}
 	}
 	
-	public function deletar(Pessoa $pessoa)
+	public function deletar(Pessoa $pessoa, Endereco $endereco)
 	{
 		try {
 			if($pessoa->getIdpessoa()!= null)
 			{
+				$endereco->find(true);
+				$endereco->delete();
 				$pessoa->delete();
 			}
 			else
@@ -265,19 +241,12 @@ class ControlaPessoa extends ControlGeral {
 		}
 	}
 	
-	public function alterar(Pessoa $pessoa)
+	public function alterar(Pessoa $pessoa, Endereco $endereco)
 	{
 		try
 		{
-			if($pessoa->getNomepessoa()!=null && $pessoa->getSexopessoa()!=null && $pessoa->getCpfpessoa()!=null
-			&& $pessoa->getEstadocivilpessoa()!=null && $pessoa->getDatanascimentopessoa()!=null)
-			{
-				$pessoa->update();
-			}
-			else
-			{
-				throw new Exception(Mensagens::getMensagem("CAMPO_OBRIGATORIO"));
-			}
+			$pessoa->update();
+			$endereco->update();
 		}
 		catch (Exception $e)
 		{

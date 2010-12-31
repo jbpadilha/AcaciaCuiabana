@@ -25,7 +25,6 @@ class Endereco extends Lumine_Base{
      */
     protected function _initialize()
     {
-		# 
         
         $this->_addField("idendereco", "idendereco", "int", 11, array('primary' => true, 'notnull' => true, 'autoincrement' => true));
         $this->_addField('idpessoa', 'idpessoa', 'int', 11, array('foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE', 'linkOn' => 'idpessoa', 'class' => 'Pessoa'));
@@ -221,6 +220,21 @@ class Endereco extends Lumine_Base{
     # END AUTOCODE                                         #
     #------------------------------------------------------#
     #### END AUTOCODE
+    
+	public function validate(){
+		
+		// limpa os validators anteriores
+		Lumine_Validator_PHPValidator::clearValidations($this);
+		
+		// adicionando as regras 
+		Lumine_Validator_PHPValidator::addValidation($this, 'logradouroendereco', Lumine_Validator::REQUIRED_STRING, 'Informe o Logradouro corretamente');
+		Lumine_Validator_PHPValidator::addValidation($this, 'cependereco', Lumine_Validator::REQUIRED_STRING, 'Informe o CEP corretamente');
+		Lumine_Validator_PHPValidator::addValidation($this, 'cidadeendereco', Lumine_Validator::REQUIRED_STRING, 'Informe a Cidade corretamente');
+		Lumine_Validator_PHPValidator::addValidation($this, 'estadoendereco', Lumine_Validator::REQUIRED_STRING, 'Informe o estado corretamente');
+		
+		return parent::validate();
+	}
+	
 }
 
 ?>
