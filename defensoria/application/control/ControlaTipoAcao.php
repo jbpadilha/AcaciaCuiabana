@@ -5,7 +5,14 @@ require_once ('ControlGeral.php');
 class ControlaTipoAcao extends ControlGeral {
 	
 	public function permiteAcesso($grupo) {
-		return true;
+		if($grupo == GruposUsuarios::$GRUPO_ADMIN)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	public function get($GET) {

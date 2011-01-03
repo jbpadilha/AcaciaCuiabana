@@ -12,6 +12,11 @@ class ParteProcesso extends Lumine_Base{
 	public $idprocesso;		 	 	 	 	 	 	
 	public $iddefensor;
 	
+	public $TIPO_PARTE_PROMOVENTE = 1;
+	public $TIPO_PARTE_PROMOVIDO = 2;
+	public $TIPO_PARTE_PROMOVENTE_TXT = "Promovente";
+	public $TIPO_PARTE_PROMOVIDO_TXT = "Promovido";
+	
 	/**
      * Inicia os valores da classe
      * @author João Batista Padilha e Silva
@@ -127,7 +132,58 @@ class ParteProcesso extends Lumine_Base{
     # END AUTOCODE                                         #
     #------------------------------------------------------#
     #### END AUTOCODE
+	public function getTipoParteTxt()
+	{
+		if($this->getTipoparte() == $this->TIPO_PARTE_PROMOVENTE)
+		{
+			return $this->TIPO_PARTE_PROMOVENTE_TXT;
+		}
+		else
+		{
+			return $this->TIPO_PARTE_PROMOVIDO_TXT;
+		}
+	}
 	
+	public function getIdParteProcessoAssistido($idProcesso)
+	{
+		$this->setIdprocesso($idProcesso);
+		$this->where("iddefensor is not null");
+		if($this->find(true))
+		{
+			return $this->getIdparteprocesso();
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	/**
+	 * 
+	 * @return Pessoa
+	 */
+	public function getPessoa()
+	{
+		$pessoa = new Pessoa();
+		$pessoa->setIdpessoa($this->getIdpessoa());
+		$pessoa->find(true);
+		return $pessoa;
+	}
+	
+	/**
+	 * 
+	 * @return Defensor
+	 */
+	public function getDefensor()
+	{
+		$defensor = new Defensor();
+		if($this->getIddefensor() != null)
+		{
+			$defensor->setIddefensor($this->getIddefensor());
+			$defensor->find(true);
+		}
+		return $defensor;
+	}
 }
 
 ?>

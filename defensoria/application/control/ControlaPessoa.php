@@ -7,7 +7,15 @@ class ControlaPessoa extends ControlGeral {
 	private $arrayPessoa = array();
 	
 	public function permiteAcesso($grupo) {
-		return true;
+		if($grupo == GruposUsuarios::$GRUPO_ADMIN || $grupo == GruposUsuarios::$GRUPO_ATENDENTE
+		|| $grupo == GruposUsuarios::$GRUPO_DEFENSOR || $grupo == GruposUsuarios::$GRUPO_ESTAGIARIO)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	public function get($GET) {
@@ -16,8 +24,8 @@ class ControlaPessoa extends ControlGeral {
 			if(isset($GET['pesquisa']))
 			{
 				$pessoa = new Pessoa();
-				if(isset($GET['cpfpesquisa']) && $GET['cpfpesquisa'] != "")
-					$pessoa->setCpfpessoa(trim($GET['cpfpesquisa']));
+				if(isset($GET['cpfPesquisa']) && $GET['cpfPesquisa'] != "")
+					$pessoa->setCpfpessoa(trim($GET['cpfPesquisa']));
 				if(isset($GET['nomePesquisa']) && $GET['nomePesquisa'] != "")
 				{
 					$pessoa->where("nomepessoa like '%".trim($GET['nomePesquisa'])."%'");
@@ -54,7 +62,7 @@ class ControlaPessoa extends ControlGeral {
 					&idpessoaPromovente={$GET['idpessoaPromovente']}&idpessoaPromovido={$GET['idpessoaPromovido']}
 					&assuntoentrevista={$GET['assuntoentrevista']}&nomePromovente={$_GET['nomePromovente']}&nomePromovido={$_GET['nomePromovido']}
 					&nomeDefensor={$GET['nomeDefensor']}&iddefensor={$GET['iddefensor']}&tipoParte={$GET['tipoParte']}
-					&MensagemErro=".urlencode(serialize(Mensagens::getMensagem("PESSOA_NAO_ENCONTRADA"))));
+					&mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 				}
 				elseif(isset($GET['paramentrosPessoaHipo']))
 				{
@@ -65,7 +73,7 @@ class ControlaPessoa extends ControlGeral {
 				}
 				else
 				{
-					header("Location:../public/pessoa.php?cadastro=1&MensagemErro=".urlencode(serialize(Mensagens::getMensagem("PESSOA_NAO_ENCONTRADA"))));
+					header("Location:../public/pessoa.php?cadastro=1&mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 				}
 			}
 			else
@@ -123,7 +131,7 @@ class ControlaPessoa extends ControlGeral {
 							&naturezaAcao={$POST['naturezaAcao']}&juizo={$POST['juizo']}
 							&idpessoaPromovente={$POST['idpessoaPromovente']}&idpessoaPromovido={$POST['idpessoaPromovido']}
 							&assunto={$POST['assunto']}&nomePromovente={$POST['nomePromovente']}&tipoParte={$POST['tipoParte']}
-							&nomeDefensor={$POST['nomeDefensor']}&idDefensor={$POST['idDefensor']}&nomePromovido={$POST['nomePromovido']}");
+							&nomeDefensor={$POST['nomeDefensor']}&iddefensor={$POST['iddefensor']}&nomePromovido={$POST['nomePromovido']}");
 						}
 						else
 						{
@@ -138,7 +146,7 @@ class ControlaPessoa extends ControlGeral {
 							&comarca={$POST['comarca']}&tipoAcao={$POST['tipoAcao']}
 							&naturezaAcao={$POST['naturezaAcao']}&juizo={$POST['juizo']}
 							&idpessoaPromovente={$POST['idpessoaPromovente']}&idpessoaPromovido={$POST['idpessoaPromovido']}
-							&assunto={$POST['assunto']}&nomeDefensor={$$POST['nomeDefensor']}&idDefensor={$POST['idDefensor']}
+							&assunto={$POST['assunto']}&nomeDefensor={$$POST['nomeDefensor']}&iddefensor={$POST['iddefensor']}
 							&nomePromovente={$POST['nomePromovente']}&nomePromovido={$POST['nomePromovido']}&tipoParte={$POST['tipoParte']}");
 						}
 						else

@@ -6,10 +6,13 @@ include 'carregamentoInicial.php';
 	<head>
 		<script type="text/javascript">
 		$(document).ready(function(){
+			$("#usuario").alphanumeric(); 
 			$("#datanascimentopessoa").mask("99/99/9999");
 			$("#cpfpessoa").mask("999.999.999-99");
-			$("#cpfpesquisa").mask("999.999.999-99");
+			$("#cpfPesquisa").mask("999.999.999-99");
 			$("#cependereco").mask("99999-999");
+			$("#rgpessoa").numeric();
+			$("#numeroendereco").numeric();
 		});
 			function pesquisar()
 			{
@@ -135,11 +138,11 @@ include 'carregamentoInicial.php';
 			</tr>
 			<tr>
 				<td>Nome:</td>
-				<td colspan="2" align="left"><input type="text" name="nomePesquisa" id="nomePesquisa" style="text-transform: lowercase;" /></td>
+				<td colspan="2" align="left"><input type="text" name="nomePesquisa" id="nomePesquisa" style="text-transform: uppercase;" /></td>
 			</tr>
 			<tr>
 				<td>CPF:</td>
-				<td><input type="text" name="cpfpesquisa" id="cpfpesquisa" /></td>
+				<td><input type="text" name="cpfPesquisa" id="cpfPesquisa" /></td>
 				<td><input type="button" name="submit" id="submit" value="Pesquisar" onClick="pesquisar();"/></td>
 			</tr>
 		</table>
@@ -262,7 +265,7 @@ if(isset($_GET['cadastro']))
 		</tr>
 		<tr>
 			<td align="left">Cidade:</td>
-			<td colspan="2" align="left"><input type="text" name="cidadeendereco" id="cidadeendereco" value="<?=$enderecoAtual->getCidadeendereco()?>" /></td>		
+			<td colspan="2" align="left"><input type="text" name="cidadeendereco" id="cidadeendereco" value="<?=$enderecoAtual->getCidadeendereco()?>" style="text-transform: uppercase;"/></td>		
 		</tr>
 		<tr>
 			<td align="left">Estado:</td>
@@ -321,41 +324,41 @@ else if(isset($_SESSION['pessoaPesquisa']))
 	<input type="hidden" id="control" name="control" value="Pessoa"/>
 	<input type="hidden" id="funcao" name="funcao" value=""/>
 	<input type="hidden" id="idPessoa" name="idPessoa" value=""/>
-<table>
-	<tr>
-		<td colspan="4">&nbsp;</td>
-	</tr>
-	<tr>
-		<td colspan="4"><strong>Pessoa Pesquisada</strong></td>
-	</tr>
-	<tr>
-		<td width="126">&nbsp;</td>
-		<td colspan="3">&nbsp;</td>
-	</tr>
-	<tr>
-		<td><strong>Nome</strong></td>
-		<td colspan="3"><strong>CPF</strong></td>
-	</tr>
-	<tr>
-		<td><?=$pessoaAtual->getNomepessoa()?></td>
-		<td width="243"><?=$pessoaAtual->getCpfpessoa()?></td>
-		<?php 
-		if(!isset($_GET['paramentrosPessoa']) && !isset($_GET['paramentrosPessoaHipo']))
-		{
-		?>
-		<td width="31"><a href="javascript:void(0);" onClick="alterar(<?=$pessoaAtual->getIdpessoa()?>)"><img src="images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
-		<td width="20"><a href="javascript:void(0);" onClick="deletar(<?=$pessoaAtual->getIdpessoa()?>)"><img src="images/botao_apagar.gif" width="16" height="16" border="0" /></a></td>
-  		<?php 
-		}
-		else
-		{
-  		?>
-  		<td width="20" colspan="2"><a href="javascript:void(0);" onClick="selecionarPessoa(<?=$pessoaAtual->getIdpessoa()?>,'<?=$pessoaAtual->getNomepessoa()?>')"><img src="images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
-  		<?php 
-		}
-  		?>
-  	</tr>
-</table>
+	<table>
+		<tr>
+			<td colspan="4">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="4"><strong>Pessoa Pesquisada</strong></td>
+		</tr>
+		<tr>
+			<td width="126">&nbsp;</td>
+			<td colspan="3">&nbsp;</td>
+		</tr>
+		<tr>
+			<td><strong>Nome</strong></td>
+			<td colspan="3"><strong>CPF</strong></td>
+		</tr>
+		<tr>
+			<td><?=$pessoaAtual->getNomepessoa()?></td>
+			<td width="243"><?=$pessoaAtual->getCpfpessoa()?></td>
+			<?php 
+			if(!isset($_GET['paramentrosPessoa']) && !isset($_GET['paramentrosPessoaHipo']))
+			{
+			?>
+			<td width="31"><a href="javascript:void(0);" onClick="alterar(<?=$pessoaAtual->getIdpessoa()?>)"><img src="images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
+			<td width="20"><a href="javascript:void(0);" onClick="deletar(<?=$pessoaAtual->getIdpessoa()?>)"><img src="images/botao_apagar.gif" width="16" height="16" border="0" /></a></td>
+	  		<?php 
+			}
+			else
+			{
+	  		?>
+	  		<td width="20" colspan="2"><a href="javascript:void(0);" onClick="selecionarPessoa(<?=$pessoaAtual->getIdpessoa()?>,'<?=$pessoaAtual->getNomepessoa()?>')"><img src="images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
+	  		<?php 
+			}
+	  		?>
+	  	</tr>
+	</table>
 </form>
 <?php
 unset($_SESSION['pessoaPesquisa']); 

@@ -16,15 +16,19 @@ class Mensagens {
 		$this->arrayMensagens["PESSOA_NAO_ENCONTRADA"] = "A pessoa pesquisada não foi encontrado.";
 		//DEFENSOR
 		$this->arrayMensagens["DEFENSOR_NAO_ENCONTRADO"] = "O defensor pesquisado não foi encontrado.";
+		//Processo
+		$this->arrayMensagens["PROCESSO_NAO_ENCONTRADO"] = "Nenhum processo foi encontrado.";
 		
 		//CAMPOS
 		$this->arrayMensagens["USUARIO_SENHA_INCORRETO"] = "Usuario ou senha incorreto. Tente novamente.";
 		$this->arrayMensagens["CAMPO_OBRIGATORIO"] = "Por favor, preencher todos os campos obrigatórios.";
+		$this->arrayMensagens["NUMERO_PROCESSO_OBRIGATORIO"] = "Por favor, preencher o número do Processo.";
 		
 		//MENSAGENS DE SUCESSO
 		$this->arrayMensagens["SUCESSO_CADASTRO"] = "Cadastro realizado com sucesso.";
 		$this->arrayMensagens["SUCESSO_DELETAR"] = "Deletado com sucesso.";
 		$this->arrayMensagens["SUCESSO_ALTERAR"] = "Alterado com sucesso.";
+		$this->arrayMensagens["SUCESSO_ANALISAR_PROCESSO"] = "Processo analisado com sucesso.";
 	}
 	
 	public function getMensagem($chavemensagem)

@@ -28,6 +28,8 @@ class ControlaUsuarios extends ControlGeral {
 			if(!ProjetoUtil::verificaBrancoNulo($function))
 			{
 				$usuarios = new Usuarios();
+				$pessoa = new Pessoa();
+				$endereco = new Endereco();
 				if($POST['funcao'] == "cadastrar")
 				{
 					$this->preencheObjeto($usuarios, $pessoa, $endereco, $POST);

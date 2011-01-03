@@ -93,7 +93,14 @@ class ControlaVara extends ControlGeral {
 	 * @param  int $grupo
 	 */
 	public function permiteAcesso($grupo) {
-		return true;
+	if($grupo == GruposUsuarios::$GRUPO_ADMIN)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	public function cadastrar(Vara $vara)

@@ -7,7 +7,14 @@ class ControlaDefensor extends ControlGeral {
 	private $arrayDefensor = array();
 	
 	public function permiteAcesso($grupo) {
-		return true;
+		if($grupo == GruposUsuarios::$GRUPO_ADMIN)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	public function get($GET) {
@@ -104,9 +111,9 @@ class ControlaDefensor extends ControlGeral {
 				}
 				elseif($POST['funcao'] == "deletar")
 				{
-					$idPessoa = (isset($POST['idPessoa']))?$POST['idPessoa']:null;
-					$idDefensor = (isset($POST['idDefensor']))?$POST['idDefensor']:null;
-					$idUsuario = (isset($POST['idUsuario']))?$POST['idUsuario']:null;
+					$idPessoa = (isset($POST['idpessoa']))?$POST['idpessoa']:null;
+					$idDefensor = (isset($POST['iddefensor']))?$POST['iddefensor']:null;
+					$idUsuario = (isset($POST['idusuario']))?$POST['idusuario']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($idPessoa) && !ProjetoUtil::verificaBrancoNulo($idDefensor) && !ProjetoUtil::verificaBrancoNulo($idUsuario))
 					{
 						$pessoa->setIdpessoa($idPessoa);
@@ -125,10 +132,10 @@ class ControlaDefensor extends ControlGeral {
 				}
 				elseif($POST['funcao'] == "alterar")
 				{
-					$idPessoa = (isset($POST['idPessoa']))?$POST['idPessoa']:null;
-					$idDefensor = (isset($POST['idDefensor']))?$POST['idDefensor']:null;
-					$idUsuario = (isset($POST['idUsuario']))?$POST['idUsuario']:null;
-					$idEndereco = (isset($POST['idEndereco'])?$POST['idEndereco']:null);
+					$idPessoa = (isset($POST['idpessoa']))?$POST['idpessoa']:null;
+					$idDefensor = (isset($POST['iddefensor']))?$POST['iddefensor']:null;
+					$idUsuario = (isset($POST['idusuario']))?$POST['idusuario']:null;
+					$idEndereco = (isset($POST['idendereco'])?$POST['idendereco']:null);
 					if(!ProjetoUtil::verificaBrancoNulo($idPessoa) && !ProjetoUtil::verificaBrancoNulo($idDefensor) && !ProjetoUtil::verificaBrancoNulo($idUsuario) && !ProjetoUtil::verificaBrancoNulo($idEndereco))
 					{
 						$pessoa->setIdpessoa($idPessoa);

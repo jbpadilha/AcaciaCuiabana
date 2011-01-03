@@ -139,7 +139,14 @@ class ControlaComarca extends ControlGeral{
 	 * @param unknown_type unknown_type $grupo
 	 */
 	public function permiteAcesso($grupo) {
-		return true;	
+		if($grupo == GruposUsuarios::$GRUPO_ADMIN)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}	
 	}
 
 
