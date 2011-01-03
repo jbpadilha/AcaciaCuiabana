@@ -19,10 +19,13 @@ else
 <script type="text/javascript">
 
 $(document).ready(function(){
+	$("#usuario").alphanumeric(); 
 	$("#datanascimentopessoa").mask("99/99/9999");
 	$("#cpfpessoa").mask("999.999.999-99");
 	$("#cpfPesquisa").mask("999.999.999-99");
 	$("#cependereco").mask("99999-999");
+	$("#rgpessoa").numeric();
+	$("#numeroendereco").numeric();
 });
 
 function pesquisar()
@@ -38,18 +41,18 @@ function pesquisar()
 	}
 }
 
-function alterar(idPessoa,idDefensor, idUsuario)
+function alterar(idpessoa,iddefensor, idusuario)
 {
 	var formulario = $('#deletaAltera').serialize(true);
-	carregaPagina('defensor.php?idPessoa='+idPessoa+'&idDefensor='+idDefensor+'&idUsuario='+idUsuario+'&cadastro=true','page');
+	carregaPagina('defensor.php?idpessoa='+idpessoa+'&iddefensor='+iddefensor+'&idusuario='+idusuario+'&cadastro=true','page');
 }
 
 function deletar(idPessoa,idDefensor, idUsuario)
 {
 	document.deletaAltera.funcao.value = "deletar";
-	document.deletaAltera.idPessoa.value = idPessoa;
-	document.deletaAltera.idDefensor.value = idDefensor;
-	document.deletaAltera.idUsuario.value = idUsuario;
+	document.deletaAltera.idpessoa.value = idpessoa;
+	document.deletaAltera.iddefensor.value = iddefensor;
+	document.deletaAltera.idusuario.value = idusuario;
 	var formulario = $('#deletaAltera').serialize(true);
 	enviaFormulario($('#deletaAltera').attr("action"),'page',formulario);
 }
@@ -108,9 +111,9 @@ function selecionarDefensor(defensor,nomeDefensor)
 	carregaPagina(
 			'entrevista.php?nomeDefensor='
 			+nomeDefensor+
-			'&idDefensor='
+			'&iddefensor='
 			+defensor+
-			'&paramentrosDefensor=<?=$_GET['paramentrosDefensor']?>&comarca=<?=$_GET['idcomarca']?>&tipoAcao=<?=$_GET['idtipoacao']?>&naturezaAcao=<?=$_GET['idnaturezaacao']?>&juizo=<?=$_GET['juizo']?>&idpessoaPromovente=<?=$_GET['idpessoaPromovente']?>&idpessoaPromovido=<?=$_GET['idpessoaPromovido']?>&assunto=<?=$_GET['assuntoentrevista']?>&nomePromovente=<?=$_GET['nomePromovente']?>&nomePromovido=<?=$_GET['nomePromovido']?>','page');
+			'&paramentrosDefensor=<?=$_GET['paramentrosDefensor']?>&idcomarca=<?=$_GET['idcomarca']?>&idtipoacao=<?=$_GET['idtipoacao']?>&idnaturezaacao=<?=$_GET['idnaturezaacao']?>&juizo=<?=$_GET['juizo']?>&idpessoaPromovente=<?=$_GET['idpessoaPromovente']?>&idpessoaPromovido=<?=$_GET['idpessoaPromovido']?>&assuntoentrevista=<?=$_GET['assuntoentrevista']?>&nomePromovente=<?=$_GET['nomePromovente']?>&nomePromovido=<?=$_GET['nomePromovido']?>','page');
 }
 <?php 
 }
@@ -124,15 +127,15 @@ function selecionarDefensor(defensor,nomeDefensor)
 	{
 	?>
 	<input type="hidden" id="paramentrosDefensor" name="paramentrosDefensor" value="<?=$_GET['paramentrosDefensor']?>">
-	<input type="hidden" id="comarca" name="comarca" value="<?=$_GET['comarca']?>">
-	<input type="hidden" id="tipoAcao" name="tipoAcao" value="<?=$_GET['tipoAcao']?>">
-	<input type="hidden" id="naturezaAcao" name="naturezaAcao" value="<?=$_GET['naturezaAcao']?>">
+	<input type="hidden" id="idcomarca" name="idcomarca" value="<?=$_GET['idcomarca']?>">
+	<input type="hidden" id="idtipoacao" name="idtipoacao" value="<?=$_GET['idtipoacao']?>">
+	<input type="hidden" id="idnaturezaacao" name="idnaturezaacao" value="<?=$_GET['idnaturezaacao']?>">
 	<input type="hidden" id="juizo" name="juizo" value="<?=$_GET['juizo']?>">
 	<input type="hidden" id="idpessoaPromovente" name="idpessoaPromovente" value="<?=$_GET['idpessoaPromovente']?>">
 	<input type="hidden" id="nomePromovente" name="nomePromovente" value="<?=$_GET['nomePromovente']?>">
 	<input type="hidden" id="idpessoaPromovido" name="idpessoaPromovido" value="<?=$_GET['idpessoaPromovido']?>">
 	<input type="hidden" id="nomePromovido" name="nomePromovido" value="<?=$_GET['nomePromovido']?>">
-	<input type="hidden" id="assunto" name="assunto" value="<?=$_GET['assunto']?>">
+	<input type="hidden" id="assuntoentrevista" name="assuntoentrevista" value="<?=$_GET['assuntoentrevista']?>">
 	<?php 
 	}
 	?>
@@ -213,26 +216,26 @@ if(isset($_GET['cadastro']) && !isset($_GET['paramentrosDefensor']))
 	$defensor = new Defensor();
 	$usuarios = new Usuarios();
 	$enderecoAtual = new Endereco();
-	if(isset($_GET['idPessoa']) && isset($_GET['idDefensor']) && isset($_GET['idUsuario']))
+	if(isset($_GET['idpessoa']) && isset($_GET['idpefensor']) && isset($_GET['idusuario']))
 	{
-		$pessoaAtual->setIdpessoa($_GET['idPessoa']);
+		$pessoaAtual->setIdpessoa($_GET['idpessoa']);
 		$pessoaAtual->find(true);
-		$enderecoAtual->setIdpessoa($_GET['idPessoa']);
+		$enderecoAtual->setIdpessoa($_GET['idpessoa']);
 		$enderecoAtual->find(true);
-		$defensor->setIddefensor($_GET['idDefensor']);
+		$defensor->setIddefensor($_GET['iddefensor']);
 		$defensor->find(true);
-		$usuarios->setIdusuario($_GET['idUsuario']);
+		$usuarios->setIdusuario($_GET['idusuario']);
 		$usuarios->find(true);
 	}
 ?>
 <br/><br/><br/><br/>
 <form name="defensor" id="defensor" method="post" action="../application/recebePostGet.php" >
 	<input type="hidden" id="control" name="control" value="Defensor"/>
-	<input type="hidden" id="funcao" name="funcao" value="<?=(isset($_GET['idPessoa']))?"alterar":"cadastrar"?>"/>
-	<input type="hidden" id="idPessoa" name="idPessoa" value="<?=$pessoaAtual->getIdpessoa()?>"/>
-	<input type="hidden" id="idDefensor" name="idDefensor" value="<?=$defensor->getIddefensor()?>"/>
-	<input type="hidden" id="idUsuario" name="idUsuario" value="<?=$usuarios->getIdusuario()?>"/>
-	<input type="hidden" id="idEndereco" name="idEndereco" value="<?=$enderecoAtual->getIdendereco()?>"/>
+	<input type="hidden" id="funcao" name="funcao" value="<?=(isset($_GET['idpessoa']))?"alterar":"cadastrar"?>"/>
+	<input type="hidden" id="idpessoa" name="idpessoa" value="<?=$pessoaAtual->getIdpessoa()?>"/>
+	<input type="hidden" id="iddefensor" name="iddefensor" value="<?=$defensor->getIddefensor()?>"/>
+	<input type="hidden" id="idusuario" name="idusuario" value="<?=$usuarios->getIdusuario()?>"/>
+	<input type="hidden" id="idendereco" name="idendereco" value="<?=$enderecoAtual->getIdendereco()?>"/>
 	<table width="644">
 		<tr>
 			<td colspan="3"><span class="subTitulo">DADOS PESSOAIS</span></td>
@@ -312,7 +315,7 @@ if(isset($_GET['cadastro']) && !isset($_GET['paramentrosDefensor']))
 		</tr>
 		<tr>
 			<td align="left">Cidade:</td>
-			<td colspan="2" align="left"><input type="text" name="cidadeendereco" id="cidadeendereco" value="<?=$enderecoAtual->getCidadeendereco()?>" /></td>		
+			<td colspan="2" align="left"><input type="text" name="cidadeendereco" id="cidadeendereco" value="<?=$enderecoAtual->getCidadeendereco()?>" style="text-transform: uppercase;"/></td>		
 		</tr>
 		<tr>
 			<td align="left">Estado:</td>
@@ -438,9 +441,9 @@ else if(isset($_SESSION['defensorPesquisa']))
 <form name="deletaAltera" id="deletaAltera" method="post" action="../application/recebePostGet.php" >
 	<input type="hidden" id="control" name="control" value="Defensor"/>
 	<input type="hidden" id=funcao name="funcao" value=""/>
-	<input type="hidden" id="idPessoa" name="idPessoa" value=""/>
-	<input type="hidden" id="idDefensor" name="idDefensor" value=""/>
-	<input type="hidden" id="idUsuario" name="idUsuario" value=""/>
+	<input type="hidden" id="idpessoa" name="idpessoa" value=""/>
+	<input type="hidden" id="iddefensor" name="iddefensor" value=""/>
+	<input type="hidden" id="idusuario" name="idusuario" value=""/>
 <table>
 	<tr>
 		<td colspan="4">&nbsp;</td>

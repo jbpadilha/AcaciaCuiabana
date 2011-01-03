@@ -9,7 +9,6 @@ if(isset($_GET['mensagemErro']) || isset($_SESSION['mensagemErro']))
 		echo $mensagem."<br/>";
 	}
 	echo "' );";
-	echo "alert('{$mensagem}')";
 }
 if(isset($_GET['mensagemSucesso']) || isset($_SESSION['mensagemSucesso']))
 {   
@@ -20,6 +19,5 @@ if(isset($_GET['mensagemSucesso']) || isset($_SESSION['mensagemSucesso']))
 		echo $mensagem."<br/>";
 	}
 	echo "' );";
-	echo "alert('{$mensagem}')";
 }
 echo '</script>';

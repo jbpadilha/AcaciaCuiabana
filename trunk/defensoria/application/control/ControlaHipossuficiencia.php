@@ -5,7 +5,15 @@ require_once ('ControlGeral.php');
 class ControlaHipossuficiencia extends ControlGeral {
 	
 	public function permiteAcesso($grupo) {
-		return true;
+		if($grupo == GruposUsuarios::$GRUPO_ADMIN || $grupo == GruposUsuarios::$GRUPO_ATENDENTE
+		|| $grupo == GruposUsuarios::$GRUPO_DEFENSOR || $grupo == GruposUsuarios::$GRUPO_ESTAGIARIO)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	public function get($GET) {

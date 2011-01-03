@@ -26,5 +26,17 @@
 			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Hipossuficiencia','page')">Hipossuficiência</a></li>
 		</ul>	
 	</li>
+	<li><a href="#">Processos</a>
+		<ul class="sub_menu">
+			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Processos','page')">Acompanhar/Movimentar Processo</a></li>
+		</ul>	
+	</li>
+	<li><a href="#">Relatórios</a>
+		<ul class="sub_menu">
+			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Relatorio','page')">Convite</a></li>
+			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Relatorio','page')">Ficha Hipossuficiência</a></li>
+			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Relatorio','page')">Atendimento/Entrevista</a></li>
+		</ul>	
+	</li>
 	<li><a href="javascript:void(0);" onclick="document.location.href='../application/recebePostGet.php?sair=1';">Sair do Sistema</a></li>
 </ul>
