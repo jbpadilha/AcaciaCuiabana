@@ -26,6 +26,17 @@ include 'carregamentoInicial.php';
 			{
 				carregaPagina('processos.php?processoAnalisa='+idprocesso,'page');
 			}
+		
+			function alterarProcesso(idprocesso)
+			{
+				carregaPagina('processos.php?processoAltera='+idprocesso,'page');
+			}
+
+			function visualizarProcesso(idprocesso)
+			{
+				carregaPagina('processos.php?processoVisualiza='+idprocesso,'page');
+			}
+			
 			function analisar()
 			{
 				if ( $('#idcomarca').val() == '' ) {
@@ -117,8 +128,11 @@ include 'carregamentoInicial.php';
 						<td><?=$parteProcessoAssistido->getPessoa()->getNomepessoa();?></td>
 						<td width="255"><?=$parteProcessoAssistido->getDefensor()->getPessoa()->getNomepessoa();?></td>
 						<td width="395">
-							Processo não analisado pelo Defensor.<br/>
-							<?php 
+							<?php
+							if($processo->getNumeroprocesso()==null || $processo->getIdvara() == null)
+							{
+								echo "Processo não analisado pelo Defensor.<br/>";
+							}
 							if($_SESSION['grupo'] == GruposUsuarios::$GRUPO_ADMIN || ($_SESSION['grupo'] == GruposUsuarios::$GRUPO_DEFENSOR && $_SESSION['loginusuario'] == $parteProcessoAssistido->getIddefensor()) )
 							{
 								if($processo->getNumeroprocesso()==null || $processo->getIdvara() == null)
@@ -152,25 +166,53 @@ include 'carregamentoInicial.php';
 			<?php 
 			unset($_SESSION['processoPesquisa']);	
 		}
-		if(isset($_GET['processoAnalisa']))
+		if(isset($_GET['processoAnalisa']) || isset($_GET['processoAltera']) || isset($_GET['processoVisualiza']))
 		{
 			$processo = new Processo();
-			$processo->setIdprocesso($_GET['processoAnalisa']);
-			
+			if(isset($_GET['processoAnalisa']))
+				$processo->setIdprocesso($_GET['processoAnalisa']);
+			elseif(isset($_GET['processoAltera']))
+				$processo->setIdprocesso($_GET['processoAltera']);
+			elseif(isset($_GET['processoVisualiza']))
+				$processo->setIdprocesso($_GET['processoVisualiza']);
+				
+				
 			$processo->find(true);
 			?>
 			<form name="analisaProcesso" id="analisaProcesso" method="post" action="../application/recebePostGet.php" >
 				<input type="hidden" id="control" name="control" value="Processos"/>
-				<input type="hidden" id="funcao" name="funcao" value="Analisar"/>
+				<input type="hidden" id="funcao" name="funcao" value="<?=(isset($_GET['processoAltera']))?"Alterar":"Analisar"?>"/>
 				<input type="hidden" id="idprocesso" name="idprocesso" value="<?=$processo->getIdprocesso()?>"/>
 				<table width="613">
 					<tr>
 						<td>Número do Processo:</td>
-						<td><input id="numeroprocesso" name="numeroprocesso" value="<?=$processo->getNumeroprocesso()?>"></td>
+						<td align="left">
+							<?php 
+							if(isset($_GET['processoVisualiza']))
+							{
+							 	echo $processo->getNumeroprocesso(); 
+							}
+							else {
+								?>
+								<input id="numeroprocesso" name="numeroprocesso" value="<?=$processo->getNumeroprocesso()?>">
+							<?
+							}
+							?>
+						</td>
 					</tr>
 					<tr>
 						<td width="269">Comarca:</td>
 						<td width="332" colspan="2" align="left">
+							<?php 
+							if(isset($_GET['processoVisualiza']))
+							{
+								$comarcaV = new Comarca();
+								$comarcaV->setIdcomarca($processo->getIdcomarca());
+								$comarcaV->find(true);
+								echo $comarcaV->getNomecomarca();
+							}
+							else {
+							?>
 							<select id="idcomarca" name="idcomarca">
 								<option value="">Selecione</option>
 								<?php 
@@ -184,11 +226,25 @@ include 'carregamentoInicial.php';
 								}
 								?>
 							</select>
+							<?php 
+							}
+							?>
 						</td>
 					</tr>
 					<tr>
 						<td>Vara:</td>
-						<td>
+						<td align="left">
+							<?php 
+							if(isset($_GET['processoVisualiza']))
+							{
+								$varaV = new Vara();
+								$varaV->setIdvara($processo->getIdvara());
+								$varaV->find(true);
+								echo $varaV->getCodvara()."-".$varaV->getNomevara();
+							}
+							else
+							{
+							?>
 							<select id="idvara" name="idvara">
 								<option value="">Selecione</option>
 								<?php 
@@ -202,11 +258,25 @@ include 'carregamentoInicial.php';
 								}
 								?>
 							</select>
+							<?php 
+							}
+							?>
 						</td>
 					</tr>
 					<tr>
 						<td>Tipo da Ação:</td>
 						<td colspan="2" align="left">
+							<?php 
+							if(isset($_GET['processoVisualiza']))
+							{
+								$tipoAcaoV = new TipoAcao();
+								$tipoAcaoV->setIdtipoacao($processo->getIdtipoacao());
+								$tipoAcaoV->find(true);
+								echo $tipoAcaoV->getTipoacao();
+							}
+							else
+							{
+							?>
 							<select id="idtipoacao" name="idtipoacao">
 								<option value="">Selecione</option>
 								<?php 
@@ -220,11 +290,25 @@ include 'carregamentoInicial.php';
 								}
 								?>
 							</select>
+							<?php 
+							}
+							?>
 						</td>
 					</tr>
 					<tr>
 						<td>Natureza da Ação:</td>
 						<td colspan="2" align="left">
+						<?php 
+						if(isset($_GET['processoVisualiza']))
+						{
+							$naturezaAcaoV = new NaturezaAcao();
+							$naturezaAcaoV->setIdnaturezaacao($processo->getIdnaturezaacao());
+							$naturezaAcaoV->find(true);
+							echo $naturezaAcaoV->getNaturezaacao();
+						}
+						else
+						{
+						?>
 							<select id="idnaturezaacao" name="idnaturezaacao">
 								<option value="">Selecione</option>
 								<?php 
@@ -238,16 +322,33 @@ include 'carregamentoInicial.php';
 								}
 								?>
 							</select>
+							<?php 
+						}
+							?>
 						</td>
 					</tr>
 					<tr>
 						<td>Juizo:</td>
 						<td colspan="2" align="left">
+						<?php 
+						if(isset($_GET['processoVisualiza']))
+						{
+							if($processo->getJuizo() == ProjetoUtil::$juizo_Primeiro_Grau)
+								echo ProjetoUtil::$juizo_Primeiro_Grau_TXT;
+							elseif($processo->getJuizo() == ProjetoUtil::$juizo_Segundo_Grau)
+								echo ProjetoUtil::$juizo_Segundo_Grau_TXT; 	
+						}
+						else
+						{
+						?>
 							<select id="juizo" name="juizo">
 								<option value="">Selecione</option>
 								<option value="<?=ProjetoUtil::$juizo_Primeiro_Grau?>" <?=$processo->getJuizo() == ProjetoUtil::$juizo_Primeiro_Grau? "selected":"" ?>><?=ProjetoUtil::$juizo_Primeiro_Grau_TXT?></option>
 								<option value="<?=ProjetoUtil::$juizo_Segundo_Grau?>" <?=$processo->getJuizo() == ProjetoUtil::$juizo_Segundo_Grau? "selected":"" ?>><?=ProjetoUtil::$juizo_Segundo_Grau_TXT?></option>
 							</select>
+						<?php 
+						}
+						?>
 						</td>
 					</tr>
 					<?php 
@@ -260,17 +361,22 @@ include 'carregamentoInicial.php';
 					?>
 					<tr>
 						<td>Parte <?=$parteProcesso->getTipoParteTxt();?><?=($parteProcesso->getIddefensor()!=null)?"(Assistido)":""?>:</td>
-						<td><?=$parteProcesso->getPessoa()->getNomepessoa()?></td>
+						<td align="left"><?=$parteProcesso->getPessoa()->getNomepessoa()?></td>
 					</tr>
 					<?php
 						} 
 					}
+					if(isset($_GET['processoAnalisa']) || isset($_GET['processoAltera']))
+					{
 					?>
 					<tr>
 						<td colspan="2">
 							<input type="button" name="submit" id="submit" value="Cadastrar" onClick="analisar();"/>
 						</td>
 					</tr>
+					<?php 
+					}
+					?>
 				</table>
 			</form>
 			<?php
