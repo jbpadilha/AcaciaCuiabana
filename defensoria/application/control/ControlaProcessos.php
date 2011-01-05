@@ -96,6 +96,20 @@ class ControlaProcessos extends ControlGeral {
 						throw new Exception();
 					}
 				}
+				elseif ($POST['funcao'] == "Alterar")
+				{
+					$this->preencheObjeto($processo,$POST);
+					if(count($this->MENSAGEM_ERRO)<=0)
+					{
+						$this->alterar($processo);						
+						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_ALTERAR"); 
+						header("Location:../public/processos.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+					}
+					else
+					{
+						throw new Exception();
+					}
+				}
 			}
 			else
 			{
