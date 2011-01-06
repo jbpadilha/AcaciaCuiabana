@@ -1,6 +1,6 @@
 <?php
 
-require_once ('control\ControlGeral.php');
+require_once ('ControlGeral.php');
 
 class ControlaUsuarios extends ControlGeral {
 	
