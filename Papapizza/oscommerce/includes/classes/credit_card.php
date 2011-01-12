@@ -26,13 +26,14 @@
 
 /* Class constructor */
 
-    function osC_CreditCard($number = '', $exp_month = '', $exp_year = '') {
+    function osC_CreditCard($number = '', $exp_month = '', $exp_year = '', $cvc_number = '') {
       global $osC_Database;
 
       if (empty($number) === false) {
         $this->_number = ereg_replace('[^0-9]', '', $number);
         $this->_expiry_month = (int)$exp_month;
         $this->_expiry_year = (int)$exp_year;
+        $this->_cvc = (int)$cvc_number;
       }
 
       $this->_data = array();
@@ -70,6 +71,11 @@
 
       if ($this->hasOwner() && ($this->hasValidOwner() === false)) {
         return -4;
+      }
+      
+      if (!$this->isValidCVC())
+      {
+      	return -6;
       }
 
       return true;
@@ -182,5 +188,14 @@
     function setCVC($cvc) {
       $this->_cvc = trim($cvc);
     }
+    
+    function isValidCVC()
+    {
+    	if(strlen($this->getCVC()) == 3)
+	    	return true;
+	    else
+	    	return false;
+    }
+    
   }
 ?>

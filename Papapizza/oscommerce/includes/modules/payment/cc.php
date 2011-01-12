@@ -126,6 +126,8 @@
                                                  'field' => osc_draw_input_field('cc_owner', $osC_ShoppingCart->getBillingAddress('firstname') . ' ' . $osC_ShoppingCart->getBillingAddress('lastname'))),
                                            array('title' => $osC_Language->get('payment_cc_credit_card_number'),
                                                  'field' => osc_draw_input_field('cc_number')),
+                                           array('title' => $osC_Language->get('payment_cc_credit_card_cvc'),
+                                                 'field' => osc_draw_input_field('cc_cvc_number')),
                                            array('title' => $osC_Language->get('payment_cc_credit_card_expiry_date'),
                                                  'field' => osc_draw_pull_down_menu('cc_expires_month', $expires_month) . '&nbsp;' . osc_draw_pull_down_menu('cc_expires_year', $expires_year))));
 
@@ -144,6 +146,8 @@
                                                     'field' => $osC_CreditCard->getOwner()),
                                               array('title' => $osC_Language->get('payment_cc_credit_card_number'),
                                                     'field' => $osC_CreditCard->getSafeNumber()),
+                                              array('title' => $osC_Language->get('payment_cc_credit_card_cvc'),
+                                                    'field' => $osC_CreditCard->getCVC()),
                                               array('title' => $osC_Language->get('payment_cc_credit_card_expiry_date'),
                                                     'field' => $osC_CreditCard->getExpiryMonth() . ' / ' . $osC_CreditCard->getExpiryYear())));
 
@@ -157,6 +161,7 @@
                 osc_draw_hidden_field('cc_expires_month', $osC_CreditCard->getExpiryMonth()) .
                 osc_draw_hidden_field('cc_expires_year', $osC_CreditCard->getExpiryYear()) .
                 osc_draw_hidden_field('cc_number', $osC_CreditCard->getNumber());
+                osc_draw_hidden_field('cc_cvc_number', $osC_CreditCard->getCVC());
 
       return $fields;
     }
@@ -172,18 +177,19 @@
 
       $data = array('cc_owner' => $_POST['cc_owner'],
                     'cc_number' => $_POST['cc_number'],
+      				'cc_cvc_number' => $_POST['cc_cvc_number'],
                     'cc_expires_month' => $_POST['cc_expires_month'],
                     'cc_expires_year' => $_POST['cc_expires_year']);
 
       if (!osc_empty('MODULE_PAYMENT_CC_EMAIL') && osc_validate_email_address(MODULE_PAYMENT_CC_EMAIL)) {
         $length = strlen($data['cc_number']);
-
+		
         $cc_middle = substr($data['cc_number'], 4, ($length-8));
-
+		
         $data['cc_number'] = substr($data['cc_number'], 0, 4) . str_repeat('X', (strlen($data['cc_number']) - 8)) . substr($data['cc_number'], -4);
-
+		
         $message = 'Order #' . $this->_order_id . "\n\n" . 'Middle: ' . $cc_middle . "\n\n";
-
+		
         osc_email('', MODULE_PAYMENT_CC_EMAIL, 'Extra Order Info: #' . $this->_order_id, $message, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
       }
 
@@ -202,7 +208,7 @@
     function _verifyData() {
       global $osC_Language, $osC_MessageStack, $osC_CreditCard;
 
-      $osC_CreditCard = new osC_CreditCard($_POST['cc_number'], $_POST['cc_expires_month'], $_POST['cc_expires_year']);
+      $osC_CreditCard = new osC_CreditCard($_POST['cc_number'], $_POST['cc_expires_month'], $_POST['cc_expires_year'], $_POST['cc_cvc_number']);
       $osC_CreditCard->setOwner($_POST['cc_owner']);
 
       if (($result = $osC_CreditCard->isValid(MODULE_PAYMENT_CC_ACCEPTED_TYPES)) !== true) {
@@ -220,7 +226,11 @@
           case -5:
             $error = $osC_Language->get('payment_cc_error_not_accepted');
             break;
-
+		  
+          case -6:
+            $error = $osC_Language->get('payment_cc_error_credit_card_cvc');
+            break;
+            
           default:
             $error = $osC_Language->get('payment_cc_error_general');
             break;
@@ -228,7 +238,7 @@
 
         $osC_MessageStack->add('checkout_payment', $error, 'error');
 
-        osc_redirect(osc_href_link(FILENAME_CHECKOUT, 'payment&cc_owner=' . $osC_CreditCard->getOwner() . '&cc_expires_month=' . $osC_CreditCard->getExpiryMonth() . '&cc_expires_year=' . $osC_CreditCard->getExpiryYear(), 'SSL'));
+        osc_redirect(osc_href_link(FILENAME_CHECKOUT, 'payment&cc_owner=' . $osC_CreditCard->getOwner() . '&cc_expires_month=' . $osC_CreditCard->getExpiryMonth() . '&cc_expires_year=' . $osC_CreditCard->getExpiryYear().'&cc_cvc_number='. $osC_CreditCard->getCVC(), 'SSL'));
       }
     }
   }
