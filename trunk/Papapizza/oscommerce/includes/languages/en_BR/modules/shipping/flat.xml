@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<language>
+  <definitions>
+    <definition>
+      <key>shipping_flat_title</key>
+      <value><![CDATA[Tarifa Unica]]></value>
+      <group>modules-shipping</group>
+    </definition>
+    <definition>
+      <key>shipping_flat_description</key>
+      <value><![CDATA[Tarifa Unica]]></value>
+      <group>modules-shipping</group>
+    </definition>
+    <definition>
+      <key>shipping_flat_method</key>
+      <value><![CDATA[Unica Opção]]></value>
+      <group>modules-shipping</group>
+    </definition>
+  </definitions>
+</language>

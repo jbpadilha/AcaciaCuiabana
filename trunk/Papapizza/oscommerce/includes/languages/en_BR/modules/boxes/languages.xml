@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<language>
+  <definitions>
+    <definition>
+      <key>box_languages_heading</key>
+      <value><![CDATA[Linguagens]]></value>
+      <group>modules-boxes</group>
+    </definition>
+  </definitions>
+</language>
