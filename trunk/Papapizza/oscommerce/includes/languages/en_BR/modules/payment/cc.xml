@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0"?>
 <language>
   <definitions>
     <definition>
       <key>payment_cc_title</key>
-      <value><![CDATA[Cartão de Crédito (VISA ou MASTERCARD)]]></value>
+      <value><![CDATA[CartÃ£o de CrÃ©dito (VISA ou MASTERCARD)]]></value>
       <group>modules-payment</group>
     </definition>
     <definition>
@@ -13,62 +13,72 @@
     </definition>
     <definition>
       <key>payment_cc_method_title</key>
-      <value><![CDATA[Cartão de Crédito (VISA ou MASTERCARD)]]></value>
+      <value><![CDATA[CartÃ£o de CrÃ©dito (VISA ou MASTERCARD)]]></value>
       <group>modules-payment</group>
     </definition>
     <definition>
       <key>payment_cc_credit_card_owner</key>
-      <value><![CDATA[Proprietário do Cartão]]></value>
+      <value><![CDATA[ProprietÃ¡rio do CartÃ£o]]></value>
       <group>modules-payment</group>
     </definition>
     <definition>
       <key>payment_cc_credit_card_number</key>
-      <value><![CDATA[Número do Cartão]]></value>
+      <value><![CDATA[NÃºmero do CartÃ£o]]></value>
+      <group>modules-payment</group>
+    </definition>
+    <definition>
+      <key>payment_cc_credit_card_cvc</key>
+      <value><![CDATA[CÃ³digo de seguranÃ§a:]]></value>
       <group>modules-payment</group>
     </definition>
     <definition>
       <key>payment_cc_credit_card_expiry_date</key>
-      <value><![CDATA[Cartão válido até]]></value>
+      <value><![CDATA[CartÃ£o vÃ¡lido atÃ©]]></value>
       <group>modules-payment</group>
     </definition>
     <definition>
       <key>payment_cc_js_credit_card_owner</key>
-      <value><![CDATA[* O nome do proprietário do Cartão de Crédito deve ter um mínimo de %s caracteres.]]></value>
+      <value><![CDATA[* O nome do proprietÃ¡rio do CartÃ£o de CrÃ©dito deve ter um mÃ­nimo de %s caracteres.]]></value>
       <group>modules-payment</group>
     </definition>
     <definition>
       <key>payment_cc_js_credit_card_number</key>
-      <value><![CDATA[* O número do Cartão de Crédito deve ter um mínimo de %s caracteres.]]></value>
+      <value><![CDATA[* O nÃºmero do CartÃ£o de CrÃ©dito deve ter um mÃ­nimo de %s caracteres.]]></value>
       <group>modules-payment</group>
     </definition>
     <definition>
       <key>payment_cc_js_credit_card_not_accepted</key>
-      <value><![CDATA[* Este tipo de Cartão de Crédito não é aceito. Tente novamente com outro cartão ou outra modalidade de pagamento]]></value>
+      <value><![CDATA[* Este tipo de CartÃ£o de CrÃ©dito nÃ£o Ã© aceito. Tente novamente com outro cartÃ£o ou outra modalidade de pagamento]]></value>
       <group>modules-payment</group>
     </definition>
     <definition>
       <key>payment_cc_error_general</key>
-      <value><![CDATA[Houve um problema no processamento deste Cartão de Crédito. Verifique as informações do Cartão e tente novamente.]]></value>
+      <value><![CDATA[Houve um problema no processamento deste CartÃ£o de CrÃ©dito. Verifique as informaÃ§Ãµes do CartÃ£o e tente novamente.]]></value>
       <group>modules-payment</group>
     </definition>
     <definition>
       <key>payment_cc_error_not_accepted</key>
-      <value><![CDATA[Este tipo de Cartão de Crédito não é aceito. Tente novamente com outro cartão ou outra modalidade de pagamento.]]></value>
+      <value><![CDATA[Este tipo de CartÃ£o de CrÃ©dito nÃ£o Ã© aceito. Tente novamente com outro cartÃ£o ou outra modalidade de pagamento.]]></value>
       <group>modules-payment</group>
     </definition>
     <definition>
       <key>payment_cc_error_invalid_expiration_date</key>
-      <value><![CDATA[A Data de Expiração do Cartão de Crédito não é uma Data válida. Verifique as informações e tente novamente.]]></value>
+      <value><![CDATA[A Data de ExpiraÃ§Ã£o do CartÃ£o de CrÃ©dito nÃ£o Ã© uma Data vÃ¡lida. Verifique as informaÃ§Ãµes e tente novamente.]]></value>
       <group>modules-payment</group>
     </definition>
     <definition>
       <key>payment_cc_error_expired</key>
-      <value><![CDATA[Este Cartão de Crédito está vencido. Tente novamente com outro cartão ou outra modalidade de pagamento.]]></value>
+      <value><![CDATA[Este CartÃ£o de CrÃ©dito estÃ¡ vencido. Tente novamente com outro cartÃ£o ou outra modalidade de pagamento.]]></value>
       <group>modules-payment</group>
     </definition>
     <definition>
       <key>payment_cc_error_unknown_card</key>
-      <value><![CDATA[Este número de Cartão de Crédito não é reconhecido pelos nossos sistemas. Verifique o número ou tente novamente com outro cartão ou outra forma de pagamento.]]></value>
+      <value><![CDATA[Este nÃºmero de CartÃ£o de CrÃ©dito nÃ£o Ã© reconhecido pelos nossos sistemas. Verifique o nÃºmero ou tente novamente com outro cartÃ£o ou outra forma de pagamento.]]></value>
+      <group>modules-payment</group>
+    </definition>
+    <definition>
+      <key>payment_cc_error_credit_card_cvc</key>
+      <value><![CDATA[* O cÃ³digo de seguranÃ§a do cartÃ£o deve conter no mÃ­nimo 3 letras.]]></value>
       <group>modules-payment</group>
     </definition>
   </definitions>
