@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0"?>
 <language>
   <definitions>
     <definition>
@@ -8,7 +8,7 @@
     </definition>
     <definition>
       <key>box_search_text</key>
-      <value><![CDATA[(Tente nossa <a href="%s">Busca Avançada</a>)]]></value>
+      <value><![CDATA[(Tente nossa <a href="%s">Busca AvanÃ§ada</a>)]]></value>
       <group>modules-boxes</group>
     </definition>
   </definitions>

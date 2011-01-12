@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0"?>
 <language>
   <definitions>
     <definition>
       <key>shipping_zones_title</key>
-      <value><![CDATA[Tarifas da Região]]></value>
+      <value><![CDATA[Tarifas da RegiÃ£o]]></value>
       <group>modules-shipping</group>
     </definition>
     <definition>
       <key>shipping_zones_description</key>
-      <value><![CDATA[Tarifas baseadas na Região]]></value>
+      <value><![CDATA[Tarifas baseadas na RegiÃ£o]]></value>
       <group>modules-shipping</group>
     </definition>
     <definition>
@@ -18,12 +18,12 @@
     </definition>
     <definition>
       <key>shipping_zones_invalid_zone</key>
-      <value><![CDATA[Não temos transporte para o País mencionado]]></value>
+      <value><![CDATA[NÃ£o temos transporte para o PaÃ­s mencionado]]></value>
       <group>modules-shipping</group>
     </definition>
     <definition>
       <key>shipping_zones_undefined_rate</key>
-      <value><![CDATA[A tarifa do transporte não pode ser determinada agora]]></value>
+      <value><![CDATA[A tarifa do transporte nÃ£o pode ser determinada agora]]></value>
       <group>modules-shipping</group>
     </definition>
   </definitions>

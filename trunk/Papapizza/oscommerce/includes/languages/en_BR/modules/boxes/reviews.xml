@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0"?>
 <language>
   <definitions>
     <definition>
       <key>box_reviews_heading</key>
-      <value><![CDATA[Comentários]]></value>
+      <value><![CDATA[ComentÃ¡rios]]></value>
       <group>modules-boxes</group>
     </definition>
     <definition>
       <key>box_reviews_write</key>
-      <value><![CDATA[Escreva um comentário sobre este Produto !]]></value>
+      <value><![CDATA[Escreva um comentÃ¡rio sobre este Produto !]]></value>
       <group>modules-boxes</group>
     </definition>
     <definition>
