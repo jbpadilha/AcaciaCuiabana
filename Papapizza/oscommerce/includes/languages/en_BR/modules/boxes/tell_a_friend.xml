@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0"?>
 <language>
   <definitions>
     <definition>
@@ -8,7 +8,7 @@
     </definition>
     <definition>
       <key>box_tell_a_friend_text</key>
-      <value><![CDATA[Fale para um amigo sobre este produto. Gostará de saber que voce lembrou dele.]]></value>
+      <value><![CDATA[Fale para um amigo sobre este produto. GostarÃ¡ de saber que voce lembrou dele.]]></value>
       <group>modules-boxes</group>
     </definition>
   </definitions>

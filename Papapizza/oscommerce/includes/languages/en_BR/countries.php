@@ -9,54 +9,54 @@
 # it under the terms of the GNU General Public License v2 (1991)
 # as published by the Free Software Foundation.
 
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0"?>
 
-heading_title = Países
+heading_title = Paï¿½ses
 
-table_heading_countries = Países
+table_heading_countries = Paï¿½ses
 table_heading_code = ISO Code
 table_heading_total_zones = Total Estados
-table_heading_action = Ação
+table_heading_action = Aï¿½ï¿½o
 
 table_heading_zones = Estados
-table_heading_zone_code = Código
+table_heading_zone_code = Cï¿½digo
 
-action_heading_new_country = Novo País
-action_heading_batch_delete_countries = Remover Grupo de Países
+action_heading_new_country = Novo Paï¿½s
+action_heading_batch_delete_countries = Remover Grupo de Paï¿½ses
 
-action_heading_new_zone = Nova Região
-action_heading_batch_delete_zones = Remover Grupo de Regiões
+action_heading_new_zone = Nova Regiï¿½o
+action_heading_batch_delete_zones = Remover Grupo de Regiï¿½es
 
 field_name = Nome :
 field_iso_code_2 = ISO Code (2):
 field_iso_code_3 = ISO Code (3):
-field_address_format = Formato do Endereço :
+field_address_format = Formato do Endereï¿½o :
 
 field_zone_name = Nome :
-field_zone_code = Código :
+field_zone_code = Cï¿½digo :
 
-total_zones = %s Regiões
+total_zones = %s Regiï¿½es
 
-introduction_new_country = Preencha por favor a seguinte informação para o novo País .
+introduction_new_country = Preencha por favor a seguinte informaï¿½ï¿½o para o novo Paï¿½s .
 
-introduction_edit_country = Faça as mudanças necessárias para este País .
+introduction_edit_country = Faï¿½a as mudanï¿½as necessï¿½rias para este Paï¿½s .
 
-introduction_delete_country = Verifique a remoção deste País e de suas Regiões .
-delete_warning_country_in_use_address_book = Aviso : Este País não pode ser deletado enquanto for atribuido a ele %s entradas no Livro de Endereços .
-delete_warning_country_in_use_tax_zone = Aviso : Este País não pode ser deletado enquanto for atribuido a ele %s zonas com impostos .
+introduction_delete_country = Verifique a remoï¿½ï¿½o deste Paï¿½s e de suas Regiï¿½es .
+delete_warning_country_in_use_address_book = Aviso : Este Paï¿½s nï¿½o pode ser deletado enquanto for atribuido a ele %s entradas no Livro de Endereï¿½os .
+delete_warning_country_in_use_tax_zone = Aviso : Este Paï¿½s nï¿½o pode ser deletado enquanto for atribuido a ele %s zonas com impostos .
 
-introduction_batch_delete_countries = Verifique a remoção dos seguintes Países e suas Regiões .
-batch_delete_warning_country_in_use_address_book = Aviso : Os seguintes Países não podem ser deletados enquanto tiverem entradas nos Livros de Endereço .
-batch_delete_warning_country_in_use_tax_zone = Aviso : TOs seguintes Países não podem ser deletados enquanto tiverem registro de Impostos em suas Regiões .
+introduction_batch_delete_countries = Verifique a remoï¿½ï¿½o dos seguintes Paï¿½ses e suas Regiï¿½es .
+batch_delete_warning_country_in_use_address_book = Aviso : Os seguintes Paï¿½ses nï¿½o podem ser deletados enquanto tiverem entradas nos Livros de Endereï¿½o .
+batch_delete_warning_country_in_use_tax_zone = Aviso : TOs seguintes Paï¿½ses nï¿½o podem ser deletados enquanto tiverem registro de Impostos em suas Regiï¿½es .
 
-introduction_new_zone = Preencha por favor a seguinte informação para a Nova Região .
+introduction_new_zone = Preencha por favor a seguinte informaï¿½ï¿½o para a Nova Regiï¿½o .
 
-introduction_edit_zone = Faça as mudanças necessárias para esta região .
+introduction_edit_zone = Faï¿½a as mudanï¿½as necessï¿½rias para esta regiï¿½o .
 
-introduction_delete_zone = Verifique a remoção desta região .
-delete_warning_zone_in_use_address_book = Aviso : Esta região não pode ser deletada enquanto houverem registros no Livro de Endereços de %s .
-delete_warning_zone_in_use_tax_zone = Aviso : Esta região não pode ser deletada enquanto houver registros de impostos em %s .
+introduction_delete_zone = Verifique a remoï¿½ï¿½o desta regiï¿½o .
+delete_warning_zone_in_use_address_book = Aviso : Esta regiï¿½o nï¿½o pode ser deletada enquanto houverem registros no Livro de Endereï¿½os de %s .
+delete_warning_zone_in_use_tax_zone = Aviso : Esta regiï¿½o nï¿½o pode ser deletada enquanto houver registros de impostos em %s .
 
-introduction_batch_delete_zones = Verifique a remoção das seguintes Regiões .
-batch_delete_warning_zone_in_use_address_book = Aviso : As seguintes Regiões não podem ser deletadas enquanto contiverem Registros nos Livros de Endereços .
-batch_delete_warning_zone_in_use_tax_zone = Aviso : As seguintes Regiões não poderão ser deletadas enquanto tiverem impostos registrados nelas .
+introduction_batch_delete_zones = Verifique a remoï¿½ï¿½o das seguintes Regiï¿½es .
+batch_delete_warning_zone_in_use_address_book = Aviso : As seguintes Regiï¿½es nï¿½o podem ser deletadas enquanto contiverem Registros nos Livros de Endereï¿½os .
+batch_delete_warning_zone_in_use_tax_zone = Aviso : As seguintes Regiï¿½es nï¿½o poderï¿½o ser deletadas enquanto tiverem impostos registrados nelas .
