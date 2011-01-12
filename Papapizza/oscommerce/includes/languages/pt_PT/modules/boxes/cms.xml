@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language>
+  <definitions>
+    <definition>
+      <key>box_cms_heading</key>
+      <value><![CDATA[Artigos]]></value>
+      <group>modules-boxes</group>
+    </definition>
+    <definition>
+      <key>breadcrumb_cms</key>
+      <value><![CDATA[CMS]]></value>
+      <group>cms</group>
+    </definition>
+	<definition>
+      <key>cms_heading</key>
+      <value><![CDATA[Simple Content Managment System]]></value>
+      <group>cms</group>
+    </definition>
+	<definition>
+      <key>cms_box_heading</key>
+      <value><![CDATA[Artigos]]></value>
+      <group>cms</group>
+    </definition>
+    <definition>
+      <key>result_set_number_of_cms</key>
+      <value><![CDATA[A ver (%s a %s) de %s artigos]]></value>
+      <group>cms</group>
+    </definition>
+    <definition>
+      <key>cms_text_more</key>
+      <value><![CDATA[..mais..]]></value>
+      <group>cms</group>
+    </definition>
+    <definition>
+      <key>cms_read_text_more</key>
+      <value><![CDATA[Ler Mais...]]></value>
+      <group>cms</group>
+    </definition>
+  </definitions>
+</language>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<language>
+  <definitions>
+    <definition>
+      <key>order_total_shipping_title</key>
+      <value><![CDATA[Frete]]></value>
+      <group>modules-order_total</group>
+    </definition>
+    <definition>
+      <key>order_total_shipping_description</key>
+      <value><![CDATA[Valor do Frete do Pedido]]></value>
+      <group>modules-order_total</group>
+    </definition>
+  </definitions>
+</language>
