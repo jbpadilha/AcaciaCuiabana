@@ -7,8 +7,8 @@ include 'carregamentoInicial.php';
 	<head>
 		<script type="text/javascript">
 		$(document).ready(function(){ 
-			$("#dataPesquisa").mask("99/99/9999");
-			$("#datacartaconvite").mask("99/99/9999");
+			$("#dataPesquisa").mask("99/99/9999 99:99:99");
+			$("#datacartaconvite").mask("99/99/9999 99:99:99");
 			$("#cpfpessoa").mask("999.999.999-99");
 			$("#cpfPesquisa").mask("999.999.999-99");
 			$("#numeroProcesso").numeric();
@@ -61,6 +61,11 @@ include 'carregamentoInicial.php';
 				var formulario = $('#cartaconvite').serialize(true);
 				carregaPagina('convite.php?numeroProcesso='+obj.value+'&'+formulario,'page');
 			}
+
+			function gerarPDF(idcartaconvite)
+			{
+				carregaPagina($('#cartaconvite').attr("action")+'?control=GerarPDF&funcao=CartaConvite&idcartaconvite='+idcartaconvite,'page');
+			}
 		</script>
 	</head>
 	<body>
@@ -86,7 +91,7 @@ include 'carregamentoInicial.php';
 						<td colspan="2" align="left"><input type="text" name="cpfPesquisa" id="cpfPesquisa" /></td>
 					</tr>
 					<tr>
-						<td>Data:</td>
+						<td>Data/Hora:</td>
 						<td align="left"><input type="text" name="dataPesquisa" id="dataPesquisa" /></td>
 					  <td align="left"><input type="button" name="submit" id="submit" value="Pesquisar" onClick="pesquisar();"/></td>
 					</tr>
@@ -115,7 +120,7 @@ include 'carregamentoInicial.php';
 		      <tr>
 		        <td width="63"><strong>Parte</strong></td>
 		        <td width="173"><strong>Nº do Processo</strong></td>
-		        <td width="224"><strong>Data de Agendamento</strong></td>
+		        <td width="224"><strong>Data/Hora de Agendamento</strong></td>
 		        <td><strong>Marcado Leitura</strong></td>
 		        <td colspan="2">&nbsp;</td>
 	        </tr>
@@ -139,7 +144,7 @@ include 'carregamentoInicial.php';
 					{ 
 					?>
 		        <td width="16"><a href="javascript:void(0);" onClick="alterar(<?=$cartaConvitePesquisa->getIdcartaconvite()?>)"><img src="images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
-		        <td width="32"><a href="javascript:void(0);" onClick="gerarPdf(<?=$cartaConvitePesquisa->getIdcartaconvite()?>)"><img src="images/pdf.jpg" width="16" height="16" border="0" /></a></td>
+		        <td width="32"><a href="javascript:void(0);" onClick="gerarPDF(<?=$cartaConvitePesquisa->getIdcartaconvite()?>)"><img src="images/pdf.jpg" width="16" height="16" border="0" /></a></td>
 		        <?php
 					}
 					else 
@@ -265,7 +270,7 @@ include 'carregamentoInicial.php';
 					}
 					?>
 					<tr>
-						<td align="left">Data do Agendamento:</td>
+						<td align="left">Data/Hora do Agendamento:</td>
 						<td align="left"><input type="text" name="datacartaconvite" id="datacartaconvite" value="<?=$datacartaconvite?>" /> (ex. 11/11/2010)</td>
 						<td align="left"><input type="button" name="submit" id="submit" onClick="cadastra();" value="<?=(isset($_GET['idcartaconvite']) && $_GET['idcartaconvite']!='')?"Alterar":"Cadastrar"?>"/></td>		
 					</tr>

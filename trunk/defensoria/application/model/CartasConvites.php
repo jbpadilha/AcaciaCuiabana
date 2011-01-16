@@ -184,10 +184,10 @@ class CartasConvites extends Lumine_Base {
 	{
 		if($this->getDatacartaconvite()!=null)
 		{
-			$data = explode(" ",$this->getDatacartaconvite());
-			$data = explode("-",$data[0]);
+			$dataHora = explode(" ",$this->getDatacartaconvite());
+			$data = explode("-",$dataHora[0]);
 			$dataRetorno = $data[2]."/".$data[1]."/".$data[0];
-			return $dataRetorno;
+			return $dataRetorno . " ".$dataHora[1];
 		}
 		else
 		{

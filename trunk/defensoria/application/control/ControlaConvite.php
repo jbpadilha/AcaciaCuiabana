@@ -118,6 +118,15 @@ class ControlaConvite extends ControlGeral {
 					if (count ( $this->MENSAGEM_ERRO ) <= 0) {
 						$this->cadastrar ( $cartaConvite );
 						$this->MENSAGEM_SUCESSO [] = Mensagens::getMensagem ( "SUCESSO_CADASTRO" );
+						
+						//gerando PDF
+						$cartaConvite->find(true);
+						$control = "ControlaGerarPDF"; //Classe Control
+						require $control.".php";
+						$controla = new $control();
+						$parametrosPDF = array("funcao" => "CartaConvite","idcartaconvite" => $cartaConvite->getIdcartaconvite());
+						$controla->post($parametrosPDF);
+						
 						header ( "Location:../public/convite.php?mensagemSucesso=" . urlencode ( serialize ( $this->MENSAGEM_SUCESSO ) ) );
 					} else {
 						throw new Exception ();
