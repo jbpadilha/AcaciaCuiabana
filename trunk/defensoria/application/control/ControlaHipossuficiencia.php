@@ -34,7 +34,7 @@ class ControlaHipossuficiencia extends ControlGeral {
 					{
 						$this->cadastrar($hipossuficiencia);						
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO"); 
-						header("Location:../public/hipossuficiencia.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/hipossuficiencia.php?gerarFicha=1&idhipossuficiencia={$hipossuficiencia->getIdhipossuficiencia()}&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{

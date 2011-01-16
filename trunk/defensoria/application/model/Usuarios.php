@@ -177,6 +177,17 @@ class Usuarios extends Lumine_Base{
 		
 	}
 	
+	/**
+	 * 
+	 * @return Pessoa
+	 */
+	public function getPessoa()
+	{
+		$pessoa = new Pessoa();
+		$pessoa->setIdpessoa($this->getIdpessoa());
+		$pessoa->find(true);
+		return $pessoa;
+	}
 }
 
 ?>

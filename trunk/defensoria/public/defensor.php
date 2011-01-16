@@ -2,16 +2,22 @@
 require '../application/ProjetoUtil.php'; 
 include 'carregamentoInicial.php';
 
-if(!isset($_GET['paramentrosDefensor']))
+if(isset($_GET['paramentrosConvite']))
 {
 ?>
-<legend class="subtitulo">Cadastro de Defensor:</legend>
+<legend class="subtitulo">Agendamento Carta Convite / Pesquisa de Defensor:</legend>
+<?php	
+}
+elseif(isset($_GET['paramentrosDefensor']))
+{
+?>
+<legend class="subtitulo">Entrevista / Pesquisa de Defensor:</legend>
 <?php 
 }
 else
 {
 ?>
-<legend class="subtitulo">Entrevista / Pesquisa de Defensor:</legend>
+<legend class="subtitulo">Cadastro de Defensor:</legend>
 <?
 }
 ?>
@@ -117,6 +123,16 @@ function selecionarDefensor(defensor,nomeDefensor)
 }
 <?php 
 }
+elseif(isset($_GET['paramentrosConvite']))
+{
+?>
+function selecionarDefensor(defensor,nomeDefensor)
+{
+	carregaPagina(
+			'convite.php?nomeDefensor='+nomeDefensor+'&iddefensor='+defensor+'&paramentrosConvite=<?=$_GET['paramentrosConvite']?>&idparteprocesso=<?=$_GET['idparteprocesso']?>&numeroProcesso=<?=$_GET['numeroProcesso']?>&datacartaconvite=<?=$_GET['datacartaconvite']?>&idcartaconvite=<?=$_GET['idcartaconvite']?>','page');
+}
+<?php
+}
 ?>
 </script>
 <form name="pesquisaDefensor" id="pesquisaDefensor" method="get" action="../application/recebePostGet.php" >
@@ -136,6 +152,16 @@ function selecionarDefensor(defensor,nomeDefensor)
 	<input type="hidden" id="idpessoaPromovido" name="idpessoaPromovido" value="<?=$_GET['idpessoaPromovido']?>">
 	<input type="hidden" id="nomePromovido" name="nomePromovido" value="<?=$_GET['nomePromovido']?>">
 	<input type="hidden" id="assuntoentrevista" name="assuntoentrevista" value="<?=$_GET['assuntoentrevista']?>">
+	<?php 
+	}
+	elseif(isset($_GET['paramentrosConvite']))
+	{
+	?>
+	<input type="hidden" id="paramentrosConvite" name="paramentrosConvite" value="<?=$_GET['paramentrosConvite']?>">
+	<input type="hidden" id="idparteprocesso" name="idparteprocesso" value="<?=$_GET['idparteprocesso']?>">
+	<input type="hidden" id="numeroProcesso" name="numeroProcesso" value="<?=$_GET['numeroProcesso']?>">
+	<input type="hidden" id="datacartaconvite" name="datacartaconvite" value="<?=$_GET['datacartaconvite']?>">
+	<input type="hidden" id="idcartaconvite" name="idcartaconvite" value="<?=$_GET['idcartaconvite']?>">
 	<?php 
 	}
 	?>
@@ -210,7 +236,7 @@ function selecionarDefensor(defensor,nomeDefensor)
 	</fieldset>
 </form>
 <?php 
-if(isset($_GET['cadastro']) && !isset($_GET['paramentrosDefensor']))
+if(isset($_GET['cadastro']) && !isset($_GET['paramentrosDefensor']) && !isset($_GET['paramentrosConvite']))
 {
 	$pessoaAtual = new Pessoa();
 	$defensor = new Defensor();
@@ -482,16 +508,16 @@ else if(isset($_SESSION['defensorPesquisa']))
 		<td><?=$defensor->getOabdefensor()?></td>
 		<td width="243"><?=$defensor->getCompoabdefensor()?></td>
 		<?php 
-		if(!isset($_GET['paramentrosDefensor']))
+		if(isset($_GET['paramentrosDefensor']) || isset($_GET['paramentrosConvite']))
 		{
 		?>
-		<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$pessoaAtual->getIdpessoa()?>,<?=$defensor->getIddefensor()?>,<?=$usuarios->getIdusuario()?>)"><img src="images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
-		<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$pessoaAtual->getIdpessoa()?>,<?=$defensor->getIddefensor()?>,<?=$usuarios->getIdusuario()?>)"><img src="images/botao_apagar.gif" width="16" height="16" border="0" /></a></td>
+		<td width="20" colspan="2"><a href="javascript:void(0);" onclick="selecionarDefensor(<?=$defensor->getIddefensor()?>,'<?=$pessoaAtual->getNomepessoa()?>')"><img src="images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
 		<?php 
 		}
 		else{
 		?>
-		<td width="20" colspan="2"><a href="javascript:void(0);" onclick="selecionarDefensor(<?=$defensor->getIddefensor()?>,'<?=$pessoaAtual->getNomepessoa()?>')"><img src="images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
+		<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$pessoaAtual->getIdpessoa()?>,<?=$defensor->getIddefensor()?>,<?=$usuarios->getIdusuario()?>)"><img src="images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
+		<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$pessoaAtual->getIdpessoa()?>,<?=$defensor->getIddefensor()?>,<?=$usuarios->getIdusuario()?>)"><img src="images/botao_apagar.gif" width="16" height="16" border="0" /></a></td>
 		<?php 
 		}
 		?>

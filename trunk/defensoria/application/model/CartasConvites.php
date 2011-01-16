@@ -143,6 +143,58 @@ class CartasConvites extends Lumine_Base {
 		$this->leitura = $leitura;
 	}
 	
+	public function validate(){
+		
+		// limpa os validators anteriores
+		Lumine_Validator_PHPValidator::clearValidations($this);
+		
+		// adicionando as regras 
+		Lumine_Validator_PHPValidator::addValidation($this, 'datacartaconvite', Lumine_Validator::REQUIRED_STRING, 'Informe a data do convite');
+		Lumine_Validator_PHPValidator::addValidation($this, 'iddefensor', Lumine_Validator::REQUIRED_STRING, 'Informe o defensor responsável');
+		Lumine_Validator_PHPValidator::addValidation($this, 'idatendente', Lumine_Validator::REQUIRED_STRING, 'O Id do usuário deve ser informado');
+		
+		return parent::validate();
+	}
+	
+	/**
+	 * 
+	 * @return ParteProcesso
+	 */
+	public function getParteProcesso()
+	{
+		$parteProcesso = new ParteProcesso();
+		$parteProcesso->setIdparteprocesso($this->getIdparteprocesso());
+		$parteProcesso->find(true);
+		return $parteProcesso;
+	}
+	
+	/**
+	 * 
+	 * @return Defensor
+	 */
+	public function getDefensor()
+	{
+		$defensor = new Defensor();
+		$defensor->setIddefensor($this->getIddefensor());
+		$defensor->find(true);
+		return $defensor;
+	}
+	
+	public function getDataCartaConviteFormatado()
+	{
+		if($this->getDatacartaconvite()!=null)
+		{
+			$data = explode(" ",$this->getDatacartaconvite());
+			$data = explode("-",$data[0]);
+			$dataRetorno = $data[2]."/".$data[1]."/".$data[0];
+			return $dataRetorno;
+		}
+		else
+		{
+			return "";
+		}
+	}
+	
 }
 
 ?>

@@ -8,22 +8,15 @@
 			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=TipoAcao','page')">Tipo de Ação</a></li>
 			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Vara','page')">Vara</a></li>
 			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Usuarios','page')">Usuários do Sistema</a></li>
-		</ul>
-	</li>
-	<li><a href="#">Cadastros Usuais</a>
-		<ul class="sub_menu">
-			<li>
-				<a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Pessoa','page')">Pessoa</a>
-			</li>
-			<li>
-				<a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Defensor','page')">Defensor</a>
-			</li>
+			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Defensor','page')">Defensor</a></li>
 		</ul>
 	</li>
 	<li><a href="#">Cadastros Funcionais</a>
 		<ul class="sub_menu">
+			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Pessoa','page')">Pessoa</a></li>
 			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Entrevista','page')">Entrevista</a></li>
 			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Hipossuficiencia','page')">Hipossuficiência</a></li>
+			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Convite','page')">Agendar Convite</a></li>
 		</ul>	
 	</li>
 	<li><a href="#">Processos</a>
@@ -31,11 +24,10 @@
 			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Processos','page')">Acompanhar/Movimentar Processo</a></li>
 		</ul>	
 	</li>
-	<li><a href="#">Relatórios</a>
+	<li><a href="#">Relatórios/Fichas</a>
 		<ul class="sub_menu">
-			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Relatorio','page')">Convite</a></li>
-			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Relatorio','page')">Ficha Hipossuficiência</a></li>
-			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Relatorio','page')">Atendimento/Entrevista</a></li>
+			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Relatorio&funcao=FichaHipo','page')">Ficha Hipossuficiência</a></li>
+			<li><a href="javascript:void(0);" onclick="carregaPagina('../application/recebePostGet.php?control=Relatorio&funcao=FichaAtendimento','page')">Ficha Atendimento/Entrevista</a></li>
 		</ul>	
 	</li>
 	<li><a href="javascript:void(0);" onclick="document.location.href='../application/recebePostGet.php?sair=1';">Sair do Sistema</a></li>
