@@ -66,7 +66,7 @@ class ControlaPessoa extends ControlGeral {
 				}
 				elseif(isset($GET['paramentrosPessoaHipo']))
 				{
-					header("Location:../public/hipossuficiencia.php?paramentrosPessoaHipo={$GET['paramentrosPessoaHipo']}
+					header("Location:../public/pessoa.php?paramentrosPessoaHipo={$GET['paramentrosPessoaHipo']}
 					&profHipo={$GET['profHipo']}&salarioHipo={$GET['salarioHipo']}
 					&empresaHipo={$GET['empresaHipo']}&rendaHipo={$GET['rendaHipo']}
 					&observacoesHipo={$GET['observacoesHipo']}");

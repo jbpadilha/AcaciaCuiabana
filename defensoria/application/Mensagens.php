@@ -18,6 +18,8 @@ class Mensagens {
 		$this->arrayMensagens["DEFENSOR_NAO_ENCONTRADO"] = "O defensor pesquisado não foi encontrado.";
 		//Processo
 		$this->arrayMensagens["PROCESSO_NAO_ENCONTRADO"] = "Nenhum processo foi encontrado.";
+		//Carta Convite
+		$this->arrayMensagens["CONVITE_NAO_ENCONTRADO"] = "Nenhum convite foi encontrado.";
 		
 		//CAMPOS
 		$this->arrayMensagens["USUARIO_SENHA_INCORRETO"] = "Usuario ou senha incorreto. Tente novamente.";

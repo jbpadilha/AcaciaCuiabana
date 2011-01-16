@@ -184,6 +184,18 @@ class ParteProcesso extends Lumine_Base{
 		}
 		return $defensor;
 	}
+
+	/**
+	 * 
+	 * @return Processo
+	 */
+	public function getProcesso()
+	{
+		$processo = new Processo();
+		$processo->setIdprocesso($this->getIdprocesso());
+		$processo->find(true);
+		return $processo;
+	}
 }
 
 ?>

@@ -50,6 +50,12 @@ class ControlaDefensor extends ControlGeral {
 					&idpessoaPromovente={$GET['idpessoaPromovente']}&idpessoaPromovido={$GET['idpessoaPromovido']}
 					&assuntoentrevista={$GET['assuntoentrevista']}&nomePromovente={$_GET['nomePromovente']}&nomePromovido={$_GET['nomePromovido']}&MensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 				}
+				elseif(isset($GET['paramentrosConvite']))
+				{
+					header("Location:../public/defensor.php?paramentrosConvite={$GET['paramentrosConvite']}
+					&idparteprocesso={$GET['idparteprocesso']}&numeroProcesso={$GET['numeroProcesso']}
+					&datacartaconvite={$GET['datacartaconvite']}&idcartaconvite={$GET['idcartaconvite']}&MensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+				}
 				else{
 					header("Location:../public/defensor.php?cadastro=1&MensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 				}
@@ -63,6 +69,12 @@ class ControlaDefensor extends ControlGeral {
 					&idnaturezaacao={$GET['idnaturezaacao']}&juizo={$GET['juizo']}
 					&idpessoaPromovente={$GET['idpessoaPromovente']}&idpessoaPromovido={$GET['idpessoaPromovido']}
 					&assuntoentrevista={$GET['assuntoentrevista']}&nomePromovente={$_GET['nomePromovente']}&nomePromovido={$_GET['nomePromovido']}");
+				}
+				elseif(isset($GET['paramentrosConvite']))
+				{
+					header("Location:../public/defensor.php?paramentrosConvite={$GET['paramentrosConvite']}
+					&idparteprocesso={$GET['idparteprocesso']}&numeroProcesso={$GET['numeroProcesso']}
+					&datacartaconvite={$GET['datacartaconvite']}&idcartaconvite={$GET['idcartaconvite']}");
 				}
 				else
 				{
@@ -80,6 +92,12 @@ class ControlaDefensor extends ControlGeral {
 					&idnaturezaacao={$GET['idnaturezaacao']}&juizo={$GET['juizo']}
 					&idpessoaPromovente={$GET['idpessoaPromovente']}&idpessoaPromovido={$GET['idpessoaPromovido']}
 					&assuntoentrevista={$GET['assuntoentrevista']}&nomePromovente={$_GET['nomePromovente']}&nomePromovido={$_GET['nomePromovido']}&mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+			}
+			elseif(isset($GET['paramentrosConvite']))
+			{
+				header("Location:../public/defensor.php?paramentrosConvite={$GET['paramentrosConvite']}
+					&idparteprocesso={$GET['idparteprocesso']}&numeroProcesso={$GET['numeroProcesso']}
+					&datacartaconvite={$GET['datacartaconvite']}&idcartaconvite={$GET['idcartaconvite']}&MensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 			}
 			else {
 				header("Location:../public/defensor.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));

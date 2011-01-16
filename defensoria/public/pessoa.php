@@ -77,10 +77,8 @@ include 'carregamentoInicial.php';
 				carregaPagina('entrevista.php?nomePromovente=<?=($_GET['tipoParte'] == 1)?"'+nomePessoa+'":$_GET['nomePromovente']?>&nomePromovido=<?=($_GET['tipoParte'] == 2)?"'+nomePessoa+'":$_GET['nomePromovido']?>&idpessoaPromovente=<?=($_GET['tipoParte'] == 1)?"'+idPessoa+'":$_GET['idpessoaPromovente']?>&idpessoaPromovido=<?=($_GET['tipoParte'] == 2) ? "'+idPessoa+'" : $_GET['idpessoaPromovido']?>&nomeDefensor=<?=$_GET['nomeDefensor']?>&iddefensor=<?=$_GET['iddefensor']?>&paramentrosPessoa=<?=$_GET['paramentrosPessoa']?>&idcomarca=<?=$_GET['idcomarca']?>&idtipoacao=<?=$_GET['idtipoacao']?>&idnaturezaacao=<?=$_GET['idnaturezaacao']?>&juizo=<?=$_GET['juizo']?>&assunto=<?=$_GET['assuntoentrevista']?>','page');
 			}
 			<?php 
-			}
-			?>
-			<?php 
-			if(isset($_GET['paramentrosPessoaHipo']))
+			} 
+			elseif(isset($_GET['paramentrosPessoaHipo']))
 			{
 			?>
 			function selecionarPessoa(idPessoa,nomePessoa)
@@ -89,6 +87,7 @@ include 'carregamentoInicial.php';
 			}
 			<?php 
 			}
+			
 			?>
 		</script>
 	</head>
@@ -117,7 +116,7 @@ include 'carregamentoInicial.php';
 	<input type="hidden" id="tipoParte" name="tipoParte" value="<?=$_GET['tipoParte']?>">
 	<?php 
 	}
-	if(isset($_GET['paramentrosPessoaHipo']))
+	elseif(isset($_GET['paramentrosPessoaHipo']))
 	{
 	?>
 	<input type="hidden" id="paramentrosPessoaHipo" name="paramentrosPessoaHipo" value="<?=$_GET['paramentrosPessoaHipo']?>">
@@ -126,7 +125,6 @@ include 'carregamentoInicial.php';
 	<input type="hidden" id="empresaHipo" name="empresaHipo" value="<?=$_GET['empresaHipo']?>">
 	<input type="hidden" id="rendaHipo" name="rendaHipo" value="<?=$_GET['rendaHipo']?>">
 	<input type="hidden" id="observacoesHipo" name="observacoesHipo" value="<?=$_GET['observacoesHipo']?>">
-
 	<?php 
 	}
 	?>
@@ -185,6 +183,19 @@ if(isset($_GET['cadastro']))
 	<input type="hidden" id="tipoParte" name="tipoParte" value="<?=$_GET['tipoParte']?>">
 	<?php 
 	}
+	elseif(isset($_GET['paramentrosConvite']))
+	{
+	?>
+	<input type="hidden" id="paramentrosConvite" name="paramentrosConvite" value="<?=$_GET['paramentrosConvite']?>">
+	<input type="hidden" id="idparteprocesso" name="idparteprocesso" value="<?=$_GET['idparteprocesso']?>">
+	<input type="hidden" id="nomeParte" name="nomeParte" value="<?=$_GET['nomeParte']?>">
+	<input type="hidden" id="datacartaconvite" name="datacartaconvite" value="<?=$_GET['datacartaconvite']?>">
+	<input type="hidden" id="idcartaconvite" name="idcartaconvite" value="<?=$_GET['idcartaconvite']?>">
+	<input type="hidden" id="iddefensor" name="iddefensor" value="<?=$_GET['iddefensor']?>">
+	<input type="hidden" id="nomeDefensor" name="nomeDefensor" value="<?=$_GET['nomeDefensor']?>">
+	<?php 
+	}
+	?>
 	?>
 	<table width="633">
 		<tr>
