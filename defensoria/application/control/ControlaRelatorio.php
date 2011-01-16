@@ -51,7 +51,7 @@ class ControlaRelatorio extends ControlGeral {
 	}
 	
 	public function post($POST) {
-		
+		$this->get($POST);
 	}
 	
 }
