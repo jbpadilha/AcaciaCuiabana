@@ -26,15 +26,18 @@ class ControlaRelatorio extends ControlGeral {
 				{
 					case "FichaHipo":
 						{
+							header ( "Location:../public/fichaHipo.php");
 							break;
 						}
 					case "FichaAtendimento":
 						{
+							header ( "Location:../public/fichaAtendimento.php");
 							break;
 						}
 					default:
 						{
 							throw new Exception(Mensagens::getMensagem("ERRO_ACESSAR_FUNCIONALIDADE"));
+							break;
 						}
 				}
 			}

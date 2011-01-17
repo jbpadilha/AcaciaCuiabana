@@ -195,6 +195,21 @@ class CartasConvites extends Lumine_Base {
 		}
 	}
 	
+	public function getDataCartaConviteFormatadoPDF()
+	{
+		if($this->getDatacartaconvite()!=null)
+		{
+			$dataHora = explode(" ",$this->getDatacartaconvite());
+			$data = explode("-",$dataHora[0]);
+			$dataRetorno = $data[2]."/".$data[1]."/".$data[0];
+			return $dataRetorno . " às ".$dataHora[1];
+		}
+		else
+		{
+			return "";
+		}
+	}
+	
 }
 
 ?>

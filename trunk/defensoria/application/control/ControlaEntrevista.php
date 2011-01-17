@@ -17,7 +17,62 @@ class ControlaEntrevista extends ControlGeral {
 	}
 	
 	public function get($GET) {
-		header("Location:../public/entrevista.php");
+		if(isset($GET['pesquisa']))
+		{
+			if(($GET['nomePesquisa']!='' && $GET['cpfPesquisa']!='')
+			|| ($GET['nomePesquisa']=='' && $GET['cpfPesquisa']!='') ||
+			($GET['nomePesquisa']!='' && $GET['cpfPesquisa']==''))
+			{
+				$pessoa = new Pessoa();
+				if($GET['cpfPesquisa']!='')
+					$pessoa->setCpfpessoa($GET['cpfPesquisa']);
+				if($GET['nomePesquisa']!='')
+					$pessoa->where("nomepessoa like '%".trim($GET['nomePesquisa'])."%'");
+				
+				if($pessoa->find())
+				{
+					while($pessoa->fetch())
+					{
+						$parteProcesso = new ParteProcesso();
+						$parteProcesso->setIdpessoa($pessoa->getIdpessoa());
+						if($parteProcesso->find())
+						{
+							while($parteProcesso->fetch())
+							{
+								$entrevista = new Entrevista();
+								if($GET['protocoloAtendimento']!='')
+									$entrevista->setProtocoloatendimento($GET['protocoloAtendimento']);
+								$entrevista->setIdprocesso($parteProcesso->getIdprocesso());
+								if($entrevista->find(true))
+									$arrayFichas[] = $entrevista->getIdentrevista();
+							}
+						}
+					}
+				}
+			}
+			elseif ($GET['protocoloAtendimento']!='')
+			{
+				$entrevista = new Entrevista();
+				$entrevista->setProtocoloatendimento($GET['protocoloAtendimento']);
+				if($entrevista->find(true))
+					$arrayFichas[] = $entrevista->getIdentrevista();
+			}
+			if(count($arrayFichas) > 0)
+			{
+				session_start();
+				$_SESSION['fichaAtendimentoPesquisa'] = $arrayFichas;
+				header ( "Location:../public/fichaAtendimento.php");
+			}
+			else
+			{
+				$this->MENSAGEM_ERRO[] = Mensagens::getMensagem("ATENDIMENTO_NAO_ENCONTRADO");
+				header ( "Location:../public/fichaAtendimento.php?mensagemErro=" . urlencode ( serialize ( $this->MENSAGEM_ERRO ) ) );
+			}
+		}
+		else
+		{
+			header("Location:../public/entrevista.php");
+		}
 	}
 	
 	public function post($POST) {
@@ -39,7 +94,8 @@ class ControlaEntrevista extends ControlGeral {
 					if(count($this->MENSAGEM_ERRO)<=0)
 					{
 						$this->cadastrar($entrevista,$processo,$parteProcessoPromovente,$parteProcessoPromovido);						
-						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO"); 
+						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO");
+						$this->MENSAGEM_SUCESSO[] = 'O Protocolo de Atendimento é <font color="FF0000"><b>'.$entrevista->getProtocoloatendimento().'</b></font>'; 
 						header("Location:../public/entrevista.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
@@ -69,7 +125,7 @@ class ControlaEntrevista extends ControlGeral {
 		{
 			$parteProcessoPromovente->setIdpessoa($POST['idpessoaPromovente']);
 			$parteProcessoPromovente->setTipoparte(1);
-			$parteProcessoPromovente->setIddefensor($POST['idDefensor']);
+			$parteProcessoPromovente->setIddefensor($POST['iddefensor']);
 		}
 		if(isset($POST['idpessoaPromovido']))
 		{
@@ -78,7 +134,6 @@ class ControlaEntrevista extends ControlGeral {
 		}
 		$this->MENSAGEM_ERRO = array_merge($this->MENSAGEM_ERRO, $entrevista->validate(), $processo->validate());
 	}
-
 	
 	public function cadastrar(Entrevista $entrevista, Processo $processo, ParteProcesso $parteProcessoPromovente, ParteProcesso $parteProcessoPromovido)
 	{
@@ -89,7 +144,7 @@ class ControlaEntrevista extends ControlGeral {
 			$parteProcessoPromovente->save();
 			$parteProcessoPromovido->save();
 			$entrevista->setIdprocesso($processo->getIdprocesso());
-			$entrevista->setProtocoloatendimento($this->genereteKey());
+			$entrevista->setProtocoloatendimento(date("Ymdhis").$this->genereteKey(2));
 			$entrevista->setDataentrevista(date("Y-m-d H:i:s"));
 			$entrevista->save();
 		}
@@ -104,7 +159,7 @@ class ControlaEntrevista extends ControlGeral {
 		$key = '';
 		for($i = 0; $i < $length; $i ++)
 		{
-			$key .= chr(mt_rand(33,126));
+			$key .= mt_rand(33,126);
 		}
 		return $key;
 	}

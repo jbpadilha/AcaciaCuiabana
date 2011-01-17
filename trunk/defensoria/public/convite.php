@@ -64,7 +64,7 @@ include 'carregamentoInicial.php';
 
 			function gerarPDF(idcartaconvite)
 			{
-				carregaPagina($('#cartaconvite').attr("action")+'?control=GerarPDF&funcao=CartaConvite&idcartaconvite='+idcartaconvite,'page');
+				window.open($('#cartaconvite').attr("action")+'?control=GerarPDF&funcao=CartaConvite&idcartaconvite='+idcartaconvite);
 			}
 		</script>
 	</head>

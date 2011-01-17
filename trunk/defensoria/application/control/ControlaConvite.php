@@ -119,13 +119,9 @@ class ControlaConvite extends ControlGeral {
 						$this->cadastrar ( $cartaConvite );
 						$this->MENSAGEM_SUCESSO [] = Mensagens::getMensagem ( "SUCESSO_CADASTRO" );
 						
-						//gerando PDF
-						$cartaConvite->find(true);
-						$control = "ControlaGerarPDF"; //Classe Control
-						require $control.".php";
-						$controla = new $control();
-						$parametrosPDF = array("funcao" => "CartaConvite","idcartaconvite" => $cartaConvite->getIdcartaconvite());
-						$controla->post($parametrosPDF);
+						/*//gerando PDF
+						$parametrosPDF = array("control" => "GerarPDF","idcartaconvite" => $cartaConvite->getIdcartaconvite(),"funcao" => "CartaConvite");
+						echo "<script>window.open('../recebePostGet.php', 'nomedajanela', 'toolbar=no, width=100, height=200');</script>";*/
 						
 						header ( "Location:../public/convite.php?mensagemSucesso=" . urlencode ( serialize ( $this->MENSAGEM_SUCESSO ) ) );
 					} else {

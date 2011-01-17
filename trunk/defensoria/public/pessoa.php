@@ -74,7 +74,7 @@ include 'carregamentoInicial.php';
 			?>
 			function selecionarPessoa(idPessoa,nomePessoa)
 			{
-				carregaPagina('entrevista.php?nomePromovente=<?=($_GET['tipoParte'] == 1)?"'+nomePessoa+'":$_GET['nomePromovente']?>&nomePromovido=<?=($_GET['tipoParte'] == 2)?"'+nomePessoa+'":$_GET['nomePromovido']?>&idpessoaPromovente=<?=($_GET['tipoParte'] == 1)?"'+idPessoa+'":$_GET['idpessoaPromovente']?>&idpessoaPromovido=<?=($_GET['tipoParte'] == 2) ? "'+idPessoa+'" : $_GET['idpessoaPromovido']?>&nomeDefensor=<?=$_GET['nomeDefensor']?>&iddefensor=<?=$_GET['iddefensor']?>&paramentrosPessoa=<?=$_GET['paramentrosPessoa']?>&idcomarca=<?=$_GET['idcomarca']?>&idtipoacao=<?=$_GET['idtipoacao']?>&idnaturezaacao=<?=$_GET['idnaturezaacao']?>&juizo=<?=$_GET['juizo']?>&assunto=<?=$_GET['assuntoentrevista']?>','page');
+				carregaPagina('entrevista.php?nomePromovente=<?=($_GET['tipoParte'] == 1)?"'+nomePessoa+'":$_GET['nomePromovente']?>&nomePromovido=<?=($_GET['tipoParte'] == 2)?"'+nomePessoa+'":$_GET['nomePromovido']?>&idpessoaPromovente=<?=($_GET['tipoParte'] == 1)?"'+idPessoa+'":$_GET['idpessoaPromovente']?>&idpessoaPromovido=<?=($_GET['tipoParte'] == 2) ? "'+idPessoa+'" : $_GET['idpessoaPromovido']?>&nomeDefensor=<?=$_GET['nomeDefensor']?>&iddefensor=<?=$_GET['iddefensor']?>&paramentrosPessoa=<?=$_GET['paramentrosPessoa']?>&idcomarca=<?=$_GET['idcomarca']?>&idtipoacao=<?=$_GET['idtipoacao']?>&idnaturezaacao=<?=$_GET['idnaturezaacao']?>&juizo=<?=$_GET['juizo']?>&assuntoentrevista=<?=$_GET['assuntoentrevista']?>','page');
 			}
 			<?php 
 			} 
@@ -106,6 +106,7 @@ include 'carregamentoInicial.php';
 	<input type="hidden" id="idcomarca" name="idcomarca" value="<?=$_GET['idcomarca']?>">
 	<input type="hidden" id="idtipoacao" name="idtipoacao" value="<?=$_GET['idtipoacao']?>">
 	<input type="hidden" id="iddefensor" name="iddefensor" value="<?=$_GET['iddefensor']?>">
+	<input type="hidden" id="nomeDefensor" name="nomeDefensor" value="<?=$_GET['nomeDefensor']?>">
 	<input type="hidden" id="idnaturezaacao" name="idnaturezaacao" value="<?=$_GET['idnaturezaacao']?>">
 	<input type="hidden" id="juizo" name="juizo" value="<?=$_GET['juizo']?>">
 	<input type="hidden" id="idpessoaPromovente" name="idpessoaPromovente" value="<?=$_GET['idpessoaPromovente']?>">
@@ -173,6 +174,7 @@ if(isset($_GET['cadastro']))
 	<input type="hidden" id="idcomarca" name="idcomarca" value="<?=$_GET['idcomarca']?>">
 	<input type="hidden" id="idtipoacao" name="idtipoacao" value="<?=$_GET['idtipoacao']?>">
 	<input type="hidden" id="iddefensor" name="iddefensor" value="<?=$_GET['iddefensor']?>">
+	<input type="hidden" id="nomeDefensor" name="nomeDefensor" value="<?=$_GET['nomeDefensor']?>">
 	<input type="hidden" id="idnaturezaacao" name="idnaturezaacao" value="<?=$_GET['idnaturezaacao']?>">
 	<input type="hidden" id="juizo" name="juizo" value="<?=$_GET['juizo']?>">
 	<input type="hidden" id="idpessoaPromovente" name="idpessoaPromovente" value="<?=$_GET['idpessoaPromovente']?>">
