@@ -1,1 +1,0 @@
-<div id="conteudo_top">	<h1>Página não encontrada.</h1></div><div id="conteudo">	<p>O arquivo ou página que você está procurando não existe ou está em manutenção.</p></div><div id="conteudo_bottom"></div>
