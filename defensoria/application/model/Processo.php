@@ -169,6 +169,76 @@ class Processo extends Lumine_Base{
 		
 		return parent::validate();
 	}
+
+	/**
+	 * 
+	 * @return ParteProcesso
+	 */
+	public function getPartePromoventeProcesso()
+	{
+		$parteProcesso = new ParteProcesso();
+		$parteProcesso->setTipoparte($parteProcesso->TIPO_PARTE_PROMOVENTE);
+		$parteProcesso->setIdprocesso($this->getIdprocesso());
+		$parteProcesso->find(true);
+		return $parteProcesso;
+	}
+	
+/**
+	 * 
+	 * @return ParteProcesso
+	 */
+	public function getPartePromovidoProcesso()
+	{
+		$parteProcesso = new ParteProcesso();
+		$parteProcesso->setTipoparte($parteProcesso->TIPO_PARTE_PROMOVIDO);
+		$parteProcesso->setIdprocesso($this->getIdprocesso());
+		$parteProcesso->find(true);
+		return $parteProcesso;
+	}
+
+	/**
+	 * 
+	 * @return ParteProcesso
+	 */
+	public function getParteAssistida()
+	{
+		$parteProcesso = new ParteProcesso();
+		$parteProcesso->setIdprocesso($this->getIdprocesso());
+		$parteProcesso->find();
+		while($parteProcesso->fetch())
+		{
+			if($parteProcesso->getIddefensor()!=null)
+			{
+				return $parteProcesso;
+			}
+		}
+	}
+	
+	public function getParteNaoAssistida()
+	{
+		$parteProcesso = new ParteProcesso();
+		$parteProcesso->setIdprocesso($this->getIdprocesso());
+		$parteProcesso->find();
+		while($parteProcesso->fetch())
+		{
+			if($parteProcesso->getIddefensor()==null)
+			{
+				return $parteProcesso;
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @return Comarca
+	 */
+	public function getComarca()
+	{
+		$comarca = new Comarca();
+		$comarca->setIdcomarca($this->getIdcomarca());
+		$comarca->find(true);
+		return $comarca;
+	}
 }
 
 ?>

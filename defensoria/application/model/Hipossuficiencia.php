@@ -156,6 +156,19 @@ class Hipossuficiencia extends Lumine_Base{
     # END AUTOCODE                                         #
     #------------------------------------------------------#
     #### END AUTOCODE
+    
+	/**
+	 * 
+	 * @return Pessoa
+	 */
+	public function getPessoa()
+	{
+		$pessoa = new Pessoa();
+		$pessoa->setIdpessoa($this->getIdpessoa());
+		$pessoa->find(true);
+		return $pessoa;
+	}
+	
 }
 
 ?>

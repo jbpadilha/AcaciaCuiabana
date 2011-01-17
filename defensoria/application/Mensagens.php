@@ -20,6 +20,10 @@ class Mensagens {
 		$this->arrayMensagens["PROCESSO_NAO_ENCONTRADO"] = "Nenhum processo foi encontrado.";
 		//Carta Convite
 		$this->arrayMensagens["CONVITE_NAO_ENCONTRADO"] = "Nenhum convite foi encontrado.";
+		//Ficha Hipo
+		$this->arrayMensagens["HIPO_NAO_ENCONTRADO"] = "Nenhuma ficha hipossuficiência foi encontrada.";
+		//Ficha Atendimento/Entrevista
+		$this->arrayMensagens["ATENDIMENTO_NAO_ENCONTRADO"] = "Nenhuma ficha de Entrevista/Atendimento foi encontrada.";
 		
 		//CAMPOS
 		$this->arrayMensagens["USUARIO_SENHA_INCORRETO"] = "Usuario ou senha incorreto. Tente novamente.";

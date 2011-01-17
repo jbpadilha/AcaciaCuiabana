@@ -19,8 +19,6 @@ class Entrevista extends Lumine_Base{
      */
     protected function _initialize()
     {
-		# 
-        
         $this->_addField("identrevista", "identrevista", "int", 11, array('primary' => true, 'notnull' => true, 'autoincrement' => true));
         $this->_addField("dataentrevista", "dataentrevista", "datetime", null, array('notnull' => true));
         $this->_addField('idprocesso', 'idprocesso', 'int', 11, array('foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE', 'linkOn' => 'idprocesso', 'class' => 'Processo'));
@@ -133,6 +131,33 @@ class Entrevista extends Lumine_Base{
 		Lumine_Validator_PHPValidator::addValidation($this, 'assuntoentrevista', Lumine_Validator::REQUIRED_STRING, 'Informe o assunto da entrevista');
 		
 		return parent::validate();
+	}
+	
+	public function getDataEntrevistaFormatadoPDF()
+	{
+		if($this->getDataentrevista()!=null)
+		{
+			$dataHora = explode(" ",$this->getDataentrevista());
+			$data = explode("-",$dataHora[0]);
+			$dataRetorno = $data[2]."/".$data[1]."/".$data[0];
+			return $dataRetorno . " às ".$dataHora[1];
+		}
+		else
+		{
+			return "";
+		}
+	}
+	
+	/**
+	 * 
+	 * @return Processo
+	 */
+	public function getProcesso()
+	{
+		$processo = new Processo();
+		$processo->setIdprocesso($this->getIdprocesso());
+		$processo->find(true);
+		return $processo;
 	}
 }
 

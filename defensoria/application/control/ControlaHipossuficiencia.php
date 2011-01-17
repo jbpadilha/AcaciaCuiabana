@@ -4,6 +4,8 @@ require_once ('ControlGeral.php');
 
 class ControlaHipossuficiencia extends ControlGeral {
 	
+	private $arrayFichas = array();
+	
 	public function permiteAcesso($grupo) {
 		if($grupo == GruposUsuarios::$GRUPO_ADMIN || $grupo == GruposUsuarios::$GRUPO_ATENDENTE
 		|| $grupo == GruposUsuarios::$GRUPO_DEFENSOR || $grupo == GruposUsuarios::$GRUPO_ESTAGIARIO)
@@ -17,7 +19,46 @@ class ControlaHipossuficiencia extends ControlGeral {
 	}
 	
 	public function get($GET) {
-		header("Location:../public/hipossuficiencia.php");
+		
+		if(isset($GET['pesquisa']))
+		{
+			if(($GET['nomePesquisa']!='' && $GET['cpfPesquisa']!='')
+			|| ($GET['nomePesquisa']=='' && $GET['cpfPesquisa']!='') ||
+			($GET['nomePesquisa']!='' && $GET['cpfPesquisa']==''))
+			{
+				$pessoa = new Pessoa();
+				if($GET['cpfPesquisa']!='')
+					$pessoa->setCpfpessoa($GET['cpfPesquisa']);
+				if($GET['nomePesquisa']!='')
+					$pessoa->where("nomepessoa like '%".trim($GET['nomePesquisa'])."%'");
+				
+				if($pessoa->find())
+				{
+					while($pessoa->fetch())
+					{
+						$fichaPesquisada = new Hipossuficiencia();
+						$fichaPesquisada->setIdpessoa($pessoa->getIdpessoa());
+						if($fichaPesquisada->find(true))
+							$arrayFichas[] = $fichaPesquisada->getIdhipossuficiencia();
+					}
+				}
+			}
+			if(count($arrayFichas) > 0)
+			{
+				session_start();
+				$_SESSION['fichaHipoPesquisa'] = $arrayFichas;
+				header ( "Location:../public/fichaHipo.php");
+			}
+			else
+			{
+				$this->MENSAGEM_ERRO[] = Mensagens::getMensagem("HIPO_NAO_ENCONTRADO");
+				header ( "Location:../public/fichaHipo.php?mensagemErro=" . urlencode ( serialize ( $this->MENSAGEM_ERRO ) ) );
+			}
+		}
+		else
+		{
+			header("Location:../public/hipossuficiencia.php");
+		}
 	}
 	
 	public function post($POST) {

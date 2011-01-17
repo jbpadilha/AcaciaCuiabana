@@ -298,7 +298,17 @@ class Pessoa extends Lumine_Base{
 		return parent::validate();
 	}
 	
-	
+	/**
+	 * 
+	 * @return Endereco
+	 */
+	public function getEndereco()
+	{
+		$endereco = new Endereco();
+		$endereco->setIdpessoa($this->getIdpessoa());
+		$endereco->find(true);
+		return $endereco;
+	}
 	
 }
 

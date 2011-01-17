@@ -45,7 +45,7 @@ function cadastra()
 					if($comarca->fetch())
 					{
 					?>
-					<option value="<?=$comarca->getIdcomarca()?>" <?=(isset($_GET['"idcomarca"']) && $_GET['"idcomarca"'] == $comarca->getIdcomarca())?"selected":""?>><?=$comarca->getNomecomarca()?></option>
+					<option value="<?=$comarca->getIdcomarca()?>" <?=(isset($_GET['idcomarca']) && $_GET['idcomarca'] == $comarca->getIdcomarca())?"selected":""?>><?=$comarca->getNomecomarca()?></option>
 					<?php 
 					}
 					?>
@@ -108,7 +108,7 @@ function cadastra()
 			</td>
 		</tr>
 		<tr>
-			<td>Parte Promovente:</td>
+			<td>Parte Promovente(Assistido):</td>
 			<td align="left">
 				<input type="hidden" id="idpessoaPromovente" name="idpessoaPromovente" value="<?=(isset($_GET['idpessoaPromovente']))?$_GET['idpessoaPromovente']:""?>"/>
 				<input type="hidden" id="nomePromovente" name="nomePromovente" value="<?=(isset($_GET['nomePromovente']))?$_GET['nomePromovente']:""?>"/>
