@@ -23,7 +23,7 @@
     <default_currency><![CDATA[BRA]]></default_currency>
     <numerical_decimal_separator><![CDATA[,]]></numerical_decimal_separator>
     <numerical_thousands_separator><![CDATA[.]]></numerical_thousands_separator>
-    <parent_language_code><![CDATA[5]]></parent_language_code>
+    <parent_language_code><![CDATA[]]></parent_language_code>
   </data>
 </language>
 

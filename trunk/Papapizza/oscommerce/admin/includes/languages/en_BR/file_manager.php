@@ -16,41 +16,41 @@ heading_title = Gerenciar Arquivos
 action_heading_upload_file = Upload File
 action_heading_new_file = Novo Arquivo
 action_heading_edit_file = Editar Arquivo
-action_heading_new_directory = Novo Diret√≥rio
+action_heading_new_directory = Novo DiretÛrio
 action_heading_delete_entry = Remover Entrada
 
-operation_heading_directory = Diret√≥rio :
+operation_heading_directory = DiretÛrio :
 
 table_heading_files = Arquivos
 table_heading_size = Tamanho
-table_heading_permissions = Permiss√£o
-table_heading_user = Usu√°rio
+table_heading_permissions = Permiss„o
+table_heading_user = Usu·rio
 table_heading_group = Grupo
-table_heading_writable = Escritur√°vel
-table_heading_date_last_modified = √öltima Altera√ß√£o
-table_heading_action = A√ß√£o
+table_heading_writable = Escritur·vel
+table_heading_date_last_modified = ⁄ltima AlteraÁ„o
+table_heading_action = AÁ„o
 
 field_file = Arquivo :
 field_file_name = Nome do Arquivo :
 field_file_contents = Indice dos Arquivos :
-field_directory_name = Nome do Diret√≥rio :
+field_directory_name = Nome do DiretÛrio :
 
 top_level = -- Inicial --
 parent_level = -- Principal --
 
-introduction_upload_file = Selecione os arquivos para upar (uploaded) para este diret√≥rio .
-upload_error_directory_not_writable = Erro : Os arquivos n√£o podem ser transferidos para este diret√°rio porque ele n√£o √© escritur√°vel ou faltam permiss√µes de escrita : %s
+introduction_upload_file = Selecione os arquivos para upar (uploaded) para este diretÛrio .
+upload_error_directory_not_writable = Erro : Os arquivos n„o podem ser transferidos para este diretÛrio porque ele n„o È escritur·vel ou faltam permissıes de escrita : %s
 
-introduction_new_file = Preencha a seguinte informa√ß√£o para o Novo Arquivo .
+introduction_new_file = Preencha a seguinte informaÁ„o para o Novo Arquivo .
 
-introduction_edit_file = Fa√ßa as mudan√ßas necess√°rias para este arquivo .
+introduction_edit_file = FaÁa as mudanÁas necess·rias para este arquivo .
 
-introduction_new_directory = Preencha a seguinte informa√ß√£o para o Novo Diret√≥rio .
-new_directory_error_not_writable = Erro : O Arquivo n√£o est√° escritur√°vel : %s
+introduction_new_directory = Preencha a seguinte informaÁ„o para o Novo DiretÛrio .
+new_directory_error_not_writable = Erro : O Arquivo n„o est· escritur·vel : %s
 
-introduction_delete_entry = Verifique a remo√ß√£o desta entrada .
-delete_error_not_writable = Erro : Esta entrada n√£o tem permiss√£o de escrita e n√£o pode ser removida : %s
+introduction_delete_entry = Verifique a remoÁ„o desta entrada .
+delete_error_not_writable = Erro : Esta entrada n„o tem permiss„o de escrita e n„o pode ser removida : %s
 
-ms_error_directory_not_writable = Erro : O arquivo n√£o √© escritur√°vel : %s
-ms_error_file_not_writable = Erro : Este arquivo n√£o √© escritur√°vel : %s
-ms_error_download_link_invalid = Erro : Este arquivo n√£o pode ser transferido .
+ms_error_directory_not_writable = Erro : O arquivo n„o È escritur·vel : %s
+ms_error_file_not_writable = Erro : Este arquivo n„o È escritur·vel : %s
+ms_error_download_link_invalid = Erro : Este arquivo n„o pode ser transferido .

@@ -14,7 +14,7 @@
 heading_title = Administradores
 
 table_heading_administrators = Administradores
-table_heading_action = A√ß√£o
+table_heading_action = AÁ„o
 
 action_heading_new_administrator = Novo Administrador
 action_heading_batch_edit_administrators = Editar Grupo de Administradores
@@ -28,12 +28,12 @@ remove_from = Remover De
 set_to = Ajuste a
 global_access = Acesso Global
 
-introduction_new_administrator = Preencha a seguinte informa√ß√£o para o Novo Administrador.
+introduction_new_administrator = Preencha a seguinte informaÁ„o para o Novo Administrador.
 
-introduction_edit_administrator = Fa√ßa as mudan√ßas necess√°rias para este Administrador.
-introduction_batch_edit_administrators = Fa√ßa as mudan√ßas necess√°rias para os seguintes Administradores.
+introduction_edit_administrator = FaÁa as mudanÁas necess·rias para este Administrador.
+introduction_batch_edit_administrators = FaÁa as mudanÁas necess·rias para os seguintes Administradores.
 
-introduction_delete_administrator = Verifique a Remo√ß√£o deste Administrador.
-introduction_batch_delete_administrators = Verifique a Remo√ß√£o dos seguintes Administradores.
+introduction_delete_administrator = Verifique a RemoÁ„o deste Administrador.
+introduction_batch_delete_administrators = Verifique a RemoÁ„o dos seguintes Administradores.
 
-ms_error_username_already_exists = Erro : O username do Administrador j√° existe. Escolha outro .
+ms_error_username_already_exists = Erro : O username do Administrador j· existe. Escolha outro .

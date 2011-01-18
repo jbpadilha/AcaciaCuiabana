@@ -23,7 +23,7 @@ operation_heading_directory = Diretório :
 
 table_heading_files = Arquivos
 table_heading_size = Tamanho
-table_heading_permissions = Permiss�o
+table_heading_permissions = Permissão
 table_heading_user = Usuário
 table_heading_group = Grupo
 table_heading_writable = Escriturável

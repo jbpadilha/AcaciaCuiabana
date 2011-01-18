@@ -11,10 +11,10 @@
 
 <?xml version="1.0" encoding="utf-8"?>
 
-heading_title = ConfiguraÃ§Ã£o
+heading_title = Configuração
 
 table_heading_title = Titulo
 table_heading_value = Valor
-table_heading_action = AÃ§Ã£o
+table_heading_action = Ação
 
-introduction_edit_parameter = FaÃ§a as necessÃ¡rias mudanÃ§as nos parametros de configuraÃ§Ã£o .
+introduction_edit_parameter = Faça as necessárias mudanças nos parametros de configuração .
