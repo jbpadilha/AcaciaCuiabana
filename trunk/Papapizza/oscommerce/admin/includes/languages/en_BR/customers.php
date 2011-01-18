@@ -9,7 +9,7 @@
 # it under the terms of the GNU General Public License v2 (1991)
 # as published by the Free Software Foundation.
 
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 heading_title = Clientes
 
@@ -19,68 +19,68 @@ operation_new_address_book_entry = Nova Entrada do Livro de EndereÃ§os
 table_heading_last_name = Sobrenome
 table_heading_first_name = Primeiro Nome
 table_heading_date_created = Data
-table_heading_action = Ação
+table_heading_action = AÃ§Ã£o
 
 action_heading_new_customer = Novo Cliente
 action_heading_new_address_book_entry = Nova Entrada no Livro de EndereÃ§os
 action_heading_batch_delete_customers = Remover Grupo de Clientes
 
 section_personal = Pessoal
-section_address_book = Livro de Endereços
+section_address_book = Livro de EndereÃ§os
 
 field_gender = Sexo :
 field_first_name = Primeiro Nome :
 field_last_name = Sobrenome :
 field_date_of_birth = Data de Nascimento :
 field_email_address = E-Mail :
-field_newsletter_subscription = Inscrição na Newsletter :
+field_newsletter_subscription = InscriÃ§Ã£o na Newsletter :
 field_password = Senha :
-field_password_confirmation = Confirmação da Senha :
+field_password_confirmation = ConfirmaÃ§Ã£o da Senha :
 field_new_password = Nova Senha :
-field_new_password_confirmation = Confirmação da Nova Senha :
-field_status = Posisão:
+field_new_password_confirmation = ConfirmaÃ§Ã£o da Nova Senha :
+field_status = PosiÃ§Ã£o:
 field_company = Empresa :
 field_street_address = Rua, Avenida :
 field_suburb = Bairro :
 field_post_code = CEP :
 field_city = CiDADE :
 field_state = Estado :
-field_country = País :
+field_country = PaÃ­s :
 field_telephone_number = Telefone Fixo :
 field_fax_number = Celular ou tel 2:
-field_set_as_primary = Marque um Endereço Principal :
-field_delete_reviews = Remover Comentários ?
+field_set_as_primary = Marque um EndereÃ§o Principal :
+field_delete_reviews = Remover ComentÃ¡rios ?
 
-total_reviews = %s Comentários
+total_reviews = %s ComentÃ¡rios
 primary_address = principal
-no_telephone_number = sem número telefone fixo
-no_fax_number = sem número celular ou tel 2
+no_telephone_number = sem nÃºmero telefone fixo
+no_fax_number = sem nÃºmero celular ou tel 2
 
-introduction_delete_customer = Verifique a remoção deste Cliente .
+introduction_delete_customer = Verifique a remoÃ§Ã£o deste Cliente .
 
-introduction_batch_delete_customers = Verifique a remoção dos seguintes Clientes .
+introduction_batch_delete_customers = Verifique a remoÃ§Ã£o dos seguintes Clientes .
 
-introduction_delete_address_book_entry = Verifique a remoção das Entradas no Livro de Endereços .
-delete_warning_primary_address_book_entry = Aviso : O endereço principal do cliente não pode ser removido . Marque outro endereço como Principal e Tente Novamente .
+introduction_delete_address_book_entry = Verifique a remoÃ§Ã£o das Entradas no Livro de EndereÃ§os .
+delete_warning_primary_address_book_entry = Aviso : O endereÃ§o principal do cliente nÃ£o pode ser removido . Marque outro endereÃ§o como Principal e Tente Novamente .
 
 ms_error_gender = Selecione o sexo dos Clientes .
-ms_error_first_name = O Primeiro Nome do Cliente tem que ter um mínimo de %s caracteres .
-ms_error_last_name = O Sobrenome dos Cliente tem que ter um mínimo de %s caracteres .
+ms_error_first_name = O Primeiro Nome do Cliente tem que ter um mÃ­nimo de %s caracteres .
+ms_error_last_name = O Sobrenome dos Cliente tem que ter um mÃ­nimo de %s caracteres .
 ms_error_date_of_birth = A Data de Nascimento do Cliente deve ser ajustada corretamente .
-ms_error_email_address = O Email do Cliente tem que ter um mánimo de %s caracteres .
+ms_error_email_address = O Email do Cliente tem que ter um mÃ­nimo de %s caracteres .
 ms_error_email_address_invalid = O Email do cliente tm que ser ajustada corretamente .
-ms_error_email_address_exists = O Email do Cliente já existe. Use um unico Email por cliente .
-ms_error_password = A Senha do Cliente tem que ter um mínimo de %s caracteres .
-ms_error_password_confirmation_invalid = A Confirmação da Senha não combina com a Senha . Tente Novamente .
-ms_error_company = A Empresa dos Clientes tem que ter um mínimo de %s caracteres .
-ms_error_street_address = O endereço dos clientes tem que ter um mínimo de %s caracteres .
-ms_error_suburb = O Bairro dos Clientes tem que ter um mínimo de %s caracteres .
-ms_error_post_code = O CEP do Cliente tem que ter um mínimo de %s caracteres .
-ms_error_city = A Cidade do Cliente tem que ter um mínimo de %s caracteres .
-ms_error_state = O Estado que o Cliente mora tem que ter um mínimo de %s caracteres.
-ms_error_country = Selecione o País no menu ao lado.
-ms_error_telephone_number = O número de telefone do cliente tem que ter um mínimo de %s caracteres.
-ms_error_fax_number = O número do fax dos Clientes tem que ter um mínimo de %s caracteres.
+ms_error_email_address_exists = O Email do Cliente jÃ¡ existe. Use um unico Email por cliente .
+ms_error_password = A Senha do Cliente tem que ter um mÃ­nimo de %s caracteres .
+ms_error_password_confirmation_invalid = A ConfirmaÃ§Ã£o da Senha nÃ£o combina com a Senha . Tente Novamente .
+ms_error_company = A Empresa dos Clientes tem que ter um mÃ­nimo de %s caracteres .
+ms_error_street_address = O endereÃ§o dos clientes tem que ter um mÃ­nimo de %s caracteres .
+ms_error_suburb = O Bairro dos Clientes tem que ter um mÃ­nimo de %s caracteres .
+ms_error_post_code = O CEP do Cliente tem que ter um mÃ­nimo de %s caracteres .
+ms_error_city = A Cidade do Cliente tem que ter um mÃ­nimo de %s caracteres .
+ms_error_state = O Estado que o Cliente mora tem que ter um mÃ­nimo de %s caracteres.
+ms_error_country = Selecione o PaÃ­s no menu ao lado.
+ms_error_telephone_number = O nÃºmero de telefone do cliente tem que ter um mÃ­nimo de %s caracteres.
+ms_error_fax_number = O nÃºmero do fax dos Clientes tem que ter um mÃ­nimo de %s caracteres.
 
 ms_warning_state_select_from_list = Selecione o Estado correto no menu ao lado .
 
@@ -92,11 +92,11 @@ email_text = Bem Vindo a %s.
 
 Agora Voce pode participar dos vÃ¡rios ServiÃ§os que temos para oferecer. Alguns desses ServiÃ§os incluem :
 
-* CARRINHO DE COMPRAS PERMANENTE  -  Todos os produtos que voce adicionou a suas compras permanecerão lá até que Você os Compre ou os Remova ;
-* LIVRO DE ENDEREÇOS - Os Produtos poderÃ£o ser entregues a qualquer um dos endereços que voce adicionar nele.
-* HISTÓRICO DE COMPRAS - Relação de todas as compras que voce fez em nossa Loja online .
-* COMENTÁRIOS DE PRODUTOS - Ofereça sua opinião acerca dos produtos que voce conhece aos outros Clientes.
+* CARRINHO DE COMPRAS PERMANENTE  -  Todos os produtos que voce adicionou a suas compras permanecerÃ£o lÃ¡ atÃ© que Voce os Compre ou os Remova ;
+* LIVRO DE ENDEREÃ‡OS - Os Produtos poderÃ£o ser entregues a qualquer um dos endereÃ§os que voce adicionar nele. Ã‰ perfeito para presentear diretamente.
+* HISTÃ“RICO DE COMPRAS - RelaÃ§Ã£o de todas as compras que voce fez em nossa Loja online .
+* COMENTÃRIOS DE PRODUTOS - OfereÃ§a sua opiniÃ£o acerca dos produtos que voce conhece aos outros Clientes.
 
-Para resolver qualquer dúvida quanto ao uso dos Serviços mande um Email para %s que faremos o máximo para tirálas.
+Para resolver qualquer dÃºvida quanto ao uso dos ServiÃ§os mande um Email para %s que faremos o mÃ¡ximo para tirÃ¡-las.
 
 Anote por favor. Esta Conta foi criada para voce quando do seu cadastro.Para se logar na Loja use o seu Email mais a seguinte senha escolhida por voce : %s

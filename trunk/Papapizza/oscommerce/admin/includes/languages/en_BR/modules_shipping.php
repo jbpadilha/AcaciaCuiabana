@@ -9,14 +9,14 @@
 # it under the terms of the GNU General Public License v2 (1991)
 # as published by the Free Software Foundation.
 
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 
-heading_title = Módulo de Entrega
+heading_title = MÃ³dulo de Entrega
 
-table_heading_shipping_modules = Módulo de Entrega
+table_heading_shipping_modules = MÃ³dulo de Entrega
 table_heading_sort_order = Ordem
-table_heading_action = Ação
+table_heading_action = AÃ§Ã£o
 
-introduction_edit_shipping_module = Fazer alterações no Módulo de Entrega.
+introduction_edit_shipping_module = Fazer alteraÃ§Ãµes no MÃ³dulo de Entrega.
 
-introduction_uninstall_shipping_module = Verificar a desinstalação do módulo de entrega .
+introduction_uninstall_shipping_module = Verificar a desinstalaÃ§Ã£o do mÃ³dulo de entrega .
