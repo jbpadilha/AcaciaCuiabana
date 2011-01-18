@@ -17,4 +17,4 @@ table_heading_title = Titulo
 table_heading_value = Valor
 table_heading_action = Ação
 
-introduction_edit_parameter = Fa�a as necess�rias mudan�as nos parametros de configuração .
+introduction_edit_parameter = Faça as necessárias mudanças nos parametros de configuração .

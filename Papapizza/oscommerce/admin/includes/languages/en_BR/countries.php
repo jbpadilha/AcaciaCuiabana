@@ -39,7 +39,7 @@ total_zones = %s Regiões
 
 introduction_new_country = Preencha por favor a seguinte informação para o novo País .
 
-introduction_edit_country = Fa�a as mudanças necess�rias para este Pa�s .
+introduction_edit_country = Faça as mudanças necessárias para este País .
 
 introduction_delete_country = Verifique a remoção deste País e de suas Regiões .
 delete_warning_country_in_use_address_book = Aviso : Este País não pode ser deletado enquanto for atribuido a ele %s entradas no Livro de Endereços .

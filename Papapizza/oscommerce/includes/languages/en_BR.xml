@@ -3,8 +3,8 @@
   <data>
     <title><![CDATA[portugues]]></title>
     <code><![CDATA[en_BR]]></code>
-    <locale><![CDATA[en_BR.UTF-8,br,portugues]]></locale>
-    <character_set><![CDATA[UTF-8]]></character_set>
+    <locale><![CDATA[en_BR.UTF-8,en_BR,portugues]]></locale>
+    <character_set><![CDATA[utf-8]]></character_set>
     <text_direction><![CDATA[ltr]]></text_direction>
     <date_format_short><![CDATA[%d/%m/%Y]]></date_format_short>
     <date_format_long><![CDATA[%A %d %B, %Y]]></date_format_long>
@@ -72,7 +72,7 @@
     </definition>
     <definition>
       <key>js_error_already_submitted</key>
-      <value><![CDATA[O cadastro está pronto. Agora, sómente pressione OK para que o processo se complete.]]></value>
+      <value><![CDATA[O cadastro está pronto. Agora, somente pressione OK para que o processo se complete.]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -102,12 +102,12 @@
     </definition>
     <definition>
       <key>result_set_previous_page</key>
-      <value><![CDATA[[&lt;&lt;&nbsp;Anterior]]]></value>
+      <value><![CDATA[[Anterior]]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>result_set_next_page</key>
-      <value><![CDATA[[Próxima&nbsp;&gt;&gt;]]]></value>
+      <value><![CDATA[[Próxima]]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -1960,7 +1960,7 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>field_customer_suburb_error</key>
-      <value><![CDATA[Seu Bairro tem que ter um mínimo de %s caracteres .]]></value>
+      <value><![CDATA[Seu Bairro tem que ter um mõ­nimo de %s caracteres .]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -2075,7 +2075,7 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>field_customer_password_new_mismatch_with_confirmation_error</key>
-      <value><![CDATA[A Confirmação da Senha tem que ser igual à Senha.]]></value>
+      <value><![CDATA[A Confirmação da Senha tem que ser igual a Senha.]]></value>
       <group>general</group>
     </definition>
     <definition>
