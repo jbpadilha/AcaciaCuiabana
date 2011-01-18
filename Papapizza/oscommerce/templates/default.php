@@ -80,7 +80,6 @@
     foreach ($osC_Template->getContentModules('before') as $box) {
       $osC_Box = new $box();
       $osC_Box->initialize();
-
       if ($osC_Box->hasContent()) {
         if ($osC_Template->getCode() == DEFAULT_TEMPLATE) {
           include('templates/' . $osC_Template->getCode() . '/modules/content/' . $osC_Box->getCode() . '.php');

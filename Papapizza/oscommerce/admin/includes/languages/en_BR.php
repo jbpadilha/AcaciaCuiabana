@@ -9,13 +9,13 @@
 # it under the terms of the GNU General Public License v2 (1991)
 # as published by the Free Software Foundation.
 
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <language>
   <data>
     <title><![CDATA[portugues]]></title>
     <code><![CDATA[en_BR]]></code>
-    <locale><![CDATA[en_BR.iso-8859-1,en_BR,portugues]]></locale>
-    <character_set><![CDATA[iso-8859-1]]></character_set>
+    <locale><![CDATA[en_BR.UTF-8,en_BR,portugues]]></locale>
+    <character_set><![CDATA[utf-8]]></character_set>
     <text_direction><![CDATA[ltr]]></text_direction>
     <date_format_short><![CDATA[%d/%m/%Y]]></date_format_short>
     <date_format_long><![CDATA[%A %d %B, %Y]]></date_format_long>
@@ -23,7 +23,7 @@
     <default_currency><![CDATA[BRA]]></default_currency>
     <numerical_decimal_separator><![CDATA[,]]></numerical_decimal_separator>
     <numerical_thousands_separator><![CDATA[.]]></numerical_thousands_separator>
-    <parent_language_code><![CDATA[]]></parent_language_code>
+    <parent_language_code><![CDATA[5]]></parent_language_code>
   </data>
 </language>
 
@@ -35,8 +35,8 @@ header_title_online_catalog = Catalogo
 header_title_languages = Linguas
 header_title_logoff = Sair
 
-ssl_protection = Você está protegido por uma %s conexão SSL segura.
-ssl_unprotected = Você não está em uma conexão segura SSL .
+ssl_protection = Voce está protegido por uma %s conexão SSL segura.
+ssl_unprotected = Voce não está em uma conexão segura SSL .
 
 gender_male = Masculino
 gender_female = Feminino
@@ -75,10 +75,10 @@ button_restore = Restaurar
 button_retry = Tentar novamente
 button_save = Salvar
 button_send = Emitir
-button_send_to_server = Emitir ao usu�rio
+button_send_to_server = Emitir ao usuário
 button_uninstall = Desinstalar
 button_update = Atualizar
-button_update_currency_exchange_rates = Atualização de C�mbio das Moedas
+button_update_currency_exchange_rates = Atualização de Câmbio das Moedas
 button_upload = Upload
 
 icon_banner_preview = Prévia

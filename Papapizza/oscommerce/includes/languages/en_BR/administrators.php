@@ -9,12 +9,12 @@
 # it under the terms of the GNU General Public License v2 (1991)
 # as published by the Free Software Foundation.
 
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 heading_title = Administradores
 
 table_heading_administrators = Administradores
-table_heading_action = A��o
+table_heading_action = Ação
 
 action_heading_new_administrator = Novo Administrador
 action_heading_batch_edit_administrators = Editar Grupo de Administradores
@@ -28,12 +28,12 @@ remove_from = Remover De
 set_to = Ajuste a
 global_access = Acesso Global
 
-introduction_new_administrator = Preencha a seguinte informa��o para o Novo Administrador.
+introduction_new_administrator = Preencha a seguinte informação para o Novo Administrador.
 
-introduction_edit_administrator = Fa�a as mudan�as necess�rias para este Administrador.
-introduction_batch_edit_administrators = Fa�a as mudan�as necess�rias para os seguintes Administradores.
+introduction_edit_administrator = Faça as mudanças necessárias para este Administrador.
+introduction_batch_edit_administrators = Faça as mudan�as necessárias para os seguintes Administradores.
 
-introduction_delete_administrator = Verifique a Remo��o deste Administrador.
-introduction_batch_delete_administrators = Verifique a Remo��o dos seguintes Administradores.
+introduction_delete_administrator = Verifique a Remoção deste Administrador.
+introduction_batch_delete_administrators = Verifique a Remoção dos seguintes Administradores.
 
-ms_error_username_already_exists = Erro : O username do Administrador j� existe. Escolha outro .
+ms_error_username_already_exists = Erro : O username do Administrador já existe. Escolha outro .
