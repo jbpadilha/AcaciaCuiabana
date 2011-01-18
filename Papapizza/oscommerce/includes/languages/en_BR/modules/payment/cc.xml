@@ -27,6 +27,11 @@
       <group>modules-payment</group>
     </definition>
     <definition>
+      <key>payment_cc_credit_card_cvc</key>
+      <value><![CDATA[Código de segurança]]></value>
+      <group>modules-payment</group>
+    </definition>
+    <definition>
       <key>payment_cc_credit_card_expiry_date</key>
       <value><![CDATA[Cartão válido até]]></value>
       <group>modules-payment</group>
@@ -69,6 +74,11 @@
     <definition>
       <key>payment_cc_error_unknown_card</key>
       <value><![CDATA[Este número de Cartão de Crédito não é reconhecido pelos nossos sistemas. Verifique o número ou tente novamente com outro cartão ou outra forma de pagamento.]]></value>
+      <group>modules-payment</group>
+    </definition>
+    <definition>
+      <key>payment_cc_error_credit_card_cvc</key>
+      <value><![CDATA[* O código de segurança do cartão deve conter no mínimo 3 letras.]]></value>
       <group>modules-payment</group>
     </definition>
   </definitions>

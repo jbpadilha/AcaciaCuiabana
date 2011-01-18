@@ -67,22 +67,22 @@
     </definition>
     <definition>
       <key>js_error</key>
-      <value><![CDATA[Houveram erros durante o processamento de seu cadastro.\n\nFaça as seguintes correções :\n\n]]></value>
+      <value><![CDATA[Houveram erros durante o processamento de seu cadastro.\n\nFaÃ§a as seguintes correÃ§Ãµes :\n\n]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>js_error_already_submitted</key>
-      <value><![CDATA[O cadastro está pronto. Agora, somente pressione OK para que o processo se complete.]]></value>
+      <value><![CDATA[O cadastro estÃ¡ pronto. Agora, sÃ³mente pressione OK para que o processo se complete.]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>form_required_information</key>
-      <value><![CDATA[* Campo de Preenchimento Obrigatório]]></value>
+      <value><![CDATA[* Campo de Preenchimento ObrigatÃ³rio]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>result_set_current_page</key>
-      <value><![CDATA[Página %s de %d]]></value>
+      <value><![CDATA[PÃ¡gina %s de %d]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -97,22 +97,22 @@
     </definition>
     <definition>
       <key>result_set_number_of_reviews</key>
-      <value><![CDATA[Mostrando <b>%d</b> de <b>%d</b> (de <b>%d</b> comentários)]]></value>
+      <value><![CDATA[Mostrando <b>%d</b> de <b>%d</b> (de <b>%d</b> comentÃ¡rios)]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>result_set_previous_page</key>
-      <value><![CDATA[[Anterior]]]></value>
+      <value><![CDATA[[&lt;&lt;&nbsp;Anterior]]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>result_set_next_page</key>
-      <value><![CDATA[[Próxima]]]></value>
+      <value><![CDATA[[PrÃ³xima&nbsp;&gt;&gt;]]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>button_add_address</key>
-      <value><![CDATA[Adicionar Endereço]]></value>
+      <value><![CDATA[Adicionar EndereÃ§o]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -127,7 +127,7 @@
     </definition>
     <definition>
       <key>button_change_address</key>
-      <value><![CDATA[Alterar Endereço]]></value>
+      <value><![CDATA[Alterar EndereÃ§o]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -167,12 +167,12 @@
     </definition>
     <definition>
       <key>button_add_to_cart</key>
-      <value><![CDATA[Adicionar às Compras]]></value>
+      <value><![CDATA[Adicionar Ã s Compras]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>button_reviews</key>
-      <value><![CDATA[Comentários]]></value>
+      <value><![CDATA[ComentÃ¡rios]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -187,12 +187,12 @@
     </definition>
     <definition>
       <key>button_write_review</key>
-      <value><![CDATA[Escrever Comentário]]></value>
+      <value><![CDATA[Escrever ComentÃ¡rio]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>icon_in_cart</key>
-      <value><![CDATA[Adicionar às Compras]]></value>
+      <value><![CDATA[Adicionar Ã s Compras]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -212,7 +212,7 @@
     </definition>
     <definition>
       <key>index_text</key>
-      <value><![CDATA[Bem vindo]]></value>
+      <value><![CDATA[]]></value>
       <group>index</group>
     </definition>
     <definition>
@@ -242,7 +242,7 @@
     </definition>
     <definition>
       <key>listing_price_heading</key>
-      <value><![CDATA[Preço]]></value>
+      <value><![CDATA[PreÃ§o]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -257,7 +257,7 @@
     </definition>
     <definition>
       <key>no_products_in_category</key>
-      <value><![CDATA[Não há nenhum produto disponível nesta categoria.]]></value>
+      <value><![CDATA[NÃ£o hÃ¡ nenhum produto disponÃ­vel nesta categoria.]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -277,12 +277,12 @@
     </definition>
     <definition>
       <key>greeting_guest</key>
-      <value><![CDATA[Bem vindo! <a href="%s">Entre</a> e veja <a href="%s">as novidades</a> desde sua última visita.]]></value>
+      <value><![CDATA[Bem vindo! <a href="%s">Entre</a> e veja <a href="%s">as novidades</a> desde sua Ãºltima visita.]]></value>
       <group>index</group>
     </definition>
     <definition>
       <key>greeting_customer</key>
-      <value><![CDATA[Volte sempre %s! Olhe <a href="%s">as novidades</a> desde sua última visita!]]></value>
+      <value><![CDATA[Volte sempre %s! Olhe <a href="%s">as novidades</a> desde sua Ãºltima visita!]]></value>
       <group>index</group>
     </definition>
     <definition>
@@ -342,7 +342,7 @@
     </definition>
     <definition>
       <key>breadcrumb_address_book</key>
-      <value><![CDATA[Livro de Endereços]]></value>
+      <value><![CDATA[Livro de EndereÃ§os]]></value>
       <group>account</group>
     </definition>
     <definition>
@@ -407,7 +407,7 @@
     </definition>
     <definition>
       <key>newsletters_heading</key>
-      <value><![CDATA[Minha Inscrição na Newsletter]]></value>
+      <value><![CDATA[Minha InscriÃ§Ã£o na Newsletter]]></value>
       <group>account</group>
     </definition>
     <definition>
@@ -417,22 +417,22 @@
     </definition>
     <definition>
       <key>address_book_heading</key>
-      <value><![CDATA[Meu Livro de Enderços]]></value>
+      <value><![CDATA[Meu Livro de EnderÃ§os]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>address_book_add_entry_heading</key>
-      <value><![CDATA[Nova Entrada no meu Livro de Endereços]]></value>
+      <value><![CDATA[Nova Entrada no meu Livro de EndereÃ§os]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>address_book_edit_entry_heading</key>
-      <value><![CDATA[Editar Entrada no Livro de Endereços]]></value>
+      <value><![CDATA[Editar Entrada no Livro de EndereÃ§os]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>address_book_delete_entry_heading</key>
-      <value><![CDATA[Remover Entrada no Livro de Endereços]]></value>
+      <value><![CDATA[Remover Entrada no Livro de EndereÃ§os]]></value>
       <group>account</group>
     </definition>
     <definition>
@@ -452,7 +452,7 @@
     </definition>
     <definition>
       <key>login_new_customer_text</key>
-      <value><![CDATA[Eu sou um novo cliente e quero criar uma Conta agora.<br /><br />Criando uma Conta voce poderá aproveitar-se desta Loja comprando mais rápidamente, sendo atualizado na posição de seus pedidos e mantendo-se a par das compras que voce fez.]]></value>
+      <value><![CDATA[Eu sou um novo cliente e quero criar uma Conta agora.<br /><br />Criando uma Conta voce poderÃ¡ aproveitar-se desta Loja comprando mais rÃ¡pidamente, sendo atualizado na posiÃ§Ã£o de seus pedidos e mantendo-se a par das compras que voce fez.]]></value>
       <group>account</group>
     </definition>
     <definition>
@@ -472,7 +472,7 @@
     </definition>
     <definition>
       <key>error_login_no_match</key>
-      <value><![CDATA[Não temos cadastro desse email ou senha. Tente novamente com outro email ou outra senha.]]></value>
+      <value><![CDATA[NÃ£o temos cadastro desse email ou senha. Tente novamente com outro email ou outra senha.]]></value>
       <group>account</group>
     </definition>
     <definition>
@@ -482,7 +482,7 @@
     </definition>
     <definition>
       <key>sign_out_text</key>
-      <value><![CDATA[Voce Saiu com Sucesso de Sua Conta . Seu carrinho de compras foi mantido e será restaurado na próxima vez que voce entrar.<br /><br />Neste site voce pode entrar e sair com segurança.]]></value>
+      <value><![CDATA[Voce Saiu com Sucesso de Sua Conta . Seu carrinho de compras foi mantido e serÃ¡ restaurado na prÃ³xima vez que voce entrar.<br /><br />Neste site voce pode entrar e sair com seguranÃ§a.]]></value>
       <group>account</group>
     </definition>
     <definition>
@@ -492,7 +492,7 @@
     </definition>
     <definition>
       <key>information_title</key>
-      <value><![CDATA[Informação]]></value>
+      <value><![CDATA[InformaÃ§Ã£o]]></value>
       <group>info</group>
     </definition>
     <definition>
@@ -502,7 +502,7 @@
     </definition>
     <definition>
       <key>my_account_address_book</key>
-      <value><![CDATA[Ver ou alterar meu Livro de Endereços.]]></value>
+      <value><![CDATA[Ver ou alterar meu Livro de EndereÃ§os.]]></value>
       <group>account</group>
     </definition>
     <definition>
@@ -542,12 +542,12 @@
     </definition>
     <definition>
       <key>order_number</key>
-      <value><![CDATA[Pedido Número :]]></value>
+      <value><![CDATA[Pedido NÃºmero :]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>order_status</key>
-      <value><![CDATA[Situação da Compra :]]></value>
+      <value><![CDATA[SituaÃ§Ã£o da Compra :]]></value>
       <group>account</group>
     </definition>
     <definition>
@@ -577,7 +577,7 @@
     </definition>
     <definition>
       <key>no_orders_made_yet</key>
-      <value><![CDATA[Voce não fez nenhuma compra ainda.]]></value>
+      <value><![CDATA[Voce nÃ£o fez nenhuma compra ainda.]]></value>
       <group>account</group>
     </definition>
     <definition>
@@ -597,7 +597,7 @@
     </definition>
     <definition>
       <key>order_history_heading</key>
-      <value><![CDATA[Histórico de Compras]]></value>
+      <value><![CDATA[HistÃ³rico de Compras]]></value>
       <group>account</group>
     </definition>
     <definition>
@@ -607,7 +607,7 @@
     </definition>
     <definition>
       <key>download_link_expires</key>
-      <value><![CDATA[Link válido até : %s]]></value>
+      <value><![CDATA[Link vÃ¡lido atÃ© : %s]]></value>
       <group>account</group>
     </definition>
     <definition>
@@ -617,17 +617,17 @@
     </definition>
     <definition>
       <key>newsletter_subscriptions_heading</key>
-      <value><![CDATA[Minhas Inscrições na Newsletter]]></value>
+      <value><![CDATA[Minhas InscriÃ§Ãµes na Newsletter]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>newsletter_general</key>
-      <value><![CDATA[Boletim de Notícias Geral]]></value>
+      <value><![CDATA[Boletim de NotÃ­cias Geral]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>newsletter_general_description</key>
-      <value><![CDATA[Inclui novidades da Loja, novos produtos, ofertas especiais e novas Promoções e Itens Promocionais .]]></value>
+      <value><![CDATA[Inclui novidades da Loja, novos produtos, ofertas especiais e novas PromoÃ§Ãµes e Itens Promocionais .]]></value>
       <group>account</group>
     </definition>
     <definition>
@@ -637,17 +637,17 @@
     </definition>
     <definition>
       <key>newsletter_product_notifications_description</key>
-      <value><![CDATA[A lista de atualização de produtos permite que voce se mantenha atualizado com as novidades relacionadas aos produtos que voce selecionou.<br /><br />Para isso, basta selecionar<b>Atualização Global de Produtos</b>.]]></value>
+      <value><![CDATA[A lista de atualizaÃ§Ã£o de produtos permite que voce se mantenha atualizado com as novidades relacionadas aos produtos que voce selecionou.<br /><br />Para isso, basta selecionar<b>AtualizaÃ§Ã£o Global de Produtos</b>.]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>newsletter_product_notifications_global</key>
-      <value><![CDATA[Atualização Global de Produtos]]></value>
+      <value><![CDATA[AtualizaÃ§Ã£o Global de Produtos]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>newsletter_product_notifications_global_description</key>
-      <value><![CDATA[Receba atualizações de todos Produtos disponíveis.]]></value>
+      <value><![CDATA[Receba atualizaÃ§Ãµes de todos Produtos disponÃ­veis.]]></value>
       <group>account</group>
     </definition>
     <definition>
@@ -662,57 +662,57 @@
     </definition>
     <definition>
       <key>newsletter_product_notifications_products_none</key>
-      <value><![CDATA[Não há no momento nenhum produto selecionado para receber atualizações.<br /><br />Para adicionar Produtos na sua Lista Pessoal de Atualizações, clique sobre o link na página detalhada do produto, dentro da caixa à sua direita escrita Aviso de Produto.]]></value>
+      <value><![CDATA[NÃ£o hÃ¡ no momento nenhum produto selecionado para receber atualizaÃ§Ãµes.<br /><br />Para adicionar Produtos na sua Lista Pessoal de AtualizaÃ§Ãµes, clique sobre o link na pÃ¡gina detalhada do produto, dentro da caixa Ã  sua direita escrita Aviso de Produto.]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>primary_address_title</key>
-      <value><![CDATA[Endereço Principal]]></value>
+      <value><![CDATA[EndereÃ§o Principal]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>primary_address_description</key>
-      <value><![CDATA[Este endereço está pré-selecionado para entregas e faturamento referentes aos Pedidos efetuados nesta Loja.<br /><br />Este endereço será usado igualmente para cálculo de frete e outros serviços referentes aos seus produtos adquiridos.]]></value>
+      <value><![CDATA[Este endereÃ§o estÃ¡ prÃ©-selecionado para entregas e faturamento referentes aos Pedidos efetuados nesta Loja.<br /><br />Este endereÃ§o serÃ¡ usado igualmente para cÃ¡lculo de frete e outros serviÃ§os referentes aos seus produtos adquiridos.]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>address_book_title</key>
-      <value><![CDATA[Entradas no Livro de Endereços]]></value>
+      <value><![CDATA[Entradas no Livro de EndereÃ§os]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>primary_address_marker</key>
-      <value><![CDATA[(endereço principal)]]></value>
+      <value><![CDATA[(endereÃ§o principal)]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>address_book_maximum_entries</key>
-      <value><![CDATA[<font color="#ff0000"><b>NOTE:</b></font> Um máximo de %s entradas no Livro de Endereços.]]></value>
+      <value><![CDATA[<font color="#ff0000"><b>NOTE:</b></font> Um mÃ¡ximo de %s entradas no Livro de EndereÃ§os.]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>address_book_delete_address_title</key>
-      <value><![CDATA[Remover Endereço]]></value>
+      <value><![CDATA[Remover EndereÃ§o]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>address_book_delete_address_description</key>
-      <value><![CDATA[Voce está certo que gostaria de remover este endereço ?]]></value>
+      <value><![CDATA[Voce estÃ¡ certo que gostaria de remover este endereÃ§o ?]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>address_book_new_address_title</key>
-      <value><![CDATA[Novo Endereço]]></value>
+      <value><![CDATA[Novo EndereÃ§o]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>selected_address_title</key>
-      <value><![CDATA[Selecionar Endereço]]></value>
+      <value><![CDATA[Selecionar EndereÃ§o]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>set_as_primary</key>
-      <value><![CDATA[Marque o Endereço Principal.]]></value>
+      <value><![CDATA[Marque o EndereÃ§o Principal.]]></value>
       <group>account</group>
     </definition>
     <definition>
@@ -722,7 +722,7 @@
     </definition>
     <definition>
       <key>create_account_terms_description</key>
-      <value><![CDATA[Reconheço que concordo com os Estatutos de Privacidade clicando na sequinte caixa. Os Estatutos de Privacidade podem ser lidos <a href="%s">AQUI</a>.]]></value>
+      <value><![CDATA[ReconheÃ§o que concordo com os Estatutos de Privacidade clicando na sequinte caixa. Os Estatutos de Privacidade podem ser lidos <a href="%s">AQUI</a>.]]></value>
       <group>account</group>
     </definition>
     <definition>
@@ -749,16 +749,16 @@
       <key>email_create_account_body</key>
       <value><![CDATA[Bem Vindo a %s!
 
-Agora voce pode participar dos vários serviços e ofertas que temos. Alguns desses serviços incluem :
+Agora voce pode participar dos vÃ¡rios serviÃ§os e ofertas que temos. Alguns desses serviÃ§os incluem :
 
-<li>Carrinho de Compras Permanente - Seus Produtos adicionados para Compra ficam registrados em sua Conta pessoal até que voce os compre ou os remova.
-<li>Livro de Endereços - Agora voce poderá ter os Produtos escolhidos entregues em outro Endereço que não o seu, por exemplo, um Presente de Aniversário para entrega direta ao aniversariante em que voce poderá, inclusive, escolher um texto para mandarmos uma mensagem sua!
-<li>Histórico de Compras - Voce poderá ver as compras que fez conosco.
-<li>Comentários de Produtos - Ofereça sua opinião à respeito dos Produtos aos outros clientes. Isso poderá ajudar na decisão deles mostrando uma visão Pessoal dos itens em condições de uso real.
+<li>Carrinho de Compras Permanente - Seus Produtos adicionados para Compra ficam registrados em sua Conta pessoal atÃ© que voce os compre ou os remova.
+<li>Livro de EndereÃ§os - Agora voce poderÃ¡ ter os Produtos escolhidos entregues em outro EndereÃ§o que nÃ£o o seu, por exemplo, um Presente de AniversÃ¡rio para entrega direta ao aniversariante em que voce poderÃ¡, inclusive, escolher um texto para mandarmos uma mensagem sua!
+<li>HistÃ³rico de Compras - Voce poderÃ¡ ver as compras que fez conosco.
+<li>ComentÃ¡rios de Produtos - OfereÃ§a sua opiniÃ£o Ã  respeito dos Produtos aos outros clientes. Isso poderÃ¡ ajudar na decisÃ£o deles mostrando uma visÃ£o Pessoal dos itens em condiÃ§Ãµes de uso real.
 
-Para receber ajuda em qualquer um de nossos serviços mande-nos um Email: %s.
+Para receber ajuda em qualquer um de nossos serviÃ§os mande-nos um Email: %s.
 
-Nota: Este endereço de Email foi nos dado por um de nossos clientes. Se voce não for um dos nossos clientes, por gentileza, mande-nos um Email para que possamos fazer as devidas correções em nosso cadastro. Muito Obrigado.]]></value>
+Nota: Este endereÃ§o de Email foi nos dado por um de nossos clientes. Se voce nÃ£o for um dos nossos clientes, por gentileza, mande-nos um Email para que possamos fazer as devidas correÃ§Ãµes em nosso cadastro. Muito Obrigado.]]></value>
       <group>account</group>
     </definition>
     <definition>
@@ -785,18 +785,18 @@ Nota: Este endereço de Email foi nos dado por um de nossos clientes. Se voce não
       <key>email_password_reminder_body</key>
       <value><![CDATA[Uma nova senha foi requerida para %s.
 
-A nova Senha de %s é :
+A nova Senha de %s Ã© :
 
 %s
 
-Para qualquer ajuda acerca de nossos serviços nos mande um Email : %s.
+Para qualquer ajuda acerca de nossos serviÃ§os nos mande um Email : %s.
 
-Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique a Caiçara Brasil o mais cedo possível.]]></value>
+Note: Se voce nÃ£o pediu esta aÃ§Ã£o atravÃ©s de Nossa PÃ¡gina , por favor, notifique a CaiÃ§ara Brasil o mais cedo possÃ­vel.]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>success_account_created</key>
-      <value><![CDATA[Parabéns ! Sua nova Conta foi criada com Sucesso ! Agora Voce pode aproveitar-se dos privilégios de Membro . Se tiver tiver dúvidas do funcionamento ou sugestões para melhorarmos a Loja, mande um Email para <a href="%s">Caiçara Brasil</a>.<br /><br />Uma confirmação foi emitida ao seu Email. Se voce não recebe-la dentro de no máximo uma hora, por favor contate conosco .]]></value>
+      <value><![CDATA[ParabÃ©ns ! Sua nova Conta foi criada com Sucesso ! Agora Voce pode aproveitar-se dos privilÃ©gios de Membro . Se tiver tiver dÃºvidas do funcionamento ou sugestÃµes para melhorarmos a Loja, mande um Email para <a href="%s">CaiÃ§ara Brasil</a>.<br /><br />Uma confirmaÃ§Ã£o foi emitida ao seu Email. Se voce nÃ£o recebe-la dentro de no mÃ¡ximo uma hora, por favor contate conosco .]]></value>
       <group>account</group>
     </definition>
     <definition>
@@ -811,87 +811,87 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>success_newsletter_updated</key>
-      <value><![CDATA[A atualização de Sua Inscrição em nossa Newsletter foi feita com Sucesso ! Parabéns !]]></value>
+      <value><![CDATA[A atualizaÃ§Ã£o de Sua InscriÃ§Ã£o em nossa Newsletter foi feita com Sucesso ! ParabÃ©ns !]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>success_notifications_updated</key>
-      <value><![CDATA[A atualização dos avisos de produtos escolhidos por voce foi feita com Sucesso !]]></value>
+      <value><![CDATA[A atualizaÃ§Ã£o dos avisos de produtos escolhidos por voce foi feita com Sucesso !]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>success_address_book_entry_deleted</key>
-      <value><![CDATA[O Endereço selecionado foi removido com Sucesso do seu Livro de Endereços .]]></value>
+      <value><![CDATA[O EndereÃ§o selecionado foi removido com Sucesso do seu Livro de EndereÃ§os .]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>success_address_book_entry_updated</key>
-      <value><![CDATA[O seu Livro de Endereços foi atualizado.]]></value>
+      <value><![CDATA[O seu Livro de EndereÃ§os foi atualizado.]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>success_password_forgotten_sent</key>
-      <value><![CDATA[Uma nova Senha está sendo remetida para seu Email.]]></value>
+      <value><![CDATA[Uma nova Senha estÃ¡ sendo remetida para seu Email.]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>warning_primary_address_deletion</key>
-      <value><![CDATA[O Endereço Principal foi apagado. Por gentileza, marque ou determine um outro endereço como Endereço Principal e tente novamente]]></value>
+      <value><![CDATA[O EndereÃ§o Principal foi apagado. Por gentileza, marque ou determine um outro endereÃ§o como EndereÃ§o Principal e tente novamente]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>error_current_password_not_matching</key>
-      <value><![CDATA[Sua Senha não combina com a que temos em nossos registros. Por favor, tente novamente.]]></value>
+      <value><![CDATA[Sua Senha nÃ£o combina com a que temos em nossos registros. Por favor, tente novamente.]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>error_address_book_entry_non_existing</key>
-      <value><![CDATA[Esta entrada no Livro de Endereços não existe.]]></value>
+      <value><![CDATA[Esta entrada no Livro de EndereÃ§os nÃ£o existe.]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>error_address_book_full</key>
-      <value><![CDATA[Seu Livro de Endereços está cheio . Remova algum Endereço do Livro para poder salvar um Novo Endereço .]]></value>
+      <value><![CDATA[Seu Livro de EndereÃ§os estÃ¡ cheio . Remova algum EndereÃ§o do Livro para poder salvar um Novo EndereÃ§o .]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>error_password_forgotten_no_email_address_found</key>
-      <value><![CDATA[Erro : O Email digitado não consta de nossos Registros. Por favor, tente novamente com outro Email .]]></value>
+      <value><![CDATA[Erro : O Email digitado nÃ£o consta de nossos Registros. Por favor, tente novamente com outro Email .]]></value>
       <group>account</group>
     </definition>
     <definition>
       <key>warning_install_directory_exists</key>
-      <value><![CDATA[Installation directory exists at: %s. Remova o diretório por motivo de segurança .]]></value>
+      <value><![CDATA[Installation directory exists at: %s. Remova o diretÃ³rio por motivo de seguranÃ§a .]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>warning_config_file_writeable</key>
-      <value><![CDATA[Eu posso escrever novas configurações nos arquivos: %s. Este é um risco potencial de segurança - verifique as permissões de uso e escrita.]]></value>
+      <value><![CDATA[Eu posso escrever novas configuraÃ§Ãµes nos arquivos: %s. Este Ã© um risco potencial de seguranÃ§a - verifique as permissÃµes de uso e escrita.]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>warning_session_directory_non_existent</key>
-      <value><![CDATA[O diretório das sessões não existe: %s. Não haverá sessões até que o diretório seja criado.]]></value>
+      <value><![CDATA[O diretÃ³rio das sessÃµes nÃ£o existe: %s. NÃ£o haverÃ¡ sessÃµes atÃ© que o diretÃ³rio seja criado.]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>warning_session_directory_not_writeable</key>
-      <value><![CDATA[Eu não posso escrever no diretório das sessões : %s. As sessões não trabalharão até que as permissões de usuário estejam corretas.]]></value>
+      <value><![CDATA[Eu nÃ£o posso escrever no diretÃ³rio das sessÃµes : %s. As sessÃµes nÃ£o trabalharÃ£o atÃ© que as permissÃµes de usuÃ¡rio estejam corretas.]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>warning_session_auto_start</key>
-      <value><![CDATA[session.auto_start está ligada (enable) - feche esta (disable)php feature no php.ini e reinicie o servidor.]]></value>
+      <value><![CDATA[session.auto_start estÃ¡ ligada (enable) - feche esta (disable)php feature no php.ini e reinicie o servidor.]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>warning_download_directory_non_existent</key>
-      <value><![CDATA[Os arquivos de downloads dos produtos não existe: %s. Os downloads de produtos não funcionarão até que esse diretório seja válido.]]></value>
+      <value><![CDATA[Os arquivos de downloads dos produtos nÃ£o existe: %s. Os downloads de produtos nÃ£o funcionarÃ£o atÃ© que esse diretÃ³rio seja vÃ¡lido.]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>breadcrumb_checkout</key>
-      <value><![CDATA[Verificação Geral]]></value>
+      <value><![CDATA[VerificaÃ§Ã£o Geral]]></value>
       <group>checkout</group>
     </definition>
     <definition>
@@ -906,7 +906,7 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>breadcrumb_checkout_shipping_address</key>
-      <value><![CDATA[Endereço para entrega]]></value>
+      <value><![CDATA[EndereÃ§o para entrega]]></value>
       <group>checkout</group>
     </definition>
     <definition>
@@ -916,12 +916,12 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>breadcrumb_checkout_payment_address</key>
-      <value><![CDATA[Endereço de Pagamento]]></value>
+      <value><![CDATA[EndereÃ§o de Pagamento]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>breadcrumb_checkout_confirmation</key>
-      <value><![CDATA[Confirmação]]></value>
+      <value><![CDATA[ConfirmaÃ§Ã£o]]></value>
       <group>checkout</group>
     </definition>
     <definition>
@@ -941,7 +941,7 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>shipping_address_heading</key>
-      <value><![CDATA[Endereço da Entrega]]></value>
+      <value><![CDATA[EndereÃ§o da Entrega]]></value>
       <group>checkout</group>
     </definition>
     <definition>
@@ -951,12 +951,12 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>payment_address_heading</key>
-      <value><![CDATA[Endereço de Pagamento]]></value>
+      <value><![CDATA[EndereÃ§o de Pagamento]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>confirmation_heading</key>
-      <value><![CDATA[Confirmação]]></value>
+      <value><![CDATA[ConfirmaÃ§Ã£o]]></value>
       <group>checkout</group>
     </definition>
     <definition>
@@ -966,22 +966,22 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>shipping_address_title</key>
-      <value><![CDATA[Endereço da Entrega]]></value>
+      <value><![CDATA[EndereÃ§o da Entrega]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>choose_shipping_destination</key>
-      <value><![CDATA[Escolha em seu Livro de Endereços aonde voce deseja que a entrega seja feita.]]></value>
+      <value><![CDATA[Escolha em seu Livro de EndereÃ§os aonde voce deseja que a entrega seja feita.]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>selected_shipping_destination</key>
-      <value><![CDATA[Este é o endereço selecionado em que este pedido será entregue.]]></value>
+      <value><![CDATA[Este Ã© o endereÃ§o selecionado em que este pedido serÃ¡ entregue.]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>current_shipping_address_title</key>
-      <value><![CDATA[Endereço da Entrega :]]></value>
+      <value><![CDATA[EndereÃ§o da Entrega :]]></value>
       <group>checkout</group>
     </definition>
     <definition>
@@ -991,7 +991,7 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>shipping_method_title</key>
-      <value><![CDATA[Método da Entrega]]></value>
+      <value><![CDATA[MÃ©todo da Entrega]]></value>
       <group>checkout</group>
     </definition>
     <definition>
@@ -1001,7 +1001,7 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>only_one_shipping_method_available</key>
-      <value><![CDATA[Este é atualmente o unico método de transporte para este pedido.]]></value>
+      <value><![CDATA[Este Ã© atualmente o unico mÃ©todo de transporte para este pedido.]]></value>
       <group>checkout</group>
     </definition>
     <definition>
@@ -1011,57 +1011,57 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>address_book_entries_title</key>
-      <value><![CDATA[Livro de Endereços]]></value>
+      <value><![CDATA[Livro de EndereÃ§os]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>select_another_shipping_destination</key>
-      <value><![CDATA[Selecione o endereço da entrega se voce desejar que esta compra seja entregue em outro local.]]></value>
+      <value><![CDATA[Selecione o endereÃ§o da entrega se voce desejar que esta compra seja entregue em outro local.]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>select_another_billing_destination</key>
-      <value><![CDATA[Selecione o endereço da fatura se voce desejar que esta fatura seja entregue em outro local.]]></value>
+      <value><![CDATA[Selecione o endereÃ§o da fatura se voce desejar que esta fatura seja entregue em outro local.]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>new_shipping_address_title</key>
-      <value><![CDATA[Novo Endereço de Entrega]]></value>
+      <value><![CDATA[Novo EndereÃ§o de Entrega]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>new_shipping_address</key>
-      <value><![CDATA[Use o seguinte formulário para criar um Endereço de Entrega novo para este Pedido.]]></value>
+      <value><![CDATA[Use o seguinte formulÃ¡rio para criar um EndereÃ§o de Entrega novo para este Pedido.]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>new_billing_address_title</key>
-      <value><![CDATA[Novo Endereço de Faturamento]]></value>
+      <value><![CDATA[Novo EndereÃ§o de Faturamento]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>new_billing_address</key>
-      <value><![CDATA[Use o seguinte formulário se quiser criar um novo endereço de faturamento.]]></value>
+      <value><![CDATA[Use o seguinte formulÃ¡rio se quiser criar um novo endereÃ§o de faturamento.]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>billing_address_title</key>
-      <value><![CDATA[Endereço de Fatura]]></value>
+      <value><![CDATA[EndereÃ§o de Fatura]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>selected_billing_destination</key>
-      <value><![CDATA[Este é atualmente o Endereço de Faturamento selecionado para este pedido.]]></value>
+      <value><![CDATA[Este Ã© atualmente o EndereÃ§o de Faturamento selecionado para este pedido.]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>choose_billing_destination</key>
-      <value><![CDATA[Escolha a partir do seu Livro de Endereços aonde a Fatura deverá ser entregue.]]></value>
+      <value><![CDATA[Escolha a partir do seu Livro de EndereÃ§os aonde a Fatura deverÃ¡ ser entregue.]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>current_billing_address_title</key>
-      <value><![CDATA[Endereço da Fatura :]]></value>
+      <value><![CDATA[EndereÃ§o da Fatura :]]></value>
       <group>checkout</group>
     </definition>
     <definition>
@@ -1071,7 +1071,7 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>continue_checkout_procedure_to_shipping</key>
-      <value><![CDATA[para selecionar seu método de envio preferido .]]></value>
+      <value><![CDATA[para selecionar seu mÃ©todo de envio preferido .]]></value>
       <group>checkout</group>
     </definition>
     <definition>
@@ -1086,7 +1086,7 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>shopping_cart_empty</key>
-      <value><![CDATA[Seu Carrinho de Compras está Vazio !]]></value>
+      <value><![CDATA[Seu Carrinho de Compras estÃ¡ Vazio !]]></value>
       <group>checkout</group>
     </definition>
     <definition>
@@ -1101,27 +1101,27 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>products_out_of_stock_checkout_not_possible</key>
-      <value><![CDATA[Produtos identificados por meio de %s não existem na quantidade desejada em nossos estoques.<br />Mude a quantidade marcada ou mande-nos um Email fazendo a encomenda e combinando o prazo e endereço da entrega.]]></value>
+      <value><![CDATA[Produtos identificados por meio de %s nÃ£o existem na quantidade desejada em nossos estoques.<br />Mude a quantidade marcada ou mande-nos um Email fazendo a encomenda e combinando o prazo e endereÃ§o da entrega.]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>products_out_of_stock_checkout_possible</key>
-      <value><![CDATA[Produtos identificados por meio de %s não existem na quantidade desejada em nossos estoques.<br />Voce poderá compré-los de qualquer maneira e verificar em nosso estoque a quantidade que temos disponível no fechamento do pedido.]]></value>
+      <value><![CDATA[Produtos identificados por meio de %s nÃ£o existem na quantidade desejada em nossos estoques.<br />Voce poderÃ¡ comprÃ©-los de qualquer maneira e verificar em nosso estoque a quantidade que temos disponÃ­vel no fechamento do pedido.]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>order_conditions_title</key>
-      <value><![CDATA[Termos e Condições]]></value>
+      <value><![CDATA[Termos e CondiÃ§Ãµes]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>order_conditions_description</key>
-      <value><![CDATA[Reconheça por favor no tocante a este pedido os Termos e Condições clicando na seguinte Caixa. Os Termos e Condições podem ser lidos <a href="%s"><u>aqui</u></a>.]]></value>
+      <value><![CDATA[ReconheÃ§a por favor no tocante a este pedido os Termos e CondiÃ§Ãµes clicando na seguinte Caixa. Os Termos e CondiÃ§Ãµes podem ser lidos <a href="%s"><u>aqui</u></a>.]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>order_conditions_acknowledge</key>
-      <value><![CDATA[Eu li e concordo com os Termos e Condições limitados à esta compra.]]></value>
+      <value><![CDATA[Eu li e concordo com os Termos e CondiÃ§Ãµes limitados Ã  esta compra.]]></value>
       <group>checkout</group>
     </definition>
     <definition>
@@ -1136,12 +1136,12 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>only_one_payment_method_available</key>
-      <value><![CDATA[Esta é atualmente a unica forma de pagamento disponível para este Pedido.]]></value>
+      <value><![CDATA[Esta Ã© atualmente a unica forma de pagamento disponÃ­vel para este Pedido.]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>order_delivery_address_title</key>
-      <value><![CDATA[Endereço de Entrega]]></value>
+      <value><![CDATA[EndereÃ§o de Entrega]]></value>
       <group>order</group>
     </definition>
     <definition>
@@ -1166,7 +1166,7 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>order_billing_address_title</key>
-      <value><![CDATA[Endereço da Fatura]]></value>
+      <value><![CDATA[EndereÃ§o da Fatura]]></value>
       <group>order</group>
     </definition>
     <definition>
@@ -1176,12 +1176,12 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>order_payment_information_title</key>
-      <value><![CDATA[Informações do pagamento]]></value>
+      <value><![CDATA[InformaÃ§Ãµes do pagamento]]></value>
       <group>order</group>
     </definition>
     <definition>
       <key>order_comments_title</key>
-      <value><![CDATA[Comente algo à respeito desta Compra para que possamos melhorar os nossos serviços]]></value>
+      <value><![CDATA[Comente algo Ã  respeito desta Compra para que possamos melhorar os nossos serviÃ§os]]></value>
       <group>order</group>
     </definition>
     <definition>
@@ -1196,7 +1196,7 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>email_order_order_number</key>
-      <value><![CDATA[Pedido número : %s]]></value>
+      <value><![CDATA[Pedido nÃºmero : %s]]></value>
       <group>checkout</group>
     </definition>
     <definition>
@@ -1211,7 +1211,7 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>email_order_status</key>
-      <value><![CDATA[Posição do Pedido : %s]]></value>
+      <value><![CDATA[PosiÃ§Ã£o do Pedido : %s]]></value>
       <group>checkout</group>
     </definition>
     <definition>
@@ -1221,12 +1221,12 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>email_order_delivery_address</key>
-      <value><![CDATA[Endereço da Entrega]]></value>
+      <value><![CDATA[EndereÃ§o da Entrega]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>email_order_billing_address</key>
-      <value><![CDATA[Endereço da Fatura]]></value>
+      <value><![CDATA[EndereÃ§o da Fatura]]></value>
       <group>checkout</group>
     </definition>
     <definition>
@@ -1241,7 +1241,7 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>order_processed_successfully</key>
-      <value><![CDATA[Seu Pedido foi enviado com Sucesso ! Os produtos escolhidos lhe serão enviados entre 3 a 6 dias úteis após a confirmação do Pagamento.]]></value>
+      <value><![CDATA[Seu Pedido foi enviado com Sucesso ! Os produtos escolhidos lhe serÃ£o enviados entre 3 a 6 dias Ãºteis apÃ³s a confirmaÃ§Ã£o do Pagamento.]]></value>
       <group>checkout</group>
     </definition>
     <definition>
@@ -1251,12 +1251,12 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>view_order_history</key>
-      <value><![CDATA[Voce poderá ver Histórico de Compras indo para <a href="%s">Minha Conta</a> e clicando sobre <a href="%s">Histórico</a>.]]></value>
+      <value><![CDATA[Voce poderÃ¡ ver HistÃ³rico de Compras indo para <a href="%s">Minha Conta</a> e clicando sobre <a href="%s">HistÃ³rico</a>.]]></value>
       <group>checkout</group>
     </definition>
     <definition>
       <key>contact_store_owner</key>
-      <value><![CDATA[Dirija todas as dúvidas que tiver para <a href="%s">Caiçara Brasil</a>.]]></value>
+      <value><![CDATA[Dirija todas as dÃºvidas que tiver para <a href="%s">CaiÃ§ara Brasil</a>.]]></value>
       <group>checkout</group>
     </definition>
     <definition>
@@ -1271,12 +1271,12 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>breadcrumb_information</key>
-      <value><![CDATA[Informação]]></value>
+      <value><![CDATA[InformaÃ§Ã£o]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>breadcrumb_conditions</key>
-      <value><![CDATA[Condições]]></value>
+      <value><![CDATA[CondiÃ§Ãµes]]></value>
       <group>info</group>
     </definition>
     <definition>
@@ -1306,17 +1306,17 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>breadcrumb_ssl_check</key>
-      <value><![CDATA[Checagem de Segurança]]></value>
+      <value><![CDATA[Checagem de SeguranÃ§a]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>info_heading</key>
-      <value><![CDATA[Informações e Ajuda]]></value>
+      <value><![CDATA[InformaÃ§Ãµes e Ajuda]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>info_conditions_heading</key>
-      <value><![CDATA[Termos e Condições]]></value>
+      <value><![CDATA[Termos e CondiÃ§Ãµes]]></value>
       <group>info</group>
     </definition>
     <definition>
@@ -1331,7 +1331,7 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>info_shipping_heading</key>
-      <value><![CDATA[Entrega e Devolução]]></value>
+      <value><![CDATA[Entrega e DevoluÃ§Ã£o]]></value>
       <group>info</group>
     </definition>
     <definition>
@@ -1346,42 +1346,42 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>info_ssl_check_heading</key>
-      <value><![CDATA[Checagem de Segurança]]></value>
+      <value><![CDATA[Checagem de SeguranÃ§a]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>conditions</key>
-      <value><![CDATA[Por aqui a informação exigida.]]></value>
+      <value><![CDATA[Por aqui a informaÃ§Ã£o exigida.]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>contact</key>
-      <value><![CDATA[Por aqui a informação exigida.]]></value>
+      <value><![CDATA[Por aqui a informaÃ§Ã£o exigida.]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>privacy</key>
-      <value><![CDATA[Por aqui a informação exigida.]]></value>
+      <value><![CDATA[Por aqui a informaÃ§Ã£o exigida.]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>shipping</key>
-      <value><![CDATA[Por aqui a informação exigida.]]></value>
+      <value><![CDATA[Por aqui a informaÃ§Ã£o exigida.]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>cookie_usage</key>
-      <value><![CDATA[Nós detectamos que seu browser não dá suporte a cookies ou está bloqueando-os.<br /><br />Para continuar comprando online nós precisamos que sejam liberados.<br /><br />Para <b>Internet Explorer</b>, siga as instruções :<br /><ol><li>Clique em Ferramentas no Menu Principal e selecione opções de Internet</li><li>Encontre e selecione Segurança e coloque o nível de segurança para Médio</li></ol>Desculpe-nos pela incoveniencia,mas nós tomamos esta medida de segurança para seu benefício.<br /><br />Contate por favor a Caiçara Brasil para tirar as dúvidas relacionadas a esta nossa exigência.]]></value>
+      <value><![CDATA[NÃ³s detectamos que seu browser nÃ£o dÃ¡ suporte a cookies ou estÃ¡ bloqueando-os.<br /><br />Para continuar comprando online nÃ³s precisamos que sejam liberados.<br /><br />Para <b>Internet Explorer</b>, siga as instruÃ§Ãµes :<br /><ol><li>Clique em Ferramentas no Menu Principal e selecione opÃ§Ãµes de Internet</li><li>Encontre e selecione SeguranÃ§a e coloque o nÃ­vel de seguranÃ§a para MÃ©dio</li></ol>Desculpe-nos pela incoveniencia,mas nÃ³s tomamos esta medida de seguranÃ§a para seu benefÃ­cio.<br /><br />Contate por favor a CaiÃ§ara Brasil para tirar as dÃºvidas relacionadas a esta nossa exigÃªncia.]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>ssl_check</key>
-      <value><![CDATA[Nós detectamos que o seu navegador usou uma ID diferente durante as sessões em SSL.<br /><br />Por razões de segurança voce deverá entrar novamente com seu login para continuar comprando online.<br /><br />Determinados navegadores não tem a capacidade de gerar automáticamente sua Identificação segura nos níveis que exigimos. Se voce usa tal navegador nós recomendamos que voce reinicie a sessão com o <a href="http://www.microsoft.com/ie/" target="_blank">Microsoft Internet Explorer</a>, <a href="http://www.mozilla.com/firefox/" target="_blank">Firefox</a>, ou <a href="http://www.opera.com" target="_blank">Opera</a> para continuar sua compra com segurança. Use nossos links para baixar as últimas gerações desses navegadores..<br /><br />Desculpe-nos a inconveniência causada, mas é para seu próprio benefício que tomamos essas, entre outras, medidas de segurança.<br /><br />Contate-nos se voce tiver qualquer dúvida com relação à esta nossa exigência, ou com relação a quaisquer outras dúvidas. Obrigado .]]></value>
+      <value><![CDATA[NÃ³s detectamos que o seu navegador usou uma ID diferente durante as sessÃµes em SSL.<br /><br />Por razÃµes de seguranÃ§a voce deverÃ¡ entrar novamente com seu login para continuar comprando online.<br /><br />Determinados navegadores nÃ£o tem a capacidade de gerar automÃ¡ticamente sua IdentificaÃ§Ã£o segura nos nÃ­veis que exigimos. Se voce usa tal navegador nÃ³s recomendamos que voce reinicie a sessÃ£o com o <a href="http://www.microsoft.com/ie/" target="_blank">Microsoft Internet Explorer</a>, <a href="http://www.mozilla.com/firefox/" target="_blank">Firefox</a>, ou <a href="http://www.opera.com" target="_blank">Opera</a> para continuar sua compra com seguranÃ§a. Use nossos links para baixar as Ãºltimas geraÃ§Ãµes desses navegadores..<br /><br />Desculpe-nos a inconveniÃªncia causada, mas Ã© para seu prÃ³prio benefÃ­cio que tomamos essas, entre outras, medidas de seguranÃ§a.<br /><br />Contate-nos se voce tiver qualquer dÃºvida com relaÃ§Ã£o Ã  esta nossa exigÃªncia, ou com relaÃ§Ã£o a quaisquer outras dÃºvidas. Obrigado .]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>contact_title</key>
-      <value><![CDATA[Informações de Contato]]></value>
+      <value><![CDATA[InformaÃ§Ãµes de Contato]]></value>
       <group>info</group>
     </definition>
     <definition>
@@ -1401,17 +1401,17 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>contact_enquiry_title</key>
-      <value><![CDATA[Tira Dúvidas:]]></value>
+      <value><![CDATA[Tira DÃºvidas:]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>contact_email_sent_successfully</key>
-      <value><![CDATA[Suas questões foram mandadas com Sucesso para a Caiçara Brasil. Obrigado por nos contatar, em breve retornaremos via Email com suas dúvidas respondidas.]]></value>
+      <value><![CDATA[Suas questÃµes foram mandadas com Sucesso para a CaiÃ§ara Brasil. Obrigado por nos contatar, em breve retornaremos via Email com suas dÃºvidas respondidas.]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>contact_email_subject</key>
-      <value><![CDATA[Contato Tira Dúvidas]]></value>
+      <value><![CDATA[Contato Tira DÃºvidas]]></value>
       <group>info</group>
     </definition>
     <definition>
@@ -1421,22 +1421,22 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>sitemap_account_edit</key>
-      <value><![CDATA[Informações da Minha conta]]></value>
+      <value><![CDATA[InformaÃ§Ãµes da Minha conta]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>sitemap_address_book</key>
-      <value><![CDATA[Livro de Endereços]]></value>
+      <value><![CDATA[Livro de EndereÃ§os]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>sitemap_account_history</key>
-      <value><![CDATA[Histórico de Compras]]></value>
+      <value><![CDATA[HistÃ³rico de Compras]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>sitemap_account_notifications</key>
-      <value><![CDATA[Inscrições na Newsletter]]></value>
+      <value><![CDATA[InscriÃ§Ãµes na Newsletter]]></value>
       <group>info</group>
     </definition>
     <definition>
@@ -1446,12 +1446,12 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>sitemap_checkout_shipping</key>
-      <value><![CDATA[Confirmação Global]]></value>
+      <value><![CDATA[ConfirmaÃ§Ã£o Global]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>sitemap_advanced_search</key>
-      <value><![CDATA[Busca Avançada]]></value>
+      <value><![CDATA[Busca AvanÃ§ada]]></value>
       <group>info</group>
     </definition>
     <definition>
@@ -1466,27 +1466,27 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>sitemap_reviews</key>
-      <value><![CDATA[Comentários]]></value>
+      <value><![CDATA[ComentÃ¡rios]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>cookie_usage_box_heading</key>
-      <value><![CDATA[Privacidade e Segurança]]></value>
+      <value><![CDATA[Privacidade e SeguranÃ§a]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>cookie_usage_box_contents</key>
-      <value><![CDATA[Voce deve liberar os cookies em seu navegador para que possa continuar comprando, para que possamos garantir sua segurança.<br /><br />Abrindo a liberação dos cookies no seu navegador, a comunicação é reforçada sabendo-se que é voce que está fazendo transações em seu nome, e não outros que estejam usando de seu nome para fazer compras conosco e para prevenir que suas Informações Confidenciais não vazem para pessoas inescrupulosas. Para que possamos manter Sua Segurança .]]></value>
+      <value><![CDATA[Voce deve liberar os cookies em seu navegador para que possa continuar comprando, para que possamos garantir sua seguranÃ§a.<br /><br />Abrindo a liberaÃ§Ã£o dos cookies no seu navegador, a comunicaÃ§Ã£o Ã© reforÃ§ada sabendo-se que Ã© voce que estÃ¡ fazendo transaÃ§Ãµes em seu nome, e nÃ£o outros que estejam usando de seu nome para fazer compras conosco e para prevenir que suas InformaÃ§Ãµes Confidenciais nÃ£o vazem para pessoas inescrupulosas. Para que possamos manter Sua SeguranÃ§a .]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>ssl_check_box_heading</key>
-      <value><![CDATA[Privacidade e Segurança]]></value>
+      <value><![CDATA[Privacidade e SeguranÃ§a]]></value>
       <group>info</group>
     </definition>
     <definition>
       <key>ssl_check_box_contents</key>
-      <value><![CDATA[Nós validamos a identificação da Sessão de SSL (criptografia para manter sua Identidade e Informações Confidenciais em Segurança) gerada automáticamente por seu navegador em cada abertura de página segura feita pelo usuário.<br /><br />Esta validação assegura que é voce que está navegando neste Local com sua Conta e não outra pessoa.]]></value>
+      <value><![CDATA[NÃ³s validamos a identificaÃ§Ã£o da SessÃ£o de SSL (criptografia para manter sua Identidade e InformaÃ§Ãµes Confidenciais em SeguranÃ§a) gerada automÃ¡ticamente por seu navegador em cada abertura de pÃ¡gina segura feita pelo usuÃ¡rio.<br /><br />Esta validaÃ§Ã£o assegura que Ã© voce que estÃ¡ navegando neste Local com sua Conta e nÃ£o outra pessoa.]]></value>
       <group>info</group>
     </definition>
     <definition>
@@ -1501,12 +1501,12 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>breadcrumb_reviews</key>
-      <value><![CDATA[Comentários]]></value>
+      <value><![CDATA[ComentÃ¡rios]]></value>
       <group>products</group>
     </definition>
     <definition>
       <key>breadcrumb_reviews_new</key>
-      <value><![CDATA[Novo Comentário]]></value>
+      <value><![CDATA[Novo ComentÃ¡rio]]></value>
       <group>products</group>
     </definition>
     <definition>
@@ -1516,12 +1516,12 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>product_not_found_heading</key>
-      <value><![CDATA[Produto não encontrado]]></value>
+      <value><![CDATA[Produto nÃ£o encontrado]]></value>
       <group>products</group>
     </definition>
     <definition>
       <key>no_new_products</key>
-      <value><![CDATA[Não há atualmente nem um novo Produto disponível.]]></value>
+      <value><![CDATA[NÃ£o hÃ¡ atualmente nem um novo Produto disponÃ­vel.]]></value>
       <group>products</group>
     </definition>
     <definition>
@@ -1536,32 +1536,32 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>reviews_heading</key>
-      <value><![CDATA[Comentários]]></value>
+      <value><![CDATA[ComentÃ¡rios]]></value>
       <group>products</group>
     </definition>
     <definition>
       <key>product_not_found</key>
-      <value><![CDATA[Produto não Encontrado !]]></value>
+      <value><![CDATA[Produto nÃ£o Encontrado !]]></value>
       <group>products</group>
     </definition>
     <definition>
       <key>number_of_product_reviews</key>
-      <value><![CDATA[Comentários mais recentes :]]></value>
+      <value><![CDATA[ComentÃ¡rios mais recentes :]]></value>
       <group>products</group>
     </definition>
     <definition>
       <key>go_to_external_products_webpage</key>
-      <value><![CDATA[Para mais informações, visite este produto <a href="%s" target="_blank">no site do fabricante</a>.]]></value>
+      <value><![CDATA[Para mais informaÃ§Ãµes, visite este produto <a href="%s" target="_blank">no site do fabricante</a>.]]></value>
       <group>products</group>
     </definition>
     <definition>
       <key>date_availability</key>
-      <value><![CDATA[<font color="#ff0000">Este Produto deverá estar em estoque em %s.</font>]]></value>
+      <value><![CDATA[<font color="#ff0000">Este Produto deverÃ¡ estar em estoque em %s.</font>]]></value>
       <group>products</group>
     </definition>
     <definition>
       <key>product_attributes</key>
-      <value><![CDATA[Faça sua Escolha :]]></value>
+      <value><![CDATA[FaÃ§a sua Escolha :]]></value>
       <group>products</group>
     </definition>
     <definition>
@@ -1581,12 +1581,12 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>price</key>
-      <value><![CDATA[Preço :]]></value>
+      <value><![CDATA[PreÃ§o :]]></value>
       <group>products</group>
     </definition>
     <definition>
       <key>average_rating</key>
-      <value><![CDATA[Avaliação Média:]]></value>
+      <value><![CDATA[AvaliaÃ§Ã£o MÃ©dia:]]></value>
       <group>products</group>
     </definition>
     <definition>
@@ -1596,17 +1596,17 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>no_reviews_available</key>
-      <value><![CDATA[Não foram encontrados comentários para este item . Seja o primeiro a fazer um !]]></value>
+      <value><![CDATA[NÃ£o foram encontrados comentÃ¡rios para este item . Seja o primeiro a fazer um !]]></value>
       <group>products</group>
     </definition>
     <definition>
       <key>new_review_title</key>
-      <value><![CDATA[Novos Comentários]]></value>
+      <value><![CDATA[Novos ComentÃ¡rios]]></value>
       <group>products</group>
     </definition>
     <definition>
       <key>field_review_rating</key>
-      <value><![CDATA[Avaliação :]]></value>
+      <value><![CDATA[AvaliaÃ§Ã£o :]]></value>
       <group>products</group>
     </definition>
     <definition>
@@ -1666,14 +1666,14 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, notifique
     </definition>
     <definition>
       <key>email_tell_a_friend_intro</key>
-      <value><![CDATA[Olá %s!
+      <value><![CDATA[OlÃ¡ %s!
 
 Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></value>
       <group>products</group>
     </definition>
     <definition>
       <key>email_tell_a_friend_link</key>
-      <value><![CDATA[Para ver o Produto clique sobre o Link abaixo ou copie-o e o cole na janela de navegação do seu navegador:
+      <value><![CDATA[Para ver o Produto clique sobre o Link abaixo ou copie-o e o cole na janela de navegaÃ§Ã£o do seu navegador:
 
 %s]]></value>
       <group>products</group>
@@ -1685,12 +1685,12 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>success_review_new</key>
-      <value><![CDATA[Obrigado por comentar sobre este produto ! Foi recebido seu comentário e em breve será ativado para facilitar a orientação dos visitantes do nosso site!]]></value>
+      <value><![CDATA[Obrigado por comentar sobre este produto ! Foi recebido seu comentÃ¡rio e em breve serÃ¡ ativado para facilitar a orientaÃ§Ã£o dos visitantes do nosso site!]]></value>
       <group>products</group>
     </definition>
     <definition>
       <key>success_review_moderation</key>
-      <value><![CDATA[Obrigado por comentar à respeito deste Item ! Foi recebido e em breve estará disponível para os visitantes do site.]]></value>
+      <value><![CDATA[Obrigado por comentar Ã  respeito deste Item ! Foi recebido e em breve estarÃ¡ disponÃ­vel para os visitantes do site.]]></value>
       <group>products</group>
     </definition>
     <definition>
@@ -1700,17 +1700,17 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>error_tell_a_friend_friends_name_empty</key>
-      <value><![CDATA[Erro : O nome de seu amigo está em branco .]]></value>
+      <value><![CDATA[Erro : O nome de seu amigo estÃ¡ em branco .]]></value>
       <group>products</group>
     </definition>
     <definition>
       <key>error_tell_a_friend_invalid_friends_email_address</key>
-      <value><![CDATA[Erro : O Email de seu amigo não é um endereço válido. Por gentileza, verifique o Email correto.]]></value>
+      <value><![CDATA[Erro : O Email de seu amigo nÃ£o Ã© um endereÃ§o vÃ¡lido. Por gentileza, verifique o Email correto.]]></value>
       <group>products</group>
     </definition>
     <definition>
       <key>error_tell_a_friend_customers_name_empty</key>
-      <value><![CDATA[Erro : Seu Nome não foi preenchido .]]></value>
+      <value><![CDATA[Erro : Seu Nome nÃ£o foi preenchido .]]></value>
       <group>products</group>
     </definition>
     <definition>
@@ -1735,7 +1735,7 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>advanced_search_heading</key>
-      <value><![CDATA[Busca Avançada]]></value>
+      <value><![CDATA[Busca AvanÃ§ada]]></value>
       <group>search</group>
     </definition>
     <definition>
@@ -1745,7 +1745,7 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>search_criteria_title</key>
-      <value><![CDATA[Critério de Busca]]></value>
+      <value><![CDATA[CritÃ©rio de Busca]]></value>
       <group>search</group>
     </definition>
     <definition>
@@ -1765,12 +1765,12 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>field_search_price_from</key>
-      <value><![CDATA[Preço de :]]></value>
+      <value><![CDATA[PreÃ§o de :]]></value>
       <group>search</group>
     </definition>
     <definition>
       <key>field_search_price_to</key>
-      <value><![CDATA[Preço até :]]></value>
+      <value><![CDATA[PreÃ§o atÃ© :]]></value>
       <group>search</group>
     </definition>
     <definition>
@@ -1780,7 +1780,7 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>field_search_date_to</key>
-      <value><![CDATA[Data até:]]></value>
+      <value><![CDATA[Data atÃ©:]]></value>
       <group>search</group>
     </definition>
     <definition>
@@ -1795,7 +1795,7 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>search_help</key>
-      <value><![CDATA[As palavras-chave são separadas por "AND" ou "OR" para um maior controle dos resultados da Busca.<br /><br />Por exemplo, <u>Teclado AND mouse</u> gerará um resultado em que contém sómente ambas as palavras. Entretanto, para <u>mouse OR teclado</u>, retornará um resultado que contém uma ou outra palavra.<br /><br />Termos exatos poderão ser encontrados colocando-os entre aspas.<br /><br />Por exemplo, <u>"Computador notebook""</u> retornará um resultado dos dois termos exatos.<br /><br />Os parenteses podem ser usados para valores adicionais ao resultado.<br /><br />Por exemplo, <u>Microsoft and (keyboard or mouse or "visual basic")</u>.]]></value>
+      <value><![CDATA[As palavras-chave sÃ£o separadas por "AND" ou "OR" para um maior controle dos resultados da Busca.<br /><br />Por exemplo, <u>Teclado AND mouse</u> gerarÃ¡ um resultado em que contÃ©m sÃ³mente ambas as palavras. Entretanto, para <u>mouse OR teclado</u>, retornarÃ¡ um resultado que contÃ©m uma ou outra palavra.<br /><br />Termos exatos poderÃ£o ser encontrados colocando-os entre aspas.<br /><br />Por exemplo, <u>"Computador notebook""</u> retornarÃ¡ um resultado dos dois termos exatos.<br /><br />Os parenteses podem ser usados para valores adicionais ao resultado.<br /><br />Por exemplo, <u>Microsoft and (keyboard or mouse or "visual basic")</u>.]]></value>
       <group>search</group>
     </definition>
     <definition>
@@ -1805,12 +1805,12 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>error_search_at_least_one_input</key>
-      <value><![CDATA[Pelo menos um dos campos do formulário da Busca deve ser preenchido.]]></value>
+      <value><![CDATA[Pelo menos um dos campos do formulÃ¡rio da Busca deve ser preenchido.]]></value>
       <group>search</group>
     </definition>
     <definition>
       <key>error_search_invalid_from_date</key>
-      <value><![CDATA[Data Inválida.]]></value>
+      <value><![CDATA[Data InvÃ¡lida.]]></value>
       <group>search</group>
     </definition>
     <definition>
@@ -1825,32 +1825,32 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>error_search_price_from_not_numeric</key>
-      <value><![CDATA[Preço tem que ser um número.]]></value>
+      <value><![CDATA[PreÃ§o tem que ser um nÃºmero.]]></value>
       <group>search</group>
     </definition>
     <definition>
       <key>error_search_price_to_not_numeric</key>
-      <value><![CDATA[Preço tem que ser em números.]]></value>
+      <value><![CDATA[PreÃ§o tem que ser em nÃºmeros.]]></value>
       <group>search</group>
     </definition>
     <definition>
       <key>error_search_price_to_less_than_price_from</key>
-      <value><![CDATA[O Preço deve ser igual ou superior.]]></value>
+      <value><![CDATA[O PreÃ§o deve ser igual ou superior.]]></value>
       <group>search</group>
     </definition>
     <definition>
       <key>error_search_invalid_keywords</key>
-      <value><![CDATA[Palavra chave Inválida.]]></value>
+      <value><![CDATA[Palavra chave InvÃ¡lida.]]></value>
       <group>search</group>
     </definition>
     <definition>
       <key>js_review_text</key>
-      <value><![CDATA[* O texto do Comentário deve ter pelo menos %s caracteres.]]></value>
+      <value><![CDATA[* O texto do ComentÃ¡rio deve ter pelo menos %s caracteres.]]></value>
       <group>products</group>
     </definition>
     <definition>
       <key>js_review_rating</key>
-      <value><![CDATA[* Voce deve avaliar o produto para seu Comentário.]]></value>
+      <value><![CDATA[* Voce deve avaliar o produto para seu ComentÃ¡rio.]]></value>
       <group>products</group>
     </definition>
     <definition>
@@ -1865,7 +1865,7 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>error_conditions_not_accepted</key>
-      <value><![CDATA[Confirme por favor a sua leitura dos Termos e Condições clicando na Caixa abaixo.]]></value>
+      <value><![CDATA[Confirme por favor a sua leitura dos Termos e CondiÃ§Ãµes clicando na Caixa abaixo.]]></value>
       <group>checkout</group>
     </definition>
     <definition>
@@ -1890,7 +1890,7 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>field_customer_first_name_error</key>
-      <value><![CDATA[Seu Primeiro Nome tem que ter um mínimo de %s letras .]]></value>
+      <value><![CDATA[Seu Primeiro Nome tem que ter um mÃ­nimo de %s letras .]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -1900,7 +1900,7 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>field_customer_last_name_error</key>
-      <value><![CDATA[Seu Sobrenome tem que ter um mínimo de %s letras.]]></value>
+      <value><![CDATA[Seu Sobrenome tem que ter um mÃ­nimo de %s letras.]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -1920,17 +1920,17 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>field_customer_email_address_error</key>
-      <value><![CDATA[Seu Email tem que ter um mínimo de %S caracteres.]]></value>
+      <value><![CDATA[Seu Email tem que ter um mÃ­nimo de %S caracteres.]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>field_customer_email_address_check_error</key>
-      <value><![CDATA[Seu Email não parece ser um Email válido - por gentileza, faça as devidas correções.]]></value>
+      <value><![CDATA[Seu Email nÃ£o parece ser um Email vÃ¡lido - por gentileza, faÃ§a as devidas correÃ§Ãµes.]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>field_customer_email_address_exists_error</key>
-      <value><![CDATA[Seu Email já consta em nossos registros - entre com ele e sua senha na janela de Cliente.]]></value>
+      <value><![CDATA[Seu Email jÃ¡ consta em nossos registros - entre com ele e sua senha na janela de Cliente.]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -1940,17 +1940,17 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>field_customer_company_error</key>
-      <value><![CDATA[O nome da Empresa para a qual voce trabalha tem que ter um mínimo de %s caracteres .]]></value>
+      <value><![CDATA[O nome da Empresa para a qual voce trabalha tem que ter um mÃ­nimo de %s caracteres .]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>field_customer_street_address</key>
-      <value><![CDATA[Endereço :]]></value>
+      <value><![CDATA[EndereÃ§o :]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>field_customer_street_address_error</key>
-      <value><![CDATA[Seu Endereço tem que ter um mínimo de %s caracteres .]]></value>
+      <value><![CDATA[Seu EndereÃ§o tem que ter um mÃ­nimo de %s caracteres .]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -1960,7 +1960,7 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>field_customer_suburb_error</key>
-      <value><![CDATA[Seu Bairro tem que ter um mõ­nimo de %s caracteres .]]></value>
+      <value><![CDATA[Seu Bairro tem que ter um mÃ­nimo de %s caracteres .]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -1980,7 +1980,7 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>field_customer_city_error</key>
-      <value><![CDATA[Sua Cidade tem que ter um mínimo de %s caracteres.]]></value>
+      <value><![CDATA[Sua Cidade tem que ter um mÃ­nimo de %s caracteres.]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -1990,7 +1990,7 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>field_customer_state_error</key>
-      <value><![CDATA[Seu Estado tem que ter um mínimo de %s caracteres.]]></value>
+      <value><![CDATA[Seu Estado tem que ter um mÃ­nimo de %s caracteres.]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -2000,12 +2000,12 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>field_customer_country</key>
-      <value><![CDATA[País :]]></value>
+      <value><![CDATA[PaÃ­s :]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>field_customer_country_error</key>
-      <value><![CDATA[Selecione um País .]]></value>
+      <value><![CDATA[Selecione um PaÃ­s .]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -2015,7 +2015,7 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>field_customer_telephone_number_error</key>
-      <value><![CDATA[Seu telefone tem que ter um mínimo de %s algarismos. Não se esqueça do Código DDD .]]></value>
+      <value><![CDATA[Seu telefone tem que ter um mÃ­nimo de %s algarismos. NÃ£o se esqueÃ§a do CÃ³digo DDD .]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -2025,7 +2025,7 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>field_customer_fax_number_error</key>
-      <value><![CDATA[Seu Celular ou Tel 2 tem que ter um mínimo de %s algarismos. Não se esqueça de código DDD .]]></value>
+      <value><![CDATA[Seu Celular ou Tel 2 tem que ter um mÃ­nimo de %s algarismos. NÃ£o se esqueÃ§a de cÃ³digo DDD .]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -2040,17 +2040,17 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>field_customer_password_error</key>
-      <value><![CDATA[Sua Senha tem que ter um mínimo de %s caracteres .]]></value>
+      <value><![CDATA[Sua Senha tem que ter um mÃ­nimo de %s caracteres .]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>field_customer_password_mismatch_with_confirmation</key>
-      <value><![CDATA[A confirmação da Senha deve ser igual à sua Senha.]]></value>
+      <value><![CDATA[A confirmaÃ§Ã£o da Senha deve ser igual Ã  sua Senha.]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>field_customer_password_confirmation</key>
-      <value><![CDATA[Confirmação da Senha:]]></value>
+      <value><![CDATA[ConfirmaÃ§Ã£o da Senha:]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -2060,7 +2060,7 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>field_customer_password_current_error</key>
-      <value><![CDATA[Sua Senha tem que ter um mínimo de %s caracteres]]></value>
+      <value><![CDATA[Sua Senha tem que ter um mÃ­nimo de %s caracteres]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -2070,12 +2070,12 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>field_customer_password_new_error</key>
-      <value><![CDATA[Sua Nova Senha tem que ter um mínimo de %s dígitos.]]></value>
+      <value><![CDATA[Sua Nova Senha tem que ter um mÃ­nimo de %s dÃ­gitos.]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>field_customer_password_new_mismatch_with_confirmation_error</key>
-      <value><![CDATA[A Confirmação da Senha tem que ser igual a Senha.]]></value>
+      <value><![CDATA[A ConfirmaÃ§Ã£o da Senha tem que ser igual Ã  Senha.]]></value>
       <group>general</group>
     </definition>
     <definition>
@@ -2085,7 +2085,7 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>review_rating</key>
-      <value><![CDATA[Avaliação: %s [%s]]]></value>
+      <value><![CDATA[AvaliaÃ§Ã£o: %s [%s]]]></value>
       <group>products</group>
     </definition>
     <definition>
@@ -2095,12 +2095,12 @@ Seu Amigo, %s, pensando em voce achou que estaria interessado em %s de %s.]]></v
     </definition>
     <definition>
       <key>credit_card_number_error</key>
-      <value><![CDATA[O número do cartão de crédito não é válido.<br />Verifique o número e tente novamente.]]></value>
+      <value><![CDATA[O nÃºmero do cartÃ£o de crÃ©dito nÃ£o Ã© vÃ¡lido.<br />Verifique o nÃºmero e tente novamente.]]></value>
       <group>general</group>
     </definition>
     <definition>
       <key>maximum_file_upload_size</key>
-      <value><![CDATA[(Máximo: %s)]]></value>
+      <value><![CDATA[(MÃ¡ximo: %s)]]></value>
       <group>general</group>
     </definition>
   </definitions>
