@@ -37,13 +37,13 @@ introduction_move_category = Selecione a Categoria Principal para que possa ser 
 
 introduction_delete_category = Verifique a remoção desta categoria e de suas sub-categorias .
 delete_warning_category_in_use_children = Aviso : Há sub-categorias de %s que serão removidas com ela. Voce tem certeza de que é isso que quer fazer mesmo?
-delete_warning_category_in_use_products = Aviso : Existgm Produtos de %s que terão suas relações com ela removidas juntamente com a categoria .
+delete_warning_category_in_use_products = Aviso : Existem Produtos de %s que terão suas relações com ela removidas juntamente com a categoria .
 
 introduction_batch_delete_categories = Verifique a remoção das seguintees categorias e de suas sub-categorias .
 
 introduction_batch_move_categories = Selecione qual categoria principal as seguintes categorias devem ser movidas .
 
-ms_warning_category_name_empty = Aviso : O nome da categoria de %s est� sem preenchimento. Preencha um Nome para esta Categoria .
+ms_warning_category_name_empty = Aviso : O nome da categoria de %s está sem preenchimento. Preencha um Nome para esta Categoria .
 
 ms_error_image_directory_not_writable = Erro : O diretório que contém as Imagens da Categoria não está escriturável : %s
 ms_error_image_directory_non_existant = Erro : O arquivo para armazenar as Imagens da Categoria não existe : %s
