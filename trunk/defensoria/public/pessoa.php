@@ -198,7 +198,6 @@ if(isset($_GET['cadastro']))
 	<?php 
 	}
 	?>
-	?>
 	<table width="633">
 		<tr>
 			<td colspan="3"><span class="subTitulo">DADOS PESSOAIS</span></td>

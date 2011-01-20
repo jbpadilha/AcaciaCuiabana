@@ -82,7 +82,7 @@ include 'carregamentoInicial.php';
 				?>
 		      <tr>
 		        <td width="335" nowrap><?=$fichaHipo->getPessoa()->getNomepessoa()?></td>
-		        <td width="347" colspan="2"><a href="javascript:void(0);" onClick="gerandoPDF(<?=$fichaHipo->getIdhipossuficiencia()?>);"><img src="images/pdf.jpg" width="16" height="16" border="0" /></a></td>
+		        <td width="347" colspan="2"><a href="javascript:void(0);" onClick="gerandoPDF(<?=$fichaHipo->getIdhipossuficiencia()?>);"><img src="images/pdf.gif" width="57" height="48" border="0" /></a></td>
 	        </tr>
 		      <?php 
 				}

@@ -93,7 +93,7 @@ include 'carregamentoInicial.php';
 		        <td width="335" nowrap><?=$entrevista->getProcesso()->getPartePromovidoProcesso()->getPessoa()->getNomepessoa()?></td>
 		        <td width="335" nowrap><?=$entrevista->getProtocoloatendimento()?></td>
 		        <td width="335" nowrap><?=$entrevista->getDataEntrevistaFormatadoPDF()?></td>
-		        <td width="347" colspan="2"><a href="javascript:void(0);" onClick="gerandoPDF(<?=$entrevista->getIdentrevista()?>);"><img src="images/pdf.jpg" width="16" height="16" border="0" /></a></td>
+		        <td width="347" colspan="2"><a href="javascript:void(0);" onClick="gerandoPDF(<?=$entrevista->getIdentrevista()?>);"><img src="images/pdf.gif" width="57" height="48" border="0" /></a></td>
 	        </tr>
 		      <?php 
 				}
