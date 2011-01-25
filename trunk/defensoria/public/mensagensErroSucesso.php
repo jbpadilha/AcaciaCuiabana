@@ -6,9 +6,10 @@ if(isset($_GET['mensagemErro']) || isset($_SESSION['mensagemErro']))
 	echo "$( '#erros' ).html( '";
 	foreach ($MENSAGEM_ERRO as $mensagem)
 	{
-		echo $mensagem."<br/>";
+		echo str_ireplace("'","\'",$mensagem)."<br/>";
 	}
 	echo "' );";
+	//echo "$('#sucesso').html('');'";
 }
 if(isset($_GET['mensagemSucesso']) || isset($_SESSION['mensagemSucesso']))
 {   
@@ -16,8 +17,9 @@ if(isset($_GET['mensagemSucesso']) || isset($_SESSION['mensagemSucesso']))
 	echo "$( '#sucesso' ).html( '";
 	foreach ($MENSAGEM_SUCESSO as $mensagem)
 	{
-		echo $mensagem."<br/>";
+		echo str_ireplace("'","\'",$mensagem)."<br/>";
 	}
 	echo "' );";
+	//echo "$('#erros').html('');'";
 }
 echo '</script>';

@@ -1,7 +1,7 @@
 <?php 
 include 'carregamentoInicial.php';
 ?>
-<legend class="subtitulo">Cadastro de Natureza de Ação:</legend>
+<legend class="subtitulo">Cadastro de Natureza de AÃ§Ã£o:</legend>
 <br/>
 <script type="text/javascript">
 
@@ -21,7 +21,7 @@ function deletar(idNaturezaAcao)
 function cadastra()
 {
 	if ( $('#nome').val() == '' ) {
-		alert('O nome da natureza da ação deve ser inserido !');
+		alert('O nome da natureza da aï¿½ï¿½o deve ser inserido !');
 		return false;
 	} else {
 		var formulario = $('#naturezaAcao').serialize(true);
@@ -45,7 +45,7 @@ function cadastra()
 	<input type="hidden" id="idNaturezaAcao" name="idNaturezaAcao" value="<?=$naturezaAcao->getIdnaturezaacao()?>"/>
 	<table>
 		<tr>
-			<td width="120">Nome da Natureza da Ação:</td>
+			<td width="120">Nome da Natureza da AÃ§Ã£o:</td>
 			<td width="144"><input type="text" name="nome" value="<?=$naturezaAcao->getNaturezaacao()?>" id="nome"/></td>
 			<td width="49"><input type="button" onclick="cadastra();" name="submit" id="submit" value="<?=(isset($_GET['idNaturezaAcao']))?"Alterar":"Cadastrar"?>"/></td>
 		</tr>
@@ -70,7 +70,7 @@ if($naturezaAcao->find()>0)
 		<td colspan="4">&nbsp;</td>
 	</tr>
 	<tr>
-		<td colspan="4"><strong>Comarcas Natureza da Ação</strong></td>
+		<td colspan="4"><strong>Comarcas Natureza da AÃ§Ã£o</strong></td>
 	</tr>
 	<tr>
 		<td width="126">&nbsp;</td>
@@ -78,7 +78,7 @@ if($naturezaAcao->find()>0)
 	</tr>
 	<tr>
 		<td><strong>ID</strong></td>
-		<td colspan="3"><strong>Natureza da Ação</strong></td>
+		<td colspan="3"><strong>Natureza da AÃ§Ã£o</strong></td>
 	</tr>
   <?php 
 	while($naturezaAcao->fetch())
@@ -100,7 +100,7 @@ if($naturezaAcao->find()>0)
 else
 {
 ?>
-Não existem Natureza de Ação cadastradas.
+NÃ£o existem Natureza de AÃ§Ã£o cadastradas.
 <?php 
 }
 ?>

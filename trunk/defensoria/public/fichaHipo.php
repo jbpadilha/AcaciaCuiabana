@@ -34,10 +34,10 @@ include 'carregamentoInicial.php';
 			<input type="hidden" id="control" name="control" value="Hipossuficiencia"/>
 			<input type="hidden" id="pesquisa" name="pesquisa" value="true"/>
 			<fieldset>
-				<legend class="subtitulo">Pesquisar Ficha Hipossuficiência Emitida:</legend>
+				<legend class="subtitulo">Pesquisar Ficha HipossuficiÃªncia Emitida:</legend>
 				<table>
 					<tr>
-						<td colspan="3">A pesquisa pelo Nome ou CPF é obrigatório.</td>
+						<td colspan="3">A pesquisa pelo Nome ou CPF Ã© obrigatÃ³rio.</td>
 					</tr>
 					<tr>
 						<td>Nome:</td>
@@ -65,7 +65,7 @@ include 'carregamentoInicial.php';
 		        <td colspan="3">&nbsp;</td>
 	        </tr>
 		      <tr>
-		        <td colspan="3"><strong>Ficha Hipossuficiência Emitidos</strong></td>
+		        <td colspan="3"><strong>Ficha HipossuficiÃªncia Emitidos</strong></td>
 	        </tr>
 		      <tr>
 		        <td colspan="3">&nbsp;</td>

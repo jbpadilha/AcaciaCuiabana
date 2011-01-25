@@ -1,5 +1,5 @@
 <?php
-
+header("Content-Type: text/html; charset=UTF-8",true);
 require_once ('ControlGeral.php');
 
 class ControlaGerarPDF extends ControlGeral {
@@ -75,14 +75,14 @@ class ControlaGerarPDF extends ControlGeral {
 	    $pdf->Cell(0,6,"CONVITE",0,1,'C',true);
 	    $pdf->Ln(4);
 	    $pdf->SetFont('Arial','',8);
-	    $pdf->Cell(0,6,"Senhor(a) ".$cartaConvite->getParteProcesso()->getPessoa()->getNomepessoa(),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Senhor(a) ".$cartaConvite->getParteProcesso()->getPessoa()->getNomepessoa()),0,1,'L');
 	    $pdf->Ln(2);
-	    $pdf->Cell(0,6,"Convidamos a comparecer da Defensoria Pública:",0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Convidamos a comparecer da Defensoria PÃºblica:"),0,1,'L');
 	    $pdf->Cell(0,6,"Data:".$cartaConvite->getDataCartaConviteFormatadoPDF(),0,1,'L');
 	    $pdf->Ln(10);
 	    $pdf->Cell(0,6,$cartaConvite->getDefensor()->getPessoa()->getNomepessoa(),0,1,'C');
-	    $pdf->Cell(0,6,"Defensor(ra) Público(a)",0,1,'C');
-		$pdf->Output();
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Defensor(ra) PÃºblico(a)"),0,1,'C');
+	    $pdf->Output();
 	}
 	
 	private function gerarFichaHipo(Hipossuficiencia $hipossuficiencia)
@@ -94,35 +94,35 @@ class ControlaGerarPDF extends ControlGeral {
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial','B',10);
 		$pdf->SetFillColor(200,220,255);
-	    $pdf->Cell(0,6,"FICHA HIPOSSUFICIÊNCIA",0,1,'C',true);
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"FICHA HIPOSSUFICIÃŠNCIA"),0,1,'C',true);
 	    $pdf->Ln(2);
 	    $pdf->SetFont('Arial','',8);
-	    $pdf->Cell(0,6,"Nome: ".$hipossuficiencia->getPessoa()->getNomepessoa(),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Nome: ".$hipossuficiencia->getPessoa()->getNomepessoa()),0,1,'L');
 	    $pdf->Cell(0,6,"CPF: ".$hipossuficiencia->getPessoa()->getCpfpessoa(),0,1,'L');
 	    $pdf->Cell(0,6,"RG: ".$hipossuficiencia->getPessoa()->getRgpessoa(),0,1,'L');
 	    $pdf->Cell(0,6,"Emissor: ".$hipossuficiencia->getPessoa()->getEmissorpessoa(),0,1,'L');
 	    $pdf->Cell(0,6,"Sexo: ".$hipossuficiencia->getPessoa()->getSexopessoa(),0,1,'L');
 	    $pdf->Cell(0,6,"Estado Civil: ".$hipossuficiencia->getPessoa()->getEstadocivilpessoa(),0,1,'L');
-	    $pdf->Cell(0,6,"Apelido: ".$hipossuficiencia->getPessoa()->getApelidopessoa(),0,1,'L');
-	    $pdf->Cell(0,6,"Naturalidade: ".$hipossuficiencia->getPessoa()->getNaturalidadepessoa(),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Apelido: ".$hipossuficiencia->getPessoa()->getApelidopessoa()),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Naturalidade: ".$hipossuficiencia->getPessoa()->getNaturalidadepessoa()),0,1,'L');
 	    $pdf->Cell(0,6,"Data de Nascimento: ".$hipossuficiencia->getPessoa()->getDataNascimentoFormatado(),0,1,'L');
 	    $pdf->Ln(2);
 	    //$pdf->AddPage();
-	    $pdf->Cell(0,6,"Logradouro: ".$hipossuficiencia->getPessoa()->getEndereco()->getLogradouroendereco(),0,1,'L');
-	    $pdf->Cell(0,6,"Complemento: ".$hipossuficiencia->getPessoa()->getEndereco()->getComplementoendereco(),0,1,'L');
-	    $pdf->Cell(0,6,"Bairro: ".$hipossuficiencia->getPessoa()->getEndereco()->getBairroendereco(),0,1,'L');
-	    $pdf->Cell(0,6,"Nº: ".$hipossuficiencia->getPessoa()->getEndereco()->getNumeroendereco(),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Logradouro: ".$hipossuficiencia->getPessoa()->getEndereco()->getLogradouroendereco()),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Complemento: ".$hipossuficiencia->getPessoa()->getEndereco()->getComplementoendereco()),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Bairro: ".$hipossuficiencia->getPessoa()->getEndereco()->getBairroendereco()),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"NÂº: ".$hipossuficiencia->getPessoa()->getEndereco()->getNumeroendereco()),0,1,'L');
 	    $pdf->Cell(0,6,"CEP: ".$hipossuficiencia->getPessoa()->getEndereco()->getCependereco(),0,1,'L');
-	    $pdf->Cell(0,6,"Cidade: ".$hipossuficiencia->getPessoa()->getEndereco()->getCidadeendereco(),0,1,'L');
-	    $pdf->Cell(0,6,"Estado: ".$hipossuficiencia->getPessoa()->getEndereco()->getEstadoendereco(),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Cidade: ".$hipossuficiencia->getPessoa()->getEndereco()->getCidadeendereco()),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Estado: ".$hipossuficiencia->getPessoa()->getEndereco()->getEstadoendereco()),0,1,'L');
 	    $pdf->Cell(0,6,"Telefone: ".$hipossuficiencia->getPessoa()->getEndereco()->getTelefoneendereco(),0,1,'L');
-	    $pdf->Cell(0,6,"Referência: ".$hipossuficiencia->getPessoa()->getEndereco()->getReferenciaendereco(),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"ReferÃªncia: ".$hipossuficiencia->getPessoa()->getEndereco()->getReferenciaendereco()),0,1,'L');
 	    $pdf->Ln(2);
-	    $pdf->Cell(0,6,"Profissão: ".$hipossuficiencia->getProfhipossuficiencia(),0,1,'L');
-	    $pdf->Cell(0,6,"Salário: R$ ".$hipossuficiencia->getSalariohipossuficiencia(),0,1,'L');
-	    $pdf->Cell(0,6,"Empresa: ".$hipossuficiencia->getEmpresahipossuficiencia(),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"ProfissÃ£o: ".$hipossuficiencia->getProfhipossuficiencia()),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"SalÃ¡rio: R$ ".$hipossuficiencia->getSalariohipossuficiencia()),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Empresa: ".$hipossuficiencia->getEmpresahipossuficiencia()),0,1,'L');
 	    $pdf->Cell(0,6,"Renda: R$ ".$hipossuficiencia->getTotalrendahipossuficiencia(),0,1,'L');
-	    $pdf->Cell(0,6,"Observações: ".$hipossuficiencia->getObservacoeshipossuficiencia(),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"ObservaÃ§Ãµes: ".$hipossuficiencia->getObservacoeshipossuficiencia()),0,1,'L');
 	    $pdf->Ln(7);
 	    $pdf->Cell(0,6,$hipossuficiencia->getPessoa()->getNomepessoa(),0,1,'C');
 		$pdf->Output();
@@ -140,67 +140,67 @@ class ControlaGerarPDF extends ControlGeral {
 	    $pdf->Cell(0,6,"FICHA ATENDIMENTO - Protocolo: ".$entrevista->getProtocoloatendimento(),0,1,'C',true);
 	    $pdf->Ln(2);
 	    $pdf->SetFont('Arial','',5);
-	    $pdf->Cell(0,6,"Assistido: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getNomepessoa(),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Assistido: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getNomepessoa()),0,1,'L');
 	    $pdf->Cell(0,6,"CPF: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getCpfpessoa(),0,1,'L');
 	    $pdf->Cell(0,6,"RG: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getRgpessoa(),0,1,'L');
 	    $pdf->Cell(0,6,"Emissor: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getEmissorpessoa(),0,1,'L');
 	    $pdf->Cell(0,6,"Sexo: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getSexopessoa(),0,1,'L');
 	    $pdf->Cell(0,6,"Estado Civil: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getEstadocivilpessoa(),0,1,'L');
-	    $pdf->Cell(0,6,"Apelido: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getApelidopessoa(),0,1,'L');
-	    $pdf->Cell(0,6,"Naturalidade: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getNaturalidadepessoa(),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Apelido: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getApelidopessoa()),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Naturalidade: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getNaturalidadepessoa()),0,1,'L');
 	    $pdf->Cell(0,6,"Data de Nascimento: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getDataNascimentoFormatado(),0,1,'L');
-	    $pdf->Cell(0,6,"Logradouro: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getEndereco()->getLogradouroendereco(),0,1,'L');
-	    $pdf->Cell(0,6,"Complemento: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getEndereco()->getComplementoendereco(),0,1,'L');
-	    $pdf->Cell(0,6,"Bairro: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getEndereco()->getBairroendereco(),0,1,'L');
-	    $pdf->Cell(0,6,"Nº: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getEndereco()->getNumeroendereco(),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Logradouro: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getEndereco()->getLogradouroendereco()),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Complemento: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getEndereco()->getComplementoendereco()),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Bairro: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getEndereco()->getBairroendereco()),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"NÂº: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getEndereco()->getNumeroendereco()),0,1,'L');
 	    $pdf->Cell(0,6,"CEP: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getEndereco()->getCependereco(),0,1,'L');
-	    $pdf->Cell(0,6,"Cidade: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getEndereco()->getCidadeendereco(),0,1,'L');
-	    $pdf->Cell(0,6,"Estado: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getEndereco()->getEstadoendereco(),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Cidade: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getEndereco()->getCidadeendereco()),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Estado: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getEndereco()->getEstadoendereco()),0,1,'L');
 	    $pdf->Cell(0,6,"Telefone: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getEndereco()->getTelefoneendereco(),0,1,'L');
-	    $pdf->Cell(0,6,"Referência: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getEndereco()->getReferenciaendereco(),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"ReferÃªncia: ".$entrevista->getProcesso()->getParteAssistida()->getPessoa()->getEndereco()->getReferenciaendereco()),0,1,'L');
 	    $pdf->Ln(2);
-		$pdf->Cell(0,6,"Parte Contrária: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getNomepessoa(),0,1,'L');
+		$pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Parte ContrÃ¡ria: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getNomepessoa()),0,1,'L');
 	    $pdf->Cell(0,6,"CPF: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getCpfpessoa(),0,1,'L');
 	    $pdf->Cell(0,6,"RG: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getRgpessoa(),0,1,'L');
 	    $pdf->Cell(0,6,"Emissor: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getEmissorpessoa(),0,1,'L');
 	    $pdf->Cell(0,6,"Sexo: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getSexopessoa(),0,1,'L');
 	    $pdf->Cell(0,6,"Estado Civil: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getEstadocivilpessoa(),0,1,'L');
-	    $pdf->Cell(0,6,"Apelido: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getApelidopessoa(),0,1,'L');
-	    $pdf->Cell(0,6,"Naturalidade: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getNaturalidadepessoa(),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Apelido: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getApelidopessoa()),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Naturalidade: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getNaturalidadepessoa()),0,1,'L');
 	    $pdf->Cell(0,6,"Data de Nascimento: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getDataNascimentoFormatado(),0,1,'L');
-	    $pdf->Cell(0,6,"Logradouro: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getEndereco()->getLogradouroendereco(),0,1,'L');
-	    $pdf->Cell(0,6,"Complemento: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getEndereco()->getComplementoendereco(),0,1,'L');
-	    $pdf->Cell(0,6,"Bairro: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getEndereco()->getBairroendereco(),0,1,'L');
-	    $pdf->Cell(0,6,"Nº: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getEndereco()->getNumeroendereco(),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Logradouro: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getEndereco()->getLogradouroendereco()),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Complemento: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getEndereco()->getComplementoendereco()),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Bairro: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getEndereco()->getBairroendereco()),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"NÂº: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getEndereco()->getNumeroendereco()),0,1,'L');
 	    $pdf->Cell(0,6,"CEP: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getEndereco()->getCependereco(),0,1,'L');
-	    $pdf->Cell(0,6,"Cidade: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getEndereco()->getCidadeendereco(),0,1,'L');
-	    $pdf->Cell(0,6,"Estado: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getEndereco()->getEstadoendereco(),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Cidade: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getEndereco()->getCidadeendereco()),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Estado: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getEndereco()->getEstadoendereco()),0,1,'L');
 	    $pdf->Cell(0,6,"Telefone: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getEndereco()->getTelefoneendereco(),0,1,'L');
-	    $pdf->Cell(0,6,"Referência: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getEndereco()->getReferenciaendereco(),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"ReferÃªncia: ".$entrevista->getProcesso()->getParteNaoAssistida()->getPessoa()->getEndereco()->getReferenciaendereco()),0,1,'L');
 	    $pdf->Ln(2);
-	    $pdf->Cell(0,6,"Defensor Público: ".$entrevista->getProcesso()->getParteAssistida()->getDefensor()->getPessoa()->getNomepessoa(),0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Defensor PÃºblico: ".$entrevista->getProcesso()->getParteAssistida()->getDefensor()->getPessoa()->getNomepessoa()),0,1,'L');
 	    $pdf->Cell(0,6,"Data da Entrevista: ".$entrevista->getDataEntrevistaFormatadoPDF(),0,1,'L');
 	    $pdf->Ln(1);
-	    $pdf->Cell(0,6,"Fui instruído(a) acerca da relação de documentos que devo providenciar para a medida judicial pertinente.",0,1,'L');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Fui instruÃ­do(a) acerca da relaÃ§Ã£o de documentos que devo providenciar para a medida judicial pertinente."),0,1,'L');
 	    $pdf->Ln(1);
-	    $pdf->Cell(0,6,"Declaro, sob as penas da lei, que as informações acima prestadas são verdadeiras.",0,1,'R');
+	    $pdf->Cell(0,6,iconv('utf-8','iso-8859-1',"Declaro, sob as penas da lei, que as informaÃ§Ãµes acima prestadas sÃ£o verdadeiras."),0,1,'R');
 	    $pdf->Cell(0,6,$entrevista->getProcesso()->getComarca()->getNomecomarca().",__________/_________/_________",0,1,'R');
 	    $pdf->Cell(0,6,"Declarante: ____________________________",0,1,'R');
-		$pdf->Output();
+	    $pdf->Output();
 	}
 	
 	//Page header
 	function Header(FPDF $pdf)
 	{
 	    //Logo
-	    $pdf->Image($_SESSION["PATH_PUBLIC"].'/images/pdf_logo.jpg',70,0);
+	    $pdf->Image($_SESSION["PATH_PUBLIC"].'/images/pdf_logo.jpg',90,0);
 	    //Arial bold 15
 	    //Line break
 	    $pdf->Ln(25);
 	    $pdf->SetFont('Arial','B',12);
-		$pdf->Cell(0,5,'DEFENSORIA PÚBLICA DO ESTADO DE MATO GROSSO',0,1,'C');
-		$pdf->Cell(0,5,'BALCÃO DA CIDADANIA - CUIABÁ',0,1,'C');
+		$pdf->Cell(0,5,iconv('utf-8','iso-8859-1','DEFENSORIA PÃšBLICA DO ESTADO DE MATO GROSSO'),0,1,'C');
+		$pdf->Cell(0,5,iconv('utf-8','iso-8859-1','BALCÃ£O DA CIDADANIA - CUIABÃ'),0,1,'C');
 		$pdf->SetFont('Arial','B',10);
-		$pdf->MultiCell(0,5,'Missão: Promover assistência jurídica aos necessitados com excelência, efetivando a inclusão social, respaldada na ética e na moralidade',0,'C');
+		$pdf->MultiCell(0,5,iconv('utf-8','iso-8859-1','MissÃ£o: Promover assistÃªncia jurÃ­dica aos necessitados com excelÃªncia, efetivando a inclusÃ£o social, respaldada na Ã³tica e na moralidade'),0,'C');
 	}
 }

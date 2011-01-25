@@ -21,29 +21,24 @@ function cadastra()
 		enviaFormulario($('#hipossuficiencia').attr("action"),'page',formulario);
 	}
 }
-function gerarPDF()
-{
-	var formulario = $('#FichaHipo').serialize(true);
-	enviaFormulario($('#FichaHipo').attr("action"),'page',formulario);
-}
 </script>
 <?php
 if(isset($_GET['gerarFicha']))
 {
 ?>
-<legend class="subtitulo">Gerar Ficha Hipossuficiência:</legend>
+<legend class="subtitulo">Gerar Ficha HipossuficiÃªncia:</legend>
 <br/>
-<form name="FichaHipo" id="FichaHipo" method="get" action="../application/recebePostGet.php">
+<form name="FichaHipo" id="FichaHipo" method="get" action="../application/recebePostGet.php" target="_blank">
 	<input type="hidden" id="control" name="control" value="GerarPDF"/>
 	<input type="hidden" id="funcao" name="funcao" value="FichaHipo"/>
 	<input type="hidden" id="idhipossuficiencia" name="idhipossuficiencia" value="<?=$_GET['idhipossuficiencia']?>"/>
-	<input type="button" name="submit" id="submit" value="Gerar Ficha Hipo em PDF" onclick="gerarPDF();"/>
+	<input type="submit" name="submit" id="submit" value="Gerar Ficha Hipo em PDF"/>
 </form>
 <br/><br/><br/>
 <?php
 }
 ?>
-<legend class="subtitulo">Cadastro de Hipossuficiência:</legend>
+<legend class="subtitulo">Cadastro de HipossuficiÃªncia:</legend>
 <br/>
 <br/>
 <form name="hipossuficiencia" id="hipossuficiencia" method="post" action="../application/recebePostGet.php">
@@ -61,13 +56,13 @@ if(isset($_GET['gerarFicha']))
 			<td align="left">&nbsp;</td>
 		</tr>
 		<tr>
-			<td>Profissão:</td>
+			<td>ProfissÃ£o:</td>
 			<td colspan="3">
 				<input type="text" name="profHipo" id="profHipo" value="<?=(isset($_GET['profHipo']))?$_GET['profHipo']:""?>">
 			</td>
 		</tr>
 		<tr>
-			<td>Salário:</td>
+			<td>SalÃ¡rio:</td>
 			<td colspan="3">
 				<input type="text" name="salarioHipo" id="salarioHipo" value="<?=(isset($_GET['salarioHipo']))?$_GET['salarioHipo']:""?>">
 			</td>
@@ -85,7 +80,7 @@ if(isset($_GET['gerarFicha']))
 			</td>
 		</tr>
 		<tr>
-			<td>Observações:</td>
+			<td>ObservaÃ§Ãµes:</td>
 			<td colspan="2">
 				<textarea rows="8" cols="100" id="observacoesHipo" name="observacoesHipo"><?=(isset($_GET['observacoesHipo']))?$_GET['observacoesHipo']:""?></textarea>
 			</td>

@@ -5,15 +5,15 @@ include 'carregamentoInicial.php';
 <html>
 	<head>
 		<script type="text/javascript">
-		$(document).ready(function(){
-			$("#usuario").alphanumeric(); 
-			$("#datanascimentopessoa").mask("99/99/9999");
-			$("#cpfpessoa").mask("999.999.999-99");
-			$("#cpfPesquisa").mask("999.999.999-99");
-			$("#cependereco").mask("99999-999");
-			$("#rgpessoa").numeric();
-			$("#numeroendereco").numeric();
-		});
+			$(document).ready(function(){
+				$("#usuario").alphanumeric(); 
+				$("#datanascimentopessoa").mask("99/99/9999");
+				$("#cpfpessoa").mask("999.999.999-99");
+				$("#cpfPesquisa").mask("999.999.999-99");
+				$("#cependereco").mask("99999-999");
+				$("#rgpessoa").numeric();
+				$("#numeroendereco").numeric();
+			});
 			function pesquisar()
 			{
 				if ( $('#nomePesquisa').val() == '' && $('#cpfPesquisa').val() == '') {
@@ -133,7 +133,7 @@ include 'carregamentoInicial.php';
 		<legend class="subtitulo">Pesquisar Pessoa:</legend>
 		<table>
 			<tr>
-				<td>A pesquisa pelo nome ou CPF é obrigatório.</td>
+				<td>A pesquisa pelo nome ou CPF Ã© obrigatÃ³io.</td>
 			</tr>
 			<tr>
 				<td>Nome:</td>
@@ -253,7 +253,7 @@ if(isset($_GET['cadastro']))
 			<td colspan="2" align="left"><input type="text" name="datanascimentopessoa" id="datanascimentopessoa" value="<?=$pessoaAtual->getDataNascimentoFormatado()?>" /> (ex. 11/11/2010)</td>		
 		</tr>
         <tr>
-			<td colspan="3" class="subTitulo">ENDEREÇO</td>
+			<td colspan="3" class="subTitulo">ENDEREÃ‡O</td>
 		</tr>
 		<tr>
 			<td align="left">Logradouro:</td>
@@ -268,7 +268,7 @@ if(isset($_GET['cadastro']))
 			<td colspan="2" align="left"><input name="bairroendereco" type="text" id="bairroendereco" value="<?=$enderecoAtual->getBairroendereco()?>" size="30" /></td>		
 		</tr>
 		<tr>
-			<td align="left">Número:</td>
+			<td align="left">NÃºmero:</td>
 			<td colspan="2" align="left"><input type="text" name="numeroendereco" id="numeroendereco" value="<?=$enderecoAtual->getNumeroendereco()?>" /></td>		
 		</tr>
 		<tr>
@@ -318,7 +318,7 @@ if(isset($_GET['cadastro']))
 			<td colspan="2" align="left"><input type="text" name="telefoneendereco" id="telefoneendereco" value="<?=$enderecoAtual->getTelefoneendereco()?>" /></td>		
 		</tr>
 		<tr>
-			<td align="left">Referência:</td>
+			<td align="left">ReferÃªncia:</td>
 			<td align="left"><input type="text" name="referenciaendereco" id="referenciaendereco" value="<?=$enderecoAtual->getReferenciaendereco()?>" /></td>
 			<td width="49"><input type="button" name="submit" id="submit" onClick="cadastra();" value="<?=(isset($_GET['idpessoa']))?"Alterar":"Cadastrar"?>"/></td>		
 		</tr>

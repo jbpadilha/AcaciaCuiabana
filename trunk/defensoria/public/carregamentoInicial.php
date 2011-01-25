@@ -6,6 +6,6 @@ if(!isset($_SESSION['loginusuario']))
 {
 	header("Location: conteudoInicial.php");
 }
-header("Content-Type: text/html; charset=ISO-8859-1",true);
+header("Content-Type: text/html; charset=UTF-8",true);
 include 'mensagensErroSucesso.php';
 ?>

@@ -100,7 +100,7 @@ if($comarca->find()>0)
 else
 {
 ?>
-Não existem comarcas cadastradas.
+NÃ£o existem comarcas cadastradas.
 <?php 
 }
 ?>

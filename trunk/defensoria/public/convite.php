@@ -76,10 +76,10 @@ include 'carregamentoInicial.php';
 				<legend class="subtitulo">Pesquisar Carta Convite Emitida:</legend>
 				<table>
 					<tr>
-						<td colspan="3">A pesquisa pela data, numero do processo ou Parte do Processo(Nome ou CPF) é obrigatório.</td>
+						<td colspan="3">A pesquisa pela data, numero do processo ou Parte do Processo(Nome ou CPF) Ã© obrigatÃ³rio.</td>
 					</tr>
 					<tr>
-						<td>Número do Processo:</td>
+						<td>NÃºmero do Processo:</td>
 						<td colspan="2" align="left"><input type="text" name="processoPesquisa" id="processoPesquisa" /></td>
 					</tr>
 					<tr>
@@ -119,7 +119,7 @@ include 'carregamentoInicial.php';
 	        </tr>
 		      <tr>
 		        <td width="63"><strong>Parte</strong></td>
-		        <td width="173"><strong>Nº do Processo</strong></td>
+		        <td width="173"><strong>NÂº do Processo</strong></td>
 		        <td width="224"><strong>Data/Hora de Agendamento</strong></td>
 		        <td><strong>Marcado Leitura</strong></td>
 		        <td colspan="2">&nbsp;</td>
@@ -135,7 +135,7 @@ include 'carregamentoInicial.php';
 		        <td><?=$cartaConvitePesquisa->getParteProcesso()->getPessoa()->getNomepessoa()?></td>
 		        <td><?=$cartaConvitePesquisa->getParteProcesso()->getProcesso()->getNumeroprocesso()?></td>
 		        <td><?=$cartaConvitePesquisa->getDataCartaConviteFormatado()?></td>
-		        <td width="138"><?=($cartaConvitePesquisa->getLeitura() == 0)?"Não lido":"lido"?></td>
+		        <td width="138"><?=($cartaConvitePesquisa->getLeitura() == 0)?"NÃ£o lido":"lido"?></td>
 		        <?php
 					$usuario = new Usuarios();
 					$usuario->setUsuario($_SESSION["loginusuario"]);
@@ -199,7 +199,7 @@ include 'carregamentoInicial.php';
 				<legend class="subtitulo"><?=(isset($_GET['idcartaconvite']) && $_GET['idcartaconvite']!=''?"Alterar":"Cadastrar")?>/Gerar Carta Convite:</legend>
 				<table width="633">
 					<tr>
-						<td width="95" align="left">Número do Processo:</td>
+						<td width="95" align="left">NÃºmero do Processo:</td>
 						<td width="144" align="left">
 							<input type="text" id="numeroProcesso" name="numeroProcesso" value="<?=$numeroProcesso?>"/>
 						</td>
@@ -260,7 +260,7 @@ include 'carregamentoInicial.php';
 						<td align="left">Marcar Leitura</td>
 						<td align="left">
 						  <select id="leitura" name="leitura">
-								<option value="0" <?=($cartaConvite->getLeitura() == 0)?"Selected": ""?>>Não</option>
+								<option value="0" <?=($cartaConvite->getLeitura() == 0)?"Selected": ""?>>NÃ£o</option>
 								<option value="1" <?=($cartaConvite->getLeitura() == 1)?"Selected": ""?>>Sim</option>
 							</select>
 						</td>
