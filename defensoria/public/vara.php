@@ -45,7 +45,7 @@ function cadastra()
 	<input type="hidden" id="idVara" name="idVara" value="<?=$vara->getIdvara()?>"/>
 	<table>
 		<tr>
-			<td width="120">Código da Vara:</td>
+			<td width="120">CÃ³digo da Vara:</td>
 			<td width="144" colspan="2"><input type="text" name="codVara" value="<?=$vara->getCodvara()?>" id="codVara"/></td>
 		</tr>
 		<tr>
@@ -101,7 +101,7 @@ if($vara->find()>0)
 		<td colspan="4">&nbsp;</td>
 	</tr>
 	<tr>
-		<td><strong>Código</strong></td>
+		<td><strong>CÃ³digo</strong></td>
 		<td><strong>Vara</strong></td>
 		<td colspan="3"><strong>Comarca</strong></td>
 	</tr>
@@ -126,7 +126,7 @@ if($vara->find()>0)
 else
 {
 ?>
-Não existem varas cadastradas.
+NÃ£o existem varas cadastradas.
 <?php 
 }
 ?>

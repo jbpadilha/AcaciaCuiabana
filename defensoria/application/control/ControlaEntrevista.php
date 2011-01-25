@@ -93,10 +93,11 @@ class ControlaEntrevista extends ControlGeral {
 					$this->preencheObjeto($entrevista,$processo,$parteProcessoPromovente,$parteProcessoPromovido,$POST);
 					if(count($this->MENSAGEM_ERRO)<=0)
 					{
-						$this->cadastrar($entrevista,$processo,$parteProcessoPromovente,$parteProcessoPromovido);						
+						$this->cadastrar($entrevista,$processo,$parteProcessoPromovente,$parteProcessoPromovido);
+						$entrevista->find(true);						
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO");
-						$this->MENSAGEM_SUCESSO[] = 'O Protocolo de Atendimento é <font color="FF0000"><b>'.$entrevista->getProtocoloatendimento().'</b></font>'; 
-						header("Location:../public/entrevista.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						$this->MENSAGEM_SUCESSO[] = 'O Protocolo de Atendimento Ã© '.$entrevista->getProtocoloatendimento(); 
+						header("Location:../public/entrevista.php?identrevista={$entrevista->getIdentrevista()}&fichaAtendimento={$entrevista->getProtocoloatendimento()}&mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else
 					{

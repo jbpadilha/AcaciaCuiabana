@@ -99,7 +99,7 @@ if($atividades->find()>0)
 else
 {
 ?>
-Não existem atividades cadastradas.
+NÃ£o existem atividades cadastradas.
 <?php 
 }
 ?>

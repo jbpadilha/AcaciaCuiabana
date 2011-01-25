@@ -7,28 +7,28 @@ class Mensagens {
 	{
 		//MENSAGENS DE ERRO
 		$this->arrayMensagens["ERRO"] = "Erro ao tentar carregar a funcionalidade.";
-		$this->arrayMensagens["ACESSO_NEGADO"] = "Acesso não autorizado.";
+		$this->arrayMensagens["ACESSO_NEGADO"] = "Acesso nÃ£o autorizado.";
 		$this->arrayMensagens["ACESSAR_BANCO_DADOS"] = "Erro ao tentar acessar o banco de dados.";
 		$this->arrayMensagens["ERRO_ACESSAR_FUNCIONALIDADE"] = "Erro ao tentar acessar a funcionalidade.";
-		$this->arrayMensagens["ERRO_USUARIO_EXISTENTE"] = "Os dados Informados já foi utilizado por outra pessoa.";
+		$this->arrayMensagens["ERRO_USUARIO_EXISTENTE"] = "Os dados Informados jÃ¡ foi utilizado por outra pessoa.";
 		
 		//Pessoa
-		$this->arrayMensagens["PESSOA_NAO_ENCONTRADA"] = "A pessoa pesquisada não foi encontrado.";
+		$this->arrayMensagens["PESSOA_NAO_ENCONTRADA"] = "A pessoa pesquisada nÃ£o foi encontrado.";
 		//DEFENSOR
-		$this->arrayMensagens["DEFENSOR_NAO_ENCONTRADO"] = "O defensor pesquisado não foi encontrado.";
+		$this->arrayMensagens["DEFENSOR_NAO_ENCONTRADO"] = "O defensor pesquisado nÃ£o foi encontrado.";
 		//Processo
 		$this->arrayMensagens["PROCESSO_NAO_ENCONTRADO"] = "Nenhum processo foi encontrado.";
 		//Carta Convite
 		$this->arrayMensagens["CONVITE_NAO_ENCONTRADO"] = "Nenhum convite foi encontrado.";
 		//Ficha Hipo
-		$this->arrayMensagens["HIPO_NAO_ENCONTRADO"] = "Nenhuma ficha hipossuficiência foi encontrada.";
+		$this->arrayMensagens["HIPO_NAO_ENCONTRADO"] = "Nenhuma ficha hipossuficiÃªncia foi encontrada.";
 		//Ficha Atendimento/Entrevista
 		$this->arrayMensagens["ATENDIMENTO_NAO_ENCONTRADO"] = "Nenhuma ficha de Entrevista/Atendimento foi encontrada.";
 		
 		//CAMPOS
 		$this->arrayMensagens["USUARIO_SENHA_INCORRETO"] = "Usuario ou senha incorreto. Tente novamente.";
-		$this->arrayMensagens["CAMPO_OBRIGATORIO"] = "Por favor, preencher todos os campos obrigatórios.";
-		$this->arrayMensagens["NUMERO_PROCESSO_OBRIGATORIO"] = "Por favor, preencher o número do Processo.";
+		$this->arrayMensagens["CAMPO_OBRIGATORIO"] = "Por favor, preencher todos os campos obrigatÃ³rios.";
+		$this->arrayMensagens["NUMERO_PROCESSO_OBRIGATORIO"] = "Por favor, preencher o nÃºmero do Processo.";
 		
 		//MENSAGENS DE SUCESSO
 		$this->arrayMensagens["SUCESSO_CADASTRO"] = "Cadastro realizado com sucesso.";

@@ -1,7 +1,7 @@
 <?php 
 include 'carregamentoInicial.php';
 ?>
-<legend class="subtitulo">Cadastro de Núcleo da Defensoria:</legend>
+<legend class="subtitulo">Cadastro de NÃºcleo da Defensoria:</legend>
 <br/>
 <script type="text/javascript">
 
@@ -21,11 +21,11 @@ function deletar(idNucleo)
 function cadastra()
 {
 	if ( $('#nome').val() == '' ) {
-		alert('O nome do núcleo da defensoria deve ser informado.');
+		alert('O nome do nï¿½cleo da defensoria deve ser informado.');
 		return false;
 	} 
 	else if ( $('#idComarca').val() == '' ) {
-		alert('A comarca do núcleo da defensoria deve ser informado.');
+		alert('A comarca do nï¿½cleo da defensoria deve ser informado.');
 		return false;
 	}
 	else {
@@ -50,7 +50,7 @@ function cadastra()
 	<input type="hidden" id="idNucleo" name="idNucleo" value="<?=$nucleo->getIdnucleo()?>"/>
 	<table>
 		<tr>
-			<td width="120">Nome do Núcleo da Defensoria:</td>
+			<td width="120">Nome do NÃºcleo da Defensoria:</td>
 			<td width="144" colspan="2"><input type="text" name="nome" value="<?=$nucleo->getNomenucleo()?>" id="nome"/></td>
 		</tr>
 		<tr>
@@ -95,15 +95,15 @@ if($nucleo->find()>0)
 		<td colspan="5">&nbsp;</td>
 	</tr>
 	<tr>
-		<td colspan="5"><strong>Núcleos de Defensoria Cadastradas</strong></td>
+		<td colspan="5"><strong>NÃºcleos de Defensoria Cadastradas</strong></td>
 	</tr>
 	<tr>
 		<td width="126">&nbsp;</td>
 		<td colspan="4">&nbsp;</td>
 	</tr>
 	<tr>
-		<td><strong>Código</strong></td>
-		<td><strong>Núcleo</strong></td>
+		<td><strong>CÃ³digo</strong></td>
+		<td><strong>NÃºcleo</strong></td>
 		<td colspan="3"><strong>Comarca</strong></td>
 	</tr>
   <?php 
@@ -127,7 +127,7 @@ if($nucleo->find()>0)
 else
 {
 ?>
-Não existem núcleos de defensoria cadastradas.
+NÃ£o existem nÃºcleos de defensoria cadastradas.
 <?php 
 }
 ?>

@@ -13,7 +13,7 @@ include 'carregamentoInicial.php';
 			function pesquisar()
 			{
 				if ( $('#nomePesquisa').val() == '' && $('#cpfpesquisa').val() == '' && $('#numeroprocesso').val() == '') {
-					alert('O nome, CPF ou número do processo deve ser informado.');
+					alert('O nome, CPF ou nï¿½mero do processo deve ser informado.');
 				}
 				else
 				{
@@ -47,7 +47,7 @@ include 'carregamentoInicial.php';
 					return false;
 				} 
 				else if ( $('#numeroprocesso').val() == '' ) {
-					alert('O Número do Processo deve ser informado.');
+					alert('O NÃºmero do Processo deve ser informado.');
 					return false;
 				}
 				else {
@@ -67,7 +67,7 @@ include 'carregamentoInicial.php';
 			<legend class="subtitulo">Pesquisar Pessoa:</legend>
 				<table>
 					<tr>
-						<td>A pesquisa pelo nome, CPF ou número do processo é obrigatório.</td>
+						<td>A pesquisa pelo nome, CPF ou nÃºmero do processo Ã© obrigatÃ³rio.</td>
 					</tr>
 					<tr>
 						<td>Nome:</td>
@@ -78,7 +78,7 @@ include 'carregamentoInicial.php';
 						<td colspan="2" align="left"><input type="text" name="cpfpesquisa" id="cpfpesquisa" /></td>
 					</tr>
 					<tr>
-						<td>Número do Processo:</td>
+						<td>NÃºmero do Processo:</td>
 						<td align="left"><input type="text" name="numeroprocessoPesquisa" id="numeroprocessoPesquisa" /></td>
 					  <td align="left"><input type="button" name="submit" id="submit" value="Pesquisar" onClick="pesquisar();"/></td>
 					</tr>
@@ -104,7 +104,7 @@ include 'carregamentoInicial.php';
 						<td colspan="4">&nbsp;</td>
 					</tr>
 					<tr>
-						<td width="158"><strong>Nº do Processo</strong></td>
+						<td width="158"><strong>NÂº do Processo</strong></td>
 						<td width="158"><strong>Parte Assistida</strong></td>
 						<td><strong>Defensor</strong></td>
 						<td>&nbsp;</td>
@@ -131,7 +131,7 @@ include 'carregamentoInicial.php';
 							<?php
 							if($processo->getNumeroprocesso()==null || $processo->getIdvara() == null)
 							{
-								echo "Processo não analisado pelo Defensor.<br/>";
+								echo "Processo nï¿½o analisado pelo Defensor.<br/>";
 							}
 							if($_SESSION['grupo'] == GruposUsuarios::$GRUPO_ADMIN || ($_SESSION['grupo'] == GruposUsuarios::$GRUPO_DEFENSOR && $_SESSION['loginusuario'] == $parteProcessoAssistido->getIddefensor()) )
 							{
@@ -185,7 +185,7 @@ include 'carregamentoInicial.php';
 				<input type="hidden" id="idprocesso" name="idprocesso" value="<?=$processo->getIdprocesso()?>"/>
 				<table width="613">
 					<tr>
-						<td>Número do Processo:</td>
+						<td>NÃºmero do Processo:</td>
 						<td align="left">
 							<?php 
 							if(isset($_GET['processoVisualiza']))
@@ -264,7 +264,7 @@ include 'carregamentoInicial.php';
 						</td>
 					</tr>
 					<tr>
-						<td>Tipo da Ação:</td>
+						<td>Tipo da AÃ§Ã£o:</td>
 						<td colspan="2" align="left">
 							<?php 
 							if(isset($_GET['processoVisualiza']))
@@ -296,7 +296,7 @@ include 'carregamentoInicial.php';
 						</td>
 					</tr>
 					<tr>
-						<td>Natureza da Ação:</td>
+						<td>Natureza da AÃ§Ã£o:</td>
 						<td colspan="2" align="left">
 						<?php 
 						if(isset($_GET['processoVisualiza']))

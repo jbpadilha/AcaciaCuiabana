@@ -14,7 +14,7 @@ class Entrevista extends Lumine_Base{
 	
 	/**
      * Inicia os valores da classe
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return void
      */
     protected function _initialize()
@@ -28,7 +28,7 @@ class Entrevista extends Lumine_Base{
 
     /**
      * Recupera um objeto estaticamente
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return Pessoa
      */
     public static function staticGet($pk, $pkValue = null)
@@ -140,7 +140,7 @@ class Entrevista extends Lumine_Base{
 			$dataHora = explode(" ",$this->getDataentrevista());
 			$data = explode("-",$dataHora[0]);
 			$dataRetorno = $data[2]."/".$data[1]."/".$data[0];
-			return $dataRetorno . " às ".$dataHora[1];
+			return $dataRetorno . " Ã s ".$dataHora[1];
 		}
 		else
 		{

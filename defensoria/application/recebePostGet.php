@@ -1,9 +1,9 @@
 <?php
 /**
- * Arquivo de controle de recebimento de requisições. 
- * Muito bom para controlar requisições e direcioná-las para a classe de controle correspondente 
+ * Arquivo de controle de recebimento de requisiÃ§Ãµes. 
+ * Muito bom para controlar requisiÃ§Ãµes e direcionÃ¡-las para a classe de controle correspondente 
  * @var $_GET e $_POST
- * @author João Batista Padilha e Silva --- joao.padilha@globo.com
+ * @author JoÃ£o Batista Padilha e Silva --- joao.padilha@globo.com
  * @since 23/11/2010
  */
 require_once 'ProjetoUtil.php';
@@ -15,7 +15,6 @@ session_start();
 $MENSAGEM_SUCESSO = Array();
 $MENSAGEM_ERRO = Array();
 $grupo = (isset($_SESSION['grupo'])) ?$_SESSION['grupo'] : null;
-header("Content-Type: text/html; charset=ISO-8859-1",true);
 try {
 	switch($_SERVER['REQUEST_METHOD'])
 	{

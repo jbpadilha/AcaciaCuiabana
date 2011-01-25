@@ -1,5 +1,5 @@
 <?php
-
+header("Content-Type: text/html; charset=UTF-8",true);
 class ProjetoUtil
 {	
 	public static $DOMINIO_SOLTEIRO = 1;
@@ -11,14 +11,14 @@ class ProjetoUtil
 	public static $DOMINIO_SOLTEIRO_TXT = "Solteiro";
 	public static $DOMINIO_CASADO_TXT = "Casado";
 	public static $DOMINIO_SEPARADO_TXT = "Separado";
-	public static $DOMINIO_VIUVO_TXT = "Viúvo";
+	public static $DOMINIO_VIUVO_TXT = "ViÃºvo";
 	public static $DOMINIO_OUTROS_TXT = "Outros";
 	
 	public static $juizo_Primeiro_Grau = 1;
 	public static $juizo_Segundo_Grau = 2;
 	
-	public static $juizo_Primeiro_Grau_TXT = "Juízo de Primeiro Grau";
-	public static $juizo_Segundo_Grau_TXT = "Juízo de Segundo Grau";
+	public static $juizo_Primeiro_Grau_TXT = "JuÃ­zo de Primeiro Grau";
+	public static $juizo_Segundo_Grau_TXT = "JuÃ­zo de Segundo Grau";
 	
 	public function __construct()
 	{
@@ -30,10 +30,10 @@ class ProjetoUtil
 		$lumineConfig = array(
 					'dialect' => 'MySQL',
 					'database' => 'defensoria',
-				    'user' => 'root',
-				    'password' => '',
+				    'user' => 'joaopadilhacom',
+				    'password' => 'padilha10',
 				    'port' => '3306',
-				    'host' => 'localhost',
+				    'host' => 'mysql01.joaopadilha.com',
 				    'class_path' => dirname(__FILE__),
 				    'package' => 'model',
 					'keep_foreign_column_name' => '1', 

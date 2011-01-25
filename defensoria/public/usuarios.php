@@ -29,15 +29,15 @@ include 'carregamentoInicial.php';
 			function cadastra()
 			{
 				if ( $('#usuario').val() == '' ) {
-					alert('O nome do usuário deve ser informado !');
+					alert('O nome do usuï¿½rio deve ser informado !');
 					return false;
 				}
 				if ( $('#senha').val() == '' ) {
-					alert('A senha do usuário deve ser informado !');
+					alert('A senha do usuï¿½rio deve ser informado !');
 					return false;
 				} 
 				if ( $('#grupousuario').val() == '' ) {
-					alert('O grupo de acesso do usuário deve ser informado !');
+					alert('O grupo de acesso do usuï¿½rio deve ser informado !');
 					return false;
 				}
 				if ( $('#nomepessoa').val() == '' ) {
@@ -68,7 +68,7 @@ include 'carregamentoInicial.php';
 			</script>	
 	</head>
 	<body>
-		<legend class="subtitulo">Cadastro de Usuários:</legend>
+		<legend class="subtitulo">Cadastro de UsuÃ¡rios:</legend>
 		<br/>
 		<form name="usuarios" id="usuarios" method="post" action="../application/recebePostGet.php">
 			<?php
@@ -91,7 +91,7 @@ include 'carregamentoInicial.php';
 			<input type="hidden" id="idusuario" name="idusuario" value="<?=$usuarios->getIdusuario()?>"/>
 			<table>
 				<tr>
-					<td>Usuário:</td>
+					<td>UsuÃ¡rio:</td>
 					<td colspan="2"><input type="text" name="usuario" id="usuario" value="<?=$usuarios->getUsuario()?>"/></td>
 				</tr>
 				<tr>
@@ -99,7 +99,7 @@ include 'carregamentoInicial.php';
 					<td colspan="2"><input type="password" name="senha" id="senha" value=""/></td>
 				</tr>
 				<tr>
-					<td>Grupo do Usuário:</td>
+					<td>Grupo do UsuÃ¡rio:</td>
 					<td colspan="2">
 						<select id="grupousuario" name="grupousuario">
 							<option value="">Selecione</option>
@@ -163,7 +163,7 @@ include 'carregamentoInicial.php';
 					<td colspan="2" align="left"><input type="text" name="datanascimentopessoa" id="datanascimentopessoa" value="<?=$pessoaAtual->getDataNascimentoFormatado()?>" /> (ex. 11/11/2010)</td>		
 				</tr>
 		        <tr>
-					<td colspan="3" class="subTitulo">ENDEREÇO</td>
+					<td colspan="3" class="subTitulo">ENDEREÃ‡O</td>
 				</tr>
 				<tr>
 					<td align="left">Logradouro:</td>
@@ -178,7 +178,7 @@ include 'carregamentoInicial.php';
 					<td colspan="2" align="left"><input name="bairroendereco" type="text" id="bairroendereco" value="<?=$enderecoAtual->getBairroendereco()?>" size="30" /></td>		
 				</tr>
 				<tr>
-					<td align="left">Número:</td>
+					<td align="left">NÃºmero:</td>
 					<td colspan="2" align="left"><input type="text" name="numeroendereco" id="numeroendereco" value="<?=$enderecoAtual->getNumeroendereco()?>" /></td>		
 				</tr>
 				<tr>
@@ -228,7 +228,7 @@ include 'carregamentoInicial.php';
 					<td colspan="2" align="left"><input type="text" name="telefoneendereco" id="telefoneendereco" value="<?=$enderecoAtual->getTelefoneendereco()?>" /></td>		
 				</tr>
 				<tr>
-					<td align="left">Referência:</td>
+					<td align="left">ReferÃªncia:</td>
 					<td align="left"><input type="text" name="referenciaendereco" id="referenciaendereco" value="<?=$enderecoAtual->getReferenciaendereco()?>" /></td>
 					<td width="49"><input type="button" name="submit" id="submit" onClick="cadastra();" value="<?=(isset($_GET['idusuario']))?"Alterar":"Cadastrar"?>"/></td>		
 				</tr>
@@ -261,7 +261,7 @@ include 'carregamentoInicial.php';
 			<tr>
 				<td width="100"><strong>ID</strong></td>
 				<td width="204"><strong>Nome</strong></td>
-				<td width="203"><strong>Usuário</strong></td>
+				<td width="203"><strong>UsuÃ¡rio</strong></td>
 				<td colspan="3"><strong>Grupo</strong></td>
 			</tr>
 		  <?php 
@@ -289,7 +289,7 @@ include 'carregamentoInicial.php';
 		else
 		{
 		?>
-		Não existem usuários cadastrados.
+		NÃ£o existem usuÃ¡rios cadastrados.
 		<?php 
 		}
 		?>

@@ -1,7 +1,7 @@
 <?php 
 include 'carregamentoInicial.php';
 ?>
-<legend class="subtitulo">Cadastro de Tipo de Ação:</legend>
+<legend class="subtitulo">Cadastro de Tipo de AÃ§Ã£o:</legend>
 <br/>
 <script type="text/javascript">
 
@@ -21,7 +21,7 @@ function deletar(idTipoAcao)
 function cadastra()
 {
 	if ( $('#nome').val() == '' ) {
-		alert('O tipo da ação deve ser informado !');
+		alert('O tipo da aï¿½ï¿½o deve ser informado !');
 		return false;
 	} else {
 		var formulario = $('#tipoacao').serialize(true);
@@ -45,7 +45,7 @@ function cadastra()
 	<input type="hidden" id="idTipoAcao" name="idTipoAcao" value="<?=$tipoacao->getIdtipoacao()?>"/>
 	<table>
 		<tr>
-			<td width="120">Tipo da Ação:</td>
+			<td width="120">Tipo da AÃ§Ã£o:</td>
 			<td width="144"><input type="text" name="nome" value="<?=$tipoacao->getTipoacao()?>" id="nome"/></td>
 			<td width="49"><input type="button" onclick="cadastra();" name="submit" id="submit" value="<?=(isset($_GET['idTipoAcao']))?"Alterar":"Cadastrar"?>"/></td>
 		</tr>
@@ -70,7 +70,7 @@ if($tipoacao->find()>0)
 		<td colspan="4">&nbsp;</td>
 	</tr>
 	<tr>
-		<td colspan="4"><strong>Tipo de Ação Cadastradas</strong></td>
+		<td colspan="4"><strong>Tipo de AÃ§Ã£o Cadastradas</strong></td>
 	</tr>
 	<tr>
 		<td width="126">&nbsp;</td>
@@ -78,7 +78,7 @@ if($tipoacao->find()>0)
 	</tr>
 	<tr>
 		<td><strong>ID</strong></td>
-		<td colspan="3"><strong>Tipo da Ação</strong></td>
+		<td colspan="3"><strong>Tipo da AÃ§Ã£o</strong></td>
 	</tr>
   <?php 
 	while($tipoacao->fetch())
@@ -100,7 +100,7 @@ if($tipoacao->find()>0)
 else
 {
 ?>
-Não existem tipo de ação cadastradas.
+NÃ£o existem tipo de aÃ§Ã£o cadastradas.
 <?php 
 }
 ?>

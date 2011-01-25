@@ -38,7 +38,7 @@ include 'carregamentoInicial.php';
 				<legend class="subtitulo">Pesquisar Ficha Atendimento/Entrevista Emitidas:</legend>
 				<table>
 					<tr>
-						<td colspan="3">A pesquisa pelo Nome/CPF ou Protocolo de atendimento é obrigatório.</td>
+						<td colspan="3">A pesquisa pelo Nome/CPF ou Protocolo de atendimento Ã© obrigatÃ³rio.</td>
 					</tr>
 					<tr>
 						<td>Protocolo de Atendimento:</td>
@@ -69,8 +69,8 @@ include 'carregamentoInicial.php';
 		      <tr>
 		        <td colspan="5">&nbsp;</td>
 	        </tr>
-		      <tr>
-		        <td colspan="5"><strong>Ficha Atendimentos/Entrevista Emitidos</strong></td>
+		      <tr align="center">
+		        <td colspan="5" ><strong>Ficha Atendimentos/Entrevista Emitidos</strong></td>
 	        </tr>
 		      <tr>
 		        <td colspan="5">&nbsp;</td>

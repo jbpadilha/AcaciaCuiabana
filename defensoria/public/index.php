@@ -1,18 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<link href="css/html.css" rel="stylesheet" type="text/css" media="screen, projection, tv" />
-<!--[if lte IE 7]>
-	<link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" />
-<![endif]-->
-<script type="text/javascript" src="js/jquery-1.3.1.min.js"></script>	
-<script type="text/javascript" language="javascript" src="js/jquery.dropdownPlain.js"></script>
-<title>DEFENSORIA PÚBLICA DO ESTADO DE MATO GROSSO</title>
-</head>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<link href="css/html.css" rel="stylesheet" type="text/css" media="screen, projection, tv" />
+		<!--[if lte IE 7]>
+			<link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" />
+		<![endif]-->
+		<script type="text/javascript" src="js/jquery-1.3.1.min.js"></script>	
+		<script type="text/javascript" language="javascript" src="js/jquery.dropdownPlain.js"></script>
+		<title>DEFENSORIA PÃšBLICA DO ESTADO DE MATO GROSSO</title>
+	</head>
 <body>
 <div id="content">
 	<div id="header">
-    <span class="titulo">DEFENSORIA PÚBLICA DO ESTADO DE MATO GROSSO - SISTEMA DE PROTOCOLO E ACOMPANHAMENTO DE PROCESSOS</span>
+    <span class="titulo">DEFENSORIA PÃšBLICA DO ESTADO DE MATO GROSSO - SISTEMA DE PROTOCOLO E ACOMPANHAMENTO DE PROCESSOS</span>
 	</div>
 	<div id="headerImg">	
 	  <div id="headerImg1"></div>
@@ -23,7 +24,9 @@
   	<div id="sucesso" class="sucesso"></div>
   	<br/><br/><br/>
     <div id="page">
-    	<?php 
+    	<div id="erros" class="erros"></div>
+  		<div id="sucesso" class="sucesso"></div>
+  		<?php 
 		include 'mensagensErroSucesso.php';
 		?>
     	<form name="form" action="../application/recebePostGet.php" method="post">
@@ -32,7 +35,7 @@
 				<legend class="subtitulo">Logar no Sistema Defensoria:</legend>
 				<table>
 					<tr>
-						<td>Usuário:</td>
+						<td>UsuÃ¡rio:</td>
 						<td colspan="2" align="left"><input type="text" name="usuario" id="usuario" style="text-transform: lowercase;" /></td>
 					</tr>
 					<tr>
