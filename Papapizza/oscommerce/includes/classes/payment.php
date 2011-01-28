@@ -207,8 +207,8 @@
 
       $js = '';
       if (is_array($this->_modules)) {
-        $js = '<script type="text/javascript"><!-- ' . "\n" .
-              'function check_form() {' . "\n" .
+        $js = '<script type="text/javascript"> ' . "\n" .
+        	  'function check_form() {' . "\n" .
               '  var error = 0;' . "\n" .
               '  var error_message = "' . $osC_Language->get('js_error') . '";' . "\n" .
               '  var payment_value = null;' . "\n" .
@@ -241,7 +241,7 @@
                '    return true;' . "\n" .
                '  }' . "\n" .
                '}' . "\n" .
-               '//--></script>' . "\n";
+               '</script>' . "\n";
       }
 
       return $js;

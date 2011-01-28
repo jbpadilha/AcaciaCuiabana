@@ -68,7 +68,9 @@
         $this->addJavascriptFilename('templates/' . $this->getCode() . '/javascript/checkout_payment_address.js');
         $this->addJavascriptPhpFilename('includes/form_check.js.php');
       } else {
-        $this->addJavascriptFilename('templates/' . $this->getCode() . '/javascript/checkout_payment.js');
+      	$this->addJavascriptFilename('templates/' . $this->getCode() . '/javascript/checkout_payment.js');      	
+        
+        
 
 // if no billing destination address was selected, use the customers own address as default
         if ($osC_ShoppingCart->hasBillingAddress() == false) {

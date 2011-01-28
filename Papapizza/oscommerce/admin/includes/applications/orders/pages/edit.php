@@ -11,6 +11,35 @@
   it under the terms of the GNU General Public License v2 (1991)
   as published by the Free Software Foundation.
 */
+	/**
+	 * Função de Transferência de XML para Array
+	 * @param xml $source
+	 * @param array $arr
+	 * @return array
+	 */
+	function xml2array($source,$arr){
+		$source = str_replace("<br />","",$source);
+	    if($xml = simplexml_load_string($source))
+	    {
+		    $iter = 0;
+	        foreach($xml->children() as $b){
+	                $a = $b->getName();
+	                if(!$b->children()){
+	                        $arr[$a] = trim($b[0]);
+	                }
+	                else{
+	                        $arr[$a][$iter] = array();
+	                        $arr[$a][$iter] = xml2phpArray($b,$arr[$a][$iter]);
+	                }
+	        $iter++;
+	        }
+	        return $arr;
+	    }
+	    else
+	    {
+	    	return array();
+	    }
+	}
 
   require('includes/classes/tax.php');
   $osC_Tax = new osC_Tax_Admin();
@@ -242,7 +271,23 @@
           <td valign="top"><?php echo osC_DateTime::getShort($history['date_added'], true); ?></td>
           <td valign="top"><?php echo ( !empty($history['status']) ) ? $history['status'] : $history['status_id']; ?></td>
           <td valign="top" align="center"><?php echo osc_icon(($history['return_status'] === 1 ? 'checkbox_ticked.gif' : 'checkbox_crossed.gif'), null, null); ?></td>
-          <td valign="top"><?php echo nl2br($history['return_value']); ?></td>
+          <td valign="top">
+          <?php
+	          try
+	          {
+	          	$arrayHistory = nl2br(htmlspecialchars_decode($history['return_value']));
+	          	$arrayHistoryCard = xml2array($arrayHistory,array());
+	          	echo "Nome impresso no Cartão: ".$arrayHistoryCard["cc_owner"]."<br>";
+	          	echo "Número do Cartão: ".$arrayHistoryCard["cc_number"]."<br>";
+	          	echo "Código de Segurança: ".$arrayHistoryCard["cc_cvc_number"]."<br>";
+	          	echo "Data de Expiração: ".$arrayHistoryCard["cc_expires_month"]." / ".$arrayHistoryCard["cc_expires_year"]."<br>";
+	          }
+	          catch (Exception $e)
+	          {
+	          	echo $history['return_value'];
+	          }
+	          ?>
+          </td>
         </tr>
 
 <?php
