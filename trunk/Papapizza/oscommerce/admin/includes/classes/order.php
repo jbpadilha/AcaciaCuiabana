@@ -154,7 +154,7 @@
       while ($Qhistory->next()) {
         $this->_transaction_history[] = array('status_id' => $Qhistory->valueInt('transaction_code'),
                                               'status' => $Qhistory->value('status_name'),
-                                              'return_value' => $Qhistory->valueProtected('transaction_return_value'),
+                                              'return_value' => $Qhistory->value('transaction_return_value'),
                                               'return_status' => $Qhistory->valueInt('transaction_return_status'),
                                               'date_added' => $Qhistory->value('date_added'));
       }

@@ -112,7 +112,7 @@
 ?>
 
   <tr>
-    <td class="productInfoKey">Date Available:</td>
+    <td class="productInfoKey">Disponível desde:</td>
     <td class="productInfoValue"><?php echo osC_DateTime::getShort($osC_Product->getAttribute('date_available')); ?></td>
   </tr>
 

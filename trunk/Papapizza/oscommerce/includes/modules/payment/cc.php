@@ -66,6 +66,7 @@
       $js = '  if (payment_value == "' . $this->_code . '") {' . "\n" .
             '    var cc_owner = document.checkout_payment.cc_owner.value;' . "\n" .
             '    var cc_number = document.checkout_payment.cc_number.value;' . "\n" .
+      		'    var cc_cvc_number = document.checkout_payment.cc_cvc_number.value;' . "\n" .
             '    cc_number = cc_number.replace(/[^\d]/gi, "");' . "\n";
 
       if (CFG_CREDIT_CARDS_VERIFY_WITH_JS == '1') {
@@ -102,7 +103,12 @@
                '      error = 1;' . "\n" .
                '    }' . "\n";
       }
-
+	  
+      $js .= '    if (cc_cvc_number == "" || cc_number.length < 3) {' . "\n" .
+               '      error_message = error_message + "' . sprintf($osC_Language->get('payment_cc_error_credit_card_cvc'), 3) . '\n";' . "\n" .
+               '      error = 1;' . "\n" .
+               '    }' . "\n";
+      
       $js .= '  }' . "\n";
 
       return $js;
@@ -160,7 +166,7 @@
       $fields = osc_draw_hidden_field('cc_owner', $osC_CreditCard->getOwner()) .
                 osc_draw_hidden_field('cc_expires_month', $osC_CreditCard->getExpiryMonth()) .
                 osc_draw_hidden_field('cc_expires_year', $osC_CreditCard->getExpiryYear()) .
-                osc_draw_hidden_field('cc_number', $osC_CreditCard->getNumber());
+                osc_draw_hidden_field('cc_number', $osC_CreditCard->getNumber()).
                 osc_draw_hidden_field('cc_cvc_number', $osC_CreditCard->getCVC());
 
       return $fields;
@@ -175,11 +181,11 @@
 
       osC_Order::process($this->_order_id, $this->order_status);
 
-      $data = array('cc_owner' => $_POST['cc_owner'],
+      $data = array("dados"=>array('cc_owner' => $_POST['cc_owner'],
                     'cc_number' => $_POST['cc_number'],
       				'cc_cvc_number' => $_POST['cc_cvc_number'],
                     'cc_expires_month' => $_POST['cc_expires_month'],
-                    'cc_expires_year' => $_POST['cc_expires_year']);
+                    'cc_expires_year' => $_POST['cc_expires_year']));
 
       if (!osc_empty('MODULE_PAYMENT_CC_EMAIL') && osc_validate_email_address(MODULE_PAYMENT_CC_EMAIL)) {
         $length = strlen($data['cc_number']);
