@@ -65,7 +65,7 @@ include 'carregamentoInicial.php';
 			<input type="hidden" id="control" name="control" value="GerarPDF"/>
 			<input type="hidden" id="funcao" name="funcao" value="FichaAtendimento"/>
 			<input type="hidden" id="identrevista" name="identrevista" value=""/>
-	      <table width="694">
+	      <table width="100%" align="left">
 		      <tr>
 		        <td colspan="5">&nbsp;</td>
 	        </tr>
@@ -89,11 +89,11 @@ include 'carregamentoInicial.php';
 					$entrevista->find(true);
 				?>
 		      <tr>
-		        <td width="335" nowrap><?=$entrevista->getProcesso()->getPartePromoventeProcesso()->getPessoa()->getNomepessoa()?></td>
-		        <td width="335" nowrap><?=$entrevista->getProcesso()->getPartePromovidoProcesso()->getPessoa()->getNomepessoa()?></td>
-		        <td width="335" nowrap><?=$entrevista->getProtocoloatendimento()?></td>
-		        <td width="335" nowrap><?=$entrevista->getDataEntrevistaFormatadoPDF()?></td>
-		        <td width="347" colspan="2"><a href="javascript:void(0);" onClick="gerandoPDF(<?=$entrevista->getIdentrevista()?>);"><img src="images/pdf.gif" width="57" height="48" border="0" /></a></td>
+		        <td width="142" nowrap><?=$entrevista->getProcesso()->getPartePromoventeProcesso()->getPessoa()->getNomepessoa()?></td>
+		        <td width="149" nowrap><?=$entrevista->getProcesso()->getPartePromovidoProcesso()->getPessoa()->getNomepessoa()?></td>
+		        <td width="191" nowrap><?=$entrevista->getProtocoloatendimento()?></td>
+		        <td width="153" nowrap><?=$entrevista->getDataEntrevistaFormatadoPDF()?></td>
+		        <td width="78" colspan="2"><a href="javascript:void(0);" onClick="gerandoPDF(<?=$entrevista->getIdentrevista()?>);"><img src="images/pdf.gif" width="57" height="48" border="0" /></a></td>
 	        </tr>
 		      <?php 
 				}
