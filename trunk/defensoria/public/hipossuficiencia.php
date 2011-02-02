@@ -2,25 +2,25 @@
 include 'carregamentoInicial.php';
 ?>
 <script type="text/javascript">
-$(document).ready(function(){
-	$("#salarioHipo").maskMoney({symbol:"R$",decimal:",",thousands:"."})
-	$("#rendaHipo").maskMoney({symbol:"R$",decimal:",",thousands:"."})
-});
-function pesquisaPessoa()
-{
-	var formulario = $('#hipossuficiencia').serialize(true);
-	carregaPagina('pessoa.php?paramentrosPessoaHipo=1&'+formulario,'page');
-}
-function cadastra()
-{
-	if ( $('#idPessoa').val() == '' ) {
-		alert('A pessoa deve ser informado.');
-		return false;
-	} else {
+	$(document).ready(function(){
+		$("#salarioHipo").maskMoney({symbol:"R$",decimal:",",thousands:"."})
+		$("#rendaHipo").maskMoney({symbol:"R$",decimal:",",thousands:"."})
+	});
+	function pesquisaPessoa()
+	{
 		var formulario = $('#hipossuficiencia').serialize(true);
-		enviaFormulario($('#hipossuficiencia').attr("action"),'page',formulario);
+		carregaPagina('pessoa.php?paramentrosPessoaHipo=1&'+formulario,'page');
 	}
-}
+	function cadastra()
+	{
+		if ( $('#idPessoa').val() == '' ) {
+			alert('A pessoa deve ser informado.');
+			return false;
+		} else {
+			var formulario = $('#hipossuficiencia').serialize(true);
+			enviaFormulario($('#hipossuficiencia').attr("action"),'page',formulario);
+		}
+	}
 </script>
 <?php
 if(isset($_GET['gerarFicha']))
@@ -52,7 +52,7 @@ if(isset($_GET['gerarFicha']))
 				<input type="hidden" id="nomeHipo" name="nomeHipo" value="<?=(isset($_GET['nomeHipo']))?$_GET['nomeHipo']:""?>"/>
 				<?=(isset($_GET['nomeHipo']))?$_GET['nomeHipo']:""?>
 				</td>
-			<td width="385" align="left"><input type="button" name="selecione" id="selecione" value="Selecione" onclick="pesquisaPessoa();"/></td>
+			<td width="385" align="left"><input type="button" name="selecione" id="selecione" value="Selecione" onclick="pesquisaPessoa()"/></td>
 			<td align="left">&nbsp;</td>
 		</tr>
 		<tr>
@@ -84,7 +84,7 @@ if(isset($_GET['gerarFicha']))
 			<td colspan="2">
 				<textarea rows="8" cols="100" id="observacoesHipo" name="observacoesHipo"><?=(isset($_GET['observacoesHipo']))?$_GET['observacoesHipo']:""?></textarea>
 			</td>
-			<td width="213"><input type="button" name="submit" id="submit" value="Cadastrar" onclick="cadastra();"/></td>
+			<td width="213"><input type="button" name="submit" id="submit" value="Cadastrar" onclick="cadastra()"/></td>
 		</tr>
 	</table>
 </form>
