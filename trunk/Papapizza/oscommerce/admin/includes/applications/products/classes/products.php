@@ -32,6 +32,7 @@
         $Qsubproducts->bindTable(':table_products', TABLE_PRODUCTS);
         $Qsubproducts->bindInt(':parent_id', $data['products_id']);
         $Qsubproducts->bindInt(':products_status', 1);
+        $Qsubproducts->bindInt(':administrator_id', $data['administrator_id']); 
         $Qsubproducts->execute();
 
         while ( $Qsubproducts->next() ) {
@@ -105,17 +106,28 @@
           $in_categories[] = $category['id'];
         }
 
-        $Qproducts = $osC_Database->query('select SQL_CALC_FOUND_ROWS distinct p.*, pd.products_name from :table_products p, :table_products_description pd, :table_products_to_categories p2c where p.parent_id = 0 and p.products_id = pd.products_id and pd.language_id = :language_id and p.products_id = p2c.products_id and p2c.categories_id in (:categories_id)');
+        //$Qproducts = $osC_Database->query('select SQL_CALC_FOUND_ROWS distinct p.*, pd.products_name from :table_products p, :table_products_description pd, :table_products_to_categories p2c where p.parent_id = 0 and p.products_id = pd.products_id and pd.language_id = :language_id and p.products_id = p2c.products_id and p2c.categories_id in (:categories_id)');
+      	if ( $administrator_id >1 ) {
+	        $Qproducts = $osC_Database->query('select SQL_CALC_FOUND_ROWS distinct p.*, pd.products_name from :table_products p, :table_products_description pd, :table_products_to_categories p2c where p.parent_id = 0 and p.products_id = pd.products_id and pd.language_id = :language_id and p.products_id = p2c.products_id and p2c.categories_id in (:categories_id) and p.administrator_id = :administrator_id');
+        } else {
+	        $Qproducts = $osC_Database->query('select SQL_CALC_FOUND_ROWS distinct p.*, pd.products_name from :table_products p, :table_products_description pd, :table_products_to_categories p2c where p.parent_id = 0 and p.products_id = pd.products_id and pd.language_id = :language_id and p.products_id = p2c.products_id and p2c.categories_id in (:categories_id)');
+	    }
         $Qproducts->bindTable(':table_products_to_categories', TABLE_PRODUCTS_TO_CATEGORIES);
         $Qproducts->bindRaw(':categories_id', implode(',', $in_categories));
       } else {
-        $Qproducts = $osC_Database->query('select SQL_CALC_FOUND_ROWS p.*, pd.products_name from :table_products p, :table_products_description pd where p.parent_id = 0 and p.products_id = pd.products_id and pd.language_id = :language_id');
+        //$Qproducts = $osC_Database->query('select SQL_CALC_FOUND_ROWS p.*, pd.products_name from :table_products p, :table_products_description pd where p.parent_id = 0 and p.products_id = pd.products_id and pd.language_id = :language_id');
+      	if ( $administrator_id >1 ) {
+            $Qproducts = $osC_Database->query('select SQL_CALC_FOUND_ROWS p.*, pd.products_name from :table_products p, :table_products_description pd where p.parent_id = 0 and p.products_id = pd.products_id and pd.language_id = :language_id and p.administrator_id = :administrator_id');
+        } else {
+            $Qproducts = $osC_Database->query('select SQL_CALC_FOUND_ROWS p.*, pd.products_name from :table_products p, :table_products_description pd where p.parent_id = 0 and p.products_id = pd.products_id and pd.language_id = :language_id');
+	    }
       }
 
       $Qproducts->appendQuery('order by pd.products_name');
       $Qproducts->bindTable(':table_products', TABLE_PRODUCTS);
       $Qproducts->bindTable(':table_products_description', TABLE_PRODUCTS_DESCRIPTION);
       $Qproducts->bindInt(':language_id', $osC_Language->getID());
+      $Qproducts->bindInt(':administrator_id', $administrator_id);
 
       if ( $pageset !== -1 ) {
         $Qproducts->setBatchLimit($pageset, MAX_DISPLAY_SEARCH_RESULTS);
@@ -188,12 +200,18 @@
         $Qproducts = $osC_Database->query('select SQL_CALC_FOUND_ROWS p.*, pd.products_name from :table_products p, :table_products_description pd where p.parent_id = 0 and p.products_id = pd.products_id and pd.language_id = :language_id');
       }
 
-      $Qproducts->appendQuery('and (pd.products_name like :products_name or pd.products_keyword like :products_keyword) order by pd.products_name');
+      //$Qproducts->appendQuery('and (pd.products_name like :products_name or pd.products_keyword like :products_keyword) order by pd.products_name');
+      if ( $administrator_id >1 ) {
+          $Qproducts->appendQuery('and (pd.products_name like :products_name or pd.products_keyword like :products_keyword)  and ( p.administrator_id = :administrator_id ) order by pd.products_name');	      
+      } else {
+          $Qproducts->appendQuery('and (pd.products_name like :products_name or pd.products_keyword like :products_keyword) order by pd.products_name');         
+      }
       $Qproducts->bindTable(':table_products', TABLE_PRODUCTS);
       $Qproducts->bindTable(':table_products_description', TABLE_PRODUCTS_DESCRIPTION);
       $Qproducts->bindInt(':language_id', $osC_Language->getID());
       $Qproducts->bindValue(':products_name', '%' . $search . '%');
       $Qproducts->bindValue(':products_keyword', '%' . $search . '%');
+      $Qproducts->bindValue(':administrator_id', $administrator_id);
 
       if ( $pageset !== -1 ) {
         $Qproducts->setBatchLimit($pageset, MAX_DISPLAY_SEARCH_RESULTS);
@@ -244,10 +262,12 @@
       $osC_Database->startTransaction();
 
       if ( is_numeric($id) ) {
-        $Qproduct = $osC_Database->query('update :table_products set products_quantity = :products_quantity, products_price = :products_price, products_model = :products_model, products_weight = :products_weight, products_weight_class = :products_weight_class, products_status = :products_status, products_tax_class_id = :products_tax_class_id, products_last_modified = now() where products_id = :products_id');
+        //$Qproduct = $osC_Database->query('update :table_products set products_quantity = :products_quantity, products_price = :products_price, products_model = :products_model, products_weight = :products_weight, products_weight_class = :products_weight_class, products_status = :products_status, products_tax_class_id = :products_tax_class_id, products_last_modified = now() where products_id = :products_id');
+        $Qproduct = $osC_Database->query('update :table_products set products_quantity = :products_quantity, products_price = :products_price, products_model = :products_model, products_weight = :products_weight, products_weight_class = :products_weight_class, products_status = :products_status, products_tax_class_id = :products_tax_class_id, products_last_modified = now(), administrator_id = :administrator_id where products_id = :products_id');
         $Qproduct->bindInt(':products_id', $id);
       } else {
-        $Qproduct = $osC_Database->query('insert into :table_products (products_quantity, products_price, products_model, products_weight, products_weight_class, products_status, products_tax_class_id, products_date_added) values (:products_quantity, :products_price, :products_model, :products_weight, :products_weight_class, :products_status, :products_tax_class_id, :products_date_added)');
+        //$Qproduct = $osC_Database->query('insert into :table_products (products_quantity, products_price, products_model, products_weight, products_weight_class, products_status, products_tax_class_id, products_date_added) values (:products_quantity, :products_price, :products_model, :products_weight, :products_weight_class, :products_status, :products_tax_class_id, :products_date_added)');
+        $Qproduct = $osC_Database->query('insert into :table_products (products_quantity, products_price, products_model, products_weight, products_weight_class, products_status, products_tax_class_id, products_date_added,administrator_id) values (:products_quantity, :products_price, :products_model, :products_weight, :products_weight_class, :products_status, :products_tax_class_id, :products_date_added, :administrator_id)');
         $Qproduct->bindRaw(':products_date_added', 'now()');
       }
 
@@ -259,6 +279,7 @@
       $Qproduct->bindInt(':products_weight_class', $data['weight_class']);
       $Qproduct->bindInt(':products_status', $data['status']);
       $Qproduct->bindInt(':products_tax_class_id', $data['tax_class_id']);
+      $Qproduct->bindInt(':administrator_id', $data['administrator_id']);
 //      $Qproduct->setLogging($_SESSION['module'], $id);
       $Qproduct->execute();
 
@@ -609,7 +630,8 @@
 
           $osC_Database->startTransaction();
 
-          $Qnew = $osC_Database->query('insert into :table_products (products_quantity, products_price, products_model, products_date_added, products_weight, products_weight_class, products_status, products_tax_class_id, manufacturers_id) values (:products_quantity, :products_price, :products_model, now(), :products_weight, :products_weight_class, 0, :products_tax_class_id, :manufacturers_id)');
+          //$Qnew = $osC_Database->query('insert into :table_products (products_quantity, products_price, products_model, products_date_added, products_weight, products_weight_class, products_status, products_tax_class_id, manufacturers_id) values (:products_quantity, :products_price, :products_model, now(), :products_weight, :products_weight_class, 0, :products_tax_class_id, :manufacturers_id)');
+          $Qnew = $osC_Database->query('insert into :table_products (products_quantity, products_price, products_model, products_date_added, products_weight, products_weight_class, products_status, products_tax_class_id, manufacturers_id,administrator_id) values (:products_quantity, :products_price, :products_model, now(), :products_weight, :products_weight_class, 0, :products_tax_class_id, :manufacturers_id, :administrator_id)');
           $Qnew->bindTable(':table_products', TABLE_PRODUCTS);
           $Qnew->bindInt(':products_quantity', $Qproduct->valueInt('products_quantity'));
           $Qnew->bindValue(':products_price', $Qproduct->value('products_price'));
@@ -618,6 +640,7 @@
           $Qnew->bindInt(':products_weight_class', $Qproduct->valueInt('products_weight_class'));
           $Qnew->bindInt(':products_tax_class_id', $Qproduct->valueInt('products_tax_class_id'));
           $Qnew->bindInt(':manufacturers_id', $Qproduct->valueInt('manufacturers_id'));
+          $Qnew->bindInt(':administrator_id', $Qproduct->valueInt('administrator_id'));
           $Qnew->setLogging($_SESSION['module']);
           $Qnew->execute();
 

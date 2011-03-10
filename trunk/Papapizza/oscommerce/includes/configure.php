@@ -19,7 +19,7 @@
 
   define('DB_SERVER', 'localhost');
   define('DB_SERVER_USERNAME', 'root');
-  define('DB_SERVER_PASSWORD', '');
+  define('DB_SERVER_PASSWORD', '123');
   define('DB_DATABASE', 'papapizzacomerce');
   define('DB_DATABASE_CLASS', 'mysqli');
   define('DB_TABLE_PREFIX', 'osc_');

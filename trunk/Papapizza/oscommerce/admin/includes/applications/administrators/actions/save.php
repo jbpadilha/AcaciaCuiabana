@@ -25,9 +25,14 @@
       }
 
       if ( isset($_POST['subaction']) && ($_POST['subaction'] == 'confirm') ) {
-        $data = array('username' => $_POST['user_name'],
-                      'password' => $_POST['user_password']);
-
+        /*$data = array('username' => $_POST['user_name'],
+                      'password' => $_POST['user_password']);*/
+		$data = array('username' => $_POST['user_name'],
+                      'password' => $_POST['user_password'],
+                      'userfullname' => $_POST['user_fullname'],
+                      'useremail' => $_POST['user_email'],
+                      'usercell' => $_POST['user_cell']);
+		
         switch ( osC_Administrators_Admin::save((isset($_GET['aID']) && is_numeric($_GET['aID']) ? $_GET['aID'] : null), $data, (isset($_POST['modules']) ? $_POST['modules'] : null)) ) {
           case 1:
             if ( isset($_GET['aID']) && is_numeric($_GET['aID']) && ($_GET['aID'] == $_SESSION['admin']['id']) ) {
