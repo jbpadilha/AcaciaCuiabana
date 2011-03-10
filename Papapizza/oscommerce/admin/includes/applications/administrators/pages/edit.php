@@ -32,7 +32,9 @@
   <fieldset>
     <div><label for="user_name"><?php echo $osC_Language->get('field_username'); ?></label><?php echo osc_draw_input_field('user_name', $osC_ObjectInfo->get('user_name')); ?></div>
     <div><label for="user_password"><?php echo $osC_Language->get('field_password'); ?></label><?php echo osc_draw_password_field('user_password'); ?></div>
-
+	<div><label for="user_fullname"><?php echo $osC_Language->get('field_fullusername'); ?></label><?php echo osc_draw_input_field('user_fullname', $osC_ObjectInfo->get('user_fullname')); ?></div>
+    <div><label for="user_email"><?php echo $osC_Language->get('field_email'); ?></label><?php echo osc_draw_input_field('user_email', $osC_ObjectInfo->get('user_email')); ?></div>
+    <div><label for="user_cell"><?php echo $osC_Language->get('field_cell'); ?></label><?php echo osc_draw_input_field('user_cell', $osC_ObjectInfo->get('user_cell')); ?></div>
     <div><select name="accessModules" id="modulesList"><option value="-1" disabled="disabled">-- Access Modules --</option><option value="0"><?php echo $osC_Language->get('global_access'); ?></option></select></div>
 
     <ul id="accessToModules" class="modulesListing"></ul>

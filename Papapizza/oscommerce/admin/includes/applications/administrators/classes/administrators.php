@@ -131,12 +131,28 @@
             $Qadmin->appendQuery(', user_password = :user_password');
             $Qadmin->bindValue(':user_password', osc_encrypt_string(trim($data['password'])));
           }
-
+        	if ( isset($data['userfullname']) && !empty($data['userfullname']) ) {                                                                  
+            $Qadmin->appendQuery(', user_fullname = :user_fullname');     
+            $Qadmin->bindValue(':user_fullname', $data['userfullname']);  
+          }                                                               
+          if ( isset($data['useremail']) && !empty($data['useremail']) ) {
+            $Qadmin->appendQuery(', user_email = :user_email');           
+            $Qadmin->bindValue(':user_email', $data['useremail']);        
+          }                                                               
+          if ( isset($data['usercell']) && !empty($data['usercell']) ) {  
+            $Qadmin->appendQuery(', user_cell = :user_cell');             
+            $Qadmin->bindValue(':user_cell', $data['usercell']);          
+          }
           $Qadmin->appendQuery('where id = :id');
           $Qadmin->bindInt(':id', $id);
         } else {
-          $Qadmin = $osC_Database->query('insert into :table_administrators (user_name, user_password) values (:user_name, :user_password)');
-          $Qadmin->bindValue(':user_password', osc_encrypt_string(trim($data['password'])));
+          /*$Qadmin = $osC_Database->query('insert into :table_administrators (user_name, user_password) values (:user_name, :user_password)');
+          $Qadmin->bindValue(':user_password', osc_encrypt_string(trim($data['password'])));*/
+          	$Qadmin = $osC_Database->query('insert into :table_administrators (user_name, user_password,user_fullname,user_email,user_cell) values (:user_name, :user_password,:user_fullname,:user_email,:user_cell)');
+		    $Qadmin->bindValue(':user_password', osc_encrypt_string(trim($data['password'])));                  
+		    $Qadmin->bindValue(':user_fullname', $data['user_fullname']);
+		    $Qadmin->bindValue(':user_email', $data['user_email']);
+		    $Qadmin->bindValue(':user_cell', $data['user_cell']);
         }
 
         $Qadmin->bindTable(':table_administrators', TABLE_ADMINISTRATORS);

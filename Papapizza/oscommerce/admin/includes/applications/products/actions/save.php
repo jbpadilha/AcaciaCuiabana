@@ -27,7 +27,7 @@
       if ( isset($_POST['subaction']) && ($_POST['subaction'] == 'confirm') ) {
         $error = false;
 
-        $data = array('quantity' => (isset($_POST['products_quantity']) ? $_POST['products_quantity'] : 0),
+        /*$data = array('quantity' => (isset($_POST['products_quantity']) ? $_POST['products_quantity'] : 0),
                       'price' => (is_numeric($_POST['products_price']) ? $_POST['products_price'] : 0),
                       'weight' => (isset($_POST['products_weight']) ? $_POST['products_weight'] : 0),
                       'weight_class' => (isset($_POST['products_weight_class']) ? $_POST['products_weight_class'] : ''),
@@ -38,7 +38,20 @@
                       'products_description' => $_POST['products_description'],
                       'products_keyword' => $_POST['products_keyword'],
                       'products_tags' => $_POST['products_tags'],
-                      'products_url' => $_POST['products_url']);
+                      'products_url' => $_POST['products_url']);*/
+       $data = array('quantity' => (isset($_POST['products_quantity']) ? $_POST['products_quantity'] : 0),
+                      'price' => (is_numeric($_POST['products_price']) ? $_POST['products_price'] : 0),
+                      'weight' => (isset($_POST['products_weight']) ? $_POST['products_weight'] : 0),
+                      'weight_class' => (isset($_POST['products_weight_class']) ? $_POST['products_weight_class'] : ''),
+                      'status' => $_POST['products_status'],
+                      'model' => (isset($_POST['products_model']) ? $_POST['products_model'] : ''),
+                      'tax_class_id' => $_POST['products_tax_class_id'],
+                      'products_name' => $_POST['products_name'],
+                      'products_description' => $_POST['products_description'],
+                      'products_keyword' => $_POST['products_keyword'],
+                      'products_tags' => $_POST['products_tags'],
+                      'products_url' => $_POST['products_url'],
+                      'administrator_id' => $_SESSION['admin']['id']);
 
         if ( isset($_POST['attributes']) ) {
           $data['attributes'] = $_POST['attributes'];
