@@ -38,8 +38,8 @@
 
     <table border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td class="productInfoKey">Price:</td>
-        <td class="productInfoValue"><span id="productInfoPrice"><?php echo $osC_Product->getPriceFormated(true); ?></span> (plus <?php echo osc_link_object(osc_href_link(FILENAME_INFO, 'shipping'), 'shipping'); ?>)</td>
+        <td class="productInfoKey">Preço:</td>
+        <td class="productInfoValue"><span id="productInfoPrice"><?php echo $osC_Product->getPriceFormated(true); ?></span> (mais <?php echo osc_link_object(osc_href_link(FILENAME_INFO, 'shipping'), 'taxa de entrega'); ?>)</td>
       </tr>
 
 <?php
@@ -47,7 +47,7 @@
 ?>
 
       <tr>
-        <td class="productInfoKey">Availability:</td>
+        <td class="productInfoKey">Disponibilidade:</td>
         <td class="productInfoValue" id="productInfoAvailability"><?php echo $osC_Product->getAttribute('shipping_availability'); ?></td>
       </tr>
 
@@ -94,7 +94,7 @@
 ?>
 
   <tr>
-    <td class="productInfoKey">Manufacturer:</td>
+    <td class="productInfoKey">Fabricante:</td>
     <td class="productInfoValue"><?php echo $osC_Product->getAttribute('manufacturers'); ?></td>
   </tr>
 
@@ -103,7 +103,7 @@
 ?>
 
   <tr>
-    <td class="productInfoKey">Model:</td>
+    <td class="productInfoKey">Modelo:</td>
     <td class="productInfoValue"><span id="productInfoModel"><?php echo $osC_Product->getModel(); ?></span></td>
   </tr>
 
