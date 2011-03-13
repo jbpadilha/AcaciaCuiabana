@@ -107,7 +107,7 @@
         }
 
         //$Qproducts = $osC_Database->query('select SQL_CALC_FOUND_ROWS distinct p.*, pd.products_name from :table_products p, :table_products_description pd, :table_products_to_categories p2c where p.parent_id = 0 and p.products_id = pd.products_id and pd.language_id = :language_id and p.products_id = p2c.products_id and p2c.categories_id in (:categories_id)');
-      	if ( $administrator_id >1 ) {
+      	if (isset($administrator_id) && $administrator_id >1 ) {
 	        $Qproducts = $osC_Database->query('select SQL_CALC_FOUND_ROWS distinct p.*, pd.products_name from :table_products p, :table_products_description pd, :table_products_to_categories p2c where p.parent_id = 0 and p.products_id = pd.products_id and pd.language_id = :language_id and p.products_id = p2c.products_id and p2c.categories_id in (:categories_id) and p.administrator_id = :administrator_id');
         } else {
 	        $Qproducts = $osC_Database->query('select SQL_CALC_FOUND_ROWS distinct p.*, pd.products_name from :table_products p, :table_products_description pd, :table_products_to_categories p2c where p.parent_id = 0 and p.products_id = pd.products_id and pd.language_id = :language_id and p.products_id = p2c.products_id and p2c.categories_id in (:categories_id)');
@@ -116,7 +116,7 @@
         $Qproducts->bindRaw(':categories_id', implode(',', $in_categories));
       } else {
         //$Qproducts = $osC_Database->query('select SQL_CALC_FOUND_ROWS p.*, pd.products_name from :table_products p, :table_products_description pd where p.parent_id = 0 and p.products_id = pd.products_id and pd.language_id = :language_id');
-      	if ( $administrator_id >1 ) {
+      	if (isset($administrator_id) && $administrator_id >1 ) {
             $Qproducts = $osC_Database->query('select SQL_CALC_FOUND_ROWS p.*, pd.products_name from :table_products p, :table_products_description pd where p.parent_id = 0 and p.products_id = pd.products_id and pd.language_id = :language_id and p.administrator_id = :administrator_id');
         } else {
             $Qproducts = $osC_Database->query('select SQL_CALC_FOUND_ROWS p.*, pd.products_name from :table_products p, :table_products_description pd where p.parent_id = 0 and p.products_id = pd.products_id and pd.language_id = :language_id');
@@ -127,7 +127,8 @@
       $Qproducts->bindTable(':table_products', TABLE_PRODUCTS);
       $Qproducts->bindTable(':table_products_description', TABLE_PRODUCTS_DESCRIPTION);
       $Qproducts->bindInt(':language_id', $osC_Language->getID());
-      $Qproducts->bindInt(':administrator_id', $administrator_id);
+      if (isset($administrator_id) && $administrator_id >1 )
+      	$Qproducts->bindInt(':administrator_id', $administrator_id);
 
       if ( $pageset !== -1 ) {
         $Qproducts->setBatchLimit($pageset, MAX_DISPLAY_SEARCH_RESULTS);
@@ -211,7 +212,8 @@
       $Qproducts->bindInt(':language_id', $osC_Language->getID());
       $Qproducts->bindValue(':products_name', '%' . $search . '%');
       $Qproducts->bindValue(':products_keyword', '%' . $search . '%');
-      $Qproducts->bindValue(':administrator_id', $administrator_id);
+      if ( $administrator_id >1 )
+      	$Qproducts->bindValue(':administrator_id', $administrator_id);
 
       if ( $pageset !== -1 ) {
         $Qproducts->setBatchLimit($pageset, MAX_DISPLAY_SEARCH_RESULTS);

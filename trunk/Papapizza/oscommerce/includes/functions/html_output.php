@@ -607,8 +607,9 @@
  */
 
   function osc_draw_date_pull_down_menu($name, $value = null, $default_today = true, $show_days = true, $use_month_names = true, $year_range_start = 0, $year_range_end = 1) {
-    $year = date('Y');
-
+    setlocale(LC_ALL, "pt_BR.utf-8", "ptb");
+  	$year = date('Y');
+	
     if (!is_bool($default_today)) {
       $default_today = true;
     }
@@ -678,7 +679,7 @@
     $months_array = array();
     for ($i=1; $i<=12; $i++) {
       $months_array[] = array('id' => $i,
-                              'text' => (($use_month_names === true) ? strftime('%B', mktime(0, 0, 0, $i, 1)) : $i));
+                              'text' => (($use_month_names === true) ?  iconv('ISO-8859-1', 'UTF-8', strftime('%B', mktime(0, 0, 0, $i, 1))): $i));
     }
 
     $months_select_string = osc_draw_pull_down_menu($name . '_months', $months_array, $value['month'], $params);

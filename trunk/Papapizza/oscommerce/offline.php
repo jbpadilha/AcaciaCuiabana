@@ -16,10 +16,9 @@
   and/or modify  it under the terms of the GNU General Public License v2 (1991)
   as published by the Free Software Foundation.
 */
-
   
   require('includes/application_top.php');
-
+header("Content-Type: text/html; charset=ISO-8859-1",true);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -57,9 +56,8 @@
   $image_path = osc_href_link(null, null, 'AUTO', false);
   	
   // display the store name and logo
-  echo '<p>' . osc_image($image_path .DIR_WS_IMAGES . 'logo_trimmed.gif', STORE_NAME) . '</p>';
-  echo '<p><br /><br />Desculpe ' . STORE_NAME . '. Nesse momento não é possível efetuar compras.';
-  echo '<br />Por favor, tente novamente mais tarde.<br /></p>'; 
+  echo '<p>' . osc_image($image_path .DIR_WS_IMAGES . 'store_logo.png', STORE_NAME) . '</p>';
+  echo '<p><br /><font size=18><b>' . STORE_NAME . '</b></font><br/><br/>Nesse momento não é possível efetuar compras. Confira nosso horário de atendimento, ou tente novamente mais tarde.';
 
 ?>
 </div>
