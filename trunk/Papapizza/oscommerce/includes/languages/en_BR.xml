@@ -1585,6 +1585,11 @@ Note: Se voce não pediu esta ação através de Nossa Página , por favor, noti
       <group>products</group>
     </definition>
     <definition>
+      <key>price_from</key>
+      <value><![CDATA[A partir de :]]></value>
+      <group>products</group>
+    </definition>
+    <definition>
       <key>average_rating</key>
       <value><![CDATA[Avaliação Média:]]></value>
       <group>products</group>
