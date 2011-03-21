@@ -122,10 +122,8 @@ function check_form(form_name) {
 
   check_input("street_address", <?php echo ACCOUNT_STREET_ADDRESS; ?>, "<?php echo sprintf($GLOBALS['osC_Language']->get('field_customer_street_address_error'), ACCOUNT_STREET_ADDRESS); ?>");
 
+  check_select("suburb", "", "<?php echo $GLOBALS['osC_Language']->get('field_customer_suburb_error'); ?>");
 <?php
-  if (ACCOUNT_SUBURB > 0) {
-    echo '  check_input("suburb", ' . ACCOUNT_SUBURB . ', "' . sprintf($GLOBALS['osC_Language']->get('field_customer_suburb_error'), ACCOUNT_SUBURB) . '");' . "\n";
-  }
 
   if (ACCOUNT_POST_CODE > 0) {
     echo '  check_input("postcode", ' . ACCOUNT_POST_CODE . ', "' . sprintf($GLOBALS['osC_Language']->get('field_customer_post_code_error'), ACCOUNT_POST_CODE) . '");' . "\n";

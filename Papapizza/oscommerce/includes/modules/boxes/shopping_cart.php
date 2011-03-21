@@ -41,7 +41,8 @@
         }
 
         $this->_content .= '</table>' .
-                           '<p style="text-align: right">' . $osC_Language->get('box_shopping_cart_subtotal') . ' ' . $osC_Currencies->format($osC_ShoppingCart->getSubTotal()) . '</p>';
+                           '<p style="text-align: right">' . $osC_Language->get('box_shopping_cart_subtotal') . ' ' . $osC_Currencies->format($osC_ShoppingCart->getSubTotal()) . '</p>'.
+        				   '<p style="text-align: right">(Mais Taxa de Entrega)</p>';
       } else {
         $this->_content = $osC_Language->get('box_shopping_cart_empty');
       }

@@ -25,6 +25,7 @@
       include('includes/classes/xml.php');
       include('includes/classes/mail.php');
       include('includes/classes/address.php');
+      include('includes/classes/suburbs.php');
 
       include('includes/classes/customer.php');
       $osC_Customer = new osC_Customer();

@@ -211,11 +211,12 @@
               }
 
               if ( ACCOUNT_SUBURB > 0 ) {
-                if ( strlen(trim($data['suburb'])) < ACCOUNT_SUBURB ) {
-                  $osC_MessageStack->add($this->_module, sprintf($osC_Language->get('ms_error_suburb'), ACCOUNT_SUBURB), 'error');
-                  $error = true;
-                }
+	              if ( !is_numeric($data['suburb']) || ($data['suburb_id'] < 1) ) {
+	                $osC_MessageStack->add($this->_module, $osC_Language->get('ms_error_suburb'), 'error');
+	                $error = true;
+	              }
               }
+              
 
               if ( ACCOUNT_POST_CODE > 0 ) {
                 if ( strlen(trim($data['postcode'])) < ACCOUNT_POST_CODE ) {
