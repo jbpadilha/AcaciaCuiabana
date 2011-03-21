@@ -29,8 +29,9 @@
     function _getSummary($order_id) {
       global $osC_Database;
 
-      $Qorder = $osC_Database->query('select * from :table_orders where orders_id = :orders_id');
+      $Qorder = $osC_Database->query('select * from :table_orders, :table_suburbs where orders_id = :orders_id and customers_suburb = suburbs_id');
       $Qorder->bindTable(':table_orders', TABLE_ORDERS);
+      $Qorder->bindTable(':table_suburbs', TABLE_SUBURBS);
       $Qorder->bindInt(':orders_id', $order_id);
       $Qorder->execute();
 
@@ -38,7 +39,7 @@
         $this->_valid_order = true;
 
         $this->_order_id = $Qorder->valueInt('orders_id');
-
+		
         $this->_customer = array('name' => $Qorder->valueProtected('customers_name'),
                                  'company' => $Qorder->valueProtected('customers_company'),
                                  'street_address' => $Qorder->valueProtected('customers_street_address'),
@@ -51,6 +52,7 @@
                                  'country_iso2' => $Qorder->value('customers_country_iso2'),
                                  'country_iso3' => $Qorder->value('customers_country_iso3'),
                                  'format' => $Qorder->value('customers_address_format'),
+        						 'suburbs_title' => $Qorder->valueProtected('suburbs_name'),
                                  'telephone' => $Qorder->valueProtected('customers_telephone'),
                                  'email_address' => $Qorder->valueProtected('customers_email_address'));
 
@@ -63,6 +65,7 @@
                                  'state' => $Qorder->valueProtected('delivery_state'),
                                  'zone_code' => $Qorder->value('delivery_state_code'),
                                  'country_title' => $Qorder->value('delivery_country'),
+        						 'suburbs_title' => $Qorder->valueProtected('suburbs_name'),
                                  'country_iso2' => $Qorder->value('delivery_country_iso2'),
                                  'country_iso3' => $Qorder->value('delivery_country_iso3'),
                                  'format' => $Qorder->value('delivery_address_format'));
@@ -76,6 +79,7 @@
                                 'state' => $Qorder->valueProtected('billing_state'),
                                 'zone_code' => $Qorder->value('billing_state_code'),
                                 'country_title' => $Qorder->value('billing_country'),
+        						'suburbs_title' => $Qorder->valueProtected('suburbs_name'),
                                 'country_iso2' => $Qorder->value('billing_country_iso2'),
                                 'country_iso3' => $Qorder->value('billing_country_iso3'),
                                 'format' => $Qorder->value('billing_address_format'));
