@@ -40,8 +40,9 @@ function check_form_optional(form_name) {
   var firstname = form.elements['firstname'].value;
   var lastname = form.elements['lastname'].value;
   var street_address = form.elements['street_address'].value;
+  var suburbs_address = form.elements['suburbs_address'].value;
 
-  if (firstname == '' && lastname == '' && street_address == '') {
+  if (firstname == '' && lastname == '' && street_address == '' && suburbs_address == '') {
     return true;
   } else {
     return check_form(form_name);

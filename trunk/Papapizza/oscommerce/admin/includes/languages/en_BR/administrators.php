@@ -14,7 +14,7 @@
 heading_title = Administradores
 
 table_heading_administrators = Administradores
-table_heading_action = A��o
+table_heading_action = Ação
 
 action_heading_new_administrator = Novo Administrador
 action_heading_batch_edit_administrators = Editar Grupo de Administradores

@@ -46,7 +46,23 @@
   if (ACCOUNT_SUBURB > -1) {
 ?>
 
-  <li><?php echo osc_draw_label($osC_Language->get('field_customer_suburb'), null, 'suburb', (ACCOUNT_SUBURB > 0)) . osc_draw_input_field('suburb', (isset($Qentry) ? $Qentry->value('entry_suburb') : null)); ?></li>
+  <li>
+  <?php
+  echo osc_draw_label($osC_Language->get('field_customer_suburb'), null, 'suburb', true);
+
+  $suburbs_array = array(array('id' => '',
+                                 'text' => $osC_Language->get('pull_down_default')));
+
+  foreach (osC_Address::getSuburbss() as $suburbs) {
+    $suburbs_array[] = array('id' => $suburbs['id'],
+                               'text' => $suburbs['name']);
+  }
+
+  echo osc_draw_pull_down_menu('suburb', $suburbs_array, (isset($Qentry) ? $Qentry->valueInt('entry_suburb') : ""));
+?>
+  
+  
+  </li>
 
 <?php
   }
@@ -60,7 +76,16 @@
   }
 ?>
 
-  <li><?php echo osc_draw_label($osC_Language->get('field_customer_city'), null, 'city', true) . osc_draw_input_field('city', (isset($Qentry) ? $Qentry->value('entry_city') : null)); ?></li>
+  <li><?php 
+  echo osc_draw_label($osC_Language->get('field_customer_city'), null, 'city', false); 
+  //echo osc_draw_input_field('city', (isset($Qentry) ? $Qentry->value('entry_city') : "Cuiabá"));
+  echo osc_draw_label("Cuiabá",null,'city',false);
+  ?>
+  (Entrega Somente para Cuiabá)
+  <?php 
+  echo osc_draw_hidden_field('city', "Cuiabá");
+  ?>
+  </li>
 
 <?php
   if (ACCOUNT_STATE > -1) {
@@ -109,6 +134,7 @@
   <li>
 
 <?php
+if (ACCOUNT_COUNTRY > -1) {
   echo osc_draw_label($osC_Language->get('field_customer_country'), null, 'country', true);
 
   $countries_array = array(array('id' => '',
@@ -120,6 +146,8 @@
   }
 
   echo osc_draw_pull_down_menu('country', $countries_array, (isset($Qentry) ? $Qentry->valueInt('entry_country_id') : STORE_COUNTRY));
+}
+  echo osc_draw_hidden_field('country', 30); 
 ?>
 
   </li>

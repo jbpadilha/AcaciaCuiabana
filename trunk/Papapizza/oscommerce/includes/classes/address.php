@@ -17,7 +17,28 @@
  */
 
   class osC_Address {
+	
+  	/**
+  	 * 
+  	 * Retorno de Endereco
+  	 * @param unknown_type $address
+  	 * @return array
+  	 */
+  	public static function getAddress($address)
+  	{
+  		global $osC_Database;
+  		$Qaddress = $osC_Database->query('select ab.entry_firstname as firstname, ab.entry_lastname as lastname, ab.entry_company as company, ab.entry_street_address as street_address, ab.entry_suburb as suburb, ab.entry_city as city, ab.entry_postcode as postcode, ab.entry_state as state, ab.entry_zone_id as zone_id, ab.entry_country_id as country_id, z.zone_code as zone_code, c.countries_name as country_title, su.suburbs_name as suburbs_title from :table_address_book ab left join :table_zones z on (ab.entry_zone_id = z.zone_id), :table_countries c, :table_suburbs su where ab.address_book_id = :address_book_id and ab.entry_country_id = c.countries_id and su.suburbs_id = ab.entry_suburb');
+        $Qaddress->bindTable(':table_address_book', TABLE_ADDRESS_BOOK);
+        $Qaddress->bindTable(':table_zones', TABLE_ZONES);
+        $Qaddress->bindTable(':table_countries', TABLE_COUNTRIES);
+        $Qaddress->bindTable(':table_suburbs', TABLE_SUBURBS);
+        $Qaddress->bindInt(':address_book_id', $address);
+        $Qaddress->execute();
 
+        return $Qaddress->toArray();
+  	}
+  	
+  	
 /**
  * Correctly format an address to the address format rule assigned to its country
  *
@@ -33,10 +54,11 @@
       $address_format = '';
 
       if ( is_numeric($address) ) {
-        $Qaddress = $osC_Database->query('select ab.entry_firstname as firstname, ab.entry_lastname as lastname, ab.entry_company as company, ab.entry_street_address as street_address, ab.entry_suburb as suburb, ab.entry_city as city, ab.entry_postcode as postcode, ab.entry_state as state, ab.entry_zone_id as zone_id, ab.entry_country_id as country_id, z.zone_code as zone_code, c.countries_name as country_title from :table_address_book ab left join :table_zones z on (ab.entry_zone_id = z.zone_id), :table_countries c where ab.address_book_id = :address_book_id and ab.entry_country_id = c.countries_id');
+        $Qaddress = $osC_Database->query('select ab.entry_firstname as firstname, ab.entry_lastname as lastname, ab.entry_company as company, ab.entry_street_address as street_address, ab.entry_suburb as suburbs_title , ab.entry_city as city, ab.entry_postcode as postcode, ab.entry_state as state, ab.entry_zone_id as zone_id, ab.entry_country_id as country_id, z.zone_code as zone_code, c.countries_name as country_title, su.suburbs_name as suburbs_title from :table_address_book ab left join :table_zones z on (ab.entry_zone_id = z.zone_id), :table_countries c, :table_suburbs su where ab.address_book_id = :address_book_id and ab.entry_country_id = c.countries_id and su.suburbs_id = ab.entry_suburb');
         $Qaddress->bindTable(':table_address_book', TABLE_ADDRESS_BOOK);
         $Qaddress->bindTable(':table_zones', TABLE_ZONES);
         $Qaddress->bindTable(':table_countries', TABLE_COUNTRIES);
+        $Qaddress->bindTable(':table_suburbs', TABLE_SUBURBS);
         $Qaddress->bindInt(':address_book_id', $address);
         $Qaddress->execute();
 
@@ -61,9 +83,14 @@
       }
 
       $country = $address['country_title'];
+      $suburbs = $address['suburbs_title'];
 
       if ( empty($country) && isset($address['country_id']) && is_numeric($address['country_id']) && ($address['country_id'] > 0) ) {
         $country = osC_Address::getCountryName($address['country_id']);
+      }
+      
+    	if ( empty($suburbs) && isset($address['suburbs_id']) && is_numeric($address['suburbs_id']) && ($address['suburbs_id'] > 0) ) {
+        $suburbs = osC_Address::getSuburbsName($address['suburbs_id']);
       }
 
       if ( isset($address['format']) ) {
@@ -87,7 +114,7 @@
 
       $replace_array = array(osc_output_string_protected($firstname . ' ' . $lastname),
                              osc_output_string_protected($address['street_address']),
-                             osc_output_string_protected($address['suburb']),
+                             osc_output_string_protected($suburbs),
                              osc_output_string_protected($address['city']),
                              osc_output_string_protected($address['postcode']),
                              osc_output_string_protected($state),
@@ -139,7 +166,31 @@
 
       return $countries;
     }
+	
+  public static function getSuburbss() {
+      global $osC_Database;
 
+      static $suburbs;
+
+      if ( !isset($suburbs) ) {
+        $suburbs = array();
+
+        $Qsuburbs = $osC_Database->query('select * from :table_suburbs order by suburbs_name');
+        $Qsuburbs->bindTable(':table_suburbs', TABLE_SUBURBS);
+        $Qsuburbs->execute();
+
+        while ( $Qsuburbs->next() ) {
+          $suburbs[] = array('id' => $Qsuburbs->valueInt('suburbs_id'),
+                               'name' => $Qsuburbs->value('suburbs_name'),
+                               'price' => $Qsuburbs->value('suburbs_price'));
+        }
+
+        $Qsuburbs->freeResult();
+      }
+
+      return $suburbs;
+    }
+    
 /**
  * Return the country name
  *
@@ -159,6 +210,17 @@
       return $Qcountry->value('countries_name');
     }
 
+  	public static function getSuburbsName($id) {
+      global $osC_Database;
+
+      $Qsuburbs = $osC_Database->query('select suburbs_name from :table_suburbs where suburbs_id = :suburbs_id');
+      $Qsuburbs->bindTable(':table_suburbs', TABLE_SUBURBS);
+      $Qsuburbs->bindInt(':suburbs_id', $id);
+      $Qsuburbs->execute();
+
+      return $Qsuburbs->value('suburbs_name');
+    }
+    
 /**
  * Return the country 2 character ISO code
  *

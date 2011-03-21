@@ -64,13 +64,27 @@
     }
 
     function quote() {
-      global $osC_Language;
-
+      global $osC_Language,$osC_Customer, $osC_ShoppingCart ;
+      $price = null;
+      if ( $osC_Customer->isLoggedOn()) {
+      	  if($osC_ShoppingCart->getShippingAddress() != null)
+      	  {
+      	  	$arrayEnd = $osC_ShoppingCart->getShippingAddress(); 
+		  	$suburbs_array = osC_Suburbs::getSuburbs($arrayEnd['suburb']);
+	      	$price = $suburbs_array['price'];
+      	  }
+      	  elseif($osC_Customer->hasDefaultAddress())
+      	  {
+		  	$arrayEnd = osC_Address::getAddress($osC_Customer->getDefaultAddressID());
+		  	$suburbs_array = osC_Suburbs::getSuburbs($arrayEnd['suburb']);
+	      	$price = $suburbs_array['price'];
+      	  }
+      }
       $this->quotes = array('id' => $this->_code,
                             'module' => $this->_title,
                             'methods' => array(array('id' => $this->_code,
                                                      'title' => $osC_Language->get('shipping_flat_method'),
-                                                     'cost' => MODULE_SHIPPING_FLAT_COST)),
+                                                     'cost' => ($price == null)?MODULE_SHIPPING_FLAT_COST:$price)),
                             'tax_class_id' => $this->tax_class);
 
       if (!empty($this->icon)) $this->quotes['icon'] = osc_image($this->icon, $this->_title);

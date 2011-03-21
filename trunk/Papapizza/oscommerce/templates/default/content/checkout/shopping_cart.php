@@ -84,9 +84,17 @@
 //    if ($osC_OrderTotal->hasActive()) {
 //      foreach ($osC_OrderTotal->getResult() as $module) {
       foreach ($osC_ShoppingCart->getOrderTotals() as $module) {
-        echo '    <tr>' . "\n" .
-             '      <td align="right">' . $module['title'] . '</td>' . "\n" .
-             '      <td align="right">' . $module['text'] . '</td>' . "\n" .
+        echo '    <tr>' . "\n" ;
+        /*if($module['code'] == "shipping")
+        {
+        	$arrayEnd = osC_Address::getAddress($osC_Customer->getDefaultAddressID());
+        	$suburbs_array = osC_Suburbs::getSuburbs($arrayEnd['suburb']);
+        	$module['value'] = $suburbs_array['price'];
+        	$module['text'] = $suburbs_array['price'];
+        }*/
+        echo '      <td align="right">' . $module['title'] . '</td>' . "\n" ;
+        
+        echo '      <td align="right">' . $module['text'] . '</td>' . "\n" .
              '    </tr>';
       }
 //    }

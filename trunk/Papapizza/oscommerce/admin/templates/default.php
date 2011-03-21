@@ -39,6 +39,8 @@
 <script language="javascript" src="../ext/jquery/jquery.json-1.3.min.js"></script>
 <script language="javascript" src="../ext/jquery/jquery.tinysort.min.js"></script>
 <script language="javascript" src="../ext/jquery/jquery.ocupload-1.1.2.packed.js"></script>
+<script language="javascript" src="../ext/jquery/jquery-maskedinput.js"></script>
+<script language="javascript" src="../ext/jquery/jquery.maskMoney.0.2.js"></script>
 <!--mycommerce.cn add 2009-4-6 -->
 <script language="javascript" src="../ext/jquery/ajaxfileupload.js"></script>
 <!--mycommerce.cn add end 2009-4-6 -->

@@ -13,7 +13,7 @@
     </definition>
     <definition>
       <key>shipping_flat_method</key>
-      <value><![CDATA[Unica Opção]]></value>
+      <value><![CDATA[De acordo com o bairro de entrega]]></value>
       <group>modules-shipping</group>
     </definition>
   </definitions>

@@ -653,10 +653,11 @@
         $previous_address = $this->getShippingAddress();
       }
 
-      $Qaddress = $osC_Database->query('select ab.entry_firstname, ab.entry_lastname, ab.entry_company, ab.entry_street_address, ab.entry_suburb, ab.entry_postcode, ab.entry_city, ab.entry_zone_id, ab.entry_telephone, z.zone_code, z.zone_name, ab.entry_country_id, c.countries_name, c.countries_iso_code_2, c.countries_iso_code_3, c.address_format, ab.entry_state from :table_address_book ab left join :table_zones z on (ab.entry_zone_id = z.zone_id) left join :table_countries c on (ab.entry_country_id = c.countries_id) where ab.customers_id = :customers_id and ab.address_book_id = :address_book_id');
+      $Qaddress = $osC_Database->query('select ab.entry_firstname, ab.entry_lastname, ab.entry_company, ab.entry_street_address, ab.entry_suburb, ab.entry_postcode, ab.entry_city, ab.entry_zone_id, ab.entry_telephone, z.zone_code, z.zone_name, ab.entry_country_id, c.countries_name, c.countries_iso_code_2, c.countries_iso_code_3, c.address_format, ab.entry_state, su.suburbs_name as suburbs_title from :table_address_book ab left join :table_zones z on (ab.entry_zone_id = z.zone_id) left join :table_countries c on (ab.entry_country_id = c.countries_id), :table_suburbs su where ab.customers_id = :customers_id and ab.address_book_id = :address_book_id and su.suburbs_id = ab.entry_suburb');
       $Qaddress->bindTable(':table_address_book', TABLE_ADDRESS_BOOK);
       $Qaddress->bindTable(':table_zones', TABLE_ZONES);
       $Qaddress->bindTable(':table_countries', TABLE_COUNTRIES);
+      $Qaddress->bindTable(':table_suburbs', TABLE_SUBURBS);
       $Qaddress->bindInt(':customers_id', $osC_Customer->getID());
       $Qaddress->bindInt(':address_book_id', $address_id);
       $Qaddress->execute();
@@ -678,9 +679,10 @@
                                          'country_iso_code_2' => $Qaddress->value('countries_iso_code_2'),
                                          'country_iso_code_3' => $Qaddress->value('countries_iso_code_3'),
                                          'format' => $Qaddress->value('address_format'),
+        								 'suburbs_title' => $Qaddress->value('suburbs_title'),
                                          'telephone_number' => $Qaddress->value('entry_telephone'));
 
-        if ( is_array($previous_address) && ( ($previous_address['id'] != $this->_shipping_address['id']) || ($previous_address['country_id'] != $this->_shipping_address['country_id']) || ($previous_address['zone_id'] != $this->_shipping_address['zone_id']) || ($previous_address['state'] != $this->_shipping_address['state']) || ($previous_address['postcode'] != $this->_shipping_address['postcode']) ) ) {
+        if ( is_array($previous_address) && ( ($previous_address['id'] != $this->_shipping_address['id']) || ($previous_address['postcode'] != $this->_shipping_address['postcode']) ) ) {
           $this->_calculate();
         }
       }
@@ -744,10 +746,11 @@
         $previous_address = $this->getBillingAddress();
       }
 
-      $Qaddress = $osC_Database->query('select ab.entry_firstname, ab.entry_lastname, ab.entry_company, ab.entry_street_address, ab.entry_suburb, ab.entry_postcode, ab.entry_city, ab.entry_zone_id, ab.entry_telephone, z.zone_code, z.zone_name, ab.entry_country_id, c.countries_name, c.countries_iso_code_2, c.countries_iso_code_3, c.address_format, ab.entry_state from :table_address_book ab left join :table_zones z on (ab.entry_zone_id = z.zone_id) left join :table_countries c on (ab.entry_country_id = c.countries_id) where ab.customers_id = :customers_id and ab.address_book_id = :address_book_id');
+      $Qaddress = $osC_Database->query('select ab.entry_firstname, ab.entry_lastname, ab.entry_company, ab.entry_street_address, ab.entry_suburb, ab.entry_postcode, ab.entry_city, ab.entry_zone_id, ab.entry_telephone, z.zone_code, z.zone_name, ab.entry_country_id, c.countries_name, c.countries_iso_code_2, c.countries_iso_code_3, c.address_format, ab.entry_state, su.suburbs_name as suburbs_title from :table_address_book ab left join :table_zones z on (ab.entry_zone_id = z.zone_id) left join :table_countries c on (ab.entry_country_id = c.countries_id), :table_suburbs su where ab.customers_id = :customers_id and ab.address_book_id = :address_book_id and su.suburbs_id = ab.entry_suburb');
       $Qaddress->bindTable(':table_address_book', TABLE_ADDRESS_BOOK);
       $Qaddress->bindTable(':table_zones', TABLE_ZONES);
       $Qaddress->bindTable(':table_countries', TABLE_COUNTRIES);
+      $Qaddress->bindTable(':table_suburbs', TABLE_SUBURBS);
       $Qaddress->bindInt(':customers_id', $osC_Customer->getID());
       $Qaddress->bindInt(':address_book_id', $address_id);
       $Qaddress->execute();
@@ -769,9 +772,10 @@
                                         'country_iso_code_2' => $Qaddress->value('countries_iso_code_2'),
                                         'country_iso_code_3' => $Qaddress->value('countries_iso_code_3'),
                                         'format' => $Qaddress->value('address_format'),
+        								'suburbs_title' => $Qaddress->value('suburbs_title'),
                                         'telephone_number' => $Qaddress->value('entry_telephone'));
 
-        if ( is_array($previous_address) && ( ($previous_address['id'] != $this->_billing_address['id']) || ($previous_address['country_id'] != $this->_billing_address['country_id']) || ($previous_address['zone_id'] != $this->_billing_address['zone_id']) || ($previous_address['state'] != $this->_billing_address['state']) || ($previous_address['postcode'] != $this->_billing_address['postcode']) ) ) {
+        if ( is_array($previous_address) && ( ($previous_address['id'] != $this->_billing_address['id']) || ($previous_address['postcode'] != $this->_billing_address['postcode']) ) ) {
           $this->_calculate();
         }
       }
@@ -889,7 +893,7 @@
     }
 
     private function _calculate($set_shipping = true) {
-      global $osC_Currencies, $osC_Tax, $osC_Weight, $osC_Shipping, $osC_OrderTotal;
+      global $osC_Currencies, $osC_Tax, $osC_Weight, $osC_Shipping, $osC_OrderTotal, $osC_Customer;
 
       $this->_sub_total = 0;
       $this->_total = 0;
@@ -910,7 +914,7 @@
 
           $tax = $osC_Tax->getTaxRate($data['tax_class_id'], $this->getTaxingAddress('country_id'), $this->getTaxingAddress('zone_id'));
           $tax_description = $osC_Tax->getTaxRateDescription($data['tax_class_id'], $this->getTaxingAddress('country_id'), $this->getTaxingAddress('zone_id'));
-
+          
           $shown_price = $osC_Currencies->addTaxRateToPrice($data['price'], $tax, $data['quantity']);
 
           $this->_sub_total += $shown_price;

@@ -46,17 +46,18 @@
     public static function getAddressBookData($customer_id, $address_book_id = null) {
       global $osC_Database;
 
-      $Qab = $osC_Database->query('select ab.address_book_id, ab.entry_gender as gender, ab.entry_firstname as firstname, ab.entry_lastname as lastname, ab.entry_company as company, ab.entry_street_address as street_address, ab.entry_suburb as suburb, ab.entry_city as city, ab.entry_postcode as postcode, ab.entry_state as state, ab.entry_zone_id as zone_id, ab.entry_country_id as country_id, ab.entry_telephone as telephone_number, ab.entry_fax as fax_number, z.zone_code as zone_code, c.countries_name as country_title from :table_address_book ab left join :table_zones z on (ab.entry_zone_id = z.zone_id), :table_countries c where');
+      $Qab = $osC_Database->query('select ab.address_book_id, ab.entry_gender as gender, ab.entry_firstname as firstname, ab.entry_lastname as lastname, ab.entry_company as company, ab.entry_street_address as street_address, ab.entry_suburb as suburb, ab.entry_city as city, ab.entry_postcode as postcode, ab.entry_state as state, ab.entry_zone_id as zone_id, ab.entry_country_id as country_id, ab.entry_telephone as telephone_number, ab.entry_fax as fax_number, z.zone_code as zone_code, c.countries_name as country_title, su.suburbs_name as suburbs_title from :table_address_book ab left join :table_zones z on (ab.entry_zone_id = z.zone_id), :table_countries c, :table_suburbs where');
 
       if ( is_numeric($address_book_id) ) {
         $Qab->appendQuery('ab.address_book_id = :address_book_id and');
         $Qab->bindInt(':address_book_id', $address_book_id);
       }
 
-      $Qab->appendQuery('ab.customers_id = :customers_id and ab.entry_country_id = c.countries_id');
+      $Qab->appendQuery('ab.customers_id = :customers_id and ab.entry_country_id = c.countries_id and ab.entry_suburb = su.suburbs_id');
       $Qab->bindTable(':table_address_book', TABLE_ADDRESS_BOOK);
       $Qab->bindTable(':table_zones', TABLE_ZONES);
       $Qab->bindTable(':table_countries', TABLE_COUNTRIES);
+      $Qab->bindTable(':table_suburbs', TABLE_SUBURBS);
       $Qab->bindInt(':customers_id', $customer_id);
       $Qab->execute();
 
