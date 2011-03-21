@@ -73,11 +73,19 @@
 
 <?php
   if ( ACCOUNT_SUBURB > -1 ) {
+
+  $suburbs_array = array(array('id' => '',
+                                 'text' => $osC_Language->get('pull_down_default')));
+
+  foreach (osC_Address::getSuburbss() as $suburbs) {
+    $suburbs_array[] = array('id' => $suburbs['id'],
+                               'text' => $suburbs['name']);
+  }
 ?>
 
     <tr>
       <td width="30%"><?php echo $osC_Language->get('field_suburb'); ?></td>
-      <td width="70%"><?php echo osc_draw_input_field('ab_suburb', $osC_ObjectInfo->get('suburb')); ?></td>
+      <td width="70%"><?php echo osc_draw_pull_down_menu('ab_suburb', $suburbs_array, (isset($osC_ObjectInfo) ? $osC_ObjectInfo->get('suburb') : "")); ?></td>
     </tr>
 
 <?php
