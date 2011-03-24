@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="system">
+	<name>System - JXTC xmenu</name>
+	<author>JoomlaXTC</author>
+	<creationDate>2010-10-16</creationDate>
+	<copyright>Copyright (C) 2010 Monev Software LLC. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorUrl>http://www.joomlaxtc.com</authorUrl>
+	<version>1.0</version>
+	<description>JoomlaXTC xmenu</description>
+	<files>
+		<filename plugin="jxtc_xmenu">jxtc_xmenu.php</filename>
+		<folder>jxtc_xmenu</folder>
+	</files>
+	<params>
+		<param name="ulclass" type="text" default="" label="Menu CSS Class" description="Specify CSS class or classes used in the menu unordered list tag, as they appear in the template page source. eg: menu dropdown" />
+		<param name="ulid" type="text" default="" label="Menu CSS ID" description="The unique ID used in the menu unordered list tag, as it appears in the template page source. eg: mainlevel-nav" />
+	</params>
+</install>

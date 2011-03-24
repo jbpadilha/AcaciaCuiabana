@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 1.5//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.5/template-install.dtd">
+<install version="1.5" type="template">
+	<name>kraftwerks</name>
+	<creationDate>2010-02-01</creationDate>
+	<author>JoomlaXTC</author>
+	<authorUrl>http://www.joomlaxtc.com</authorUrl>
+	<copyright>Copyright 2010 Monev Software LLC. All rights reserved.</copyright>
+	<license>GNU/GPL version 2</license>
+	<version>1.0</version>
+	<description>Kraftwerks Joomla 1.5 TI ThemeMagic Template</description>
+	<files>
+		<filename>component.php</filename>
+		<filename>index.php</filename>
+		<filename>params.ini</filename>
+		<filename>save-configbar.php</filename>
+		<filename>save-css.php</filename>
+		<filename>save-params.php</filename>
+		<filename>save-upload.php</filename>
+		<filename>templateDetails.xml</filename>
+		<folder>child_themes</folder>
+		<folder>html</folder>
+		<folder>media</folder>
+		<folder>template_files</folder>
+		<folder>thememagic</folder>
+	</files>
+	<positions>
+		<position>logo</position>
+		<position>top</position>
+		<position>newsflash</position>
+		<position>left</position>
+		<position>inset</position> 
+		<position>right</position>
+		<position>user1</position>
+		<position>user2</position> 
+		<position>user3</position>
+		<position>user4</position>
+		<position>user5</position>
+		<position>user6</position>
+		<position>user7</position>   
+		<position>user8</position>
+		<position>user9</position>    
+		<position>user10</position>
+		<position>user11</position> 
+		<position>user12</position>
+		<position>user13</position>
+		<position>user14</position>
+		<position>user15</position>
+		<position>user16</position>   
+		<position>user17</position>
+		<position>user18</position>   
+		<position>user19</position>
+		<position>user20</position>
+		<position>user21</position>
+		<position>user22</position>   
+		<position>user23</position>
+		<position>footer</position> 
+		<position>legals</position>  
+		<position>cart</position> 
+		<position>bottomone</position> 
+		<position>bottomtwo</position>
+		<position>flypage</position> 
+		<position>js_fpslide</position> 
+		<position>shoptop</position> 
+		<position>shopleft</position>
+		<position>shopright</position>
+		<position>shopbottom</position>    
+		<position>browsetop</position>   
+		<position>browsesearch</position>     
+		<position>loginpopup</position>
+		<position>login</position>
+		<position>logintop</position>
+		<position>loginside</position>
+	</positions>
+  <params addpath="/templates/kraftwerks/thememagic/j_admin/elements">
+    <param name="" type="niceforms" default=""/>  
+		<param name="styleEditorEnable" type="radio" default="on" label="Turn On Style Editor" description="">
+		  <option value="on">On</option>
+		  <option value="off">Off</option>
+		</param>
+		<param name="configBarEnable" type="radio" default="on" label="Turn On ThemeMagic Config Bar" description="">
+		  <option value="on">On</option>
+		  <option value="off">Off</option>
+		</param>
+	</params>
+</install>

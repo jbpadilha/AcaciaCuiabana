@@ -1,0 +1,54 @@
+/*******************************************************************************
+********************************************************************************
+***                                                                          ***
+***   Use to override any other CSS styling or add new styling               ***
+***                                                                          ***
+***   This file will be loaded last in the CSS chain                         ***
+***                                                                          ***
+***   ( Remember: This Cascade Styles inherit styling defined previously)    ***
+********************************************************************************
+*******************************************************************************/
+
+/*for demo only*/
+#menu1,#menu2,#menu3 {
+    height: 45px;
+    -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    -moz-border-radius: 0 0 2px 2px;
+    background: url("<?php echo $imgpath; ?>/topfade2a.png") repeat-x left top rgba(255, 255, 255, 0.9);
+}
+#menu1 ul.menu > li > a,#menu2 ul.menu > li > a,#menu3 ul.menu > li > a {
+	color:#838381; 
+	border-right:1px solid #ebebeb; 
+}
+#menu1 ul.menu > li.active > a,#menu2 ul.menu > li.active > a,#menu3 ul.menu > li.active > a {
+	color:#838381; 
+	background: #f1f1f1 url('<?php echo $imgpath; ?>/menutick.png') no-repeat bottom center;
+    border-bottom:3px solid #333333;
+	-moz-box-shadow: 0px 5px 10px rgba(0,0,0,.2);
+}
+#menu1 ul.menu > li > a:hover,#menu2 ul.menu > li > a:hover,#menu3 ul.menu > li > a:hover {
+	color:#838381; 
+	border-bottom:3px solid #45a0cf;}
+/* Drop Levels */
+#menu1 ul.menu li.parent > ul,#menu2 ul.menu li.parent > ul,#menu3 ul.menu li.parent > ul {
+	background:#333333;
+    -moz-box-shadow:0 7px 7px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow:0 7px 7px rgba(0, 0, 0, 0.6);
+    box-shadow:0 7px 7px rgba(0, 0, 0, 0.6);
+    -moz-border-radius:0 0 10px 10px;
+    -webkit-border-radius:0 0 10px 10px;
+    border-radius:0 0 10px 10px;
+}
+#menu1 ul.menu li.parent > ul > li,#menu2 ul.menu li.parent > ul > li,#menu3 ul.menu li.parent > ul > li {
+	background:url(<?php echo $imgpath; ?>/menulines/menuline-style1.png) repeat-x left bottom;	
+}
+#menu1 ul.menu li.parent > ul > li > a,#menu2 ul.menu li.parent > ul > li > a,#menu3 ul.menu li.parent > ul > li > a {
+	color:<?php echo $params->dropfont_color; ?>; 
+	padding-left:15px; background:url(<?php echo $imgpath; ?>/menuarrow-style1.png) 0 50% no-repeat; 
+}
+#menu1 ul.menu li.parent > ul > li.active > a,#menu2 ul.menu li.parent > ul > li.active > a,#menu3 ul.menu li.parent > ul > li.active > a {
+	color:#ffffff;
+}
+#menu1 ul.menu li.parent > ul > li > a:hover,#menu2 ul.menu li.parent > ul > li > a:hover,#menu3 ul.menu li.parent > ul > li > a:hover {
+	color:<?php echo $params->dropfonthover_color; ?>; display:block; 
+}

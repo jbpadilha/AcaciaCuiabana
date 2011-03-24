@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5">
+	<name>JoomlaXTC Social Group Wall Module</name>
+	<author>JoomlaXTC</author>
+	<creationDate>2009-10-28</creationDate>
+	<copyright>Copyright (c) 2009, 2010 Monev Software LLC. All Rights Reserved</copyright>
+	<authorUrl>http://www.joomlaxtc.com</authorUrl>
+	<version>1.0</version>
+	<description>JoomlaXTC Social Group Wall module v1.0 - Visit www.joomlaxtc.com documents area for help.</description>
+	<files>
+		<filename module="mod_jxtc_socialgwall">mod_jxtc_socialgwall.php</filename>
+		<filename>index.html</filename>
+		<filename>func_parserow.php</filename>
+		<filename>LICENSE.php</filename>
+		<filename>COPYRIGHT.php</filename>
+		<folder>buttons</folder>
+		<folder>css</folder>
+		<folder>elements</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+	</files>
+	<params addpath="/modules/mod_jxtc_socialgwall/elements">	
+		<param name="columns" type="text" default="1" label="Columns" description="Number of columns to show." />
+		<param name="rows" type="text" default="1" label="Rows" description="Number of rows to show." />
+		<param name="pages" type="text" default="1" label="Pages" description="Number of pages to show. Transition effects are enabled between page changes." />
+		<param name="avatarw" type="text" default="120" label="Avatar image width" description="Width of Avatar image." />
+		<param name="avatarh" type="text" default="90" label="Avatar image height" description="Height of Avatar image." />
+		<param name="sortfield" type="list" default="0" label="Sort field" description="Select a sort field for avatar selection." >
+			<option value="0">Owner name</option>
+			<option value="1">Group name</option>
+			<option value="2">Category name</option>
+			<option value="3">Member count</option>
+			<option value="4">Discuss count</option>
+			<option value="5">Wall count</option>
+			<option value="6">Creation date</option>
+			<option value="7">Activity</option>
+		</param>
+		<param name="sortorder" type="list" default="1" label="Sort order" description="Select a sort order for avatar selection." >
+			<option value="0">Ascending</option>
+			<option value="1">Descending</option>
+		</param>
+		<param name="transmode" type="list" default="hslide" label="Display Style" description="Transition effect mode.">
+		  <option value="hslide">Horizontal slider</option>
+		  <option value="vslide">Vertical slider</option>
+		  <option value="fade">Fader</option>
+		  <option value="wind">Draggable Window</option>
+		  <option value="winz">Zoom Window</option>
+		</param>
+		<param name="width" type="text" default="200" label="Window Width" description="Window width in pixels (only for Window mode)." />
+		<param name="height" type="text" default="200" label="Window Height" description="Window height in pixels (only for Window mode)." />
+		<param name="transpause" type="text" default="4000" label="Transition pause" description="Pause time between transitions (in milliseconds, default: 4000)." />
+		<param name="transspeed" type="text" default="1500" label="Transition duration" description="Transition duration in milliseconds (default: 1500)." />
+		<param name="transflow" type="list" default="0" label="Slide orientation" description="Starting transition orientation." >
+			<option value="0">Top-Bottom / Left-Right</option>
+			<option value="1">Bottom-Top / Right-Left</option>
+		</param>
+		<param name="transtype" type="list" default="1" label="Transition type" description="Transition animation type." >
+			<option value="1">Linear</option>
+			<option value="2">Quad</option>
+			<option value="3">Cubic</option>
+			<option value="4">Quart</option>
+			<option value="5">Quint</option>
+			<option value="6">Expo</option>
+			<option value="7">Circ</option>
+			<option value="8">Sine</option>
+			<option value="9">Back</option>
+			<option value="10">Bounce</option>
+			<option value="11">Elastic</option>
+		</param>
+		<param name="button" type="folderlist" default="" label="Button Style" directory="modules/mod_jxtc_socialgwall/buttons" hide_none="1" hide_default="1" filter="" exclude="" stripext="" description="Button graphic set to use (if enabled)."/>
+	  <param name="moduletemplate" type="textarea" rows="10" cols="40" default="{mainarea}" label="Module HTML template" description="HTML/CSS code to display the entire module." />
+	  <param name="itemtemplate" type="textarea" rows="10" cols="40" default="{name}" label="Group HTML template" description="HTML/CSS code to display each group." />
+		<param name="dateformat" type="text" default="Y-m-d" label="Date format" description="Date format (using PHP date function). Defaulty is: Y-m-d" />
+		<param name="maxdesclen" type="text" default="0" label="Maximum Description Length" description="Maximum characters to display of Group Description (0 = all)." />
+		<param name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="PARAMMODULECLASSSUFFIX" />
+	</params>
+	<params group="advanced">
+<param type="spacer" default="Slide It FX Settings:" />
+<param name="npslideitfx" type="list" default="easeIn" label="Sliding Panel Settings" description="Sliding Panel" >
+	<option value="RSO">Right Slide Out</option>
+  <option value="RSI">Right Slide In</option>
+	<option value="LSO">Left Slide Out</option>
+  <option value="LSI">Left Slide In</option>
+	<option value="BSO">Bottom Slide Out</option>
+  <option value="BSI">Bottom Slide In</option>
+	<option value="TSO">Top Slide Out</option>
+  <option value="TSI">Top Slide In</option>
+  <option value="TRSO">Top Right Slide Out</option>
+  <option value="TRSI">Top Right Slide In</option>
+  <option value="TLSO">Top Left Slide Out</option>
+  <option value="TLSI">Top Left Slide In</option>
+  <option value="BRSO">Bottom Right Slide Out</option>
+  <option value="BRSI">Bottom Right Slide In</option>
+  <option value="BLSO">Bottom Left Slide Out</option>
+  <option value="BLSI">Bottom Left Slide In</option>
+	<option value="CM">Custom</option>
+</param>
+
+<param name="npslixin" type="text" default="" label="Slide Panel X In" description="Slide X coordiantes px"/>
+<param name="npslixout" type="text" default="" label="Slide Panel X out" description="Slide X coordiantes px"/>
+<param name="npsliyin" type="text" default="" label="Slide Panel Y In" description="Slide Y coordiantes px"/>
+<param name="npsliyout" type="text" default="" label="Slide Panel Y Out" description="Slide Y coordiantes px"/>
+<param name="npsliAnim" type="list" default="Quad" label="Slide animation mode" description="Slide Panel animation mode." >
+	<option value="Quad">Quadratic transition</option>
+	<option value="linear">Linear transition</option>
+	<option value="Cubic">Cubicular transition</option>
+	<option value="Quart">Quartetic transition</option>
+	<option value="Quint">Quintic transition</option>
+	<option value="Expo">Exponential transition</option>
+	<option value="Circ">Circular transition</option>
+	<option value="Sine">Sineousidal transition</option>
+	<option value="Back">Makes the transition go back, then all forth</option>
+	<option value="Bounce">Makes the transition bouncy</option>
+	<option value="Elastic">Elastic curve</option>
+</param>
+<param name="npsliEase" type="list" default="easeIn" label="Slide ease mode" description="Slide ease mode." >
+	<option value="easeIn">Ease In</option>
+	<option value="easeOut">Ease Out</option>
+	<option value="easeInOut">Ease In/Out</option>
+</param>
+<param name="npslidi" type="text" default="50" label="Frames Per Second" description="Frames per second" />
+<param name="npslido" type="text" default="800" label="Frame Duration" description="Duration in Milliseconds." />
+
+<param type="spacer" default="Tool Tip / Pop Up FX Settings:" />
+<param name="npElement0FXH" type="text" default="80" label="FX X Position" description="Element 0 Horizontal Map Position." />	
+<param name="nptipoi" type="text" default="1" label="In Opacity" description="Tooltip / Popup In Opacity Value." />
+<param name="nptipoo" type="text" default="1" label="Out Opacity" description="Tooltip / Popup Out Opacity Value." />
+<param name="nptipvi" type="text" default="0" label="In Animation Vertical" description="Height of Vertical In Animation." />
+<param name="nptipvo" type="text" default="0" label="Out Animation Vertical" description="Height of Vertical Out Animation." />
+<param name="nptiphi" type="text" default="0" label="In Animation Horizontal" description="Width of Tooltip / Popup In Animation." />	
+<param name="nptipho" type="text" default="0" label="Out Animation Horizontal" description="Width of Tooltip Out / Popup Animation." />	
+<param name="nptipdi" type="text" default="550" label="Fade-In Duration" description="Tooltip / Popup Animation Fade In Duration." />
+<param name="nptipdo" type="text" default="550" label="Fade-Out Duration" description="Tooltip / Popup Animation Fade Out Duration." />
+<param name="nptipfi" type="text" default="0.5" label="Fade In Opacity" description="Tooltip / Popup Fade In Opacity Value." />
+<param name="nptipfo" type="text" default="0.5" label="Fade Out Opacity" description="Tooltip / Popup  Fade Out Opacity Value." />
+<param name="nptpause" type="text" default="1000" label="Pause" description="Tooltip Pause Value (in millisencods)." />
+<param name="nptipAnim" type="list" default="Quad" label="Tooltip animation mode" description="Tooltip / Popup animation mode." >
+	<option value="Quad">Quadratic transition</option>
+	<option value="linear">Linear transition</option>
+	<option value="Cubic">Cubicular transition</option>
+	<option value="Quart">Quartetic transition</option>
+	<option value="Quint">Quintic transition</option>
+	<option value="Expo">Exponential transition</option>
+	<option value="Circ">Circular transition</option>
+	<option value="Sine">Sineousidal transition</option>
+	<option value="Back">Makes the transition go back, then all forth</option>
+	<option value="Bounce">Makes the transition bouncy</option>
+	<option value="Elastic">Elastic curve</option>
+</param>
+<param name="nptipEase" type="list" default="easeIn" label="Tooltip / Popup ease mode" description="Tooltip ease mode." >
+	<option value="easeIn">Ease In</option>
+	<option value="easeOut">Ease Out</option>
+	<option value="easeInOut">Ease In/Out</option>
+</param>
+<param name="nptipCenter" type="radio" default="1" label="Centered Popup" description="Centers the pop-up window on the screen." >
+	<option value="0">No</option>
+	<option value="1">Yes</option>
+</param>
+<param name="hoifx" type="colorinput" default="CECECE" label="Hover Effect In Color" description="Hover Effect Color"/>
+<param name="hoofx" type="colorinput" default="FFFFFF" label="Hover Effect Out Color" description="Original Background Color"/>
+	</params>
+</install>

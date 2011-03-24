@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="content">
+  <name>JoomlaXTC Virtuemart Simple Image plugin</name>
+	<author>JoomlaXTC</author>
+	<creationDate>August 2009</creationDate>
+	<copyright>Copyright (C) 2008 Monev Software, LLC. All rights reserved.</copyright>
+	<authorUrl>http://www.joomlaxtc.com</authorUrl>
+	<version>1.1</version>
+  <description>JoomlaXTC Virtuemart Simple Image plugin v1.1 - Visit www.joomlaxtc.com documents area for help.</description>
+  <params>
+  </params>
+  <files>
+    <filename plugin="vimg">vimg.php</filename>
+  </files>
+</install>

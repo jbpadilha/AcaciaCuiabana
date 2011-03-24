@@ -1,0 +1,41 @@
+
+/** Custom Style Sheet **/
+
+/** Add your own background here **/
+body #bg_wrap {}
+
+/** Set the Height from the Top of the Site to the Main Area **/
+body #bg_wrap #header_container { }
+
+/** Main Navigation Links **/
+#navigation ul.menu li a {}
+
+/** Module Title Colors **/
+body .box .box_left_title .box_right_title h3.modtitle .first_word {}
+body .box .box_left_title .box_right_title h3.modtitle .rest {}
+.box .box_left_title .box_right_title .pagetitle {}
+.box .box_left_title .box_right_title .pagetitle .first_word {}
+.flip .box_footer_left h3.modtitle .first_word {}
+.module.advert .box_left_title .box_right_title h3.modtitle .first_word  {}
+
+/** Virtuemart Showcase Price Color **/
+.vmshowc {}
+
+/** Additional CSS for COM Templates - Add your base H3 text colors here **/
+#community-wrap .app-box-title {}
+.app-box-header {}
+.app-box-title, .app-box-title a {}
+.app-box-info h3  {}
+#Kunena .fbl {}
+#Kunena a.fb_title, #Kunena .fb_title {}
+
+#aboutthisvideotitle {}
+.videotitleinmainarea {}
+#commentstitle {}
+
+.listnavigationtitle {}
+h2.app-box-title a {}
+.listing-summary h3 {}
+.category .subcat   {}
+.category .subcat a {}
+#component-com_mtree .box_right_title .pagetitle {}

@@ -1,0 +1,202 @@
+/* ----------------------------------------------*/
+
+/* TYPOGRAPHY 
+/* ----------------------------------------------*/     
+
+
+
+.component h1 {display:inline-block;
+font-size:4.25em;
+color: #999;
+line-height: 42px;
+}
+
+.component h2 { font-size: 2em; color: #999; line-height: 32px;}
+
+.component h3 { font-size: 1.55em;color: #999; line-height: 24px; }
+
+.component h4 { font-size: 1.15em; line-height: 1.25; font-weight: bold;color: #999; line-height: 18px; }
+
+.component h5 { font-size: 1em; font-weight: bold;color: #999; line-height: 16px;}
+
+.component h6 { font-size: 1em;color: #999; line-height: 16px;}
+
+
+.dropcap {float:left;padding:4px 8px 0 0;display:block;color:#999;font:50px/40px Times, serif;}
+
+/* Quotes */
+
+quotes {
+	padding: 1em 40px 1em 15px;
+	font: 16px Arial;
+	color:#777;
+}
+
+quotes span.open {
+	background: url(../images/openquote.gif) no-repeat left top;
+	padding: 2px 0 2px 25px;
+}
+
+quotes span.close {
+	background: url(../images/closequote.gif) no-repeat top right;
+	padding: 2px 25px 2px 0;
+}
+
+/* Large Quotes */
+
+quoteslg {
+	padding: 1em 70px 1em 15px;
+	font: 28px Arial;
+	line-height: 28px;
+	color:#777;
+}
+
+quoteslg span.open {
+	background: url(../images/oquote_lg.png) no-repeat left top;
+	padding:  12px 25px 2px 25px;
+}
+
+quoteslg span.close {
+	background: url(../images/equote_lg.png) no-repeat top right;
+	padding: 2px 25px 25px 25px;
+}
+
+
+/* Code */
+.code {background: #F4F4F4;font: 1em/1.5 "Tahoma", monospace;	margin: 5px 0 15px;	padding: 10px 15px;	color: #333333;}
+
+/* Error */
+p.error {padding-left: 25px;color: #f10033;	background: url('../images/error.gif') no-repeat top left;}
+
+/* Message */
+p.message {color: #006699;background: url('../images/info.gif') no-repeat top left;; padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:5px;}
+
+/* Ideas */
+p.ideas {padding-left: 25px;color: #EE9600;	background: url('../images/lightbulb.gif') no-repeat top left;}
+
+/* Highlight */
+.highlight {padding: 12px;background: #FFFFCC;color: #333333;}
+
+/* Download */
+p.download {background: url('../images/download.gif') no-repeat 5px center;	padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+
+/* Astrix */
+p.astrix {background: url('../images/icon-asterisk_sm.png') no-repeat 5px center;	padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:5px;}
+
+/* Com */
+p.com {	background: url('../images/ext_com.png') no-repeat 5px center;	padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:5px;}
+
+/* Mod */
+p.mod {	background: url('../images/ext_mod.png') no-repeat 5px center;	padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:5px;}
+
+/* Plug */
+p.plug {background: url('../images/ext_plugin.png') no-repeat 5px center;padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:5px;}
+
+/* Lang */
+p.lang {background: url('../images/ext_lang.png') no-repeat 5px center;	padding-left:35px; padding-right:0px; padding-top:0px; padding-bottom:5px;}
+
+/* Photolink */
+p.photolink {background: url('../images/ww_image.png') no-repeat 5px center;	padding-left:40px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+
+/* heart */
+p.heart {background: url('../images/heart.png') no-repeat 5px center;padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+
+/* Star */
+p.stargrey {background: url('../images/star-grey.png') no-repeat 5px center;padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+p.starred {background: url('../images/star-red.png') no-repeat 5px center;padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+p.starblue {background: url('../images/star-blue.png') no-repeat 5px center;padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+p.stargreen {background: url('../images/star-green.png') no-repeat 5px center;padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+p.starorange {background: url('../images/star-orange.png') no-repeat 5px center;padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+p.starbrick {background: url('../images/star-brick.png') no-repeat 5px center;padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+p.starorange {background: url('../images/star-orange.png') no-repeat 5px center;padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+
+/* Photo */
+p.photogrey {background: url('../images/camera-grey.png') no-repeat 5px center;	padding-left:40px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+p.photoblack {background: url('../images/camera-black.png') no-repeat 5px center;padding-left:40px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+p.photored {background: url('../images/camera-red.png') no-repeat 5px center;padding-left:40px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+p.photoblue {background: url('../images/camera-blue.png') no-repeat 5px center;	padding-left:40px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+p.photopink {background: url('../images/camera-pink.png') no-repeat 5px center;	padding-left:40px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+p.photogreen {background: url('../images/camera-green.png') no-repeat 5px center;padding-left:40px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+p.photobrick {background: url('../images/camera-brick.png') no-repeat 5px center;padding-left:40px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+p.photoorange {background: url('../images/camera-orange.png') no-repeat 5px center;padding-left:40px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+
+/* X */
+p.x {background: url('../images/x-red.png') no-repeat 5px center;padding-left:25px; padding-right:0px; padding-top:5px; padding-bottom:5px;}
+p.xblack {background: url('../images/x-black.png') no-repeat 5px center;padding-left:25px; padding-right:0px; padding-top:5px; padding-bottom:5px;}
+
+/* RSS */
+p.rss {background: url('../images/rss.png') no-repeat 5px center;padding-left:25px; padding-right:0px; padding-top:0px; padding-bottom:0px;}
+
+/* Check list */
+ul.checklist {list-style: none;}
+ul.checklist li {background: url('../images/check-grey.png') no-repeat 0 3px;margin-left: 15px;	padding: 0 0 5px 30px;}
+
+/* Article list */
+ul.articlelist {list-style: none;}
+ul.articlelist li {background: url('../images/article-grey.png') no-repeat 0 3px; margin-left: 15px;padding: 0 0 5px 30px;}
+
+/* Star list */
+ul.starlist {list-style: none;}
+ul.starlist li {background: url('../images/star-grey.png') no-repeat 0 3px;margin-left: 15px;padding: 0 0 5px 30px;}
+
+/* Arrow list */
+ul.arrowlist {list-style: none;}
+ul.arrowlist li {background: url('../images/next-grey.png') no-repeat 0 3px;margin-left: 15px;	padding: 0 0 5px 30px;}
+
+/* X list */
+ul.xlist {list-style: none;}
+ul.xlist li {margin-left: 15px;	background: url('../images/x-red.png') no-repeat 0 3px;; padding: 0 0 5px 30px;}
+
+/* ast list */
+ul.astlist {list-style: none;}
+ul.astlist li {	margin-left: 15px;	background: url('../images/icon-asterisk_sm.png') no-repeat 0 3px;; padding: 0 0 5px 30px;}
+
+/* Movie List */
+ul.movielist {list-style: none;}
+ul.movielist li {margin-left: 15px; background: url('../images/movie-grey.png') no-repeat 0 3px;padding: 0 0 5px 30px;}
+
+/* Blog List */
+ul.bloglist {list-style: none;}
+ul.bloglist li {margin-left: 15px; background: url('../images/blog-green.png') no-repeat 0 3px;	padding: 0px 0px 5px 30px;}
+
+/* Photo List */
+ul.photolist {list-style: none;}
+ul.photolist li {margin-left: 15px; background: url('../images/camera-grey.png') no-repeat 0 3px;	padding: 0 0 0px 30px;}
+
+/* Date List */
+ul.datelist {list-style: none;}
+ul.datelist li {background: url('../images/calendar-grey.png') no-repeat 0 3px;margin-left: 15px;	padding: 0 0 5px 30px;}
+
+/* Pink Blog Bubble */
+.pinkbubble {background: url('../images/pinkblog_bottom.gif') no-repeat left bottom;font-size: 2em;	color: #FFFFFF !important;	padding-left:20px; padding-right:20px; padding-top:20px; padding-bottom:50px;}
+
+/* Blue Blog Bubble */
+.bluebubble {background: url('../images/blueblog_bottom.gif') no-repeat left bottom;font-size: 2em;color: #FFFFFF !important;	padding-left:20px; padding-right:20px; padding-top:20px; padding-bottom:50px;}
+
+/* Red Blog Bubble */
+.redbubble {	background: url('../images/redblog_bottom.gif') no-repeat left bottom;	font-size: 2em;	color: #FFFFFF !important;	padding-left:20px; padding-right:20px; padding-top:20px; padding-bottom:50px;}
+
+/* Green Blog Bubble */
+.greenbubble {	background: url('../images/greenblog_bottom.gif') no-repeat left bottom;font-size: 2em;color: #FFFFFF !important;padding-left:20px; padding-right:20px; padding-top:20px; padding-bottom:50px;}
+
+/* Yellow Blog Bubble */
+.yellowbubble {background: url('../images/yellowblog_bottom.gif') no-repeat left bottom;font-size: 2em;color: #FFFFFF !important;padding-left:20px; padding-right:20px; padding-top:20px; padding-bottom:50px;}
+
+/* brick Blog Bubble */
+.brickbubble {background: url('../images/pinkblog_bottom.gif') no-repeat left bottom;font-size: 2em;color: #FFFFFF !important;	padding-left:20px; padding-right:20px; padding-top:20px; padding-bottom:50px;}
+
+/* Orange Blog Bubble */
+.orangebubble {	background: url('../images/orangeblog_bottom.gif') no-repeat left bottom;font-size: 2em;color: #FFFFFF !important;	padding-left:20px; padding-right:20px; padding-top:20px; padding-bottom:50px;}
+
+/* Grey Blog Bubble */
+.greybubble {background: url('../images/greyblog_bottom.gif') no-repeat left bottom;font-size: 2em;color: #FFFFFF !important;padding-left:20px; padding-right:20px; padding-top:20px; padding-bottom:50px;}
+
+/* Black Blog Bubble */
+.blackbubble {background: url('../images/blackblog_bottom.gif') no-repeat left bottom;font-size: 2em;color: #FFFFFF !important;padding-left:20px; padding-right:20px;padding-top:20px; padding-bottom:50px;}
+
+/* Note */
+.note {	background: url('../images/note.gif') no-repeat right bottom;font-size: 1em;color: #000000 !important;	padding-left:20px; padding-right:20px; padding-top:40px; padding-bottom:40px;}
+
+.grayhover1{padding: 12px;}
+
+

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<install type="module" version="1.5.0">
+	<name>JoomlaXTC VMBanners Module</name>
+	<author>JoomlaXTC</author>
+	<creationDate>March 2009</creationDate>
+	<copyright>Copyright (C) 2009 Monev Software, LLC. All rights reserved.</copyright>
+	<authorUrl>www.joomlaxtc.com</authorUrl>
+	<version>1.1</version>
+	<description>JoomlaXTC VMBanners Module v1.1 - Visit www.joomlaxtc.com documents area for help.</description>
+	<files>
+		<filename module="mod_jxtc_vmbanners">mod_jxtc_vmbanners.php</filename>
+		<filename>js/vmbanners.js</filename>
+		<filename>images/infobackground.png</filename>
+	</files>
+	<params>
+		<param name="width" type="text" default="300" label="Module width" description="Width of banner module (in pixels)." />
+		<param name="height" type="text" default="200" label="Module height" description="Height of banner module (in pixels)." />
+		<param name="speed" type="text" default="2000" label="Effect speed" description="Effect speed (in milliseconds)." />
+		<param name="limit" type="text" default="5" label="Number of products" description="Number of featured products to display." />
+		<param name="filter" type="text" default="_banner" label="Image name filter" description="Image name filter (default: _banner)." />
+		<param name="direction" type="list" default="1" label="Effect direction" description="Effect direction." >
+			<option value="1">Top-Bottom</option>
+			<option value="2">Bottom-Top</option>
+			<option value="3">Right-Left</option>
+			<option value="4">Left-Right</option>
+		</param>
+		<param name="effect" type="list" default="1" label="Effect type" description="Effect type." >
+			<option value="1">Slide</option>
+			<option value="2">Fade</option>
+		</param>
+		<param name="position" type="list" default="bottom" label="Info area position" description="Position of information area." >
+			<option value="top">Top</option>
+			<option value="bottom">Bottom</option>
+			<option value="right">Right</option>
+			<option value="left">Left</option>
+		</param>
+		<param name="desclen" type="text" default="0" label="Short description length" description="Maximum short description length (0 = no limit)." />
+		<param name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="PARAMMODULECLASSSUFFIX" />
+	</params>
+</install>

@@ -1,0 +1,297 @@
+
+/** Save and Resets **/
+.save_all_wrap, .reset_all_wrap, body #config-bar .save-config-bar-wrap input {                   
+    float:left;
+    line-height:14px;       
+    text-shadow:0 1px 0 #555555 !important;   
+    width:132px;
+    height:33px;
+    background:url(images/admin-button.png) no-repeat;
+}         
+
+body #config-bar .save-config-bar-wrap { margin-top:8px; position:absolute; right:200px; }  
+body #config-bar .save-config-bar-wrap input { border:none; color:#fff; }  
+body #config-bar .save-config-bar-wrap input:hover { cursor:pointer; }
+
+.reset_all_wrap { float:right; margin-right:10px; } 
+.save_all_wrap { margin-left:10px; }      
+
+.reset_all, .save_all { 
+    color:#FFFFFF;
+    display:block;
+    font-size:12px !important;
+    margin:10px 0 0 14px; 
+}
+
+.option-admin-form .local_reset, .option-admin-form .local_submit {display:none;}
+     
+.save_button_wrap
+{
+    float:right;
+    height:20px;
+    width:210px;
+}     
+
+.save_bar_top  { margin:80px 20px 0px 0px;}     
+
+/** User-message **/
+
+#user-message { 
+    display:none; 
+    width:400px;     
+    border:10px solid #666; 
+    border:10px solid rgba(82, 82, 82, 0.698); 
+    -moz-border-radius:8px; 
+    -webkit-border-radius:8px;      
+} 
+ 
+#user-message div { 
+    padding:10px; 
+    border:1px solid #3B5998; 
+    background-color:#fff; 
+    font-family:"lucida grande",tahoma,verdana,arial,sans-serif  
+    color:#f68484;
+} 
+  
+
+.hidden {display:none !important;}  
+
+
+/** Admin Sidebar **/
+
+#editor_sidebar {
+    -moz-box-shadow:3px 0 6px rgba(0, 0, 0, 0.35);
+    background:#1E1E1E none repeat scroll 0 0;
+    color:#f2f2f2;
+    display:block;
+    font-family:helvetica,sans-serif;
+    font-size:13px;
+    height:100%;
+    left:0;
+    position:fixed;
+    top:78px;
+    width:310px;
+    z-index:12000;
+}   
+
+a#editor_sidebar_toggle {
+    background:transparent url(images/sidebar-toggle.png) no-repeat scroll 0 0;
+    cursor:pointer;
+    display:block;
+    height:82px;
+    left:310px;
+    margin-top:-40px;
+    position:absolute;
+    top:50%;
+    width:16px;
+}  
+
+/** Admin Inner **/
+
+#editor_sidebar_inner { height:100%; }
+
+/** Admin Accordion **/
+
+/* root element for accordion. decorated with rounded borders and gradient background image */
+#sidebar_accordion {
+    width:100%;
+}
+
+/* accordion header */
+#sidebar_accordion h2 {
+	background:url(images/tab-head.png) repeat-x;
+	margin:0;
+	padding:5px 15px;
+	font-size:13px;
+	font-weight:normal;
+	cursor:pointer;	  
+	color:#8c8c8c;  
+	height:54px;  
+	font-family: Arial, "MS Trebuchet", sans-serif;
+}
+
+/* currently active header */
+#sidebar_accordion h2.current {
+	cursor:default;
+}
+
+/** Boxes **/    
+.css-option-set { 
+     float:left;
+     padding:0px 0 10px 15px;
+     width:265px;
+}
+.group-box.open .group-box-content { display:block; }   
+.group-box.closed .group-box-content { display:none; }   
+
+.group-box {
+    -moz-box-shadow:1px 1px 6px rgba(0, 0, 0, 0.15);
+    background:#353535 none repeat scroll 0 0;
+    float:left;
+    margin:5px 0;
+    padding:15px;
+    width:245px;      
+    color:#888888;
+}    
+
+.group-box.closed { padding-bottom:0px; }
+
+.group-box-heading
+{
+    background:#222222 none repeat scroll 0 0;
+    display:block;
+    font-weight:bold;
+    margin:-15px -15px 0px;
+    padding:8px 10px;
+    text-shadow:2px 2px 3px rgba(0, 0, 0, 0.25);
+    display:block;   
+    color:#cccccc;
+}
+
+.group-box .desc, .group-box-content { color:#888888;}     
+
+a.minimize { float:right; color:#fff; }
+              
+.css_submit { z-index:10000; } 
+form.cssAdmin { float:left; } 
+   
+#editor_sidebar_inner { height:500px;  } 
+
+.pane { height:200px;  } 
+
+#editor_sidebar_container { margin-right:308px; height:100%; }   
+#editor_sidebar .label { color:#fff; } 
+
+.elements-wrap, .group-box-wrap {
+    float:left;
+    padding:0 0 10px 15px;
+    width:265px;
+} 
+
+.group-box .desc { margin:4px 0px 6px 0px; }      
+
+.css_submit { display:none; }             
+
+/** Icons **/ 
+.pane_head .icon {
+    display:block; 
+    width:26px; 
+    height:26px; 
+    margin-top:9px;     
+    float:left;
+} 
+
+.text.current .icon { background:url(images/text-icon-sprite.png) no-repeat; }      
+.text .icon { background:url(images/text-icon-sprite.png) no-repeat scroll 0 -26px; } 
+
+.styles.current .icon { background:url(images/styles-icon-sprite.png) no-repeat; }      
+.styles .icon { background:url(images/styles-icon-sprite.png) no-repeat scroll 0 -26px; }
+
+.layout.current .icon { background:url(images/layout-icon-sprite.png) no-repeat; }      
+.layout .icon { background:url(images/layout-icon-sprite.png) no-repeat scroll 0 -26px; } 
+
+.options.current .icon { background:url(images/options-icon-sprite.png) no-repeat; }      
+.options .icon { background:url(images/options-icon-sprite.png) no-repeat scroll 0 -26px; }   
+
+.title { display:block; margin:14px 0px 0px 7px; float:left; }   
+
+.group-box .colorInput .heading { display:none; }    
+.group-box .colorInput .controls  { margin-top:16px; } 
+.group-box .colorInput .controls input { margin:1.5px 0 0 3px; }      
+.controls input {
+    background:#474747 none repeat scroll 0 0;
+    border:1px solid #222222;
+    color:#888888;
+    font-size:10px;
+    height:12px;  
+    padding:4.5px 0 4.5px 5px;
+    width:190px; 
+}
+   
+/** Radios **/  
+.group-box-content .down-radio, .group-box-content .up-radio, .group-box-content .def-radio  { width:26px; height:18px; display:block; padding:0px; }
+.down-radio, #config-bar .down-radio { background:url(images/on-off-sprite.png) no-repeat !important;   }   
+.up-radio, .def-radio, #config-bar .up-radio, #config-bar .def-radio { background:url(images/on-off-sprite.png) no-repeat 0px -18px !important;}
+#config-bar .down-radio, #config-bar .up-radio, #config-bar .def-radio  { 
+    width:26px; 
+    height:18px; 
+    margin-right:30px;
+    padding:2px 26px 0 0; 
+}                                                                                                  
+
+.jScrollPaneContainer {
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+}
+
+.jScrollPaneTrack {
+	position: absolute;
+	cursor: pointer;
+	right: 0;
+	top: 0;
+	height: 100%;
+	background: #1d1d1d;
+}
+.jScrollPaneDrag {
+	position: absolute;
+	background: #4c4c4c;
+	cursor: pointer;
+	overflow: hidden;
+}
+.jScrollPaneDragTop {
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+}
+.jScrollPaneDragBottom {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+}
+a.jScrollArrowUp {
+	display: block;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	right: 0;
+	text-indent: -2000px;
+	overflow: hidden;
+	/*background-color: #666;*/
+	height: 9px;
+}
+a.jScrollArrowUp:hover {
+	/*background-color: #f60;*/
+}
+
+a.jScrollArrowDown {
+	display: block;
+	position: absolute;
+	z-index: 1;
+	bottom: 0;
+	right: 0;
+	text-indent: -2000px;
+	overflow: hidden;
+	/*background-color: #666;*/
+	height: 9px;
+}
+a.jScrollArrowDown:hover {
+	/*background-color: #f60;*/
+}
+a.jScrollActiveArrowButton, a.jScrollActiveArrowButton:hover {
+	/*background-color: #f00;*/
+}
+
+#sidebar_accordion .scrollpane { height:200px; }             
+
+body #config-bar {
+    background:transparent url(images/tab-head.png) repeat-x scroll 0 0 !important;
+}  
+body #config-bar, body #config-bar label {
+    color:#8C8C8C; 
+}    
+body #config-bar-options li { margin-top:18px; }  
+body #config-bar .tooltip  { margin-top:24px; }
+
