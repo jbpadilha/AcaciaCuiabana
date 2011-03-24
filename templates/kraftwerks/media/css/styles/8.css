@@ -1,0 +1,30 @@
+body #bg_wrap {background: url('../../images/backgrounds/paintsplash.jpg') no-repeat top;}
+body #bg_wrap #header_container { height:220px; }
+#navigation ul.menu li a {color: #e55dcb;}
+body .box .box_left_title .box_right_title h3.modtitle .first_word {color: #e55dcb;}
+body .box .box_left_title .box_right_title h3.modtitle .rest {color:#CCCCCC;}
+.box .box_left_title .box_right_title .pagetitle {color: #e55dcb;}
+.box .box_left_title .box_right_title .pagetitle .first_word {color: #e55dcb;}
+
+
+
+/** Additional CSS for COM Templates **/
+.vmshowc {color: #75a4b1!important;}
+.productPrice {color: #75a4b1!important;}
+.price {color: #75a4b1!important;}
+#community-wrap .app-box-title {color: #e55dcb!important;}
+.app-box-header {color: #e55dcb!important;}
+.app-box-title, .app-box-title a {color: #e55dcb!important;}
+.app-box-info h3  {color: #e55dcb!important;}
+#Kunena .fbl {color: #e55dcb;}
+#Kunena a.fb_title, #Kunena .fb_title {color: #e55dcb;}
+
+#aboutthisvideotitle {color: #e55dcb;}
+.videotitleinmainarea {color: #e55dcb;}
+#commentstitle {color: #e55dcb;}
+
+.listnavigationtitle {color: #e55dcb;}
+h2.app-box-title a {color: #e55dcb;}
+.listing-summary h3 {color: #e55dcb;}
+.category .subcat   {color: #e55dcb!important;}
+.category .subcat a {color: #e55dcb!important;}

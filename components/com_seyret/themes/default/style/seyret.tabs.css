@@ -1,0 +1,169 @@
+.dynamic-tab-pane-control.tab-pane {
+	position:	relative;
+	/*width:		100%;		 width needed weird IE bug */
+	/*margin-right:	-2px;	 to make room for the shadow */
+}
+.dynamic-tab-pane-control .tab-row .tab {
+	width: 94px;
+	height: 19px;
+	color:#FFFFFF;
+	position: relative;
+	top: 0;
+	display: inline;
+	float: left;
+	overflow: hidden;
+	cursor: pointer;
+	border: 0px none;
+	z-index: 1;
+	white-space: nowrap;
+	text-align: center;
+	background-image:url('../images/tabpas.png') !important;;
+	background-repeat:repeat-x;
+	padding-top:7px; font-style:normal; font-variant:normal; font-weight:normal; font-size:11px; font-family:Tahoma, Helvetica, sans-serif; margin-left:0px; margin-right:-1px; margin-top:0px; margin-bottom:1px; padding-left:0px; padding-right:0px; padding-bottom:0px
+}
+
+.tab-row {
+padding-left:10px;
+}
+
+.dynamic-tab-pane-control .tab-row .tab a {
+	font:	11px Tahoma, Helvetica, sans-serif;
+	color:#FFFFFF;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.dynamic-tab-pane-control .tab-row .tab.selected {
+	width: 94px !important;
+	height: 19px !important;
+	z-index: 3;
+	top: 0px;
+	background-image:url('../images/tabact.png') !important;;
+	background-repeat:repeat-x;
+	padding-top:7px; font-style:normal; font-variant:normal; font-weight:normal; font-size:11px; font-family:Tahoma, Helvetica, sans-serif; margin-left:0px; margin-right:-1px; margin-top:0px; margin-bottom:-1px; padding-left:0px; padding-right:0px; padding-bottom:0px
+}
+
+.dynamic-tab-pane-control .tab-row .tab.hover {
+	width: 94px;
+	height: 19px;
+	background-image:url('../images/tabhov.png') !important;;
+	background-repeat:repeat-x;
+	padding-top:7px; font-style:normal; font-variant:normal; font-weight:normal; font-size:11px; font-family:Tahoma, Helvetica, sans-serif	
+}
+.dynamic-tab-pane-control .tab-page {
+	border-left:medium none; border-right:medium none; border-bottom:medium none; border-top:1px solid #333333; background:rgb( 252 252 254 ); z-index: 2;
+	position: relative;
+	top: -2px;
+	/*244, 243, 238*/
+	/* 145, 155, 156*/
+	padding:	5px;
+	width: 97%;  /* stupid stupid stupid IE!!! */
+	float: left; font-style:normal; font-variant:normal; font-weight:normal; font-size:11px; font-family:Tahoma, Helvetica, sans-serif
+
+}
+.dynamic-tab-pane-control .tab-row {
+	z-index: 1;
+	white-space: nowrap;
+}
+
+
+
+
+
+dl.tabs {	
+	float:left;
+	height:50px;
+    margin:0px;
+    padding:0 0 0 10px;
+
+}
+
+/*dl.tabs dt {
+	float: left;
+	color:#666666;
+	text-align:center;
+	font-size:11px;
+	width: 89px;
+	height: 29px;
+	margin-right: 3px;
+	background:url('../images/tabpas.png') no-repeat scroll left top;
+	
+}
+
+dl.tabs dt.open {
+	z-index: 100;
+	color:#666666;
+	text-align:center;
+	font-size:11px;
+	width: 89px;
+	height: 29px;
+	margin-right: 3px;
+	background-image:url('../images/tabact.png') !important;
+}*/
+
+div.current {
+	clear: both;
+	*clear:right; 
+	_clear:right;
+	padding-top:10px;	
+
+}
+
+div.current dd {
+	padding: 0;
+	margin: 0;
+}
+
+
+/************** New Style ********************/
+
+
+#cToolbarNav,
+#cToolbarNav ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+#cToolbarNav {
+	background: url('../images/toolbar-bg.gif') no-repeat 0 0;	
+	margin-left:0; margin-right:0; margin-top:0; margin-bottom:10px
+}
+#cToolbarNavInner {
+	background: url('../images/toolbar-bg.gif') no-repeat 100% -50px;	
+}
+
+#cToolbarNav dl.tabs dt.closed {
+background:url('../images/toolbar-item-off-left.gif') no-repeat left top;
+float:left;
+line-height:27px;
+list-style-position:outside;
+list-style-type:none;
+padding:0 0; margin-left:0px; margin-right:3px; margin-top:11px; margin-bottom:0
+}
+
+#cToolbarNav dl.tabs dt.closed span {
+background:url('../images/toolbar-item-off-right.gif') no-repeat right top;
+color:#999999;
+display:block;
+text-decoration:none; padding-left:14px; padding-right:14px; padding-top:0; padding-bottom:0
+}
+
+#cToolbarNav dl.tabs dt.closed span:hover {
+color:#ffffff;
+}
+
+#cToolbarNav dl.tabs dt.open {
+background:url('../images/toolbar-item-on-left.gif') no-repeat left top;
+float:left;
+line-height:27px;
+list-style-position:outside;
+list-style-type:none;
+padding:0 0; margin-left:0px; margin-right:3px; margin-top:11px; margin-bottom:0
+}
+
+#cToolbarNav dl.tabs dt.open span {
+background:url('../images/toolbar-item-on-right.gif') no-repeat right top;
+color:#ffffff;
+display:block;
+text-decoration:none; padding-left:14px; padding-right:14px; padding-top:0; padding-bottom:0
+}

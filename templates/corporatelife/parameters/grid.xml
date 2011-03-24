@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XTC>
+	<name>Default</name>
+	<description>A template layout based on regions</description>
+   <params>
+		<param name="wrapperwidth" type="text" default="1114" label="Main Wrap Width" description="Change The Width Of Main Wrapper" />
+		<param name="wrappergutter" type="text" default="10" label="Outer Wrapper" description="Set Width Of Outside Wrapper" />
+		<param name="columnseparatorwidth" type="text" default="20" label="Separator between columns" description="in pixels" />
+		<param name="regionseparatorwidth" type="text" default="20" label="Separator between regions" description="in pixels" />
+		<param name="regioncfg" type="list" default="1,2,3,4,5,6" label="Region Order" description="Choose the Region display order">
+			<option value="1,2,3,4,5,6,7">1,2,3,4,5,6,7</option>
+			<option value="1,3,2,4,5,6,7">1,3,2,4,5,6,7</option>
+		</param>
+		<param name="region3cfg" type="columnorder" default="left,center,right" columns="left,center,right" label="Region 3 Column order" description="Enter the column display order for region 3." />
+		<param name="leftwidth" type="text" default="315" label="Left Width" description="Change The Width Of Left Position" />
+		<param name="rightwidth" type="text" default="300" label="Right Width" description="Change The Width Of Right Position" />
+</params>
+</XTC>

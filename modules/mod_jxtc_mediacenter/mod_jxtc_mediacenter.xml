@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<install type="module" version="1.5.0">
+	<name>JoomlaXTC VAI Mediacenter</name>
+	<author>JoomlaXTC</author>
+	<creationDate>2010-02-13</creationDate>
+	<copyright>Copyright (C) 2009,2010 Monev Software LLC.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorUrl>http://www.joomlaxtc.com</authorUrl>
+	<version>1.6</version>
+	<description>JoomlaXTC VAI Mediacenter - Visit www.joomlaxtc.com documents area for more help.</description>
+	<files>
+	<filename module="mod_jxtc_mediacenter">mod_jxtc_mediacenter.php</filename>
+		<filename>getVideoId.php</filename>
+	  <filename>index.html</filename>
+	  <filename>crossdomain.xml</filename>
+	  <filename>mediacenter.php</filename>
+	  <filename>flash/index.html</filename>
+	  <filename>flash/jxtc_video.swf</filename>
+	  <filename>flash/jxtc_audio.swf</filename>
+	  <filename>flash/jxtc_image.swf</filename>
+	  <filename>flash/xtcPlayerLib.swf</filename>
+	  <filename>js/index.html</filename>
+		<filename>js/jxtcswfobject.js</filename>
+	 <filename>js/winOpen-moo.js</filename>
+	</files>
+	<params>
+	<param name="@spacer" type="spacer" default="Media Center Parameters" label="" description="Players Basic Settings" />
+		<param name="media_type" type="list" default="video" label="Media Type" description="Video / Audio / Images">
+			<option value="video">Video</option>
+			<option value="audio">Audio</option>
+			<option value="image">Images</option>
+		</param>
+		<param name="media_display" type="list" default="v" label="Display Mode" description="Horizontal or Vertical Display">
+		  <option value="h">Horizontal</option>
+			<option value="v">Vertical</option>
+		</param>
+		<param name="display" type="list" default="m" label="Display Type" description="Player display mode.">
+		  <option value="m">Module</option>
+		  <option value="p">Pop-up</option>
+		  <option value="a">Auto Pop-up</option>
+			<option value="s">Lightbox</option>
+		</param>
+		<param name="autoplay" type="list" default="1" label="Auto Play" description="Auto Play Content.">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		<param name="@spacer" type="spacer" default="Module Size" label="" description="Overall Module Size" />
+		<param name="width" type="text" default="" label="Module Width" description="Overall Width in pixels. Will use default values if empty."/>
+		<param name="height" type="text" default="" label="Module Height" description="Overall Height in pixels. Will use default values if empty."/>
+		<param name="@spacer" type="spacer" default="Media Player Size" label="" description="Player Size - Choose Players custom Width or Height based on Vertical or Horizontal Settings" />
+		<param name="pwidth" type="text" default="" label="Player Width" description="Player window width in pixels. Will use default values if empty."/>
+		<param name="pheight" type="text" default="" label="Player Height" description="Player window height in pixels. Will use default values if empty."/>
+		<param name="@spacer" type="spacer" default="Media Center Images" label="" description="Players Images" />
+		<param name="logo" type="imagelist" directory="/images" hide_default="1" default="" label="Logo" description="Opening player image. Upload images to /images directory."/>
+		<param name="logo_position" type="list" default="br" label="Logo Position" description="Logo position.">
+			<option value="br">Bottom right</option>
+			<option value="bl">Bottom left</option>
+			<option value="tl">Top left</option>
+			<option value="tr">Top right</option>
+		</param>
+		<param name="start_image" type="imagelist" directory="/images" hide_default="1" default="" label="Start Image" description="Start image. Upload images to /images directory."/>
+		<param name="@spacer" type="spacer" default="Media Center Playlist" label="" description="Playlist Settings" />
+		<param name="show_playlist" type="list" default="1" label="Display Playlist" description="Show Playlist or Player Only.">
+			<option value="0">No</option>
+		  <option value="1">Yes</option>
+		</param>
+			<param name="show_playlist_scroller" type="list" default="1" label="Show Playlist Scroller" description="Show the playlist scroller.">
+			<option value="0">No</option>
+		  <option value="1">Yes</option>
+		</param>
+		<param name="media_xml" type="text" default="" label="XML/RSS Playlist" description="Full URL of playlist XML file."/>
+		<param name="media_list" type="textarea" default="" rows="25" cols="50"  label="XPS Playlist" description="Enter your playlist parameters here if no XML/RSS file is available. &lt;br&gt;Separate each group by a blank line.&lt;br&gt;Use / to comment out a feature&lt;br&gt;Please read on-line help guide for more instructions."/>
+			<param name="link_target" type="list" default="new" label="Link Target" description="Link Target.">
+			<option value="new">New</option>
+			<option value="parent">Parent</option>
+		</param>
+		<param name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="PARAMMODULECLASSSUFFIX" />
+	</params>
+	<params group="advanced">
+	<param name="@spacer" type="spacer" default="Lightbox Parameters" label="" description="Module Lightbox Settings" />
+	<param name="button" type="imagelist" directory="/images" hide_default="1" default="" label="Link Button" description="Button Image for Pop Up and Lightbox setting. Upload images to /images directory." />
+	
+	
+	<param name="@spacer" type="spacer" default="Playlist Parameters" label="" description="Module Playlist Settings" />
+			<param name="rounded_corners_playlist" type="list" default="1" label="Playlist Style" description="Square or Round corners.">
+			<option value="0">Square</option>
+		  <option value="1">Rounded</option>
+		</param>
+		<param name="stretch_playlist" type="list" default="1" label="Stretch Playlist" description="Stretch playlist to full size of module">
+			<option value="0">No</option>
+		  <option value="1">Yes</option>
+		</param>
+		<param name="lhover" type="list" default="0" label="Disable Left Hover" description="Left Thumbnail Effect">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		<param name="rhover" type="list" default="0" label="Disable Right Hover" description="Right Thumbnal Effect">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>	
+		<param name="playlist_active_color" type="text" default="666666" label="Playlist Active color" description="Active link color on playlist."/>
+		<param name="playlist_inactive_color" type="text" default="000000" label="Playlist Inactive color" description="Inactive link color on playlist."/>
+		<param name="playlist_hover_color" type="text" default="333333" label="Playlist Hover color" description="Hover link color on playlist."/>
+		
+		
+		<param name="@spacer" type="spacer" default="Media Player Parameters" label="" description="Players Settings" />
+			<param name="controls_always_show" type="list" default="1" label="Always Display Controls" description="Enable controls fade out for Video Player.">
+			<option value="0">No</option>
+		  <option value="1">Yes</option>
+		</param>
+			<param name="rounded_corners" type="list" default="1" label="Display Style" description="Rouned or Square Display">
+			<option value="0">Square</option>
+		  <option value="1">Rounded</option>
+		</param>
+		<param name="@spacer" type="spacer" default="Image and MP3 Parameters" label="" description="Image and MP3 Players Settings" />
+			<param name="background_color" type="text" default="cccccc" label="Background Color" description="background Color of Player."/>
+		<param name="text_line" type="list" default="1" label="Show Title" description="Shows a description in player for images or sound files.">
+			<option value="0">No</option>
+		  <option value="1">Yes</option>
+		</param>
+		<param name="text_line_timeout" type="text" default="5" label="Title Text Timeout" description="Image player text timeout (in seconds)."/>
+		<param name="transition_effect" type="list" default="fade" label="Transition Effect" description="Image Transition Effects for Image and Audio Players">
+			<option value="fade">Smooth Fade</option>
+			<option value="pagepeel">Roll Out</option>
+			<option value="tile">Tile Flip</option>
+			<option value="fuzz">Static Fuzz</option>
+			<option value="blur">Motion Blur</option>
+		</param>
+		<param name="effect_direction" type="list" default="top" label="Effect Direction" description="Effect Direction.">
+		  <option value="top">Top</option>
+			<option value="right">Right</option>
+			<option value="down">Down</option>
+			<option value="left">Left</option>
+			<option value="random">Random</option>
+		</param>
+		<param name="slideshow_timeout" type="text" default="8" label="Slideshow Pause" description="Slideshow pause time (in seconds) between images."/>
+		
+		<param name="stretch_content" type="list" default="1" label="Stretch Display" description="Stretch Content to Full Width of Player - Only for Image and Audio.">
+			<option value="0">No</option>
+		  <option value="1">Yes</option>
+		</param>
+		<param name="@spacer" type="spacer" default="Flash Policy File" label="" description="Cross Domain Policy File" />
+		<param name="pol_xml" type="text" size="80" default="modules/mod_jxtc_mediacenter/crossdomain.xml" label="Policy File" description="Path to Flash policy file (if needed)."/>
+		</params>
+</install>

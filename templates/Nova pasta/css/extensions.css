@@ -1,0 +1,127 @@
+/* Copyright (C) 2007 - 2011 YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+#left #form-login fieldset { border: none; }
+
+/*
+ * YOOsearch
+ */
+
+#page div.default div.yoo-search div.searchbox {
+	width: 120px;
+	height: 20px;
+	padding: 0px;
+	margin: 0px;
+	background: url(../images/searchbox_bg.png) 0 0 no-repeat;
+}
+#page div.default div.yoo-search div.searchbox:hover { background-position: 0 -20px; }
+
+#page div.default div.yoo-search div.searchbox input,
+#page div.default div.yoo-search div.searchbox button { margin-top: 1px; }
+
+#page div.yoo-search div.resultbox {
+	position: absolute;
+	right: -5px;
+	top: 34px;
+	z-index: 20;
+}
+
+#page div.default div.yoo-search div.resultbox-bg {
+	border-left: 1px solid #BDC8CE;
+	border-right: 1px solid #BDC8CE;
+}
+
+#page div.default div.yoo-search div.resultbox-bl { background: url(../images/yoosearch/resultbox_bl.png) 0 100% no-repeat; }
+#page div.default div.yoo-search div.resultbox-br { background: url(../images/yoosearch/resultbox_br.png) 100% 100% no-repeat; }
+#page div.default div.yoo-search div.resultbox-b { background: url(../images/yoosearch/resultbox_b.png) 0 100% repeat-x; }
+#page div.default div.yoo-search span.search-more { background: url(../images/yoosearch/more_icon.png) 0 0 no-repeat; }
+#page div.default div.yoo-search h3.search-header { background: url(../images/yoosearch/header_bg.png) 0 0 repeat-x; }
+#page div.default div.yoo-search .resultbox-bg a { background: #ECEFF0; }
+#page div.default div.yoo-search .resultbox-bg a:hover { background: #ffffff; }
+
+/*
+ * YOOtweet
+ */
+
+/* single */
+#header div.single div.yoo-tweet {
+	min-width: 200px;
+	max-width: 400px;
+}
+
+#header div.single div.yoo-tweet p {
+	margin-top: 0px;
+	text-align: center;
+}
+
+/*
+ * YOOlogin
+ */
+
+ 
+/* quick */
+#header span.quick span.yoo-login {}
+
+#header span.quick span.yoo-login span.login { width: 231px; }
+
+#header span.quick span.yoo-login span.login span.login-button-text,
+#header span.quick span.yoo-login span.login span.login-button-icon { margin-right: 0px; }
+
+#header span.quick span.yoo-login span.login span.lostpassword, 
+#header span.quick span.yoo-login span.login span.lostusername,
+#header span.quick span.yoo-login span.login span.registration { margin-top: 5px; }
+
+#header span.quick span.yoo-login span.logout {
+	margin-top: 10px;
+	overflow: visible;
+}
+
+#header span.quick span.yoo-login span.logout span.logout-button-text,
+#header span.quick span.yoo-login span.logout span.logout-button-icon { margin-right: 0px; }
+
+/* nifty quick */
+#header span.niftyquick span.yoo-login {}
+
+#header span.niftyquick span.yoo-login span.login {
+	width: 268px;
+	height: 50px;
+}
+
+#header span.niftyquick span.yoo-login span.login span.login-button { margin-right: 0px; }
+
+#header span.niftyquick span.yoo-login span.login span.lostpassword, 
+#header span.niftyquick span.yoo-login span.login span.lostusername,
+#header span.niftyquick span.yoo-login span.login span.registration { margin-top: 5px; }
+
+#header span.niftyquick span.yoo-login span.logout {
+	margin-top: 10px;
+	overflow: visible;
+}
+
+#header span.niftyquick span.yoo-login span.logout span.logout-button { margin-right: 0px; }
+
+ 
+#header span.niftyquick span.yoo-login span.login span.username input,
+#header span.niftyquick span.yoo-login span.login span.password input {
+	width: 95%;
+	height: 12px;
+	background: #ffffff;
+	border: 1px solid #ffffff;
+	overflow: hidden;
+}
+
+/*
+ * YOOslider
+ */
+ 
+#page div.photo-h div.yoo-slider ul.list div.corner {
+	position: absolute;
+	z-index: 999;
+	width: 10px;
+	height: 10px;
+	background: url(../images/yooslider/corners.png) 0 0 no-repeat;
+}
+
+#page div.photo-h div.yoo-slider ul.list div.corner-tl { top: 0px; left: 0px; }
+#page div.photo-h div.yoo-slider ul.list div.corner-bl { bottom: 0px; left: 0px; background-position: 0 100%; }
+#page div.photo-h div.yoo-slider ul.list div.corner-tr { top: 0px; right: 7px; background-position: 100% 0; }
+#page div.photo-h div.yoo-slider ul.list div.corner-br { bottom: 0px; right: 7px; background-position: 100% 100%; }

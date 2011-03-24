@@ -1,0 +1,125 @@
+/** Top Nav **/
+#navigation {
+float:right;
+height:66px;
+margin:0 auto;
+width:auto;
+
+     
+     li a:hover { cursor:pointer; }
+     
+     ul.menu > li  
+     {
+         background:url('../images/nav-sep.png') repeat-y top right;  
+         height:47px;
+         padding-top:18px !important;     
+     }  
+     
+     ul.menu > li > a { height:41px; }
+     
+     
+     ul.menu > li.back { background:none; }
+     ul.menu > li.last { background:none; }
+     
+     ul.menu, ul.menu ul 
+     {
+         line-height:1;
+         list-style-image:url('none');
+         list-style-position:outside;
+         list-style-type:none;
+position:relative;
+         
+         li.back, li.back:hover { background:url(../images/bg-nav-lamp.png) repeat-x scroll left bottom;
+             float:none;
+             height:48px;
+             padding:0;
+						 margin-left:-1px;
+             position:absolute;
+             width:5px;
+             z-index:8 !important; 
+             .left 
+             {      
+                 background:url(../images/bg-nav-lamp-tab.png) no-repeat scroll top right;  
+                 height:12px;
+                 width:12px;
+								 margin:40px auto 0px auto;
+             }    
+         }
+                 
+         
+         li 
+         { 
+             float:left;
+             padding:2px 5px;
+             width:auto; 
+
+                         
+             a 
+             {
+                position:relative;
+                z-index:100;  
+                color:!menuLinks-color; 
+                display:block;
+                font-size:12px;
+                line-height:28px;
+                padding:0px 10px 7px 10px;
+                margin-bottom:0px;
+                text-decoration:none;
+                font-weight: bold;     
+             }  
+             
+             ul 
+             {
+                 left:auto;
+                 position:absolute; 
+                 display:none;
+                 width:172px;                 
+                 background:#FFFFFF 0 0;
+                 border:1px solid #EFEFEF;      
+                 
+                 
+                 li 
+                 { 
+                     padding:5px 0px 0px 0px;
+                        
+                     &.first:hover { }
+                     &:hover { background:#FAFAFA;  } 
+                     
+                     a
+                     {
+                         color:#000000;
+                         font-size:12px;
+                         line-height:30px;
+                         padding-left:15px;
+                         width:145px;
+                     }  
+                     
+                     ul 
+                     {
+                         margin:-25px 0px 0px 170px;
+                         li 
+                         { 
+                             padding:5px 0px 0px 0px;
+
+                             &:hover { background:#FAFAFA; } 
+
+                             a
+                             {
+                                 color:#000000;
+                                 font-size:12px;
+                                 line-height:30px;
+                                 padding-left:15px;
+                                 width:145px;
+                             } 
+                         }     
+                         
+                        /* &:hover > ul { font-size:120%; left:auto;}    */      
+                     }  
+                 }    
+             }  
+             
+             /* &:hover > ul { font-size:120%; left:auto;}  */
+             
+         }
+     }
+ }

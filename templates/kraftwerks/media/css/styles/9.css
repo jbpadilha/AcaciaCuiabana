@@ -1,0 +1,28 @@
+body #bg_wrap {background: url('../../images/backgrounds/paintsplash2.jpg') no-repeat top;}
+body #bg_wrap #header_container { height:220px; }
+#navigation ul.menu li a {color: #c2d25d;}
+body .box .box_left_title .box_right_title h3.modtitle .first_word {color: #b0c04c;}
+body .box .box_left_title .box_right_title h3.modtitle .rest {color:#CCCCCC;}
+
+
+
+/** Additional CSS for COM Templates **/
+.vmshowc {color: #b0c04c!important;}
+.productPrice {color: #b0c04c!important;}
+.price {color: #b0c04c!important;}
+#community-wrap .app-box-title {color: #b0c04c!important;}
+.app-box-header {color: #b0c04c!important;}
+.app-box-title, .app-box-title a {color:#b0c04c!important;}
+.app-box-info h3  {color: #b0c04c!important;}
+#Kunena .fbl {color: #b0c04c;}
+#Kunena a.fb_title, #Kunena .fb_title {color:  #b0c04c;}
+
+#aboutthisvideotitle {color:  #b0c04c;}
+.videotitleinmainarea {color: #b0c04c;}
+#commentstitle {color:  #b0c04c;}
+
+.listnavigationtitle {color: #b0c04c;}
+h2.app-box-title a {color: #b0c04c;}
+.listing-summary h3 {color: #b0c04c;;}
+.category .subcat   {color: #b0c04c;!important;}
+.category .subcat a {color: #b0c04c;!important;}

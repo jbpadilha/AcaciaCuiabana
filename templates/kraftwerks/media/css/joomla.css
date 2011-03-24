@@ -1,0 +1,8 @@
+/* floats */
+div.joomla .float-left { float: left; overflow: hidden; }
+div.joomla .float-right { float: right; overflow: hidden; }
+
+div.joomla .width25 { width: 24.999%; }
+div.joomla .width33 { width: 33.333%; }
+div.joomla .width50 { width: 49.999%; }
+div.joomla .width100 { width: 100%; }

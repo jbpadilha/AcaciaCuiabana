@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<coreSettings> 
+	<setting name="cssProcess" label="CSS Processor"> 
+		<value>false</value>
+		<tooltip>    
+			themeMagic includes a CSS processor so it can auto-magically generate a new stylesheet after style changes. 
+			When your done editing its a good idea to turn off this processing to reduce load.
+		</tooltip>
+	</setting>  
+	<setting name="gzipCSS" label="CSS Packing"> 
+		<value>true</value>
+		<tooltip>  
+			Disables and Enables The Packing of CSS.
+		</tooltip>
+	</setting>  
+	<setting name="gzipJS" label="JS GZIP"> 
+		<value>false</value>
+		<tooltip>   
+			Disables and Enables The Packing of JS.
+		</tooltip>
+	</setting>       
+	<setting name="moduleTools" label="Module Details"> 
+		<value>false</value>
+		<tooltip>
+			Displays an overlay on every module; with position, chrome, and suffix details.
+		</tooltip>
+	</setting>
+</coreSettings>

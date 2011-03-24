@@ -1,0 +1,763 @@
+
+@include "reset.css";
+@include "text.css";    
+@include "forms.css";  
+@include "menu-base.css";    
+@include "joomla.css"; 
+@include "typography.css";
+
+
+@constants 
+{
+    main_wrap_width:983px;
+}        
+
+/** Genrate A Grid For Use In Template **/
+
+
+@grid
+{
+	column-width:61;
+	column-count:16;
+	left-gutter-width:13px;
+	right-gutter-width:13px;
+	baseline:13px;
+	unit:px;
+}         
+
+/* 
+ * TABLE OF CONTENTS
+ ************************************************ 
+
+00 - Global Elements - Standard Elements     
+01 - Main Structure - Columns, clearfix, etc.
+02 - Navigation and Header - Logo and Navigation  
+03 - Modules - mod suffixes et.  
+04 - TYPOGRAPHY - mod suffixes et.
+
+
+/* ----------------------------------------------*/
+
+/* 00 - GLOBAL ELEMENTS
+/* ----------------------------------------------*/
+ 
+body {
+    background:url(../images/bg-body.png) repeat-x; 
+    font-family:!body-fontFamily; 
+    font-size:#[!body-fontSize]px;
+    line-height:17px;
+    color:!body-color  
+} 
+
+body { background:url(../images/bodybgs/!bodyImg_name) repeat-x;  }
+
+#main_container a {
+font-family:  Arial, Helvetica, sans-serif; 
+color:!link-color; } 
+
+
+
+p {font-size:12px;   
+    line-height:17px;
+    color:#777; } 
+	
+.button {background: #e4e4e4; color: #999999; padding: 2px; border: none; font-size: 11px;}  
+
+/* ----------------------------------------------*/
+
+/* 01 - MAIN STRUCTURE
+/* ----------------------------------------------*/
+  
+.clearBoth {clear:both;}                
+
+.hideTxt { text-indent:-9999px; }   
+
+
+/** Columns **/  
+
+.column, .columnSeparator {float:left;}  
+.columnSeparator { min-height:50px; }
+
+.module-column { float:left; padding-right:13px; }     
+.last-module-column { padding-right:0px; }     
+
+.module-set { float:left; } 
+.wrapper { width:#[!wrapperwidth]px; margin:0px auto; }   
+    
+
+/** Wraps **/
+
+#bg_wrap {  float:left; width:100%; }
+
+#header_container { 
+    float:left;
+    margin-bottom:20px;
+    min-height:90px;
+    width:100%;   
+}
+      
+#bg_wrap {
+    background:url(../images/backgrounds/!headerImg_name) no-repeat top center;  
+}       
+#main_wrap { overflow:auto;} 
+#cart_push { float:left; margin-bottom:140px; width:100%; }    
+#bottom_bg {
+    background:transparent url(../images/bottombgs/!bottomImg_name) repeat-x scroll center bottom;
+    float:left;
+    height:340px;
+    margin-top:24px;
+    width:100%;  
+}  
+
+.noNewsflash #main_container { margin-top:15px; }    
+.noHeader #main_container { margin-top:140px; } 
+
+/* ----------------------------------------------*/
+
+/* 02 - NAVIGATION
+/* ----------------------------------------------*/ 
+
+/** TOP NAV + LOGO **/
+#nav_container 
+{   
+    height:78px;
+    width:100%;
+    position:fixed;
+    +quick-clearfix        
+    top:0; 
+    z-index:1000; 
+    background:url(../images/bg-topnav.png) repeat-x scroll 0 0;  
+     
+    #logo { 
+		z-index: 9000;  
+        float:left;
+        height:!logoImg_height; 
+        width:!logoImg_width;
+        background:url(../images/logos/!logoImg_name) no-repeat;      
+        margin-top:15px;
+		margin-right:0px
+    }
+
+		.wrapper{
+			position:relative;
+		}
+}  
+    
+.firefox #nav_container, .firefox #nav_shadow { overflow-y:hidden; }   
+ 
+/** Nav Shadow **/  
+#nav_shadow {
+    background:url(../images/bg-nav-shadow.png) repeat-x; 
+    z-index:900; 
+    height:21px;
+    width:100%; 
+    top:78px;     
+    position:fixed;  
+}   
+      
+     
+#top {
+    position:relative;
+    top:90px;
+}
+
+/** Vertical Menu **/
+
+.menu.box, .menu.flip 
+{    
+    .box_content_left { padding:0px; }
+    ul 
+    {
+        li 
+        { 
+	          height:47px;
+            a
+            {
+                height:47px;     
+                background:url(../images/bg-vnav.png) repeat-x;  
+                display:block;
+                width:100%;  
+                color:#A3D2E5;  
+                span
+                { 
+                    display:block;
+                    width:auto; padding-left:20px; padding-right:0; padding-top:12px; padding-bottom:0
+                }
+
+                img
+                { 
+                    display:block;
+                    padding:12px 0 0 20px;
+                    width:auto;
+                }
+                
+            }   
+
+        }    
+    }
+
+}
+
+.vertmenu.box, .menu.flip 
+{    
+    .box_content_left { padding:0px; }
+    ul 
+    {
+        li, li:hover
+        { 
+            height:47px;
+            background:url(../images/vmenu-li-bg.png) 0px 0px repeat-x;
+            a, a:hover
+            {
+                height:47px;     
+                display:block;
+                width:100%;  
+                color:#A3D2E5;
+                
+                span 
+                { 
+                    display:block;
+                    padding:11px 0px 0px 20px;
+                    width:auto;
+                }
+                
+            }   
+
+        }    
+    }
+
+}
+
+
+.vertmenu.box, .menu.flip 
+{    
+    .box_content_left { padding:0px; }
+    ul 
+    {
+        li 
+        { 
+					div.vMenuBg{
+			                height:47px;     
+        	            background:url(../images/vnav-over.png) repeat-x;
+        	            background:url(../images/vmenu-hover.png) no-repeat;     
+					}
+        }    
+    }
+
+}
+
+
+/* ----------------------------------------------*/
+
+/* 03 - MODULES SUFFIXES 
+/* ----------------------------------------------*/  
+
+/** NewsFlash **/       
+#newsflash_wrap { margin-top:120px; float:left; width:100%; }
+  
+/** Box Wraps The Modules and Component **/
+.box
+{    
+    margin-bottom:13px;
+    
+    .box_left_title 
+    {
+        background:url(../images/box-header.png) no-repeat scroll 0 0;
+        margin-right:14px;   
+        height:46px;
+        
+        .box_right_title
+        {
+            background:url(../images/box-header-right.png) no-repeat scroll right 0;   
+            height:46px;      
+            margin-right:-14px;
+                       
+            h3.modtitle, .pagetitle { padding:15px 0px 0px 15px; }
+            h3.modtitle { color:!moduleTitleRest-color; }  
+            h3.modtitle .first_word { color:!moduleTitleFirst-color; }      
+            
+            .pagetitle .first_word { color:!pageTitleFirst-color; }     
+            .pagetitle { color:!pageTitleRest-color; }
+        }
+    }    
+    
+    .box_footer_left 
+    {
+        background:url(../images/box-footer.png);
+        height:47px;    
+        margin-right:14px;
+        
+        .box_footer_right { background:url(../images/box-footer-right.png) no-repeat scroll right top; 
+            height:47px; 
+            margin-right:-14px;  
+        }
+    }   
+ 
+    .box_content_left { 
+        border:1px solid #ececec; 
+        padding:15px; 
+        background:#fff url(../images/box-shadow.png) no-repeat 0 0; 
+    }
+}       
+
+.small { 
+    
+    .box_footer_left 
+    {
+        background:url(../images/box-footer-sm.png);
+        height:24px;    
+        margin-right:7px;
+
+        .box_footer_right { background:url(../images/box-footer-sm-right.png) no-repeat scroll right top; 
+             height:24px; 
+             margin-right:-7px;
+        }
+    }
+}  
+
+.tab {
+    .box_footer_left 
+    {
+        background:url(../images/box-footer-tab.png);
+        height:47px;    
+        margin-right:42px;
+        
+        .box_footer_right { background:url(../images/box-footer-tab-right.png) no-repeat scroll right top; 
+            height:47px; 
+            margin-right:-42px;  
+        }
+    }
+}
+ 
+/** Box Wraps The Modules and Component **/
+
+.flip  
+{    
+    .box_left_title 
+    {
+        background:url(../images/box-flip-header.png);
+        height:46px;    
+        padding-left:5px;
+        
+        .box_right_title
+        {
+            background:url(../images/box-flip-header.png) scroll right top;   
+            height:46px;
+        }
+    }     
+    
+    .box_content_left 
+    {
+        background-image:none;     
+        background:#f6f6f6;     
+        border-top:none;   
+    }   
+    
+    .box_content_right { margin-top:-46px;}
+    
+    .box_footer_left 
+    {
+        background:url(../images/box-flip-footer.png) no-repeat 0 0;
+        margin-right:14px; 
+        height:46px;
+        
+        .box_footer_right
+        {
+            background:url(../images/box-flip-footer-right.png) no-repeat scroll right 0;   
+            height:46px;      
+            margin-right:-14px;   
+        }           
+        
+        h3.modtitle, .pagetitle { padding:15px 0px 0px 15px; }
+        h3.modtitle  { color:!moduleTitleRest-color; }  
+        h3.modtitle .first_word { color:!moduleTitleFirst-color; } 
+        .pagetitle .first_word { color:!pageTitleFirst-color; }     
+        .pagetitle { color:!pageTitleRest-color; }  
+
+    }  
+    
+} 
+
+
+
+/** Avdert Suffix **/
+
+.module.advert
+{
+    .box_left_title 
+    {
+        background:none;
+        height:auto;    
+        padding-left:0px;
+        
+        .box_right_title
+        {
+            background:none;   
+            height:auto;
+            h3.modtitle .first_word { color:#b0c04c; }
+        }
+    } 
+       
+    .box_footer_left 
+    {
+        background:none;
+        height:auto;    
+        padding-left:0px;
+        
+        .box_footer_right{ background:none; height:auto; }
+    }     
+    
+     .box_content_left { border:none; padding:0px; background:none; }
+}        
+
+/** No Padding For Content **/
+
+.nopad
+{
+    .box_content_left { padding:0px; }
+}
+
+
+/** Simple Box Chrome **/
+.simple 
+{
+    h3.modtitle .first_word { color:#b0c04c; }
+    h3.modtitle {  
+        color:#c2c2c2;
+        background:#fff;  
+        +border-radius(3px); padding-left:12px; padding-right:0px; padding-top:5px; padding-bottom:5px
+    }      
+    
+    .module_content { padding:5px 0px 0px 12px; }
+}     
+
+#userMods20-23 .simple h3.modtitle { background:none; }    
+
+/** Module Head Suffixes **/   
+.module.floral, .module.rss, .module.search, .module.video, .module.photo, .module.blog, .module.user, .module.sale, .module.sun, .module.diamond, .module.home, .module.tools, .module.coffee, .module.mail, .module.lightning, .module.percent, .module.clock, .module.arrow
+{    
+    h3.modtitle {     
+        float:left;
+        height:24px;
+        margin:3px 0 0 10px;
+        padding:11px 0 0 24px !important;
+    }
+}   
+    
+.module.floral {
+    h3.modtitle { 
+        background:url(../images/floral-icon.png) no-repeat scroll 0% 15px;
+    }
+}  
+
+.module.rss {
+    h3.modtitle { 
+        background:url(../images/rss_h3.png) no-repeat scroll 6px 13px;
+		padding-left: 30px!important;
+    }
+}   
+
+.module.search {
+    h3.modtitle { 
+        background:url(../images/search_h3.png) no-repeat scroll 6px 13px;
+		padding-left: 30px!important;
+    }
+}   
+
+.module.video {
+    h3.modtitle { 
+        background:url(../images/video_h3.png) no-repeat scroll 6px 13px;
+		padding-left: 30px!important;
+    }
+}      
+
+.module.photo {
+    h3.modtitle { 
+        background:url(../images/photo_h3.png) no-repeat scroll 6px 13px;
+		padding-left: 40px!important;
+    }
+}
+
+.module.blog {
+    h3.modtitle { 
+        background:url(../images/blog_h3.png) no-repeat scroll 6px 13px;
+		padding-left: 30px!important;
+    }
+}
+
+.module.user {
+    h3.modtitle { 
+        background:url(../images/user_h3.png) no-repeat scroll 6px 13px;
+		padding-left: 30px!important;
+    }
+} 
+
+.module.sale {
+    h3.modtitle { 
+        background:url(../images/sale_h3.png) no-repeat scroll 6px 13px;
+		padding-left: 30px!important;
+    }
+} 
+
+.module.sun {
+    h3.modtitle { 
+        background:url(../images/sun_h3.png) no-repeat scroll 6px 13px;
+		padding-left: 30px!important;
+    }
+}
+
+.module.diamond {
+    h3.modtitle { 
+        background:url(../images/diamond_h3.png) no-repeat scroll 6px 13px;
+		padding-left: 30px!important;
+    }
+}
+
+.module.home {
+    h3.modtitle { 
+        background:url(../images/home_h3.png) no-repeat scroll 5px 13px;
+		padding-left: 28px!important;
+    }
+}   
+
+.module.tools {
+    h3.modtitle { 
+        background:url(../images/tools_h3.png) no-repeat scroll 6px 13px;
+		padding-left: 35px!important;
+    }
+} 
+
+.module.coffee {
+    h3.modtitle { 
+        background:url(../images/coffee_h3.png) no-repeat scroll 6px 13px;
+		padding-left: 33px!important;
+    }
+}
+
+.module.percent {
+    h3.modtitle { 
+        background:url(../images/percent_h3.png) no-repeat scroll 6px 13px;
+		padding-left: 30px!important;
+    }
+}
+
+.module.mail {
+    h3.modtitle { 
+        background:url(../images/mail_h3.png) no-repeat scroll 6px 13px;
+		padding-left: 30px!important;
+    }
+}
+
+
+.module.arrow {
+    h3.modtitle { 
+        background:url(../images/arrow_h3.png) no-repeat scroll 2px 13px;
+		padding-left: 28px!important;
+    }
+}
+
+.module.clock {
+    h3.modtitle { 
+        background:url(../images/clock_h3.png) no-repeat scroll 6px 13px;
+		padding-left: 30px!important;
+    }
+}
+
+.module.lightning {
+    h3.modtitle { 
+        background:url(../images/lightning_h3.png) no-repeat scroll 8px 15px;
+    }
+}
+/** Underline Suffix **/
+ul.underline, .module.underline ul 
+{
+    li 
+    {
+        a { color:#afafaf !important; }     
+        border-bottom:1px dotted #d1d1d1;
+        padding:5px 0px 5px 0px;
+    }
+}
+
+/** Cart Module **/
+#cart {
+    background:url(../images/bottombar-bkg.png) 0px 40px repeat-x;    
+    bottom:0;
+    height:195px;
+    position:fixed;
+    width:100%;
+    z-index:1000;     
+/*    overflow-y:hidden;  */
+    
+    .wrapper { margin-top:120px; }
+    
+/*    #kraftwerks-wrap-l { float:left; width:360px; } */
+/*    #kraftwerks-wrap-l, #kraftwerks-wrap-r { width:380px; }                  */
+    #kraftwerks-wrap-l { float:left; margin-top:-24px;width:360px; height:79px;background:url(../images/rctFake.png) top left no-repeat;}
+    #kraftwerks-wrap-r {float:right; }
+}  
+
+#kraftwerks-bottom-panel-toggler{
+	display:block;
+	position:relative;
+	top:-30px;
+	width:19px;
+	height:13px;
+	margin-left:0px;
+  background:url(../images/btm-cart-close.png) no-repeat;  
+	cursor:pointer;  
+}
+
+/* ----------------------------------------------*/
+
+/* 04 - Module Wraps
+/* ----------------------------------------------*/
+
+#userMods15-19
+{
+    background:#efefef;
+    +border-radius(5px);
+    padding:13px; 
+    width:957px;   
+    margin-bottom:15px
+}     
+
+.userModColumnWrap {margin:0 auto; width:#[!wrapperwidth]px; overflow:auto; }
+ 
+#userColumns {margin:0 auto; width:#[!wrapperwidth]px;}     
+
+#userMods20-23 {overflow:hidden;}
+#legalMods { overflow:hidden; margin:24px auto 160px auto;  }  
+
+/* ----------------------------------------------*/
+
+/* 05 - TYPOGRAPHY
+/* ----------------------------------------------*/ 
+
+.componentheading {
+	font-family: Trebuchet MS, Arial, Helvetica, sans-serif; 
+	font-size:#[!comHead-fontSize]px;
+	margin-bottom: 18px;
+	line-height:1em;  
+	color:!componentHeading-color;
+}  
+
+.contentheading {
+	font-family: Trebuchet MS, Arial, Helvetica, sans-serif; 
+	font-size:#[!conHead-fontSize]px;
+	line-height:1em;
+	color:!contentHeading-color;  
+	display:block;
+    float:left;
+}            
+ 
+a { text-decoration:none; }           
+
+#main_container .vertmenu.box ul li a {
+    font-family:Arial, Trebuchet MS, Helvetica, sans-serif;      
+}
+
+/** Module Font Size **/
+
+.module h3.modtitle { font-size:#[!module-fontSize]px;}
+
+/* ----------------------------------------------*/
+
+/* 06 - CONTENT
+/* ----------------------------------------------*/  
+
+#component-com_content .article, #component-com_content .item {
+    background:url(../images/vmbottomfade.png) repeat-x bottom;  
+    padding-bottom:15px;
+}    
+
+#component-com_content .article { overflow-y:auto; }
+
+#component-com_content .article_text {
+    padding:19px 19px 8px 16px; 
+}
+
+#component-com_content .headline {
+    height:30px;    
+    border-bottom:1px solid #e7e7e7;      
+    background:url(../images/box-shadow-new.png) repeat-x;  
+    padding:19px 0px 8px 16px;
+}      
+
+#component-com_content .icons { float:right; margin-right:25px; }  
+ 
+#component-com_content .pagination, #component-com_content .morearticles {  
+     background:url(../images/vmbottomfade.png) repeat-x bottom; 
+     padding:19px 0px 12px 16px;   
+} 
+
+#component-com_content .morearticles h3 {
+    float:left;
+    margin-top:19px;
+    width:700px;
+}                                     
+
+#component-com_content .article_text img { padding-right:6px;} 
+
+#component-com_content .article_info_container {
+    height:30px;    
+    background:url(../images/datebar-fade.png) repeat-x;   
+    padding:6px 0px 8px 16px;
+}   
+
+.article_info_container p { font-weight:600; font-size:10px; }  
+
+.box.com_content
+{
+    .box_content_left { padding:0px; overflow-y:auto; }
+}
+   
+.box.component {
+    .box_left_title 
+    {
+        background:url(../images/component_head.png) no-repeat scroll 0 0;
+        margin-right:14px; 
+        height:46px;
+        
+        .box_right_title
+        {
+            background:url(../images/component_head-right.png) no-repeat scroll right 0;   
+            height:46px;      
+            margin-right:-14px;  
+            
+            .pagetitle { font-size:#[!pageTitle-fontSize]px; padding:0px 0 0 15px; }
+        }     
+    }
+} 
+ 
+
+#eventlist, #community-wrap, #main_wrap .componenthead {
+    .box_left_title 
+    {
+        background:url(../images/component_head-round.png) no-repeat scroll 0 0;
+        margin-right:14px; 
+        height:55px;
+        
+        .box_right_title
+        {
+            background:url(../images/component_head-round-right.png) no-repeat scroll right 0;   
+            height:55px;      
+            margin-right:-14px;  
+           .pagetitle {  font-size:20px; padding:8px 0 0 15px; }
+            
+        }     
+    }
+}  
+ 
+.user_flash { display:none; }  
+
+.box.com_virtuemart .box_content_left {
+    overflow:hidden;
+}   
+
+.filter { height:30px;    
+    background:url(../images/datebar-fade.png) repeat-x;   
+    padding:4px 0px 12px 16px;  color: #777;}  
+	
+     
+                   

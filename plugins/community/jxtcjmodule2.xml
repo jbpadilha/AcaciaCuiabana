@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="community" method="upgrade">
+	<name>jmodule2</name>
+	<author>JoomlaXTC</author>
+	<creationDate>2010-01-07</creationDate>
+	<copyright>Copyright (C) 2010 JoomlaXTC</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorUrl>http://www.joomlaxtc.com</authorUrl>
+	<version>1.0</version>
+	<isapplication>true</isapplication>
+	<description>
+		Display a module position.
+	</description>
+	<files>
+		<file plugin="jxtcjmodule2">jxtcjmodule2.php</file>
+		<folder>jxtcjmodule2</folder>
+	</files>
+	
+	<params>
+		<param name="coreapp" type="list" default="0" label="Core Application" description="Causes this application to not appearin the users applications list but it will allow this application to appear in the user profile automatically if selected.">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		<param name="cache" type="list" default="1" label="Caching" description="Select whether to cache the content of this plugin">
+			<option value="1">Use Global</option>
+			<option value="0">No</option>
+		</param>
+		<param name="position" type="text" label="Module position name" default="jmodule2" description="Module Position to be displayed (default: jmodule2)." />
+	</params>
+</install>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>  
+	<config>
+		<options>
+			<optionset name="Text" label="Text"> 
+				<param name="body-fontSize" type="textInput" default="12" label="Global Font Size">  
+					<value>12</value>
+					<description>  
+						Set The Body/Global Font Size
+					</description>
+				</param>  
+				<param name="body-fontFamily" type="fontFamily" default="Arial" label="Global Font Family">  
+					<value>Arial</value>
+					<description>  
+						Select The Global Font Family
+					</description>
+				</param>
+				<param name="module-fontSize" type="textInput" default="12" label="Module Title Font Size">  
+					<value>13</value>
+					<description>  
+						Set The Module Title Font Size
+					</description>
+				</param>     
+				<param name="comHead-fontSize" type="textInput" default="30" label="Component Font Size">  
+					<value>30</value>
+					<description>  
+						Set The Component Heading Font Size. Affects only .componentheading, will not change all component heads
+					</description>
+				</param> 
+				<param name="conHead-fontSize" type="textInput" default="23" label="Content Heading Font Size">  
+					<value>23</value>
+					<description>  
+						Set The Content Heading Font Size. Affects only .contentheading, will not change all content heads 
+					</description>
+				</param>         
+				<param name="pageTitle-fontSize" type="textInput" default="16" label="Pagetitle Heading Font Size">  
+					<value>16</value>
+					<description>  
+						Set The PageTitle Heading Font Size. Affects only .pagetitle.
+					</description>
+				</param>
+			</optionset>  
+			<optionset name="Styling-Images" label="Styling and Images"> 
+				<param name="styles" type="fileSelect" ext="css" label="Styles" folder="styles">  
+					<value>9.css</value>
+					<description>  
+					   Select a Alternate Style
+					</description>
+				</param>          
+				<param name="menustyles" type="fileSelect" ext="css" label="Menu Styles" folder="menus">  
+					<value>dualfish.css</value>
+					<description>  
+					   Select a Menu Style
+					</description>
+				</param>    
+				<param name="menuscripts" type="fileSelect" ext="js" label="Menu Scripts" folder="menus">  
+					<value>jquery.js</value>
+					<description>  
+					   Select a Menu Script
+					</description>
+				</param>
+				<param name="logoImg" type="imgSelect" label="Logo" folder="logos">  
+					<value>logo-wide1.png</value>
+					<width>170px</width>
+					<height>40px</height>
+					<description>  
+					   Select a Logo.
+					</description>
+				</param>
+				<param name="headerImg" type="imgSelect" label="Newsflash Backgrouns" folder="backgrounds">  
+					<value>cubesplat.png</value>
+					<width>1920px</width>
+					<height>648px</height>
+					<description>  
+					   Select a NewsFlash Background.
+					</description>
+				</param>    
+				<param name="bodyImg" type="imgSelect" label="Body Backgrounds" folder="bodybgs">  
+					<value>bg-body.png</value>
+					<width>1px</width>
+					<height>567px</height>
+					<description>  
+					   Select a Body Background
+					</description>
+				</param>    
+				<param name="bottomImg" type="imgSelect" label="Bottom Background" folder="bottombgs">  
+					<value>vmbottomfade.png</value>
+					<width>6px</width>
+					<height>352px</height>
+					<description>  
+					   Select a Bottom Background.
+					</description>
+				</param>
+			</optionset> 
+			<optionset name="Layout-Options" label="Layout Options"> 
+				<param name="userfiveflip" type="onOff" label="Flip User 5">  
+					<value>false</value>
+					<description>  
+						Move The User 5 Position To The Right
+					</description>
+				</param>  
+				<param name="wrapperwidth" type="textInput" default="983" label="Main Wrap Width">  
+					<value>983</value>
+					<description>  
+						Change The Width Of Main Wrapper
+					</description>
+				</param>  
+				<param name="leftwidth" type="textInput" default="249" label="Left Width">  
+					<value>236</value>
+					<description>  
+						Change The Width Of Left Position
+					</description>
+				</param>    
+				<param name="rightwidth" type="textInput" default="236" label="Right Width">  
+					<value>236</value>
+					<description>  
+						Change The Width Of Right Position
+					</description>
+				</param>    
+				<param name="user5width" type="textInput" default="236" label="User5 Width">  
+					<value>236</value>
+					<description>  
+						Change The Width Of User 5 Position
+					</description>
+				</param>
+			</optionset>  
+			<optionset name="Options" label="Options">  
+				<param name="frontpage" type="onOff" label="Frontpage Enable">  
+					<value>false</value>
+					<description>  
+						Turn On or off Component On Frontpage.
+					</description>
+				</param>
+			</optionset>
+		</options>  
+		<cssoptions>  
+			<cssoptionset affects="body" name="Body" category="General"> 
+				<group name="color" label="Colors"> 
+					<cssparam name="body-color" type="color" default="#545454"><value>#777777</value></cssparam>
+				</group> 
+			</cssoptionset> 
+			<cssoptionset affects="#main_container a" name="Links" category="General"> 
+				<group name="color" label="Colors"> 
+					<cssparam name="link-color" type="color" default="#5acfef"><value>#828282</value></cssparam>
+				</group>   
+			</cssoptionset>     
+			<cssoptionset affects=".contentheading" name="Content-Heading" category="Headings"> 
+				<group name="color" label="Colors"> 
+					<cssparam name="contentHeading-color" type="color" default="#999999"><value/></cssparam>
+				</group> 
+			</cssoptionset> 
+			<cssoptionset affects=".componentheading" name="Component-Heading" category="Headings"> 
+				<group name="color" label="Colors"> 
+					<cssparam name="componentHeading-color" type="color" default="#999999"><value/></cssparam>
+				</group> 
+			</cssoptionset>    
+			<cssoptionset affects=".pagetitle span.first_word" name="Page-Title-First-Word" category="Headings"> 
+				<group name="color" label="Colors"> 
+					<cssparam name="pageTitleFirst-color" type="color" default="#B0C04C"><value/></cssparam>
+				</group> 
+			</cssoptionset> 
+			<cssoptionset affects=".pagetitle span.rest" name="Page-Title-Rest" category="Headings"> 
+				<group name="color" label="Colors"> 
+					<cssparam name="pageTitleRest-color" type="color" default="#C2C2C2"><value/></cssparam>
+				</group> 
+			</cssoptionset>  
+			<cssoptionset affects="ul.menu li a" name="Menu-Links" category="Navigation"> 
+				<group name="color" label="Colors"> 
+					<cssparam name="menuLinks-color" type="color" default="#A3D2E5"><value/></cssparam>
+				</group> 
+			</cssoptionset>  
+			<cssoptionset affects=".modtitle span.first_word" name="Module-Title-First-Word" category="Modules"> 
+				<group name="color" label="Colors"> 
+					<cssparam name="moduleTitleFirst-color" type="color" default="#B0C04C"><value/></cssparam>
+				</group> 
+			</cssoptionset> 
+			<cssoptionset affects=".modtitle span.rest" name="Module-Title-Rest" category="Modules"> 
+				<group name="color" label="Colors"> 
+					<cssparam name="moduleTitleRest-color" type="color" default="#C2C2C2"><value/></cssparam>
+				</group>  
+			</cssoptionset>    
+		</cssoptions>
+	</config>
+</configs>

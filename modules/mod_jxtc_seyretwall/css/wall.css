@@ -1,0 +1,49 @@
+/* JXTC Popups*/
+.jxtcpopup{
+  position:absolute;
+  float:left;
+  top:0;
+  left:0;
+  margin:0px auto 0px auto;
+  padding:5px;
+  z-index:99999;
+  border:0px solid #d1d1d1;
+  background: transparent;
+}
+
+.jxtcinner{
+  width:620px;
+}
+
+.jxtcpopupclose{
+  position:absolute;
+	height:69px;
+	width:15px;
+  margin:0;
+  padding:4px 6px 0px 6px;
+  font-size:0px;
+  font-weight:bold;  
+  color:#FFFFFF;
+  top:58px;
+  right:113px;
+  cursor:pointer;
+  background: url('../images/close.gif') no-repeat;
+}
+
+.jxtcpopupdrag{
+  position:absolute;
+	height:69px;
+	width:15px;
+  margin:0;
+  padding:4px 6px 0px 6px;
+  font-size:0px;  
+  color:#FFFFFF;
+  top:138px;
+  right:113px;
+  cursor:pointer;
+  background: url('../images/drag.gif') no-repeat;
+}
+
+.tip{
+	display:none;
+}

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XTC>
+	<name>Default</name>
+	<description>Default Typography</description>
+   <params>
+		<param name="direction" type="radio" default="ltr" label="Text Direction" description="Choose the text direction for the template." >
+			<option value="ltr">LTR</option>
+			<option value="rtl">RTL</option>
+		</param>
+		<param name="body_fontSize" type="text" default="11" label="Global Font Size" description="Set The Body/Global Font Size" />
+		<param name="body_fontFamily" type="text" default="Arial" label="Global Font Family" description="Select The Global Font Family" />
+		<param name="comHead_fontSize" type="text" default="18" label="Component Font Size" description="Set The Component Heading Font Size. Affects only .componentheading, will not change all component heads" />
+		<param name="comHead_fontFamily" type="text" default="Arial" label="Component Heading Font Family" description="Set The Component Heading Font Family" />
+		<param name="conHead_fontSize" type="text" default="14" label="Content Heading Font Size" description="Set The Content Heading Font Size. Affects only .contentheading, will not change all content heads" />
+		<param name="conHead_fontFamily" type="text" default="Arial" label="Content heading Font Family" description="Set The Content Heading Font Family" />
+		<param name="modHead_fontSize" type="text" default="14" label="Module Title Font Size" description="Set The Mod Title Size" />
+		<param name="cfonts" type="radio" default="1" label="Use Cufon Fonts" description="Enable or Disable Cufon fonts calls." >
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		<param name="gfonts" type="radio" default="1" label="Use Google Fonts" description="Enable or Disable Google fonts calls." >
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		 <param name="linkSize" type="list" default="12" label="Link Font Size" description="Link Font Size">
+        <option value="8">8</option>
+        <option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+		<option value="13">13</option>
+		<option value="14">14</option>
+		<option value="15">15</option>
+		<option value="16">16</option>
+        </param>
+		 <param name="linkFont" type="list" default="on" label="Link Font Family" description="Link Font Family">
+        <option value="Arial, Helvetica, sans-serif">Arial, Helvetica, sans-serif</option>
+		<option value="Verdana, Geneva, sans-serif">Verdana, Geneva, sans-serif</option>
+		<option value="Tahoma, Geneva, sans-serif">Tahoma, Geneva, sans-serif</option>
+		<option value="Georgia, Times New Roman, Times, serif">Georgia, Times New Roman, Times, serif</option>
+		</param>
+		 <param name="linkdecoration" type="list" default="none" label="Link Decoration" description="Link Decoration">
+        <option value="none">None</option>
+		<option value="underline">Underline</option>
+		</param>
+		 <param name="linkdecorationhover" type="list" default="none" label="Link Decoration On Hover" description="Link Decoration On Hover">
+        <option value="none">None</option>
+		<option value="underline">Underline</option>
+		</param>
+		 <param name="h1" type="list" default="30" label="H1" description="H1">
+        <option value="30">30</option>
+        <option value="24">24</option>
+		<option value="22">22</option>
+		<option value="20">20</option>
+		<option value="18">18</option>
+		<option value="16">16</option>
+		<option value="14">14</option>
+		<option value="12">12</option>
+		<option value="10">10</option>
+        </param>
+		 <param name="h2" type="list" default="24" label="H2" description="H2">
+        <option value="30">30</option>
+        <option value="24">24</option>
+		<option value="22">22</option>
+		<option value="20">20</option>
+		<option value="18">18</option>
+		<option value="16">16</option>
+		<option value="14">14</option>
+		<option value="12">12</option>
+		<option value="10">10</option>
+        </param>
+		 <param name="h3" type="list" default="14" label="H3" description="H3">
+        <option value="30">30</option>
+        <option value="24">24</option>
+		<option value="22">22</option>
+		<option value="20">20</option>
+		<option value="18">18</option>
+		<option value="16">16</option>
+		<option value="14">14</option>
+		<option value="12">12</option>
+		<option value="10">10</option>
+        </param>
+		 <param name="h4" type="list" default="12" label="H4" description="H4">
+        <option value="30">30</option>
+        <option value="24">24</option>
+		<option value="22">22</option>
+		<option value="20">20</option>
+		<option value="18">18</option>
+		<option value="16">16</option>
+		<option value="14">14</option>
+		<option value="12">12</option>
+		<option value="10">10</option>
+        </param>
+		 <param name="h5" type="list" default="12" label="H5" description="H5">
+        <option value="30">30</option>
+        <option value="24">24</option>
+		<option value="22">22</option>
+		<option value="20">20</option>
+		<option value="18">18</option>
+		<option value="16">16</option>
+		<option value="14">14</option>
+		<option value="12">12</option>
+		<option value="10">10</option>
+        </param>
+		 <param name="h6" type="list" default="12" label="H6" description="H6">
+        <option value="30">30</option>
+        <option value="24">24</option>
+		<option value="22">22</option>
+		<option value="20">20</option>
+		<option value="18">18</option>
+		<option value="16">16</option>
+		<option value="14">14</option>
+		<option value="12">12</option>
+		<option value="10">10</option>
+        </param>
+	</params>
+</XTC>
