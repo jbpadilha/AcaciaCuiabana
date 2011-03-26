@@ -1,1 +1,0 @@
-UPDATE `#__seyret_check` SET dbversion='0.2.1' WHERE id='1';
