@@ -10,8 +10,8 @@ abstract class ControlGeral
 	public static $PAGINA_INICIO_LOGADO = "../public/admin/inicio.php";
 	public static $PAGINA_INICIO = "../public/index.php";
 	
-	public static $MENSAGEM_SUCESSO = Array();
-	public static $MENSAGEM_ERRO = Array();
+	public $MENSAGEM_SUCESSO;
+	public $MENSAGEM_ERRO;
 	
 	public abstract function get($GET);
 	public abstract function post($POST);
