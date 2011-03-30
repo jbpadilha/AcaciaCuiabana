@@ -1,0 +1,79 @@
+<?php
+//####################################
+// * Rafael Henrique Vieira de Moura / Desenvolvedor (Ábaco Tecnologia)
+// * Arquivo: Projetos_ModulosVo.php
+// * Criação: Rafael Henrique Vieira de Moura
+// * Revisão:
+// * Data de criação: 01/07/2008
+//####################################
+/**
+ * Classe Value Object. Serve para transportar os atributos dos usuários entre as camadas.
+ * @author Rafael Henrique Vieira de Moura
+ */
+class Projetos_ModulosVo extends AbstractVo 
+{
+	private $idProjetos_Modulos = null;
+	private $idProjetos = null;
+	private $idModulos = null;
+	
+	/**
+	 * Método que atribui a identificação de projetos módulos
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param int $id
+	 */
+	public function setIdProjetos_Modulos($id = null)
+	{
+		$this->idProjetos_Modulos = $id;
+	}
+	
+	/**
+	 * Método que retorna a identificação de Projetos Módulos
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return int
+	 */
+	public function getIdProjetos_Modulos()
+	{
+		return $this->idProjetos_Modulos;
+	}
+	
+	/**
+	 * Método que atribui a identificação de projetos
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param int $id
+	 */
+	public function setIdProjetos($id = null)
+	{
+		$this->idProjetos = $id;
+	}
+	
+	/**
+	 * Método que retorna a identificação de projetos
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return int
+	 */
+	public function getIdProjetos()
+	{
+		return $this->idProjetos;
+	}
+	
+	/**
+	 * Método que atribui a identificação de módulos
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param int $id
+	 */
+	public function setIdModulos($id = null)
+	{
+		$this->idModulos = $id;
+	}
+	
+	/**
+	 * Método que retorna a identificação de módulos do projeto
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return int
+	 */
+	public function getIdModulos()
+	{
+		return $this->idModulos;
+	}
+}
+?>

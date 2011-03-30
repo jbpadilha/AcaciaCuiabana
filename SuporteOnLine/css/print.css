@@ -1,0 +1,274 @@
+/*
+Style Sheet for Print
+Author: Márcia Carmo
+Last Updated: 14.Feb.2006
+*/
+
+body {
+	margin: 0 auto; 
+	padding: 0;
+	text-align: center;
+	background: #fff;
+	font: 100%/1.5 verdana, arial, helvetica, sans-serif;
+	}
+
+
+/* Inicio do CSS do menu */
+#menu_1 {
+	display: none;
+}
+#menu_2 {
+	display: none;
+}
+
+/* Fim do CSS do menu */
+
+#container {
+	margin:-30px auto;
+	_margin:0px auto;
+	margin-bottom:0;
+	width:770px;
+	text-align:left;
+	min-height:200px;
+	_height:200px;
+}
+
+#topo {
+	display: none;
+}
+
+#conteudo {
+	margin-top:0px;
+	margin-bottom:3px;
+	padding:5px;
+	width:758px;
+	text-align:left;
+}
+
+#busca {
+	display: none;
+}
+
+#rodape {
+	color:#fff;
+	height:13px;
+	width:770px;
+}
+
+#titulo {
+	display: none;
+}
+
+#barra {
+	display: none;
+}
+
+#dica {
+	display: none;
+}
+
+#formulario {
+	width:100%;
+	padding:5px;
+}
+
+#formulario h4 {
+	display:none;
+}
+
+#msgResposta {
+	display: none;
+}
+
+#msg {
+	display: none;
+}
+
+#obs {
+	display: none;
+}
+
+#direito {
+	display: none;
+}
+
+#usuario {
+	display: none;
+}
+
+#msgAlerta {
+	display: none;
+}
+
+/*img {
+	display:none;
+}
+*/
+form {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size:8pt;
+}
+
+.msgAlerta {
+	display: none;
+}
+
+.botao {
+	display: none;
+}
+
+.campo {
+	display: none;
+}
+
+.informacao {
+	display: none;
+}
+
+.alerta {
+	display: none;
+}
+
+.asteristico {
+	display: none;
+}
+
+.formTdEsquerdo {
+	text-align:left;
+	font-family:Arial, Helvetica, sans-serif; 
+	font-size:9pt;
+	padding-right:2px;
+}
+
+.formTdDireito {
+	text-align:left;
+	font-family:Arial, Helvetica, sans-serif; 
+	font-size:9pt;
+	height:-10px;
+}
+
+.formTdCentro {
+	text-align:center;
+	font-family:Arial, Helvetica, sans-serif; 
+	font-size:9pt;	
+}
+
+.divResultPesquisa {
+	font-family:Arial, Helvetica, sans-serif; 
+	font-size:9pt;
+	float:left;
+	clear:both;
+}
+
+.tabelaListagem {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	color: #1B5978;
+	background-color:#FFFFFF;
+	padding: 1px;
+}
+
+.tituloListagem {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	font-weight: bold;
+	color: #456274;
+	background-color:#B7C9D5;
+	padding-left:5pt;
+	height:20px;
+}
+
+.linhaListagem {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	color: #456274;
+	background-color:#FFFFFF;
+	padding-left:5pt;
+	height:20px;
+}
+
+.linha2Listagem {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	color: #456274;
+	background-color:#EFF3F5;
+	padding-left:5pt;
+	height:20px;
+}
+
+#paginacao {
+	display:none;
+}
+
+#tituloPedido {
+  font-family:Verdana, Arial, Helvetica, sans-serif;
+  font-size:9pt;
+  margin-bottom: 5px;
+  text-align:left;
+}
+.formTdEsquerdoNegrito {
+	text-align:left;
+	font-family:Arial, Helvetica, sans-serif; 
+	font-size:9pt;
+	padding-right:2px;
+	font-weight:bold;
+	height:0px;
+	padding:0px;
+}
+.formTdDireitoNegrito {
+	text-align:left;
+	font-family:Arial, Helvetica, sans-serif; 
+	font-size:9pt;
+	padding-right:2px;
+	font-weight:bold;
+	height:0px;
+}
+#tabelaPedido {
+	background-color:#E8EEF0;
+	padding:0px;
+}
+.textoLaranja {
+	text-align:left;
+	font-family:Arial, Helvetica, sans-serif; 
+	font-size:8pt;
+	padding-right:2px;
+	text-decoration:none;
+	color:#000000;
+}
+.textoLaranjaNegrito {
+	text-align:left;
+	font-family:Arial, Helvetica, sans-serif; 
+	font-size:9pt;
+	font-weight:bold;
+	text-decoration:none;
+	color:#000000;
+	padding-left:10px;
+}
+
+#pedido {
+	margin-left:10px;
+	margin-top:0px;
+	margin-right:5px;
+	text-align:center
+}
+
+#cabecalhoprint {
+	display:block;
+}
+
+.imagem {
+	display:none;
+}
+
+
+.separador {
+	display:none;
+}
+
+#download {
+	display:none;
+}
+
+#atividades {
+	display:none;	
+}

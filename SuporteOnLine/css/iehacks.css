@@ -1,0 +1,36 @@
+#container 
+{
+	position:relative;
+	margin:0 auto;
+	width:768px;
+	height:auto;
+	text-align:center;
+	z-index:1;
+	border:1px solid #306181;
+	background:#FFF;
+	padding-bottom:4px;
+	margin-bottom:2px;
+}
+#conteudo{
+	height:auto;
+}
+#menu{
+	width:130px;
+}
+#menu a, #menu h4 {
+	display:block;
+}
+#menu h4 {
+	height:16px;
+}
+
+#formulario 
+{
+	position:relative;
+	float:right;
+	text-align:left;
+	width:555px;
+	padding:5px;
+	overflow:hidden;
+	height:auto;
+}

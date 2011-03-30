@@ -1,0 +1,289 @@
+<?php
+//####################################
+// * João Batista Padilha e Silva Analista/Desenvolvedor (Ábaco Tecnologia)
+// * Arquivo: UsuariosVo.php
+// * Criação: João Batista Padilha e Silva
+// * Revisão:
+// * Data de criação: 30/06/2008
+//####################################
+/**
+ * Classe Value Objet. Serve para transportar os atributos dos usuários entre as camadas.
+ * @author João Batista Padilha e Silva
+ */
+class UsuariosVo extends AbstractVo
+{
+	private $idUsuarios = null;
+	private $nomeUsuarios = '';
+	private $enderecoUsuarios = '';
+	private $cepUsuarios = null;
+	private $cidadeUsuarios = '';
+	private $emailUsuarios = '';
+	private $telUsuarios = null;
+	private $telCelUsuarios = null;
+	private $dataNascimentoUsuarios = '';
+	private $loginUsuarios = '';
+	private $senhaUsuarios = '';
+	private $flagSuspenso = false;
+	private $flagTipoUsuario = true;
+
+	/**
+	 * Método de modificação da identificação do Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @param integer $id
+	 */
+	public function setIdUsuarios($id = null)
+	{
+		$this->idUsuarios = $id;
+	}
+	
+	/**
+	 * Método de retorno da identificação do Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @return integer
+	 */
+	public function getIdUsuarios()
+	{
+		return $this->idUsuarios;
+	}
+	
+	/**
+	 * Método de modificação do nome do Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @param var $nome
+	 */
+	public function setNomeUsuarios($nome = '')
+	{
+		$this->nomeUsuarios = $nome;
+	}
+	
+	/**
+	 * Método de retorno do nome do Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @return var
+	 */
+	public function getNomeUsuarios()
+	{
+		return $this->nomeUsuarios;
+	}
+	
+	/**
+	 * Método de modificação do endereço de Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @param var $end
+	 */
+	public function setEnderecoUsuarios($end = '')
+	{
+		$this->enderecoUsuarios = $end;
+	}
+	
+	/**
+	 * Método de retorno do endereço de Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @return var
+	 */
+	public function getEnderecoUsuarios()
+	{
+		return $this->enderecoUsuarios;
+	}
+	
+	/**
+	 * Método de modificação do Cep de Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @param integer $cep
+	 */
+	public function setCepUsuarios($cep = null)
+	{
+		$this->cepUsuarios = $cep;
+	}
+	
+	/**
+	 * Método de retorno o cep de Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @return integer
+	 */
+	public function getCepUsuarios()
+	{
+		return $this->cepUsuarios;
+	}
+	
+	/**
+	 * Método de modificação da cidade de Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @param var $cidade
+	 */
+	public function setCidadeUsuarios($cidade = '')
+	{
+		$this->cidadeUsuarios = $cidade;
+	}
+	
+	/**
+	 * Método de retorno de cidade de Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @return var
+	 */
+	public function getCidadeUsuarios()
+	{
+		return $this->cidadeUsuarios;
+	}
+	
+	/**
+	 * Método de modificação de Email de Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @param var $email
+	 */
+	public function setEmailUsuarios($email = '')
+	{
+		$this->emailUsuarios = $email;
+	}
+	
+	/**
+	 * Método de retorno de Email de Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @return var
+	 */
+	public function getEmailUsuarios()
+	{
+		return $this->emailUsuarios;
+	}
+	
+	/**
+	 * Método de modificação de Telefone de Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @param var $tel
+	 */
+	public function setTelUsuarios($tel = null)
+	{
+		$this->telUsuarios = $tel;
+	}
+	
+	/**
+	 * Método de retorno de telefone de Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @return var
+	 */
+	public function getTelUsuarios()
+	{
+		return $this->telUsuarios;
+	}
+	
+	/**
+	 * Método de modificação de Telefone Celular de Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @param var $telCel
+	 */
+	public function setTelCelUsuarios($telCel = null)
+	{
+		$this->telCelUsuarios = $telCel;
+	}
+	
+	/**
+	 * Método de retorno de Telefone Celular de Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @return var
+	 */
+	public function getTelCelUsuarios()
+	{
+		return $this->telCelUsuarios;
+	}
+	
+	/**
+	 * Método de modificação de Data de Nascimento de Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @param date $data
+	 */
+	public function setDataNascimentoUsuarios($data = null)
+	{
+		$this->dataNascimentoUsuarios = $data;
+	}
+	
+	/**
+	 * Método de retorno de data de Nascimento de Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @return date
+	 */
+	public function getDataNascimentoUsuarios()
+	{
+		return $this->dataNascimentoUsuarios;
+	}
+	
+	/**
+	 * Método de modificação de login de Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @param var $login
+	 */
+	public function setloginUsuarios($login = '')
+	{
+		$this->loginUsuarios = $login;
+	}
+	
+	/**
+	 * Método de retorno de Login de Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @return var
+	 */
+	public function getLoginUsuarios()
+	{
+		return $this->loginUsuarios;
+	}
+	
+	/**
+	 * Método de modificação de Senha de Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @param var $senha
+	 */
+	public function setSenhaUsuarios($senha = '')
+	{
+		$this->senhaUsuarios = $senha;
+	}
+	
+	/**
+	 * Método de retorno de Senha de Usuarios
+	 * @author João Batista Padilha e Silva
+	 * @return var
+	 */
+	public function getSenhaUsuarios()
+	{
+		return $this->senhaUsuarios;
+	}
+	
+	/**
+	 * Método de Modificação se o usuário está suspenso ou não
+	 * @author João Batista Padilha e Silva
+	 * @param boolean $flag
+	 */
+	public function setFlagSuspenso($flag = false)
+	{
+		$this->flagSuspenso = $flag;
+	}
+	
+	/**
+	 * Método de retorno se o usuário está suspenso ou não
+	 * @author João Batista Padilha e Silva
+	 * @return boolean
+	 */
+	public function getFlagSuspenso()
+	{
+		return $this->flagSuspenso;
+	}
+	
+	/**
+	 * Método que atribui Se o usuário é Interno ou não
+	 * @author João Batista Padilha e Silva
+	 * @param bool $flag
+	 */
+	public function setFlagTipoUsuario($flag)
+	{
+		$this->flagTipoUsuario = $flag;
+	}
+	
+	/**
+	 * Método de retorno se o Usuário é cliente Interno ou Externo
+	 * @author João Batista Padilha e Silva
+	 * @return unknown
+	 */
+	public function getFlagTipoUsuario()
+	{
+		return $this->flagTipoUsuario;
+	}
+}
+?>

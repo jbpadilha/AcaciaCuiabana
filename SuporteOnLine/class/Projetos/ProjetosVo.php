@@ -1,0 +1,100 @@
+<?php
+//####################################
+// * João Batista Padilha e Silva Analista/Desenvolvedor (Ábaco Tecnologia)
+// * Arquivo: ProjetosVo.php
+// * Criação: João Batista Padilha e Silva
+// * Revisão:
+// * Data de criação: 01/07/2008
+//####################################
+/**
+ * Classe Value Objet. Serve para transportar os atributos dos usuários entre as camadas.
+ * @author João Batista Padilha e Silva
+ */
+class ProjetosVo extends AbstractVo 
+{
+	private $idProjetos = null;
+	private $nomeProjetos = '';
+	private $idGrupoFluxos = null;
+	private $idClientes = null;
+
+	/**
+	 * Método que atribui a identificação de Projetos
+	 * @author João Batista Padilha e Silva
+	 * @param int $id
+	 */
+	public function setIdProjetos($id)
+	{
+		$this->idProjetos = $id;
+	}
+	
+	/**
+	 * Método retorna a identificação de Projetos
+	 * @author João Batista Padilha e Silva
+	 * @return int
+	 */
+	public function getIdProjetos()
+	{
+		return $this->idProjetos;
+	}
+	
+	/**
+	 * Método que atribui o Nome de Projetos
+	 * @author João Batista Padilha e Silva
+	 * @param var $nome
+	 */
+	public function setNomeProjetos($nome)
+	{
+		$this->nomeProjetos = $nome;
+	}
+	
+	/**
+	 * Método que retorna o nome de projetos
+	 * @author João Batista Padilha e Silva
+	 * @return var
+	 */
+	public function getNomeProjetos()
+	{
+		return $this->nomeProjetos;
+	}
+	
+	/**
+	 * Método que atribui a identificação de grupo de fluxos ao projeto
+	 * @author João Batista Padilha e Silva
+	 * @param int $id
+	 */
+	public function setIdGrupoFluxos($id)
+	{
+		$this->idGrupoFluxos = $id;
+	}
+	
+	/**
+	 * Método que retorna a identificação de grupo de fluxos ao projeto
+	 * @author João Batista Padilha e Silva
+	 * @return int
+	 */
+	public function getIdGrupoFluxos()
+	{
+		return $this->idGrupoFluxos;
+	}
+	
+	/**
+	 * Método que atribui a identificação de Clientes
+	 * @author João Batista Padilha e Silva
+	 * @param int $id
+	 */
+	public function setIdClientes($id)
+	{
+		$this->idClientes = $id;
+	}
+	
+	/**
+	 * Método que retorna a identificação de Clientes
+	 * @author João Batista Padilha e Silva
+	 * @return int
+	 */
+	public function getIdClientes()
+	{
+		return $this->idClientes;
+	}
+}
+?>

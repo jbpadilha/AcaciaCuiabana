@@ -1,0 +1,38 @@
+<?php
+//####################################
+// * João Batista Padilha e Silva Analista/Desenvolvedor (Ábaco Tecnologia)
+// * Arquivo: TecnologiasVo.php
+// * Criação: João Batista Padilha e Silva
+// * Revisão:
+// * Data de criação: 30/06/2008
+//####################################
+/*
+   Classe Value Objet. Serve para transportar os atributos dos usuários entre as camadas.
+*/
+
+class TecnologiasVo extends AbstractVo 
+{
+	private $idTecnologias = null;
+	private $nomeTecnologias = '';
+	
+	public function setIdTecnologias($id = null)
+	{
+		$this->idTecnologias = $id;
+	}
+	
+	public function getIdTecnologias()
+	{
+		return $this->idTecnologias;
+	}
+	
+	public function setNomeTecnologias($nome = '')
+	{
+		$this->nomeTecnologias = $nome; 
+	}
+	
+	public function getNomeTecnologias()
+	{
+		return $this->nomeTecnologias;
+	}
+}
+?>

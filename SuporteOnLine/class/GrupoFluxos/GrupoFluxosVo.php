@@ -1,0 +1,58 @@
+<?php
+//####################################
+// * Rafael Henrique Vieira de Moura / Desenvolvedor (Ábaco Tecnologia)
+// * Arquivo: GrupoFluxosVo.php
+// * Criação: João Batista Padilha e Silva
+// * Revisão:
+// * Data de criação: 11/07/2008
+//####################################
+/**
+ * Classe Value Object. Serve para transportar os atributos do Fluxo entre as camadas.
+ * @author João Batista Padilha e Silva
+ */
+class GrupoFluxosVo extends AbstractVo 
+{
+	private $idGrupoFluxos = null;
+	private $nomeGrupoFluxos = '';
+	
+	/**
+	 * Método de alteração da identificação do Grupo de Fluxos
+	 * @author João Batista Padilha e Silva
+	 * @param int $id
+	 */
+	public function setIdGrupoFluxos($id = null)
+	{
+		$this->idGrupoFluxos = $id;
+	}
+	
+	/**
+	 * Método de retorno da identificação do Grupo de Fluxos
+	 * @author João Batista Padilha e Silva
+	 * @return int
+	 */
+	public function getIdGrupoFluxos()
+	{
+		return $this->idGrupoFluxos;
+	}
+	
+	/**
+	 * Método de modificação do Nome de Grupo de Fluxos
+	 * @author João Batista Padilha e Silva
+	 * @param var $nome
+	 */
+	public function setNomeGrupoFluxos($nome = '')
+	{
+		$this->nomeGrupoFluxos = $nome;
+	}
+	
+	/**
+	 * Método de retorno do nome do Grupo de Fluxos
+	 * @author João Batista Padilha e Silva
+	 * @return var
+	 */
+	public function getNomeGrupoFluxos()
+	{
+		return $this->nomeGrupoFluxos;
+	}
+}
+?>
