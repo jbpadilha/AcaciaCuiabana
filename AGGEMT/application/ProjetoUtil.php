@@ -18,8 +18,8 @@ class ProjetoUtil
 	{
 		session_cache_limiter(5);
 		// carrega Lumine
-		$teste = dirname(__FILE__);
-		require_once '../libs/lumine/Lumine.php';
+		
+		require_once PATH_PROJETO.'libs/lumine/Lumine.php';
 		// carrega as configuracoes de Lumine
 		$lumineConfig = array(
 					'dialect' => 'MySQL',

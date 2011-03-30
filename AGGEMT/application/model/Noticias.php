@@ -80,8 +80,9 @@ class Noticias extends Lumine_Base {
 	{
 		if($this->getDatanoticia()!=null)
 		{
-			$data = explode("-",$this->getDatanoticia());
-			$dataRetorno = $data[2]."/".$data[1]."/".$data[0];
+			$dataHora = explode(" ",$this->getDatanoticia());
+			$data = explode("-",$dataHora[0]);
+			$dataRetorno = $data[2]."/".$data[1]."/".$data[0]." ".$dataHora[1];
 			return $dataRetorno;
 		}
 		else
@@ -116,6 +117,19 @@ class Noticias extends Lumine_Base {
 	 */
 	public function setDatanoticia($datanoticia) {
 		$this->datanoticia = $datanoticia;
+	}
+	
+	public function toDataNoticiaDB()
+	{
+		if($this->getDatanoticia())
+		{
+			$data = explode("-",$this->getDatanoticia());
+			return $data[2]."-".$data[1]."-".$data[0];
+		}
+		else
+		{
+			return null;
+		}
 	}
 	
 	

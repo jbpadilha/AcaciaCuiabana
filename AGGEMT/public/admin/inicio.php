@@ -1,5 +1,5 @@
-<?php 
-session_start();
+<?php
+include '../carregamentoInicial.php'; 
 /*if(!isset($_SESSION["loginusuario"]))
 	header("Location:index.php");*/
 header("Content-Type: text/html; charset=UTF-8",true);
@@ -18,8 +18,8 @@ $_SESSION["PATH_PUBLIC"] = getcwd();
 		<script type="text/javascript" src="../js/script.js"></script>
 		<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
 		<script type="text/javascript" src="../js/jquery.maskedinput-1.2.2.js"></script>
-		<script src="../jscal/js/jscal2.js"></script> 
-	    <script src="../jscal/js/lang/pt.js"></script> 
+		<script type="text/javascript" src="../jscal/js/jscal2.js"></script> 
+	    <script type="text/javascript" src="../jscal/js/lang/pt.js"></script> 
 	    <link rel="stylesheet" type="text/css" href="../jscal/css/jscal2.css" /> 
 	    <link rel="stylesheet" type="text/css" href="../jscal/css/border-radius.css" /> 
 	    <link rel="stylesheet" type="text/css" href="../jscal/css/steel/steel.css" /> 
@@ -36,6 +36,12 @@ $_SESSION["PATH_PUBLIC"] = getcwd();
 			    $("div#"+id).html("<div aligh='center'><font color=\"#FF0000\">Carregando ...</font>  <img src='../images/loading.gif' align='top' alt='aguarde' /></div>");
 			            $.post(url,dados
 			            ,function(retorno){$("#"+id).html(retorno)});
+			}
+			function enviaFormularioArquivo(url,id,form)
+			{
+				$("div#"+id).html("<div aligh='center'><font color=\"#FF0000\">Carregando ...</font>  <img src='../images/loading.gif' align='top' alt='aguarde' /></div>");
+
+				
 			}
 		</script>
 	</head>
@@ -76,7 +82,7 @@ $_SESSION["PATH_PUBLIC"] = getcwd();
 									<div class="art-post-body">
 										<div id="erros" class="erros"></div>
 	  									<div id="sucesso" class="sucesso"></div>
-										<div class="art-post-inner art-article" id="content">
+										<div class="art-post-inner art-article" id="conteudo">
 										Selecione algum menu para realizar as operações.	
 										</div>
 										<div class="cleared"></div>

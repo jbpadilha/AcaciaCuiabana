@@ -1,8 +1,8 @@
 <?php 
-include 'carregamentoInicial.php';
+include '../carregamentoInicial.php';
 include_once( '../ckeditor/ckeditor_php5.php' ) ;
 ?>
-<script type="text/javascript">//<![CDATA[
+<script type="text/javascript">
       Calendar.setup({
         inputField : "datanoticia",
         trigger    : "f_btn1",
@@ -10,8 +10,6 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
         dateFormat : "%d-%m-%Y"
       });
       $("#datanoticia").mask("99/99/9999");
-      
-    //]]>
       function abaCadastra()
       {
     	  $('#cadastroNoticia').toggle();
@@ -19,7 +17,7 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
       function alterar(idnoticia)
       {
       	var formulario = $('#deletaAltera').serialize(true);
-      	carregaPagina('noticiaAdm.php?idnoticia='+idnoticia,'content');
+      	carregaPagina('noticiaAdm.php?idnoticia='+idnoticia,'conteudo');
       }
 
       function deletar(idnoticia)
@@ -27,7 +25,7 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
       	document.deletaAltera.funcao.value = "deletar";
       	document.deletaAltera.idnoticia.value = idnoticia;
       	var formulario = $('#deletaAltera').serialize(true);
-      	enviaFormulario($('#deletaAltera').attr("action"),'content',formulario);
+      	enviaFormulario($('#deletaAltera').attr("action"),'conteudo',formulario);
       }
       function cadastra()
       {
@@ -35,8 +33,7 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
       		alert('Todos campos obrigatórios devem ser preenchidos!');
       		return false;
       	} else {
-      		var formulario = $('#cadastrar').serialize(true);
-      		enviaFormulario($('#cadastrar').attr("action"),'content',formulario);
+      		$('#cadastrar').submit();
       	}
       }
 </script>
@@ -63,13 +60,14 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
 			<td>Data da Notícia</td>
 			<td colspan="2">Ações</td>
 		</tr>
-		<?php
+		<?php  
 		$noticia = null;
 		$noticia = new Noticias();
 		$noticia->reset();
+		$noticia->limit();
 		if($noticia->find()>0)
 		{
-			while($comarca->fetch())
+			while($noticia->fetch())
 			{
 			?>
 			<tr>
@@ -97,8 +95,10 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
 	?>
 </table>
 </form>
-<input type="button" id="Cadastrar" value="Cadastrar" onclick="abaCadastra();">
-<div id="cadastroNoticia" style="display:none;">
+<?php 
+?>
+<input type="button" id="btCadastra" value="Cadastrar" onclick="abaCadastra();">
+<div id="cadastroNoticia" <?php if (!isset($_GET['idnoticia'])) echo "style=\"display:none;\"";?>>
 <h3 class="t">Cadastro de Notícias</h3>
 <?php 
 $noticia = null;
@@ -111,7 +111,7 @@ if(isset($_GET['idnoticia']))
 }
 
 ?>
-<form name="cadastrar" id="cadastrar" method="post" action="../../application/recebePostGet.php" >
+<form name="cadastrar" id="cadastrar" method="post" action="../../application/recebePostGet.php" enctype="multipart/form-data" >
 	<input type="hidden" id="control" name="control" value="Noticia"/>
 	<input type="hidden" id="funcao" name="funcao" value="<?=(isset($_GET['idnoticia']))?"alterar":"cadastrar"?>"/>
 	<input type="hidden" id="idnoticia" name="idnoticia" value="<?=$noticia->getIdnoticia()?>"/>
@@ -137,9 +137,32 @@ if(isset($_GET['idnoticia']))
 			</td>
 		</tr>
 		<tr>
+			<td valign="top"><p>Imagem da Notícia:</p></td>
+			<td valign="top">
+				<input type="file" name="imagem" id="imagem" class="input">
+			</td>
+		</tr>
+		<?php 
+		if($noticia->getImagemnoticia()!=null)
+		{
+		?>
+		<tr>
+			<td valign="top">Imagem Cadastradas:</td>
+			<td valign="top">
+				<img alt="" src="<?=$noticia->getImagemnoticia()?>">
+			</td>
+		</tr>
+		<?php 
+		}
+		?>
+		<tr>
+			<td valign="top">Destaque?</td>
+			<td valign="top"><input type="checkbox" id="destaque" name="destaque" <?=($noticia->getDestaque())?"checked=\"checked\"":""?>/></td>
+		</tr>
+		<tr>
 			<td colspan="3">
 				* Campos Obrigatórios.<br>
-				<input type="button" name="submit" onclick="cadastra();" id="submit" value="<?=(isset($_GET['idnoticia']))?"Alterar":"Cadastrar"?>"/>
+				<input type="submit" name="submit" id="submit" value="<?=(isset($_GET['idnoticia']))?"Alterar":"Cadastrar"?>"/>
 			</td>
 		</tr>
 	</table>
