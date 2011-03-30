@@ -1,0 +1,101 @@
+<?php
+//####################################
+// * Rafael Henrique Vieira de Moura / Desenvolvedor (Ábaco Tecnologia)
+// * Arquivo: Papeis_ProjetosVo.php
+// * Criação: Rafael Henrique Vieira de Moura
+// * Revisão:
+// * Data de criação: 01/07/2008
+//####################################
+
+/**
+ * Classe Value Object. Serve para transportar os atributos de Papeis/Projetos entre as camadas.
+ *
+ */
+class Papeis_ProjetosVo extends AbstractVo 
+{
+	private $idPapeisProjetos = null;
+	private $idPapeis = null;
+	private $idProjetos = null;
+	private $idUsuarios = null;
+	
+	/**
+	 * Método de modificação de identificação de Papeis_Projetos
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param integer $id
+	 */
+	public function setIdPapeisProjeto($id = null)
+	{
+		$this->idPapeisProjetos = $id;
+	}
+	
+	/**
+	 * Método de retorno de identificação de Papeis_Projetos
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return integer
+	 */
+	public function getIdPapeisProjeto()
+	{
+		return $this->idPapeisProjetos;
+	}
+	
+	/**
+	 * Método de modificação da identificação de Papeis
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param integer $id
+	 */
+	public function setIdPapeis($id = null)
+	{
+		$this->idPapeis = $id;
+	}
+	
+	/**
+	 * Método de retorno de identificação de Papeis
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return integer
+	 */
+	public function getIdPapeis()
+	{
+		return $this->idPapeis;
+	}
+	
+	/**
+	 * Método de modificação de identificação de Projetos
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param integer $id
+	 */
+	public function setIdProjetos($id = null)
+	{
+		$this->idProjetos = $id;
+	}
+	
+	/**
+	 * Método de retorno de identificação de Projetos
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return integer
+	 */
+	public function getIdProjetos()
+	{
+		return $this->idProjetos;
+	}
+	
+	/**
+	 * Método de modificação de identificação de Usuarios
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param integer $id
+	 */
+	public function setIdUsuarios($id = null)
+	{
+		$this->idUsuarios = $id;
+	}
+	
+	/**
+	 * Método de retorno de identificação de Usuarios
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return integer
+	 */
+	public function getIdUsuarios()
+	{
+		return $this->idUsuarios;
+	}
+}
+?>

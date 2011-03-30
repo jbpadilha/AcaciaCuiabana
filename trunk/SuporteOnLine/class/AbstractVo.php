@@ -1,0 +1,27 @@
+<?php
+//####################################
+// * João Batista Padilha e Silva Analista/Desenvolvedor (Ábaco Tecnologia)
+// * Arquivo: UsuariosVo.php
+// * Criação: João Batista Padilha e Silva
+// * Revisão:
+// * Data de criação: 30/06/2008
+//####################################
+/*
+   Classe Value Objet. Serve para transportar os atributos dos usuários entre as camadas.
+*/
+
+class AbstractVo
+{
+	private $parametroConsulta = '';
+	
+	public function setParametroConsulta($parametro = '')
+	{
+		$this->parametroConsulta = $parametro;
+	}
+	
+	public function getParametroConsulta()
+	{
+		return $this->parametroConsulta;
+	}
+}
+?>

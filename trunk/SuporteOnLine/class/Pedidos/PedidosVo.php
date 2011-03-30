@@ -1,0 +1,268 @@
+<?php
+//####################################
+// * Rafael Henrique Vieira de Moura / Desenvolvedor (Ábaco Tecnologia)
+// * Arquivo: PedidosVo.php
+// * Criação: Rafael Henrique Vieira de Moura
+// * Revisão:
+// * Data de criação: 01/07/2008
+//####################################
+/*
+   Classe Value Object. Serve para transportar os atributos dos pedidos entre as camadas.
+*/
+
+class PedidosVo extends AbstractVo 
+{
+	private $idPedidos = null;
+	private $idUsuarios = null;
+	private $idAtividadesPontoFuncaoHoras = null;
+	private $idProjetos = null;
+	private $idVersoes = null;
+	private $idModulos = null;
+	private $idSubModulos = null;
+	private $dataHoraPrevisaoPedidos = '';
+	private $precedentePedidos = null;
+	private $domnStatusPedidos = null;
+	private $domnSeveridadePedidos = null;
+	private $assuntoPedidos = '';
+	
+	/**
+	 * Método de Atribuição de idPedidos
+	 * @author João Batista Padilha e Silva
+	 * @param int $id
+	 */
+	public function setIdPedidos($id)
+	{
+		$this->idPedidos = $id;
+	}
+	
+	/**
+	 * Método de retorno da identificação do Pedido
+	 * @author João Batista Padilha e Silva
+	 * @return int
+	 */
+	public function getIdPedidos()
+	{
+		return $this->idPedidos;
+	}
+	
+	/**
+	 * Método de atribuição da identificação do Usuario que abriu o Pedido
+	 * @author João Batista Padilha e Silva
+	 * @param int $id
+	 */
+	public function setIdUsuarios($id)
+	{
+		$this->idUsuarios = $id;
+	}
+	
+	/**
+	 * Método de retorno da identificação do Usuário
+	 * @author João Batista Padilha e Silva
+	 * @return int
+	 */
+	public function getIdUsuarios()
+	{
+		return $this->idUsuarios;
+	}
+	
+	/**
+	 * Método de atribuição da identificação da Atividade Ponto Função Hora
+	 * @author João Batista Padilha e Silva
+	 * @param int $id
+	 */
+	public function setIdAtividadesPontoFuncaoHoras($id)
+	{
+		$this->idAtividadesPontoFuncaoHoras = $id;
+	}
+	
+	/**
+	 * Método de retorno da identificação da Atividade Ponto Função Hora
+	 * @author João Batista Padilha e Silva
+	 * @return int
+	 */
+	public function getIdAtividadesPontoFuncaoHoras()
+	{
+		return $this->idAtividadesPontoFuncaoHoras;
+	}
+	
+	/**
+	 * Método de atribuição da identificação do Projeto
+	 * @author João Batista Padilha e Silva
+	 * @param int $id
+	 */
+	public function setIdProjetos($id)
+	{
+		$this->idProjetos = $id;
+	}
+	
+	/**
+	 * Método de retorno da identificação do Projeto
+	 * @author João Batista Padilha e Silva
+	 * @return int
+	 */
+	public function getIdProjetos()
+	{
+		return $this->idProjetos;
+	}
+	
+	/**
+	 * Método de atribuição da identificação da Versão do Projeto
+	 * @author João Batista Padilha e Silva
+	 * @param int $id
+	 */
+	public function setIdVersoes($id)
+	{
+		$this->idVersoes = $id;
+	}
+	
+	/**
+	 * Método de retorno da identificação da Versão
+	 * @author João Batista Padilha e Silva
+	 * @return int
+	 */
+	public function getIdVersoes()
+	{
+		return $this->idVersoes;
+	}
+	
+	/**
+	 * Método de atribuição da identificação do Módulo
+	 * @author João Batista Padilha e Silva
+	 * @param int $id
+	 */
+	public function setIdModulos($id)
+	{
+		$this->idModulos = $id;
+	}
+	
+	/**
+	 * Método de retorno da identificação do módulo
+	 * @author João Batista Padilha e Silva
+	 * @return int
+	 */
+	public function getIdModulos()
+	{
+		return $this->idModulos;
+	}
+	
+	/**
+	 * Método de atribuição do sub-módulo 
+	 * @author João Batista Padilha e Silva
+	 * @param int $id
+	 */
+	public function setIdSubModulos($id)
+	{
+		$this->idSubModulos = $id;
+	}
+	
+	/**
+	 * Método de retorno da identificação do SubModulo
+	 * @author João Batista Padilha e Silva
+	 * @return int
+	 */
+	public function getIdSubModulos()
+	{
+		return $this->idSubModulos;
+	}
+	
+	/**
+	 * Método de atribuição da Data de Previsão do Pedido
+	 * @author João Batista Padilha e Silva
+	 * @param date $dataHora
+	 */
+	public function setDataHoraPrevisaoPedidos($dataHora)
+	{
+		$this->dataHoraPrevisaoPedidos = $dataHora;
+	}
+	
+	/**
+	 * Método de retorno da data de previsão do Pedido
+	 * @author João Batista Padilha e Silva
+	 * @return date
+	 */
+	public function getDataHoraPrevisaoPedidos()
+	{
+		return $this->dataHoraPrevisaoPedidos;
+	}
+		
+	/**
+	 * Método de atribuição do Pai do Pedido, em caso de sub-pedido
+	 * @author João Batista Padilha e Silva
+	 * @param int $idPrecedente
+	 */
+	public function setPrecedentePedidos($idPrecedente)
+	{
+		$this->precedentePedidos = $idPrecedente;
+	}
+	
+	/**
+	 * Método de retorno do pai do Pedido, em caso de sub-pedido
+	 * @author João Batista Padilha e Silva
+	 * @return int
+	 */
+	public function getPrecedentePedidos()
+	{
+		return $this->precedentePedidos;
+	}
+	
+	/**
+	 * Método de atribuição do Status do pedido. Domínio
+	 * @author João Batista Padilha e Silva
+	 * @param int $status
+	 */
+	public function setDomnStatusPedidos($status)
+	{
+		$this->domnStatusPedidos = $status;
+	}
+	
+	/**
+	 * Método de retorno do Status do Pedido
+	 * @author João Batista Padilha e Silva
+	 * @return int
+	 */
+	public function getDomnStatusPedidos()
+	{
+		return $this->domnStatusPedidos;
+	}
+	
+	/**
+	 * Método de Atribuição da Severidade do Pedido/ Dominio
+	 * @author João Batista Padilha e Silva
+	 * @param int $severidade
+	 */
+	public function setDomnSeveridadePedidos($severidade)
+	{
+		$this->domnSeveridadePedidos = $severidade;
+	}
+	
+	/**
+	 * Método de retorno da Severidade do Pedido / Dominio
+	 * @author João Batista Padilha e Silva
+	 * @return int
+	 */
+	public function getDomnSeveridadePedidos()
+	{
+		return $this->domnSeveridadePedidos;
+	}
+	
+	/**
+	 * Método de atribuição do assunto do Pedido
+	 * @author João Batista Padilha e Silva
+	 * @param var $assunto
+	 */
+	public function setAssuntoPedidos($assunto)
+	{
+		$this->assuntoPedidos = $assunto;
+	}
+	
+	/**
+	 * Método de retorno do assunto do Pedido
+	 * @author João Batista Padilha e Silva
+	 * @return var
+	 */
+	public function getAssuntoPedido()
+	{
+		return $this->assuntoPedidos;
+	}
+}
+?>

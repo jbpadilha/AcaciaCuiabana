@@ -1,0 +1,142 @@
+<?php
+//####################################
+// * João Batista Padilha e Silva Analista/Desenvolvedor (Ábaco Tecnologia)
+// * Arquivo: FuncionalidadesVo.php
+// * Criação: João Batista Padilha e Silva
+// * Revisão: Rafael Henrique Vieira de Moura
+// * Data de criação: 30/06/2008
+//####################################
+/**
+ * Classe Value Objet. Serve para transportar os atributos dos usuários entre as camadas.
+ * @author João Batista Padilha e Silva
+ */
+class FuncionalidadesVo extends AbstractVo 
+{
+	private $idFuncionalidades = null;
+	private $nomeFuncionalidades = '';
+	private $linkFuncionalidades = '';
+	private $DomnTipoFuncionalidades = null;
+	private $ordemFuncionalidades = null;
+	private $precedenteFuncionalidades = null;
+	
+	/**
+	 * Método de modificação da identificação de Funcionalidades
+	 * @author João Batista Padilha e Silva
+	 * @param integer $id
+	 */
+	public function setIdFuncionalidades($id = null)
+	{
+		$this->idFuncionalidades = $id;
+	}
+	
+	/**
+	 * Método de retorno da Identificação de Funcionalidades
+	 * @author João Batista Padilha e Silva
+	 * @return integer
+	 */
+	public function getIdFuncionalidades()
+	{
+		return $this->idFuncionalidades;
+	}
+	
+	/**
+	 * Método de modificação do nome de Funcionalidades
+	 * @author João Batista Padilha e Silva
+	 * @param var $nome
+	 */
+	public function setNomeFuncionalidades($nome = '')
+	{
+		$this->nomeFuncionalidades = $nome;
+	}
+	
+	/**
+	 * Método de retorno do nome de Funcionalidades
+	 * @author João Batista Padilha e Silva
+	 * @return var
+	 */
+	public function getNomeFuncionalidades()
+	{
+		return $this->nomeFuncionalidades;
+	}
+	
+	/**
+	 * Método de modificação de Link de Funcionalidades
+	 * @author João Batista Padilha e Silva
+	 * @param var $link
+	 */
+	public function setLinkFuncionalidades($link = '')
+	{
+		$this->linkFuncionalidades = $link;
+	}
+	
+	/**
+	 * Método de retorno de Link de Funcionalidades
+	 * @author João Batista Padilha e Silva
+	 * @return var
+	 */
+	public function getLinkFuncionalidades()
+	{
+		return $this->linkFuncionalidades;
+	}
+	
+	/**
+	 * Método de modificação de Dominio Tipo de Funcionalidades
+	 * @author João Batista Padilha e Silva
+	 * @param integer $domn
+	 */
+	public function setDomnTipoFuncionalidades($domn = null)
+	{
+		$this->DomnTipoFuncionalidades = $domn;
+	}
+	
+	/**
+	 * Método de retorno do Dominio tipo Funcionalidades
+	 * @author João Batista Padilha e Silva
+	 * @return integer
+	 */
+	public function getDomnTipoFuncionalidades()
+	{
+		return $this->DomnTipoFuncionalidades;
+	}
+	
+	/**
+	 * Método de modificação da ordem da Funcionalidades
+	 * @author João Batista Padilha e Silva
+	 * @param integer $ordem
+	 */
+	public function setOrdemFuncionalidades($ordem = null)
+	{
+		$this->ordemFuncionalidades = $ordem;
+	}
+	
+	/**
+	 * Método de retorno da ordem da Funcionalidades
+	 * @author João Batista Padilha e Silva
+	 * @return integer
+	 */
+	public function getOrdemFuncionalidades()
+	{
+		return $this->ordemFuncionalidades;
+	}
+	
+	/**
+	 * Método de modificação do Menu Pai dele na funcionalidade
+	 * @author João Batista Padilha e Silva
+	 * @param integer $prec
+	 */
+	public function setPrecedenteFuncionalidades($prec = null)
+	{
+		$this->precedenteFuncionalidades = $prec;
+	}
+	
+	/**
+	 * Método de retorno do Menu pai da funcionalidade
+	 * @author João Batista Padilha e Silva
+	 * @return integer
+	 */
+	public function getPrecedenteFuncionalidades()
+	{
+		return $this->precedenteFuncionalidades;
+	}
+}
+?>

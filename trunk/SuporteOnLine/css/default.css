@@ -1,0 +1,444 @@
+html 
+{
+	background: url(../imagens/background2.jpg);
+}
+
+body 
+{
+	color: #1B5978;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	margin:0;
+	padding:0;
+	background: url(../imagens/background.jpg);
+	background-repeat:repeat-x;
+}
+
+form{
+	margin:0;
+	padding:0;
+}
+
+#topoAtendimento
+{
+	position:relative;
+	background-image:url(../imagens/topo.jpg);
+	background-repeat:no-repeat;
+	height:14px;
+	width:768px;
+	margin:0 auto;
+}
+
+#container 
+{
+	position:relative;
+	margin:0 auto;
+	width:768px;
+	overflow:hidden;
+	min-height:300px;
+	text-align:center;
+	z-index:1;
+	border:1px solid #306181;
+	background:#FFF;
+	padding-bottom:4px;
+	margin-bottom:2px;
+}
+#topo
+{
+	position:relative;
+	background-color:#fff;
+	background-image:url(../imagens/topoImg.jpg);
+	background-repeat:no-repeat;
+	height:71px;
+	margin:0 auto;
+	margin-bottom:2px;
+	margin-top:4px;
+	width:758px;
+}
+#conteudo{
+	position:relative;
+	width:758px;
+	overflow:hidden;
+	min-height:400px;
+	margin:0 auto;
+	background:#FFFFFF;
+}
+
+#formulario 
+{
+	position:relative;
+	float:right;
+	text-align:left;
+	width:575px;
+	padding:5px;
+	overflow:hidden;
+	min-height:300px;
+}
+
+#menu {	
+	position:relative;
+	width:170px;
+	height:auto;
+	float:left;
+	text-align:left;
+	margin-left:0;
+	margin-top:10px;
+}
+#menu a, #menu h4 {
+	font:11px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	white-space:nowrap;
+	margin:0;
+	padding:1px 0 1px 1px;
+}
+#menu ul a {
+	text-decoration:none;
+}
+#menu h4 {
+	color:#24769C;
+	font-weight:bold;
+	border-bottom:1px dotted #23759C;
+	width:130px;
+	text-align:left;
+	text-transform:none;
+	padding-top:3px;
+	padding-bottom:3px;
+	padding-left:20px;
+	padding-right:5px;
+	height:auto;
+    background: url(../imagens/marcador_menu.gif) no-repeat;
+    background-position: 3px center;
+}
+#menu ul{
+	position:relative;
+	list-style:none;
+	margin:0;
+	padding-left:0;
+	float:left;
+	width:4em;
+	text-align:left;
+	clear:both;
+}
+#menu ul li h4 a { /* Não possuem filhos */
+	text-align:left;
+	text-transform:none;
+	padding:0;
+	padding-right:5px;
+	height:13px;
+	font-weight:bold;
+}
+#menu a { 
+	text-decoration:none;
+	padding:0;
+	padding-left:30px;
+	padding-bottom:0;
+	height:auto;
+}
+#menu ul ul {
+	top:0;
+	left:10px;
+}
+#menu a, #menu a:visited{
+	color:#24769C;
+}
+#menu ul li ul a:hover{
+	text-decoration:none;
+}
+#menu a:active{
+	color:#000;
+}
+
+#rodape
+{
+	position:relative;
+	color:#fff;
+	background-image:url(../imagens/rodape.gif);
+	background-repeat:no-repeat;
+	height:13px;
+	width:770px;
+	margin:0 auto;
+	overflow:hidden;
+	text-indent:-1000px;
+	clear:both;
+}
+
+.formTdEsquerdo 
+{
+	text-align:right;
+	font-family:Arial, Helvetica, sans-serif; 
+	font-size:8pt;
+	padding-right:2px;
+}
+
+.linkPequeno 
+{
+	font: 7.5pt Verdana, Arial, Helvetica, sans-serif;
+	color: #456274;
+	text-decoration: underline;
+}
+
+#msgResposta 
+{
+	position:relative;
+	text-align:center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:8pt;
+	color:#ff9900;
+	font-weight:bold;
+	margin-top:10px;
+	margin-left:10px;
+}
+
+#barra {
+	position:relative;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size:7pt;
+	font-weight:bold;
+	color:#508dac;
+	border:1px dashed #a6abaf;
+	background-color:#f9f9f9;
+	/*text-align:left;*/
+	padding-left:5px;
+	padding-right:5px;
+	padding-top:2px;
+	padding-bottom:3px;
+	margin:0;
+}
+#barra a {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size:7.5pt;
+	color:#508dac;
+	text-decoration:none;
+}
+
+.botao 
+{
+	border: 1px solid #2F7CA1;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color: #1B5978;
+	font-size:7pt;
+	background-color:#e1effa;
+	font-weight:bold;
+}
+
+.campo 
+{
+	border: 1px solid #2F7CA1;
+	background-color: #F9F9F9;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: #1B5978;
+}
+
+.tabelaListagem {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	color: #1B5978;
+	border: 1px solid #1B5978;
+	background-color:#FFFFFF;
+	padding: 1px;
+	clear:both;
+}
+.tituloListagem {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	font-weight: bold;
+	color: #456274;
+	background-color:#B7C9D5;
+	padding-left:5pt;
+	height:20px;
+}
+.linhaListagem {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	color: #456274;
+	background-color:#FFFFFF;
+	padding-left:5pt;
+	height:20px;
+	cursor:pointer;
+}
+.linha2Listagem {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	color: #456274;
+	background-color:#EFF3F5;
+	padding-left:5pt;
+	height:20px;
+	cursor:pointer;
+}
+/*Coloração das tabelas pedidos a receber*/
+.tabelaListagemReceber {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	color: #FFFFFF;
+	border: 1px solid #0484b0;
+	background-color:#FFFFFF;
+	padding: 1px;
+	clear:both;
+}
+.tituloListagemReceber {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color:#0484b0;
+	padding-left:5pt;
+	height:20px;
+}
+.linhaListagemReceber {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	color: #456274;
+	background-color:#FFFFFF;
+	padding-left:5pt;
+	height:20px;
+	cursor:pointer;
+}
+.linha2ListagemReceber {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	color: #456274;
+	background-color:#e2e7e9;
+	padding-left:5pt;
+	height:20px;
+	cursor:pointer;
+}
+
+/*Coloração das tabelas pedidos em atendimento*/
+.tabelaListagemAtendimento {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	color: #FFFFFF;
+	border: 1px solid #f3882c;
+	background-color:#FFFFFF;
+	padding: 1px;
+	clear:both;
+}
+.tituloListagemAtendimento {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color:#f3882c;
+	padding-left:5pt;
+	height:20px;
+}
+.linhaListagemAtendimento {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	color: #456274;
+	background-color:#FFFFFF;
+	padding-left:5pt;
+	height:20px;
+	cursor:pointer;
+}
+.linha2ListagemAtendimento {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	color: #456274;
+	background-color:#fbebd6;
+	padding-left:5pt;
+	height:20px;
+	cursor:pointer;
+}
+
+/*Coloração das tabelas pedidos fechados/devolvidos*/
+.tabelaListagemFechadosDevolvidos {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	color: #FFFFFF;
+	border: 1px solid #47a5ae;
+	background-color:#FFFFFF;
+	padding: 1px;
+	clear:both;
+}
+.tituloListagemFechadosDevolvidos {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color:#47a5ae;
+	padding-left:5pt;
+	height:20px;
+}
+.linhaListagemFechadosDevolvidos {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	color: #456274;
+	background-color:#FFFFFF;
+	padding-left:5pt;
+	height:20px;
+	cursor:pointer;
+}
+.linha2ListagemFechadosDevolvidos {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	color: #456274;
+	background-color:#dbf0f2;
+	padding-left:5pt;
+	height:20px;
+	cursor:pointer;
+}
+
+
+/*Coloração das tabelas pedidos do projeto*/
+.tabelaListagemPedidosProjeto {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	color: #FFFFFF;
+	border: 1px solid #0066b3;
+	background-color:#FFFFFF;
+	padding: 1px;
+	clear:both;
+}
+.tituloListagemPedidosProjeto {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color:#0066b3;
+	padding-left:5pt;
+	height:20px;
+}
+.linhaListagemPedidosProjeto {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	color: #456274;
+	background-color:#FFFFFF;
+	padding-left:5pt;
+	height:20px;
+	cursor:pointer;
+}
+.linha2ListagemPedidosProjeto {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 7.5pt;
+	color: #456274;
+	background-color:#dbe2f3;
+	padding-left:5pt;
+	height:20px;
+	cursor:pointer;
+}
+
+.asterisco {
+	color:#F00;
+	font-size:10pt;
+}
+
+.suspenso{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size:7pt;
+	color:#F00;
+}
+
+.informacao {
+	position:relative;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size:8pt;
+	font-weight:bold;
+	color:#F00;
+	width:99%;
+	height:auto;
+	text-align:center;
+	border:1px dashed #FF0000;
+	background:#FCE0E0;
+	padding:2px;
+}

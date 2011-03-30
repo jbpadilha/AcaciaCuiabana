@@ -1,0 +1,248 @@
+<?php
+//####################################
+// * João Batista Padilha e Silva Analista/Desenvolvedor (Ábaco Tecnologia)
+// * Arquivo: TabelaBasicaVo.php
+// * Criação: João Batista Padilha e Silva
+// * Revisão:
+// * Data de criação: 30/06/2008
+//####################################
+/**
+ * Classe Value Objet. Serve para transportar os atributos dos usuários entre as camadas.
+ * @author João Batista Padilha e Silva
+ */
+class TabelaBasicaVo extends AbstractVo 
+{
+	private $idTabelaBasica = null;
+	private $emailPadraoTabelaBasica = '';
+	private $nomeRemetenteTabelaBasica = '';
+	private $toleranciaHoraConformidade = '';
+	
+	private $horasBaseTrabalhadasTabelaBasica = '';
+	private $horasNaoTrabalhadasBaseTabelaBasica = '';
+	private $horasInicioTrabalhoTabelaBasica = '';
+	private $horasFimTrabalhoTabelaBasica = '';
+	private $horasIntervaloInicioTabelaBasica = '';
+	private $horasIntervaloFimTabelaBasica = '';
+	private $horasBaseRecebimentoPedido = '';
+	
+	/**
+	 * Método de moficiação da Identificação da Tabela Basica
+	 * @author João Batista Padilha e Silva
+	 * @param integer $id
+	 */
+	public function setIdTabelaBasica($id = null)
+	{
+		$this->idTabelaBasica = $id;
+	}
+	
+	/**
+	 * Método de retorno da Identificação da tabela Basica
+	 * @author João Batista Padilha e Silva
+	 * @return integer
+	 */
+	public function getIdTabelaBasica()
+	{
+		return $this->idTabelaBasica;
+	}
+	
+	/**
+	 * Método de modificação do Email Padrão da Tabela Basica
+	 * @author João Batista Padilha e Silva
+	 * @param var $email
+	 */
+	public function setEmailPadraoTabelaBasica($email = '')
+	{
+		$this->emailPadraoTabelaBasica = $email;
+	}
+	
+	/**
+	 * Método de retorno do Email Padrão da Tabela Basica
+	 * @author João Batista Padilha e Silva
+	 * @return var
+	 */
+	public function getEmailPadraoTabelaBasica()
+	{
+		return $this->emailPadraoTabelaBasica;
+	}
+	
+	/**
+	 * Método de modificação do Nome do Remetente da Tabela Basica
+	 * @author João Batista Padilha e Silva
+	 * @param var $nomeRemetente
+	 */
+	public function setNomeRemetenteTabelaBasica($nomeRemetente = '')
+	{
+		$this->nomeRemetenteTabelaBasica = $nomeRemetente;
+	}
+	
+	/**
+	 * Método de retorno do Nome do Remetente Padrão da Tabela Basica
+	 * @author João Batista Padilha e Silva
+	 * @return var
+	 */
+	public function getNomeRemetenteTabelaBasica()
+	{
+		return $this->nomeRemetenteTabelaBasica;
+	}
+	
+	/**
+	 * Método de moficiação da tolerancia de tempo para as não conformidades
+	 * @author João Batista Padilha e Silva
+	 * @param time $hora
+	 */
+	public function setToleranciaHoraConformidade($hora = '')
+	{
+		$this->toleranciaHoraConformidade = $hora;
+	}
+	
+	/**
+	 * Método de retorno da tolerância de tempo para as não conformidades
+	 * @author João Batista Padilha e Silva
+	 * @return time
+	 */
+	public function getToleranciaHoraConformidade()
+	{
+		return $this->toleranciaHoraConformidade;
+	}
+	
+	/**
+	 * Método de atribuição das Base de Horas trabalhadas na Empresa
+	 * @author João Batista Padilha e Silva
+	 * @param time $hora
+	 */
+	public function setHorasBaseTrabalhadasTabelaBasica($hora)
+	{
+		$this->horasBaseTrabalhadasTabelaBasica = $hora;
+	}
+	
+	/**
+	 * Método de retorno da base de horas trabalhadas na Empresa.
+	 * @author João Batista Padilha e Silva
+	 * @return time
+	 */
+	public function getHorasBaseTrabalhadasTabelaBasica()
+	{
+		return $this->horasBaseTrabalhadasTabelaBasica;
+	}
+	
+	/**
+	 * Método de atribuição de Horas não trabalhadas na empresa
+	 * @author João Batista Padilha e Silva
+	 * @param time $hora
+	 */
+	public function setHorasNaoTrabalhadasBaseTabelaBasica($hora)
+	{
+		$this->horasNaoTrabalhadasBaseTabelaBasica = $hora;
+	}
+	
+	/**
+	 * Método de retorno das horas não trabalhadas no dia
+	 * @author João Batista Padilha e Silva
+	 * @return time
+	 */
+	public function getHorasNaoTrabalhadasBaseTabelaBasica()
+	{
+		return $this->horasNaoTrabalhadasBaseTabelaBasica;
+	}
+	
+	/**
+	 * Método de atribuição de Inicio de Hora de Trabalho
+	 * @author João Batista Padilha e Silva
+	 * @param time $hora
+	 */
+	public function setHorasInicioTrabalhoTabelaBasica($hora)
+	{
+		$this->horasInicioTrabalhoTabelaBasica = $hora;
+	}
+	
+	/**
+	 * Método de retorno da Hora de Início de Trabalho
+	 * @author João Batista Padilha e Silva
+	 * @return time
+	 */
+	public function getHorasInicioTrabalhoTabelaBasica()
+	{
+		return $this->horasInicioTrabalhoTabelaBasica;
+	}
+	
+	/**
+	 * Método de atribuição de Horario fim de trabalho
+	 * @author João Batista Padilha e Silva
+	 * @param time $hora
+	 */
+	public function setHorasFimTrabalhoTabelaBasica($hora)
+	{
+		$this->horasFimTrabalhoTabelaBasica = $hora;
+	}
+	
+	/**
+	 * Método de retorno da Hora Fim de Trabalho
+	 * @author João Batista Padilha e Silva
+	 * @return time
+	 */
+	public function getHorasFimTrabalhoTabelaBasica()
+	{
+		return $this->horasFimTrabalhoTabelaBasica;
+	}
+	
+	/**
+	 * Método de atribuição de Inicio do Intervalo para almoço
+	 * @author João Batista Padilha e Silva
+	 * @param time $hora
+	 */
+	public function setHorasIntervaloInicioTabelaBasica($hora)
+	{
+		$this->horasIntervaloInicioTabelaBasica = $hora;
+	}
+	
+	/**
+	 * Método de retorno do Inicio de Intervalo
+	 * @author João Batista Padilha e Silva
+	 * @return time
+	 */
+	public function getHorasIntervaloInicioTabelaBasica()
+	{
+		return $this->horasIntervaloInicioTabelaBasica;
+	}
+	
+	/**
+	 * Método de atribuição de Fim de Intervalo de Almoço
+	 * @author João Batista Padilha e Silva
+	 * @param time $hora
+	 */
+	public function setHorasIntervaloFimTabelaBasica($hora)
+	{
+		$this->horasIntervaloFimTabelaBasica = $hora;
+	}
+	
+	/**
+	 * Método de retorno de Horario fim do Intervalo de almoço
+	 * @author João Batista Padilha e Silva
+	 * @return time
+	 */
+	public function getHorasIntervaloFimTabelaBasica()
+	{
+		return $this->horasIntervaloFimTabelaBasica;
+	}
+	
+	/**
+	 * Método de atribuição de Horario base de Recebimento
+	 * @author João Batista Padilha e Silva
+	 * @param time $hora
+	 */
+	public function setHorasBaseRecebimentoPedido($hora)
+	{
+		$this->horasBaseRecebimentoPedido = $hora;
+	}
+	
+	/**
+	 * Método de retorno de Hora base de recebimento de Pedido
+	 * @author João Batista Padilha e Silva
+	 * @return time
+	 */
+	public function getHorasBaseRecebimentoPedido()
+	{
+		return $this->horasBaseRecebimentoPedido;
+	}
+}
+?>

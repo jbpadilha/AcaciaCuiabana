@@ -1,0 +1,58 @@
+<?php
+//####################################
+// * João Batista Padilha e Silva Analista/Desenvolvedor (Ábaco Tecnologia)
+// * Arquivo: PapeisVo.php
+// * Criação: João Batista Padilha e Silva
+// * Revisão:
+// * Data de criação: 30/06/2008
+//####################################
+/**
+ * Classe Value Objet. Serve para transportar os atributos dos usuários entre as camadas.
+ * @author João Batista Padilha e Silva
+ */
+class PapeisVo extends AbstractVo
+{
+	private $idPapeis = null;
+	private $nomePapeis = '';
+	
+	/**
+	 * Método de modificação da Identificação de Papeis
+	 * @author João Batista Padilha e Silva
+	 * @param integer $id
+	 */
+	public function setIdPapeis($id = null)
+	{
+		$this->idPapeis = $id;
+	}
+	
+	/**
+	 * Método de retorno da identificação de Papeis
+	 * @author João Batista Padilha e Silva
+	 * @return integer
+	 */
+	public function getIdPapeis()
+	{
+		return $this->idPapeis;
+	}
+	
+	/**
+	 * Método de modificação do nome de Papeis
+	 * @author João Batista Padilha e Silva
+	 * @param var $nome
+	 */
+	public function setNomePapeis($nome = '')
+	{
+		$this->nomePapeis = $nome;
+	}
+	
+	/**
+	 * Método de retorno do nome de Papeis
+	 * @author João Batista Padilha e Silva
+	 * @return var
+	 */
+	public function getNomePapeis()
+	{
+		return $this->nomePapeis;
+	}
+}
+?>

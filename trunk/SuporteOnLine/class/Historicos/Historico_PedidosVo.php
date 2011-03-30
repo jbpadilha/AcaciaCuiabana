@@ -1,0 +1,311 @@
+<?php
+//####################################
+// * Rafael Henrique Vieira de Moura / Desenvolvedor (Ábaco Tecnologia)
+// * Arquivo: Historico_PedidosVo.php
+// * Criação: Rafael Henrique Vieira de Moura
+// * Revisão:
+// * Data de criação: 01/07/2008
+//####################################
+/*
+   Classe Value Object. Serve para transportar os atributos dos históricos dos
+   pedidos entre as camadas.
+*/
+
+class Historico_PedidosVo extends AbstractVo 
+{
+	private $idHistorico_Pedidos = null;
+	private $idPedidos = null;
+	private $idAnexos = null;
+	private $idUsuarioOrigem = null;
+	private $idPapeisOrigem = null;
+	private $idUsuariosDestinatario = null;
+	private $idPapeisDestinatario = null;
+	private $dataHoraHistorico_Pedidos = '';
+	private $complementoHistorico_Pedidos = '';
+	private $dataHoraAtendimentoHistorico_Pedidos = null;
+	private $idFluxos = null;
+	private $idUsuariosHistorico_Pedidos = null;
+	private $idVersoes = null;
+	private $DomnStatusPedidoHistorico_Pedidos = null;
+	
+	/**
+	 * Método de atribuição da identificação do Historico do Pedido
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param int $id
+	 */
+	public function setIdHistorico_Pedidos($id = null)
+	{
+		$this->idHistorico_Pedidos = $id;
+	}
+	
+	/**
+	 * Método de retorno da identificação do Historico do Pedido
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return int
+	 */
+	public function getIdHistorico_Pedidos()
+	{
+		return $this->idHistorico_Pedidos;
+	}
+	
+	/**
+	 * Método de atribuição da identificação do Pedido
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param int $id
+	 */
+	public function setIdPedidos($id = null)
+	{
+		$this->idPedidos = $id;
+	}
+	
+	/**
+	 * Método de retorno da identificação do Pedido
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return int
+	 */
+	public function getIdPedidos()
+	{
+		return $this->idPedidos;
+	}
+	
+	/**
+	 * Método de atribuição da identificação do Anexo
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param int $id
+	 */
+	public function setIdAnexos($id = null)
+	{
+		$this->idAnexos = $id;
+	}
+	
+	/**
+	 * Método de retorno da identificação do Anexo
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return int
+	 */
+	public function getIdAnexos()
+	{
+		return $this->idAnexos;
+	}
+	
+	/**
+	 * Método de atribuição da identificação do Usuario de Origem do Pedido
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param int $id
+	 */
+	public function setIdUsuarioOrigem($id = null)
+	{
+		$this->idUsuarioOrigem = $id;
+	}
+	
+	/**
+	 * Método de retorno da identificação do Usuario Origem
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return int
+	 */
+	public function getIdUsuarioOrigem()
+	{
+		return $this->idUsuarioOrigem;
+	}
+	
+	/**
+	 * Método de atribuição do Papel de Origem
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param int $id
+	 */
+	public function setIdPapeisOrigem($id = null)
+	{
+		$this->idPapeisOrigem = $id;
+	}
+	
+	/**
+	 * Método de retorno da identificação do Papel de Origem
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return int
+	 */
+	public function getIdPapeisOrigem()
+	{
+		return $this->idPapeisOrigem;
+	}
+	
+	/**
+	 * Método de atribuição da identificação do Usuario Destinatário
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param int $id
+	 */
+	public function setIdUsuariosDestinatario($id = null)
+	{
+		$this->idUsuariosDestinatario = $id;
+	}
+	
+	/**
+	 * Método de retorno da identificação do Usuario Destinatário
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return int
+	 */
+	public function getIdUsuariosDestinatario()
+	{
+		return $this->idUsuariosDestinatario;
+	}
+	
+	/**
+	 * Método de atribuição da indetificação do Papel Destinatário
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param int $id
+	 */
+	public function setIdPapeisDestinatario($id = null)
+	{
+		$this->idPapeisDestinatario = $id;
+	}
+	
+	/**
+	 * Método de retorno da indetificação do Papel Destinatário
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return int
+	 */
+	public function getIdPapeisDestinatario()
+	{
+		return $this->idPapeisDestinatario;
+	}
+	
+	/**
+	 * Método de atribuição da Data e Hora de Criação do Historico do Pedido
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param date $dataHora
+	 */
+	public function setDataHoraHistorico_Pedidos($dataHora = '')
+	{
+		$this->dataHoraHistorico_Pedidos = $dataHora;
+	}
+	
+	/**
+	 * Método de retorno da Data de Criação do Histórico do Pedido
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return date
+	 */
+	public function getDataHoraHistorico_Pedidos()
+	{
+		return $this->dataHoraHistorico_Pedidos;
+	}
+	
+	/**
+	 * Método de atribuição do Complemento do Histórico
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param var $desc
+	 */
+	public function setComplementoHistorico_Pedidos($desc = '')
+	{
+		$this->complementoHistorico_Pedidos = $desc;
+	}
+	
+	/**
+	 * Método de retorno do Complemento do Histórico do Pedido
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return var
+	 */
+	public function getComplementoHistorico_Pedidos()
+	{
+		return $this->complementoHistorico_Pedidos;
+	}
+	
+	/**
+	 * Método de atribuição do Fluxo Utilizado
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param int $id
+	 */
+	public function setIdFluxos($id = null)
+	{
+		$this->idFluxos = $id;
+	}
+	
+	/**
+	 * Método de retorno da identificação do Fluxo Utilizado
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return int
+	 */
+	public function getIdFluxos()
+	{
+		return $this->idFluxos;
+	}
+	
+	/**
+	 * Método de retorno da Data/Hora do Atendimento do Estágio do Pedido
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return date
+	 */
+	public function getDataHoraAtendimentoHistorico_Pedidos()
+	{
+		return $this->dataHoraAtendimentoHistorico_Pedidos;
+	}
+	
+	/**
+	 * Método de atribuição da Data/Hora do Atendimento do Estágio do Pedido
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param date $data
+	 */
+	public function setDataHoraAtendimentoHistorico_Pedidos($data = '')
+	{
+		$this->dataHoraAtendimentoHistorico_Pedidos = $data;
+	}
+	
+	/**
+	 * Método de retorno da identificação do Usuário que fez a alteração do histórico
+	 * @author Rafael Henrique Vieira de Moura
+	 * @return int
+	 */
+	public function getIdUsuarioHistorico_Pedidos()
+	{
+		return $this->idUsuariosHistorico_Pedidos;
+	}
+	
+	/**
+	 * Método de atribuição da identificação do Usuário que fez a alteração do Histórico
+	 * @author Rafael Henrique Vieira de Moura
+	 * @param int $id
+	 */
+	public function setIdUsuarioHistorico_Pedidos($id = null)
+	{
+		$this->idUsuariosHistorico_Pedidos = $id;
+	}
+	
+	/**
+	 * Método que retorna da identificação da Versão do Pedido até o Historico Atual
+	 * @author João Batista Padilha e Silva
+	 * @return int
+	 */
+	public function getIdVersoes()
+	{
+		return $this->idVersoes;
+	}
+	
+	/**
+	 * Método que atribui a identificação da versão
+	 * @author João Batista Padilha e Silva
+	 * @param int $id
+	 */
+	public function setIdVersoes($id = null)
+	{
+		$this->idVersoes = $id;
+	}
+	
+	/**
+	 * Método de retorno Domínio Status do Pedido
+	 * @author João Batista Padilha e Silva
+	 * @return int
+	 */
+	public function getDomnStatusPedidoHistorico_Pedidos()
+	{
+		return $this->DomnStatusPedidoHistorico_Pedidos;
+	}
+	
+	/**
+	 * Método de atribuição do Status do Pedido ao Histórico do Pedido
+	 * @author João Batista Padilha e Silva
+	 * @param int $status
+	 */
+	public function setDomnStatusPedidoHistorico_Pedidos($status = null)
+	{
+		$this->DomnStatusPedidoHistorico_Pedidos = $status;
+	}
+}
+?>
