@@ -7,10 +7,5 @@ define("PROJETO_CONTEXT", "http://AGGEMT/");
 require_once PATH_PROJETO_APPLICATION.'ProjetoUtil.php';
 new ProjetoUtil();
 session_start();
-/*if(!isset($_SESSION['loginusuario']))
-{
-	header("Location: conteudoInicial.php");
-}*/
 header("Content-Type: text/html; charset=UTF-8",true);
-include 'admin/mensagensErroSucesso.php';
 ?>

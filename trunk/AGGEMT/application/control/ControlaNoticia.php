@@ -1,5 +1,5 @@
 <?php
-require_once (PATH_PROJETO_APPLICATION.'control/ControlGeral.php');
+require_once ('ControlGeral.php');
 
 class ControlaNoticia extends ControlGeral {
 
@@ -52,7 +52,7 @@ class ControlaNoticia extends ControlGeral {
 						$noticia->setIdnoticia($idnoticia);
 						$this->deletar($noticia);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
-						header("Location:".PROJETO_CONTEXT."public/admin/inicio.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/admin/conteudoInicial.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					else	
 					{
@@ -66,6 +66,14 @@ class ControlaNoticia extends ControlGeral {
 					if(!ProjetoUtil::verificaBrancoNulo($idnoticia))
 					{
 						$noticia->setIdnoticia($idnoticia);
+						//Teste Img Notícia existente
+						$noticiaImg = new Noticias();
+						$noticiaImg->setIdnoticia($idnoticia);
+						$noticiaImg->find();
+						if($noticiaImg->getImagemnoticia()!=null)
+						{
+							@unlink(PATH_PROJETO_IMAGEM_UPLOAD.$noticiaImg->getImagemnoticia());
+						}
 					}
 					$this->preencheObjeto($noticia, $POST, $FILES);
 					$this->uploadImagem($noticia,$FILES);
@@ -97,6 +105,8 @@ class ControlaNoticia extends ControlGeral {
 	{
 		$noticias->_setFrom($POST);
 		$noticias->setDatanoticia($noticias->toDataNoticiaDB());
+		if($noticias->getDestaque() == null)
+			$noticias->setDestaque(0);
 		$this->MENSAGEM_ERRO = array_merge($this->MENSAGEM_ERRO, $noticias->validate());
 	}
 	
@@ -107,7 +117,7 @@ class ControlaNoticia extends ControlGeral {
 		}
 		catch (Exception $e)
 		{
-			throw new Exception(Mensagens::getMensagem("ERRO_ACESSAR_FUNCIONALIDADE")+$e->getMessage());
+			throw new Exception(Mensagens::getMensagem("ERRO_ACESSAR_FUNCIONALIDADE").$e->getMessage());
 		}
 	}
 	
@@ -125,7 +135,7 @@ class ControlaNoticia extends ControlGeral {
 		}
 		catch (Exception $e)
 		{
-			throw new Exception(Mensagens::getMensagem("ERRO_ACESSAR_FUNCIONALIDADE")+$e->getMessage());
+			throw new Exception(Mensagens::getMensagem("ERRO_ACESSAR_FUNCIONALIDADE").$e->getMessage());
 		}
 	}
 	
@@ -137,7 +147,7 @@ class ControlaNoticia extends ControlGeral {
 		}
 		catch (Exception $e)
 		{
-			throw new Exception(Mensagens::getMensagem("ERRO_ACESSAR_FUNCIONALIDADE")+$e->getMessage());
+			throw new Exception(Mensagens::getMensagem("ERRO_ACESSAR_FUNCIONALIDADE").$e->getMessage());
 		}
 	}
 	
@@ -150,25 +160,29 @@ class ControlaNoticia extends ControlGeral {
 		{
 			try
 			{
-				foreach($FILES as $key => $file){
-			    $upload->set("name",$file["name"]); // Uploaded file name.
-			    $upload->set("type",$file["type"]); // Uploaded file type.
-			    $upload->set("tmp_name",$file["tmp_name"]); // Uploaded tmp file name.
-			    $upload->set("error",$file["error"]); // Uploaded file error.
-			    $upload->set("size",$file["size"]); // Uploaded file size.
-			    $upload->set("fld_name",$key); // Uploaded file field name.
-			    $upload->set("max_file_size",4194304); // Max size allowed for uploaded file in bytes = 40 KB.
-			    $upload->set("supported_extensions",array("gif" => "image/gif" , "jpg" => "image/jpeg", "jpeg" => "image/pjpeg" ,"png" => "image/x-png")); // Allowed extensions and types for uploaded file.
-			    $upload->set("randon_name",TRUE); // Generate a unique name for uploaded file? bool(true/false).
-			    $upload->set("replace",FALSE); // Replace existent files or not? bool(true/false).
-			    $upload->set("file_perm",0444); // Permission for uploaded file. 0444 (Read only).
-			    $upload->set("dst_dir",PATH_PROJETO_IMAGEM_UPLOAD."noticias"); // Destination directory for uploaded files.
-			    $result = $upload->moveFileToDestination(); // $result = bool (true/false). Succeed or not.
-			    $noticias->setImagemnoticia("noticias/".$upload->generateFileName());
-			    if(!$result)
-			    {
-			    	throw new Exception($upload->error);
-			    }
+				foreach($FILES as $key => $file)
+				{
+					if($file["error"] == 0)
+					{
+					    $upload->set("name",$file["name"]); // Uploaded file name.
+					    $upload->set("type",$file["type"]); // Uploaded file type.
+					    $upload->set("tmp_name",$file["tmp_name"]); // Uploaded tmp file name.
+					    $upload->set("error",$file["error"]); // Uploaded file error.
+					    $upload->set("size",$file["size"]); // Uploaded file size.
+					    $upload->set("fld_name",$key); // Uploaded file field name.
+					    $upload->set("max_file_size",4194304); // Max size allowed for uploaded file in bytes = 40 KB.
+					    $upload->set("supported_extensions",array("gif" => "image/gif" , "jpg" => "image/jpeg", "jpeg" => "image/pjpeg" ,"png" => "image/x-png")); // Allowed extensions and types for uploaded file.
+					    $upload->set("randon_name",TRUE); // Generate a unique name for uploaded file? bool(true/false).
+					    $upload->set("replace",FALSE); // Replace existent files or not? bool(true/false).
+					    $upload->set("file_perm",0444); // Permission for uploaded file. 0444 (Read only).
+					    $upload->set("dst_dir",PATH_PROJETO_IMAGEM_UPLOAD."noticias"); // Destination directory for uploaded files.
+					    $result = $upload->moveFileToDestination(); // $result = bool (true/false). Succeed or not.
+					    $noticias->setImagemnoticia("noticias/".$upload->generateFileName());
+					    if(!$result)
+					    {
+					    	throw new Exception($upload->error);
+					    }
+					}
 			  }	
 			}
 			catch (Exception $e)
