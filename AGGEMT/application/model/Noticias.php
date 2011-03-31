@@ -124,7 +124,7 @@ class Noticias extends Lumine_Base {
 		if($this->getDatanoticia())
 		{
 			$data = explode("-",$this->getDatanoticia());
-			return $data[2]."-".$data[1]."-".$data[0];
+			return $data[2]."-".$data[1]."-".$data[0]." ".date("H:i:s");
 		}
 		else
 		{
@@ -169,8 +169,7 @@ class Noticias extends Lumine_Base {
 		Lumine_Validator_PHPValidator::clearValidations($this);
 		
 		// adicionando as regras 
-		Lumine_Validator_PHPValidator::addValidation($this, 'titulonoticia', Lumine_Validator::REQUIRED_STRING, 'Informe o t�tulo da not�cia');
-		Lumine_Validator_PHPValidator::addValidation($this, 'datanoticia', Lumine_Validator::REQUIRED_DATE, 'Informe a data da not�cia');
+		Lumine_Validator_PHPValidator::addValidation($this, 'titulonoticia', Lumine_Validator::REQUIRED_STRING, 'Informe o título da notícia');
 		return parent::validate();
 	}
 	

@@ -2,7 +2,7 @@
 
 class Agenda extends Lumine_Base {
 
-	protected $_tablename = 'anexos';
+	protected $_tablename = 'agenda';
     protected $_package   = 'model';
 	
     public $idagenda;
@@ -12,7 +12,7 @@ class Agenda extends Lumine_Base {
     
 	/**
      * Inicia os valores da classe
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return void
      */
     protected function _initialize()
@@ -27,7 +27,7 @@ class Agenda extends Lumine_Base {
 
     /**
      * Recupera um objeto estaticamente
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return Pessoa
      */
     public static function staticGet($pk, $pkValue = null)
@@ -108,10 +108,39 @@ class Agenda extends Lumine_Base {
 		Lumine_Validator_PHPValidator::clearValidations($this);
 		
 		// adicionando as regras 
-		Lumine_Validator_PHPValidator::addValidation($this, 'tituloagenda', Lumine_Validator::REQUIRED_STRING, 'Informe o título da agenda');
+		Lumine_Validator_PHPValidator::addValidation($this, 'tituloagenda', Lumine_Validator::REQUIRED_STRING, 'Informe o tï¿½tulo da agenda');
 		Lumine_Validator_PHPValidator::addValidation($this, 'dataagenda', Lumine_Validator::REQUIRED_DATE, 'Informe a data da agenda');
 		
 		return parent::validate();
+	}
+	
+	public function toDataAgendaDB()
+	{
+		if($this->getDataagenda())
+		{
+			$dataHora = explode(" ",$this->getDataagenda());
+			$data = explode("-",$dataHora[0]);
+			return $data[2]."-".$data[1]."-".$data[0]." ".$dataHora[1];
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
+	public function getDataAgendaFormatado()
+	{
+		if($this->getDataagenda()!=null)
+		{
+			$dataHora = explode(" ",$this->getDataagenda());
+			$data = explode("-",$dataHora[0]);
+			$dataRetorno = $data[2]."/".$data[1]."/".$data[0]." ".$dataHora[1];
+			return $dataRetorno;
+		}
+		else
+		{
+			return "";
+		}
 	}
 	
 }

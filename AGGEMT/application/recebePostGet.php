@@ -9,7 +9,7 @@
 define("PATH_PROJETO", $_SERVER['DOCUMENT_ROOT']."/AGGEMT/");
 define("PATH_PROJETO_APPLICATION", $_SERVER['DOCUMENT_ROOT']."/AGGEMT/application/");
 define("PATH_PROJETO_IMAGEM_UPLOAD", "C:/Paginas_Sistemas/AGGEMT/public/images/");
-define("PROJETO_CONTEXT", "http://AGGEMT/");
+define("PROJETO_CONTEXT", "http://localhost/AGGEMT/");
 require_once 'ProjetoUtil.php';
 require_once 'GruposUsuarios.php';
 require_once 'control/ControlGeral.php';
@@ -28,14 +28,14 @@ try {
 				{
 					$control = "Controla".$_GET['control']; //Classe Control
 					require 'control/'.$control.".php";
-					$controla = new $control($_GET);
+					$controla = new $control();
 					if($controla->permiteAcesso($grupo)){
 						$controla->get($_GET);
 					}
 					else
 					{
 						$MENSAGEM_ERRO[] = Mensagens::getMensagem("ACESSO_NEGADO");
-						header("Location:".PATH_PROJETO."public/conteudoInicial.php?mensagemErro=".urlencode(serialize($MENSAGEM_ERRO)));		
+						header("Location:".PROJETO_CONTEXT."public/admin/conteudoInicial.php?mensagemErro=".urlencode(serialize($MENSAGEM_ERRO)));		
 					}
 				}
 				elseif (isset($_GET['sair']))
@@ -46,7 +46,7 @@ try {
 				else
 				{
 					$MENSAGEM_ERRO[] = Mensagens::getMensagem("ERRO_ACESSAR_FUNCIONALIDADE");
-					header("Location:".PATH_PROJETO."public/conteudoInicial.php?mensagemErro=".urlencode(serialize($MENSAGEM_ERRO)));
+					header("Location:".PROJETO_CONTEXT."public/admin/conteudoInicial.php?mensagemErro=".urlencode(serialize($MENSAGEM_ERRO)));
 				}
 				break;	
 			}
@@ -56,7 +56,7 @@ try {
 				{
 					$control = "Controla".$_POST['control']; //Classe Control
 					require 'control/'.$control.".php";
-					$controla = new $control($_POST);
+					$controla = new $control();
 					if($controla->permiteAcesso($grupo))
 					{
 						if($_FILES == null)
@@ -70,13 +70,13 @@ try {
 					else
 					{
 						$MENSAGEM_ERRO[] = Mensagens::getMensagem("ACESSO_NEGADO");
-						header("Location:".PATH_PROJETO."public/conteudoInicial.php?mensagemErro=".urlencode(serialize($MENSAGEM_ERRO)));		
+						header("Location:".PROJETO_CONTEXT."public/admin/conteudoInicial.php?mensagemErro=".urlencode(serialize($MENSAGEM_ERRO)));		
 					}
 				}
 				else
 				{
 					$MENSAGEM_ERRO[] = Mensagens::getMensagem("ERRO_ACESSAR_FUNCIONALIDADE");
-					header("Location:".PATH_PROJETO."public/conteudoInicial.php?mensagemErro=".urlencode(serialize($MENSAGEM_ERRO)));
+					header("Location:".PROJETO_CONTEXT."public/admin/conteudoInicial.php?mensagemErro=".urlencode(serialize($MENSAGEM_ERRO)));
 				}
 				break;
 			}
@@ -89,5 +89,5 @@ try {
 catch (Exception $e)
 {
 	$MENSAGEM_ERRO[] = Mensagens::getMensagem("ERRO").$e->getMessage();
-	header("Location:".PATH_PROJETO."public/index.php?mensagemErro=".urlencode(serialize($MENSAGEM_ERRO))); 
+	header("Location:".PROJETO_CONTEXT."public/admin/index.php?mensagemErro=".urlencode(serialize($MENSAGEM_ERRO))); 
 }

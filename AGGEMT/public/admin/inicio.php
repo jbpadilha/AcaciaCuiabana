@@ -1,9 +1,8 @@
 <?php
-include '../carregamentoInicial.php'; 
-/*if(!isset($_SESSION["loginusuario"]))
-	header("Location:index.php");*/
-header("Content-Type: text/html; charset=UTF-8",true);
-$_SESSION["PATH_PUBLIC"] = getcwd(); 
+	include '../carregamentoInicial.php'; 
+	/*if(!isset($_SESSION["loginusuario"]))
+		header("Location:index.php");*/
+	$_SESSION["PATH_PUBLIC"] = getcwd(); 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US" xml:lang="en">
@@ -37,14 +36,9 @@ $_SESSION["PATH_PUBLIC"] = getcwd();
 			            $.post(url,dados
 			            ,function(retorno){$("#"+id).html(retorno)});
 			}
-			function enviaFormularioArquivo(url,id,form)
-			{
-				$("div#"+id).html("<div aligh='center'><font color=\"#FF0000\">Carregando ...</font>  <img src='../images/loading.gif' align='top' alt='aguarde' /></div>");
-
-				
-			}
 		</script>
 	</head>
+
 	<body>
 		<div id="art-main">
 			<div class="art-header">
@@ -113,3 +107,6 @@ $_SESSION["PATH_PUBLIC"] = getcwd();
 		</div>
 	</body>
 </html>
+<?php 
+include 'mensagensErroSucesso.php';
+?>
