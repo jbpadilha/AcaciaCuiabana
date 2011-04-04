@@ -5,7 +5,7 @@ class ControlaLogin extends ControlGeral {
 	 * @param Array $GET
 	 */
 	public function get($GET) {
-		header("Location:".ControlGeral::$PAGINA_INICIAL);
+		header("Location:".ControlGeral::$PAGINA_INICIO);
 	}
 
 	/**

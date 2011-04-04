@@ -8,7 +8,7 @@ require_once 'Mensagens.php';
 abstract class ControlGeral
 {
 	public static $PAGINA_INICIO_LOGADO = "../public/admin/inicio.php";
-	public static $PAGINA_INICIO = "../public/index.php";
+	public static $PAGINA_INICIO = "../public/admin/index.php";
 	
 	public $MENSAGEM_SUCESSO;
 	public $MENSAGEM_ERRO;

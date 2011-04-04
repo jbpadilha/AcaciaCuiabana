@@ -81,6 +81,7 @@ class ControlaUsuarios extends ControlGeral {
 	private function preencheObjeto(Usuarios $usuarios, Pessoa $pessoa, Endereco $endereco, $POST)
 	{
 		$usuarios->_setFrom($POST);
+		$usuarios->setSenha(sha1($usuarios->getSenha()));
 		$pessoa->_setFrom($POST);
 		$pessoa->setDatanascimentopessoa($pessoa->toDataNascimentoDB());
 		$endereco->_setFrom($POST);

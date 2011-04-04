@@ -10,6 +10,17 @@ Tags: fixed width, left sidebar, two columns, valid XHTML, widgets
 
 /* begin Page */
 /* Created by Artisteer v3.0.0.35414 */
+.erros
+{
+	color: #FF0000;
+	font-weight: bold;
+}
+
+.sucesso
+{
+	color: #00F;
+	font-weight: bold;
+}
 
 #art-main, table
 {
