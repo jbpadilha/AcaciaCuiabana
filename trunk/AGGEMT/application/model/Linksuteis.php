@@ -2,16 +2,16 @@
 
 class Linksuteis extends Lumine_Base {
 	
-	protected $_tablename = 'anexos';
+	protected $_tablename = 'linksuteis';
     protected $_package   = 'model';
     
-    public $idlinksuteis;
-    public $descricaolinksuteis;
-    public $link;
+    public $idlinksuteis = null;
+    public $descricaolinksuteis = null;
+    public $link = null;
     
 	/**
      * Inicia os valores da classe
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return void
      */
     protected function _initialize()
@@ -25,7 +25,7 @@ class Linksuteis extends Lumine_Base {
 
     /**
      * Recupera um objeto estaticamente
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return Pessoa
      */
     public static function staticGet($pk, $pkValue = null)

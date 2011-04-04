@@ -5,12 +5,12 @@ class Noticias extends Lumine_Base {
 	protected $_tablename = 'noticias';
     protected $_package   = 'model';
     
-	public $idnoticia;
-	public $titulonoticia;
-	public $descricaonoticia;
-	public $datanoticia;
-	public $imagemnoticia;
-	public $destaque;
+	public $idnoticia = null;
+	public $titulonoticia = null;
+	public $descricaonoticia = null;
+	public $datanoticia = null;
+	public $imagemnoticia = null;
+	public $destaque = null;
 	
 	/**
      * Inicia os valores da classe

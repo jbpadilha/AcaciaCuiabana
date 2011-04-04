@@ -16,14 +16,6 @@ Lumine::load('Events_ConnectionEvent');
 interface ILumine_Connection extends ILumine_EventListener 
 {
 	/**
-	 * Recupera a instancia
-	 * @author Hugo Ferreira da Silva
-	 * @link http://www.hufersil.com.br/
-	 * @return ILumine_Connection
-	 */
-	static function getInstance();
-	
-	/**
 	 * Abre a conexao com o banco
 	 * @author Hugo Ferreira da Silva
 	 * @link http://www.hufersil.com.br/
@@ -297,9 +289,27 @@ interface ILumine_Connection extends ILumine_EventListener
 	 */
 	function getEscapeChar();
 	
+	/**
+	 * recupera o charset utilizado
+	 *
+	 * @author Hugo Ferreira da Silva
+	 * @link http://www.hufersil.com.br
+	 * @return string
+	 */
+	function getCharset();
+	
+	/**
+	 * altera o charset utilizado
+	 *
+	 * @author Hugo Ferreira da Silva
+	 * @link http://www.hufersil.com.br
+	 * @param string $charset 
+	 * @return void
+	 */
+	function setCharset($charset);
+	
 }
 
 
 
 
-?>

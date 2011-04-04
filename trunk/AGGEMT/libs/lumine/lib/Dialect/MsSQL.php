@@ -1,6 +1,6 @@
 <?php
 /**
- * Classe para dialeto com o banco MySQL
+ * Classe para dialeto com o banco MsSQL
  * @package Lumine_Dialect
  * @author Hugo Ferreira da Silva
  * @link http://www.hufersil.com.br
@@ -10,7 +10,7 @@ Lumine::load('Dialect_Exception');
 Lumine::load('Dialect_IDialect');
 
 /**
- * Classe para dialeto com o banco MySQL
+ * Classe para dialeto com o banco MsSQL
  * @package Lumine_Dialect
  * @author Hugo Ferreira da Silva
  * @link http://www.hufersil.com.br
@@ -183,16 +183,16 @@ class Lumine_Dialect_MsSQL extends Lumine_EventListener implements ILumine_Diale
 			switch($mode)
 			{
 				case Lumine_Base::FETCH_ROW:
-					$native_mode = MYSQL_ROW;
+					$native_mode = MSSQL_ROW;
 				break;
 				
 				case Lumine_Base::FETCH_BOTH:
-					$native_mode = MYSQL_BOTH;
+					$native_mode = MSSQL_BOTH;
 				break;
 				
 				case Lumine_Base::FETCH_ASSOC:
 				default:
-					$native_mode = MYSQL_ASSOC;
+					$native_mode = MSSQL_ASSOC;
 			}
 			
 			

@@ -1,7 +1,7 @@
 <?php
 /**
  * Classe com funcoes utilitarias
- * 
+ *
  * @package Lumine_Util
  * @author Hugo Ferreira da Silva
  * @link http://www.hufersil.com.br
@@ -9,7 +9,7 @@
 
 /**
  * Classe com funcoes utilitarias
- * 
+ *
  * @package Lumine_Util
  * @author Hugo Ferreira da Silva
  * @link http://www.hufersil.com.br
@@ -18,7 +18,7 @@ class Lumine_Util
 {
 	/**
 	 * Importa classes
-	 * 
+	 *
 	 * @author Hugo Ferreira da Silva
 	 * @link http://www.hufersil.com.br/
 	 * @return void
@@ -30,7 +30,7 @@ class Lumine_Util
 		{
 			$parts = explode(".", $item);
 			$class = array_pop($parts);
-			
+
 			$cm = Lumine_ConnectionManager::getInstance();
 			$cfg = $cm->getConfiguration( implode('.', $parts) );
 			if($cfg != false)
@@ -39,7 +39,7 @@ class Lumine_Util
 			}
 		}
 	}
-	
+
 	/**
 	 * Funcao para formatar uma data de acordo com o formato desejado
 	 * @author Hugo Ferreira da Silva
@@ -75,7 +75,7 @@ class Lumine_Util
 
 	/**
 	 * Funcao para formatar um horario de acordo com o formato desejado
-	 * 
+	 *
 	 * @author Hugo Ferreira da Silva
 	 * @link http://www.hufersil.com.br/
 	 * @param string $time   Horario de entrada
@@ -93,10 +93,10 @@ class Lumine_Util
 		}
 		return $v;
 	}
-	
+
 	/**
 	 * Formata uma data e horario conforme o desejado
-	 * 
+	 *
 	 * @author Hugo Ferreira da Silva
 	 * @link http://www.hufersil.com.br/
 	 * @param string $time Data/hora de entrada
@@ -146,7 +146,7 @@ class Lumine_Util
 		}
 		return $time;
 	}
-	
+
 	/**
 	 * Cria diretorios recursivamente
 	 * @author Hugo Ferreira da Silva
@@ -161,7 +161,7 @@ class Lumine_Util
 		}
 		$dir = str_replace("\\","/", $dir);
 		$pieces = explode("/", $dir);
-		
+
 		for($i=0; $i<count($pieces); $i++) {
 			$mdir = '';
 			for($j=0; $j<=$i; $j++) {
@@ -178,7 +178,7 @@ class Lumine_Util
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Valida um email
 	 *
@@ -209,12 +209,12 @@ class Lumine_Util
 	public static function buildOptions($class, $value, $label, $selected='', $where=null) {
 		if(is_string($class)) {
 			self::Import($class);
-			
+
 			$classname = substr($class, strrpos($class,'.')+1);
-			
+
 			$o = new $classname;
 			$o->alias('o');
-			
+
 			if($o) {
 				if( !empty($where)) {
 					$o->where($where);
@@ -228,7 +228,7 @@ class Lumine_Util
 		} else {
 			return false;
 		}
-		
+
 		$str='';
 		while($o->fetch()) {
 			$str .= '<option value="'.$o->$value.'"';
@@ -239,10 +239,10 @@ class Lumine_Util
 		}
 		return $str;
 	}
-	
+
 	/**
 	 * Converte os valores para UTF-8
-	 * 
+	 *
 	 * @author Hugo Ferreira da Silva
 	 * @link http://www.hufersil.com.br/
 	 * @param mixed $o Dado a ser convertido
@@ -270,7 +270,7 @@ class Lumine_Util
 		// padrao
 		return $o;
 	}
-	
+
 	/**
 	 * Converte os valores de UTF-8
 	 *
@@ -301,10 +301,10 @@ class Lumine_Util
 		// padrao
 		return $o;
 	}
-	
+
 	/**
 	 * Exibe os resultados de uma consulta em uma tabela HTML
-	 * 
+	 *
 	 * @author Hugo Ferreira da Silva
 	 * @link http://www.hufersil.com.br/
 	 * @param Lumine_Base $obj
@@ -314,26 +314,26 @@ class Lumine_Util
 	{
 		$sql = $obj->_getSQL();
 		$resultset = $obj->allToArray();
-		
+
 		if( !empty($resultset) )
 		{
 			$header = $resultset[0];
-			
+
 			$style = ' style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9px" ';
-			
+
 			echo '<table cellpadding="2" cellspacing="1" width="100%">';
 			echo '<tr>';
-			
+
 			echo '<tr>'.PHP_EOL;
 			echo '<td '.$style.' colspan="'.count($header).'">' . $sql. '</td>'.PHP_EOL;
 			echo '</tr>' . PHP_EOL;
-			
+
 			foreach($header as $key => $value)
 			{
 				echo '<td'.$style.' bgcolor="#CCCCCC">'. $key .'</td>'.PHP_EOL;
 			}
 			echo '</tr>';
-			
+
 			for($i=0; $i<count($resultset); $i++)
 			{
 				$row = $resultset[$i];
@@ -345,16 +345,16 @@ class Lumine_Util
 				}
 				echo '</tr>';
 			}
-			
+
 			echo '</table>';
 		} else {
 			Lumine_Log::warning( 'Nenhum resultado encontrado no objeto passado: ' . get_class($obj) );
 		}
 	}
-	
+
 	/**
 	 * Converte um array para xml
-	 * 
+	 *
 	 * @author Hugo Ferreira da Silva
 	 * @link http://www.hufersil.com.br/
 	 * @param array $arr
@@ -362,41 +362,74 @@ class Lumine_Util
 	 * @param boolean $first
 	 * @return string
 	 */
-	public static function array2xml( $arr, $utf8 = true, $first = true )
+	public static function array2xml( $arr, $utf8 = true, $first = true, $useAttributes = false, $nodeName = '' )
 	{
 	    $xml = array();
 	    $stack = array();
-	    
+
+
+	    if( !$useAttributes ){
+		    foreach( $arr as $key => $item )
+		    {
+		        if( is_numeric($key) )
+		        {
+		            $key = 'item';
+		        }
 	
-	    foreach( $arr as $key => $item )
-	    {
-	        if( is_numeric($key) )
-	        {
-	            $key = 'item';
-	        }
-	        
-	        $xml[] = sprintf('<%s>', $key);
-	        
-	        if( is_array($item) ) {
-                $str = self::array2xml($item, $utf8, false);
-	        } else {
-	            $str = sprintf('<![CDATA[%s]]>', $utf8 ? utf8_encode($item) : $item);
-	        }
-	        
-	        $xml[] = $str;
-	        $xml[] = sprintf('</%s>', $key);
+		        $xml[] = sprintf('<%s>', $key);
+	
+		        if( is_array($item) ) {
+	                $str = self::array2xml($item, $utf8, false, $useAttributes);
+		        } else {
+		            $str = sprintf('<![CDATA[%s]]>', $utf8 ? utf8_encode($item) : $item);
+		        }
+	
+		        $xml[] = $str;
+		        $xml[] = sprintf('</%s>', $key);
+		    }
+	    } else {
+	    	
+	    	$lists = array();
+	    	$nodeName = empty($nodeName) ? 'record' : $nodeName;
+	    	$line = $first ? '' : '<' . $nodeName . ' ';
+	    	
+			foreach( $arr as $key => $item )
+		    {
+		        if( is_numeric($key) )
+		        {
+		            $key = 'item';
+		        }
+	
+		        if( is_array($item) ) {
+		        	$lists[] = array('data' => $item, 'key' => $key);
+		        } else {
+		            $line .= sprintf('%s="%s" '
+		            	, $key
+		            	, $utf8 ? utf8_encode($item) : $item
+		            );
+		        }
+		    }
+		    
+		    $line .= $first ? '' : '>';
+		    
+		    foreach($lists as $item){
+		    	$line .= self::array2xml($item['data'], $utf8, false, $useAttributes, $item['key']);
+		    }
+		    
+		    $line .= $first ? '' : '</' . $nodeName . '>';
+		    $xml[] = $line;
 	    }
-	    
+
 	    if( $first ) {
 	        return '<data>' . implode(PHP_EOL, $xml) . '</data>';
 	    } else {
 	        return implode(PHP_EOL, $xml);
 	    }
 	}
-	
+
 	/**
 	 * Converte valores para o formato JSON
-	 * 
+	 *
 	 * @author Hugo Ferreira da Silva
 	 * @link http://www.hufersil.com.br/lumine
 	 * @param mixed $value valor a ser convertido
@@ -407,12 +440,24 @@ class Lumine_Util
 		if($utf8){
 			$value = self::toUTF8($value);
 		}
-		
+
 		if(!function_exists('json_encode')){
 			throw new Exception('O metodo json_encode nao existe');
 		}
-		
+
 		return json_encode($value);
+	}
+
+	/**
+	 * Coloca a string no formato camel case
+	 *
+	 * @author Hugo Ferreira da Silva
+	 * @link http://www.hufersil.com.br
+	 * @param unknown_type $field
+	 * @return
+	 */
+	public static function camelCase($field){
+		return preg_replace('@_(\w{1})@e', 'strtoupper("$1")', strtolower($field) );
 	}
 }
 

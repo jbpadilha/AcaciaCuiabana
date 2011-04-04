@@ -5,18 +5,10 @@ require_once ('ControlGeral.php');
 class ControlaUsuarios extends ControlGeral {
 	
 	public function permiteAcesso($grupo) {
-		if($grupo == GruposUsuarios::$GRUPO_ADMIN)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return true;
 	}
 	
 	public function get($GET) {
-		header("Location:../public/usuarios.php");
 	}
 	
 	public function post($POST) {
@@ -41,7 +33,7 @@ class ControlaUsuarios extends ControlGeral {
 					{
 						$this->cadastrar($usuarios, $pessoa, $endereco);						
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO"); 
-						header("Location:../public/usuarios.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/admin/conteudoInicial.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 				}
 				elseif($POST['funcao'] == "deletar")
@@ -55,7 +47,7 @@ class ControlaUsuarios extends ControlGeral {
 					{
 						$this->deletar($usuarios, $pessoa, $endereco);						
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
-						header("Location:../public/usuarios.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/admin/conteudoInicial.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 					
 				}
@@ -68,9 +60,9 @@ class ControlaUsuarios extends ControlGeral {
 					}
 					else
 					{
-						$this->deletar($usuarios, $pessoa, $endereco);						
+						$this->alterar($usuarios, $pessoa, $endereco);						
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_ALTERAR"); 
-						header("Location:../public/usuarios.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						header("Location:../public/admin/conteudoInicial.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
 				}
 			}
@@ -82,7 +74,7 @@ class ControlaUsuarios extends ControlGeral {
 		catch (Exception $e)
 		{
 			$this->MENSAGEM_ERRO[] = $e->getMessage();
-			header("Location:../public/comarca.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+			header("Location:".PROJETO_CONTEXT."public/admin/inicio.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 		}
 	}
 	

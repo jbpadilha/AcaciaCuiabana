@@ -5,13 +5,13 @@ class Paginas extends Lumine_Base {
 	protected $_tablename = 'paginas';
     protected $_package   = 'model';
     
-    public $idpagina;
-    public $nomepagina;
-    public $descricaopagina;
+    public $idpagina = null;
+    public $nomepagina = null;
+    public $descricaopagina = null;
     
 /**
      * Inicia os valores da classe
-     * @author João Batista Padilha e Silva
+     * @author JoÃ£o Batista Padilha e Silva
      * @return void
      */
     protected function _initialize()
@@ -22,11 +22,12 @@ class Paginas extends Lumine_Base {
         $this->_addField("descricaopagina", "descricaopagina", "text", null, array('notnull' => false));
 		
         $this->_addForeignRelation('menu', self::ONE_TO_MANY, 'Menu', 'idpagina', null, null, null);
+        $this->_addForeignRelation('submenu', self::ONE_TO_MANY, 'Submenu', 'idpagina', null, null, null);
     }
     
 /**
      * Recupera um objeto estaticamente
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return Pessoa
      */
     public static function staticGet($pk, $pkValue = null)
@@ -93,7 +94,7 @@ class Paginas extends Lumine_Base {
 		Lumine_Validator_PHPValidator::clearValidations($this);
 		
 		// adicionando as regras 
-		Lumine_Validator_PHPValidator::addValidation($this, 'nomepagina', Lumine_Validator::REQUIRED_STRING, 'Informe o nome da página');
+		Lumine_Validator_PHPValidator::addValidation($this, 'nomepagina', Lumine_Validator::REQUIRED_STRING, 'Informe o nome da pï¿½gina');
 		
 		return parent::validate();
 	}

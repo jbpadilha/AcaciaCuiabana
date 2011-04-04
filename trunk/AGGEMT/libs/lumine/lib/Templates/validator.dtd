@@ -11,7 +11,7 @@
 >
 <!-- Atributos do elemento "validator" -->
 <!ATTLIST validator
-          type        (class|requiredString|requiredNumber|requiredEmail|rule|unique)   #REQUIRED
+          type        (class|requiredString|requiredNumber|requiredEmail|rule|unique|requiredDate|requiredCpf|requiredCnpj)   #REQUIRED
 		  rule        CDATA     #IMPLIED
 		  classname   CDATA     #IMPLIED
 		  name        CDATA     #IMPLIED

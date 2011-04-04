@@ -11,7 +11,7 @@ function post(){
 	$list = func_get_args();
 	$atual = $_POST;
 	$valor = '';
-	
+
 	foreach($list as $key){
 		if(isset($atual[$key])){
 			$atual = $atual[$key];
@@ -20,7 +20,7 @@ function post(){
 			$valor = '';
 		}
 	}
-	
+
 	echo $valor;
 }
 
@@ -29,9 +29,9 @@ function checked(){
 	$args = func_get_args();
 	$compare = array_shift($args);
 	call_user_func_array('post', $args);
-	
+
 	$val = ob_get_clean();
-	
+
 	if($val == $compare){
 		echo ' checked="checked"';
 	}
@@ -42,9 +42,9 @@ function selected(){
 	$args = func_get_args();
 	$compare = array_shift($args);
 	call_user_func_array('post', $args);
-	
+
 	$val = ob_get_clean();
-	
+
 	if($val == $compare){
 		echo ' selected="selected"';
 	}
@@ -58,7 +58,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 		'port' => 3306,
 		'user' => 'root',
 		'class_path' => str_replace('\\', '/', dirname(LUMINE_INCLUDE_PATH)),
-		
+
 		'options' => array(
 			'create_paths' => 1,
 			'camel_case' => 1,
@@ -90,26 +90,34 @@ $addons_path = '';
 // se ja informou o class-path
 if( !empty($_POST['class_path']) ){
 	// pasta onde deverao ser instalados os add-ons
-	$addons_path = $_POST['class_path'] . '/add-ons/';
-	// lista os arquivos
-	$files = glob($addons_path.'*.php');
-	
-	// para cada arquivo encontrado
-	foreach($files as $file){
-		// inclui o arquivo
-		include_once $file;
-		// informacoes do arquivo
-		$info = pathinfo($file);
-		// se a classe existir (mesmo nome do arquivo)
-		if( class_exists($info['filename']) ){
-			// reflexao
-			$ref = new ReflectionClass($info['filename']);
-			// cria a instancia
-			$instance = $ref->newInstance();
-			// se extende Lumine_AddOn e se puder ser exibida
-			if( $instance instanceof Lumine_AddOn && $instance->showInReverseScreen() ){
-				// coloca na lista de add-ons
-				$addons[] = $instance;
+	$addons_paths = array($_POST['class_path'] . '/add-ons/');
+
+	// se informou outra pasta de add-ons
+	if( !empty($_POST['addons_path']) ){
+		$addons_paths[] = $_POST['addons_path'];
+	}
+
+	foreach($addons_paths as $addons_path){
+		// lista os arquivos
+		$files = glob($addons_path.'*.php');
+
+		// para cada arquivo encontrado
+		foreach($files as $file){
+			// inclui o arquivo
+			include_once $file;
+			// informacoes do arquivo
+			$info = pathinfo($file);
+			// se a classe existir (mesmo nome do arquivo)
+			if( class_exists($info['filename']) ){
+				// reflexao
+				$ref = new ReflectionClass($info['filename']);
+				// cria a instancia
+				$instance = $ref->newInstance();
+				// se extende Lumine_AddOn e se puder ser exibida
+				if( $instance instanceof Lumine_AddOn && $instance->showInReverseScreen() ){
+					// coloca na lista de add-ons
+					$addons[] = $instance;
+				}
 			}
 		}
 	}
@@ -132,28 +140,28 @@ if(!empty($_POST['acao'])){
 		case 'addon-action':
 			$name = empty($_POST['addon-name']) ? '' : $_POST['addon-name'];
 			$method = empty($_POST['addon-method']) ? '' : $_POST['addon-method'];
-			
+
 			if( empty($name) || empty($method) ){
 				die('Voce deve informar o nome do addon e o metodo a ser executado');
 			}
-			
+
 			if(!class_exists($name)){
 				die('Classe nao encontrada: '.$name);
 			}
-			
+
 			$class = new ReflectionClass($name);
 			$instance = $class->newInstance();
 			$method = $class->getMethod($method);
-			
+
 			if( is_null($method) || $method->isPublic() == false ){
 				die('Metodo nao encontrado ou nao e publico');
 			}
-			
+
 			$result = $method->invokeArgs($instance, array($_POST));
-			
+
 			echo $result;
 		break;
-		
+
 		case 'tabelas':
 				$res = false;
 				$message = '';
@@ -165,60 +173,60 @@ if(!empty($_POST['acao'])){
 					$res = $conn->connect();
 					$list = $conn->getTables();
 					$conn->close();
-					
+
 					if(!empty($list)){
 						echo '<input type="checkbox" onclick="checarTodas(this)" />Selecionar todas as tabelas<br /><br />';
 						foreach($list as $table){
 							printf('<input type="checkbox" class="table" name="tables[]" value="%1$s" /> %1$s <br />', $table);
 						}
-						
+
 						echo '<br />';
 						echo '<input type="button" id="btnConcluir" value="Gerar Classes" onclick="concluir()" />';
 					} else {
 						echo 'Nenhuma tabela encontrada';
 					}
-					
+
 				} catch(Exception $e) {
 					$message = $e->getMessage();
 					$res = false;
-					
+
 					echo $message;
 				}
-				
+
 				exit;
 		break;
-		
+
 		case 'gerar':
 			try {
 				Lumine::load('Reverse');
 				$table_list = !empty($_POST['tables']) ? $_POST['tables'] : array();
-				
+
 				unset($_POST['tables']);
-				
+
 				$_POST['options']['overwrite'] = 0;
 				$_POST['options']['create_dtos'] = !empty($_POST['options']['create_dtos']);
 				$_POST['options']['create_paths'] = !empty($_POST['options']['create_paths']);
 				$_POST['options']['generateAccessors'] = !empty($_POST['options']['generateAccessors']);
 				$_POST['options']['create_entities_for_many_to_many'] = !empty($_POST['options']['create_entities_for_many_to_many']);
-				
+
 				// ajusta algumas configuracoes
 				if($_POST['options']['tipo_geracao'] == 1)	{
 					$_POST['options']['generate_files'] = 1;
 					$_POST['options']['generate_zip'] = 0;
-					
-				} else if($_POST['options']['tipo_geracao'] == 2) { 
+
+				} else if($_POST['options']['tipo_geracao'] == 2) {
 					$_POST['options']['generate_files'] = 0;
 					$_POST['options']['generate_zip'] = 1;
 				}
-				
+
 				Lumine_Log::setLevel(Lumine_Log::ERROR);
 				$cfg = new Lumine_Reverse($_POST);
 				$cfg->setTables($table_list);
 				$cfg->start();
-				
+
 				if(!empty($_POST['addons'])){
 					Lumine_Log::debug('Executando add-ons');
-					
+
 					foreach($_POST['addons'] as $classname){
 						foreach($addons as $item){
 							if( get_class($item) == $classname ){
@@ -227,15 +235,15 @@ if(!empty($_POST['acao'])){
 						}
 					}
 				}
-				
+
 				echo '<span style="color: #006600; font-weight: bold;">Engenharia reversa terminada!</span>';
-				
+
 			} catch (Exception $e) {
 				echo "Falha na engenharia reversa: " . $e->getMessage();
 			}
 			exit;
 		break;
-		
+
 		case 'loadTemplate':
 			if(isset($_POST['options']['configID']) && $_POST['options']['configID'] != ''){
 				$id = $_POST['options']['configID'];
@@ -259,28 +267,28 @@ if(!empty($_POST['acao'])){
 <script type="text/javascript">
 $(function(){
 	$('#tabs, #addons-tabs').tabs();
-	
+
 	$('.btnRecuperarTabelas').click(function(){
 		var data = $('#formReverse').serialize() + '&acao=tabelas';
-		
+
 		$('#tabs').tabs('select','tabelas');
-		
+
 		$('#lista_tabelas').html('Aguarde...');
-		
+
 		$.post('<?php echo $_SERVER['PHP_SELF']; ?>', data, function(json){
 			$('#lista_tabelas').html(json);
 		});
 	});
-	
+
 	$('#btnImportar').click(function(){
 		$('#formReverse').submit();
 	});
-	
+
 	$('#configID').change(function(){
 		$('#acao').val('loadTemplate');
 		$('#formReverse').submit();
 	});
-	
+
 });
 
 function checarTodas(ref){
@@ -290,14 +298,14 @@ function checarTodas(ref){
 function concluir(){
 	$('#tabs').tabs('select','logs');
 	$('#log_geracao').html('<iframe src="" style="width:100%; height: 300px;" id="logFrame" name="logFrame" />');
-	
+
 	$('#acao').val('gerar');
 	$('#formReverse').attr('target','logFrame')
 		.submit();
-		
+
 	$('#formReverse').attr('target','_self');
 	$('#acao').val('');
-	
+
 }
 </script>
 </head>
@@ -333,17 +341,17 @@ function concluir(){
 				<select name="dialect" id="dialect">
 					<?php
             $dh = opendir(LUMINE_INCLUDE_PATH.'/lib/Connection');
-            $nopes = array('.','..','IConnection.php','.cvs','.svn');
-            
+            $nopes = array('.','..','IConnection.php','.cvs','.svn','AbstractConnection.php');
+
             while($file = readdir($dh))
             {
                 if(in_array($file , $nopes))
                 {
                     continue;
                 }
-                
+
                 $name = str_replace('.php','',$file);
-                
+
                 echo '<option value="'.$name.'"';
                 if(@$_POST['dialect'] == $name)
                 {
@@ -351,7 +359,7 @@ function concluir(){
                 }
                 echo '>'.$name.'</option>'.PHP_EOL;
             }
-            
+
             ?>
 				</select>
 			</p>
@@ -430,7 +438,7 @@ function concluir(){
 					<?php
 				$dir = LUMINE_INCLUDE_PATH . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'Form' . DIRECTORY_SEPARATOR;
 				$files = glob($dir . '*.php');
-				
+
 				foreach($files as $file)
 				{
 					preg_match('@([\w,\.]+)\.php$@', $file, $reg);
@@ -442,7 +450,7 @@ function concluir(){
 							$reg[1]);
 					}
 				}
-				
+
 				?>
 				</select>
 			</p>
@@ -523,6 +531,12 @@ function concluir(){
 			<p>Add-ons ser&atilde;o executados automaticamente ap&oacute;s o termindo da engenharia reversa.</p>
 			<p>Caso a lista de add-ons n&atilde;o esteja sendo exibida, confirme se os caminhos est&atilde;o digitados corretamente.</p>
 			<p>Lumine ir&aacute; procurar por uma pasta chamada &quot;add-ons&quot; dentro da pasta definida em sua class-path.</p>
+			<p>&nbsp;</p>
+			<p>
+				Procurar tamb&eacute;m neste pasta:
+				<input type="text" name="addons_path" value="<?php post('addons_path'); ?>" />
+			</p>
+			<p>&nbsp;</p>
 			<p>Para atualizar a lista, <a href="#" onclick="$('#acao').val(''); $('form').submit();">clique aqui</a>.</p>
 			<p>&nbsp;</p>
 			<?php if(!empty($addons)): ?>
@@ -535,14 +549,14 @@ function concluir(){
 						</li>
 					<?php endforeach; ?>
 					</ul>
-					
+
 					<?php foreach($addons as $idx => $item): ?>
 						<div id="addon-<?php echo $idx; ?>"><?php echo $item->displayConfigScreen(); ?></div>
 					<?php endforeach; ?>
 				</div>
 			<?php else: ?>
-			<p>Nenhum add-on encontrado na pasta <?php echo $addons_path; ?></p>
-			
+			<p>Nenhum add-on encontrado nas pastas <br /> <?php echo implode('<br />', $addons_paths); ?></p>
+
 			<?php endif; ?>
 			<p>&nbsp;</p>
 		</div>

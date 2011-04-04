@@ -59,7 +59,7 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
 		<tr>
 			<td>id</td>
 			<td>Título</td>
-			<td colspan="2">Data da Agenda</td>
+			<td colspan="2">Ações</td>
 		</tr>
 		<?php  
 		$agenda = null;

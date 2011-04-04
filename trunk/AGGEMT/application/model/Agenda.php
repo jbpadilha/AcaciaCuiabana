@@ -5,10 +5,10 @@ class Agenda extends Lumine_Base {
 	protected $_tablename = 'agenda';
     protected $_package   = 'model';
 	
-    public $idagenda;
-    public $tituloagenda;
-    public $dataagenda;
-    public $descricaoagenda;
+    public $idagenda = null;
+    public $tituloagenda = null;
+    public $dataagenda = null;
+    public $descricaoagenda = null;
     
 	/**
      * Inicia os valores da classe

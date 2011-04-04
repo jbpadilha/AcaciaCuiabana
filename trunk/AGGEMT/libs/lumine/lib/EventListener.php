@@ -1,7 +1,7 @@
 <?php
 /**
  * Implementacao de EventListeners
- * 
+ *
  * @author Hugo Ferreira da Silva
  * @link http://www.hufersil.com.br
  * @package Lumine
@@ -12,12 +12,12 @@ Lumine::load('IEventListener');
 
 /**
  * Implementacao de EventListeners
- * 
+ *
  * @package Lumine
  * @author Hugo Ferreira da Silva
  * @link http://www.hufersil.com.br
  */
-class Lumine_EventListener implements ILumine_EventListener 
+class Lumine_EventListener implements ILumine_EventListener
 {
 	/**
 	 * ouvintes registrados
@@ -29,13 +29,13 @@ class Lumine_EventListener implements ILumine_EventListener
 	 * @var array
 	 */
 	protected $_event_types   = array();
-	
+
 	/**
 	 * @see ILumine_EventListener::addEventListener()
 	 */
 	public function addEventListener($evt, $callback)
 	{
-		if( ! in_array($evt, $this->_event_types)) 
+		if( ! in_array($evt, $this->_event_types))
 		{
 			throw new Lumine_Exception('Tipo de evento nao suportado', Lumine_Exception::ERROR);
 		}
@@ -43,7 +43,7 @@ class Lumine_EventListener implements ILumine_EventListener
 		{
 			$this->_listeners[ $evt ] = array();
 		}
-				
+
 		$this->_listeners[ $evt ][] = $callback;
 	}
 	/**
@@ -51,7 +51,7 @@ class Lumine_EventListener implements ILumine_EventListener
 	 */
 	public function removeEventListener($evt, $callback)
 	{
-		if( ! in_array($evt, $this->_event_types)) 
+		if( ! in_array($evt, $this->_event_types))
 		{
 			throw new Lumine_Exception('Tipo de evento nao suportado', Lumine_Exception::ERROR);
 		}
@@ -59,7 +59,7 @@ class Lumine_EventListener implements ILumine_EventListener
 		{
 			$this->_listeners[ $evt ] = array();
 		}
-				
+
 		// $this->_listeners[ $evt ][] = $callback;
 	}
 	/**
@@ -67,7 +67,7 @@ class Lumine_EventListener implements ILumine_EventListener
 	 */
 	public function removeAllListeners($evt)
 	{
-		if( ! in_array($evt, $this->_event_types)) 
+		if( ! in_array($evt, $this->_event_types))
 		{
 			throw new Lumine_Exception('Tipo de evento nao suportado', Lumine_Exception::ERROR);
 		}
@@ -83,6 +83,12 @@ class Lumine_EventListener implements ILumine_EventListener
 			foreach($this->_listeners[ $evt->type ] as $id => $callback)
 			{
 				call_user_func_array($callback, array($evt));
+
+				// se pediu para parar a propagacao
+				if( ! $evt->getPropagate() ) {
+					// nao executa mais os listeners
+					break;
+				}
 			}
 		}
 	}
