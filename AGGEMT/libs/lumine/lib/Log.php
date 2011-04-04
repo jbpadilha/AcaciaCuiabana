@@ -110,6 +110,10 @@ class Lumine_Log {
 	 */
 	public static function log($code, $msg, $file, $line)
 	{
+		if( self::$level < $code ){
+			return;
+		}
+		
 		$tipo = 'DESCONHECIDO';
 		$cor = '';
 
@@ -191,6 +195,9 @@ class Lumine_Log {
 	 */
 	public static function warning($message)
 	{
+		if( self::$level < self::WARNING ){
+			return;
+		}
 		$tmp = debug_backtrace();
 		$bt = array_shift( $tmp );
 		$file = $bt['file'];
@@ -208,6 +215,9 @@ class Lumine_Log {
 	 */
 	public static function debug($message)
 	{
+		if( self::$level < self::LOG ){
+			return;
+		}
 		$tmp = debug_backtrace();
 		$bt = array_shift( $tmp );
 		$file = $bt['file'];
@@ -225,6 +235,9 @@ class Lumine_Log {
 	 */
 	public static function error($message)
 	{
+		if( self::$level < self::ERROR ){
+			return;
+		}
 		$tmp = debug_backtrace();
 		$bt = array_shift( $tmp );
 		$file = $bt['file'];

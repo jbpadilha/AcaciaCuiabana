@@ -5,14 +5,14 @@ class Anexos extends Lumine_Base {
 	protected $_tablename = 'anexos';
     protected $_package   = 'model';
 	
-    public $idanexo;
-    public $nomeanexo;
-    public $caminhoanexo;
-    public $linkanexo;
+    public $idanexo = null;
+    public $nomeanexo = null;
+    public $caminhoanexo = null;
+    public $linkanexo = null;
     
 	/**
      * Inicia os valores da classe
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return void
      */
     protected function _initialize()
@@ -23,11 +23,12 @@ class Anexos extends Lumine_Base {
         $this->_addField('caminhoanexo', 'caminhoanexo', 'varchar', 255, array('notnull' => false));
         $this->_addField("linkanexo", "linkanexo", "varchar", 255, array('notnull' => false));
         
+        $this->_addForeignRelation('submenu', self::ONE_TO_MANY, 'Submenu', 'idanexo', null, null, null);
     }
 
     /**
      * Recupera um objeto estaticamente
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return Pessoa
      */
     public static function staticGet($pk, $pkValue = null)

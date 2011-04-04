@@ -6,17 +6,17 @@ class Pessoa extends Lumine_Base{
     protected $_tablename = 'pessoa';
     protected $_package   = 'model';
     
-	public $idpessoa;		 	 	 	 	 	 	
-	public $datacadastropessoa;		 	 	 	 	 	 	
-	public $nomepessoa;		 	 	 	 	 	 	 
-	public $rgpessoa;		 	 	 	 	 	 	 
-	public $emissorpessoa;		 	 	 	 	 	 	 		 	 	 	 	 	 	 
-	public $cpfpessoa;		 	 	 	 	 	 	 
-	public $datanascimentopessoa;	
+	public $idpessoa = null; 	 	 	 	 	
+	public $datacadastropessoa = null;		 	 	 	 	 	 	
+	public $nomepessoa = null;	 	 	 	 
+	public $rgpessoa = null;	 	 	 	 	 	 
+	public $emissorpessoa = null;	 	 	 	 	 	 	 		 	 	 	 	 	 	 
+	public $cpfpessoa = null;	 	 	 	 	 
+	public $datanascimentopessoa = null;
 	
 	/**
      * Inicia os valores da classe
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return void
      */
     protected function _initialize()
@@ -37,7 +37,7 @@ class Pessoa extends Lumine_Base{
 
     /**
      * Recupera um objeto estaticamente
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return Pessoa
      */
     public static function staticGet($pk, $pkValue = null)

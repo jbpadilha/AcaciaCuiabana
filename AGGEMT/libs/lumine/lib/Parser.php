@@ -172,11 +172,11 @@ class Lumine_Parser {
 			
 			// se for por binding de nome 
 			if(preg_match('@:(\w+)\b@', $wildcards[0][$i], $reg)){
-				$val = empty($args[0][$reg[1]]) ? '' : $args[0][$reg[1]];
+				$val = !isset($args[0][$reg[1]]) ? '' : $args[0][$reg[1]];
 				
 			// do contrario
 			} else {
-				$val = empty($args[$i]) ? '' : $args[$i];
+				$val = !array_key_exists($i, $args) ? '' : $args[$i];
 				
 			}
 			
@@ -246,12 +246,24 @@ class Lumine_Parser {
 	 * @param boolean           $islike
 	 * @return mixed
 	 */
-	public static function getParsedValue($obj, $val, $type, $islike = false)
+	public static function getParsedValue($obj, $val, $type, $islike = false, $usingDefault = false)
 	{
 		if( is_null( $val ) == true )
 		{
 			return 'NULL';
 		}
+		
+		// se esta informando atraves de um valor padrao
+		if( $usingDefault && !is_array($val) && !is_object($val) ){
+			// pegamos o prefixo do valor
+			$prefix = substr($val, 0, strlen(Lumine::DEFAULT_VALUE_FUNCTION_IDENTIFIER));
+			// se for para ser aplicado como uma funcao do banco
+			if( $prefix == Lumine::DEFAULT_VALUE_FUNCTION_IDENTIFIER ){
+				// removemos o prefixo e devolvemos o valor que sera usado como funcao
+				return str_replace($prefix, '', $val);
+			}
+		}
+		
 		switch($type)
 		{
 			case 'int':

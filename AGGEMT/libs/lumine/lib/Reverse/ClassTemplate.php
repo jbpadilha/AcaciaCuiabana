@@ -7,7 +7,7 @@
  * @link http://www.hufersil.com.br/lumine
  */
 
-class Lumine_Reverse_ClassTemplate 
+class Lumine_Reverse_ClassTemplate
 {
 
     /**
@@ -40,7 +40,7 @@ class Lumine_Reverse_ClassTemplate
      * @var array
      */
     private $description  = array();
-    
+
     /**
      * relacionamentos do tipo um-para-muitos
      *
@@ -53,7 +53,7 @@ class Lumine_Reverse_ClassTemplate
      * @var unknown_type
      */
     private $many_to_many = array();
-    
+
     /**
      * delimitador inicial
      *
@@ -91,7 +91,7 @@ class Lumine_Reverse_ClassTemplate
      * @var string
      */
     private $link         = 'http://www.hufersil.com.br/lumine';
-    
+
     /**
      * identacao dos campos
      *
@@ -104,26 +104,26 @@ class Lumine_Reverse_ClassTemplate
      * @var string
      */
     private $dialect      = null;
-    
+
     /**
      * Utilizar ou nao CamelCase nos nomes das propriedades
      *
      * @var unknown_type
      */
     private $useCamelCase = true;
-    
+
     /**
      * Gerar get/set
      * @var boolean
      */
     private $generateAccessors = false;
-    
+
     /**
      * Verifica se um nome ja esta na lista, para evitar duplicar e dar problemas
      * @var array
      */
     private $namesList = array();
-    
+
     /**
      * Construtor
      *
@@ -138,7 +138,7 @@ class Lumine_Reverse_ClassTemplate
         $this->setClassname($classname);
         $this->setPackage($package);
     }
-    
+
     /**
      * Altera o nome do dialeto
      *
@@ -173,7 +173,7 @@ class Lumine_Reverse_ClassTemplate
     {
         $this->package = $package;
     }
-    
+
     public function setDescription(array $desc)
     {
         $this->description = $desc;
@@ -182,16 +182,16 @@ class Lumine_Reverse_ClassTemplate
     {
         $this->foreign = $foreign;
     }
-    
+
     public function setCamelCase( $camelCase )
     {
         $this->useCamelCase = $camelCase;
     }
-    
+
     public function getDialect()
     {
         return $this->dialect;
-    }	
+    }
     public function getTablename()
     {
         return $this->tablename;
@@ -217,12 +217,12 @@ class Lumine_Reverse_ClassTemplate
     {
         return $this->foreign;
     }
-    
+
     public function getCamelCase()
     {
         return $this->useCamelCase;
     }
-    
+
     /**
      * Altera se e para criar ou nao get/set
      * @param boolean $value
@@ -230,7 +230,7 @@ class Lumine_Reverse_ClassTemplate
     public function setGenerateAccessors($value){
     	$this->generateAccessors = $value;
     }
-    
+
     /**
      * Recupera se e para criar ou nao get/set
      * @return boolean
@@ -238,7 +238,7 @@ class Lumine_Reverse_ClassTemplate
     public function getGenerateAccessors(){
     	return $this->generateAccessors;
     }
-    
+
     /**
      * pega os dados de uma coluna especifica
      *
@@ -260,7 +260,7 @@ class Lumine_Reverse_ClassTemplate
             }
         }
     }
-    
+
     /**
      * Altera os dados de uma coluna
      *
@@ -278,24 +278,24 @@ class Lumine_Reverse_ClassTemplate
                 return;
             }
         }
-        
+
     }
-    
+
     public function getGeneratedFile()
     {
         $str = $this->getTop();
         $str .= $this->getClassBody();
         $str .= $this->getFooter();
-        
+
         return $str;
     }
-    
+
     public function addOneToMany($def)
     {
     	$def['name'] = $this->checkNames($def['name']);
         $this->one_to_many[] = $def;
     }
-    
+
     public function addManyToMany($def)
     {
     	$def['name'] = $this->checkNames($def['name']);
@@ -311,22 +311,22 @@ class Lumine_Reverse_ClassTemplate
     {
         return $this->end_delim;
     }
-    
-    
+
+
     private function getTop()
     {
         $txt = file_get_contents(LUMINE_INCLUDE_PATH.'/lib/Templates/classes.top.txt');
         $txt = str_replace('{classname}', $this->getClassname(), $txt);
         $txt = preg_replace('@\{(\w+)\}@e', '$this->$1', $txt);
-        
+
         return $txt;
     }
-    
-    
+
+
     private function getClassBody()
     {
         $txt = file_get_contents(LUMINE_INCLUDE_PATH.'/lib/Templates/classes.body.txt');
-        
+
         //////////////////////////////////////////////////////////
         // membros da classe
         //////////////////////////////////////////////////////////
@@ -334,52 +334,52 @@ class Lumine_Reverse_ClassTemplate
         {
         	$itens = array('');
         	$line = trim($reg[1]);
-        	
+
             foreach($this->description as $item)
             {
         		$model = str_replace('{name}', $this->CamelCase($item[0]), $line);
         		$itens[] = $this->ident . $model;
             }
-            
+
             foreach($this->one_to_many as $item)
             {
         		$model = str_replace('{name}', $this->CamelCase($item['name']).' = array()', $line);
         		$itens[] = $this->ident . $model;
             }
-            
+
             foreach($this->many_to_many as $item)
             {
         		$model = str_replace('{name}', $this->CamelCase($item['name']).' = array()', $line);
         		$itens[] = $this->ident . $model;
             }
-            
+
             $txt = str_replace($reg[0], implode(PHP_EOL, $itens), $txt);
         }
-        
+
         //////////////////////////////////////////////////////////
         // accessors
         //////////////////////////////////////////////////////////
         if(preg_match('@\{accessors\}(.*?)\{/accessors\}@ms', $txt, $reg))
         {
         	$itens = array('');
-        	
+
         	if($this->generateAccessors){
 	        	$line = trim($reg[1]);
-	        	
+
 	            foreach($this->description as $item)
 	            {
 	        		$model = str_replace('{name}', $this->CamelCase($item[0]), $line);
 	        		$model = str_replace('{accessor}', ucfirst($this->CamelCase($item[0])), $model);
 	        		$itens[] = $this->ident . $model;
 	            }
-	            
+
 	            foreach($this->one_to_many as $item)
 	            {
 	        		$model = str_replace('{name}', $this->CamelCase($item['name']), $line);
 	        		$model = str_replace('{accessor}', ucfirst($this->CamelCase($item['name'])), $model);
 	        		$itens[] = $this->ident . $model;
 	            }
-	            
+
 	            foreach($this->many_to_many as $item)
 	            {
 	        		$model = str_replace('{name}', $this->CamelCase($item['name']), $line);
@@ -387,17 +387,17 @@ class Lumine_Reverse_ClassTemplate
 	        		$itens[] = $this->ident . $model;
 	            }
         	}
-            
+
             $txt = str_replace($reg[0], implode(PHP_EOL, $itens), $txt);
         }
         //////////////////////////////////////////////////////////
-        
+
         // definicoes
         if(preg_match('@\{definition\}(.*?)\{/definition\}@ms', $txt, $reg))
         {
             $modelo = trim($reg[1]);
             $itens = array('');
-            
+
             foreach($this->description as $item)
             {
                 if(empty($item['options']['column']))
@@ -409,7 +409,7 @@ class Lumine_Reverse_ClassTemplate
 
                 $length = empty($item[3]) ? 'null' : $item[3];
                 $options = array();
-                
+
                 if($item[4] == true)
                 {
                     $options[] = "'primary' => true";
@@ -426,15 +426,15 @@ class Lumine_Reverse_ClassTemplate
                 {
                     $options[] = "'autoincrement' => true";
                 }
-                
+
                 // adicionado em 01/09/2009 - pega o nome da sequencia
                 if(!empty($item[8]) && is_array($item[8])){
                 	foreach($item[8] as $key => $val){
                 		$options[] = "'".$key."' => '" . $val . "'";
                 	}
                 }
-                
-                
+
+
                 if( !empty($item['options']))
                 {
                     unset($item['options']['column']);
@@ -447,7 +447,7 @@ class Lumine_Reverse_ClassTemplate
                         $options[] = "'".$def."' => '".$value."'";
                     }
                 }
-                
+
                 // se tiver valores a mais (geralmente em enum)
                 if( preg_match('@^\w+\((.*?)\)$@', $item[2], $reg2) ){
                 	$_list = array();
@@ -459,35 +459,35 @@ class Lumine_Reverse_ClassTemplate
                 	}
                 	$options[] = "'option_list' => array(" . implode(', ', $_list) . ")";
                 }
-                
+
                 $options_str = 'array('.implode(', ', $options) . ')';
                 $type = $this->dialect->getLumineType( $item[2] );
-                
+
                 $line = $modelo;
                 $line = str_replace('{name}',    $this->CamelCase($item[0]),      $line);
                 $line = str_replace('{column}',  $column,       $line);
                 $line = str_replace('{type}',    addslashes($type), $line);
                 $line = str_replace('{length}',  $length,       $line);
                 $line = str_replace('{options}', $options_str,  $line);
-                
+
                 $itens[] = $this->ident . $this->ident . $line;
             }
-            
+
             $txt = str_replace($reg[0], implode(PHP_EOL, $itens), $txt);
         }
-        
+
         if(preg_match('@\{relations\}(.*?)\{/relations\}@ms', $txt, $reg))
         {
             $modelo = trim($reg[1]);
             $itens = array('');
-            
+
             foreach($this->one_to_many as $otm)
             {
                 $name    = $otm['name'];
                 $type    = 'ONE_TO_MANY';
                 $class   = $otm['class'];
                 $linkOn  = $otm['linkOn'];
-                
+
                 $line = $modelo;
                 $line = str_replace('{name}',        $this->CamelCase($name),      $line);
                 $line = str_replace('{type}',        $type,      $line);
@@ -496,53 +496,53 @@ class Lumine_Reverse_ClassTemplate
                 $line = str_replace('{table_join}',  'null',     $line);
                 $line = str_replace('{column_join}', 'null',     $line);
                 $line = str_replace('{lazy}',        'null',     $line);
-                
+
                 $itens[] = $this->ident . $this->ident . $line;
             }
-            
+
             foreach($this->many_to_many as $mtm)
             {
                 $mtm['linkOn']   = $this->CamelCase($mtm['linkOn']);
                 $mtm['table_join']   = "'" . $mtm['table_join'] . "'";
                 $mtm['column_join']  = "'" . $mtm['column_join'] . "'";
-            
+
                 $line = $modelo;
                 $line = preg_replace('@\{(\w+)\}@e', '$mtm["$1"]', $line);
 
                 $itens[] = $this->ident . $this->ident . $line;
             }
-            
+
             $txt = str_replace($reg[0], implode(PHP_EOL, $itens), $txt);
         }
-        
+
         $txt = str_replace('{classname}', $this->getClassname(), $txt);
         $txt = preg_replace('@\{(\w+)\}@e', '$this->$1', $txt);
-        
+
         return $txt;
     }
-    
+
     private function CamelCase( $name )
     {
-    	
+
         if( $this->getCamelCase() == false )
         {
             return $name;
         }
-        return preg_replace('@_(\w{1})@e', 'strtoupper("$1")', strtolower($name) );
+        return Lumine_Util::camelCase($name);
     }
-    
+
     private function getFooter()
     {
         $str = PHP_EOL . '}' . PHP_EOL;
-        
+
         return $str;
     }
-    
+
     /**
      * Verifica se existem nomes duplicados
-     * 
+     *
      * @author Hugo Ferreira da Silva
-     * @link http://www.247id.com.br
+     * @link http://www.hufersil.com.br
      * @param string $name Nome a ser verificado
      * @return string variavel modificada para manter um unico nome
      */
@@ -552,9 +552,9 @@ class Lumine_Reverse_ClassTemplate
     		$name .= '_'.$this->namesList[$name];
     	} else {
     		$this->namesList[$name] = 0;
-    		
+
     	}
-    	
+
     	return $name;
     }
 }

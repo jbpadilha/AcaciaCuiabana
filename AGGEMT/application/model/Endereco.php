@@ -6,20 +6,20 @@ class Endereco extends Lumine_Base{
     protected $_tablename = 'endereco';
     protected $_package   = 'model';
     
-	public $idendereco;
-	public $idpessoa;
-	public $logradouroendereco;		 	 	 	 	 	 	 
-	public $complementoendereco;		 	 	 	 	 	 	 
-	public $bairroendereco;		 	 	 	 	 	 	 
-	public $numeroendereco;		 	 	 	 	 	 	 
-	public $cependereco;		 	 	 	 	 	 	 
-	public $cidadeendereco;		 	 	 	 	 	 	 
-	public $estadoendereco;		 	 	 	 	 	 	 
-	public $telefoneendereco;		 	 	 	 	 	 	 
+	public $idendereco = null;
+	public $idpessoa = null;
+	public $logradouroendereco = null;		 	 	 	 	 	 	 
+	public $complementoendereco = null; 	 	 	 	 	 	 
+	public $bairroendereco = null; 	 	 	 	 
+	public $numeroendereco = null;	 	 	 	 	 	 
+	public $cependereco = null;	 	 	 	 	 	 
+	public $cidadeendereco = null; 	 	 	 	 	 	 
+	public $estadoendereco = null;	 	 	 	 	 	 
+	public $telefoneendereco = null; 	 	 	 	 	 	 
 	
 	/**
      * Inicia os valores da classe
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return void
      */
     protected function _initialize()
@@ -40,7 +40,7 @@ class Endereco extends Lumine_Base{
 
     /**
      * Recupera um objeto estaticamente
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return Pessoa
      */
     public static function staticGet($pk, $pkValue = null)

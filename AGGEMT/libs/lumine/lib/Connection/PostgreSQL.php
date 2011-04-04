@@ -6,136 +6,31 @@
  * @package Lumine_Connection
  */
 
-Lumine::load('Connection_IConnection');
+Lumine::load('Connection_AbstractConnection');
 /**
  * classe de conexao com o PostgreSQL
  * @package Lumine_Connection
  * @author Hugo Ferreira da Silva
  * @link http://www.hufersil.com.br
  */
-class Lumine_Connection_PostgreSQL extends Lumine_EventListener implements ILumine_Connection
+class Lumine_Connection_PostgreSQL
+	extends Lumine_Connection_AbstractConnection
 {
-	/**
-	 * Estado fechado
-	 * @var int
-	 */
-	const CLOSED           = 0;
-	/**
-	 * Estado aberto
-	 * @var int
-	 */
-	const OPEN             = 1;
-	/**
-	 * Constante para versao do servidor
-	 * @var int
-	 */
-	const SERVER_VERSION   = 10;
-	/**
-	 * Constante para versao do cliente
-	 * @var int
-	 */
-	const CLIENT_VERSION   = 11;
-	/**
-	 * Constante para informacoes do host
-	 * @var int
-	 */
-	const HOST_INFO        = 12;
-	/**
-	 * funcao para retorno de registros aleatorios do banco
-	 * @var string
-	 */
-	const PROTOCOL_VERSION = 13;
-	/**
-	 * funcao para retorno de registros aleatorios do banco
-	 * @var string
-	 */
-	const RANDOM_FUNCTION  = 'random()';
-	/**
-	 * caractere de escape de strings
-	 * @var string
-	 */
-	const ESCAPE_CHAR      = '\'';
-	/**
-	 * Tipos de eventos disparados pela classe
-	 * @var array
-	 */
-	protected $_event_types = array(
-		Lumine_Event::PRE_EXECUTE,
-    	Lumine_Event::POS_EXECUTE,
-    	Lumine_Event::PRE_CONNECT,
-    	Lumine_Event::POS_CONNECT,
-    	Lumine_Event::PRE_CLOSE,
-    	Lumine_Event::POS_CLOSE,
-    	Lumine_Event::EXECUTE_ERROR,
-    	Lumine_Event::CONNECTION_ERROR
-	);
-	
-	/**
-	 * conexao
-	 * @var resource
-	 */
-	private $conn_id;
-	/**
-	 * nome do banco
-	 * @var string
-	 */
-	private $database;
-	/**
-	 * usuario de conexao
-	 * @var string
-	 */
-	private $user;
-	/**
-	 * senha de conexao
-	 * @var string
-	 */
-	private $password;
-	/**
-	 * porta de conexao
-	 * @var string
-	 */
-	private $port;
-	/**
-	 * nome do host
-	 * @var string
-	 */
-	private $host;
-	/**
-	 * lista de opcoes
-	 * @var array
-	 */
-	private $options;
 	/**
 	 * ultima consulta
 	 * @var resource
 	 */
 	private $last_rs;
-	/**
-	 * Estado atual
-	 * @var int
-	 */
-	private static $state;
 	
 	/**
-	 * instancia da classe
-	 * @var ILumine_Connection
-	 */
-	private static $instance = null;
-	
-	/**
-	 * recupera a instancia da classe
+	 * Construtor
+	 *
 	 * @author Hugo Ferreira da Silva
-	 * @link http://www.hufersil.com.br/
-	 * @return ILumine_Connection
+	 * @link http://www.hufersil.com.br
+	 * @return Lumine_Connection_PostgreSQL
 	 */
-	static public function getInstance()
-	{
-		if(self::$instance == null)
-		{
-			self::$instance = new Lumine_Connection();
-		}
-		
-		return self::$instance;
+	public function __construct(){
+		$this->randomFunction = 'random()';
 	}
 	
 	/**
@@ -143,7 +38,7 @@ class Lumine_Connection_PostgreSQL extends Lumine_EventListener implements ILumi
 	 */
 	public function connect()
 	{
-		if($this->conn_id && self::$state == self::OPEN)
+		if($this->conn_id && $this->state == self::OPEN)
 		{
 			Lumine_Log::debug( 'Utilizando conexao cacheada com '.$this->getDatabase());
 			return true;
@@ -185,7 +80,7 @@ class Lumine_Connection_PostgreSQL extends Lumine_EventListener implements ILumi
 		
 		if( !$this->conn_id )
 		{
-			self::$state = self::CLOSED;
+			$this->state = self::CLOSED;
 			$msg = 'nao foi possivel conectar no banco de dados: ' . $this->getDatabase().' - '.$this->getErrorMsg();
 			Lumine_Log::error( $msg );
 			
@@ -195,7 +90,10 @@ class Lumine_Connection_PostgreSQL extends Lumine_EventListener implements ILumi
 			return false;
 		}
 		
-		self::$state = self::OPEN;
+		$this->state = self::OPEN;
+		
+		// altera o charset
+		$this->setCharset( $this->getCharset() );
 		
 		$this->dispatchEvent(new Lumine_ConnectionEvent(Lumine_Event::POS_CONNECT, $this));
 		
@@ -207,125 +105,16 @@ class Lumine_Connection_PostgreSQL extends Lumine_EventListener implements ILumi
 	public function close()
 	{
 		$this->dispatchEvent(new Lumine_ConnectionEvent(Lumine_Event::PRE_CLOSE, $this));
-		if($this->conn_id && self::$state != self::CLOSED)
+		if($this->conn_id && $this->state != self::CLOSED)
 		{
 			Lumine_Log::debug( 'Liberando resultados todos os resultados' );
 			Lumine_Dialect_Factory::getByName('PostgreSQL')->freeAllResults();
 			
-			self::$state = self::CLOSED;
+			$this->state = self::CLOSED;
 			Lumine_Log::debug( 'Fechando conexao com '.$this->getDatabase());
 			pg_close($this->conn_id);
 		}
 		$this->dispatchEvent(new Lumine_ConnectionEvent(Lumine_Event::POS_CLOSE, $this));
-	}
-	/**
-	 * @see ILumine_Connection::getState()
-	 */
-	public function getState()
-	{
-		return self::$state;
-	}
-	/**
-	 * @see ILumine_Connection::setDatabase()
-	 */
-	public function setDatabase($database)
-	{
-		$this->database = $database;
-	}
-	/**
-	 * @see ILumine_Connection::getDatabase()
-	 */
-	public function getDatabase()
-	{
-		return $this->database;
-	}
-	/**
-	 * @see ILumine_Connection::setUser()
-	 */
-	public function setUser($user)
-	{
-		$this->user = $user;
-	}
-	/**
-	 * @see ILumine_Connection::getUser()
-	 */
-	public function getUser()
-	{
-		return $this->user;
-	}
-	/**
-	 * @see ILumine_Connection::setPassword()
-	 */
-	public function setPassword($password)
-	{
-		$this->password = $password;
-	}
-	/**
-	 * @see ILumine_Connection::getPassword()
-	 */
-	public function getPassword()
-	{
-		return $this->password;
-	}
-	/**
-	 * @see ILumine_Connection::setPort()
-	 */
-	public function setPort($port)
-	{
-		$this->port = $port;
-	}
-	/**
-	 * @see ILumine_Connection::getPort()
-	 */
-	public function getPort()
-	{
-		return $this->port;
-	}
-	/**
-	 * @see ILumine_Connection::setHost()
-	 */
-	public function setHost($host)
-	{
-		$this->host = $host;
-	}
-	/**
-	 * @see ILumine_Connection::getHost()
-	 */
-	public function getHost()
-	{
-		return $this->host;
-	}
-	/**
-	 * @see ILumine_Connection::setOptions()
-	 */
-	public function setOptions($options)
-	{
-		$this->options = $options;
-	}
-	/**
-	 * @see ILumine_Connection::getOptions()
-	 */
-	public function getOptions()
-	{
-		return $this->options;
-	}
-	/**
-	 * @see ILumine_Connection::setOption()
-	 */
-	public function setOption($name, $val)
-	{
-		$this->options[ $name ] = $val;
-	}
-	/**
-	 * @see ILumine_Connection::getOption()
-	 */
-	public function getOption($name)
-	{
-		if(empty($this->options[$name]))
-		{
-			return null;
-		}
-		return $this->options[$name];
 	}
 	/**
 	 * @see ILumine_Connection::getErrorMsg()
@@ -387,30 +176,46 @@ class Lumine_Connection_PostgreSQL extends Lumine_EventListener implements ILumi
 		while($row = pg_fetch_row($rs))
 		{
 //						FOREIGN KEY (idusuario) REFERENCES usuario(idusuario) ON UPDATE CASCADE ON DELETE CASCADE
-			preg_match('@FOREIGN KEY \((\w+)\) REFERENCES (\w+)\((\w+)\)(.*?)$@i', str_replace('"', '', $row[0]), $matches);
-
-			$name = $matches[2];
-			if(isset($fks[ $name ]))
-			{
-				$name = $name . '_' . $matches[3];
+			//preg_match('@FOREIGN KEY \((\w+)\) REFERENCES (\w+)\((\w+)\)(.*?)$@i', str_replace('"', '', $row[0]), $matches);
+			preg_match('@FOREIGN KEY \((\w+(.*?)?)\) REFERENCES (\w+)\((\w+(.*?))\)(.*?)$@i', str_replace('"', '', $row[0]), $matches);
+			
+			$listFrom = explode(',', str_replace(' ', '', $matches[1]));
+			$listTo = explode(',', str_replace(' ', '', $matches[4]));
+			
+			if( count($listFrom) != count($listTo) ){
+				Lumine_Log::error('O numero de itens de origem nao e igual ao numero de itens de destino');
+				exit;
 			}
 			
-			$fks[ $name ]['from'] = $matches[1];
-			$fks[ $name ]['to'] = $matches[2];
-			$fks[ $name ]['to_column'] = $matches[3];
-			
-			$reg = array();
-			if(preg_match('@(.*?)ON UPDATE (RESTRICT|CASCADE)@i', $matches[4], $reg))
-			{
-				$fks[ $name ]['update'] = strtoupper($reg[2]);
-			} else {
-				$fks[ $name ]['update'] = 'RESTRICT';
-			}
-			if(preg_match('@(.*?)ON DELETE (RESTRICT|CASCADE)@i', $matches[4], $reg))
-			{
-				$fks[ $name ]['delete'] = strtoupper($reg[2]);
-			} else {
-				$fks[ $name ]['delete'] = 'RESTRICT';
+			for($i=0; $i<count($listFrom); $i++){
+				// nome da fk
+				$name = $matches[3];
+				
+				$fieldFrom = $listFrom[ $i ];
+				$fieldTo = $listTo[ $i ];
+				
+				if(isset($fks[ $name ]))
+				{
+					$name = $name . '_' . $fieldTo;
+				}
+				
+				$fks[ $name ]['from'] = $fieldFrom;
+				$fks[ $name ]['to'] = $matches[3];
+				$fks[ $name ]['to_column'] = $fieldTo;
+				
+				$reg = array();
+				if(preg_match('@(.*?)ON UPDATE (RESTRICT|CASCADE)@i', $matches[5], $reg))
+				{
+					$fks[ $name ]['update'] = strtoupper($reg[2]);
+				} else {
+					$fks[ $name ]['update'] = 'RESTRICT';
+				}
+				if(preg_match('@(.*?)ON DELETE (RESTRICT|CASCADE)@i', $matches[5], $reg))
+				{
+					$fks[ $name ]['delete'] = strtoupper($reg[2]);
+				} else {
+					$fks[ $name ]['delete'] = 'RESTRICT';
+				}
 			}
 		}
 		
@@ -421,7 +226,7 @@ class Lumine_Connection_PostgreSQL extends Lumine_EventListener implements ILumi
 	 */
 	public function getServerInfo($type = null)
 	{
-		if($this->conn_id && self::$state == self::OPEN)
+		if($this->conn_id && $this->state == self::OPEN)
 		{
 			switch($type)
 			{
@@ -439,7 +244,7 @@ class Lumine_Connection_PostgreSQL extends Lumine_EventListener implements ILumi
 	{
 	
 		$sql = "
-			SELECT
+			SELECT 
 				f.attname AS name,
 				pg_catalog.format_type(f.atttypid,f.atttypmod) AS type,
 			
@@ -472,34 +277,26 @@ class Lumine_Connection_PostgreSQL extends Lumine_EventListener implements ILumi
 				END AS uniquekey,
 				
 				CASE
-				WHEN p.contype = 'f'
+				WHEN fk.contype = 'f'
 					THEN g.relname
 				END AS foreignkey,
 			
 				CASE
-				WHEN p.contype = 'f'
-					THEN p.confkey
-				END AS foreignkey_fieldnum,
-			
-				CASE
-				WHEN p.contype = 'f'
-					THEN g.relname
-				END AS foreignkey,
-			
-				CASE
-				WHEN p.contype = 'f'
-					THEN p.conkey
-				END AS foreignkey_connnum
+				WHEN fk.contype = 'f'
+					THEN fk.confkey
+				END AS foreignkey_fieldnum
 			
 				FROM pg_attribute f
 				JOIN pg_class c ON c.oid = f.attrelid
 				JOIN pg_type t ON t.oid = f.atttypid
 				LEFT JOIN pg_attrdef d ON d.adrelid = c.oid AND d.adnum = f.attnum
 				LEFT JOIN pg_namespace n ON n.oid = c.relnamespace
-				LEFT JOIN pg_constraint p ON p.conrelid = c.oid AND f.attnum = ANY ( p.conkey )
-				LEFT JOIN pg_class AS g ON p.confrelid = g.oid
+				LEFT JOIN pg_constraint p ON p.conrelid = c.oid AND f.attnum = ANY ( p.conkey ) AND p.contype IN ('p')
+				LEFT JOIN pg_constraint fk ON fk.conrelid = c.oid AND f.attnum = ANY ( fk.conkey ) AND fk.contype IN ('f')
+				LEFT JOIN pg_class AS g ON fk.confrelid = g.oid
 				WHERE c.relkind = 'r'::char
-					AND c.relname = '".$tablename."' AND f.attnum > 0
+					AND c.relname = '$tablename' AND f.attnum > 0
+				
 				ORDER BY number";
 		
 		$rs = $this->executeSQL( $sql );
@@ -507,10 +304,20 @@ class Lumine_Connection_PostgreSQL extends Lumine_EventListener implements ILumi
 		$data = array();
 		while($row = pg_fetch_row($rs))
 		{
+			$options = array();
+			
 			$name           = $row[0];
 			$type_native    = $row[1];
+			
+			if( preg_match('@numeric\s*\((\d+)\s*\,\s*(\d+)\)@i', $row[1], $reg) ){
+				$type       = 'float';
+				$options['length'] = $reg[1];
+				$options['precision'] = $reg[2];
+				
+			} else {
+				$type       = preg_replace('@(\(\d+\)|\d+)@','',$row[1]);
+			}
 
-			$type       = preg_replace('@(\(\d+\)|\d+)@','',$row[1]);
 			$length     = $row[2] == '' ? null : $row[2];
 
 			$notnull        = $row[5] == 't' ? true : false;
@@ -523,7 +330,6 @@ class Lumine_Connection_PostgreSQL extends Lumine_EventListener implements ILumi
 				$default = str_replace("'", '', $reg[1]);
 			}
 			
-			$options = array();
 			
 			$row[4] = str_replace('"',"'",$row[4]);
 			
@@ -540,6 +346,32 @@ class Lumine_Connection_PostgreSQL extends Lumine_EventListener implements ILumi
 		
 		return $data;
 	}
+	
+	/**
+	 * Verifica se o valor informado como default e uma funcao do banco
+	 * 
+	 * @author Hugo Ferreira da Silva
+	 * @param mixed $value
+	 * @return string
+	 */
+	private function parseDefaultValue( $value ){
+		$types = array(
+			'CURRENT_TIME'
+			,'CURRENT_DATE'
+			,'CURRENT_TIMESTAMP'
+			,'NOW()'
+			,'CURRENT_USER'
+			,'LOCALTIME'
+			,'LOCALTIMESTAMP'
+		);
+		
+		if( !is_array($value) && in_array($value, $types) ){
+			$value = Lumine::DEFAULT_VALUE_FUNCTION_IDENTIFIER . $value;
+		}
+		
+		return $value;
+	}
+	
 	/**
 	 * @see ILumine_Connection::executeSQL()
 	 */
@@ -595,7 +427,7 @@ class Lumine_Connection_PostgreSQL extends Lumine_EventListener implements ILumi
 	 */
 	public function affected_rows()
 	{
-		if(self::$state == self::OPEN && $this->last_rs)
+		if($this->state == self::OPEN && $this->last_rs)
 		{
 			return pg_affected_rows($this->last_rs);
 		}
@@ -608,21 +440,6 @@ class Lumine_Connection_PostgreSQL extends Lumine_EventListener implements ILumi
 	{
 		return pg_num_rows($rs);
 	}
-	/**
-	 * @see ILumine_Connection::random()
-	 */
-	public function random()
-	{
-		return self::RANDOM_FUNCTION;
-	}
-	/**
-	 * @see ILumine_Connection::getEscapeChar()
-	 */
-	public function getEscapeChar()
-	{
-		return self::ESCAPE_CHAR;
-	}
-	
 	/**
 	 * @see ILumine_Connection::begin()
 	 */
@@ -644,26 +461,13 @@ class Lumine_Connection_PostgreSQL extends Lumine_EventListener implements ILumi
 	{
 		$this->executeSQL("ROLLBACK");
 	}
-	/**
-	 * @see Lumine_EventListener::__destruct()
-	 */
-    function __destruct()
-    {
-        unset($this->conn_id);
-        unset($this->database);
-        unset($this->user);
-        unset($this->password);
-        unset($this->port);
-        unset($this->host);
-        unset($this->options);
-        self::$state = null;
-        unset($this->transactions);
-        unset($this->transactions_count);
-        //unset(self::$instance);
-        
-        parent::__destruct();
-    }
+	
+	public function setCharset($charset){
+		if( $this->conn_id && !empty($charset) ){
+			pg_set_client_encoding($this->conn_id, $charset);
+		}
+		parent::setCharset($charset);
+	}
 }
 
 
-?>

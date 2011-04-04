@@ -79,6 +79,10 @@ class Lumine_ConnectionManager extends Lumine_EventListener
 				$connObj->setOptions( $config->options['options'] );
 			}
 			
+			if( $config->getOption('charset') != '' ){
+				$connObj->setCharset( $config->getOption('charset') );
+			}
+			
 			$config->setConnection( $connObj );
 			$this->connections[ $connectionName ] = $config;
 		}

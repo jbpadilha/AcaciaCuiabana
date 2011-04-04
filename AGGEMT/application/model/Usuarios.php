@@ -6,16 +6,16 @@ class Usuarios extends Lumine_Base{
     protected $_tablename = 'usuarios';
     protected $_package   = 'model';
     
-	public $idusuario;
-	public $usuario;		 	 	 	 	 	 	 
-	public $senha;
-	public $grupousuario;
-	public $idpessoa;
+	public $idusuario = null;
+	public $usuario = null;	 	 	 	 	 	 
+	public $senha = null;
+	public $grupousuario = null;
+	public $idpessoa = null;
 	
 	
 	/**
      * Inicia os valores da classe
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return void
      */
     protected function _initialize()
@@ -31,7 +31,7 @@ class Usuarios extends Lumine_Base{
 
     /**
      * Recupera um objeto estaticamente
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return Pessoa
      */
     public static function staticGet($pk, $pkValue = null)
@@ -139,9 +139,9 @@ class Usuarios extends Lumine_Base{
 		Lumine_Validator_PHPValidator::clearValidations($this);
 		
 		// adicionando as regras 
-		Lumine_Validator_PHPValidator::addValidation($this, 'usuario', Lumine_Validator::REQUIRED_STRING, 'Informe o usuário de acesso');
+		Lumine_Validator_PHPValidator::addValidation($this, 'usuario', Lumine_Validator::REQUIRED_STRING, 'Informe o usuÃ¡rio de acesso');
 		Lumine_Validator_PHPValidator::addValidation($this, 'senha', Lumine_Validator::REQUIRED_STRING, 'Informe a senha de acesso');
-		Lumine_Validator_PHPValidator::addValidation($this, 'grupousuario', Lumine_Validator::REQUIRED_NUMBER, 'Grupo de acesso não informado');
+		Lumine_Validator_PHPValidator::addValidation($this, 'grupousuario', Lumine_Validator::REQUIRED_NUMBER, 'Grupo de acesso nÃ£o informado');
 		
 		return parent::validate();
 	}

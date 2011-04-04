@@ -7,7 +7,7 @@
  */
 
 
-Lumine::load('Connection_IConnection');
+Lumine::load('Connection_AbstractConnection');
 
 /**
  * Conexao com o firebird
@@ -15,120 +15,9 @@ Lumine::load('Connection_IConnection');
  * @author Hugo Ferreira da Silva
  * @link http://www.hufersil.com.br
  */
-class Lumine_Connection_Firebird extends Lumine_EventListener implements ILumine_Connection
+class Lumine_Connection_Firebird
+	extends Lumine_Connection_AbstractConnection
 {
-	/**
-	 * conexao fechada
-	 * @var int
-	 */
-    const CLOSED           = 0;
-    /**
-     * conexao aberta
-     * @var int
-     */
-    const OPEN             = 1;
-	/**
-	 * versao do servidor
-	 * @var int
-	 */
-    const SERVER_VERSION   = 10;
-    /**
-     * versao do cliente
-     * @var int
-     */
-    const CLIENT_VERSION   = 11;
-    /**
-     * informacoes do host
-     * @var int
-     */
-    const HOST_INFO        = 12;
-    /**
-     * codigo do protocolo
-     * @var int
-     */
-    const PROTOCOL_VERSION = 13;
-    /**
-     * nome da funcao para gerar dados resultados aleatorios
-     * @var string
-     */
-    const RANDOM_FUNCTION  = '';
-    /**
-     * caracter de escape
-     * @var string
-     */
-    const ESCAPE_CHAR      = '\\';
-    
-    /**
-     * tipos de eventos suportados
-     * @var array
-     */
-    protected $_event_types = array(
-    	Lumine_Event::PRE_EXECUTE,
-    	Lumine_Event::POS_EXECUTE,
-    	Lumine_Event::PRE_CONNECT,
-    	Lumine_Event::POS_CONNECT,
-    	Lumine_Event::PRE_CLOSE,
-    	Lumine_Event::POS_CLOSE,
-    	Lumine_Event::EXECUTE_ERROR,
-    	Lumine_Event::CONNECTION_ERROR
-    );
-    
-    /**
-     * conexao aberta
-     * @var resource
-     */
-    private $conn_id;
-    /**
-     * nome do banco de dados
-     * @var string
-     */
-    private $database;
-    /**
-     * usuario do banco
-     * @var string
-     */
-    private $user;
-    /**
-     * senha do banco de dados
-     * @var string
-     */
-    private $password;
-    /**
-     * porta de conexao com o banco
-     * @var string
-     */
-    private $port;
-    /**
-     * host de conexao
-     * @var string
-     */
-    private $host;
-    /**
-     * opcoes de conexao
-     * @var array
-     */
-    private $options;
-    /**
-     * estado atual da conexao
-     * @var int
-     */
-    private $state;
-    /**
-     * referencias de transacoes abertas
-     * @var array
-     */
-    private $transactions = array();
-    /**
-     * numero de transacoes abertas
-     * @var int
-     */
-    private $transactions_count = 0;
-    
-    /**
-     * instancia da conexao
-     * @var ILumine_Connection
-     */
-    private static $instance = null;
 
     /**
      * formato de data
@@ -145,23 +34,18 @@ class Lumine_Connection_Firebird extends Lumine_EventListener implements ILumine
      * @var string
      */
     private $ibase_timestampfmt = '%Y-%m-%d %H:%M:%S';
-    
-    /**
-     * Recupera a instancia
-     * 
-     * @author Hugo Ferreira da Silva
-     * @link http://www.hufersil.com.br/
-     * @return ILumine_Connection
-     */
-    static public function getInstance()
-    {
-        if(self::$instance == null)
-        {
-            self::$instance = new Lumine_Connection();
-        }
-        
-        return self::$instance;
-    }
+
+	/**
+	 * Construtor
+	 *
+	 * @author Hugo Ferreira da Silva
+	 * @link http://www.hufersil.com.br
+	 * @return Lumine_Connection_Firebird
+	 */
+	public function __construct(){
+		$this->randomFunction = '';
+		$this->escapeChar = '\\';
+	}
     
     /**
      * @see ILumine_Connection::connect()
@@ -231,6 +115,8 @@ class Lumine_Connection_Firebird extends Lumine_EventListener implements ILumine
         $this->state = self::OPEN;
         $this->dispatchEvent(new Lumine_ConnectionEvent(Lumine_Event::POS_CONNECT, $this));
         
+        $this->setCharset( $this->getCharset() );
+        
         return true;
     }
     
@@ -252,115 +138,7 @@ class Lumine_Connection_Firebird extends Lumine_EventListener implements ILumine
         }
         $this->dispatchEvent(new Lumine_ConnectionEvent(Lumine_Event::POS_CLOSE, $this));
     }
-    /**
-     * @see ILumine_Connection::getState()
-     */
-    public function getState()
-    {
-        return $this->state;
-    }
-    /**
-     * @see ILumine_Connection::setDatabase()
-     */
-    public function setDatabase($database)
-    {
-        $this->database = $database;
-    }
-    /**
-     * @see ILumine_Connection::getDatabase()
-     */
-    public function getDatabase()
-    {
-        return $this->database;
-    }
-    /**
-     * @see ILumine_Connection::setUser()
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
-    /**
-     * @see ILumine_Connection::getUser()
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-	/**
-	 * @see ILumine_Connection::setPassword()
-	 */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    }
-    /**
-     * @see ILumine_Connection::getPassword()
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-	/**
-	 * @see ILumine_Connection::setPort()
-	 */
-    public function setPort($port)
-    {
-        $this->port = $port;
-    }
-    /**
-     * @see ILumine_Connection::getPort()
-     */
-    public function getPort()
-    {
-        return $this->port;
-    }
-    /**
-     * @see ILumine_Connection::setHost()
-     */
-    public function setHost($host)
-    {
-        $this->host = $host;
-    }
-    /**
-     * @see ILumine_Connection::getHost()
-     */
-    public function getHost()
-    {
-        return $this->host;
-    }
-    /**
-     * @see ILumine_Connection::setOptions()
-     */
-    public function setOptions($options)
-    {
-        $this->options = $options;
-    }
-    /**
-     * @see ILumine_Connection::getOptions()
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-    /**
-     * @see ILumine_Connection::setOption()
-     */
-    public function setOption($name, $val)
-    {
-        $this->options[ $name ] = $val;
-    }
-    /**
-     * @see ILumine_Connection::getOption()
-     */
-    public function getOption($name)
-    {
-        if(empty($this->options[$name]))
-        {
-            return null;
-        }
-        return $this->options[$name];
-    }
+    
 	/**
 	 * @see ILumine_Connection::getErrorMsg()
 	 */
@@ -451,22 +229,7 @@ class Lumine_Connection_Firebird extends Lumine_EventListener implements ILumine
     {
         if($this->conn_id && $this->state == self::OPEN)
         {
-            /*switch($type)
-            {
-                case self::CLIENT_VERSION:
-                    return ibase_server_info($this->conn_id);
-                    break;
-                case self::HOST_INFO:
-                    return mysql_get_host_info($this->conn_id);
-                    break;
-                case self::PROTOCOL_VERSION:
-                    return mysql_get_proto_info($this->conn_id);
-                    break;
-                case self::SERVER_VERSION:
-                default:
-                    return mysql_get_server_info($this->conn_id);
-                    break;
-            }*/
+           // TODO
             return '';
             
         } 
@@ -535,13 +298,39 @@ class Lumine_Connection_Firebird extends Lumine_EventListener implements ILumine
 
             $notnull        = empty($row['FIELD_NOT_NULL_CONSTRAINT']) ? false : true;
             $primary        = ! empty($row['PRIMARY_KEY'])  ? true : false;
-            $default        = empty($row['FIELD_DEFAULT_VALUE'])  ? null : $row[4];
+            $default        = empty($row['FIELD_DEFAULT_VALUE'])  ? null : $this->parseDefaultValue( $row['FIELD_DEFAULT_VALUE'] );
             $autoincrement  =  $this->checaAutoIncrement( $tablename, $name );
             
             $data[] = array($name, $type_native, $type, $length, $primary, $notnull, $default, $autoincrement, array());
         }
         return $data;
     }
+    
+	/**
+	 * Verifica se o valor informado como default e uma funcao do banco
+	 * 
+	 * @author Hugo Ferreira da Silva
+	 * @param mixed $value
+	 * @return string
+	 */
+	private function parseDefaultValue( $value ){
+		$types = array(
+			'CURRENT_TIME'
+			,'CURRENT_DATE'
+			,'CURRENT_TIMESTAMP'
+			,'NOW()'
+			,'CURRENT_USER'
+			,'LOCALTIME'
+			,'LOCALTIMESTAMP'
+		);
+		
+		if( !is_array($value) && in_array($value, $types) ){
+			$value = Lumine::DEFAULT_VALUE_FUNCTION_IDENTIFIER . $value;
+		}
+		
+		return $value;
+	}
+    
     /**
      * @see ILumine_Connection::executeSQL()
      */
@@ -637,20 +426,6 @@ class Lumine_Connection_Firebird extends Lumine_EventListener implements ILumine
         }
         
         return $rows;
-    }
-    /**
-     * @see ILumine_Connection::random()
-     */
-    public function random()
-    {
-        return self::RANDOM_FUNCTION;
-    }
-    /**
-     * @see ILumine_Connection::getEscapeChar()
-     */
-    public function getEscapeChar()
-    {
-        return self::ESCAPE_CHAR;
     }
     
    /**
@@ -754,24 +529,7 @@ class Lumine_Connection_Firebird extends Lumine_EventListener implements ILumine
         }
         return 1;
     }
-    /**
-     * @see Lumine_EventListener::__destruct()
-     */
-    function __destruct()
-    {
-        unset($this->conn_id);
-        unset($this->database);
-        unset($this->user);
-        unset($this->password);
-        unset($this->port);
-        unset($this->host);
-        unset($this->options);
-        unset($this->state);
-        unset($this->transactions);
-        unset($this->transactions_count);
-        //unset(self::$instance);
-    }
+    
 }
 
 
-?>

@@ -23,6 +23,8 @@ define('LUMINE_INCLUDE_PATH', dirname(__FILE__));
  */
 abstract class Lumine
 {
+	const DEFAULT_VALUE_FUNCTION_IDENTIFIER = '_function:';
+	
 	/**
 	 * Plugins registrados
 	 * @var array
@@ -139,10 +141,14 @@ abstract class Lumine
 			. str_replace('.', DIRECTORY_SEPARATOR, $cfg->getProperty('package'))
 			. DIRECTORY_SEPARATOR
 			. 'dto'
+			. DIRECTORY_SEPARATOR
+			. str_replace('.', DIRECTORY_SEPARATOR, $cfg->getOption('dto_package'))
 			. DIRECTORY_SEPARATOR;
+			
 		
 		foreach($args as $classname)
 		{
+			Lumine_Log::debug('procurando dto '.$path.$classname);
 			$filename = $path . $classname . $cfg->getOption('class_sufix') . '.php';
 			
 			if(file_exists($filename)){

@@ -175,9 +175,18 @@ abstract class Lumine_Model extends Lumine_EventListener {
 	 *        'fieldFrom'=>'idCategoria',  # opcional
 	 *        'fieldTo'=>'idCategoria',    # opcional
 	 *        'extra' => 'c.status = ?', #opcional
-	 *        'extraArgs' => array(1)    # opcional, utilizado em conjunto com o "extra"
-	 *      )
-	 *   ) 
+	 *        'extraArgs' => array(1)    # opcional, utilizado em conjunto com o "extra",
+	 *      ),
+	 *    ), 
+	 *      
+	 *    'whereFilters' => array(   # opcional, utilizado para alterar como os filtros where se comportam
+	 *			'o.idendereco' => ' > ?',
+	 * 			'o.logradouro' => ' like ?',
+	 *			'l.numero' => ' in (?)'
+	 *    ),
+	 *      
+	 *    'whereExtra' => 'o.condicao > ?', # opcional
+	 *    'whereExtraArgs' => array(1000)   # opcional
 	 * );
 	 * 
 	 * $filtros['p.nome'] = 'hugo';
@@ -212,7 +221,25 @@ abstract class Lumine_Model extends Lumine_EventListener {
 			}
 		}
 		
-		$this->setFilters($filters);
+		$this->setFilters($filters, array_key_exists('whereFilters',$prefs) ? $prefs['whereFilters'] : array());
+		
+		// se definiu um whereExtra 
+		if( array_key_exists('whereExtra', $prefs) && !empty($prefs['whereExtra']) ){
+			// se definiu argumentos extra
+			if( array_key_exists('whereExtraArgs', $prefs) && !empty($prefs['whereExtraArgs']) ){
+				// cria a listagem de argumentos em conjunto com o extra
+				$args = array($prefs['whereExtra']);
+				$args = array_merge($args, $prefs['whereExtraArgs']);
+				
+				// chama o metodo where por reflexao
+				$method = new ReflectionMethod($this->obj, 'where');
+				$method->invokeArgs($this->obj, $args);
+				
+			// se nao definiu valores extras
+			} else {
+				$this->obj->where($prefs['whereExtra']);
+			}
+		}
 		
 		// conta os registros
 		$this->rows = $this->obj->count( isset($prefs['countString']) ? $prefs['countString'] : '*' );
@@ -226,7 +253,20 @@ abstract class Lumine_Model extends Lumine_EventListener {
 		if(isset($prefs['group'])){
 			$this->obj->group($prefs['group']);
 		}
-			
+		
+		// se informou select
+		if( isset($prefs['select']) ){
+			// se for um array
+			if( is_array($prefs['select']) ){
+				// une as colunas
+				$this->obj->select(implode(', ', $prefs['select']));
+				
+			// se for string
+			} else if(is_string($prefs['select'])) {
+				$this->obj->select($prefs['select']);
+			}
+		}
+		
 		// se informou uma ordem
 		if(!empty($order)){
 			$this->obj->order($order);
@@ -246,7 +286,7 @@ abstract class Lumine_Model extends Lumine_EventListener {
 	 * @param array $filters Filtros que serao aplicados
 	 * @return void
 	 */
-	protected function setFilters(array $filters){
+	protected function setFilters(array $filters, array $where = array()){
 		foreach($filters as $key => $value){
 			// iremos ignorar valores vazios
 			if( $value === '' ){
@@ -279,6 +319,13 @@ abstract class Lumine_Model extends Lumine_EventListener {
 				if( is_null($value) ){
 					// colocamos um IS NULL como condicao
 					$this->obj->where($alias.'.'.$key .' IS NULL');
+					continue;
+				}
+				
+				// se o usuario informou uma forma de filtro
+				if( array_key_exists($alias.'.'.$key, $where) ){
+					// assim o usuario pode personalizar o filtro
+					$this->obj->where($alias . '.' . $key . ' ' . $where[$alias.'.'.$key], $value);
 					continue;
 				}
 				
@@ -539,10 +586,6 @@ abstract class Lumine_Model extends Lumine_EventListener {
 	public function getLink($linkName, $pk, $pkValue = null){
 		$res = $this->get($pk, $pkValue);
 		
-		$this->obj->reset();
-		$this->obj->setFrom($res);
-		$this->obj->find(true);
-		
 		$res = $this->obj->_getLink($linkName);
 		
 		$list = array();
@@ -556,6 +599,35 @@ abstract class Lumine_Model extends Lumine_EventListener {
 		}
 		
 		return $list;
+	}
+	
+	/**
+	 * Remove os links de uma entidade 
+	 * @author Hugo Ferreira da silva
+	 * @link http://www.hufersil.com.br
+	 * @param string $linkName
+	 * @param mixed $pk
+	 * @param mixed $pkValue
+	 * @return void
+	 */
+	public function removeLinks($linkName, $pk, $pkValue = null){
+		$res = $this->get($pk, $pkValue);
+		$this->obj->removeAll($linkName);
+	}
+	
+	/**
+	 * Remove os itens especificados 
+	 * @author Hugo Ferreira da silva
+	 * @link http://www.hufersil.com.br
+	 * @param string $linkName nome do link
+	 * @param array $items codigos dos itens ou as instancias Lumine_Base
+	 * @param mixed $pk nome ou valor da chave 
+	 * @param mixed $pkValue valor da chave
+	 * @return void
+	 */
+	public function remove($linkName, $items, $pk, $pkValue = null){
+		$res = $this->get($pk, $pkValue);
+		$this->obj->remove($linkName, $items);
 	}
 	
 	/**

@@ -149,7 +149,7 @@ if(isset($_GET['idnoticia']))
 		<tr>
 			<td valign="top">Imagem Cadastradas:</td>
 			<td valign="top">
-				<img alt="" src="<?=$noticia->getImagemnoticia()?>">
+				<a href="<?=PROJETO_CONTEXT?>images/<?=$noticia->getImagemnoticia()?>" target="_blank">Download Aqui</a>
 			</td>
 		</tr>
 		<?php 

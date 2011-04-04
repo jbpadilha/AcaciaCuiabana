@@ -7,7 +7,7 @@ class GruposUsuarios {
 	public static $GRUPO_ASSOCIADO = 3;
 	
 	public static $GRUPO_ADMIN_TXT = "Administrador";
-	public static $GRUPO_ESTAGIARIO_TXT = "Estagi·rio";
+	public static $GRUPO_ESTAGIARIO_TXT = "Estagi√°rio";
 	public static $GRUPO_ASSOCIADO_TXT = "Associado";
 
 }

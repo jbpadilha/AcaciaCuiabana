@@ -1,11 +1,11 @@
 <?php
 /**
  * Classe de configuracao
- * 
+ *
  * Para cada banco de dados que sera utilizado, e necessario inicializar a configuracao,
  * de forma que lumine possa encontrar corretamente as informacoes de conexao
  * com o banco de dados correto.
- * 
+ *
  * <code>
  * $cfg = new Lumine_Configuration($lumineConf)
  * </code>
@@ -36,7 +36,7 @@ class Lumine_Configuration extends Lumine_EventListener
 	 * @var ILumine_Connection
 	 */
 	private $connection = null;
-	
+
 	/**
 	 * tipos de eventos disparados
 	 * @var array
@@ -44,7 +44,7 @@ class Lumine_Configuration extends Lumine_EventListener
 	protected $_event_types = array(
         Lumine_Event::CREATE_OBJECT
     );
-	
+
     /**
      * Construtor da classe
      * @author Hugo Ferreira da Silva
@@ -79,7 +79,7 @@ class Lumine_Configuration extends Lumine_EventListener
 			throw new Lumine_Exception("Pacote nao definido na configuracao", Lumine_Exception::CONFIG_NO_DIALECT);
 			return;
 		}
-		
+
 		// opcionais, coloca valores padroes se nao informados
 		if(!isset($options['password']))
 		{
@@ -98,14 +98,14 @@ class Lumine_Configuration extends Lumine_EventListener
 		}
 
 		$this->options = $options;
-		
+
 		$cnManager = Lumine_ConnectionManager::getInstance();
 		$cnManager->create($this->options['package'], $this);
 	}
-	
+
 	/**
 	 * Altera a conexao ativa da configuracao
-	 * 
+	 *
 	 * @author Hugo Ferreira da Silva
 	 * @link http://www.hufersil.com.br/
 	 * @param ILumine_Connection $conn
@@ -115,7 +115,7 @@ class Lumine_Configuration extends Lumine_EventListener
 	{
 		$this->connection = $conn;
 	}
-	
+
 	/**
 	 * Retorna a conexao ativa
 	 * @author Hugo Ferreira da Silva
@@ -126,7 +126,21 @@ class Lumine_Configuration extends Lumine_EventListener
 	{
 		return $this->connection;
 	}
-	
+
+	/**
+	 * Altera uma propriedade da configuracao
+	 *
+	 * @author Hugo Ferreira da Silva
+	 * @link http://www.hufersil.com.br
+	 * @param string $name
+	 * @param mixed $value
+	 * @return void
+	 */
+	public function setProperty( $name, $value )
+	{
+		$this->options[ $name ] = $value;
+	}
+
 	/**
 	 * Recupera um valor do array de configuracoes
 	 * @author Hugo Ferreira da Silva
@@ -136,15 +150,29 @@ class Lumine_Configuration extends Lumine_EventListener
 	 */
 	public function getProperty( $name )
 	{
-		if( ! isset($this->options[ $name ]) ) 
+		if( ! isset($this->options[ $name ]) )
 		{
 			Lumine_Log::warning('Propriedade inexistente: ' . $name);
 			return null;
 		}
-		
+
 		return $this->options[ $name ];
 	}
-	
+
+	/**
+	 * Altera uma opcao na configuracao
+	 *
+	 * @author Hugo Ferreira da Silva
+	 * @link http://www.hufersil.com.br
+	 * @param string $name
+	 * @param mixed $value
+	 * @return void
+	 */
+	public function setOption($name, $value)
+	{
+		$this->options['options'][ $name ] = $value;
+	}
+
 	/**
 	 * Recupera o valor de uma opcao do array de configuracoes
 	 * @author Hugo Ferreira da Silva
@@ -154,86 +182,86 @@ class Lumine_Configuration extends Lumine_EventListener
 	 */
 	public function getOption( $name )
 	{
-		if( ! array_key_exists($name, $this->options['options']) ) 
+		if( ! array_key_exists($name, $this->options['options']) )
 		{
 			Lumine_Log::warning('Opcao inexistente: ' . $name);
 			$this->options['options'][ $name ] = null;
 			return null;
 		}
-		
+
 		return $this->options['options'][ $name ];
 	}
-	
+
 	/**
 	 * Importa classes para poderem ser utilizadas
-	 * 
+	 *
 	 * <code>
 	 * $cfg = new Lumine_Configuration($lumineConf);
 	 * $cfg->import('Pessoa','Carro','Bicicleta');
-	 * 
+	 *
 	 * // agora as classes ja podem ser usadas
 	 * $obj = new Pessoa;
 	 * $car = new Carro;
 	 * </code>
-	 * 
+	 *
 	 * @author Hugo Ferreira da Silva
 	 * @link http://www.hufersil.com.br/
 	 * @return void
 	 */
-	public function import() 
+	public function import()
 	{
 		$list = func_get_args();
 		$notfound = array();
-		
+
 		foreach($list as $className)
 		{
 			$arr_path = explode('.', $this->getProperty('package'));
 			$ps = DIRECTORY_SEPARATOR;
 			$path = $this->getProperty('class_path') . $ps . implode($ps, $arr_path) . $ps;
-			
+
 			$sufix = $this->getOption('class_sufix');
-			
+
 			if($sufix != null)
 			{
 				$sufix = '.' . $sufix;
 			}
-			
+
 			$sufix = $sufix . '.php';
 			$filename = $path . $className . $sufix;
-			
+
 			if( class_exists($className) )
 			{
 				Lumine_Log::debug('Classe ja existente: '.$className);
 			}
-			
+
 			if( file_exists($filename) )
 			{
 				require_once $filename;
-	
+
 				if( ! class_exists($className) )
 				{
 					throw new Lumine_Exception('A classe '.$className.' nao existe no arquivo '.$filename);
 				}
-				
+
 				Lumine_Log::debug('Classe carregada: '.$className);
 			} else {
 				$notfound[] = $className;
 			}
 		}
 	}
-	
+
 	/**
 	 * Carrega models para serem utilizadas com projetos em MVC
-	 * 
+	 *
 	 * <code>
 	 * $cfg = new Lumine_Configuration($lumineConf);
 	 * $cfg->loadModel('PessoaModel','CarroModel','BicicletaModel');
-	 * 
+	 *
 	 * // agora as classes ja podem ser usadas
 	 * $obj = new PessoaModel;
 	 * $car = new CarroModel;
 	 * </code>
-	 * 
+	 *
 	 * @author Hugo Ferreira da Silva
 	 * @link http://www.hufersil.com.br/
 	 * @return void
@@ -241,58 +269,58 @@ class Lumine_Configuration extends Lumine_EventListener
 	public function loadModel() {
 		$list = func_get_args();
 		$notfound = array();
-		
+
 		foreach($list as $className) {
-			
+
 			$ps = DIRECTORY_SEPARATOR;
 			$path = $this->getProperty('class_path') . $ps . $this->getOption('model_path') . $ps;
-			
+
 			$sufix = $this->getOption('class_sufix');
-			
+
 			if($sufix != null) {
 				$sufix = '.' . $sufix;
 			}
-			
+
 			$sufix = $sufix . '.php';
 			$filename = $path . $className . $sufix;
-			
+
 			if( class_exists($className) ) {
 				Lumine_Log::debug('Model ja existente: '.$className);
 				return;
 			}
-			
+
 			if( file_exists($filename) ) {
 				require_once $filename;
-	
+
 				if( ! class_exists($className) ) {
 					throw new Lumine_Exception('A model '.$className.' nao existe no arquivo '.$filename);
 				}
-				
+
 				Lumine_Log::debug('Model carregada: '.$className);
-				
+
 			} else {
 				Lumine_Log::warning('Arquivo nao encontrado: '.$filename);
 				$notfound[] = $className;
 			}
 		}
 	}
-	
+
 	/**
 	 * Exporta o schema para o banco
 	 * @author Hugo Ferreira da Silva
 	 * @link http://www.hufersil.com.br/
 	 * @return void
 	 */
-	public function export() 
+	public function export()
 	{
 		$class = 'Lumine_Export_' . $this->options['dialect'];
 		Lumine::load( $class );
-		
+
 		$reflection = new ReflectionClass( $class );
 		$instance = $reflection->newInstance();
 		$instance->export( $this );
 	}
-	
+
 	/**
 	 * Cria uma classe pelo nome da tabelaon the fly
 	 * @author Hugo Ferreira da Silva

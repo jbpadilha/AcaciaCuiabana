@@ -2,19 +2,19 @@
 
 class Submenu extends Lumine_Base {
 	
-	protected $_tablename = 'menu';
+	protected $_tablename = 'submenu';
     protected $_package   = 'model';
     
-    public $idsubmenu;
-    public $descricaosubmenu;
-    public $idpagina;
-    public $idanexo;
-    public $linksubmenu;
-    public $idmenu;
+    public $idsubmenu = null;
+    public $descricaosubmenu = null;
+    public $idpagina = null;
+    public $idanexo = null;
+    public $linksubmenu = null;
+    public $idmenu = null;
     
 /**
      * Inicia os valores da classe
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return void
      */
     protected function _initialize()
@@ -22,16 +22,16 @@ class Submenu extends Lumine_Base {
         
         $this->_addField("idsubmenu", "idsubmenu", "int", 11, array('primary' => true, 'notnull' => true, 'autoincrement' => true));
         $this->_addField("descricaosubmenu", "descricaosubmenu", "varchar", 255, array('notnull' => true));
-        $this->_addField('idpagina', 'idpagina', 'int', 11, array('foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'RESTRICT', 'linkOn' => 'idpagina', 'class' => 'Paginas'));
-        $this->_addField('idanexo', 'idanexo', 'int', 11, array('foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'RESTRICT', 'linkOn' => 'idanexo', 'class' => 'Anexos'));
+        $this->_addField('idpagina', 'idpagina', 'int', 11, array('notnull' => false, 'foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'RESTRICT', 'linkOn' => 'idpagina', 'class' => 'Paginas'));
+        $this->_addField('idanexo', 'idanexo', 'int', 11, array('notnull' => false, 'foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'RESTRICT', 'linkOn' => 'idanexo', 'class' => 'Anexos'));
         $this->_addField("linksubmenu", "linksubmenu", "varchar", 255, array('notnull' => false));
-        $this->_addField('idmenu', 'idmenu', 'int', 11, array('foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'RESTRICT', 'linkOn' => 'idmenu', 'class' => 'Menu'));
+        $this->_addField('idmenu', 'idmenu', 'int', 11, array('notnull' => false, 'foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'RESTRICT', 'linkOn' => 'idmenu', 'class' => 'Menu'));
         
     }
 
     /**
      * Recupera um objeto estaticamente
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return Pessoa
      */
     public static function staticGet($pk, $pkValue = null)
@@ -140,12 +140,27 @@ class Submenu extends Lumine_Base {
 		Lumine_Validator_PHPValidator::clearValidations($this);
 		
 		// adicionando as regras 
-		Lumine_Validator_PHPValidator::addValidation($this, 'descricaosubmenu', Lumine_Validator::REQUIRED_STRING, 'Informe a descrição do Sub-menu');
+		Lumine_Validator_PHPValidator::addValidation($this, 'descricaosubmenu', Lumine_Validator::REQUIRED_STRING, 'Informe a descriï¿½ï¿½o do Sub-menu');
 		
 		return parent::validate();
 	}
 	
-	
+	/**
+	 * 
+	 * Retorno do Menu Relacionado
+	 * @return Menu
+	 */
+	public function getMenu()
+	{
+		$menu = null;
+		if($this->getIdmenu()!=null)
+		{
+			$menu = new Menu();
+			$menu->setIdmenu($this->getIdmenu());
+			$menu->find(true);
+		}
+		return $menu;
+	}
 }
 
 ?>

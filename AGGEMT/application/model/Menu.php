@@ -7,13 +7,13 @@ class Menu extends Lumine_Base
     protected $_package   = 'model';
 	
 	public $idmenu = null;
-	public $descricaoenu = '';
+	public $descricaomenu = null;
 	public $idpagina = null;
-	public $linkmenu = '';
+	public $linkmenu = null;
 
 	/**
      * Inicia os valores da classe
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return void
      */
     protected function _initialize()
@@ -21,14 +21,15 @@ class Menu extends Lumine_Base
         
         $this->_addField("idmenu", "idmenu", "int", 11, array('primary' => true, 'notnull' => true, 'autoincrement' => true));
         $this->_addField("descricaomenu", "descricaomenu", "varchar", 255, array('notnull' => true));
-        $this->_addField('idpagina', 'idpagina', 'int', 11, array('foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'RESTRICT', 'linkOn' => 'idpagina', 'class' => 'Paginas'));
+        $this->_addField('idpagina', 'idpagina', 'int', 11, array('notnull' => false,'foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'RESTRICT', 'linkOn' => 'idpagina', 'class' => 'Paginas'));
         $this->_addField("linkmenu", "linkmenu", "varchar", 255, array('notnull' => false));
-        
+
+        $this->_addForeignRelation('submenu', self::ONE_TO_MANY, 'Submenu', 'idmenu', null, null, null);
     }
 
     /**
      * Recupera um objeto estaticamente
-     * @author João Batista Padilha e Silva
+     * @author Joï¿½o Batista Padilha e Silva
      * @return Pessoa
      */
     public static function staticGet($pk, $pkValue = null)
@@ -57,8 +58,8 @@ class Menu extends Lumine_Base
 	/**
 	 * @return the $descricaoenu
 	 */
-	public function getDescricaoenu() {
-		return $this->descricaoenu;
+	public function getDescricaomenu() {
+		return $this->descricaomenu;
 	}
 
 	/**
@@ -85,8 +86,8 @@ class Menu extends Lumine_Base
 	/**
 	 * @param field_type $descricaoenu
 	 */
-	public function setDescricaoenu($descricaoenu) {
-		$this->descricaoenu = $descricaoenu;
+	public function setDescricaomenu($descricaomenu) {
+		$this->descricaomenu = $descricaomenu;
 	}
 
 	/**
@@ -109,7 +110,7 @@ class Menu extends Lumine_Base
 		Lumine_Validator_PHPValidator::clearValidations($this);
 		
 		// adicionando as regras 
-		Lumine_Validator_PHPValidator::addValidation($this, 'descricaomenu', Lumine_Validator::REQUIRED_STRING, 'Informe a descrição do menu');
+		Lumine_Validator_PHPValidator::addValidation($this, 'descricaomenu', Lumine_Validator::REQUIRED_STRING, 'Informe a descriï¿½ï¿½o do menu');
 		
 		return parent::validate();
 	}

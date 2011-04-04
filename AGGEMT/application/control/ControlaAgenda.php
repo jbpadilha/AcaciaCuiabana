@@ -87,7 +87,7 @@ class ControlaAgenda extends ControlGeral {
 		catch (Exception $e)
 		{
 			$this->MENSAGEM_ERRO[] = $e->getMessage();
-			header("Location:".PROJETO_CONTEXT."public/admin/inicio.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+			header("Location:".PROJETO_CONTEXT."public/admin/conteudoInicial.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 		}
 	}
 	

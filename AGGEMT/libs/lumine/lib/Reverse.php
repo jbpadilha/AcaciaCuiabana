@@ -444,10 +444,18 @@ class Lumine_Reverse extends Lumine_EventListener
 		
 		// adiciona os dto's
 		reset($this->dto_files);
+		
+		// 2010-11-05
+		// permite configurar a pasta para gravar os dto's
+		$dtopath = '';
+		if( $this->cfg->getOption('dto_package') != '' ){
+			$dtopath = str_replace('.','/', $this->cfg->getOption('dto_package'));
+		}
+		
 		foreach($this->dto_files as $classname => $content)
 		{
 			Lumine_Log::debug('Adicionando DTO '.$classname . ' ao ZIP');
-			$name = $filename . 'dto/' . $classname . $sufix . '.php';
+			$name = $filename . 'dto/' . $dtopath . $classname . $sufix . '.php';
 			$zip->addFile($content, $name, 'Lumine Reverse DTO', $content);
 		}
 		
@@ -508,7 +516,14 @@ class Lumine_Reverse extends Lumine_EventListener
 	{
 		Lumine_Log::debug('Gerando arquivos direto na pasta');
 		$fullpath = $this->cfg->getProperty('class_path') . DIRECTORY_SEPARATOR.str_replace('.',DIRECTORY_SEPARATOR,$this->cfg->getProperty('package'));
+		
 		$fullpath_dto = $this->cfg->getProperty('class_path') . DIRECTORY_SEPARATOR.str_replace('.',DIRECTORY_SEPARATOR,$this->cfg->getProperty('package')).DIRECTORY_SEPARATOR.'dto';
+		
+		// 2010-11-05
+		// permite configurar a pasta para gravar os dto's
+		if( $this->cfg->getOption('dto_package') != '' ){
+			$fullpath_dto .= DIRECTORY_SEPARATOR . str_replace('.', DIRECTORY_SEPARATOR, $this->cfg->getOption('dto_package'));
+		}
 		
 		$sufix = $this->cfg->getOption('class_sufix');
 		if( !empty($sufix))

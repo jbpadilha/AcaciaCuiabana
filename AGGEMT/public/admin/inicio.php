@@ -14,9 +14,10 @@
 		<!--[if IE 6]><link rel="stylesheet" href="../style.ie6.css" type="text/css" media="screen" /><![endif]-->
 		<!--[if IE 7]><link rel="stylesheet" href="../style.ie7.css" type="text/css" media="screen" /><![endif]-->
 		<script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/jquery.maskedinput-1.2.2.js"></script>
+		<script type="text/javascript" src="../js/jquery.alphanumeric.js"></script>
 		<script type="text/javascript" src="../js/script.js"></script>
 		<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
-		<script type="text/javascript" src="../js/jquery.maskedinput-1.2.2.js"></script>
 		<script type="text/javascript" src="../jscal/js/jscal2.js"></script> 
 	    <script type="text/javascript" src="../jscal/js/lang/pt.js"></script> 
 	    <link rel="stylesheet" type="text/css" href="../jscal/css/jscal2.css" /> 

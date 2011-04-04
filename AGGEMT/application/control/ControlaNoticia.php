@@ -97,7 +97,7 @@ class ControlaNoticia extends ControlGeral {
 		catch (Exception $e)
 		{
 			$this->MENSAGEM_ERRO[] = $e->getMessage();
-			header("Location:".PROJETO_CONTEXT."public/admin/inicio.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+			header("Location:".PROJETO_CONTEXT."public/admin/conteudoInicial.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 		}
 	}
 	
@@ -177,7 +177,7 @@ class ControlaNoticia extends ControlGeral {
 					    $upload->set("file_perm",0444); // Permission for uploaded file. 0444 (Read only).
 					    $upload->set("dst_dir",PATH_PROJETO_IMAGEM_UPLOAD."noticias"); // Destination directory for uploaded files.
 					    $result = $upload->moveFileToDestination(); // $result = bool (true/false). Succeed or not.
-					    $noticias->setImagemnoticia("noticias/".$upload->generateFileName());
+					    $noticias->setImagemnoticia("noticias/".$upload->succeed_files_track[0]["new_file_name"]);
 					    if(!$result)
 					    {
 					    	throw new Exception($upload->error);

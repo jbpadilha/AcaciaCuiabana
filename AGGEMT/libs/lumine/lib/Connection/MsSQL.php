@@ -1,143 +1,34 @@
 <?php
 /**
- * Conexao com MySQL
+ * Conexao com MsSQL
  * @author Hugo Ferreira da Silva
  * @link http://www.hufersil.com.br
  * @package Lumine_Connection
  */
 
-Lumine::load('Connection_IConnection');
+Lumine::load('Connection_AbstractConnection');
 
 /**
- * Conexao com MySQL
+ * Conexao com MsSQL
  * @package Lumine_Connection
  * @author Hugo Ferreira da Silva
  * @link http://www.hufersil.com.br
  */
-class Lumine_Connection_MsSQL extends Lumine_EventListener implements ILumine_Connection
+class Lumine_Connection_MsSQL extends Lumine_Connection_AbstractConnection
 {
-
+	
 	/**
-	 * Estado fechado
-	 * @var int
-	 */
-	const CLOSED           = 0;
-	/**
-	 * Estado aberto
-	 * @var int
-	 */
-	const OPEN             = 1;
-
-	/**
-	 * Constante para versao do servidor
-	 * @var int
-	 */
-	const SERVER_VERSION   = 10;
-	/**
-	 * Constante para versao do cliente
-	 * @var int
-	 */
-	const CLIENT_VERSION   = 11;
-	/**
-	 * Constante para informacoes do host
-	 * @var int
-	 */
-	const HOST_INFO        = 12;
-	/**
-	 * tipo de protocolo
-	 * @var int
-	 */
-	const PROTOCOL_VERSION = 13;
-	/**
-	 * funcao para retorno de registros aleatorios do banco
-	 * @var string
-	 */
-	const RANDOM_FUNCTION  = 'NEWID()';
-	/**
-	 * caractere de escape de strings
-	 * @var string
-	 */
-	const ESCAPE_CHAR      = '\'';
-
-	/**
-	 * Tipos de eventos disparados pela classe
-	 * @var array
-	 */
-	protected $_event_types = array(
-	Lumine_Event::PRE_EXECUTE,
-	Lumine_Event::POS_EXECUTE,
-	Lumine_Event::PRE_CONNECT,
-	Lumine_Event::POS_CONNECT,
-	Lumine_Event::PRE_CLOSE,
-	Lumine_Event::POS_CLOSE,
-	Lumine_Event::EXECUTE_ERROR,
-	Lumine_Event::CONNECTION_ERROR
-	);
-
-	/**
-	 * ID da conexao
-	 * @var resource
-	 */
-	private $conn_id;
-	/**
-	 * nome do banco de dados
-	 * @var string
-	 */
-	private $database;
-	/**
-	 * nome do usuario
-	 * @var string
-	 */
-	private $user;
-	/**
-	 * senha do usuario
-	 * @var string
-	 */
-	private $password;
-	/**
-	 * porta de conexao
-	 * @var integer
-	 */
-	private $port;
-	/**
-	 * host do banco de dados
-	 * @var string
-	 */
-	private $host;
-	/**
-	 * opcoes
-	 * @var array
-	 */
-	private $options;
-	/**
-	 * Estado atual
-	 * @var int
-	 */
-	private $state;
-
-	/**
-	 * Instancia de conexao
-	 * @var ILumine_Connection
-	 */
-	private static $instance = null;
-
-	/**
-	 * Retorna a conexao
+	 * Construtor
 	 *
 	 * @author Hugo Ferreira da Silva
-	 * @link http://www.hufersil.com.br/
-	 * @return ILumine_Connection
+	 * @link http://www.hufersil.com.br
+	 * @return Lumine_Connection_MsSQL
 	 */
-	static public function getInstance()
-	{
-		if(self::$instance == null)
-		{
-			self::$instance = new Lumine_Connection();
-		}
-
-		return self::$instance;
+	public function __construct(){
+		$this->randomFunction = 'NEWID()';
+		$this->escapeChar = '\'';
 	}
-
+	
 	/**
 	 * @see ILumine_Connection::connect()
 	 */
@@ -187,6 +78,8 @@ class Lumine_Connection_MsSQL extends Lumine_EventListener implements ILumine_Co
 		// seleciona o banco
 		mssql_select_db($this->getDatabase(), $this->conn_id);
 		$this->state = self::OPEN;
+		
+		$this->setCharset( $this->getCharset() );
 
 		$this->dispatchEvent(new Lumine_ConnectionEvent(Lumine_Event::POS_CONNECT, $this));
 
@@ -210,115 +103,7 @@ class Lumine_Connection_MsSQL extends Lumine_EventListener implements ILumine_Co
 		}
 		$this->dispatchEvent(new Lumine_ConnectionEvent(Lumine_Event::POS_CLOSE, $this));
 	}
-	/**
-	 * @see ILumine_Connection::getState()
-	 */
-	public function getState()
-	{
-		return $this->state;
-	}
-	/**
-	 * @see ILumine_Connection::setDatabase()
-	 */
-	public function setDatabase($database)
-	{
-		$this->database = $database;
-	}
-	/**
-	 * @see ILumine_Connection::getDatabase()
-	 */
-	public function getDatabase()
-	{
-		return $this->database;
-	}
-	/**
-	 * @see ILumine_Connection::setUser()
-	 */
-	public function setUser($user)
-	{
-		$this->user = $user;
-	}
-	/**
-	 * @see ILumine_Connection::getUser()
-	 */
-	public function getUser()
-	{
-		return $this->user;
-	}
-	/**
-	 * @see ILumine_Connection::setPassword()
-	 */
-	public function setPassword($password)
-	{
-		$this->password = $password;
-	}
-	/**
-	 * @see ILumine_Connection::getPassword()
-	 */
-	public function getPassword()
-	{
-		return $this->password;
-	}
-	/**
-	 * @see ILumine_Connection::setPort()
-	 */
-	public function setPort($port)
-	{
-		$this->port = $port;
-	}
-	/**
-	 * @see ILumine_Connection::getPort()
-	 */
-	public function getPort()
-	{
-		return $this->port;
-	}
-	/**
-	 * @see ILumine_Connection::setHost()
-	 */
-	public function setHost($host)
-	{
-		$this->host = $host;
-	}
-	/**
-	 * @see ILumine_Connection::getHost()
-	 */
-	public function getHost()
-	{
-		return $this->host;
-	}
-	/**
-	 * @see ILumine_Connection::setOptions()
-	 */
-	public function setOptions($options)
-	{
-		$this->options = $options;
-	}
-	/**
-	 * @see ILumine_Connection::getOptions()
-	 */
-	public function getOptions()
-	{
-		return $this->options;
-	}
-	/**
-	 * @see ILumine_Connection::setOption()
-	 */
-	public function setOption($name, $val)
-	{
-		$this->options[ $name ] = $val;
-	}
-	/**
-	 * @see ILumine_Connection::getOption()
-	 */
-	public function getOption($name)
-	{
-		if(empty($this->options[$name]))
-		{
-			return null;
-		}
-		return $this->options[$name];
-	}
+	
 	/**
 	 * @see ILumine_Connection::getErrorMsg()
 	 */
@@ -432,7 +217,7 @@ class Lumine_Connection_MsSQL extends Lumine_EventListener implements ILumine_Co
 			$length         = $row['length'];
 			$notnull        = $row['is_nullable'] == 1 ? false : true;
 			$primary        = !is_null($row['pk']) ? true : false;
-			$default        = $row['default'];
+			$default        = $this->parseDefaultValue( $row['default'] );
 			$autoincrement  = $row['autoincrement'] == 1 ? true : false;
 			$type_native    = $type;
 				
@@ -444,6 +229,33 @@ class Lumine_Connection_MsSQL extends Lumine_EventListener implements ILumine_Co
 
 		return $data;
 	}
+	
+	
+	/**
+	 * Verifica se o valor informado como default e uma funcao do banco
+	 * 
+	 * @author Hugo Ferreira da Silva
+	 * @param mixed $value
+	 * @return string
+	 */
+	private function parseDefaultValue( $value ){
+		$types = array(
+			'CURRENT_TIME'
+			,'CURRENT_DATE'
+			,'CURRENT_TIMESTAMP'
+			,'NOW()'
+			,'CURRENT_USER'
+			,'LOCALTIME'
+			,'LOCALTIMESTAMP'
+		);
+		
+		if( !is_array($value) && in_array($value, $types) ){
+			$value = Lumine::DEFAULT_VALUE_FUNCTION_IDENTIFIER . $value;
+		}
+		
+		return $value;
+	}
+	
 	/**
 	 * @see ILumine_Connection::executeSQL()
 	 */
@@ -526,20 +338,6 @@ class Lumine_Connection_MsSQL extends Lumine_EventListener implements ILumine_Co
 	{
 		return mssql_num_rows($rs);
 	}
-	/**
-	 * @see ILumine_Connection::random()
-	 */
-	public function random()
-	{
-		return self::RANDOM_FUNCTION;
-	}
-	/**
-	 * @see ILumine_Connection::getEscapeChar()
-	 */
-	public function getEscapeChar()
-	{
-		return self::ESCAPE_CHAR;
-	}
 
 	/**
 	 * @see ILumine_Connection::begin()
@@ -565,22 +363,6 @@ class Lumine_Connection_MsSQL extends Lumine_EventListener implements ILumine_Co
 	/**
 	 * @see Lumine_EventListener::__destruct()
 	 */
-	function __destruct()
-	{
-		unset($this->conn_id);
-		unset($this->database);
-		unset($this->user);
-		unset($this->password);
-		unset($this->port);
-		unset($this->host);
-		unset($this->options);
-		unset($this->state);
-		unset($this->transactions);
-		unset($this->transactions_count);
-		//unset(self::$instance);
-
-		parent::__destruct();
-	}
 
 
 	/**
@@ -716,4 +498,3 @@ class Lumine_Connection_MsSQL extends Lumine_EventListener implements ILumine_Co
 }
 
 
-?>

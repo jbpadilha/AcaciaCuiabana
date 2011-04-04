@@ -13,8 +13,8 @@
  * @package Lumine
  */
 class Lumine_Event {
-	
-	
+
+
 	/**
 	 * Disparado antes de efetuar um Select
 	 * @var string
@@ -200,16 +200,22 @@ class Lumine_Event {
 	 * @var string
 	 */
 	const POS_DELETE_SQL = 'posDeleteSql';
-	
+
 	/**
 	 * Tipo de evento disparado
 	 * @var string
 	 */
 	public $type;
-	
+	/**
+	 * permite que o evento continue para o proximo listener
+	 *
+	 * @var boolean
+	 */
+	private $propagate = true;
+
 	/**
 	 * Construtor
-	 * 
+	 *
 	 * @author Hugo Ferreira da Silva
 	 * @link http://www.hufersil.com.br/lumine
 	 * @param $type
@@ -218,6 +224,41 @@ class Lumine_Event {
 	function __construct($type){
 		$this->type = $type;
 	}
-	
+
+	/**
+	 * Indicacao para que o evento nao continue se propagando
+	 *
+	 * @author Hugo Ferreira da Silva
+	 * @link http://www.hufersil.com.br
+	 * @return void
+	 */
+	public function stopPropagation(){
+		$this->setPropagate(false);
+	}
+
+	/**
+	 * Recupera o valor da propagacao
+	 *
+	 * @author Hugo Ferreira da Silva
+	 * @link http://www.hufersil.com.br
+	 * @return boolean
+	 */
+	public function getPropagate()
+	{
+	    return $this->propagate;
+	}
+
+	/**
+	 * Altera o valor da propagacao
+	 *
+	 * @author Hugo Ferreira da Silva
+	 * @link http://www.hufersil.com.br
+	 * @param boolean $propagate
+	 * @return boolean
+	 */
+	public function setPropagate($propagate)
+	{
+	    $this->propagate = $propagate;
+	}
 }
 

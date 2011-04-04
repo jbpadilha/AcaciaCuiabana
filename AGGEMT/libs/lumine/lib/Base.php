@@ -173,7 +173,11 @@ class Lumine_Base extends Lumine_EventListener implements Iterator
 	 * @var int
 	 */
 	protected $_iteratorPosition = 0;
-	
+	/**
+	 * Expressoes utilizadas em updates
+	 * @var array
+	 */
+	protected $_updateExpressions = array();
     /**
      * Eventos disparados por esta classe
      * @var array
@@ -2220,14 +2224,15 @@ class Lumine_Base extends Lumine_EventListener implements Iterator
 		$this->_alias          = '';
 	
 		// partes da consulta
-		$this->_data           = array();
-		$this->_where          = array();
-		$this->_having         = array();
-		$this->_order          = array();
-		$this->_group          = array();
-		$this->_join           = array();
-		$this->_limit          = null;
-		$this->_offset         = null;
+		$this->_data              = array();
+		$this->_where             = array();
+		$this->_having            = array();
+		$this->_order             = array();
+		$this->_group             = array();
+		$this->_join              = array();
+		$this->_updateExpressions = array();
+		$this->_limit             = null;
+		$this->_offset            = null;
 		
 		// modo do resultado
 		$this->_fetch_mode     = self::FETCH_ASSOC;
@@ -2387,7 +2392,7 @@ class Lumine_Base extends Lumine_EventListener implements Iterator
 						// faz a clausula com o valor desta entidade
 						$this_val = $field['column'] . "=" . Lumine_Parser::getParsedValue( $this, $this->$field['linkOn'], $field_def['type']);
 						// faz a clausula com o valor da entidade alvo
-						$to_val = $field_obj['column'] . "=" . Lumine_Parser::getParsedValue( $obj, $itemVal, $field_obj['type']);
+						$to_val = $rel['column'] . "=" . Lumine_Parser::getParsedValue( $obj, $itemVal, $field_obj['type']);
 						
 						// monta a consutla
 						$sql = "DELETE FROM " . $schema . $field['table']. " WHERE ";
@@ -2581,6 +2586,72 @@ class Lumine_Base extends Lumine_EventListener implements Iterator
 				return $this->$key;
 			}
 		}
+	}
+	
+	/**
+	 * Remove todas as expressoes de atualizacao
+	 * 
+	 * @author Hugo Ferreira da Silva 
+	 * @return void
+	 */
+	public function clearUpdateExpression(){
+		$this->_updateExpressions = array();
+	}
+	
+	/**
+	 * Remove uma expressao para atualizacao.
+	 * 
+	 * @param string $field
+	 * @author Hugo Ferreira da Silva
+	 * @return void
+	 */
+	public function removeUpdateExpression($field){
+		unset($this->_updateExpressions[ $field ]);
+	}
+	
+	/**
+	 * Adiciona uma expressao para atualizacao.
+	 * 
+	 * <p>Por padrao, quando o update vai ser efetuado, Lumine
+	 * verifica os campos e simplesmente atribui o valor 
+	 * ao campo, exemplo:</p>
+	 * 
+	 * <code>
+	 * $obj = new Pessoa();
+	 * $obj->get(1);
+	 * $obj->nome = 'Hugo';
+	 * $obj->save();
+	 * </code>
+	 * 
+	 * <p>Gerara a seguinte SQL:</p>
+	 * <code>
+	 * UPDATE pessoa SET nome = 'Hugo' WHERE codpessoa = 1;
+	 * </code>
+	 * 
+	 * <p>Caso voce precise efetuar um update executando uma funcao 
+	 * do banco, utilize este metodo, por exemplo:</p>
+	 * 
+	 * <code>
+	 * $obj = new Pessoa();
+	 * $obj->get(1);
+	 * $obj->addUpdateExpression('nome', 'replace(nome, "hugo", ?)', 'Hugo Ferreira da Silva');
+	 * $obj->save();
+	 * </code>
+	 * 
+	 * <p>Executara uma SQL semelhante a abaixo:</p>
+	 * <code>
+	 * UPDATE pessoa SET nome = replace(nome, "hugo", 'Hugo Ferreira da Silva') WHERE codpessoa = 1;
+	 * </code>
+	 * 
+	 * @param unknown_type $field
+	 * @param unknown_type $expression
+	 * @param unknown_type $args
+	 * @author Hugo Ferreira da Silva
+	 * @return void
+	 */
+	public function addUpdateExpression($field, $expression, $args = null){
+		$this->_updateExpressions[ $field ]['expression'] = $expression;
+		$this->_updateExpressions[ $field ]['args'] = $args;
 	}
 	
 	//////////////////////////////////////////////////////////////////
@@ -3227,7 +3298,7 @@ class Lumine_Base extends Lumine_EventListener implements Iterator
 				// aqui permitimos entrar mesmo se for autoincrement
 				// desde que tenha valor
 				if( is_null($val) && isset($def['options']['default'])) {
-					$val = Lumine_Parser::getParsedValue($this, $def['options']['default'], $def['type']);
+					$val = Lumine_Parser::getParsedValue($this, $def['options']['default'], $def['type'], false, true);
 					
 				} else {
 					$valor = Lumine_Parser::truncateValue($def, $val);
@@ -3252,7 +3323,7 @@ class Lumine_Base extends Lumine_EventListener implements Iterator
 					if( isset($def['options']['default']) )
 					{
 						// pega o valor padrao
-						$val = Lumine_Parser::getParsedValue($this, $def['options']['default'], $def['type']);
+						$val = Lumine_Parser::getParsedValue($this, $def['options']['default'], $def['type'], false, true);
 						// se nao grava como null 
 					} else {
 						$val = 'NULL';
@@ -3317,16 +3388,20 @@ class Lumine_Base extends Lumine_EventListener implements Iterator
 			
 			if( array_key_exists('default', $def['options']) && is_null($this->$name))
 			{
-				$this->$name = $def['options']['default'];
+				
+				if( substr($def['options']['default'],0,strlen(Lumine::DEFAULT_VALUE_FUNCTION_IDENTIFIER)) != Lumine::DEFAULT_VALUE_FUNCTION_IDENTIFIER ){
+					$this->$name = $def['options']['default'];
+				}
+				
 				$columns[] = $def['column'];
-				$values[]  = Lumine_Parser::getParsedValue($this, $this->$name, $def['type']);
+				$values[]  = Lumine_Parser::getParsedValue($this, $def['options']['default'], $def['type'], false, true);
 				continue;
 			}
 			
 			if( !empty($def['options']['autoincrement']) )
 			{
 				$sequence_type = empty($def['option']['sequence_type']) ? '' : $def['option']['sequence_type'];
-				// se nao estiver definida na entidade, tenta pegar a padr�o para todo o banco
+				// se nao estiver definida na entidade, tenta pegar a padrao para todo o banco
 				$st = $this->_getConnection()->getOption('sequence_type');
 				if( !empty($st))
 				{
@@ -3395,6 +3470,25 @@ class Lumine_Base extends Lumine_EventListener implements Iterator
 		
 		foreach($this->_definition as $name => $def)
 		{
+			// se setou uma expressa (_updateExpression)
+			if( array_key_exists($name, $this->_updateExpressions) ){
+				
+				$exp = $this->_updateExpressions[ $name ];
+				
+				// guardamos o valor anterior
+				$bkp = $this->$name;
+				// setamos o valor que vais ser feito o binding
+				$this->$name = $exp['args'];
+				
+				$fields[] = $a . $def['column'];
+				$values[] = str_replace('?', Lumine_Parser::getParsedValue($this, $exp['args'], $def['type']), $exp['expression']);
+				
+				// voltamos o valor anterior
+				$this->$name = $bkp;
+				
+				continue;
+			}
+			
 			// se o membro existe na classe mas nao esta setado
 			if($this->_checkMemberExistence($name) && !isset($this->$name)){
 				// se o valor for igual do dataset
@@ -3406,40 +3500,37 @@ class Lumine_Base extends Lumine_EventListener implements Iterator
 			
 			$valor = $this->fieldValue($name);
 
-			//if( isset($valor) ) {
-				// se este campo existir no DataHolder original e o valor for o mesmo
-				if( array_key_exists($name, $this->_original_dataholder) && $this->_original_dataholder[ $name ] == $valor )
+			// se este campo existir no DataHolder original e o valor for o mesmo
+			if( array_key_exists($name, $this->_original_dataholder) && $this->_original_dataholder[ $name ] == $valor )
+			{
+				// nao coloca na lista de atualizacao
+				continue;
+			}
+			
+			$fields[] = $a . $def['column'];
+			// $values[] = Lumine_Parser::getParsedValue($this, $this->_dataholder[ $name ], $def['type']);
+			$val = $this->getStrictValue( $name, $valor );
+			$columns[] = $def['column'];
+			
+			if( !($val instanceof Lumine_Base) )
+			{
+				if($val === '' && !empty($empty_as_null))
 				{
-					// nao coloca na lista de atualizacao
-					continue;
-				}
-				
-				$fields[] = $a . $def['column'];
-				// $values[] = Lumine_Parser::getParsedValue($this, $this->_dataholder[ $name ], $def['type']);
-				$val = $this->getStrictValue( $name, $valor );
-				$columns[] = $def['column'];
-				
-				if( !($val instanceof Lumine_Base) )
-				{
-					if($val === '' && !empty($empty_as_null))
-					{
-						$values[] = 'NULL';
-						
-					} else if(is_null($val)) {
-						$values[] = 'NULL';
-						
-					} else {
-						$valor = Lumine_Parser::truncateValue($def, $valor);
-						$values[] = Lumine_Parser::getParsedValue($this, $valor, $def['type']);
-					}
+					$values[] = 'NULL';
+					
+				} else if(is_null($val)) {
+					$values[] = 'NULL';
+					
 				} else {
-					$valor = Lumine_Parser::truncateValue($def, $val->$def['linkOn']);
+					$valor = Lumine_Parser::truncateValue($def, $valor);
 					$values[] = Lumine_Parser::getParsedValue($this, $valor, $def['type']);
 				}
+			} else {
+				$valor = Lumine_Parser::truncateValue($def, $val->$def['linkOn']);
+				$values[] = Lumine_Parser::getParsedValue($this, $valor, $def['type']);
+			}
 				
 		}
-			//continue;
-		//}
 		
 		
 		if( empty($values) )

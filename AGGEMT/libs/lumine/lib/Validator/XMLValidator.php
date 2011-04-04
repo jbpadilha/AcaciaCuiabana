@@ -224,6 +224,45 @@ class Lumine_Validator_XMLValidator
 						case 'requiredEmail':
 							$res = Lumine_Util::validateEmail( $val );
 						break;
+						
+						//Verifica se e uma data
+						case 'requiredDate':
+							if( ! preg_match('@^((\d{2}\/\d{2}\/\d{4})|(\d{4}-\d{2}-\d{2}))$@', $val, $reg)  ) {
+								$res = false;
+							
+							// se digitou no formato com barras
+							} else if( !empty($reg[2]) ) {
+								list($dia,$mes,$ano) = explode('/', $reg[2]);
+								
+								// se nao for formato brasileiro e norte-americano
+								if( !checkdate($mes,$dia,$ano) && !checkdate($dia,$mes,$ano) ) {
+									$res = false;
+								}
+							// se digitou no formato ISO
+							} else if( !empty($reg[3]) ) {
+								list($ano,$mes,$dia) = explode('-', $reg[3]);
+								
+								// se for uma data valida
+								if( !checkdate($mes,$dia,$ano) ) {
+									$res = false;
+								}
+							} else {
+								$res = true;
+							}
+							
+						break;
+						
+						//Verifica se e CPF
+						case 'requiredCpf':
+							$res = ValidateCPF::execute($val);
+						break;
+							
+						//Verifica se e CNPJ
+						case 'requiredCnpj':
+							$res = ValidateCNPJ::execute($val);
+						break;
+						
+						
 						case 'unique':
 							$res = $this->validateUnique( $val, $fieldname );
 						break;
