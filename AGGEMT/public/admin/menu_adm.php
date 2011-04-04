@@ -10,6 +10,7 @@
 				<li><a href="javascript:void(0);" onclick="carregaPagina('noticiaAdm.php','conteudo');"><span class="l" > </span><span class="r"> </span><span class="t">Notícias</span></a></li>
 				<li><a href="javascript:void(0);" onclick="carregaPagina('anexosAdm.php','conteudo');"><span class="l"> </span><span class="r"> </span><span class="t">Anexos</span></a></li>
 				<li><a href="javascript:void(0);" onclick="carregaPagina('usuariosAdm.php','conteudo');"><span class="l"> </span><span class="r"> </span><span class="t">Usuários</span></a></li>
+				<li><a href="javascript:void(0);" onclick="document.location='../../application/recebePostGet.php?sair=sim'"><span class="l"> </span><span class="r"> </span><span class="t">Sair</span></a></li>
 			</ul>
 		</div>
 	</div>

@@ -11,8 +11,8 @@ header("Content-Type: text/html; charset=UTF-8",true);
 		<link rel="stylesheet" href="../style.css" type="text/css" media="screen" />
 		<!--[if IE 6]><link rel="stylesheet" href="../style.ie6.css" type="text/css" media="screen" /><![endif]-->
 		<!--[if IE 7]><link rel="stylesheet" href="../style.ie7.css" type="text/css" media="screen" /><![endif]-->
-		<script type="text/javascript" src="../jquery.js"></script>
-		<script type="text/javascript" src="../script.js"></script>
+		<script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/script.js"></script>
 	</head>
 	<body>
 		<div id="art-main">
@@ -50,6 +50,8 @@ header("Content-Type: text/html; charset=UTF-8",true);
 											<div class="art-postmetadataheader">
 												<h2 class="art-postheader"><img src="../images/postheadericon.png" width="19" height="17" alt="" />Administração - Sistema AGGE-MT</h2>
 											</div>
+											<div id="erros" class="erros"></div>
+	  										<div id="sucesso" class="sucesso"></div>
 											<div class="art-postcontent">
 												<p>Entre com seu usuário e senha.</p>
 												<form name="form" action="../../application/recebePostGet.php" method="post">
@@ -95,5 +97,8 @@ header("Content-Type: text/html; charset=UTF-8",true);
 			<div class="cleared"></div>
 			<p class="art-page-footer">Powered by <a href="http://www.joaopadilha.com/">JPadilha</a></p>
 		</div>
+		<?php 
+		include 'mensagensErroSucesso.php';
+		?>
 	</body>
 </html>
