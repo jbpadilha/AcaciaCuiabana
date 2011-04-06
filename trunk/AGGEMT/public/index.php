@@ -10,12 +10,11 @@
 		<link rel="stylesheet" href="./style.css" type="text/css" media="screen" />
 		<!--[if IE 6]><link rel="stylesheet" href="./style.ie6.css" type="text/css" media="screen" /><![endif]-->
 		<!--[if IE 7]><link rel="stylesheet" href="./style.ie7.css" type="text/css" media="screen" /><![endif]-->
-		<script type="text/javascript" src="./jquery.js"></script>
-		<script type="text/javascript" src="./script.js"></script>
+		<script type="text/javascript" src="./js/jquery.js"></script>
+		<script type="text/javascript" src="./js/script.js"></script>
 		<script type="text/javascript">
-			function carregaPagina(url,id) {
-				$( '#erros' ).html( '' );
-				$( '#sucesso' ).html( '' ); 
+			function carregaPagina(url,id) { 
+				$('#noticiaLista').html('');
 			    $("div#"+id).html("<div aligh='center'><font color=\"#FF0000\">Carregando ...</font>  <img src='images/loading.gif' align='top' alt='aguarde' /></div>");
 			            $.get(url,{ }
 			            ,function(retorno){$("#"+id).html(retorno)});
@@ -92,12 +91,17 @@
 												$agenda = new Agenda();
 												$agenda->reset();
 												$agenda->limit(2);
+												$agenda->where("dataagenda > now()");
 												if($agenda->find())
 												{
 													while ($agenda->fetch())
 													{
 														echo "<p>{$agenda->getDataAgendaFormatado()} - {$agenda->getTituloagenda()}</p>"; 
 													}
+												}
+												else
+												{
+													echo "Não existem eventos cadastrados";
 												}
 												?>
 												<div class="cleared"><a href="javascript:void(0);" onclick="carregaPagina('agenda.php','conteudo')">Veja mais</a> </div>
@@ -174,9 +178,45 @@
 								<div class="art-post">
 									<div class="art-post-body">
 										<div class="art-post-inner art-article" id="conteudo">
-											
+											<div class="art-postmetadataheader">
+												<h2 class="art-postheader"><img src="./images/postheadericon.png" width="19" height="17" alt="" />Notícias</h2>
+											</div>
+											<div class="art-postcontent">
+												<?php 
+												$noticiaDestaque = new Noticias();
+												$noticiaDestaque->setDestaque(1);
+												if($noticiaDestaque->find()>0)
+												{
+													while($noticiaDestaque->fetch())
+													{
+														if($noticiaDestaque->getImagemnoticia())
+															echo "<img src=\"./images/{$noticiaDestaque->getImagemnoticia()}\" style=\"float:left\" width=\"300\" height=\"200\" />";
+														echo "<p>".$noticiaDestaque->getDatanoticiaFormatado()." - ".$noticiaDestaque->getTitulonoticia()."</p>";
+														echo substr ($noticiaDestaque->getDescricaonoticia(), 0, 200);
+													}
+												}
+												?>
+											</div>
 										</div>
 										<div class="cleared"></div>
+										<div id="noticiaLista">
+											<?php 
+											$noticias = new Noticias();
+											$noticias->reset();
+											$noticias->limit(4);
+											$noticias->setStatusnoticia(1);
+											if($noticias->find())
+											{
+												echo '<ul>';
+												while ($noticias->fetch())
+												{
+													echo '<li><a href="javascript:void(0);" onClick="carregaPagina(\'noticia.php?idnoticia='.$noticias->getIdnoticia().'\',\'conteudo\')" target="_blank">'.$noticias->getDatanoticiaFormatado()." - ".$noticias->getTitulonoticia().'</a></li>';
+												}
+												echo '</ul>';
+											}
+											?>
+											<a href="javascript:void(0);" onclick="carregaPagina('noticia.php','conteudo')">Veja mais</a>
+											</div>
 									</div>
 								</div>
 								<div class="cleared"></div>
@@ -201,6 +241,7 @@
 			</div>
 			<div class="cleared"></div>
 			<p class="art-page-footer">Powered by <a href="http://www.joaopadilha.com/">JPadilha</a></p>
+			<p class="art-page-footer"><a href="admin/index.php">Administração</a></p>
 		</div>
 	</body>
 </html>

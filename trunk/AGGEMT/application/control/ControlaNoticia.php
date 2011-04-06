@@ -113,6 +113,7 @@ class ControlaNoticia extends ControlGeral {
 	public function cadastrar(Noticias $noticias)
 	{
 		try {
+			$this->garantirUmaNoticiaDestaque($noticias);
 			$noticias->save();
 		}
 		catch (Exception $e)
@@ -143,6 +144,7 @@ class ControlaNoticia extends ControlGeral {
 	{
 		try
 		{
+			$this->garantirUmaNoticiaDestaque($noticias);
 			$noticias->update();
 		}
 		catch (Exception $e)
@@ -177,10 +179,12 @@ class ControlaNoticia extends ControlGeral {
 					    $upload->set("file_perm",0444); // Permission for uploaded file. 0444 (Read only).
 					    $upload->set("dst_dir",PATH_PROJETO_IMAGEM_UPLOAD."noticias"); // Destination directory for uploaded files.
 					    $result = $upload->moveFileToDestination(); // $result = bool (true/false). Succeed or not.
-					    $noticias->setImagemnoticia("noticias/".$upload->succeed_files_track[0]["new_file_name"]);
 					    if(!$result)
 					    {
 					    	throw new Exception($upload->error);
+					    }
+					    else {
+					    	$noticias->setImagemnoticia("noticias/".$upload->succeed_files_track[0]["new_file_name"]);
 					    }
 					}
 			  }	
@@ -191,6 +195,23 @@ class ControlaNoticia extends ControlGeral {
 				$this->MENSAGEM_ERRO[] = Mensagens::getMensagem("ERRO_ARQUIVO_NAO_ENVIADO");
 			}
 		} 
+	}
+	
+	public function garantirUmaNoticiaDestaque(Noticias $noticias)
+	{
+		if($noticias->getDestaque() == 1)
+		{
+			$noticiasPesquisa = new Noticias();
+			$noticiasPesquisa->setDestaque(1);
+			if($noticiasPesquisa->find()>0)
+			{
+				while($noticiasPesquisa->fetch())
+				{
+					$noticiasPesquisa->setDestaque(0);
+					$noticiasPesquisa->update();
+				}
+			}
+		}
 	}
 
 }
