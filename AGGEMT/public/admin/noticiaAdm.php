@@ -58,13 +58,14 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
 			<td>id</td>
 			<td>Titulo</td>
 			<td>Data da Notícia</td>
+			<td>Destaque</td>
+			<td>Status</td>
 			<td colspan="2">Ações</td>
 		</tr>
 		<?php  
 		$noticia = null;
 		$noticia = new Noticias();
 		$noticia->reset();
-		$noticia->limit();
 		if($noticia->find()>0)
 		{
 			while($noticia->fetch())
@@ -74,6 +75,8 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
 				<td><?=$noticia->getIdnoticia()?></td>
 				<td><?=$noticia->getTitulonoticia()?></td>
 				<td><?=$noticia->getDatanoticiaFormatado()?></td>
+				<td><?=($noticia->getDestaque()) ? "Sim": "Não"?></td>
+				<td><?=$noticia->getDescricaoStatusNoticia()?></td>
 				<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$noticia->getIdnoticia() ?>)"><img src="../images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
   				<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$noticia->getIdnoticia() ?>)"><img src="../images/botao_apagar.gif" width="16" height="16" border="0" /></a></td>
 			</tr>
@@ -156,8 +159,22 @@ if(isset($_GET['idnoticia']))
 		}
 		?>
 		<tr>
-			<td valign="top">Destaque?</td>
-			<td valign="top"><input type="checkbox" id="destaque" name="destaque" <?=($noticia->getDestaque())?"checked=\"checked\"":""?>/></td>
+			<td valign="top">Destaque? (ao selecionar a notícia em destaque, somente essa será em destaque)</td>
+			<td valign="top">
+				<select id="destaque" name="destaque">
+					<option value="0" <?=($noticia->getDestaque() == 0) ? "selected":""?>>Não</option>
+					<option value="1" <?=($noticia->getDestaque() == 1) ? "selected":""?>>Sim</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">Status</td>
+			<td valign="top">
+				<select id="statusnoticia" name="statusnoticia">
+					<option value="0" <?=($noticia->getStatusnoticia() == 0) ? "selected":""?>>Inativo</option>
+					<option value="1" <?=($noticia->getStatusnoticia() == 1) ? "selected":""?>>Ativo</option>
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="3">

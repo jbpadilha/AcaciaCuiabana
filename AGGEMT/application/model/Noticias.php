@@ -11,6 +11,7 @@ class Noticias extends Lumine_Base {
 	public $datanoticia = null;
 	public $imagemnoticia = null;
 	public $destaque = null;
+	public $statusnoticia = null;
 	
 	/**
      * Inicia os valores da classe
@@ -24,12 +25,14 @@ class Noticias extends Lumine_Base {
         $this->_addField("titulonoticia", "titulonoticia", "varchar", 255, array('notnull' => true));
         $this->_addField('descricaonoticia', 'descricaonoticia', 'text', null, array('notnull' => false));
         $this->_addField("datanoticia", "datanoticia", "datetime", null, array('notnull' => true));
-        $this->_addField("destaque", "destaque", "varchar", 1, array('notnull' => true));
+        $this->_addField("imagemnoticia", "imagemnoticia", "varchar", 255, array('notnull' => false));
+        $this->_addField("destaque", "destaque", "int", 1, array('notnull' => true));
+        $this->_addField("statusnoticia", "statusnoticia", "int", 1, array('notnull' => true));
     }
 
     /**
      * Recupera um objeto estaticamente
-     * @author Jo�o Batista Padilha e Silva
+     * @author João Batista Padilha e Silva
      * @return Pessoa
      */
     public static function staticGet($pk, $pkValue = null)
@@ -161,6 +164,40 @@ class Noticias extends Lumine_Base {
 	 */
 	public function setDestaque($destaque) {
 		$this->destaque = $destaque;
+	}
+	
+	
+
+	/**
+	 * @return the $statusnoticia
+	 */
+	public function getStatusnoticia() {
+		return $this->statusnoticia;
+	}
+
+	/**
+	 * @param field_type $statusnoticia
+	 */
+	public function setStatusnoticia($statusnoticia) {
+		$this->statusnoticia = $statusnoticia;
+	}
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function getDescricaoStatusNoticia()
+	{
+		if($this->statusnoticia != null)
+		{
+			if($this->statusnoticia == 1)
+				return "Ativo";
+			else 
+				return "Inativo";
+		}
+		else {
+			return "";
+		}
 	}
 
 	public function validate(){
