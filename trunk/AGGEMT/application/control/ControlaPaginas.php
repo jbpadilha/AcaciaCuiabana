@@ -1,16 +1,15 @@
 <?php
 require_once ('ControlGeral.php');
 class ControlaPaginas extends ControlGeral {
-public function permiteAcesso($grupo) {
-		/*if($grupo == GruposUsuarios::$GRUPO_ADMIN)
+	public function permiteAcesso($grupo) {
+		if($grupo == GruposUsuarios::$GRUPO_ADMIN)
 		{
 			return true;
 		}
 		else
 		{
 			return false;
-		}*/
-		return true;
+		}
 	}
 	
 	public function get($GET) {

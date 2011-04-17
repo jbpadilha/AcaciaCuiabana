@@ -80,7 +80,14 @@ class ControlaMenu extends ControlGeral {
 	}
 	
 	public function permiteAcesso($grupo) {
-		return true; 
+		if($grupo == GruposUsuarios::$GRUPO_ADMIN)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	private function preencheObjeto(Menu $menu, $POST)

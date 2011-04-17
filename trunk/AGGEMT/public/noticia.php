@@ -12,7 +12,7 @@ if(isset($_GET['idnoticia']))
 	$noticiasPesquisa->setIdnoticia($_GET['idnoticia']);
 	$noticiasPesquisa->find(true);
 	if($noticiasPesquisa->getImagemnoticia() != null)
-		echo "<img src=\"./images/{$noticiasPesquisa->getImagemnoticia()}\" style=\"float:left\" width=\"300\" height=\"200\" />";
+		echo "<img src=\"images/{$noticiasPesquisa->getImagemnoticia()}\" style=\"float:left\" width=\"300\" height=\"200\" />";
 	echo "<p>".$noticiasPesquisa->getDatanoticiaFormatado()." - ".$noticiasPesquisa->getTitulonoticia()."</p>";
 	echo $noticiasPesquisa->getDescricaonoticia(); 
 }

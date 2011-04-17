@@ -208,14 +208,14 @@ class Upload
     $this->fld_name             = "";
     $this->max_file_size        = 40960; //bytes.
     $this->msg                  = array (
-                                  "0" => "File uploaded successfully!",
-                                  "1" => "Extension not allowed or wrong file type!",
-                                  "2" => "File exceed size limit!",
-                                  "3" => "Fail trying to create directory!",
-                                  "4" => "Wrong directory permission!",          
-                                  "5" => "Unexpected failure!",
-                                  "6" => "File not found!",
-                                  "7" => "File already exists in directory!"
+                                  "0" => "Arquivo enviado com sucesso!",
+                                  "1" => "Extensão do arquivo não permitida!",
+                                  "2" => "Tamanho do arquivo não permitido!",
+                                  "3" => "falha ao tentar criar diretório!",
+                                  "4" => "Diretório incorreto!",          
+                                  "5" => "Erro inexperado!",
+                                  "6" => "Arquivo não encontrado!",
+                                  "7" => "Arquivo já existe no diretório!"
                                   );
     $this->error_type           = 0; // error code.
     $this->randon_name          = TRUE;

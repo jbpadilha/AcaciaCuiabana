@@ -5,15 +5,14 @@ require_once ('ControlGeral.php');
 class ControlaAgenda extends ControlGeral {
 	
 	public function permiteAcesso($grupo) {
-		/*if($grupo == GruposUsuarios::$GRUPO_ADMIN)
+		if($grupo == GruposUsuarios::$GRUPO_ADMIN)
 		{
 			return true;
 		}
 		else
 		{
 			return false;
-		}*/
-		return true;
+		}
 	}
 	
 	public function get($GET) {

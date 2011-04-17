@@ -6,7 +6,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
-		<title>Notícias</title>
+		<title>AGEEMT - Associação de Gestores Governamentais do estado de Mato Grosso</title>
 		<link rel="stylesheet" href="./style.css" type="text/css" media="screen" />
 		<!--[if IE 6]><link rel="stylesheet" href="./style.ie6.css" type="text/css" media="screen" /><![endif]-->
 		<!--[if IE 7]><link rel="stylesheet" href="./style.ie7.css" type="text/css" media="screen" /><![endif]-->
@@ -62,19 +62,6 @@
 							<div class="art-layout-cell art-sidebar1">
 								<div class="art-vmenublock">
 									<div class="art-vmenublock-body">
-										<div class="art-vmenublockheader">
-											<div class="l"></div>
-											<div class="r"></div>
-											<h3 class="t">Menu</h3>
-										</div>
-										<div class="art-vmenublockcontent">
-											<div class="art-vmenublockcontent-body">
-												<?php 
-												include 'menuVertical.php';
-												?>
-												<div class="cleared"></div>
-											</div>
-										</div>
 										<div class="cleared"></div>
 									</div>
 								</div>
@@ -89,6 +76,7 @@
 											<div class="art-blockcontent-body">`
 												<?php 
 												$agenda = new Agenda();
+												$agenda->apagaAgendaPassada();
 												$agenda->reset();
 												$agenda->limit(2);
 												$agenda->where("dataagenda > now()");
@@ -123,17 +111,49 @@
 												<?php 
 												$anexos = new Anexos();
 												$anexos->reset();
+												$anexos->setTipoanexo(0);
 												$anexos->limit(2);
 												if($anexos->find())
 												{
 													echo '<ul>';
 													while ($anexos->fetch())
 													{
-														echo '<li><a href="'.PROJETO_CONTEXT.'images/'.$anexos->getCaminhoanexo().'" target="_blank">'.$anexos->getNomeanexo().'</a></li>';
+														echo '<li><a href="'.PROJETO_CONTEXT.'public/images/'.$anexos->getCaminhoanexo().'" target="_blank">'.$anexos->getNomeanexo().'</a></li>';
 													}
 													echo '</ul>';
 												}
 												?>
+												</div>
+												<div class="cleared"></div>
+											</div>
+										</div>
+										<div class="cleared"></div>
+									</div>
+								</div>
+								<div class="art-block">
+									<div class="art-block-body">
+										<div class="art-blockheader">
+											<div class="l"></div>
+											<div class="r"></div>
+											<h3 class="t">Publicidade</h3>
+										</div>
+										<div class="art-blockcontent">
+											<div class="art-blockcontent-body">
+												<div>
+												<?php 
+												$banners = new Banners();
+												$banners->reset();
+												$banners->setStatusbanner(1);
+												if($banners->find())
+												{
+													while ($banners->fetch())
+													{
+														echo '<img src="'.PROJETO_CONTEXT.'public/images/'.$banners->getCaminhobanner().'" alt="" />';
+														break;
+													}
+												}
+												?>
+												
 												</div>
 												<div class="cleared"></div>
 											</div>
@@ -160,7 +180,16 @@
 														echo '<ul>';
 														while ($linksuteis->fetch())
 														{
-															echo '<li><a href="'.$linksuteis->getLink().'" target="_blank">'.$linksuteis->getDescricaolinksuteis().'</a></li>';
+															if($linksuteis->getLink() != null)
+															{
+																echo '<li><a href="'.$linksuteis->getLink().'" target="_blank">'.$linksuteis->getDescricaolinksuteis().'</a></li>';
+															}
+															elseif($linksuteis->getIdanexo()!=null){
+																$anexosLink = new Anexos();
+																$anexosLink->setIdanexo($linksuteis->getIdanexo());
+																$anexosLink->find(true);
+																echo '<li><a href="imagens/'.$anexosLink->getCaminhoanexo().'" target="_blank">'.$linksuteis->getDescricaolinksuteis().'</a></li>';
+															}
 														}
 														echo '</ul>';
 													}
@@ -177,7 +206,7 @@
 							<div class="art-layout-cell art-content">
 								<div class="art-post">
 									<div class="art-post-body">
-										<div class="art-post-inner art-article" id="conteudo">
+										<div class="art-post-inner art-article" id="conteudo" style="overflow: auto;">
 											<div class="art-postmetadataheader">
 												<h2 class="art-postheader"><img src="./images/postheadericon.png" width="19" height="17" alt="" />Notícias</h2>
 											</div>
@@ -190,7 +219,7 @@
 													while($noticiaDestaque->fetch())
 													{
 														if($noticiaDestaque->getImagemnoticia())
-															echo "<img src=\"./images/{$noticiaDestaque->getImagemnoticia()}\" style=\"float:left\" width=\"300\" height=\"200\" />";
+															echo "<img src=\"images/{$noticiaDestaque->getImagemnoticia()}\" style=\"float:left\" width=\"300\" height=\"200\" />";
 														echo "<p>".$noticiaDestaque->getDatanoticiaFormatado()." - ".$noticiaDestaque->getTitulonoticia()."</p>";
 														echo substr ($noticiaDestaque->getDescricaonoticia(), 0, 200);
 													}
@@ -241,7 +270,7 @@
 			</div>
 			<div class="cleared"></div>
 			<p class="art-page-footer">Powered by <a href="http://www.joaopadilha.com/">JPadilha</a></p>
-			<p class="art-page-footer"><a href="admin/index.php">Administração</a></p>
+			<p class="art-page-footer"><a href="admin/index.php" target="_blank">Central do Associado</a></p>
 		</div>
 	</body>
 </html>

@@ -2,23 +2,38 @@
 
 require_once ('ControlGeral.php');
 
-class ControlaSubMenu extends ControlGeral {
+class ControlaEnquete extends ControlGeral {
+	
+	public function permiteAcesso($grupo) {
+		if($grupo == GruposUsuarios::$GRUPO_ADMIN)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public function get($GET) {
+		
+	}
 	
 	public function post($POST) {
-		$submenu = null;
+		$enquete = null;
 		$this->MENSAGEM_ERRO = Array();
 		$this->MENSAGEM_SUCESSO = Array();
 		try {
 			$function = (isset($POST['funcao']))?$POST['funcao']:null;
 			if(!ProjetoUtil::verificaBrancoNulo($function))
 			{
-				$submenu = new Submenu();
+				$enquete = new Enquete();
 				if($POST['funcao'] == "cadastrar")
 				{
-					$this->preencheObjeto($submenu, $POST);
+					$this->preencheObjeto($enquete, $POST);
 					if(count($this->MENSAGEM_ERRO)<=0)
 					{
-						$this->cadastrar($submenu);						
+						$this->cadastrar($enquete);						
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO");
 						header("Location:../public/admin/conteudoInicial.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
@@ -29,11 +44,11 @@ class ControlaSubMenu extends ControlGeral {
 				}
 				elseif($POST['funcao'] == "deletar")
 				{
-					$idsubmenu = (isset($POST['idsubmenu']))?$POST['idsubmenu']:null;
-					if(!ProjetoUtil::verificaBrancoNulo($idsubmenu))
+					$idenquete = (isset($POST['idenquete']))?$POST['idenquete']:null;
+					if(!ProjetoUtil::verificaBrancoNulo($idenquete))
 					{
-						$submenu->setIdsubmenu($idsubmenu);
-						$this->deletar($submenu);
+						$enquete->setIdenquete($idenquete);
+						$this->deletar($enquete);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
 						header("Location:../public/admin/conteudoInicial.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
@@ -45,15 +60,15 @@ class ControlaSubMenu extends ControlGeral {
 				}
 				elseif($POST['funcao'] == "alterar")
 				{
-					$idsubmenu = (isset($POST['idsubmenu']))?$POST['idsubmenu']:null;
-					if(!ProjetoUtil::verificaBrancoNulo($idsubmenu))
+					$idenquete = (isset($POST['idenquete']))?$POST['idenquete']:null;
+					if(!ProjetoUtil::verificaBrancoNulo($idagenda))
 					{
-						$submenu->setIdsubmenu($idsubmenu);
+						$enquete->setIdagenda($idenquete);
 					}
-					$this->preencheObjeto($submenu, $POST);
+					$this->preencheObjeto($enquete, $POST);
 					if(count($this->MENSAGEM_ERRO)<=0)
 					{
-						$this->alterar($submenu);
+						$this->alterar($enquete);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_ALTERAR"); 
 						header("Location:../public/admin/conteudoInicial.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
@@ -75,37 +90,16 @@ class ControlaSubMenu extends ControlGeral {
 		}
 	}
 	
-	public function get($GET) {
-	
-	}
-	
-	public function permiteAcesso($grupo) {
-		if($grupo == GruposUsuarios::$GRUPO_ADMIN)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
-	private function preencheObjeto(Submenu $submenu, $POST)
+	private function preencheObjeto(Enquete $enquete, $POST)
 	{
-		$submenu->_setFrom($POST);
-		if($submenu->getIdanexo() == "")
-			$submenu->setIdanexo(null);
-		if($submenu->getIdpagina() == "")
-			$submenu->setIdpagina(null);
-		if($submenu->getIdmenu() == "")
-			$submenu->setIdmenu(null);
-		$this->MENSAGEM_ERRO = array_merge($this->MENSAGEM_ERRO, $submenu->validate());
+		$enquete->_setFrom($POST);
+		$this->MENSAGEM_ERRO = array_merge($this->MENSAGEM_ERRO, $enquete->validate());
 	}
 	
-	public function cadastrar(Submenu $submenu)
+	public function cadastrar(Enquete $enquete)
 	{
 		try {
-			$submenu->save();
+			$enquete->save();
 		}
 		catch (Exception $e)
 		{
@@ -113,12 +107,12 @@ class ControlaSubMenu extends ControlGeral {
 		}
 	}
 	
-	public function deletar(Submenu $submenu)
+	public function deletar(Enquete $enquete)
 	{
 		try {
-			if($submenu->getIdsubmenu() != null)
+			if($enquete->getIdenquete() != null)
 			{
-				$submenu->delete();
+				$enquete->delete();
 			}
 			else
 			{
@@ -131,17 +125,18 @@ class ControlaSubMenu extends ControlGeral {
 		}
 	}
 	
-	public function alterar(Submenu $submenu)
+	public function alterar(Enquete $enquete)
 	{
 		try
 		{
-			$submenu->update();
+			$enquete->update();
 		}
 		catch (Exception $e)
 		{
 			throw new Exception(Mensagens::getMensagem("ERRO_ACESSAR_FUNCIONALIDADE").$e->getMessage());
 		}
 	}
+
 }
 
 ?>

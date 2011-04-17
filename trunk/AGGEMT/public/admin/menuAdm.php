@@ -64,8 +64,8 @@ include '../carregamentoInicial.php';
 			<tr>
 				<td><?=$menu->getIdmenu()?></td>
 				<td><?=$menu->getDescricaomenu()?></td>
-				<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$menu->getIdmenu() ?>)"><img src="../images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
-  				<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$menu->getIdmenu() ?>)"><img src="../images/botao_apagar.gif" width="16" height="16" border="0" /></a></td>
+				<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$menu->getIdmenu() ?>)"><img src="../images/botao_editar.gif" width="16" height="16" border="0" alt="Alterar"/></a></td>
+  				<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$menu->getIdmenu() ?>)"><img src="../images/botao_apagar.gif" width="16" height="16" border="0" alt="Deletar"/></a></td>
 			</tr>
 			<?
 			}

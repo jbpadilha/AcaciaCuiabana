@@ -6,10 +6,10 @@
  * @author João Batista Padilha e Silva --- joao.padilha@globo.com
  * @since 23/11/2010
  */
-define("PATH_PROJETO", $_SERVER['DOCUMENT_ROOT']."/AGGEMT/");
-define("PATH_PROJETO_APPLICATION", $_SERVER['DOCUMENT_ROOT']."/AGGEMT/application/");
-define("PATH_PROJETO_IMAGEM_UPLOAD", "C:/Paginas_Sistemas/AGGEMT/public/images/");
-define("PROJETO_CONTEXT", "http://localhost/AGGEMT/");
+define("PATH_PROJETO", $_SERVER['DOCUMENT_ROOT']."/");
+define("PATH_PROJETO_APPLICATION", $_SERVER['DOCUMENT_ROOT']."/application/");
+define("PATH_PROJETO_IMAGEM_UPLOAD", "/home/joaopadilha/aggemt.joaopadilha.com/public/images/");
+define("PROJETO_CONTEXT", "http://aggemt.joaopadilha.com/");
 require_once 'ProjetoUtil.php';
 require_once 'GruposUsuarios.php';
 require_once 'control/ControlGeral.php';

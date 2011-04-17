@@ -21,7 +21,7 @@ include '../carregamentoInicial.php';
       }
       function cadastra()
       {
-      	if ( $('#descricaosubmenu').val() == '') {
+      	if ( $('#descricaosubmenu').val() == '' || $('#idmenu').val() == '') {
       		alert('Todos campos obrigatórios devem ser preenchidos!');
       		return false;
       	} else {
@@ -66,8 +66,8 @@ include '../carregamentoInicial.php';
 				<td><?=$submenu->getIdsubmenu()?></td>
 				<td><?=$submenu->getDescricaosubmenu()?></td>
 				<td><?=$submenu->getMenu()->getDescricaomenu()?></td>
-				<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$submenu->getIdsubmenu() ?>)"><img src="../images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
-  				<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$submenu->getIdsubmenu() ?>)"><img src="../images/botao_apagar.gif" width="16" height="16" border="0" /></a></td>
+				<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$submenu->getIdsubmenu() ?>)"><img src="../images/botao_editar.gif" width="16" height="16" border="0" alt="Alterar"/></a></td>
+  				<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$submenu->getIdsubmenu() ?>)"><img src="../images/botao_apagar.gif" width="16" height="16" border="0" alt="Deletar"/></a></td>
 			</tr>
 			<?
 			}

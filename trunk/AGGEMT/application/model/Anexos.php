@@ -9,6 +9,7 @@ class Anexos extends Lumine_Base {
     public $nomeanexo = null;
     public $caminhoanexo = null;
     public $linkanexo = null;
+    public $tipoanexo = 0;
     
 	/**
      * Inicia os valores da classe
@@ -22,8 +23,10 @@ class Anexos extends Lumine_Base {
         $this->_addField("nomeanexo", "nomeanexo", "varchar", 255, array('notnull' => true));
         $this->_addField('caminhoanexo', 'caminhoanexo', 'varchar', 255, array('notnull' => false));
         $this->_addField("linkanexo", "linkanexo", "varchar", 255, array('notnull' => false));
+        $this->_addField("tipoanexo", "tipoanexo", "int", 1, array('notnull' => false));
         
         $this->_addForeignRelation('submenu', self::ONE_TO_MANY, 'Submenu', 'idanexo', null, null, null);
+        $this->_addForeignRelation('linkuteis', self::ONE_TO_MANY, 'Linksuteis', 'idanexo', null, null, null);
     }
 
     /**
@@ -101,6 +104,20 @@ class Anexos extends Lumine_Base {
 	 */
 	public function setLinkanexo($linkanexo) {
 		$this->linkanexo = $linkanexo;
+	}
+	
+	/**
+	 * @return the $tipoanexo
+	 */
+	public function getTipoanexo() {
+		return $this->tipoanexo;
+	}
+
+	/**
+	 * @param field_type $tipoanexo
+	 */
+	public function setTipoanexo($tipoanexo) {
+		$this->tipoanexo = $tipoanexo;
 	}
 
 	public function validate(){
