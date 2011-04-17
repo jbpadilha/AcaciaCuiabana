@@ -2,24 +2,24 @@
 
 require_once ('ControlGeral.php');
 
-class ControlaAnexos extends ControlGeral {
+class ControlaBanners extends ControlGeral {
 	
-	public function post($POST, $FILES = null) {
-		$anexos = null;
+public function post($POST, $FILES = null) {
+		$banners = null;
 		$this->MENSAGEM_ERRO = Array();
 		$this->MENSAGEM_SUCESSO = Array();
 		try {
 			$function = (isset($POST['funcao']))?$POST['funcao']:null;
 			if(!ProjetoUtil::verificaBrancoNulo($function))
 			{
-				$anexos = new Anexos();
+				$banners = new Banners();
 				if($POST['funcao'] == "cadastrar")
 				{
-					$this->preencheObjeto($anexos, $POST, $FILES);
-					$this->uploadArquivo($anexos,$FILES);
+					$this->preencheObjeto($banners, $POST, $FILES);
+					$this->uploadArquivo($banners,$FILES);
 					if(count($this->MENSAGEM_ERRO)<=0)
 					{
-						$this->cadastrar($anexos);						
+						$this->cadastrar($banners);						
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_CADASTRO");
 						header("Location:".PROJETO_CONTEXT."public/admin/inicio.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
@@ -30,11 +30,19 @@ class ControlaAnexos extends ControlGeral {
 				}
 				elseif($POST['funcao'] == "deletar")
 				{
-					$idanexo = (isset($POST['idanexo']))?$POST['idanexo']:null;
+					$idbanner = (isset($POST['idbanner']))?$POST['idbanner']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($idanexo))
 					{
-						$anexos->setIdanexo($idanexo);
-						$this->deletar($anexos);
+						$banners->setIdbanner($idbanner);
+						//Teste Img Notícia existente
+						$bannersArq = new Banners();
+						$bannersArq->setIdbanner($idbanner);
+						$bannersArq->find();
+						if($bannersArq->getCaminhobanner()!=null)
+						{
+							@unlink(PATH_PROJETO_IMAGEM_UPLOAD.$bannersArq->getCaminhobanner());
+						}
+						$this->deletar($banners);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
 						header("Location:../public/admin/conteudoInicial.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
@@ -46,24 +54,24 @@ class ControlaAnexos extends ControlGeral {
 				}
 				elseif($POST['funcao'] == "alterar")
 				{
-					$idanexo = (isset($POST['idanexo']))?$POST['idanexo']:null;
+					$idbanner = (isset($POST['idbanner']))?$POST['idbanner']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($idanexo))
 					{
-						$anexos->setIdanexo($idanexo);
+						$banners->setIdbanner($idbanner);
 						//Teste Img Notícia existente
-						$anexosArq = new Anexos();
-						$anexosArq->setIdanexo($idanexo);
-						$anexosArq->find();
-						if($anexosArq->getCaminhoanexo()!=null)
+						$bannersArq = new Banners();
+						$bannersArq->setIdbanner($idbanner);
+						$bannersArq->find();
+						if($bannersArq->getCaminhobanner()!=null)
 						{
-							@unlink(PATH_PROJETO_IMAGEM_UPLOAD.$anexosArq->getCaminhoanexo());
+							@unlink(PATH_PROJETO_IMAGEM_UPLOAD.$bannersArq->getCaminhobanner());
 						}
 					}
-					$this->preencheObjeto($anexos, $POST, $FILES);
-					$this->uploadArquivo($anexos,$FILES);
+					$this->preencheObjeto($banners, $POST, $FILES);
+					$this->uploadArquivo($banners,$FILES);
 					if(count($this->MENSAGEM_ERRO)<=0)
 					{
-						$this->alterar($anexos);
+						$this->alterar($banners);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_ALTERAR"); 
 						header("Location:".PROJETO_CONTEXT."public/admin/inicio.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}
@@ -100,16 +108,16 @@ class ControlaAnexos extends ControlGeral {
 		}
 	}
 	
-	private function preencheObjeto(Anexos $anexos, $POST, $FILES)
+	private function preencheObjeto(Banners $banners, $POST, $FILES)
 	{
-		$anexos->_setFrom($POST);
-		$this->MENSAGEM_ERRO = array_merge($this->MENSAGEM_ERRO, $anexos->validate());
+		$banners->_setFrom($POST);
+		$this->MENSAGEM_ERRO = array_merge($this->MENSAGEM_ERRO, $banners->validate());
 	}
 	
-	public function cadastrar(Anexos $anexos)
+	public function cadastrar(Banners $banners)
 	{
 		try {
-			$anexos->save();
+			$banners->save();
 		}
 		catch (Exception $e)
 		{
@@ -117,12 +125,12 @@ class ControlaAnexos extends ControlGeral {
 		}
 	}
 	
-	public function deletar(Anexos $anexos)
+	public function deletar(Banners $banners)
 	{
 		try {
-			if($anexos->getIdanexo() != null)
+			if($banners->getIdbanner() != null)
 			{
-				$anexos->delete();
+				$banners->delete();
 			}
 			else
 			{
@@ -135,11 +143,11 @@ class ControlaAnexos extends ControlGeral {
 		}
 	}
 	
-	public function alterar(Anexos $anexos)
+	public function alterar(Banners $banners)
 	{
 		try
 		{
-			$anexos->update();
+			$banners->update();
 		}
 		catch (Exception $e)
 		{
@@ -147,7 +155,7 @@ class ControlaAnexos extends ControlGeral {
 		}
 	}
 	
-	public function uploadArquivo(Anexos $anexos, $FILES)
+	public function uploadArquivo(Banners $banners, $FILES)
 	{
 		//Upload da Imagem
 		require_once(PATH_PROJETO_APPLICATION."Upload.php");
@@ -171,14 +179,14 @@ class ControlaAnexos extends ControlGeral {
 					    $upload->set("randon_name",TRUE); // Generate a unique name for uploaded file? bool(true/false).
 					    $upload->set("replace",FALSE); // Replace existent files or not? bool(true/false).
 					    $upload->set("file_perm",0444); // Permission for uploaded file. 0444 (Read only).
-					    $upload->set("dst_dir",PATH_PROJETO_IMAGEM_UPLOAD."anexos"); // Destination directory for uploaded files.
+					    $upload->set("dst_dir",PATH_PROJETO_IMAGEM_UPLOAD."banners"); // Destination directory for uploaded files.
 					    $result = $upload->moveFileToDestination(); // $result = bool (true/false). Succeed or not.
 					    if(!$result)
 					    {
 					    	throw new Exception($upload->msg[$upload->error_type]);
 					    }
 					    else {
-					    	$anexos->setCaminhoanexo("anexos/".$upload->succeed_files_track[0]["new_file_name"]);
+					    	$banners->setCaminhobanner("banners/".$upload->succeed_files_track[0]["new_file_name"]);
 					    }
 					}
 			  }	

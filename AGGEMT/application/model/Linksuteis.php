@@ -8,6 +8,7 @@ class Linksuteis extends Lumine_Base {
     public $idlinksuteis = null;
     public $descricaolinksuteis = null;
     public $link = null;
+    public $idanexo = null;
     
 	/**
      * Inicia os valores da classe
@@ -20,7 +21,7 @@ class Linksuteis extends Lumine_Base {
         $this->_addField("idlinksuteis", "idlinksuteis", "int", 11, array('primary' => true, 'notnull' => true, 'autoincrement' => true));
         $this->_addField("descricaolinksuteis", "descricaolinksuteis", "varchar", 255, array('notnull' => true));
         $this->_addField('link', 'link', 'varchar', 255, array('notnull' => true));
-        
+        $this->_addField('idanexo', 'idanexo', 'int', 11, array('notnull' => false, 'foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'RESTRICT', 'linkOn' => 'idanexo', 'class' => 'Anexos'));
     }
 
     /**
@@ -71,6 +72,20 @@ class Linksuteis extends Lumine_Base {
 	public function setIdlinksuteis($idlinksuteis) {
 		$this->idlinksuteis = $idlinksuteis;
 	}
+	
+	/**
+	 * @return the $idanexo
+	 */
+	public function getIdanexo() {
+		return $this->idanexo;
+	}
+
+	/**
+	 * @param field_type $idanexo
+	 */
+	public function setIdanexo($idanexo) {
+		$this->idanexo = $idanexo;
+	}
 
 	/**
 	 * @param field_type $descricaolinksuteis
@@ -93,7 +108,6 @@ class Linksuteis extends Lumine_Base {
 		
 		// adicionando as regras 
 		Lumine_Validator_PHPValidator::addValidation($this, 'descricaolinksuteis', Lumine_Validator::REQUIRED_STRING, 'Informe a descricao do link');
-		Lumine_Validator_PHPValidator::addValidation($this, 'link', Lumine_Validator::REQUIRED_STRING, 'Informe um link para um site');
 		
 		return parent::validate();
 	}

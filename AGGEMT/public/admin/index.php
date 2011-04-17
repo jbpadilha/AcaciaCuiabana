@@ -48,7 +48,7 @@ header("Content-Type: text/html; charset=UTF-8",true);
 									<div class="art-post-body">
 										<div class="art-post-inner art-article">
 											<div class="art-postmetadataheader">
-												<h2 class="art-postheader"><img src="../images/postheadericon.png" width="19" height="17" alt="" />Administração - Sistema AGGE-MT</h2>
+												<h2 class="art-postheader"><img src="../images/postheadericon.png" width="19" height="17" alt="" />Central do Associado - Sistema AGGE-MT</h2>
 											</div>
 											<div id="erros" class="erros"></div>
 	  										<div id="sucesso" class="sucesso"></div>

@@ -77,8 +77,8 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
 				<td><?=$noticia->getDatanoticiaFormatado()?></td>
 				<td><?=($noticia->getDestaque()) ? "Sim": "Não"?></td>
 				<td><?=$noticia->getDescricaoStatusNoticia()?></td>
-				<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$noticia->getIdnoticia() ?>)"><img src="../images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
-  				<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$noticia->getIdnoticia() ?>)"><img src="../images/botao_apagar.gif" width="16" height="16" border="0" /></a></td>
+				<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$noticia->getIdnoticia() ?>)"><img src="../images/botao_editar.gif" width="16" height="16" border="0" alt="Alterar"/></a></td>
+  				<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$noticia->getIdnoticia() ?>)"><img src="../images/botao_apagar.gif" width="16" height="16" border="0" alt="Deletar"/></a></td>
 			</tr>
 			<?
 			}

@@ -25,7 +25,7 @@ class Submenu extends Lumine_Base {
         $this->_addField('idpagina', 'idpagina', 'int', 11, array('notnull' => false, 'foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'RESTRICT', 'linkOn' => 'idpagina', 'class' => 'Paginas'));
         $this->_addField('idanexo', 'idanexo', 'int', 11, array('notnull' => false, 'foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'RESTRICT', 'linkOn' => 'idanexo', 'class' => 'Anexos'));
         $this->_addField("linksubmenu", "linksubmenu", "varchar", 255, array('notnull' => false));
-        $this->_addField('idmenu', 'idmenu', 'int', 11, array('notnull' => false, 'foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'RESTRICT', 'linkOn' => 'idmenu', 'class' => 'Menu'));
+        $this->_addField('idmenu', 'idmenu', 'int', 11, array('notnull' => true, 'foreign' => '1', 'onUpdate' => 'CASCADE', 'onDelete' => 'RESTRICT', 'linkOn' => 'idmenu', 'class' => 'Menu'));
         
     }
 
@@ -140,7 +140,8 @@ class Submenu extends Lumine_Base {
 		Lumine_Validator_PHPValidator::clearValidations($this);
 		
 		// adicionando as regras 
-		Lumine_Validator_PHPValidator::addValidation($this, 'descricaosubmenu', Lumine_Validator::REQUIRED_STRING, 'Informe a descri��o do Sub-menu');
+		Lumine_Validator_PHPValidator::addValidation($this, 'descricaosubmenu', Lumine_Validator::REQUIRED_STRING, 'Informe a descrição do Sub-menu');
+		Lumine_Validator_PHPValidator::addValidation($this, 'idmenu', Lumine_Validator::REQUIRED_NUMBER, 'Informe menu relacionado');
 		
 		return parent::validate();
 	}
@@ -152,10 +153,9 @@ class Submenu extends Lumine_Base {
 	 */
 	public function getMenu()
 	{
-		$menu = null;
+		$menu = new Menu();
 		if($this->getIdmenu()!=null)
 		{
-			$menu = new Menu();
 			$menu->setIdmenu($this->getIdmenu());
 			$menu->find(true);
 		}

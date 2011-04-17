@@ -13,6 +13,8 @@ class Pessoa extends Lumine_Base{
 	public $emissorpessoa = null;	 	 	 	 	 	 	 		 	 	 	 	 	 	 
 	public $cpfpessoa = null;	 	 	 	 	 
 	public $datanascimentopessoa = null;
+	public $cursospessoa = null;
+	public $projetospessoa = null;
 	
 	/**
      * Inicia os valores da classe
@@ -29,6 +31,8 @@ class Pessoa extends Lumine_Base{
         $this->_addField("emissorpessoa", "emissorpessoa", "varchar", 255, array('notnull' => false));
         $this->_addField("cpfpessoa", "cpfpessoa", "varchar", 14, array('notnull' => true));
         $this->_addField("datanascimentopessoa", "datanascimentopessoa", "date", null, array('notnull' => true));
+        $this->_addField("cursospessoa", "cursospessoa", "text", null, array('notnull' => false));
+        $this->_addField("projetospessoa", "projetospessoa", "text", null, array('notnull' => false));
         
         $this->_addForeignRelation('endereco', self::ONE_TO_MANY, 'Endereco', 'idpessoa', null, null, null);
         $this->_addForeignRelation('usuarios', self::ONE_TO_MANY, 'Usuarios', 'idpessoa', null, null, null);
@@ -152,9 +156,36 @@ class Pessoa extends Lumine_Base{
 	public function setDatanascimentopessoa($datanascimentopessoa) {
 		$this->datanascimentopessoa = $datanascimentopessoa;
 	}
-
 	
-    #------------------------------------------------------#
+    /**
+	 * @return the $cursospessoa
+	 */
+	public function getCursospessoa() {
+		return $this->cursospessoa;
+	}
+
+	/**
+	 * @return the $projetospessoa
+	 */
+	public function getProjetospessoa() {
+		return $this->projetospessoa;
+	}
+
+	/**
+	 * @param field_type $cursospessoa
+	 */
+	public function setCursospessoa($cursospessoa) {
+		$this->cursospessoa = $cursospessoa;
+	}
+
+	/**
+	 * @param field_type $projetospessoa
+	 */
+	public function setProjetospessoa($projetospessoa) {
+		$this->projetospessoa = $projetospessoa;
+	}
+
+	#------------------------------------------------------#
     # Coloque todos os metodos personalizados abaixo de    #
     # END AUTOCODE                                         #
     #------------------------------------------------------#
@@ -209,7 +240,6 @@ class Pessoa extends Lumine_Base{
 		
 		// adicionando as regras 
 		Lumine_Validator_PHPValidator::addValidation($this, 'nomepessoa', Lumine_Validator::REQUIRED_STRING, 'Informe o nome');
-		Lumine_Validator_PHPValidator::addValidation($this, 'cpfpessoa', Lumine_Validator::REQUIRED_CPF, 'Informe o CPF corretamente');
 		Lumine_Validator_PHPValidator::addValidation($this, 'datanascimentopessoa', Lumine_Validator::REQUIRED_DATE, 'Informe a Data de Nascimento');
 		
 		return parent::validate();

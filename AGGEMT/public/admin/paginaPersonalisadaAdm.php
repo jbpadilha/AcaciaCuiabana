@@ -26,6 +26,7 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
       		alert('Todos campos obrigatórios devem ser preenchidos!');
       		return false;
       	} else {
+      		$('#descricaopagina').val(CKEDITOR.instances.descricaopagina.getData());
       		var formulario = $('#cadastrar').serialize(true);
       		enviaFormulario($('#cadastrar').attr("action"),'conteudo',formulario);
       	}
@@ -66,8 +67,8 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
 			<tr>
 				<td><?=$paginas->getIdpagina()?></td>
 				<td><?=$paginas->getNomepagina()?></td>
-				<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$paginas->getIdpagina() ?>)"><img src="../images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
-  				<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$paginas->getIdpagina() ?>)"><img src="../images/botao_apagar.gif" width="16" height="16" border="0" /></a></td>
+				<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$paginas->getIdpagina() ?>)"><img src="../images/botao_editar.gif" width="16" height="16" border="0" alt="Alterar"/></a></td>
+  				<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$paginas->getIdpagina() ?>)"><img src="../images/botao_apagar.gif" width="16" height="16" border="0" alt="Deletar"/></a></td>
 			</tr>
 			<?
 			}

@@ -5,7 +5,14 @@ require_once ('ControlGeral.php');
 class ControlaUsuarios extends ControlGeral {
 	
 	public function permiteAcesso($grupo) {
-		return true;
+		if($grupo == GruposUsuarios::$GRUPO_ADMIN || $grupo == GruposUsuarios::$GRUPO_ASSOCIADO)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	public function get($GET) {
@@ -15,6 +22,8 @@ class ControlaUsuarios extends ControlGeral {
 		$usuarios = null;
 		$pessoa = null;
 		$endereco = null;
+		$this->MENSAGEM_ERRO = array();
+		$this->MENSAGEM_SUCESSO = array();
 		try {
 			$function = (isset($POST['funcao']))?$POST['funcao']:null;
 			if(!ProjetoUtil::verificaBrancoNulo($function))
@@ -74,7 +83,7 @@ class ControlaUsuarios extends ControlGeral {
 		catch (Exception $e)
 		{
 			$this->MENSAGEM_ERRO[] = $e->getMessage();
-			header("Location:".PROJETO_CONTEXT."public/admin/inicio.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
+			header("Location:".PROJETO_CONTEXT."public/admin/conteudoInicial.php?mensagemErro=".urlencode(serialize($this->MENSAGEM_ERRO)));
 		}
 	}
 	
@@ -144,13 +153,9 @@ class ControlaUsuarios extends ControlGeral {
 			$usuarioPesquisa->find(true);
 			if($usuarioPesquisa->getIdpessoa() == $usuarios->getIdpessoa())
 			{
-				if($usuarios->getUsuario() != $usuarioPesquisa->getUsuario() 
-					|| $usuarios->getSenha() != $usuarioPesquisa->getSenha())
-				{
-					$pessoa->update();
-					$endereco->update();
-					$usuarios->update();
-				}
+				$pessoa->update();
+				$endereco->update();
+				$usuarios->update();
 			}
 			else
 			{

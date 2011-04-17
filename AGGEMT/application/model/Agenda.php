@@ -17,7 +17,6 @@ class Agenda extends Lumine_Base {
      */
     protected function _initialize()
     {
-        
         $this->_addField("idagenda", "idagenda", "int", 11, array('primary' => true, 'notnull' => true, 'autoincrement' => true));
         $this->_addField("tituloagenda", "tituloagenda", "varchar", 255, array('notnull' => true));
         $this->_addField('dataagenda', 'dataagenda', 'datetime', null, array('notnull' => true));
@@ -109,7 +108,6 @@ class Agenda extends Lumine_Base {
 		
 		// adicionando as regras 
 		Lumine_Validator_PHPValidator::addValidation($this, 'tituloagenda', Lumine_Validator::REQUIRED_STRING, 'Informe o t�tulo da agenda');
-		Lumine_Validator_PHPValidator::addValidation($this, 'dataagenda', Lumine_Validator::REQUIRED_DATE, 'Informe a data da agenda');
 		
 		return parent::validate();
 	}
@@ -143,6 +141,25 @@ class Agenda extends Lumine_Base {
 		}
 	}
 	
+	public function apagaAgendaPassada()
+	{
+		try 
+		{
+			$agenda = new Agenda();
+			$agenda->where("dataagenda < NOW()");
+			if($agenda->find()>0)
+			{
+				while ($agenda->fetch())
+				{
+					$agenda->delete();
+				}
+			}	
+		}
+		catch (Exception $e)
+		{
+			return null;
+		}
+	}
 }
 
 ?>

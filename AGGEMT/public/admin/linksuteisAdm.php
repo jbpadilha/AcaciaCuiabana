@@ -64,8 +64,8 @@ include '../carregamentoInicial.php';
 			<tr>
 				<td><?=$linksUteis->getIdlinksuteis()?></td>
 				<td><?=$linksUteis->getDescricaolinksuteis()?></td>
-				<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$linksUteis->getIdlinksuteis() ?>)"><img src="../images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
-  				<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$linksUteis->getIdlinksuteis() ?>)"><img src="../images/botao_apagar.gif" width="16" height="16" border="0" /></a></td>
+				<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$linksUteis->getIdlinksuteis() ?>)"><img src="../images/botao_editar.gif" width="16" height="16" border="0" alt="Alterar"/></a></td>
+  				<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$linksUteis->getIdlinksuteis() ?>)"><img src="../images/botao_apagar.gif" width="16" height="16" border="0" alt="Deletar"/></a></td>
 			</tr>
 			<?
 			}
@@ -113,9 +113,31 @@ if(isset($_GET['idlinksuteis']))
 			</td>
 		</tr>
 		<tr>
-			<td valign="top"><p>Link*:</p></td>
+			<td valign="top"><p>Link:</p></td>
 			<td valign="top">
 				<input type="text" id="link" name="link" value="<?=$linksUteis->getLink()?>" size="60">
+			</td>
+		</tr>
+		<tr>
+			<td valign="top"><p>Anexo:</p></td>
+			<td valign="top">
+				<select id="idanexo" name="idanexo">
+					<option value="">Selecione o Anexo</option>
+					<?php 
+						$anexos = null;
+						$anexos = new Anexos();
+						$anexos->reset();
+						if($anexos->find()>0)
+						{
+							while($anexos->fetch())
+							{
+								?>
+								<option value="<?=$anexos->getIdanexo()?>" <?=($anexos->getIdanexo() == $linksUteis->getIdanexo()) ? "selected" : ""?>><?=$anexos->getNomeanexo()?></option>
+								<?php 
+							}
+						}
+					?>
+				</select>
 			</td>
 		</tr>
 		<tr>

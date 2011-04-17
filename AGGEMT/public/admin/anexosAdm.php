@@ -1,6 +1,5 @@
 <?php 
 include '../carregamentoInicial.php';
-include_once( '../ckeditor/ckeditor_php5.php' ) ;
 ?>
 <script type="text/javascript">
 
@@ -14,7 +13,7 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
       	carregaPagina('anexosAdm.php?idanexo='+idanexo,'conteudo');
       }
 
-      function deletar(idnoticia)
+      function deletar(idanexo)
       {
       	document.deletaAltera.funcao.value = "deletar";
       	document.deletaAltera.idanexo.value = idanexo;
@@ -33,7 +32,7 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
 </script>
 <table>
 	<tr>
-		<td class="tituloAdm">Cadastro de Anexos</td>
+		<td class="tituloAdm">Cadastro de Anexos/Publicações</td>
 	</tr>
 </table>
 <br>
@@ -51,6 +50,7 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
 		<tr>
 			<td>id</td>
 			<td>Nome do Anexo:</td>
+			<td>Tipo do Anexo</td>
 			<td colspan="2">Ações</td>
 		</tr>
 		<?php  
@@ -65,8 +65,9 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
 			<tr>
 				<td><?=$anexos->getIdanexo()?></td>
 				<td><?=$anexos->getNomeanexo()?></td>
-				<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$anexos->getIdanexo() ?>)"><img src="../images/botao_editar.gif" width="16" height="16" border="0" /></a></td>
-  				<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$anexos->getIdanexo() ?>)"><img src="../images/botao_apagar.gif" width="16" height="16" border="0" /></a></td>
+				<td><?=($anexos->getTipoanexo())? "Publicações Internas" : "Anexos/Publicações Externos"?></td>
+				<td width="31"><a href="javascript:void(0);" onclick="alterar(<?=$anexos->getIdanexo() ?>)"><img src="../images/botao_editar.gif" width="16" height="16" border="0" alt="Alterar"/></a></td>
+  				<td width="20"><a href="javascript:void(0);" onclick="deletar(<?=$anexos->getIdanexo() ?>)"><img src="../images/botao_apagar.gif" width="16" height="16" border="0" alt="Deletar"/></a></td>
 			</tr>
 			<?
 			}
@@ -79,7 +80,7 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
 			<td colspan="5"></td>
 		</tr>
 		<tr>
-			<td colspan="5">Não existem anexos cadastrados.</td>
+			<td colspan="5">Não existem anexos/publicações cadastrados.</td>
 		</tr>
 	<?php 
 	}
@@ -90,7 +91,7 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
 ?>
 <input type="button" id="btCadastra" value="Cadastrar" onclick="abaCadastra();">
 <div id="cadastroClass" <?php if (!isset($_GET['idanexo'])) echo "style=\"display:none;\"";?>>
-<h3 class="t">Cadastro de Anexos</h3>
+<h3 class="t">Cadastro de Anexos/Publicações</h3>
 <?php 
 $anexos = null;
 $anexos = new Anexos();
@@ -127,12 +128,21 @@ if(isset($_GET['idanexo']))
 		<tr>
 			<td valign="top">Arquivo Cadastrado:</td>
 			<td valign="top">
-				<a href="<?=PROJETO_CONTEXT?>images/<?=$anexos->getCaminhoanexo()?>" target="_blank">Download Aqui</a>
+				<a href="<?=PROJETO_CONTEXT?>public/images/<?=$anexos->getCaminhoanexo()?>" target="_blank">Download Aqui</a>
 			</td>
 		</tr>
 		<?php 
 		}
 		?>
+		<tr>
+			<td valign="top">Tipo do Anexo</td>
+			<td valign="top">
+				<select id="tipoanexo" name="tipoanexo">
+					<option value="1" <?=($anexos->getTipoanexo() == 1) ? "selected":""?>>Publicações Internas</option>
+					<option value="0" <?=($anexos->getTipoanexo() == 0) ? "selected":""?>>Publicações/Anexos Externos</option>
+				</select>
+			</td>
+		</tr>
 		<tr>
 			<td colspan="3">
 				* Campos Obrigatórios.<br>

@@ -18,23 +18,12 @@ header("Content-Type: text/html; charset=UTF-8",true);
 		$("#cependereco").mask("99999-999");
 		$("#rgpessoa").numeric();
 		$("#numeroendereco").numeric();
-      function abaCadastra()
-      {
-    	  $('#cadastroClass').toggle();
-      }
       function alterar(idusuario)
       {
       	var formulario = $('#deletaAltera').serialize(true);
       	carregaPagina('usuariosAdm.php?idusuario='+idusuario,'conteudo');
       }
 
-      function deletar(idusuario)
-      {
-      	document.deletaAltera.funcao.value = "deletar";
-      	document.deletaAltera.idusuario.value = idusuario;
-      	var formulario = $('#deletaAltera').serialize(true);
-      	enviaFormulario($('#deletaAltera').attr("action"),'conteudo',formulario);
-      }
       function cadastra()
       {
     	  if ( $('#usuario').val() == '' ) {
@@ -66,8 +55,8 @@ header("Content-Type: text/html; charset=UTF-8",true);
 				return false;
 			}
 			else {
-			$('#cursospessoa').val(CKEDITOR.instances.cursospessoa.getData());
-			$('#projetospessoa').val(CKEDITOR.instances.projetospessoa.getData());
+				$('#cursospessoa').val(CKEDITOR.instances.cursospessoa.getData());
+				$('#projetospessoa').val(CKEDITOR.instances.projetospessoa.getData());
       		var formulario = $('#cadastrar').serialize(true);
       		enviaFormulario($('#cadastrar').attr("action"),'conteudo',formulario);
       	}
@@ -75,68 +64,11 @@ header("Content-Type: text/html; charset=UTF-8",true);
 </script>
 <table>
 	<tr>
-		<td class="tituloAdm">Cadastro de Usuários</td>
+		<td class="tituloAdm">Modificar Meus Dados</td>
 	</tr>
 </table>
 <br>
 <br>
-
-
-<form name="deletaAltera" id="deletaAltera" method="post" action="../../application/recebePostGet.php" >
-	<input type="hidden" id="control" name="control" value="Usuarios"/>
-	<input type="hidden" id="funcao" name="funcao" value=""/>
-	<input type="hidden" id="idusuario" name="idusuario" value=""/>
-	<table width="100%">
-		<tr>
-			<td class="tituloAdm" colspan="6">Usuários Cadastrados</td>
-		</tr>
-		<tr>
-			<td width="100"><strong>ID</strong></td>
-			<td width="204"><strong>Nome</strong></td>
-			<td width="203"><strong>Usuário</strong></td>
-			<td><strong>Grupo</strong></td>
-			<td colspan="2">Ações</td>
-		</tr>
-		<?php  
-		$usuarios = null;
-		$usuarios = new Usuarios();
-		if($usuarios->find()>0)
-		{
-			while($usuarios->fetch())
-			{
-				$pessoa = new Pessoa();
-				$pessoa->setIdpessoa($usuarios->getIdpessoa());
-				$pessoa->find(true);
-			?>
-			<tr>
-				<td align="left"><?=$usuarios->getIdusuario()?></td>
-			  	<td align="left"><?=$pessoa->getNomepessoa()?></td>
-			  	<td align="left"><?=$usuarios->getUsuario()?></td>
-			  	<td width="163" align="left"><?=$usuarios->getNomeGrupoUsuarios()?></td>
-			  	<td width="24"><a href="javascript:void(0);" onClick="alterar(<?=$usuarios->getIdusuario()?>)"><img src="../images/botao_editar.gif" width="16" height="16" border="0" alt="Alterar"/></a></td>
-			  	<td width="25"><a href="javascript:void(0);" onClick="deletar(<?=$usuarios->getIdusuario()?>)"><img src="../images/botao_apagar.gif" width="16" height="16" border="0" alt="Deletar"/></a></td>
-			</tr>
-			<?
-			}
-		
-		}
-		else
-		{
-		?>
-		<tr>
-			<td colspan="6"></td>
-		</tr>
-		<tr>
-			<td colspan="6">Não existem usuários cadastrados.</td>
-		</tr>
-	<?php 
-	}
-	?>
-</table>
-</form>
-<?php 
-?>
-<input type="button" id="btCadastra" value="Cadastrar" onclick="abaCadastra();">
 <div id="cadastroClass" <?php if (!isset($_GET['idusuario'])) echo "style=\"display:none;\"";?>>
 <h3 class="t">Cadastro de Usuários</h3>
 <?php 
@@ -145,7 +77,6 @@ $pessoaAtual = new Pessoa();
 $enderecoAtual = new Endereco();
 if(isset($_GET['idusuario']))
 {
-	$usuarios->reset();
 	$usuarios->setIdusuario($_GET['idusuario']);
 	$usuarios->find(true);
 	$pessoaAtual->setIdpessoa($usuarios->getIdpessoa());
@@ -155,16 +86,20 @@ if(isset($_GET['idusuario']))
 }
 
 ?>
-<form name="cadastrar" id="cadastrar" method="post" action="../../application/recebePostGet.php" enctype="multipart/form-data">
+<form name="cadastrar" id="cadastrar" method="post" action="../../application/recebePostGet.php">
 	<input type="hidden" id="control" name="control" value="Usuarios"/>
 	<input type="hidden" id="funcao" name="funcao" value="<?=(isset($_GET['idusuario']))?"alterar":"cadastrar"?>"/>
 	<input type="hidden" id="idusuario" name="idusuario" value="<?=$usuarios->getIdusuario()?>"/>
 	<input type="hidden" id="idpessoa" name="idpessoa" value="<?=$usuarios->getIdpessoa()?>"/>
 	<input type="hidden" id="idendereco" name="idendereco" value="<?=$enderecoAtual->getIdendereco()?>"/>
+	<input type="hidden" id="datacadastropessoa" name="datacadastropessoa" value="<?=$pessoaAtual->getDatacadastropessoa()?>"/>
 	<table>
 		<tr>
 			<td>Usuário:</td>
-			<td><input type="text" name="usuario" id="usuario" value="<?=$usuarios->getUsuario()?>"/></td>
+			<td>
+			<?=$usuarios->getUsuario()?>
+			<input type="hidden" name="usuario" id="usuario" value="<?=$usuarios->getUsuario()?>"/>
+			</td>
 		</tr>
 		<tr>
 			<td>Senha:</td>
@@ -173,12 +108,21 @@ if(isset($_GET['idusuario']))
 		<tr>
 			<td>Grupo do Usuário:</td>
 			<td>
-				<select id="grupousuario" name="grupousuario">
-					<option value="">Selecione</option>
-					<option value="<?=GruposUsuarios::$GRUPO_ADMIN?>" <?=($usuarios->getGrupousuario() == GruposUsuarios::$GRUPO_ADMIN)?"selected":""?>><?=GruposUsuarios::$GRUPO_ADMIN_TXT?></option>
-					<option value="<?=GruposUsuarios::$GRUPO_ASSOCIADO?>" <?=($usuarios->getGrupousuario() == GruposUsuarios::$GRUPO_ASSOCIADO)?"selected":""?>><?=GruposUsuarios::$GRUPO_ASSOCIADO_TXT?></option>
-					<option value="<?=GruposUsuarios::$GRUPO_ESTAGIARIO?>" <?=($usuarios->getGrupousuario() == GruposUsuarios::$GRUPO_ESTAGIARIO)?"selected":""?>><?=GruposUsuarios::$GRUPO_ESTAGIARIO_TXT?></option>
-				</select>
+				<?php 
+				if($usuarios->getGrupousuario() == GruposUsuarios::$GRUPO_ADMIN)
+				{
+					echo GruposUsuarios::$GRUPO_ADMIN_TXT;
+				}
+				else if($usuarios->getGrupousuario() == GruposUsuarios::$GRUPO_ASSOCIADO)
+				{
+					echo GruposUsuarios::$GRUPO_ASSOCIADO_TXT;
+				} 
+				else if($usuarios->getGrupousuario() == GruposUsuarios::$GRUPO_ESTAGIARIO)
+				{
+					echo GruposUsuarios::$GRUPO_ESTAGIARIO_TXT;
+				} 
+				?>
+				<input type="hidden" id="grupousuario" name="grupousuario" value="<?=$usuarios->getGrupousuario()?>">
 			</td>
 		</tr>
 		<tr>
@@ -283,7 +227,6 @@ if(isset($_GET['idusuario']))
 			<td align="left">Projetos Desenvolvidos:</td>
 			<td align="left">
 				<?php 
-				$CKEditor = new CKEditor();
  				$CKEditor->editor("projetospessoa", $pessoaAtual->getProjetospessoa());
  				?>
 			</td>		

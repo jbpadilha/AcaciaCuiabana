@@ -5,15 +5,14 @@ class ControlaNoticia extends ControlGeral {
 
 	
 	public function permiteAcesso($grupo) {
-		/*if($grupo == GruposUsuarios::$GRUPO_ADMIN)
+		if($grupo == GruposUsuarios::$GRUPO_ADMIN)
 		{
 			return true;
 		}
 		else
 		{
 			return false;
-		}*/
-		return true;
+		}
 	}
 	
 	public function get($GET) {
@@ -50,6 +49,14 @@ class ControlaNoticia extends ControlGeral {
 					if(!ProjetoUtil::verificaBrancoNulo($idnoticia))
 					{
 						$noticia->setIdnoticia($idnoticia);
+						//Teste Img Notícia existente
+						$noticiaImg = new Noticias();
+						$noticiaImg->setIdnoticia($idnoticia);
+						$noticiaImg->find();
+						if($noticiaImg->getImagemnoticia()!=null)
+						{
+							@unlink(PATH_PROJETO_IMAGEM_UPLOAD.$noticiaImg->getImagemnoticia());
+						}
 						$this->deletar($noticia);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
 						header("Location:../public/admin/conteudoInicial.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
@@ -181,7 +188,7 @@ class ControlaNoticia extends ControlGeral {
 					    $result = $upload->moveFileToDestination(); // $result = bool (true/false). Succeed or not.
 					    if(!$result)
 					    {
-					    	throw new Exception($upload->error);
+					    	throw new Exception($upload->msg[$upload->error_type]);
 					    }
 					    else {
 					    	$noticias->setImagemnoticia("noticias/".$upload->succeed_files_track[0]["new_file_name"]);
