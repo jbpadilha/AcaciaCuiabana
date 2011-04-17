@@ -90,8 +90,8 @@ include '../carregamentoInicial.php';
 <?php 
 ?>
 <input type="button" id="btCadastra" value="Cadastrar" onclick="abaCadastra();">
-<div id="cadastroClass" <?php if (!isset($_GET['idanexo'])) echo "style=\"display:none;\"";?>>
-<h3 class="t">Cadastro de Anexos/Publicações</h3>
+<div id="cadastroClass" <?php if (!isset($_GET['idbanner'])) echo "style=\"display:none;\"";?>>
+<h3 class="t">Cadastro de Banner</h3>
 <?php 
 $banners = null;
 $banners = new Banners();
@@ -133,7 +133,7 @@ if(isset($_GET['idbanner']))
 		<tr>
 			<td valign="top">Status do Banner</td>
 			<td valign="top">
-				<select id="tipoanexo" name="tipoanexo">
+				<select id="statusbanner" name="statusbanner">
 					<option value="1" <?=($banners->getStatusbanner() == 1) ? "selected":""?>>Ativo</option>
 					<option value="0" <?=($banners->getStatusbanner() == 0) ? "selected":""?>>Inativo</option>
 				</select>
