@@ -148,12 +148,11 @@
 												{
 													while ($banners->fetch())
 													{
-														echo '<img src="'.PROJETO_CONTEXT.'public/images/'.$banners->getCaminhobanner().'" alt="" />';
+														echo '<img src="'.PROJETO_CONTEXT.'public/images/'.$banners->getCaminhobanner().'" width="120" height="60" />';
 														break;
 													}
 												}
 												?>
-												
 												</div>
 												<div class="cleared"></div>
 											</div>

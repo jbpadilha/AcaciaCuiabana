@@ -58,6 +58,7 @@ public function post($POST, $FILES = null) {
 					if(!ProjetoUtil::verificaBrancoNulo($idanexo))
 					{
 						$banners->setIdbanner($idbanner);
+						$banners->find(true);
 						//Teste Img Notícia existente
 						$bannersArq = new Banners();
 						$bannersArq->setIdbanner($idbanner);
