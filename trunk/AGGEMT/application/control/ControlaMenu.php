@@ -33,7 +33,7 @@ class ControlaMenu extends ControlGeral {
 					if(!ProjetoUtil::verificaBrancoNulo($idmenu))
 					{
 						$menu->setIdmenu($idmenu);
-						$this->deletar($agenda);
+						$this->deletar($menu);
 						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
 						header("Location:../public/admin/conteudoInicial.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
 					}

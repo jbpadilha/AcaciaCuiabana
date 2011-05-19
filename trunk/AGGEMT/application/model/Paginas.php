@@ -99,6 +99,33 @@ class Paginas extends Lumine_Base {
 		return parent::validate();
 	}
 	
+	/**
+	 * 
+	 * Verifica se a página está sendo utilizada em algum menu
+	 * @return boolean
+	 */
+	public function paginaEhUtilizada()
+	{
+		$menu = new Menu();
+		$menu->setIdpagina($this->getIdpagina());
+		if($menu->find()>0)
+		{
+			return true;
+		}
+		else {
+			$submenu = new Submenu();
+			$submenu->setIdpagina($this->getIdpagina());
+			if($submenu->find()>0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+	}
+	
 }
 
 ?>

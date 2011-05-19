@@ -1,6 +1,6 @@
 <?php
-define("PATH_PROJETO", $_SERVER['DOCUMENT_ROOT']."/");
-define("PATH_PROJETO_APPLICATION", $_SERVER['DOCUMENT_ROOT']."/application/");
+define("PATH_PROJETO", $_SERVER['DOCUMENT_ROOT']."aggemt/");
+define("PATH_PROJETO_APPLICATION", $_SERVER['DOCUMENT_ROOT']."aggemt/application/");
 define("PATH_PROJETO_IMAGEM_UPLOAD", "/home/joaopadilha/aggemt.joaopadilha.com/public/images/");
 define("PROJETO_CONTEXT", "http://aggemt.joaopadilha.com/");
 

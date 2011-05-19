@@ -66,10 +66,8 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
 			<td colspan="2">Ações</td>
 		</tr>
 		<?php  
-		$agenda = null;
 		$agenda = new Agenda();
 		$agenda->reset();
-		$agenda->limit();
 		if($agenda->find()>0)
 		{
 			while($agenda->fetch())

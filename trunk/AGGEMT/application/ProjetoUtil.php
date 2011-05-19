@@ -25,7 +25,7 @@ class ProjetoUtil
 					'dialect' => 'MySQL',
 					'database' => 'aggemt',
 				    'user' => 'root',
-				    'password' => '123',
+				    'password' => '',
 				    'port' => '3306',
 				    'host' => 'localhost',
 				    'class_path' => dirname(__FILE__),

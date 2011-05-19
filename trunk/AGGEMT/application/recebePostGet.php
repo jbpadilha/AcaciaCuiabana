@@ -6,8 +6,8 @@
  * @author João Batista Padilha e Silva --- joao.padilha@globo.com
  * @since 23/11/2010
  */
-define("PATH_PROJETO", $_SERVER['DOCUMENT_ROOT']."/");
-define("PATH_PROJETO_APPLICATION", $_SERVER['DOCUMENT_ROOT']."/application/");
+define("PATH_PROJETO", $_SERVER['DOCUMENT_ROOT']."aggemt/");
+define("PATH_PROJETO_APPLICATION", $_SERVER['DOCUMENT_ROOT']."aggemt/application/");
 define("PATH_PROJETO_IMAGEM_UPLOAD", "/home/joaopadilha/aggemt.joaopadilha.com/public/images/");
 define("PROJETO_CONTEXT", "http://aggemt.joaopadilha.com/");
 require_once 'ProjetoUtil.php';
@@ -57,6 +57,7 @@ try {
 					$control = "Controla".$_POST['control']; //Classe Control
 					require 'control/'.$control.".php";
 					$controla = new $control();
+					echo "<script>alert('teste');</script>";
 					if($controla->permiteAcesso($grupo))
 					{
 						if($_FILES == null)
@@ -66,6 +67,10 @@ try {
 						else {
 							$controla->post($_POST,$_FILES);
 						}
+					}
+					elseif (isset($_POST['funcao']) && $_POST['funcao'] != "votar")
+					{
+						$controla->post($_POST);
 					}
 					else
 					{

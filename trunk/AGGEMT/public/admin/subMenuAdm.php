@@ -91,7 +91,7 @@ include '../carregamentoInicial.php';
 ?>
 <input type="button" id="btCadastra" value="Cadastrar" onclick="abaCadastra();">
 <div id="cadastroClass" <?php if (!isset($_GET['idsubmenu'])) echo "style=\"display:none;\"";?>>
-<h3 class="t">Cadastro de Agenda</h3>
+<h3 class="t">Cadastro de Sub-Menu</h3>
 <?php 
 $submenu = null;
 $submenu = new Submenu();

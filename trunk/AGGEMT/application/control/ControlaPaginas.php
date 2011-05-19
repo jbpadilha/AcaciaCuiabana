@@ -45,9 +45,17 @@ class ControlaPaginas extends ControlGeral {
 					if(!ProjetoUtil::verificaBrancoNulo($idpagina))
 					{
 						$paginas->setIdpagina($idpagina);
-						$this->deletar($paginas);
-						$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
-						header("Location:../public/admin/conteudoInicial.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						//Verificar se a Página está sendo utilizada
+						if(!$paginas->paginaEhUtilizada())
+						{
+							$this->deletar($paginas);
+							$this->MENSAGEM_SUCESSO[] = Mensagens::getMensagem("SUCESSO_DELETAR"); 
+							header("Location:../public/admin/conteudoInicial.php?mensagemSucesso=".urlencode(serialize($this->MENSAGEM_SUCESSO)));
+						}
+						else
+						{
+							throw new Exception("A Página não pode ser deletada, pois existem vinculos com menu ou submenu cadastrados.");
+						}
 					}
 					else	
 					{
