@@ -272,6 +272,23 @@ class Enquete extends Lumine_Base {
 		
 		return parent::validate();
 	}
+	
+	/**
+	 * 
+	 * Retorna a quantidade de questões
+	 * @return int
+	 */
+	public function getNumeroPerguntas()
+	{
+		$nPerguntas = 2;
+		if($this->getQuestao3enquete()!=null)
+			$nPerguntas++;
+		if($this->getQuestao4enquete()!=null)
+			$nPerguntas++;
+		if($this->getQuestao5enquete()!=null)
+			$nPerguntas++;
+		return $nPerguntas;
+	}
 }
 
 ?>

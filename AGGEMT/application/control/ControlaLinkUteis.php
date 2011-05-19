@@ -46,7 +46,7 @@ class ControlaLinkUteis extends ControlGeral {
 				elseif($POST['funcao'] == "alterar")
 				{
 					$idlinksuteis = (isset($POST['idlinksuteis']))?$POST['idlinksuteis']:null;
-					if(!ProjetoUtil::verificaBrancoNulo($idagenda))
+					if(!ProjetoUtil::verificaBrancoNulo($idlinksuteis))
 					{
 						$linksUteis->setIdlinksuteis($idlinksuteis);
 					}
@@ -93,6 +93,8 @@ class ControlaLinkUteis extends ControlGeral {
 	private function preencheObjeto(Linksuteis $linksUteis, $POST)
 	{
 		$linksUteis->_setFrom($POST);
+		if($linksUteis->getIdanexo() == "")
+			$linksUteis->setIdanexo(null);
 		$this->MENSAGEM_ERRO = array_merge($this->MENSAGEM_ERRO, $linksUteis->validate());
 	}
 	

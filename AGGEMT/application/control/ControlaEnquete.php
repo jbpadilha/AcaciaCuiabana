@@ -61,7 +61,7 @@ class ControlaEnquete extends ControlGeral {
 				elseif($POST['funcao'] == "alterar")
 				{
 					$idenquete = (isset($POST['idenquete']))?$POST['idenquete']:null;
-					if(!ProjetoUtil::verificaBrancoNulo($idagenda))
+					if(!ProjetoUtil::verificaBrancoNulo($idenquete))
 					{
 						$enquete->setIdagenda($idenquete);
 					}
@@ -75,6 +75,21 @@ class ControlaEnquete extends ControlGeral {
 					else
 					{
 						throw new Exception();
+					}
+				}
+				elseif($POST['funcao'] == "votar")
+				{
+					$idenquete = (isset($POST['idenquete']))?$POST['idenquete']:null;
+					if(!ProjetoUtil::verificaBrancoNulo($idenquete))
+					{
+						$enquete->setIdagenda($idenquete);
+						$enquete->find();
+						echo "<script>alert(".var_dump($enquete).");</script>";
+						$metodogetResposta = "getVotos".$POST['resposta']."enqueste";
+						$metodosetResposta = "setVotos".$POST['resposta']."enqueste";
+						$enquete->$metodosetResposta($enquete->$metodogetResposta()+1);
+						$this->alterar($enquete);
+						echo "Obrigado por votar na enquete.";
 					}
 				}
 			}

@@ -19,6 +19,13 @@
 			            $.get(url,{ }
 			            ,function(retorno){$("#"+id).html(retorno)});
 			}
+
+			function votar()
+			{
+				var formulario = $('#enquete').serialize(true);
+				$("div#resultadoEnquete").html("<div aligh='center'><font color=\"#FF0000\">Carregando ...</font>  <img src='images/loading.gif' align='top' alt='aguarde' /></div>");
+	            $.post($('#enquete').attr("action"), formulario, function(retorno){$("div#resultadoEnquete").html(retorno)});
+			}
 		</script>
 	</head>
 	<body>
@@ -103,68 +110,6 @@
 										<div class="art-blockheader">
 											<div class="l"></div>
 											<div class="r"></div>
-											<h3 class="t">Publicações</h3>
-										</div>
-										<div class="art-blockcontent">
-											<div class="art-blockcontent-body">
-												<div>
-												<?php 
-												$anexos = new Anexos();
-												$anexos->reset();
-												$anexos->setTipoanexo(0);
-												$anexos->limit(2);
-												if($anexos->find())
-												{
-													echo '<ul>';
-													while ($anexos->fetch())
-													{
-														echo '<li><a href="'.PROJETO_CONTEXT.'public/images/'.$anexos->getCaminhoanexo().'" target="_blank">'.$anexos->getNomeanexo().'</a></li>';
-													}
-													echo '</ul>';
-												}
-												?>
-												</div>
-												<div class="cleared"></div>
-											</div>
-										</div>
-										<div class="cleared"></div>
-									</div>
-								</div>
-								<div class="art-block">
-									<div class="art-block-body">
-										<div class="art-blockheader">
-											<div class="l"></div>
-											<div class="r"></div>
-											<h3 class="t">Publicidade</h3>
-										</div>
-										<div class="art-blockcontent">
-											<div class="art-blockcontent-body">
-												<div>
-												<?php 
-												$banners = new Banners();
-												$banners->reset();
-												$banners->setStatusbanner(1);
-												if($banners->find())
-												{
-													while ($banners->fetch())
-													{
-														echo '<img src="'.PROJETO_CONTEXT.'public/images/'.$banners->getCaminhobanner().'" width="120" height="60" />';
-														break;
-													}
-												}
-												?>
-												</div>
-												<div class="cleared"></div>
-											</div>
-										</div>
-										<div class="cleared"></div>
-									</div>
-								</div>
-								<div class="art-block">
-									<div class="art-block-body">
-										<div class="art-blockheader">
-											<div class="l"></div>
-											<div class="r"></div>
 											<h3 class="t">Links</h3>
 										</div>
 										<div class="art-blockcontent">
@@ -200,6 +145,98 @@
 										<div class="cleared"></div>
 									</div>
 								</div>
+								<div class="art-block">
+									<div class="art-block-body">
+										<div class="art-blockheader">
+											<div class="l"></div>
+											<div class="r"></div>
+										</div>
+										<div class="art-blockcontent">
+											<div class="art-blockcontent-body">
+												<div id="resultadoEnquete" class="resultenquete"></div>
+												<div>
+													<?php 
+													$enquete = new Enquete();
+													$enquete->setStatusenquete(1);
+													$enquete->setTipoenquete(0);
+													if($enquete->find()>0)
+													{
+														while($enquete->fetch())
+														{
+															?>
+															<form action="../application/recebePostGet.php" name="enquete" id="enquete">
+															<input type="hidden" id="control" name="control" value="Enquete"/>
+															<input type="hidden" id="funcao" name="funcao" value="votar"/>
+															<table width="124" border="0" cellspacing="0" cellpadding="0">
+													        	<tr> 
+													            	<td height="101" colspan="2"> 
+													              		<div align="center">
+													                		<input type="hidden" name="idenquete" value="<?=$enquete->getIdenquete()?>"/>
+													                		<?php echo '<b>'.$enquete->getNomeenquete().'</b><br><br>'; ?>
+													                	</div>
+													              		<table width="94%" border="0" align="center" cellpadding="0" cellspacing="0">
+													                	<?php
+													              			for ($i = 1 ; $i <= $enquete->getNumeroPerguntas() ; $i++) 
+													              			{
+													            		?>
+													                		<tr> 
+													                  			<td>
+													                  					<input type="radio" name="resposta" value="<?=$i?>"/>
+													                  					<?php 
+													                  					$metodo = "getQuestao".$i."enquete";
+													                  					?> 
+													                    				<?=$enquete->$metodo()?><br/>
+													                    		</td>
+													                		</tr>
+													                	<?php 
+													              			}
+													              		?>
+													              		</table>
+													              		<div align="center"> 
+													                		<input type="button" name="Button" value="Votar" onclick="votar();" />
+													                	</div>
+																	</td>
+													          	</tr>
+													        </table>
+													        </form>
+													<?php 
+														break;
+														}
+													}
+													?>
+													<div id="retornoVota"></div>
+												</div>
+												<div class="cleared"></div>
+											</div>
+										</div>
+										<div class="cleared"></div>
+									</div>
+								</div>
+								<div class="art-block">
+									<div class="art-block-body">
+										<div class="art-blockcontent">
+											<div class="art-blockcontent-body">
+												<div>
+												<?php 
+												$banners = new Banners();
+												$banners->reset();
+												$banners->setStatusbanner(1);
+												if($banners->find())
+												{
+													while ($banners->fetch())
+													{
+														echo '<img src="'.PROJETO_CONTEXT.'public/images/'.$banners->getCaminhobanner().'" width="120" height="60" />';
+														break;
+													}
+												}
+												?>
+												</div>
+												<div class="cleared"></div>
+											</div>
+										</div>
+										<div class="cleared"></div>
+									</div>
+								</div>
 								<div class="cleared"></div>
 							</div>
 							<div class="art-layout-cell art-content">
@@ -218,8 +255,8 @@
 													while($noticiaDestaque->fetch())
 													{
 														if($noticiaDestaque->getImagemnoticia())
-															echo "<img src=\"images/{$noticiaDestaque->getImagemnoticia()}\" style=\"float:left\" width=\"300\" height=\"200\" />";
-														echo "<p>".$noticiaDestaque->getDatanoticiaFormatado()." - ".$noticiaDestaque->getTitulonoticia()."</p>";
+															echo "<img src=\"images/{$noticiaDestaque->getImagemnoticia()}\" style=\"float:left\" width=\"300\" height=\"200\" /><br><br>";
+														echo "<p>".$noticiaDestaque->getDatanoticiaFormatado()." - <b>".$noticiaDestaque->getTitulonoticia()."</b></p>";
 														echo substr ($noticiaDestaque->getDescricaonoticia(), 0, 200);
 													}
 												}
@@ -238,7 +275,7 @@
 												echo '<ul>';
 												while ($noticias->fetch())
 												{
-													echo '<li><a href="javascript:void(0);" onClick="carregaPagina(\'noticia.php?idnoticia='.$noticias->getIdnoticia().'\',\'conteudo\')" target="_blank">'.$noticias->getDatanoticiaFormatado()." - ".$noticias->getTitulonoticia().'</a></li>';
+													echo '<li><a href="javascript:void(0);" onClick="carregaPagina(\'noticia.php?idnoticia='.$noticias->getIdnoticia().'\',\'conteudo\')">'.$noticias->getDatanoticiaFormatado()." - ".$noticias->getTitulonoticia().'</a></li>';
 												}
 												echo '</ul>';
 											}
@@ -251,25 +288,23 @@
 							</div>
 						</div>
 					</div>
-					<div class="cleared"></div>
-					<div class="art-footer">
-						<div class="art-footer-t"></div>
-						<div class="art-footer-l"></div>
-						<div class="art-footer-b"></div>
-						<div class="art-footer-r"></div>
-						<div class="art-footer-body">
-							<div class="art-footer-text">
-								<p>Copyright © 2011. All Rights Reserved.</p>
-							</div>
-							<div class="cleared"></div>
-						</div>
+				</div>
+			</div>
+			<div class="art-footer">
+				<div class="art-footer-t"></div>
+				<div class="art-footer-l"></div>
+				<div class="art-footer-b"></div>
+				<div class="art-footer-r"></div>
+				<div class="art-footer-body">
+					<div class="art-footer-text">
+						<p>Copyright © 2011. All Rights Reserved.<br/>
+						
+						</p>
 					</div>
 					<div class="cleared"></div>
 				</div>
 			</div>
 			<div class="cleared"></div>
-			<p class="art-page-footer">Powered by <a href="http://www.joaopadilha.com/">JPadilha</a></p>
-			<p class="art-page-footer"><a href="admin/index.php" target="_blank">Central do Associado</a></p>
 		</div>
 	</body>
 </html>
