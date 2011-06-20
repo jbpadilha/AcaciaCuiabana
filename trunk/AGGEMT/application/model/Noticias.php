@@ -126,8 +126,9 @@ class Noticias extends Lumine_Base {
 	{
 		if($this->getDatanoticia())
 		{
-			$data = explode("-",$this->getDatanoticia());
-			return $data[2]."-".$data[1]."-".$data[0]." ".date("H:i:s");
+			$dataHora = explode(" ",$this->getDatanoticia());
+			$data = explode("/", $dataHora[0]);
+			return $data[2]."-".$data[1]."-".$data[0]." ".$dataHora[1];
 		}
 		else
 		{

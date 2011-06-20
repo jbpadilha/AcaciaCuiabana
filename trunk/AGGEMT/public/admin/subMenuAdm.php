@@ -12,7 +12,7 @@ include '../carregamentoInicial.php';
       	carregaPagina('subMenuAdm.php?idsubmenu='+idsubmenu,'conteudo');
       }
 
-      function deletar(idmenu)
+      function deletar(idsubmenu)
       {
       	document.deletaAltera.funcao.value = "deletar";
       	document.deletaAltera.idsubmenu.value = idsubmenu;
