@@ -9,6 +9,7 @@ class Agenda extends Lumine_Base {
     public $tituloagenda = null;
     public $dataagenda = null;
     public $descricaoagenda = null;
+    public $tipoagenda = null;
     
 	/**
      * Inicia os valores da classe
@@ -21,6 +22,7 @@ class Agenda extends Lumine_Base {
         $this->_addField("tituloagenda", "tituloagenda", "varchar", 255, array('notnull' => true));
         $this->_addField('dataagenda', 'dataagenda', 'datetime', null, array('notnull' => true));
         $this->_addField("descricaoagenda", "descricaoagenda", "varchar", 255, array('notnull' => false));
+        $this->_addField("tipoagenda", "tipoagenda", "int", 1, array('notnull' => false));
         
     }
 
@@ -100,6 +102,20 @@ class Agenda extends Lumine_Base {
 	public function setDescricaoagenda($descricaoagenda) {
 		$this->descricaoagenda = $descricaoagenda;
 	}
+	
+	/**
+	 * @return the $tipoagenda
+	 */
+	public function getTipoagenda() {
+		return $this->tipoagenda;
+	}
+
+	/**
+	 * @param field_type $tipoagenda
+	 */
+	public function setTipoagenda($tipoagenda) {
+		$this->tipoagenda = $tipoagenda;
+	}
 
 	public function validate(){
 		
@@ -117,7 +133,7 @@ class Agenda extends Lumine_Base {
 		if($this->getDataagenda())
 		{
 			$dataHora = explode(" ",$this->getDataagenda());
-			$data = explode("-",$dataHora[0]);
+			$data = explode("/",$dataHora[0]);
 			return $data[2]."-".$data[1]."-".$data[0]." ".$dataHora[1];
 		}
 		else
@@ -151,7 +167,7 @@ class Agenda extends Lumine_Base {
 			{
 				while ($agenda->fetch())
 				{
-					$agenda->delete();
+					$agenda->delete(true);
 				}
 			}	
 		}

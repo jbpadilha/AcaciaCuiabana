@@ -55,6 +55,7 @@ if($menu->find())
 		}
 		echo '</li>';
 	}
+	echo '<li><a href="javascript:void(0);" class="active" onClick="carregaPagina(\'faleconosco.php\',\'conteudo\');"><span class="l"> </span><span class="r"> </span><span class="t">Fale Conosco</span></a></li>';
 	echo '</ul>';
 }
 ?>

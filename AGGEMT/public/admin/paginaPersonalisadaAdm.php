@@ -1,6 +1,5 @@
 <?php 
 include '../carregamentoInicial.php';
-include_once( '../ckeditor/ckeditor_php5.php' ) ;
 ?>
 <script type="text/javascript">
       function abaCadastra()
@@ -26,7 +25,6 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
       		alert('Todos campos obrigatórios devem ser preenchidos!');
       		return false;
       	} else {
-      		$('#descricaopagina').val(CKEDITOR.instances.descricaopagina.getData());
       		var formulario = $('#cadastrar').serialize(true);
       		enviaFormulario($('#cadastrar').attr("action"),'conteudo',formulario);
       	}
@@ -118,10 +116,8 @@ if(isset($_GET['idpagina']))
 		<tr>
 			<td valign="top"><p>Descrição:</p></td>
 			<td valign="top" colspan="2">
-				<?php 
-				$CKEditor = new CKEditor();
- 				$CKEditor->editor("descricaopagina", $paginas->getDescricaopagina());
- 				?>
+ 				<textarea readonly="readonly" name="descricaopagina" cols="50" rows="6" id="descricaopagina" onfocus="javascript:document.forms[1].Submit.focus();" title="Para editar o conteúdo da página, precione no botão Editar Campo, ao lado."><?=$paginas->getDescricaopagina()?></textarea>
+				<input name="Submit2" type="button" class="botao" value="Editar Campo" onclick="javascript:abrepagina('editorHtml.php?nomeExibicaoCampo=Conteúdo da Página&formulario=cadastrar&campo=descricaopagina',750,400);"/>
 			</td>
 		</tr>
 		<tr>

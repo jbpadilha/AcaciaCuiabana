@@ -1,6 +1,5 @@
 <?php 
 include '../carregamentoInicial.php';
-include_once( '../ckeditor/ckeditor_php5.php' ) ;
 ?>
 <script type="text/javascript">
 		Calendar.setup({
@@ -37,7 +36,6 @@ include_once( '../ckeditor/ckeditor_php5.php' ) ;
       		alert('Todos campos obrigatórios devem ser preenchidos!');
       		return false;
       	} else {
-      		$('#descricaoagenda').val(CKEDITOR.instances.descricaoagenda.getData());
       		var formulario = $('#cadastrar').serialize(true);
       		enviaFormulario($('#cadastrar').attr("action"),'conteudo',formulario);
       	}
@@ -125,6 +123,15 @@ if(isset($_GET['idagenda']))
 			</td>
 		</tr>
 		<tr>
+			<td valign="top"><p>Tipo da Agenda*:</p></td>
+			<td valign="top">
+				<select id="tipoagenda" name="tipoagenda">
+					<option value="1" <?=($agenda->getTipoagenda()==1)?"selected":""?>>Público</option>
+					<option value="0" <?=($agenda->getTipoagenda()==0)?"selected":""?>>Interno</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
 			<td valign="top"><p>Data*:</p></td>
 			<td valign="top">
 				<input type="text" id="dataagenda" name="dataagenda" value="<?=$agenda->getDataAgendaFormatado()?>" size="20">
@@ -134,10 +141,8 @@ if(isset($_GET['idagenda']))
 		<tr>
 			<td valign="top"><p>Descrição:</p></td>
 			<td valign="top" colspan="2">
-				<?php 
-				$CKEditor = new CKEditor();
- 				$CKEditor->editor("descricaoagenda", $agenda->getDescricaoagenda());
- 				?>
+ 				<textarea readonly="readonly" name="descricaoagenda" cols="50" rows="6" id="descricaoagenda" onfocus="javascript:document.forms[1].Submit.focus();" title="Para editar o conteúdo da página, precione no botão Editar Campo, ao lado."><?=$agenda->getDescricaoagenda()?></textarea>
+				<input name="Submit2" type="button" class="botao" value="Editar Campo" onclick="javascript:abrepagina('editorHtml.php?nomeExibicaoCampo=Conteúdo da Página&formulario=cadastrar&campo=descricaoagenda',750,400);"/>
 			</td>
 		</tr>
 		<tr>

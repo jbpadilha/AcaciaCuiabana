@@ -63,7 +63,7 @@ class ControlaEnquete extends ControlGeral {
 					$idenquete = (isset($POST['idenquete']))?$POST['idenquete']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($idenquete))
 					{
-						$enquete->setIdagenda($idenquete);
+						$enquete->setIdenquete($idenquete);
 					}
 					$this->preencheObjeto($enquete, $POST);
 					if(count($this->MENSAGEM_ERRO)<=0)
@@ -82,14 +82,28 @@ class ControlaEnquete extends ControlGeral {
 					$idenquete = (isset($POST['idenquete']))?$POST['idenquete']:null;
 					if(!ProjetoUtil::verificaBrancoNulo($idenquete))
 					{
-						$enquete->setIdagenda($idenquete);
-						$enquete->find();
-						echo "<script>alert(".var_dump($enquete).");</script>";
-						$metodogetResposta = "getVotos".$POST['resposta']."enqueste";
-						$metodosetResposta = "setVotos".$POST['resposta']."enqueste";
-						$enquete->$metodosetResposta($enquete->$metodogetResposta()+1);
-						$this->alterar($enquete);
-						echo "Obrigado por votar na enquete.";
+						//if(!$_COOKIE['enquete_'.$idenquete])
+						//{
+							$enquete->reset();
+							$enquete->setIdenquete($idenquete);
+							if($enquete->find())
+							{
+								while($enquete->fetch())
+								{
+									$enquete->setStatusenquete(1);
+									$metodogetResposta = "getVotos".$POST['resposta']."enqueste";
+									$metodosetResposta = "setVotos".$POST['resposta']."enqueste";
+									$enquete->$metodosetResposta($enquete->$metodogetResposta()+1);
+									$this->alterar($enquete);
+									setcookie("enquete_".$idenquete, $_SERVER['REMOTE_ADDR'],  time()+86400);
+									echo "Obrigado por votar na enquete.";
+								}
+							}
+						/*}
+						else
+						{
+							echo "Você já votou nessa enquete.";
+						}*/
 					}
 				}
 			}

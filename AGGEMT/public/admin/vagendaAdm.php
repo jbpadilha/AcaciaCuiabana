@@ -9,6 +9,7 @@ include ('../carregamentoInicial.php');
 if(isset($_GET['idagenda']))
 { 
 	$agendaPesquisa = new Agenda();
+	$agendaPesquisa->setTipoagenda(0);
 	$agendaPesquisa->setIdagenda($_GET['idagenda']);
 	$agendaPesquisa->find(true);
 ?>
@@ -21,6 +22,7 @@ if(isset($_GET['idagenda']))
 }
 $agenda = new Agenda();
 $agenda->reset();
+$agendaPesquisa->setTipoagenda(0);
 if($agenda->find())
 {
 	while ($agenda->fetch())

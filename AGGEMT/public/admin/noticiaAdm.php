@@ -1,15 +1,15 @@
 <?php 
 include '../carregamentoInicial.php';
-include_once( '../ckeditor/ckeditor_php5.php' ) ;
 ?>
 <script type="text/javascript">
       Calendar.setup({
         inputField : "datanoticia",
         trigger    : "f_btn1",
         onSelect   : function() { this.hide() },
-        dateFormat : "%d-%m-%Y"
+        dateFormat : "%d-%m-%Y %H:%M:%S",
+	    showTime: 24
       });
-      $("#datanoticia").mask("99/99/9999");
+      $("#datanoticia").mask("99/99/9999 99:99:99");
       function abaCadastra()
       {
     	  $('#cadastroNoticia').toggle();
@@ -133,10 +133,8 @@ if(isset($_GET['idnoticia']))
 		<tr>
 			<td valign="top"><p>Descrição:</p></td>
 			<td valign="top" colspan="2">
-				<?php 
-				$CKEditor = new CKEditor();
- 				$CKEditor->editor("descricaonoticia", $noticia->getDescricaonoticia());
- 				?>
+ 				<textarea readonly="readonly" name="descricaonoticia" cols="50" rows="6" id="descricaonoticia" onfocus="javascript:document.forms[1].Submit.focus();" title="Para editar o conteúdo da página, precione no botão Editar Campo, ao lado."><?=$noticia->getDescricaonoticia()?></textarea>
+				<input name="Submit2" type="button" class="botao" value="Editar Campo" onclick="javascript:abrepagina('editorHtml.php?nomeExibicaoCampo=Conteúdo da Notícia&formulario=cadastrar&campo=descricaonoticia',750,400);"/>
 			</td>
 		</tr>
 		<tr>

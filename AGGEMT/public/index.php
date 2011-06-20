@@ -6,7 +6,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
-		<title>AGEEMT - Associação de Gestores Governamentais do estado de Mato Grosso</title>
+		<title>AGGEMT  Associação dos Gestores Governamentais do Estado de Mato Grosso</title>
 		<link rel="stylesheet" href="./style.css" type="text/css" media="screen" />
 		<!--[if IE 6]><link rel="stylesheet" href="./style.ie6.css" type="text/css" media="screen" /><![endif]-->
 		<!--[if IE 7]><link rel="stylesheet" href="./style.ie7.css" type="text/css" media="screen" /><![endif]-->
@@ -26,6 +26,11 @@
 				$("div#resultadoEnquete").html("<div aligh='center'><font color=\"#FF0000\">Carregando ...</font>  <img src='images/loading.gif' align='top' alt='aguarde' /></div>");
 	            $.post($('#enquete').attr("action"), formulario, function(retorno){$("div#resultadoEnquete").html(retorno)});
 			}
+			function enviaFormulario(url,id,dados) {
+			    $("div#"+id).html("<div aligh='center'><font color=\"#FF0000\">Carregando ...</font>  <img src='images/loading.gif' align='top' alt='aguarde' /></div>");
+			            $.post(url,dados
+			            ,function(retorno){$("#"+id).html(retorno)});
+			}
 		</script>
 	</head>
 	<body>
@@ -38,8 +43,8 @@
 				<div class="art-header-wrapper">
 					<div class="art-header-inner">
 						<div class="art-logo">
-							<h1 id="name-text" class="art-logo-name"><a href="./index.html">AGGE - MT</a></h1>
-							<h2 id="slogan-text" class="art-logo-text">Associação de Gestores Governamentais do estado de Mato Grosso</h2>
+							<h1 id="name-text" class="art-logo-name"><a href="./index.html">AGGEMT</a></h1>
+							<h2 id="slogan-text" class="art-logo-text">Associação dos Gestores Governamentais do Estado de Mato Grosso</h2>
 						</div>
 					</div>
 				</div>
@@ -86,6 +91,7 @@
 												$agenda->apagaAgendaPassada();
 												$agenda->reset();
 												$agenda->limit(2);
+												$agenda->setTipoagenda(1);
 												$agenda->where("dataagenda > now()");
 												if($agenda->find())
 												{
@@ -138,6 +144,7 @@
 														echo '</ul>';
 													}
 													?>
+													<div class="cleared"><a href="javascript:void(0);" onclick="carregaPagina('links.php','conteudo')">Veja mais</a> </div>
 												</div>
 												<div class="cleared"></div>
 											</div>
@@ -157,6 +164,7 @@
 												<div>
 													<?php 
 													$enquete = new Enquete();
+													$enquete->reset();
 													$enquete->setStatusenquete(1);
 													$enquete->setTipoenquete(0);
 													if($enquete->find()>0)
@@ -167,7 +175,7 @@
 															<form action="../application/recebePostGet.php" name="enquete" id="enquete">
 															<input type="hidden" id="control" name="control" value="Enquete"/>
 															<input type="hidden" id="funcao" name="funcao" value="votar"/>
-															<table width="124" border="0" cellspacing="0" cellpadding="0">
+															<table width="150" border="0" cellspacing="0" cellpadding="0">
 													        	<tr> 
 													            	<td height="101" colspan="2"> 
 													              		<div align="center">
@@ -192,8 +200,9 @@
 													              			}
 													              		?>
 													              		</table>
-													              		<div align="center"> 
+													              		<div > 
 													                		<input type="button" name="Button" value="Votar" onclick="votar();" />
+													                		<input type="button" name="Button" value="Resultados" onclick="carregaPagina('resultadoEnquete.php?idenquete=<?=$enquete->getIdenquete()?>','conteudo');" />
 													                	</div>
 																	</td>
 													          	</tr>
@@ -239,7 +248,7 @@
 								</div>
 								<div class="cleared"></div>
 							</div>
-							<div class="art-layout-cell art-content">
+							<div>
 								<div class="art-post">
 									<div class="art-post-body">
 										<div class="art-post-inner art-article" id="conteudo" style="overflow: auto;">
@@ -249,15 +258,17 @@
 											<div class="art-postcontent">
 												<?php 
 												$noticiaDestaque = new Noticias();
+												$noticiaDestaque->reset();
 												$noticiaDestaque->setDestaque(1);
+												$noticiaDestaque->limit(1);
 												if($noticiaDestaque->find()>0)
 												{
 													while($noticiaDestaque->fetch())
 													{
 														if($noticiaDestaque->getImagemnoticia())
-															echo "<img src=\"images/{$noticiaDestaque->getImagemnoticia()}\" style=\"float:left\" width=\"300\" height=\"200\" /><br><br>";
-														echo "<p>".$noticiaDestaque->getDatanoticiaFormatado()." - <b>".$noticiaDestaque->getTitulonoticia()."</b></p>";
-														echo substr ($noticiaDestaque->getDescricaonoticia(), 0, 200);
+															echo "<img src=\"images/{$noticiaDestaque->getImagemnoticia()}\"  width=\"300\" height=\"200\" /><br><br>";
+														echo "<div><p>".$noticiaDestaque->getDatanoticiaFormatado()." - <b>".$noticiaDestaque->getTitulonoticia()."</b></p>";
+														echo substr ($noticiaDestaque->getDescricaonoticia(), 0, 200)."</div>";
 													}
 												}
 												?>
@@ -290,21 +301,10 @@
 					</div>
 				</div>
 			</div>
-			<div class="art-footer">
-				<div class="art-footer-t"></div>
-				<div class="art-footer-l"></div>
-				<div class="art-footer-b"></div>
-				<div class="art-footer-r"></div>
-				<div class="art-footer-body">
-					<div class="art-footer-text">
-						<p>Copyright © 2011. All Rights Reserved.<br/>
-						
-						</p>
-					</div>
-					<div class="cleared"></div>
-				</div>
-			</div>
 			<div class="cleared"></div>
+			<p class="art-page-footer">Powered by <a href="http://www.joaopadilha.com/" target="_blank">JPadilha</a><br/>
+			<a href="admin/" target="_blank">Administração</a></p>
 		</div>
+		
 	</body>
 </html>

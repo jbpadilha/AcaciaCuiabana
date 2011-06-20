@@ -32,6 +32,7 @@ require '../../application/GruposUsuarios.php';
 				?>
 				<li><a href="javascript:void(0);" onclick="carregaPagina('vagendaAdm.php','conteudo');"><span class="l"> </span><span class="r"> </span><span class="t">Agenda</span></a></li>
 				<li><a href="javascript:void(0);" onclick="carregaPagina('vanexosAdm.php','conteudo');"><span class="l"> </span><span class="r"> </span><span class="t">Publicações</span></a></li>
+				<li><a href="javascript:void(0);" onclick="carregaPagina('venqueteAdm.php','conteudo');"><span class="l"> </span><span class="r"> </span><span class="t">Enquete</span></a></li>
 				<li><a href="javascript:void(0);" onclick="carregaPagina('vusuariosAdm.php?idusuario=<?=$usuarioAdm->getIdusuario()?>','conteudo');"><span class="l"> </span><span class="r"> </span><span class="t">Meus Dados</span></a></li>
 				<?php 
 				}

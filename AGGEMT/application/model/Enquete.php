@@ -289,6 +289,27 @@ class Enquete extends Lumine_Base {
 			$nPerguntas++;
 		return $nPerguntas;
 	}
+	/**
+	 * 
+	 * Retorna a quantidade de votos já computados
+	 * 
+	 */
+	public function getTotalVotos()
+	{
+		$votos = 0;
+		if($this->getQuestao1enquete()!=null)
+			$votos = $votos + $this->getVotos1enqueste();
+		if($this->getQuestao1enquete()!=null)
+			$votos = $votos + $this->getVotos2enqueste();
+		if($this->getQuestao3enquete()!=null)
+			$votos = $votos + $this->getVotos3enqueste();
+		if($this->getQuestao4enquete()!=null)
+			$votos = $votos + $this->getVotos4enqueste();
+		if($this->getQuestao5enquete()!=null)
+			$votos = $votos + $this->getVotos5enqueste();
+		
+		return $votos;
+	}
 }
 
 ?>
