@@ -14,5 +14,5 @@ require '../application/GruposUsuarios.php';
 	<a href="javascript:void(0);" onclick="carregaPagina('galeria.php','conteudo')"><span class="l"></span><span class="r"></span><span class="t">Fotos</span></a>
 </li>
 <li>
-	<a href="javascript:void(0);" onclick="carregaPagina('contato.php','conteudo')"><span class="l"></span><span class="r"></span><span class="t">Contato</span></a>
+	<a href="javascript:void(0);" onclick="carregaPagina('faleconosco.php','conteudo')"><span class="l"></span><span class="r"></span><span class="t">Contato</span></a>
 </li>

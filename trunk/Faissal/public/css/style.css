@@ -189,7 +189,8 @@ h3#search {
 
 #header {
     position: relative;
-    z-index: 5;
+    
+    z-index: 3;
     height: 186px;
     width: 100% !important;
 }
@@ -204,14 +205,18 @@ h3#search {
 }
 
 #logo_wrap {
-    padding: 20px 10px;
     height: 80px;
     position: relative;
+    z-index: 3;
+}
+.faissal {
+    height: 80px;
+    position: relative;
+    width: 235px;
 }
 
 #the_logo {
-    height: 80px;
-    line-height: 80px;
+    height: 90px;
     display: block;
     margin: 0;
     float: left;
@@ -228,16 +233,17 @@ h3#search {
         text-decoration: none
     }
 
-#header #searchform {
+#searchform {
     float: right;
-    margin-top: 25px;
+    margin-top: -10px;
+    z-index: 3;
 }
 
 #content {
     padding: 0 0 40px;
     border-bottom: 1px solid #C8C8C8;
     position: relative;
-    z-index: 4;
+    z-index: 0;
     margin-top: -10px;
 }
 
@@ -580,7 +586,7 @@ input[type="submit"].button_gray:hover,
             display: none;
             margin: 0 0 0 0;
             padding: 0;
-            z-index: 900;
+            z-index: 0;
             float: none;
             height: auto;
             position: absolute;
@@ -755,7 +761,6 @@ blockquote {
 }
 
 #slide_widget_inner {
-    display: table;
     height: 300px;
 }
 
@@ -766,7 +771,7 @@ blockquote {
 }
 
 .campaign_email_capture_wrap {
-    padding: 0 20px;
+    padding: 0 10px;
     text-align: center;
     color: #757575;
 }
@@ -1704,7 +1709,7 @@ div.navigation {
 
     .body_boxed #header #main_menu {
         position: relative;
-        z-index: 5;
+        z-index: 2;
         background-image: url("../images/ribbon_menu.png");
         background-repeat: no-repeat;
         margin: 0 auto -10px;
