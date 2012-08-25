@@ -21,6 +21,16 @@ include("carregamentoInicial.php");
 		<link rel="stylesheet" href="switcher.css" type="text/css" media="screen" />
 		
 		<!-- END DEMO -->
+		<script type="text/javascript" src="./js/jquery.js"></script>
+		<script type="text/javascript" src="./js/script.js"></script>
+		<script type="text/javascript">
+		function carregaPagina(url,id) { 
+			$('#noticiaLista').html('');
+		    $("div#"+id).html("<div aligh='center'><font color=\"#FF0000\">Carregando ...</font>  <img src='images/loading.gif' align='top' alt='aguarde' /></div>");
+		            $.get(url,{ }
+		            ,function(retorno){$("#"+id).html(retorno)});
+		}
+		</script>
 	</head>
 	<!-- options for the body classes are // content_left, content_right // bg_linen, bg_freckles, bg_cork, bg_fabric, bg_pinstripes, bg_none // body_boxed, body_span // scheme_blue, scheme_red, scheme_green, scheme_yellow -->
 	<body class="content_left bg_linen body_boxed scheme_blue ">
@@ -80,13 +90,13 @@ include("carregamentoInicial.php");
 						</div>
 						<form method="get" id="searchform" action="#">
 							<div>
-								<input type="text" class="search_input" value="Search" name="s" id="s" onfocus="if (this.value == 'Search') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search';}" />
-								<input type="submit" id="searchsubmit" value="Search" />
+								<img src="images/faissal.png" alt="Campaign" id="logo">
 								<div class="clear"></div>
 							</div>
 						</form>
 						<div class="clear"></div>
 					</div>
+					<br/><br/>
 					<div id="clear"></div>
 				</div>
 				<div id="main_menu">
@@ -99,13 +109,14 @@ include("carregamentoInicial.php");
 									?>
 								</ul>
 							</div>
-							<a id="donate_now" class="button" href="#" title="Make A Donation">Make A Donation</a>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="wrapper" id="content"> <!-- #content ends in footer.php -->
-				<div class="container"><div id="slides_wrap">
+				<div class="container">
+				<div id="conteudo">
+				<div id="slides_wrap">
 	<div id="slides">
 		<div class="slidearea slides_container">
 			<div>
@@ -133,14 +144,14 @@ include("carregamentoInicial.php");
 	<div id="slide_widget" class="campaign_email_slide">
 		<div id="slide_widget_inner">
 			<div class="widget campaign_email_capture_wrap">
-				<h3 class="widgettitle">Join The Campaign</h3>
-				<span>This form does't work, but you can easily put in code from your email list manager.</span>
+				<h3 class="widgettitle">Vote Faissal</h3>
+				<span>Cadastre-se para receber agenda de Faissal.</span>
 				<div id="campaign_email_capture">
 					<form action="#" method="post">
 						<div>
-							<input type="text" class="campaign-email-capture-name campaign-email-capture-name-active" name="campaign-email-capture-name" title="Your Name" />
-							<input type="text" class="campaign-email-capture-email campaign-email-capture-email-active" name="campaign-email-capture-email" title="Your Email" />
-							<input type="submit" class="campaign-email-capture-submit" value="Subscribe To Updates" name="Submit" />
+							<input type="text" class="campaign-email-capture-name campaign-email-capture-name-active" name="campaign-email-capture-name" title="Seu Nome" />
+							<input type="text" class="campaign-email-capture-email campaign-email-capture-email-active" name="campaign-email-capture-email" title="Seu E-mail" />
+							<input type="submit" class="campaign-email-capture-submit" value="Receba agenda de Faissal" name="Submit" />
 						</div>
 					</form>
 				</div>
@@ -149,22 +160,23 @@ include("carregamentoInicial.php");
 	</div>
 	<div class="clear"></div>
 </div>
+</div>
 <div id="home_widgets">
 	<div id="home_widget_wrap">
 		<div class="widget">
-			<h3 class="widgettitle">Call To Action</h3>
-			<div>You can fill this banner up with whatever you want. These three sections and their buttons serve as a perfect call to action to navigate your users around the site..</div>
-			<a href="#" class="button button_gray">Contribute</a>
+			<h3 class="widgettitle">Educação</h3>
+			<div>Proposta na Educação</div>
+			<a href="#" class="button button_gray">Mais</a>
 		</div>
 		<div class="widget">
-			<h3 class="widgettitle">Collect Emails</h3>
-			<div>Campaign makes it easy to capture the names and emails of your constituents. You can easily put in code from your list manager to sign up users in a jiffy.</div>
-			<a href="#" class="button button_gray">Get In Touch</a>
+			<h3 class="widgettitle">Saúde</h3>
+			<div>Proposta na Saúde.</div>
+			<a href="#" class="button button_gray">Mais</a>
 		</div>
 		<div class="widget">
-			<h3 class="widgettitle">Create Events</h3>
-			<div>Campaign is also styled for events. List your upcoming events in the sidebar of each page and link each and every one to their very own events page template.</div>
-			<a href="#" class="button button_gray">Sign Me Up</a>
+			<h3 class="widgettitle">Segurança</h3>
+			<div>Proposta Saúde.</div>
+			<a href="#" class="button button_gray">Mais</a>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -172,18 +184,16 @@ include("carregamentoInicial.php");
 <div class="posts-wrap">
 	<div id="home_video_wrap">
 		<div id="home_video">
-			<iframe src="http://player.vimeo.com/video/31241445?portrait=0" width="380" height="223" frameborder="0"></iframe>
+			<iframe src="http://www.youtube.com/embed/rOrnZ5wo8nM" frameborder="0" width="380" height="223" ></iframe>
 		</div>
 		<div id="home_video_desc">
-			<h4>Video Title</h4>
-			<p>This is a short description of the video. Simply put in the embed code for whatever video you want here. This is an HTML template, so whatever you want put here will work just fine.<br /><br />
-				Get your point across with video <em>and</em> a little bit of text.
-			</p>
+			<h4>Pedido Especial</h4>
+			<p>Senador Pedro Taques e um pedido especial para você.</p>
 		</div>
 		<div class="clear"></div>
 	</div>
 	<div id="home_latest_posts">
-		<h4 class="entry-title" id="latest-posts-title">Latest Posts</h4>
+		<h4 class="entry-title" id="latest-posts-title">Últimas ações</h4>
 		<div class="single_latest left">
 			<a href="blog-single.php" title="Single Post" class="single_latest_img_link">
 				<img width="170" height="120" src="images/latest_fallback.png" alt="Image" />
@@ -215,32 +225,41 @@ include("carregamentoInicial.php");
 	</div>
 </div>
 <div id="sidebar">
-		<div class="widget"><h4 class="widgettitle">Upcoming Events</h4>
+		<div class="widget"><h4 class="widgettitle">Agenda</h4>
 		<ul class="upcoming">
-			<li class="event_list_item">
-				<div class="when">
-					July 23, 2012 <small>(All Day)</small>
-				</div>
-				<div class="event">
-					<a href="page-event.php">Campaign Party Event</a>
-				</div>
-			</li>
-			<li class="event_list_item">
-				<div class="when">
-					November 6, 2012 8:00 am -<br/>November 6, 2012 5:00 pm
-				</div>
-				<div class="event">
-					<a href="page-event.php">Election Day</a>
-				</div>
-			</li>
+			<?php 
+			$agenda = new Agenda();
+			$agenda->reset();
+			$agenda->limit(2);
+			$agenda->where("dataagenda > now()");
+			if($agenda->find())
+			{
+				while ($agenda->fetch())
+				{
+					
+					echo "<li class=\"event_list_item\">
+					<div class=\"when\">
+						{$agenda->getDataAgendaFormatado()}
+					</div>
+					<div class=\"event\">
+						<p>{$agenda->getTituloagenda()}</p></li>
+					</div>
+					";
+				}
+			}
+			else
+			{
+				echo "<tr><td>Sem agenda.</td><tr>";
+			}
+			?>
+			
 		</ul>
-		<div class="dig-in"><a href="page-event.php">View All Events</a></div>
+		<div class="dig-in"><a href="javascript:void(0);" onclick="carregaPagina('agenda.php','conteudo')">veja todas</a></div>
 	</div>
-	<div class="widget_testimonial widget"><h4 class="widgettitle">Testimonial Card</h4>
-		<div class="the_testimonial">I support Campaign because it keeps me working. It's time to get out and vote!</div>
+	<div class="widget_testimonial widget"><h4 class="widgettitle">Testemunhal</h4>
+		<div class="the_testimonial">Insira aqui o testemunho de Faissal</div>
 		<div class="the_testimonial_author">
-			<strong>- Jake Caputo</strong>
-			<span><a href="http://themeforest.net/user/designcrumbs/portfolio?ref=designcrumbs" title="Design Crumbs">Design Crumbs</a></span>
+			<strong>- Faissal</strong>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -250,50 +269,9 @@ include("carregamentoInicial.php");
 		</div><!-- end div#main_wrap, begins in header.php -->
 		<div id="footer" class="wrapper">
 			<div class="container">
-				<h1 id="footer_slogan">Change Is Coming Soon</h1>
+				<h1 id="footer_slogan">A mudança é agora.</h1>
 				<div id="footer_widgets">
-					<div class="footer_widget">
-						<div class="featured_user">
-							<h6 class="widgettitle">Meet The Candidate</h6>			
-							<div class="specific_user">
-								<a href="#" title="Jake Caputo">
-									<img alt="" src="http://0.gravatar.com/avatar/02cdeec360274d7d9f1aa85761f95dc8?s=58&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D58&amp;r=G" class="avatar" height="58" width="58" />
-								</a>
-								<strong>
-									<a href="#" title="Jake Caputo" class="featured_user_name">
-										Jake Caputo
-									</a>
-								</strong>
-								I'm a web designer and developer currently living just outside of Chicago, IL. I like coffee, comic books, and cats.  I'm also a big fan of The Beach Boys and the Chicago Bears.
-								<div class="clear"></div>
-							</div>
-						</div>
-					</div>
-					<div class="footer_widget">
-						<h6 class="widgettitle">Recent Blog Posts</h6>
-						<ul>
-							<li><a href="blog-single.php" title="Blog Post">Blog Post Title Here</a></li>
-							<li><a href="blog-single.php" title="Blog Post">Blog Post Title Here</a></li>
-							<li><a href="blog-single.php" title="Blog Post">Blog Post Title Here</a></li>
-							<li><a href="blog-single.php" title="Blog Post">Blog Post Title Here</a></li>
-							<li><a href="blog-single.php" title="Blog Post">Blog Post Title Here</a></li>
-						</ul>
-					</div>
-					<div class="footer_widget">
-						<div id="twitter_div">
-							<h6 class="widgettitle">Latest Tweets</h6>
-							<ul id="twitter_update_list"><li></li></ul>
-						</div>
-						<!-- This script pulls the latest tweets and places them in the above 'li'. Replace 'jakecaputo' with your twitter URL -->
-						<script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>
-						<script type="text/javascript" src="http://twitter.com/statuses/user_timeline/jakecaputo.json?callback=twitterCallback2&amp;count=2"></script>
-					</div>
-					<div class="footer_widget">
-						<h6 class="widgettitle">Register To Vote</h6>
-						<span>This is a widget with a button. You can use it to push users wherever you want. Perhaps to a contact page?</span>
-						<a href="#" class="button button_red">Let's Go</a>
-					</div>
-					<div class="clear"></div>
+					
 				</div>
 				<div id="post_footer">
 					<div id="socnets_wrap">
@@ -301,7 +279,7 @@ include("carregamentoInicial.php");
 							<a href="#" title="Twitter">
 								<img src="images/socnets/twitter.png" alt="Twitter" />
 							</a>
-							<a href="#" title="Facebook">
+							<a href="https://www.facebook.com/faissal.calil" title="Facebook">
 								<img src="images/socnets/facebook.png" alt="Facebook" />
 							</a>
 							<a href="#" title="Google+">
@@ -322,10 +300,9 @@ include("carregamentoInicial.php");
 						</div>
 						<div class="clear"></div>
 					</div>
-					<div id="paid_for">Paid For By Campaign for Office</div>
 					<div id="site_info">
-						&copy; 2012 Campaign&nbsp;&nbsp;:&nbsp;
-						<a href="http://www.designcrumbs.com/wordpress-themes" title="Campaign WordPress Theme">Campaign Theme</a> by <a href="http://www.designcrumbs.com/wordpress-themes" title="Design Crumbs">Design Crumbs</a>
+						&copy; 2012&nbsp;&nbsp;:&nbsp;
+						<a href="mailto:joao.padilha@globo.com" title="Campaign WordPress Theme">by João Padilha</a>
 					</div>
 				</div>
 			</div>
