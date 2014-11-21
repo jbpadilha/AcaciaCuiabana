@@ -4,5 +4,7 @@
     <string name="app_name">Attomos</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="hello"></string>
+    <dimen name="question_medium_size">18dp</dimen>
 
 </resources>
