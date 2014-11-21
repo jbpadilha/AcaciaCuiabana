@@ -13,7 +13,8 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.types.CGPoint;
 
-import android.widget.EditText;
+import android.widget.TextView;
+import br.com.casadocodigo.bis.R;
 import br.com.casadocodigo.bis.config.Assets;
 import br.com.casadocodigo.bis.game.control.Button;
 import br.com.casadocodigo.bis.game.control.ButtonDelegate;
@@ -27,7 +28,9 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 	private ScreenBackground background;
 	private Button beginButton;
 	private Button nextButton;
+	Button button;
 	public static List<Questions> questionslist = new ArrayList<Questions>();
+	protected TextView questionTextView;
 	
 	CCBitmapFontAtlas showQuestion;
 	
@@ -43,12 +46,18 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 		this.background.setPosition(screenResolution(CGPoint.ccp(screenWidth() / 2.0f, screenHeight() / 2.0f)));
 		this.addChild(this.background);
 		createQuestions();
+		//questionTextView = (TextView) CCDirector.sharedDirector().getActivity().findViewById(R.id.question);
+		//questionTextView.setText(questionslist.get(newQuiz).getQuestion());
 		
-		this.showQuestion = CCBitmapFontAtlas.bitmapFontAtlas(
-				String.valueOf(questionslist.get(newQuiz).getQuestion()),"UniSansBold_AlphaNum_50_red.fnt");
-		this.showQuestion.setScale((float) 240 / 240);
-		this.showQuestion.setPosition(screenWidth()/2, (screenHeight()/2)+100);
+		this.showQuestion = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf(questionslist.get(newQuiz).getQuestion()),"arial.fnt");
+		this.showQuestion.setScale((float) 100 / 100);
+		this.showQuestion.setPosition(screenWidth()/2-80, (screenHeight()/2)+100);
 		this.addChild(this.showQuestion);
+		
+		//Answers
+		button = (Button) CCDirector.sharedDirector().getActivity().findViewById(R.id.answer);
+		
+		
 	}
 
 	@Override
@@ -62,7 +71,7 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 		//Questions 1
 		Questions question1 = new Questions();
 		question1.setCodQuestion(1);
-		question1.setQuestion("Quest√£o 1");
+		question1.setQuestion("Quest„o 1");
 		
 			//Answers
 			question1.addAnswers(new Answers(question1, "Resposta 1",true));
@@ -73,7 +82,7 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 		//Questions 2
 		Questions question2 = new Questions();
 		question2.setCodQuestion(2);
-		question2.setQuestion("Quest√£o 2");
+		question2.setQuestion("Quest„o 2");
 			
 			//Answers
 			question2.addAnswers(new Answers(question2, "Resposta 1"));
@@ -85,7 +94,7 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 		//Questions 3
 		Questions question3 = new Questions();
 		question3.setCodQuestion(3);
-		question3.setQuestion("Quest√£o 3");
+		question3.setQuestion("Quest„o 3");
 				
 			//Answers
 			question3.addAnswers(new Answers(question3, "Resposta 1"));
@@ -98,7 +107,7 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 		//Questions 4
 		Questions question4 = new Questions();
 		question1.setCodQuestion(4);
-		question1.setQuestion("Quest√£o 4");
+		question1.setQuestion("Quest„o 4");
 				
 			//Answers
 			Answers answer4_1 = new Answers(question1, "Resposta 1");
