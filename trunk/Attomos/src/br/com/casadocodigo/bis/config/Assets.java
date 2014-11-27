@@ -34,4 +34,9 @@ public class Assets {
 	
 	public static String  NEXT 		 = "nextButton.png";
 	
+
+	public static String ERROR  = "erro.png";
+	public static String SUCESS = "sucesso.png";
+	public static String SELECT = "selecionar.png";
+	
 }
