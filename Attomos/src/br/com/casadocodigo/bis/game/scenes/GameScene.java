@@ -361,7 +361,7 @@ public class GameScene extends CCLayer implements MeteorsEngineDelegate,
 				this.runAction(CCSequence.actions(s1));
 				
 				//CCDirector.sharedDirector().replaceScene(new GameOverScreen(Runner.getFinalButton()).scene());
-				CCDirector.sharedDirector().replaceScene(new QuizScreen(1).scene());
+				CCDirector.sharedDirector().replaceScene(new QuizScreen(0).scene());
 			}
 			else
 			{

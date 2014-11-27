@@ -26,4 +26,7 @@ public class Questions {
 	{
 		answersList.add(answers);	
 	}
+	public List<Answers> getAnswers(){
+		return answersList;
+	}
 }	

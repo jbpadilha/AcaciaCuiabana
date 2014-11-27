@@ -64,6 +64,7 @@ public class TitleScreen extends CCLayer {
 		
 		// Add options layer
 		MenuButtons menuLayer = new MenuButtons(nextTittle);
+		
 		this.addChild(menuLayer);
 		
 	}

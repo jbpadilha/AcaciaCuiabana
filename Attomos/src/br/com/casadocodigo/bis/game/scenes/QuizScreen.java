@@ -13,9 +13,11 @@ import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.opengl.CCBitmapFontAtlas;
 import org.cocos2d.types.CGPoint;
 
+import android.text.AlteredCharSequence;
 import android.widget.TextView;
 import br.com.casadocodigo.bis.R;
 import br.com.casadocodigo.bis.config.Assets;
+import br.com.casadocodigo.bis.config.Runner;
 import br.com.casadocodigo.bis.game.control.Button;
 import br.com.casadocodigo.bis.game.control.ButtonDelegate;
 import br.com.casadocodigo.bis.game.objects.Answers;
@@ -28,9 +30,13 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 	private ScreenBackground background;
 	private Button beginButton;
 	private Button nextButton;
-	Button button;
+	private Button buttonAlternativa0,buttonAlternativa1,buttonAlternativa2,buttonAlternativa3;
+	Button buttonProximaQuestao;
+	Button buttonRespostaAlternativaErrada,buttonRespostaAlternativaCerta;
 	public static List<Questions> questionslist = new ArrayList<Questions>();
 	protected TextView questionTextView;
+	int Questao = 0;//0 corresponde a alternativa 1
+	
 	
 	CCBitmapFontAtlas showQuestion;
 	
@@ -42,29 +48,177 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 	
 	public QuizScreen(int newQuiz) {
 		
+		
+		//define qual questao corrente
+		Questao = newQuiz;
+		
+		
+		//define o backgroud da tela
 		this.background = new ScreenBackground(Assets.BACKGROUND);
+		//define as posições
 		this.background.setPosition(screenResolution(CGPoint.ccp(screenWidth() / 2.0f, screenHeight() / 2.0f)));
+		//adiciona na tela
 		this.addChild(this.background);
+		
+		//cria as questões e as alternativas correspondente a questão
 		createQuestions();
-		//questionTextView = (TextView) CCDirector.sharedDirector().getActivity().findViewById(R.id.question);
-		//questionTextView.setText(questionslist.get(newQuiz).getQuestion());
 		
-		this.showQuestion = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf(questionslist.get(newQuiz).getQuestion()),"arial.fnt");
-		this.showQuestion.setScale((float) 100 / 100);
-		this.showQuestion.setPosition(screenWidth()/2-80, (screenHeight()/2)+100);
-		this.addChild(this.showQuestion);
+		//mostra na tela a alternativa correspondente a questão
+			this.showQuestion = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf(questionslist.get(newQuiz).getQuestion()),"arial.fnt");
+			this.showQuestion.setScale((float) 100 / 100);
+			this.showQuestion.setPosition(screenWidth()/2-80, (screenHeight())-30);
+			this.addChild(this.showQuestion);
+			
+			//busca as altenativas da questao
+			int posicaoTelaAltenativa = -65;
+			for(int i = 0; i<= questionslist.get(newQuiz).getAnswers().size()-1;i++){
+				
+				//obtem as altenativas da questão
+				CCBitmapFontAtlas alternativa = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf(questionslist.get(newQuiz).getAnswers().get(i).getAnswer()),"arial.fnt");
+				alternativa.setScale((float) 100 / 100);
+				//define a posição de cada alternativa
+				alternativa.setPosition(screenResolution(CGPoint.ccp(120 , (screenHeight())+posicaoTelaAltenativa )));
+				//adiciona as altenativa as tela
+				this.addChild(alternativa);
+				//define a proxima posição da altenativa
+				
+				if(i==0){//testa se é 1 alternativa da questão
+					//adiciona o Proxima Questão na tela
+					this.buttonAlternativa0 = new Button(Assets.SELECT);
+					this.buttonAlternativa0.setDelegate(this);
+					this.buttonAlternativa0.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())+posicaoTelaAltenativa )));
+					this.addChild(this.buttonAlternativa0);
+				}
+				if(i==1){//testa se é 2 alternativa da questão
+					//adiciona o Proxima Questão na tela
+					this.buttonAlternativa1 = new Button(Assets.SELECT);
+					this.buttonAlternativa1.setDelegate(this);
+					this.buttonAlternativa1.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())+posicaoTelaAltenativa )));
+					this.addChild(this.buttonAlternativa1);
+					
+				}
+				if(i==2){//testa se é 3 alternativa da questão
+					//adiciona o Proxima Questão na tela
+					this.buttonAlternativa2 = new Button(Assets.SELECT);
+					this.buttonAlternativa2.setDelegate(this);
+					this.buttonAlternativa2.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())+posicaoTelaAltenativa )));
+					this.addChild(this.buttonAlternativa2);
+				}
+				if(i==3){//testa se é 4 alternativa da questão
+					//adiciona o Proxima Questão na tela
+					this.buttonAlternativa3 = new Button(Assets.SELECT);
+					this.buttonAlternativa3.setDelegate(this);
+					this.buttonAlternativa3.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())+posicaoTelaAltenativa )));
+					this.addChild(this.buttonAlternativa3);
+				}
+
+				posicaoTelaAltenativa = posicaoTelaAltenativa-30;//defiene a proxima posicao
+				
+				//fim adiciona o botao na tela
+			}
+			
+		//adiciona o Proxima Questão na tela
+		this.buttonProximaQuestao = new Button(Assets.NEXT);
+		this.buttonProximaQuestao.setDelegate(this);
+		this.buttonProximaQuestao.setPosition(screenResolution(CGPoint.ccp( screenWidth()-50 , 50 ))) ;
+		this.addChild(this.buttonProximaQuestao);
+		//fim adiciona o botao na tela
 		
-		//Answers
-		button = (Button) CCDirector.sharedDirector().getActivity().findViewById(R.id.answer);
 		
 		
+		//informa se a alternativa esta correta
+		this.buttonRespostaAlternativaCerta = new Button(Assets.SUCESS);
+		this.buttonRespostaAlternativaCerta.setPosition(screenResolution(CGPoint.ccp( 170 , 130 ))) ;
+		this.buttonRespostaAlternativaCerta.setVisible(false);
+		this.addChild(this.buttonRespostaAlternativaCerta);
+	   //fiminforma se a alternativa esta correta
+				
+		//informa se a alternativa esta errada
+		this.buttonRespostaAlternativaErrada = new Button(Assets.ERROR);
+		this.buttonRespostaAlternativaErrada.setPosition(screenResolution(CGPoint.ccp( 170 , 130 ))) ;
+		this.buttonRespostaAlternativaErrada.setVisible(false);
+		this.addChild(this.buttonRespostaAlternativaErrada);
+		//informa se a alternativa esta errada
+		
+		this.Questao = this.Questao+1;
 	}
 
 	@Override
 	public void buttonClicked(Button sender) {
+
+		
+		if((this.Questao > 3)&&(sender == this.buttonProximaQuestao)){//se terminou as questões entao manda para tela de GameOver
+			CCDirector.sharedDirector().replaceScene(new GameOverScreen(Runner.getFinalButton()).scene());
+		}
+		else{ //testa se é a ultma questao
+			
+			if(sender == this.buttonProximaQuestao){//testa se foi clicado no botao proximo
 				
+				CCDirector.sharedDirector().replaceScene(new QuizScreen(this.Questao).scene());
+				
+			}else{//senão testa os outros botoes
+					if(sender == this.buttonAlternativa0){//testa se foi clicado na 1 altern.
+					System.out.println("clicou 0");
+						if(questionslist.get(this.Questao-1).getAnswers().get(0).isCorrectAnswer() == true){//testa se alternativa é verdadeira
+							this.buttonRespostaAlternativaCerta.setVisible(true);
+							this.buttonRespostaAlternativaErrada.setVisible(false);
+							System.out.println("correto");
+						}else{
+							this.buttonRespostaAlternativaCerta.setVisible(false);
+							this.buttonRespostaAlternativaErrada.setVisible(true);
+							System.out.println("errado");
+							
+						}
+						//this.buttonRespostaAlternativa0.setPosition(10,10);
+						//this.addChild(this.buttonRespostaAlternativa0);
+					}
+					if(sender == this.buttonAlternativa1){//testa se foi clicado na 2 altern.
+						System.out.println("clicou 1");
+						if(questionslist.get(this.Questao-1).getAnswers().get(1).isCorrectAnswer() == true){//testa se alternativa é verdadeira
+							this.buttonRespostaAlternativaCerta.setVisible(true);
+							this.buttonRespostaAlternativaErrada.setVisible(false);
+							System.out.println("correto");
+						}else{
+							this.buttonRespostaAlternativaCerta.setVisible(false);
+							this.buttonRespostaAlternativaErrada.setVisible(true);
+							System.out.println("errado");
+							
+						}
+					}
+					if(sender == this.buttonAlternativa2){//testa se foi clicado na 3 altern.
+						System.out.println("clicou 2");
+						if(questionslist.get(this.Questao-1).getAnswers().get(2).isCorrectAnswer() == true){//testa se alternativa é verdadeira
+							this.buttonRespostaAlternativaCerta.setVisible(true);
+							this.buttonRespostaAlternativaErrada.setVisible(false);
+							System.out.println("correto");
+						}else{
+							this.buttonRespostaAlternativaCerta.setVisible(false);
+							this.buttonRespostaAlternativaErrada.setVisible(true);
+							System.out.println("errado");
+							
+						}
+						//this.buttonRespostaAlternativa2.setPosition(10,10);
+						//this.addChild(this.buttonRespostaAlternativa2);
+					}
+					if(sender == this.buttonAlternativa3){//testa se foi clicado na 4 altern.
+						System.out.println("clicou 3");
+						if(questionslist.get(this.Questao-1).getAnswers().get(3).isCorrectAnswer() == true){//testa se alternativa é verdadeira
+							this.buttonRespostaAlternativaCerta.setVisible(true);
+							this.buttonRespostaAlternativaErrada.setVisible(false);
+							
+							System.out.println("correto");
+						}else{
+							this.buttonRespostaAlternativaCerta.setVisible(false);
+							this.buttonRespostaAlternativaErrada.setVisible(true);
+							System.out.println("errado");
+							
+						}
+					}
+					//seta a informação da resposta
+			}
+			
+		}	
 	}
-	
 	
 	public void createQuestions()
 	{
@@ -98,26 +252,26 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 				
 			//Answers
 			question3.addAnswers(new Answers(question3, "Resposta 1"));
-			question3.addAnswers(new Answers(question3, "Resposta 2",true));
-			question3.addAnswers(new Answers(question3, "Resposta 3"));
+			question3.addAnswers(new Answers(question3, "Resposta 2"));
+			question3.addAnswers(new Answers(question3, "Resposta 3",true));
 			question3.addAnswers(new Answers(question3, "Resposta 4"));
 		
 			
 			
 		//Questions 4
 		Questions question4 = new Questions();
-		question1.setCodQuestion(4);
-		question1.setQuestion("Questão 4");
+		question4.setCodQuestion(4);
+		question4.setQuestion("Questão 4");
 				
 			//Answers
-			Answers answer4_1 = new Answers(question1, "Resposta 1");
-			Answers answer4_2 = new Answers(question1, "Resposta 2");
-			Answers answer4_3 = new Answers(question1, "Resposta 3");
-			Answers answer4_4 = new Answers(question1, "Resposta 4");
-			question1.addAnswers(answer4_1);
-			question1.addAnswers(answer4_2);
-			question1.addAnswers(answer4_3);
-			question1.addAnswers(answer4_4);
+			Answers answer4_1 = new Answers(question4, "Resposta 1");
+			Answers answer4_2 = new Answers(question4, "Resposta 2");
+			Answers answer4_3 = new Answers(question4, "Resposta 3");
+			Answers answer4_4 = new Answers(question4, "Resposta 4",true);			
+			question4.addAnswers(answer4_1);
+			question4.addAnswers(answer4_2);
+			question4.addAnswers(answer4_3);
+			question4.addAnswers(answer4_4);
 	
 			
 		questionslist.add(question1);
