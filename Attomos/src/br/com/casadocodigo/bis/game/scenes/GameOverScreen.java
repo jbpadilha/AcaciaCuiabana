@@ -35,9 +35,6 @@ public class GameOverScreen extends CCLayer implements ButtonDelegate{
 		if(nextFinal == 0){
 			this.background = new ScreenBackground(Assets.BACKGROUND_TELA_FINAL);
 		}
-		else if(nextFinal == 1){
-			this.background = new ScreenBackground(Assets.BACKGROUND_TELA_FINAL1);
-		}
 		else{
 			this.background = new ScreenBackground(Assets.BACKGROUND);
 			// image
