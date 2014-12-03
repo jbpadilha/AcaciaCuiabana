@@ -28,8 +28,6 @@ import br.com.casadocodigo.bis.screens.ScreenBackground;
 public class QuizScreen extends CCLayer implements ButtonDelegate{
 
 	private ScreenBackground background;
-	private Button beginButton;
-	private Button nextButton;
 	private Button buttonAlternativa0,buttonAlternativa1,buttonAlternativa2,buttonAlternativa3;
 	Button buttonProximaQuestao;
 	Button buttonRespostaAlternativaErrada,buttonRespostaAlternativaCerta;
@@ -65,7 +63,7 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 		
 		//mostra na tela a alternativa correspondente a questão
 			this.showQuestion = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf(questionslist.get(newQuiz).getQuestion()),"arial.fnt");
-			this.showQuestion.setScale((float) 100 / 100);
+			this.showQuestion.setScale((float) 50 /100);
 			this.showQuestion.setPosition(screenWidth()/2-80, (screenHeight())-30);
 			this.addChild(this.showQuestion);
 			
@@ -75,7 +73,7 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 				
 				//obtem as altenativas da questão
 				CCBitmapFontAtlas alternativa = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf(questionslist.get(newQuiz).getAnswers().get(i).getAnswer()),"arial.fnt");
-				alternativa.setScale((float) 100 / 100);
+				alternativa.setScale((float) 50 / 100);
 				//define a posição de cada alternativa
 				alternativa.setPosition(screenResolution(CGPoint.ccp(120 , (screenHeight())+posicaoTelaAltenativa )));
 				//adiciona as altenativa as tela
@@ -158,7 +156,6 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 				
 			}else{//senão testa os outros botoes
 					if(sender == this.buttonAlternativa0){//testa se foi clicado na 1 altern.
-					System.out.println("clicou 0");
 						if(questionslist.get(this.Questao-1).getAnswers().get(0).isCorrectAnswer() == true){//testa se alternativa é verdadeira
 							this.buttonRespostaAlternativaCerta.setVisible(true);
 							this.buttonRespostaAlternativaErrada.setVisible(false);
@@ -173,7 +170,6 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 						//this.addChild(this.buttonRespostaAlternativa0);
 					}
 					if(sender == this.buttonAlternativa1){//testa se foi clicado na 2 altern.
-						System.out.println("clicou 1");
 						if(questionslist.get(this.Questao-1).getAnswers().get(1).isCorrectAnswer() == true){//testa se alternativa é verdadeira
 							this.buttonRespostaAlternativaCerta.setVisible(true);
 							this.buttonRespostaAlternativaErrada.setVisible(false);
@@ -186,7 +182,6 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 						}
 					}
 					if(sender == this.buttonAlternativa2){//testa se foi clicado na 3 altern.
-						System.out.println("clicou 2");
 						if(questionslist.get(this.Questao-1).getAnswers().get(2).isCorrectAnswer() == true){//testa se alternativa é verdadeira
 							this.buttonRespostaAlternativaCerta.setVisible(true);
 							this.buttonRespostaAlternativaErrada.setVisible(false);
@@ -201,16 +196,13 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 						//this.addChild(this.buttonRespostaAlternativa2);
 					}
 					if(sender == this.buttonAlternativa3){//testa se foi clicado na 4 altern.
-						System.out.println("clicou 3");
 						if(questionslist.get(this.Questao-1).getAnswers().get(3).isCorrectAnswer() == true){//testa se alternativa é verdadeira
 							this.buttonRespostaAlternativaCerta.setVisible(true);
 							this.buttonRespostaAlternativaErrada.setVisible(false);
 							
-							System.out.println("correto");
 						}else{
 							this.buttonRespostaAlternativaCerta.setVisible(false);
 							this.buttonRespostaAlternativaErrada.setVisible(true);
-							System.out.println("errado");
 							
 						}
 					}
@@ -225,49 +217,60 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 		//Questions 1
 		Questions question1 = new Questions();
 		question1.setCodQuestion(1);
-		question1.setQuestion("Questão 1");
+		question1.setQuestion("Em um processo de fissão do Urânio em que se forma o xenônio-140 (Xe), " +
+				"Representeado pela equação abaixo, é formado também o estrôncio-94 (Sr) que deve ter um " +
+				"numero atômico (z) igual a: ");
 		
 			//Answers
-			question1.addAnswers(new Answers(question1, "Resposta 1",true));
-			question1.addAnswers(new Answers(question1, "Resposta 2"));
-			question1.addAnswers(new Answers(question1, "Resposta 3"));
-			question1.addAnswers(new Answers(question1, "Resposta 4"));
+			question1.addAnswers(new Answers(question1, "19",true));
+			question1.addAnswers(new Answers(question1, "36"));
+			question1.addAnswers(new Answers(question1, "38"));
+			question1.addAnswers(new Answers(question1, "40"));
 		
 		//Questions 2
 		Questions question2 = new Questions();
 		question2.setCodQuestion(2);
-		question2.setQuestion("Questão 2");
+		question2.setQuestion("Em um processo de fissão do Urânio em que se forma o xnônio-140 (Xe), " +
+				"representado pela equação abaixo, é formado também o estrôncio-94 (Sr) que deve ter " +
+				"um número de massa (A) igual a:");
 			
 			//Answers
-			question2.addAnswers(new Answers(question2, "Resposta 1"));
-			question2.addAnswers(new Answers(question2, "Resposta 2",true));
-			question2.addAnswers(new Answers(question2, "Resposta 3"));
-			question2.addAnswers(new Answers(question2, "Resposta 4"));
+			question2.addAnswers(new Answers(question2, "93"));
+			question2.addAnswers(new Answers(question2, "94",true));
+			question2.addAnswers(new Answers(question2, "95"));
+			question2.addAnswers(new Answers(question2, "98"));
 			
 			
 		//Questions 3
 		Questions question3 = new Questions();
 		question3.setCodQuestion(3);
-		question3.setQuestion("Questão 3");
+		question3.setQuestion("A maioria das usinas nucleares utiliza a fissão do isótopo U-235 " +
+				"para a produção de energia elétrica. Nos reatores dessas usinas a energia liberada durante " +
+				"a fissão nuclear é:");
 				
 			//Answers
-			question3.addAnswers(new Answers(question3, "Resposta 1"));
-			question3.addAnswers(new Answers(question3, "Resposta 2"));
-			question3.addAnswers(new Answers(question3, "Resposta 3",true));
-			question3.addAnswers(new Answers(question3, "Resposta 4"));
+			question3.addAnswers(new Answers(question3, "Absorvida por um elétron que se constitui em corrente elétrica."));
+			question3.addAnswers(new Answers(question3, "Usada para liberar outros nêutrons que se convertem em eletrecidade."));
+			question3.addAnswers(new Answers(question3, "Usada para erver a água que, como vapor a alta pressão, aciona uma turbina.",true));
+			question3.addAnswers(new Answers(question3, "Transformada em energia elétrica, de acordo com a Teoria da Relatividade, após uma violenta explosão."));
 		
 			
 			
 		//Questions 4
 		Questions question4 = new Questions();
 		question4.setCodQuestion(4);
-		question4.setQuestion("Questão 4");
+		question4.setQuestion("Na fissão nuclear ocorre a liberação de energia de ordem de 200 MeV, que, isoladamente " +
+				"pode ser considerada desprezível (trata-se de uma quantidade de energia muitíssimo menor do que aquela liberada quando se acende " +
+				"um palito de fósforo. Entretanto, o total de energia liberada que se pode obter com esse tipo de processo acaba " +
+				"se tornando extraordinariamente grande graças ao seguinte efeito: Cada um dos nêutrons liberados fissiona outro núcleo, que " +
+				"libera outros nêutrons, os quais, por sua vez, fissionarão outros núcleos, e assim por diante." +
+				"O processo inteiro ocorre em um intervalo de tempo muito curto e é chamado de:");
 				
 			//Answers
-			Answers answer4_1 = new Answers(question4, "Resposta 1");
-			Answers answer4_2 = new Answers(question4, "Resposta 2");
-			Answers answer4_3 = new Answers(question4, "Resposta 3");
-			Answers answer4_4 = new Answers(question4, "Resposta 4",true);			
+			Answers answer4_1 = new Answers(question4, "Reação em cadeia");
+			Answers answer4_2 = new Answers(question4, "Fusão nuclear");
+			Answers answer4_3 = new Answers(question4, "Interação forte");
+			Answers answer4_4 = new Answers(question4, "Decaimento alfa",true);			
 			question4.addAnswers(answer4_1);
 			question4.addAnswers(answer4_2);
 			question4.addAnswers(answer4_3);

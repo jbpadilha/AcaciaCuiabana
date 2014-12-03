@@ -27,13 +27,13 @@ public class MenuButtons extends CCLayer implements ButtonDelegate {
 		// Enable Touch
 		this.setIsTouchEnabled(true);
 		
-		if(nextTittle >= 1 && nextTittle <= 3){
+		if(nextTittle >= 1 && nextTittle <= 4){
 			this.nextButton = new Button(Assets.NEXT);
 			this.nextButton.setDelegate(this);
 			nextButton.setPosition(screenResolution(CGPoint.ccp( screenWidth()-50 , 50 ))) ;
 			addChild(nextButton);
 		}
-		else if(nextTittle == 4){
+		else if(nextTittle == 5){
 			this.playButton1 = new Button(Assets.PLAY);
 			this.playButton1.setDelegate(this);
 			playButton1.setPosition(screenResolution(CGPoint.ccp( screenWidth()/2 , 50 ))) ;

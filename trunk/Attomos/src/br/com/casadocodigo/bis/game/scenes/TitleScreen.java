@@ -53,6 +53,9 @@ public class TitleScreen extends CCLayer {
 		else if(nextTittle == 4){
 			this.background = new ScreenBackground(Assets.BACKGROUND_TELA4);
 		}
+		else if(nextTittle == 5){
+			this.background = new ScreenBackground(Assets.BACKGROUND_TELA5);
+		}
 		else{
 			this.background = new ScreenBackground(Assets.BACKGROUND_INICIO);
 		}

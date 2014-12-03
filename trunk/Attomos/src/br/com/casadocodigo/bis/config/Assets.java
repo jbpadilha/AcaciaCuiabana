@@ -9,8 +9,8 @@ public class Assets {
 	public static String  BACKGROUND_TELA2 = "tela_2_game_fissao.png";
 	public static String  BACKGROUND_TELA3 = "tela_3_game_fissao.png";
 	public static String  BACKGROUND_TELA4 = "tela_4_game_fissao.png";
+	public static String  BACKGROUND_TELA5 = "tela_5_game_fissao.png";
 	public static String  BACKGROUND_TELA_FINAL = "tela_final_game_fissao.png";
-	public static String  BACKGROUND_TELA_FINAL1 = "tela_final_game_fissao_1.png";
 	public static String  LOGO 		 = "logo.png";
 	public static String  FINALEND 	 = "finalend.png";
 	public static String  GAMEOVER 	 = "gameover.png";
