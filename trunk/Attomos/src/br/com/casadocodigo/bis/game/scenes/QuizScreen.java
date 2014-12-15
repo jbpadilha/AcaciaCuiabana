@@ -80,8 +80,8 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 		
 		// Mostra titulo
 		this.showTitleQuestion = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf("QUIZZ"),"arial.fnt");
-		this.showTitleQuestion.setScale((float) 50 /100);
-		this.showTitleQuestion.setPosition(screenWidth()/2-80, (screenHeight())-10);
+		this.showTitleQuestion.setScale((float) 100 /100);
+		this.showTitleQuestion.setPosition(screenWidth()/-80, (screenHeight())-10);
 		this.addChild(this.showTitleQuestion);
 		
 		 
@@ -96,14 +96,14 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 		
 			
 			//busca as altenativas da questao
-			int posicaoTelaAltenativa = -75;
+			int posicaoTelaAltenativa = 75;
 			for(int i = 0; i<= questionChoosen.getAnswers().size()-1;i++){
 				
 				//obtem as altenativas da questão
 				CCBitmapFontAtlas alternativa = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf(questionslist.get(newQuiz).getAnswers().get(i).getAnswer()),"arial.fnt");
 				alternativa.setScale((float) 50 / 100);
 				//define a posição de cada alternativa
-				alternativa.setPosition(screenResolution(CGPoint.ccp(120 , (screenHeight())+posicaoTelaAltenativa )));
+				alternativa.setPosition(screenResolution(CGPoint.ccp(120 , (screenHeight())-posicaoTelaAltenativa )));
 				//adiciona as altenativa as tela
 				this.addChild(alternativa);
 				//define a proxima posição da altenativa
@@ -112,14 +112,14 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 					//adiciona o Proxima Questão na tela
 					this.buttonAlternativa0 = new Button(Assets.SELECT);
 					this.buttonAlternativa0.setDelegate(this);
-					this.buttonAlternativa0.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())+posicaoTelaAltenativa )));
+					this.buttonAlternativa0.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())-posicaoTelaAltenativa )));
 					this.addChild(this.buttonAlternativa0);
 				}
 				if(i==1){//testa se é 2 alternativa da questão
 					//adiciona o Proxima Questão na tela
 					this.buttonAlternativa1 = new Button(Assets.SELECT);
 					this.buttonAlternativa1.setDelegate(this);
-					this.buttonAlternativa1.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())+posicaoTelaAltenativa )));
+					this.buttonAlternativa1.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())-posicaoTelaAltenativa )));
 					this.addChild(this.buttonAlternativa1);
 					
 				}
@@ -127,14 +127,14 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 					//adiciona o Proxima Questão na tela
 					this.buttonAlternativa2 = new Button(Assets.SELECT);
 					this.buttonAlternativa2.setDelegate(this);
-					this.buttonAlternativa2.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())+posicaoTelaAltenativa )));
+					this.buttonAlternativa2.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())-posicaoTelaAltenativa )));
 					this.addChild(this.buttonAlternativa2);
 				}
 				if(i==3){//testa se é 4 alternativa da questão
 					//adiciona o Proxima Questão na tela
 					this.buttonAlternativa3 = new Button(Assets.SELECT);
 					this.buttonAlternativa3.setDelegate(this);
-					this.buttonAlternativa3.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())+posicaoTelaAltenativa )));
+					this.buttonAlternativa3.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())-posicaoTelaAltenativa )));
 					this.addChild(this.buttonAlternativa3);
 				}
 
