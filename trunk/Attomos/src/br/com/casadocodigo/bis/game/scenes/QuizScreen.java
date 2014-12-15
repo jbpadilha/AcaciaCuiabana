@@ -37,6 +37,7 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 	
 	
 	CCBitmapFontAtlas showQuestion;
+	CCBitmapFontAtlas showTitleQuestion;
 	
 	public CCScene scene() {
 		CCScene scene = CCScene.node();
@@ -61,14 +62,21 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 		//cria as questões e as alternativas correspondente a questão
 		createQuestions();
 		
+		// Mostra titulo
+		this.showTitleQuestion = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf("QUIZZ"),"arial.fnt");
+		this.showTitleQuestion.setScale((float) 50 /100);
+		this.showTitleQuestion.setPosition(screenWidth()/2-80, (screenHeight())-20);
+		this.addChild(this.showTitleQuestion);
+		
+		
 		//mostra na tela a alternativa correspondente a questão
 			this.showQuestion = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf(questionslist.get(newQuiz).getQuestion()),"arial.fnt");
 			this.showQuestion.setScale((float) 50 /100);
-			this.showQuestion.setPosition(screenWidth()/2-80, (screenHeight())-30);
+			this.showQuestion.setPosition(screenWidth()/2-80, (screenHeight())-40);
 			this.addChild(this.showQuestion);
 			
 			//busca as altenativas da questao
-			int posicaoTelaAltenativa = -65;
+			int posicaoTelaAltenativa = -75;
 			for(int i = 0; i<= questionslist.get(newQuiz).getAnswers().size()-1;i++){
 				
 				//obtem as altenativas da questão
