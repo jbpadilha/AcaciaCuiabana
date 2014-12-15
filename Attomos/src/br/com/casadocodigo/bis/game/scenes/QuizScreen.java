@@ -62,13 +62,29 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 		//cria as questões e as alternativas correspondente a questão
 		createQuestions();
 		
+		Questions questionChoosen = (Questions)questionslist.get(newQuiz);
+		
+		if(newQuiz == 0){
+			this.background = new ScreenBackground(Assets.QUESTION_1);
+		}else if(newQuiz == 1){
+			this.background = new ScreenBackground(Assets.QUESTION_2);
+		}else if(newQuiz == 2){
+			this.background = new ScreenBackground(Assets.QUESTION_3);
+		}else if(newQuiz == 3){
+			this.background = new ScreenBackground(Assets.QUESTION_4);
+		}
+		this.background.setPosition(screenResolution(CGPoint.ccp(screenWidth() / 2.0f, screenHeight() / 2.0f)));
+		//adiciona na tela
+		this.addChild(this.background);
+		
+		
 		// Mostra titulo
 		this.showTitleQuestion = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf("QUIZZ"),"arial.fnt");
 		this.showTitleQuestion.setScale((float) 50 /100);
 		this.showTitleQuestion.setPosition(screenWidth()/2-80, (screenHeight())-10);
 		this.addChild(this.showTitleQuestion);
 		
-		Questions questionChoosen = (Questions)questionslist.get(newQuiz); 
+		 
 		
 		//mostra na tela a alternativa correspondente a questão
 			/*this.showQuestion = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf(questionslist.get(newQuiz).getQuestion()),"arial.fnt");
@@ -76,18 +92,7 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 			this.showQuestion.setPosition(screenWidth()/2-80, (screenHeight())-40);
 			this.addChild(this.showQuestion);*/
 			//Coloca Background com a Questão:
-			if(newQuiz == 1){
-				this.background = new ScreenBackground(Assets.QUESTION_1);
-			}else if(newQuiz == 2){
-				this.background = new ScreenBackground(Assets.QUESTION_2);
-			}else if(newQuiz == 3){
-				this.background = new ScreenBackground(Assets.QUESTION_3);
-			}else if(newQuiz == 4){
-				this.background = new ScreenBackground(Assets.QUESTION_4);
-			}
-			this.background.setPosition(screenResolution(CGPoint.ccp(screenWidth() / 2.0f, screenHeight() / 2.0f)));
-			//adiciona na tela
-			this.addChild(this.background);
+			
 		
 			
 			//busca as altenativas da questao
