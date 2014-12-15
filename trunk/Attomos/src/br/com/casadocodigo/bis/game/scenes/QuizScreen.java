@@ -53,11 +53,11 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 		
 		
 		//define o backgroud da tela
-		this.background = new ScreenBackground(Assets.BACKGROUND);
+		//this.background = new ScreenBackground(Assets.BACKGROUND);
 		//define as posições
-		this.background.setPosition(screenResolution(CGPoint.ccp(screenWidth() / 2.0f, screenHeight() / 2.0f)));
+		//this.background.setPosition(screenResolution(CGPoint.ccp(screenWidth() / 2.0f, screenHeight() / 2.0f)));
 		//adiciona na tela
-		this.addChild(this.background);
+		//this.addChild(this.background);
 		
 		//cria as questões e as alternativas correspondente a questão
 		createQuestions();
@@ -65,19 +65,34 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 		// Mostra titulo
 		this.showTitleQuestion = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf("QUIZZ"),"arial.fnt");
 		this.showTitleQuestion.setScale((float) 50 /100);
-		this.showTitleQuestion.setPosition(screenWidth()/2-80, (screenHeight())-20);
+		this.showTitleQuestion.setPosition(screenWidth()/2-80, (screenHeight())-10);
 		this.addChild(this.showTitleQuestion);
 		
+		Questions questionChoosen = (Questions)questionslist.get(newQuiz); 
 		
 		//mostra na tela a alternativa correspondente a questão
-			this.showQuestion = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf(questionslist.get(newQuiz).getQuestion()),"arial.fnt");
+			/*this.showQuestion = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf(questionslist.get(newQuiz).getQuestion()),"arial.fnt");
 			this.showQuestion.setScale((float) 50 /100);
 			this.showQuestion.setPosition(screenWidth()/2-80, (screenHeight())-40);
-			this.addChild(this.showQuestion);
+			this.addChild(this.showQuestion);*/
+			//Coloca Background com a Questão:
+			if(newQuiz == 1){
+				this.background = new ScreenBackground(Assets.QUESTION_1);
+			}else if(newQuiz == 2){
+				this.background = new ScreenBackground(Assets.QUESTION_2);
+			}else if(newQuiz == 3){
+				this.background = new ScreenBackground(Assets.QUESTION_3);
+			}else if(newQuiz == 4){
+				this.background = new ScreenBackground(Assets.QUESTION_4);
+			}
+			this.background.setPosition(screenResolution(CGPoint.ccp(screenWidth() / 2.0f, screenHeight() / 2.0f)));
+			//adiciona na tela
+			this.addChild(this.background);
+		
 			
 			//busca as altenativas da questao
 			int posicaoTelaAltenativa = -75;
-			for(int i = 0; i<= questionslist.get(newQuiz).getAnswers().size()-1;i++){
+			for(int i = 0; i<= questionChoosen.getAnswers().size()-1;i++){
 				
 				//obtem as altenativas da questão
 				CCBitmapFontAtlas alternativa = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf(questionslist.get(newQuiz).getAnswers().get(i).getAnswer()),"arial.fnt");
