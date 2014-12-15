@@ -39,4 +39,9 @@ public class Assets {
 	public static String SUCESS = "sucesso.png";
 	public static String SELECT = "selecionar.png";
 	
+	public static String  QUESTION_1 = "question_1.png";
+	public static String  QUESTION_2 = "question_2.png";
+	public static String  QUESTION_3 = "question_3.png";
+	public static String  QUESTION_4 = "question_4.png";
+	
 }
