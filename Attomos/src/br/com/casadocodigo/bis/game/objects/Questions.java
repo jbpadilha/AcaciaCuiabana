@@ -1,6 +1,7 @@
 package br.com.casadocodigo.bis.game.objects;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Questions {
@@ -29,4 +30,16 @@ public class Questions {
 	public List<Answers> getAnswers(){
 		return answersList;
 	}
+	
+	public Answers getCorrectAnswer(){
+		Iterator itAnswer = answersList.iterator();
+		while (itAnswer.hasNext()){
+			Answers correctAnswer = (Answers) itAnswer.next();
+			if(correctAnswer.isCorrectAnswer()){
+				return correctAnswer;
+			}
+		}
+		return null;
+	}
+	
 }	

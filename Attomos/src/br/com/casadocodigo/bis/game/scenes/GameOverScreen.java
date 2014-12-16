@@ -47,7 +47,7 @@ public class GameOverScreen extends CCLayer implements ButtonDelegate{
 				
 		// Enable Touch
 		this.setIsTouchEnabled(true);
-		if(nextFinal == 0 || nextFinal == 1){
+		if(nextFinal == 0){
 			this.nextButton = new Button(Assets.NEXT);
 			this.nextButton.setDelegate(this);
 			nextButton.setPosition(screenResolution(CGPoint.ccp( screenWidth()-50 , 50 ))) ;
@@ -62,8 +62,8 @@ public class GameOverScreen extends CCLayer implements ButtonDelegate{
 
 	@Override
 	public void buttonClicked(Button sender) {
-		if (sender.equals(this.beginButton)) {
-			if(Runner.getFinalButton() == 0 || Runner.getFinalButton() == 1){
+		if (sender.equals(this.nextButton)) {
+			if(Runner.getFinalButton() == 0){
 				Runner.finalButtonIncrease();
 				CCDirector.sharedDirector().replaceScene(new GameOverScreen(Runner.getFinalButton()).scene());
 			}
