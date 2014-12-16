@@ -32,7 +32,9 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 	Button buttonProximaQuestao;
 	Button buttonRespostaAlternativaErrada,buttonRespostaAlternativaCerta;
 	public static List<Questions> questionslist = new ArrayList<Questions>();
-	protected TextView questionTextView;
+	//protected TextView questionTextView;
+	protected CCBitmapFontAtlas alternativaCorretaTextView;
+	protected CCBitmapFontAtlas tituloAlternativaCorretaTextView;
 	int Questao = 0;//0 corresponde a alternativa 1
 	
 	
@@ -80,8 +82,8 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 		
 		// Mostra titulo
 		this.showTitleQuestion = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf("QUIZZ"),"arial.fnt");
-		this.showTitleQuestion.setScale((float) 100 /100);
-		this.showTitleQuestion.setPosition(screenWidth()/-80, (screenHeight())-10);
+		this.showTitleQuestion.setScale((float) 120 /100);
+		this.showTitleQuestion.setPosition(screenWidth()/2, (screenHeight())-20);
 		this.addChild(this.showTitleQuestion);
 		
 		 
@@ -96,14 +98,25 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 		
 			
 			//busca as altenativas da questao
-			int posicaoTelaAltenativa = 75;
+			int posicaoTelaAltenativa = -260;
+			if(newQuiz == 3){
+				posicaoTelaAltenativa = -300;
+			}
 			for(int i = 0; i<= questionChoosen.getAnswers().size()-1;i++){
 				
 				//obtem as altenativas da questão
 				CCBitmapFontAtlas alternativa = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf(questionslist.get(newQuiz).getAnswers().get(i).getAnswer()),"arial.fnt");
-				alternativa.setScale((float) 50 / 100);
+				if(newQuiz!=2){
+					alternativa.setScale((float) 60 / 100);
+				}else{
+					alternativa.setScale((float) 50 / 100);
+				}
 				//define a posição de cada alternativa
-				alternativa.setPosition(screenResolution(CGPoint.ccp(120 , (screenHeight())-posicaoTelaAltenativa )));
+				if(newQuiz!=2){
+					alternativa.setPosition(screenResolution(CGPoint.ccp(120 , (screenHeight())+posicaoTelaAltenativa )));
+				}else{
+					alternativa.setPosition(screenResolution(CGPoint.ccp(130 , (screenHeight())+posicaoTelaAltenativa )));
+				}
 				//adiciona as altenativa as tela
 				this.addChild(alternativa);
 				//define a proxima posição da altenativa
@@ -112,14 +125,22 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 					//adiciona o Proxima Questão na tela
 					this.buttonAlternativa0 = new Button(Assets.SELECT);
 					this.buttonAlternativa0.setDelegate(this);
-					this.buttonAlternativa0.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())-posicaoTelaAltenativa )));
+					if(newQuiz!=2){
+						this.buttonAlternativa0.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())+posicaoTelaAltenativa )));
+					}else{
+						this.buttonAlternativa0.setPosition(screenResolution(CGPoint.ccp(290 , (screenHeight())+posicaoTelaAltenativa )));
+					}
 					this.addChild(this.buttonAlternativa0);
 				}
 				if(i==1){//testa se é 2 alternativa da questão
 					//adiciona o Proxima Questão na tela
 					this.buttonAlternativa1 = new Button(Assets.SELECT);
 					this.buttonAlternativa1.setDelegate(this);
-					this.buttonAlternativa1.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())-posicaoTelaAltenativa )));
+					if(newQuiz!=2){
+						this.buttonAlternativa1.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())+posicaoTelaAltenativa )));
+					}else{
+						this.buttonAlternativa1.setPosition(screenResolution(CGPoint.ccp(290 , (screenHeight())+posicaoTelaAltenativa )));
+					}
 					this.addChild(this.buttonAlternativa1);
 					
 				}
@@ -127,14 +148,22 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 					//adiciona o Proxima Questão na tela
 					this.buttonAlternativa2 = new Button(Assets.SELECT);
 					this.buttonAlternativa2.setDelegate(this);
-					this.buttonAlternativa2.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())-posicaoTelaAltenativa )));
+					if(newQuiz!=2){
+						this.buttonAlternativa2.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())+posicaoTelaAltenativa )));
+					}else{
+						this.buttonAlternativa2.setPosition(screenResolution(CGPoint.ccp(290 , (screenHeight())+posicaoTelaAltenativa )));
+					}
 					this.addChild(this.buttonAlternativa2);
 				}
 				if(i==3){//testa se é 4 alternativa da questão
 					//adiciona o Proxima Questão na tela
 					this.buttonAlternativa3 = new Button(Assets.SELECT);
 					this.buttonAlternativa3.setDelegate(this);
-					this.buttonAlternativa3.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())-posicaoTelaAltenativa )));
+					if(newQuiz!=2){
+						this.buttonAlternativa3.setPosition(screenResolution(CGPoint.ccp(190 , (screenHeight())+posicaoTelaAltenativa )));
+					}else{
+						this.buttonAlternativa3.setPosition(screenResolution(CGPoint.ccp(290 , (screenHeight())+posicaoTelaAltenativa )));
+					}
 					this.addChild(this.buttonAlternativa3);
 				}
 
@@ -154,17 +183,59 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 		
 		//informa se a alternativa esta correta
 		this.buttonRespostaAlternativaCerta = new Button(Assets.SUCESS);
-		this.buttonRespostaAlternativaCerta.setPosition(screenResolution(CGPoint.ccp( 170 , 130 ))) ;
+		this.buttonRespostaAlternativaCerta.setPosition(screenResolution(CGPoint.ccp(screenWidth()/2 , 50 ))) ;
 		this.buttonRespostaAlternativaCerta.setVisible(false);
 		this.addChild(this.buttonRespostaAlternativaCerta);
 	   //fiminforma se a alternativa esta correta
 				
 		//informa se a alternativa esta errada
 		this.buttonRespostaAlternativaErrada = new Button(Assets.ERROR);
-		this.buttonRespostaAlternativaErrada.setPosition(screenResolution(CGPoint.ccp( 170 , 130 ))) ;
+		if(newQuiz == 3){
+			this.buttonRespostaAlternativaErrada.setPosition(screenResolution(CGPoint.ccp( screenWidth()/2 , 60 ))) ;
+		}else{
+			this.buttonRespostaAlternativaErrada.setPosition(screenResolution(CGPoint.ccp( screenWidth()/2 , 90 ))) ;
+		}
 		this.buttonRespostaAlternativaErrada.setVisible(false);
 		this.addChild(this.buttonRespostaAlternativaErrada);
+		
+		this.tituloAlternativaCorretaTextView = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf("Correta:"),"arial.fnt");
+		if(newQuiz!=2){
+			this.tituloAlternativaCorretaTextView.setScale((float) 80 /100);
+			if(newQuiz == 3){
+				this.tituloAlternativaCorretaTextView.setPosition(40, 30);
+			}else{
+				this.tituloAlternativaCorretaTextView.setPosition(40, 60);
+			}
+		}else{
+			this.tituloAlternativaCorretaTextView.setScale((float) 50 /100);
+			this.tituloAlternativaCorretaTextView.setPosition(40, 50);
+		}
+		
+		this.tituloAlternativaCorretaTextView.setVisible(false);
+		this.addChild(this.tituloAlternativaCorretaTextView);
+		
+		
+		Answers correctAnswer = questionslist.get(newQuiz).getCorrectAnswer();
+		if(correctAnswer!=null){
+			this.alternativaCorretaTextView = CCBitmapFontAtlas.bitmapFontAtlas(String.valueOf(correctAnswer.getAnswer()),"arial.fnt");
+			if(newQuiz!=2){
+				this.alternativaCorretaTextView.setScale((float) 80 /100);
+				if(newQuiz == 3){
+					this.alternativaCorretaTextView.setPosition(140, 30);
+				}else{
+					this.alternativaCorretaTextView.setPosition(100, 60);
+				}
+			}else{
+				this.alternativaCorretaTextView.setScale((float) 50 /100);
+				this.alternativaCorretaTextView.setPosition(130, 30);
+			}
+			this.alternativaCorretaTextView.setVisible(false);
+			this.addChild(this.alternativaCorretaTextView);
+		}
 		//informa se a alternativa esta errada
+		
+		
+		
 		
 		this.Questao = this.Questao+1;
 	}
@@ -191,6 +262,8 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 						}else{
 							this.buttonRespostaAlternativaCerta.setVisible(false);
 							this.buttonRespostaAlternativaErrada.setVisible(true);
+							this.tituloAlternativaCorretaTextView.setVisible(true);
+							this.alternativaCorretaTextView.setVisible(true);
 							System.out.println("errado");
 							
 						}
@@ -205,6 +278,8 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 						}else{
 							this.buttonRespostaAlternativaCerta.setVisible(false);
 							this.buttonRespostaAlternativaErrada.setVisible(true);
+							this.tituloAlternativaCorretaTextView.setVisible(true);
+							this.alternativaCorretaTextView.setVisible(true);
 							System.out.println("errado");
 							
 						}
@@ -217,6 +292,8 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 						}else{
 							this.buttonRespostaAlternativaCerta.setVisible(false);
 							this.buttonRespostaAlternativaErrada.setVisible(true);
+							this.tituloAlternativaCorretaTextView.setVisible(true);
+							this.alternativaCorretaTextView.setVisible(true);
 							System.out.println("errado");
 							
 						}
@@ -231,7 +308,8 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 						}else{
 							this.buttonRespostaAlternativaCerta.setVisible(false);
 							this.buttonRespostaAlternativaErrada.setVisible(true);
-							
+							this.tituloAlternativaCorretaTextView.setVisible(true);
+							this.alternativaCorretaTextView.setVisible(true);
 						}
 					}
 					//seta a informação da resposta
@@ -277,10 +355,10 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 				"a fissão nuclear é:");
 				
 			//Answers
-			question3.addAnswers(new Answers(question3, "Absorvida por um elétron que se constitui em corrente elétrica."));
-			question3.addAnswers(new Answers(question3, "Usada para liberar outros nêutrons que se convertem em eletrecidade."));
-			question3.addAnswers(new Answers(question3, "Usada para erver a água que, como vapor a alta pressão, aciona uma turbina.",true));
-			question3.addAnswers(new Answers(question3, "Transformada em energia elétrica, de acordo com a Teoria da Relatividade, após uma violenta explosão."));
+			question3.addAnswers(new Answers(question3, "Absorvida por elétron. Constitui em corrente elétrica."));
+			question3.addAnswers(new Answers(question3, "Liberar outros nêutrons, convertem em eletrecidade."));
+			question3.addAnswers(new Answers(question3, "Ferve agua como vapor a alta pressao, aciona a turbina.",true));
+			question3.addAnswers(new Answers(question3, "Transf. em energia elet. (Teoria da Relatividade) e explode."));
 		
 			
 			
