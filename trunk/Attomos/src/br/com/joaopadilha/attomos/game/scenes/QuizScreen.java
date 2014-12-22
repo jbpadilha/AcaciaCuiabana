@@ -32,8 +32,8 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 	//protected TextView questionTextView;
 	protected CCBitmapFontAtlas alternativaCorretaTextView;
 	protected CCBitmapFontAtlas tituloAlternativaCorretaTextView;
-	int Questao = 0;//0 corresponde a alternativa 1
-	
+	int questao = 0;//0 corresponde a alternativa 1
+	int respondeuQuestao = 0;
 	
 	CCBitmapFontAtlas showQuestion;
 	CCBitmapFontAtlas showTitleQuestion;
@@ -48,7 +48,7 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 		
 		
 		//define qual questao corrente
-		Questao = newQuiz;
+		questao = newQuiz;
 		
 		
 		//define o backgroud da tela
@@ -234,85 +234,85 @@ public class QuizScreen extends CCLayer implements ButtonDelegate{
 		
 		
 		
-		this.Questao = this.Questao+1;
+		this.questao = this.questao+1;
 	}
 
 	@Override
 	public void buttonClicked(Button sender) {
-
-		
-		if((this.Questao > 3)&&(sender == this.buttonProximaQuestao)){//se terminou as questões entao manda para tela de GameOver
-			CCDirector.sharedDirector().replaceScene(new GameOverScreen(Runner.getFinalButton()).scene());
-		}
-		else{ //testa se é a ultma questao
-			
-			if(sender == this.buttonProximaQuestao){//testa se foi clicado no botao proximo
-				
-				CCDirector.sharedDirector().replaceScene(new QuizScreen(this.Questao).scene());
-				
-			}else{//senão testa os outros botoes
-					if(sender == this.buttonAlternativa0){//testa se foi clicado na 1 altern.
-						if(questionslist.get(this.Questao-1).getAnswers().get(0).isCorrectAnswer() == true){//testa se alternativa é verdadeira
-							this.buttonRespostaAlternativaCerta.setVisible(true);
-							this.buttonRespostaAlternativaErrada.setVisible(false);
-							System.out.println("correto");
-						}else{
-							this.buttonRespostaAlternativaCerta.setVisible(false);
-							this.buttonRespostaAlternativaErrada.setVisible(true);
-							this.tituloAlternativaCorretaTextView.setVisible(true);
-							this.alternativaCorretaTextView.setVisible(true);
-							System.out.println("errado");
-							
-						}
-						//this.buttonRespostaAlternativa0.setPosition(10,10);
-						//this.addChild(this.buttonRespostaAlternativa0);
-					}
-					if(sender == this.buttonAlternativa1){//testa se foi clicado na 2 altern.
-						if(questionslist.get(this.Questao-1).getAnswers().get(1).isCorrectAnswer() == true){//testa se alternativa é verdadeira
-							this.buttonRespostaAlternativaCerta.setVisible(true);
-							this.buttonRespostaAlternativaErrada.setVisible(false);
-							System.out.println("correto");
-						}else{
-							this.buttonRespostaAlternativaCerta.setVisible(false);
-							this.buttonRespostaAlternativaErrada.setVisible(true);
-							this.tituloAlternativaCorretaTextView.setVisible(true);
-							this.alternativaCorretaTextView.setVisible(true);
-							System.out.println("errado");
-							
-						}
-					}
-					if(sender == this.buttonAlternativa2){//testa se foi clicado na 3 altern.
-						if(questionslist.get(this.Questao-1).getAnswers().get(2).isCorrectAnswer() == true){//testa se alternativa é verdadeira
-							this.buttonRespostaAlternativaCerta.setVisible(true);
-							this.buttonRespostaAlternativaErrada.setVisible(false);
-							System.out.println("correto");
-						}else{
-							this.buttonRespostaAlternativaCerta.setVisible(false);
-							this.buttonRespostaAlternativaErrada.setVisible(true);
-							this.tituloAlternativaCorretaTextView.setVisible(true);
-							this.alternativaCorretaTextView.setVisible(true);
-							System.out.println("errado");
-							
-						}
-						//this.buttonRespostaAlternativa2.setPosition(10,10);
-						//this.addChild(this.buttonRespostaAlternativa2);
-					}
-					if(sender == this.buttonAlternativa3){//testa se foi clicado na 4 altern.
-						if(questionslist.get(this.Questao-1).getAnswers().get(3).isCorrectAnswer() == true){//testa se alternativa é verdadeira
-							this.buttonRespostaAlternativaCerta.setVisible(true);
-							this.buttonRespostaAlternativaErrada.setVisible(false);
-							
-						}else{
-							this.buttonRespostaAlternativaCerta.setVisible(false);
-							this.buttonRespostaAlternativaErrada.setVisible(true);
-							this.tituloAlternativaCorretaTextView.setVisible(true);
-							this.alternativaCorretaTextView.setVisible(true);
-						}
-					}
-					//seta a informação da resposta
+		if(sender == this.buttonProximaQuestao && this.respondeuQuestao > 0){//testa se foi clicado no botao proximo
+			if((this.questao > 3)&&(sender == this.buttonProximaQuestao)){//se terminou as questões entao manda para tela de GameOver
+				CCDirector.sharedDirector().replaceScene(new GameOverScreen(Runner.getFinalButton()).scene());
+			}else{
+				this.respondeuQuestao = 0;
+				CCDirector.sharedDirector().replaceScene(new QuizScreen(this.questao).scene());
 			}
 			
-		}	
+		}else{//senão testa os outros botoes
+				if(sender == this.buttonAlternativa0){
+					this.respondeuQuestao = 1;
+					//this.buttonAlternativa0.ccTouchesBegan(event);
+					if(questionslist.get(this.questao-1).getAnswers().get(0).isCorrectAnswer() == true){//testa se alternativa é verdadeira
+						this.buttonRespostaAlternativaCerta.setVisible(true);
+						this.buttonRespostaAlternativaErrada.setVisible(false);
+						System.out.println("correto");
+					}else{
+						this.buttonRespostaAlternativaCerta.setVisible(false);
+						this.buttonRespostaAlternativaErrada.setVisible(true);
+						this.tituloAlternativaCorretaTextView.setVisible(true);
+						this.alternativaCorretaTextView.setVisible(true);
+						System.out.println("errado");
+						
+					}
+					//this.buttonRespostaAlternativa0.setPosition(10,10);
+					//this.addChild(this.buttonRespostaAlternativa0);
+				}
+				if(sender == this.buttonAlternativa1){//testa se foi clicado na 2 altern.
+					this.respondeuQuestao = 1;
+					if(questionslist.get(this.questao-1).getAnswers().get(1).isCorrectAnswer() == true){//testa se alternativa é verdadeira
+						this.buttonRespostaAlternativaCerta.setVisible(true);
+						this.buttonRespostaAlternativaErrada.setVisible(false);
+						System.out.println("correto");
+					}else{
+						this.buttonRespostaAlternativaCerta.setVisible(false);
+						this.buttonRespostaAlternativaErrada.setVisible(true);
+						this.tituloAlternativaCorretaTextView.setVisible(true);
+						this.alternativaCorretaTextView.setVisible(true);
+						System.out.println("errado");
+						
+					}
+				}
+				if(sender == this.buttonAlternativa2){//testa se foi clicado na 3 altern.
+					this.respondeuQuestao = 1;
+					if(questionslist.get(this.questao-1).getAnswers().get(2).isCorrectAnswer() == true){//testa se alternativa é verdadeira
+						this.buttonRespostaAlternativaCerta.setVisible(true);
+						this.buttonRespostaAlternativaErrada.setVisible(false);
+						System.out.println("correto");
+					}else{
+						this.buttonRespostaAlternativaCerta.setVisible(false);
+						this.buttonRespostaAlternativaErrada.setVisible(true);
+						this.tituloAlternativaCorretaTextView.setVisible(true);
+						this.alternativaCorretaTextView.setVisible(true);
+						System.out.println("errado");
+						
+					}
+					//this.buttonRespostaAlternativa2.setPosition(10,10);
+					//this.addChild(this.buttonRespostaAlternativa2);
+				}
+				if(sender == this.buttonAlternativa3){//testa se foi clicado na 4 altern.
+					this.respondeuQuestao = 1;
+					if(questionslist.get(this.questao-1).getAnswers().get(3).isCorrectAnswer() == true){//testa se alternativa é verdadeira
+						this.buttonRespostaAlternativaCerta.setVisible(true);
+						this.buttonRespostaAlternativaErrada.setVisible(false);
+						
+					}else{
+						this.buttonRespostaAlternativaCerta.setVisible(false);
+						this.buttonRespostaAlternativaErrada.setVisible(true);
+						this.tituloAlternativaCorretaTextView.setVisible(true);
+						this.alternativaCorretaTextView.setVisible(true);
+					}
+				}
+				//seta a informação da resposta
+		}
 	}
 	
 	public void createQuestions()
