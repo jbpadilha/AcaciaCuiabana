@@ -84,7 +84,7 @@ public class Player extends CCSprite implements AccelerometerDelegate{
 
 		// Pop Actions
 		float dt = 0.5f;
-		CCScaleBy a1 = CCScaleBy.action(dt, 7f);
+		CCScaleBy a1 = CCScaleBy.action(dt, 5f);
 		CCFadeOut a2 = CCFadeOut.action(dt);
 		CCSpawn s1 = CCSpawn.actions(a1, a2);
 

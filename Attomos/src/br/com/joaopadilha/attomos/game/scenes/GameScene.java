@@ -343,22 +343,24 @@ public class GameScene extends CCLayer implements MeteorsEngineDelegate,
 				float y = ((Player) player).getPosition().y;
 				((Player) player).explode();
 				this.meteorsArray.clear();
-				v.vibrate(4000);
-				Player player1 = new Player(Assets.ATOMO,x-90,y);
-				Player player2 = new Player(Assets.ATOMO,x+90,y);
+				v.vibrate(2000);
+				Player player1 = new Player(Assets.NAVE,x-90,y);
+				Player player2 = new Player(Assets.NAVE,x+90,y);
 				createPlayer(player1);
 				createPlayer(player2);
-				/*try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
-				float dt = 0.3f;
-				CCScaleBy a1 = CCScaleBy.action(dt, 10f);
+				
+				float dt = 0.5f;
+				CCScaleBy a1 = CCScaleBy.action(dt, 5f);
 				CCFadeOut a2 = CCFadeOut.action(dt);
 				CCSpawn s1 = CCSpawn.actions(a1, a2);
-				this.runAction(CCSequence.actions(s1));
+				player.runAction(CCSequence.actions(s1));
+				
+				for (int i = new Double(y).intValue();i<y+30;i++){
+					player1.setPosition(x-90, i);
+					player2.setPosition(x+90, i);
+					player1.unschedule("update");
+					player2.unschedule("update");
+				}
 				
 				//CCDirector.sharedDirector().replaceScene(new GameOverScreen(Runner.getFinalButton()).scene());
 				CCDirector.sharedDirector().replaceScene(new QuizScreen(0).scene());
